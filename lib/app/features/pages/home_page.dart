@@ -1,4 +1,4 @@
-import 'package:brain_check/app/features/pages/category_page.dart';
+import 'package:brain_check/app/features/pages/categories_page/categories_page.dart';
 
 import 'package:brain_check/app/features/pages/settings_page.dart';
 

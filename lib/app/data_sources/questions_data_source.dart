@@ -1,15 +1,35 @@
+import 'package:brain_check/app/domain/models/categories_model.dart';
 import 'package:brain_check/app/domain/models/question_model.dart';
 import 'package:dio/dio.dart';
-import 'package:json_annotation/json_annotation.dart';
+
+import 'package:injectable/injectable.dart';
+
 import 'package:retrofit/retrofit.dart';
 
 part 'questions_data_source.g.dart';
 
-@RestApi(baseUrl: 'https://opentdb.com/')
+@injectable
+@RestApi()
 abstract class QuestionDataSource {
-  factory QuestionDataSource(Dio dio, {String baseUrl}) = _QuestionDataSource;
+  @factoryMethod
+  factory QuestionDataSource(
+    Dio dio,
+  ) = _QuestionDataSource;
 
-  @GET('/api.php?amount=1')
-  Future<List<QuestionModel>> getTasks(
-      @Query("difficulty") String difficulty, @Query("category") int category);
+  @GET('/api.php?amount=5')
+  Future<List<QuestionModel>> getQuestionWithCatAndDiff(
+      @Query("difficulty") String? difficulty,
+      @Query("category") int? category);
+
+  @GET('/api.php?amount=5')
+  Future<List<QuestionModel>> getQuestionWithDiff(
+    @Query("difficulty") String? difficulty,
+  );
+
+  @GET('/api.php?amount=5')
+  Future<List<QuestionModel>> getQuestionWithCat(
+      @Query("category") int? category);
+
+  @GET('/api_category.php/trivia_categories/')
+  Future<List<TriviaCategory>> getCategories();
 }
