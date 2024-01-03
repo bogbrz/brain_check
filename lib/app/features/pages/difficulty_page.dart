@@ -1,10 +1,18 @@
 import 'package:flutter/material.dart';
 
-class PreGamePage extends StatelessWidget {
-  const PreGamePage({
+class DifficultyPage extends StatefulWidget {
+  const DifficultyPage({
+    required this.category,
     super.key,
   });
+  final String category;
 
+  @override
+  State<DifficultyPage> createState() => _DifficultyPageState();
+}
+
+class _DifficultyPageState extends State<DifficultyPage> {
+  var choosedDifficulty = '';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,15 +27,25 @@ class PreGamePage extends StatelessWidget {
       body: Center(
         child: Column(
           children: [
-            Text("Choose category:",
-                style: Theme.of(context).textTheme.displayMedium),
+            SizedBox(
+              height: MediaQuery.of(context).size.height / 4,
+              child: Wrap(
+                children: [
+                  Text("Choosed category: ${widget.category}",
+                      style: Theme.of(context).textTheme.displayMedium),
+                ],
+              ),
+            ),
             Text("Choose difficulty:",
                 style: Theme.of(context).textTheme.displayMedium),
+            SizedBox(
+              height: 12,
+            ),
             Container(
               width: MediaQuery.of(context).size.width / 1.75,
               padding: EdgeInsets.all(20),
               decoration: BoxDecoration(
-                  color: Colors.green,
+                  color: const Color.fromARGB(255, 50, 115, 52),
                   borderRadius: BorderRadius.circular(100),
                   border: Border.all(width: 4, color: Colors.black)),
               child: Row(
@@ -40,6 +58,9 @@ class PreGamePage extends StatelessWidget {
                   )
                 ],
               ),
+            ),
+            SizedBox(
+              height: 12,
             ),
             Container(
               width: MediaQuery.of(context).size.width / 1.75,
@@ -59,6 +80,9 @@ class PreGamePage extends StatelessWidget {
                   )
                 ],
               ),
+            ),
+            SizedBox(
+              height: 12,
             ),
             Container(
               width: MediaQuery.of(context).size.width / 1.75,

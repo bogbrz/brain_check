@@ -1,10 +1,8 @@
-import 'package:brain_check/app/features/pages/pre_game_page.dart';
+import 'package:brain_check/app/features/pages/category_page.dart';
+
 import 'package:brain_check/app/features/pages/settings_page.dart';
+
 import 'package:flutter/material.dart';
-
-
-
-
 
 class HomePage extends StatelessWidget {
   const HomePage({
@@ -38,11 +36,8 @@ class HomePage extends StatelessWidget {
         backgroundColor: Color.fromARGB(255, 27, 58, 93),
       ),
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          SizedBox(
-            height: MediaQuery.of(context).size.height / 2,
-          ),
           Center(
             child: Material(
               shadowColor: Colors.white70,
@@ -52,7 +47,7 @@ class HomePage extends StatelessWidget {
               child: InkWell(
                 onTap: () {
                   Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) => PreGamePage()));
+                      MaterialPageRoute(builder: (context) => CategoryPage()));
                 },
                 child: Container(
                   padding: EdgeInsets.all(20),
@@ -60,9 +55,28 @@ class HomePage extends StatelessWidget {
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(100),
                       border: Border.all(width: 4, color: Colors.black)),
-                  child: Text("START",
+                  child: Text("PLAY",
                       style: Theme.of(context).textTheme.displayMedium),
                 ),
+              ),
+            ),
+          ),
+          SizedBox(
+            height: 12,
+          ),
+          Material(
+            shape: OutlineInputBorder(borderRadius: BorderRadius.circular(100)),
+            clipBehavior: Clip.hardEdge,
+            child: InkWell(
+              onTap: () {},
+              child: Container(
+                padding: EdgeInsets.all(20),
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(100),
+                    border: Border.all(width: 4, color: Colors.black)),
+                child: Text("HOW TO PLAY",
+                    style: Theme.of(context).textTheme.bodyLarge),
               ),
             ),
           ),
