@@ -12,8 +12,8 @@ class QuestionRepository {
   }
 
   Future<List<TriviaCategory>> getCategories() async {
-    final json = await questionDataSource.getCategories();
-    print(json);
-    return json;
+    final categoryList = await questionDataSource.getCategories();
+   
+    return categoryList.triviaCategories;
   }
 }

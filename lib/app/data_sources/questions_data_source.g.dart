@@ -115,20 +115,20 @@ class _QuestionDataSource implements QuestionDataSource {
   }
 
   @override
-  Future<List<TriviaCategory>> getCategories() async {
+  Future<CategoryModel> getCategories() async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
     final _result = await _dio
-        .fetch<List<dynamic>>(_setStreamType<List<TriviaCategory>>(Options(
+        .fetch<Map<String, dynamic>>(_setStreamType<CategoryModel>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
     )
             .compose(
               _dio.options,
-              '/api_category.php/trivia_categories/',
+              '/api_category.php/trivia_categories',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -137,9 +137,7 @@ class _QuestionDataSource implements QuestionDataSource {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    var value = _result.data!
-        .map((dynamic i) => TriviaCategory.fromJson(i as Map<String, dynamic>))
-        .toList();
+    final value = CategoryModel.fromJson(_result.data!);
     return value;
   }
 

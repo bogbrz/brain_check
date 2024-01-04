@@ -1,38 +1,22 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+
 part 'categories_model.g.dart';
 part 'categories_model.freezed.dart';
 
 @freezed
-class Welcome with _$Welcome {
-  factory Welcome({
-    required List<TriviaCategory> triviaCategories,
-  }) = _Welcome;
+class CategoryModel with _$CategoryModel {
+  factory CategoryModel({required List<TriviaCategory> triviaCategories}) =
+      _CategoryModel;
 
-  factory Welcome.fromJson(Map<String, dynamic> json) => Welcome(
-        triviaCategories: List<TriviaCategory>.from(
-            json["trivia_categories"].map((x) => TriviaCategory.fromJson(x))),
-      );
-
-  Map<String, dynamic> toJson() => {
-        "trivia_categories":
-            List<dynamic>.from(triviaCategories.map((x) => x.toJson())),
-      };
+  factory CategoryModel.fromJson(Map<String, dynamic> json) =>
+      _$CategoryModelFromJson(json);
 }
 
 @freezed
 class TriviaCategory with _$TriviaCategory {
-  factory TriviaCategory({
-    required int id,
-    required String name,
-  }) = _TriviaCategory;
+  factory TriviaCategory({required int id, required String name}) =
+      _TriviaCategory;
 
-  factory TriviaCategory.fromJson(Map<String, dynamic> json) => TriviaCategory(
-        id: json["id"],
-        name: json["name"],
-      );
-
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "name": name,
-      };
+  factory TriviaCategory.fromJson(Map<String, dynamic> json) =>
+      _$TriviaCategoryFromJson(json);
 }

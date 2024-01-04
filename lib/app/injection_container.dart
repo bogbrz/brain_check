@@ -10,7 +10,7 @@ void configureDependencies() => getIt.init();
 @module
 abstract class RegisterModule {
   @Named("BaseUrl")
-  String get baseUrl => 'https://opentdb.com/';
+  String get baseUrl => 'https://opentdb.com';
 
   @lazySingleton
   Dio dio(@Named('BaseUrl') String url) => Dio(BaseOptions(baseUrl: url));

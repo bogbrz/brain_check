@@ -14,32 +14,34 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-Welcome _$WelcomeFromJson(Map<String, dynamic> json) {
-  return _Welcome.fromJson(json);
+CategoryModel _$CategoryModelFromJson(Map<String, dynamic> json) {
+  return _CategoryModel.fromJson(json);
 }
 
 /// @nodoc
-mixin _$Welcome {
+mixin _$CategoryModel {
   List<TriviaCategory> get triviaCategories =>
       throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $WelcomeCopyWith<Welcome> get copyWith => throw _privateConstructorUsedError;
+  $CategoryModelCopyWith<CategoryModel> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $WelcomeCopyWith<$Res> {
-  factory $WelcomeCopyWith(Welcome value, $Res Function(Welcome) then) =
-      _$WelcomeCopyWithImpl<$Res, Welcome>;
+abstract class $CategoryModelCopyWith<$Res> {
+  factory $CategoryModelCopyWith(
+          CategoryModel value, $Res Function(CategoryModel) then) =
+      _$CategoryModelCopyWithImpl<$Res, CategoryModel>;
   @useResult
   $Res call({List<TriviaCategory> triviaCategories});
 }
 
 /// @nodoc
-class _$WelcomeCopyWithImpl<$Res, $Val extends Welcome>
-    implements $WelcomeCopyWith<$Res> {
-  _$WelcomeCopyWithImpl(this._value, this._then);
+class _$CategoryModelCopyWithImpl<$Res, $Val extends CategoryModel>
+    implements $CategoryModelCopyWith<$Res> {
+  _$CategoryModelCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -61,21 +63,22 @@ class _$WelcomeCopyWithImpl<$Res, $Val extends Welcome>
 }
 
 /// @nodoc
-abstract class _$$WelcomeImplCopyWith<$Res> implements $WelcomeCopyWith<$Res> {
-  factory _$$WelcomeImplCopyWith(
-          _$WelcomeImpl value, $Res Function(_$WelcomeImpl) then) =
-      __$$WelcomeImplCopyWithImpl<$Res>;
+abstract class _$$CategoryModelImplCopyWith<$Res>
+    implements $CategoryModelCopyWith<$Res> {
+  factory _$$CategoryModelImplCopyWith(
+          _$CategoryModelImpl value, $Res Function(_$CategoryModelImpl) then) =
+      __$$CategoryModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({List<TriviaCategory> triviaCategories});
 }
 
 /// @nodoc
-class __$$WelcomeImplCopyWithImpl<$Res>
-    extends _$WelcomeCopyWithImpl<$Res, _$WelcomeImpl>
-    implements _$$WelcomeImplCopyWith<$Res> {
-  __$$WelcomeImplCopyWithImpl(
-      _$WelcomeImpl _value, $Res Function(_$WelcomeImpl) _then)
+class __$$CategoryModelImplCopyWithImpl<$Res>
+    extends _$CategoryModelCopyWithImpl<$Res, _$CategoryModelImpl>
+    implements _$$CategoryModelImplCopyWith<$Res> {
+  __$$CategoryModelImplCopyWithImpl(
+      _$CategoryModelImpl _value, $Res Function(_$CategoryModelImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -83,7 +86,7 @@ class __$$WelcomeImplCopyWithImpl<$Res>
   $Res call({
     Object? triviaCategories = null,
   }) {
-    return _then(_$WelcomeImpl(
+    return _then(_$CategoryModelImpl(
       triviaCategories: null == triviaCategories
           ? _value._triviaCategories
           : triviaCategories // ignore: cast_nullable_to_non_nullable
@@ -94,12 +97,12 @@ class __$$WelcomeImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$WelcomeImpl implements _Welcome {
-  _$WelcomeImpl({required final List<TriviaCategory> triviaCategories})
+class _$CategoryModelImpl implements _CategoryModel {
+  _$CategoryModelImpl({required final List<TriviaCategory> triviaCategories})
       : _triviaCategories = triviaCategories;
 
-  factory _$WelcomeImpl.fromJson(Map<String, dynamic> json) =>
-      _$$WelcomeImplFromJson(json);
+  factory _$CategoryModelImpl.fromJson(Map<String, dynamic> json) =>
+      _$$CategoryModelImplFromJson(json);
 
   final List<TriviaCategory> _triviaCategories;
   @override
@@ -112,14 +115,14 @@ class _$WelcomeImpl implements _Welcome {
 
   @override
   String toString() {
-    return 'Welcome(triviaCategories: $triviaCategories)';
+    return 'CategoryModel(triviaCategories: $triviaCategories)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$WelcomeImpl &&
+            other is _$CategoryModelImpl &&
             const DeepCollectionEquality()
                 .equals(other._triviaCategories, _triviaCategories));
   }
@@ -132,28 +135,30 @@ class _$WelcomeImpl implements _Welcome {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$WelcomeImplCopyWith<_$WelcomeImpl> get copyWith =>
-      __$$WelcomeImplCopyWithImpl<_$WelcomeImpl>(this, _$identity);
+  _$$CategoryModelImplCopyWith<_$CategoryModelImpl> get copyWith =>
+      __$$CategoryModelImplCopyWithImpl<_$CategoryModelImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$WelcomeImplToJson(
+    return _$$CategoryModelImplToJson(
       this,
     );
   }
 }
 
-abstract class _Welcome implements Welcome {
-  factory _Welcome({required final List<TriviaCategory> triviaCategories}) =
-      _$WelcomeImpl;
+abstract class _CategoryModel implements CategoryModel {
+  factory _CategoryModel(
+          {required final List<TriviaCategory> triviaCategories}) =
+      _$CategoryModelImpl;
 
-  factory _Welcome.fromJson(Map<String, dynamic> json) = _$WelcomeImpl.fromJson;
+  factory _CategoryModel.fromJson(Map<String, dynamic> json) =
+      _$CategoryModelImpl.fromJson;
 
   @override
   List<TriviaCategory> get triviaCategories;
   @override
   @JsonKey(ignore: true)
-  _$$WelcomeImplCopyWith<_$WelcomeImpl> get copyWith =>
+  _$$CategoryModelImplCopyWith<_$CategoryModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 

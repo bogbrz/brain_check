@@ -33,7 +33,6 @@ class _CategoryPageState extends State<CategoryPage> {
           Center(
             child: BlocBuilder<CategoriesPageCubit, CategoriesPageState>(
               builder: (context, state) {
-                context.read<CategoriesPageCubit>().getCategories();
                 return Wrap(children: [
                   Text("Choose category:",
                       style: Theme.of(context).textTheme.displayMedium),

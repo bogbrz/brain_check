@@ -30,6 +30,6 @@ abstract class QuestionDataSource {
   Future<List<QuestionModel>> getQuestionWithCat(
       @Query("category") int? category);
 
-  @GET('/api_category.php/trivia_categories/')
-  Future<List<TriviaCategory>> getCategories();
+  @GET('/api_category.php/trivia_categories')
+  Future<CategoryModel> getCategories();
 }
