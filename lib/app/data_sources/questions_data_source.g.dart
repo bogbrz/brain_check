@@ -19,27 +19,26 @@ class _QuestionDataSource implements QuestionDataSource {
   String? baseUrl;
 
   @override
-  Future<List<QuestionModel>> getQuestionWithCatAndDiff(
-    String? difficulty,
-    int? category,
+  Future<QuestionModel> getQuestionWithCatAndDiff(
+    String difficulty,
+    int category,
   ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'difficulty': difficulty,
       r'category': category,
     };
-    queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
     final _result = await _dio
-        .fetch<List<dynamic>>(_setStreamType<List<QuestionModel>>(Options(
+        .fetch<Map<String, dynamic>>(_setStreamType<QuestionModel>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
     )
             .compose(
               _dio.options,
-              '/api.php?amount=5',
+              '/api.php?amount=1',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -48,69 +47,7 @@ class _QuestionDataSource implements QuestionDataSource {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    var value = _result.data!
-        .map((dynamic i) => QuestionModel.fromJson(i as Map<String, dynamic>))
-        .toList();
-    return value;
-  }
-
-  @override
-  Future<List<QuestionModel>> getQuestionWithDiff(String? difficulty) async {
-    const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{r'difficulty': difficulty};
-    queryParameters.removeWhere((k, v) => v == null);
-    final _headers = <String, dynamic>{};
-    final Map<String, dynamic>? _data = null;
-    final _result = await _dio
-        .fetch<List<dynamic>>(_setStreamType<List<QuestionModel>>(Options(
-      method: 'GET',
-      headers: _headers,
-      extra: _extra,
-    )
-            .compose(
-              _dio.options,
-              '/api.php?amount=5',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              baseUrl,
-            ))));
-    var value = _result.data!
-        .map((dynamic i) => QuestionModel.fromJson(i as Map<String, dynamic>))
-        .toList();
-    return value;
-  }
-
-  @override
-  Future<List<QuestionModel>> getQuestionWithCat(int? category) async {
-    const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{r'category': category};
-    queryParameters.removeWhere((k, v) => v == null);
-    final _headers = <String, dynamic>{};
-    final Map<String, dynamic>? _data = null;
-    final _result = await _dio
-        .fetch<List<dynamic>>(_setStreamType<List<QuestionModel>>(Options(
-      method: 'GET',
-      headers: _headers,
-      extra: _extra,
-    )
-            .compose(
-              _dio.options,
-              '/api.php?amount=5',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              baseUrl,
-            ))));
-    var value = _result.data!
-        .map((dynamic i) => QuestionModel.fromJson(i as Map<String, dynamic>))
-        .toList();
+    final value = QuestionModel.fromJson(_result.data!);
     return value;
   }
 
@@ -128,7 +65,7 @@ class _QuestionDataSource implements QuestionDataSource {
     )
             .compose(
               _dio.options,
-              '/api_category.php/trivia_categories',
+              '/api_category.php/',
               queryParameters: queryParameters,
               data: _data,
             )

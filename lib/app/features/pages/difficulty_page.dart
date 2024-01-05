@@ -1,6 +1,6 @@
 import 'package:brain_check/app/domain/models/categories_model.dart';
 import 'package:brain_check/app/features/pages/question_page/question_page.dart';
-import 'package:brain_check/category_list.dart';
+
 import 'package:flutter/material.dart';
 
 class DifficultyPage extends StatefulWidget {
@@ -57,6 +57,7 @@ class _DifficultyPageState extends State<DifficultyPage> {
                   print("${widget.categoriesModel.id}, $choosedDifficulty)}");
                   Navigator.of(context).push(MaterialPageRoute(
                       builder: ((context) => QuestionPage(
+                       
                             category: widget.categoriesModel.id,
                             difficulty: choosedDifficulty,
                           ))));
