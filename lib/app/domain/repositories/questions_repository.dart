@@ -7,11 +7,12 @@ class QuestionRepository {
   QuestionRepository({required this.questionDataSource});
   final QuestionDataSource questionDataSource;
 
-  Future<QuestionModel> getQuestion(
+  Future<List<QuestionModel>> getQuestion(
       {required int category, required String difficulty}) async {
-    final question = await questionDataSource.getQuestionWithCatAndDiff(
+    final questions = await questionDataSource.getQuestionWithCatAndDiff(
         difficulty, category);
-    return question;
+    final questionContent = questions.results;
+    return questionContent;
   }
 
   Future<List<TriviaCategory>> getCategories() async {

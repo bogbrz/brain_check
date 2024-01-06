@@ -17,7 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$QuestionPageState {
   String? get errorMessage => throw _privateConstructorUsedError;
-  QuestionModel? get questions => throw _privateConstructorUsedError;
+  List<QuestionModel> get questions => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $QuestionPageStateCopyWith<QuestionPageState> get copyWith =>
@@ -30,9 +30,7 @@ abstract class $QuestionPageStateCopyWith<$Res> {
           QuestionPageState value, $Res Function(QuestionPageState) then) =
       _$QuestionPageStateCopyWithImpl<$Res, QuestionPageState>;
   @useResult
-  $Res call({String? errorMessage, QuestionModel? questions});
-
-  $QuestionModelCopyWith<$Res>? get questions;
+  $Res call({String? errorMessage, List<QuestionModel> questions});
 }
 
 /// @nodoc
@@ -49,30 +47,18 @@ class _$QuestionPageStateCopyWithImpl<$Res, $Val extends QuestionPageState>
   @override
   $Res call({
     Object? errorMessage = freezed,
-    Object? questions = freezed,
+    Object? questions = null,
   }) {
     return _then(_value.copyWith(
       errorMessage: freezed == errorMessage
           ? _value.errorMessage
           : errorMessage // ignore: cast_nullable_to_non_nullable
               as String?,
-      questions: freezed == questions
+      questions: null == questions
           ? _value.questions
           : questions // ignore: cast_nullable_to_non_nullable
-              as QuestionModel?,
+              as List<QuestionModel>,
     ) as $Val);
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $QuestionModelCopyWith<$Res>? get questions {
-    if (_value.questions == null) {
-      return null;
-    }
-
-    return $QuestionModelCopyWith<$Res>(_value.questions!, (value) {
-      return _then(_value.copyWith(questions: value) as $Val);
-    });
   }
 }
 
@@ -84,10 +70,7 @@ abstract class _$$QuestionPageStateImplCopyWith<$Res>
       __$$QuestionPageStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String? errorMessage, QuestionModel? questions});
-
-  @override
-  $QuestionModelCopyWith<$Res>? get questions;
+  $Res call({String? errorMessage, List<QuestionModel> questions});
 }
 
 /// @nodoc
@@ -102,17 +85,17 @@ class __$$QuestionPageStateImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? errorMessage = freezed,
-    Object? questions = freezed,
+    Object? questions = null,
   }) {
     return _then(_$QuestionPageStateImpl(
       errorMessage: freezed == errorMessage
           ? _value.errorMessage
           : errorMessage // ignore: cast_nullable_to_non_nullable
               as String?,
-      questions: freezed == questions
-          ? _value.questions
+      questions: null == questions
+          ? _value._questions
           : questions // ignore: cast_nullable_to_non_nullable
-              as QuestionModel?,
+              as List<QuestionModel>,
     ));
   }
 }
@@ -121,12 +104,19 @@ class __$$QuestionPageStateImplCopyWithImpl<$Res>
 
 class _$QuestionPageStateImpl implements _QuestionPageState {
   _$QuestionPageStateImpl(
-      {required this.errorMessage, required this.questions});
+      {required this.errorMessage,
+      required final List<QuestionModel> questions})
+      : _questions = questions;
 
   @override
   final String? errorMessage;
+  final List<QuestionModel> _questions;
   @override
-  final QuestionModel? questions;
+  List<QuestionModel> get questions {
+    if (_questions is EqualUnmodifiableListView) return _questions;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_questions);
+  }
 
   @override
   String toString() {
@@ -140,12 +130,13 @@ class _$QuestionPageStateImpl implements _QuestionPageState {
             other is _$QuestionPageStateImpl &&
             (identical(other.errorMessage, errorMessage) ||
                 other.errorMessage == errorMessage) &&
-            (identical(other.questions, questions) ||
-                other.questions == questions));
+            const DeepCollectionEquality()
+                .equals(other._questions, _questions));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, errorMessage, questions);
+  int get hashCode => Object.hash(runtimeType, errorMessage,
+      const DeepCollectionEquality().hash(_questions));
 
   @JsonKey(ignore: true)
   @override
@@ -158,12 +149,12 @@ class _$QuestionPageStateImpl implements _QuestionPageState {
 abstract class _QuestionPageState implements QuestionPageState {
   factory _QuestionPageState(
       {required final String? errorMessage,
-      required final QuestionModel? questions}) = _$QuestionPageStateImpl;
+      required final List<QuestionModel> questions}) = _$QuestionPageStateImpl;
 
   @override
   String? get errorMessage;
   @override
-  QuestionModel? get questions;
+  List<QuestionModel> get questions;
   @override
   @JsonKey(ignore: true)
   _$$QuestionPageStateImplCopyWith<_$QuestionPageStateImpl> get copyWith =>

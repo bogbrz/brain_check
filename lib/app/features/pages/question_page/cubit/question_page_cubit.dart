@@ -8,19 +8,19 @@ part 'question_page_cubit.freezed.dart';
 
 class QuestionPageCubit extends Cubit<QuestionPageState> {
   QuestionPageCubit({required this.questionRepository})
-      : super(QuestionPageState(errorMessage: null, questions: null));
+      : super(QuestionPageState(errorMessage: null, questions: []));
 
   final QuestionRepository questionRepository;
 
   Future<void> getQuestion(
       {required int category, required String difficulty}) async {
     try {
-      final questionModel = await questionRepository.getQuestion(
+      final questionContent = await questionRepository.getQuestion(
           category: category, difficulty: difficulty);
 
-      emit(QuestionPageState(errorMessage: null, questions: questionModel));
+      emit(QuestionPageState(errorMessage: null, questions: questionContent ));
     } catch (error) {
-      emit(QuestionPageState(errorMessage: error.toString(), questions: null));
+      emit(QuestionPageState(errorMessage: error.toString(), questions: []));
     }
   }
 }

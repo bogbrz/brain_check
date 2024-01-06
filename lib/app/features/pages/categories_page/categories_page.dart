@@ -2,7 +2,6 @@ import 'package:brain_check/app/features/pages/categories_page/cubit/categories_
 import 'package:brain_check/app/features/pages/difficulty_page.dart';
 import 'package:brain_check/app/injection_container.dart';
 
-import 'package:brain_check/category_list.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

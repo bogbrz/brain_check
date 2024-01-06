@@ -255,7 +255,8 @@ class __$$TriviaCategoryImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
+
+@JsonSerializable(fieldRename: FieldRename.snake)
 class _$TriviaCategoryImpl implements _TriviaCategory {
   _$TriviaCategoryImpl({required this.id, required this.name});
 

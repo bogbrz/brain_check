@@ -19,7 +19,7 @@ class _QuestionDataSource implements QuestionDataSource {
   String? baseUrl;
 
   @override
-  Future<QuestionModel> getQuestionWithCatAndDiff(
+  Future<Questions> getQuestionWithCatAndDiff(
     String difficulty,
     int category,
   ) async {
@@ -31,7 +31,7 @@ class _QuestionDataSource implements QuestionDataSource {
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
     final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<QuestionModel>(Options(
+        .fetch<Map<String, dynamic>>(_setStreamType<Questions>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -47,7 +47,7 @@ class _QuestionDataSource implements QuestionDataSource {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = QuestionModel.fromJson(_result.data!);
+    final value = Questions.fromJson(_result.data!);
     return value;
   }
 

@@ -1,7 +1,7 @@
 import 'package:brain_check/app/domain/models/categories_model.dart';
 import 'package:brain_check/app/domain/models/question_model.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter/foundation.dart';
+
 
 import 'package:injectable/injectable.dart';
 
@@ -19,7 +19,7 @@ abstract class QuestionDataSource {
   ) = _QuestionDataSource;
 
   @GET('/api.php?amount=1')
-  Future<QuestionModel> getQuestionWithCatAndDiff(
+  Future<Questions> getQuestionWithCatAndDiff(
       @Query("difficulty") String difficulty, @Query("category") int category);
 
   // @GET('/api.php?amount=5')
