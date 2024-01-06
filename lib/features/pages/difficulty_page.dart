@@ -1,6 +1,7 @@
-import 'package:brain_check/app/domain/models/categories_model.dart';
-import 'package:brain_check/app/features/pages/question_page/question_page.dart';
 
+
+import 'package:brain_check/domain/models/categories_model.dart';
+import 'package:brain_check/features/pages/question_page/question_page.dart';
 import 'package:flutter/material.dart';
 
 class DifficultyPage extends StatefulWidget {

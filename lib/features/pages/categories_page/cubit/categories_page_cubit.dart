@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
-import 'package:brain_check/app/domain/models/categories_model.dart';
-import 'package:brain_check/app/domain/repositories/questions_repository.dart';
+import 'package:brain_check/domain/models/categories_model.dart';
+import 'package:brain_check/domain/repositories/questions_repository.dart';
+
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'categories_page_state.dart';

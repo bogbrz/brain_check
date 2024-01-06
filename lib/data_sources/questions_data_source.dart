@@ -1,5 +1,6 @@
-import 'package:brain_check/app/domain/models/categories_model.dart';
-import 'package:brain_check/app/domain/models/question_model.dart';
+
+import 'package:brain_check/domain/models/categories_model.dart';
+import 'package:brain_check/domain/models/question_model.dart';
 import 'package:dio/dio.dart';
 
 
