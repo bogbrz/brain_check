@@ -25,8 +25,7 @@ class QuestionPage extends StatelessWidget {
           body: BlocBuilder<QuestionPageCubit, QuestionPageState>(
             builder: (context, state) {
               final questionModels = state.questions;
-          
-          
+
               print(questionModels);
 
               return Center(
@@ -47,45 +46,46 @@ class QuestionPage extends StatelessWidget {
                           child: Text(
                               HtmlUnescape().convert(questionModel.question),
                               style:
-                                  Theme.of(context).textTheme.headlineMedium)),
+                                  Theme.of(context).textTheme.headlineSmall)),
                       Wrap(
                         children: [
-                          for (final answer
-                              in questionModel.incorrectAnswers) ...[
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Container(
-                                  alignment: Alignment.center,
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.4,
-                                  height:
-                                      MediaQuery.of(context).size.height * 0.15,
-                                  decoration: BoxDecoration(
-                                    border: Border.all(
-                                        width: 2, color: Colors.black),
-                                    borderRadius: BorderRadius.circular(10),
-                                    color: Color.fromARGB(255, 56, 146, 249),
-                                  ),
-                                  child: Text(HtmlUnescape().convert(answer),
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .headlineSmall)),
-                            )
+                          for (final answer in state.anserws) ...[
+                            AnswerWidget(answer: answer)
                           ],
                         ],
                       ),
-                      Container(
-                          alignment: Alignment.center,
-                          width: MediaQuery.of(context).size.width * 0.4,
-                          height: MediaQuery.of(context).size.height * 0.10,
-                          padding: EdgeInsets.all(12),
-                          decoration: BoxDecoration(
-                              border: Border.all(width: 2, color: Colors.black),
-                              borderRadius: BorderRadius.circular(10),
-                              color: Colors.white),
-                          child: Text("NEXT",
-                              style:
-                                  Theme.of(context).textTheme.headlineSmall)),
+                      InkWell(
+                        onTap: () async {
+                          showDialog<void>(
+                              context: context,
+                              builder: (context) => AlertDialog(
+                                    content: Text("Correct Answer"),
+                                  ));
+                        },
+                        child: Container(
+                            alignment: Alignment.center,
+                            width: MediaQuery.of(context).size.width * 0.4,
+                            height: MediaQuery.of(context).size.height * 0.10,
+                            padding: EdgeInsets.all(12),
+                            decoration: BoxDecoration(
+                                border:
+                                    Border.all(width: 2, color: Colors.black),
+                                borderRadius: BorderRadius.circular(10),
+                                color: Colors.white),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Text("NEXT",
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .headlineSmall),
+                                Icon(
+                                  Icons.arrow_forward_outlined,
+                                  size: 30,
+                                )
+                              ],
+                            )),
+                      ),
                     ],
                   ],
                 ),
@@ -93,5 +93,62 @@ class QuestionPage extends StatelessWidget {
             },
           ),
         ));
+  }
+}
+
+class AnswerWidget extends StatefulWidget {
+  const AnswerWidget({
+    super.key,
+    required this.answer,
+
+  });
+
+  final String answer;
+ 
+
+  @override
+  State<AnswerWidget> createState() => _AnswerWidgetState();
+}
+
+class _AnswerWidgetState extends State<AnswerWidget> {
+  var isChoosed = false;
+  var asnwerName = "";
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Material(
+        shape: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+        clipBehavior: Clip.hardEdge,
+        child: InkWell(
+          onTap: () {
+            setState(() {
+              if (isChoosed == true) {
+                isChoosed = false;
+                
+              } else {
+                isChoosed = true;
+              }
+            });
+            print(widget.answer);
+          },
+          child: Container(
+              alignment: Alignment.center,
+              width: MediaQuery.of(context).size.width * 0.4,
+              height: MediaQuery.of(context).size.height * 0.15,
+              decoration: BoxDecoration(
+                border: Border.all(width: 2, color: Colors.black),
+                borderRadius: BorderRadius.circular(10),
+                color: isChoosed
+                    ? Colors.orange
+                    : Color.fromARGB(255, 56, 146, 249),
+              ),
+              child: Text(HtmlUnescape().convert(widget.answer),
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context).textTheme.bodyLarge)),
+        ),
+      ),
+    );
   }
 }
