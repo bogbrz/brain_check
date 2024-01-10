@@ -16,10 +16,10 @@ class CategoriesPageCubit extends Cubit<CategoriesPageState> {
   Future<void> getCategories() async {
     try {
       final categories = await questionRepository.getCategories();
-     
-        emit(CategoriesPageState(errorMessage: null, categories: categories));
-      
-      print(categories);
+
+      emit(CategoriesPageState(errorMessage: null, categories: categories));
+
+      // print(categories);
     } catch (error) {
       print(error.toString());
       emit(CategoriesPageState(errorMessage: error.toString(), categories: []));

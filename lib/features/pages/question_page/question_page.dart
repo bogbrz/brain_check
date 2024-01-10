@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:html_unescape/html_unescape.dart';
 
-class QuestionPage extends StatelessWidget {
+class QuestionPage extends StatefulWidget {
   const QuestionPage({
     super.key,
     required this.category,
@@ -15,82 +15,105 @@ class QuestionPage extends StatelessWidget {
   final String difficulty;
 
   @override
+  State<QuestionPage> createState() => _QuestionPageState();
+}
+
+class _QuestionPageState extends State<QuestionPage> {
+  var currentIndex = 0;
+
+  List<String> answersList = [];
+  @override
   Widget build(BuildContext context) {
     return BlocProvider(
         create: (context) => getIt<QuestionPageCubit>()
-          ..getQuestion(category: category, difficulty: difficulty),
+          ..getFiveQuestions(
+              category: widget.category, difficulty: widget.difficulty),
         child: Scaffold(
           appBar: AppBar(
             backgroundColor: Color.fromARGB(255, 27, 58, 93),
           ),
           body: BlocBuilder<QuestionPageCubit, QuestionPageState>(
             builder: (context, state) {
-              final questionModels = state.questions;
+              if (state.questions.isEmpty) {
+                return CircularProgressIndicator();
+              }
 
-              print(questionModels);
+              final currentQuestion = state.questions[currentIndex];
+              answersList.addAll(
+                currentQuestion.incorrectAnswers,
+              );
+              answersList.add(currentQuestion.correctAnswer);
+              answersList.shuffle();
+
+              print(" CURRENT QUESTION  ${currentQuestion}");
 
               return Center(
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    for (final questionModel in questionModels) ...[
-                      Container(
-                          alignment: Alignment.center,
-                          height: MediaQuery.of(context).size.height * 0.4,
-                          padding: EdgeInsets.all(12),
-                          margin: EdgeInsets.all(12),
-                          decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(20),
-                              border:
-                                  Border.all(width: 2, color: Colors.black)),
-                          child: Text(
-                              HtmlUnescape().convert(questionModel.question),
-                              style:
-                                  Theme.of(context).textTheme.headlineSmall)),
-                      Wrap(
-                        children: [
-                          for (final answer in state.anserws) ...[
-                            AnswerWidget(
-                              answer: answer,
-                              questionModel: questionModel,
-                            )
-                          ],
-                        ],
-                      ),
-                      InkWell(
-                        onTap: () async {
-                          showDialog<void>(
-                              context: context,
-                              builder: (context) => AlertDialog(
-                                    content: Text(questionModel.correctAnswer),
-                                  ));
-                        },
-                        child: Container(
-                            alignment: Alignment.center,
-                            width: MediaQuery.of(context).size.width * 0.4,
-                            height: MediaQuery.of(context).size.height * 0.10,
-                            padding: EdgeInsets.all(12),
-                            decoration: BoxDecoration(
-                                border:
-                                    Border.all(width: 2, color: Colors.black),
-                                borderRadius: BorderRadius.circular(10),
-                                color: Colors.white),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    Container(
+                        alignment: Alignment.center,
+                        height: MediaQuery.of(context).size.height * 0.4,
+                        padding: EdgeInsets.all(12),
+                        margin: EdgeInsets.all(12),
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(20),
+                            border: Border.all(width: 2, color: Colors.black)),
+                        child: Column(
+                          children: [
+                            Row(
                               children: [
-                                Text("NEXT",
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .headlineSmall),
-                                Icon(
-                                  Icons.arrow_forward_outlined,
-                                  size: 30,
-                                )
+                                Text("${currentIndex}/5"),
                               ],
-                            )),
-                      ),
-                    ],
+                            ),
+                            Text(
+                                HtmlUnescape()
+                                    .convert(currentQuestion.question),
+                                style:
+                                    Theme.of(context).textTheme.headlineSmall),
+                          ],
+                        )),
+                    Wrap(
+                      children: [
+                        for (final answer in answersList) ...[
+                          AnswerWidget(
+                            answer: answer,
+                            questionModel: currentQuestion,
+                          )
+                        ],
+                      ],
+                    ),
+                    InkWell(
+                      onTap: () {
+                        setState(() {
+                          currentIndex++;
+                          answersList.clear();
+                        });
+                      },
+                      child: Container(
+                          alignment: Alignment.center,
+                          width: MediaQuery.of(context).size.width * 0.4,
+                          height: MediaQuery.of(context).size.height * 0.10,
+                          padding: EdgeInsets.all(12),
+                          decoration: BoxDecoration(
+                              border: Border.all(width: 2, color: Colors.black),
+                              borderRadius: BorderRadius.circular(10),
+                              color: Colors.white),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Text("NEXT",
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .headlineSmall),
+                              Icon(
+                                Icons.arrow_forward_outlined,
+                                size: 30,
+                              )
+                            ],
+                          )),
+                    ),
                   ],
                 ),
               );
@@ -113,7 +136,7 @@ class AnswerWidget extends StatefulWidget {
 
 class _AnswerWidgetState extends State<AnswerWidget> {
   var isChoosed = false;
-  var asnwerName = "";
+  var answerName = "";
 
   @override
   Widget build(BuildContext context) {
@@ -131,31 +154,10 @@ class _AnswerWidgetState extends State<AnswerWidget> {
                     isChoosed = false;
                   } else {
                     isChoosed = true;
-                    asnwerName = widget.answer;
+                    answerName = widget.answer;
                   }
                 });
                 print(widget.answer);
-                if (asnwerName == widget.questionModel.correctAnswer) {
-                  showDialog<void>(
-                      context: context,
-                      builder: (context) => AlertDialog(
-                            content: Text("CORRECT!"),
-                          ));
-                } else {
-                  showDialog<void>(
-                      context: context,
-                      builder: (context) => AlertDialog(
-                            content: Text(
-                                "WRONG!! Correct answer is: ${widget.questionModel.correctAnswer}"),
-                            actions: [
-                              IconButton(
-                                  onPressed: () {
-                                    Navigator.of(context).pop();
-                                  },
-                                  icon: Icon(Icons.arrow_back))
-                            ],
-                          ));
-                }
               },
               child: Container(
                   alignment: Alignment.center,
@@ -165,10 +167,10 @@ class _AnswerWidgetState extends State<AnswerWidget> {
                       border: Border.all(width: 2, color: Colors.black),
                       borderRadius: BorderRadius.circular(10),
                       color: isChoosed &&
-                              asnwerName == widget.questionModel.correctAnswer
+                              answerName == widget.questionModel.correctAnswer
                           ? Colors.green
                           : isChoosed &&
-                                  asnwerName !=
+                                  answerName !=
                                       widget.questionModel.correctAnswer
                               ? Colors.red
                               : Color.fromARGB(255, 56, 146, 249)),
