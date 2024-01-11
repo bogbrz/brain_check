@@ -27,15 +27,59 @@ class _QuestionPageState extends State<QuestionPage> {
     return BlocProvider(
         create: (context) => getIt<QuestionPageCubit>()
           ..getFiveQuestions(
-              category: widget.category, difficulty: widget.difficulty),
-        child: Scaffold(
-          appBar: AppBar(
-            backgroundColor: Color.fromARGB(255, 27, 58, 93),
+            category: widget.category,
+            difficulty: widget.difficulty,
           ),
+        child: Scaffold(
           body: BlocBuilder<QuestionPageCubit, QuestionPageState>(
             builder: (context, state) {
               if (state.questions.isEmpty) {
                 return CircularProgressIndicator();
+              }
+              if (currentIndex == 5) {
+                return Column(
+                  children: [
+                    Container(
+                        alignment: Alignment.center,
+                        height: MediaQuery.of(context).size.height * 0.6,
+                        padding: EdgeInsets.all(12),
+                        margin: EdgeInsets.all(12),
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(20),
+                            border: Border.all(width: 2, color: Colors.black)),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text("CORRECT ANSWERS: 1/5 "),
+                            Text("TIME: 2:24 "),
+                            Text("YOUR SCORE: 2313421 "),
+                            Text("RANKING POINTS: "),
+                          ],
+                        )),
+                    Container(
+                      alignment: Alignment.center,
+                      width: MediaQuery.of(context).size.width * 0.4,
+                      height: MediaQuery.of(context).size.height * 0.10,
+                      padding: EdgeInsets.all(12),
+                      decoration: BoxDecoration(
+                          border: Border.all(width: 2, color: Colors.black),
+                          borderRadius: BorderRadius.circular(10),
+                          color: Colors.white),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Text("RETURN",
+                              style: Theme.of(context).textTheme.headlineSmall),
+                          Icon(
+                            Icons.home,
+                            size: 30,
+                          )
+                        ],
+                      ),
+                    ),
+                  ],
+                );
               }
 
               final currentQuestion = state.questions[currentIndex];
@@ -49,7 +93,7 @@ class _QuestionPageState extends State<QuestionPage> {
 
               return Center(
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Container(
                         alignment: Alignment.center,
@@ -64,7 +108,7 @@ class _QuestionPageState extends State<QuestionPage> {
                           children: [
                             Row(
                               children: [
-                                Text("${currentIndex}/5"),
+                                Text("${currentIndex + 1}/5"),
                               ],
                             ),
                             Text(
@@ -77,9 +121,12 @@ class _QuestionPageState extends State<QuestionPage> {
                     Wrap(
                       children: [
                         for (final answer in answersList) ...[
-                          AnswerWidget(
-                            answer: answer,
-                            questionModel: currentQuestion,
+                          InkWell(
+                            onTap: () {},
+                            child: AnswerWidget(
+                              answer: answer,
+                              questionModel: currentQuestion,
+                            ),
                           )
                         ],
                       ],
@@ -92,28 +139,28 @@ class _QuestionPageState extends State<QuestionPage> {
                         });
                       },
                       child: Container(
-                          alignment: Alignment.center,
-                          width: MediaQuery.of(context).size.width * 0.4,
-                          height: MediaQuery.of(context).size.height * 0.10,
-                          padding: EdgeInsets.all(12),
-                          decoration: BoxDecoration(
-                              border: Border.all(width: 2, color: Colors.black),
-                              borderRadius: BorderRadius.circular(10),
-                              color: Colors.white),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              Text("NEXT",
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .headlineSmall),
-                              Icon(
-                                Icons.arrow_forward_outlined,
-                                size: 30,
-                              )
-                            ],
-                          )),
-                    ),
+                        alignment: Alignment.center,
+                        width: MediaQuery.of(context).size.width * 0.4,
+                        height: MediaQuery.of(context).size.height * 0.10,
+                        padding: EdgeInsets.all(12),
+                        decoration: BoxDecoration(
+                            border: Border.all(width: 2, color: Colors.black),
+                            borderRadius: BorderRadius.circular(10),
+                            color: Colors.white),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Text("NEXT",
+                                style:
+                                    Theme.of(context).textTheme.headlineSmall),
+                            Icon(
+                              Icons.arrow_forward_outlined,
+                              size: 30,
+                            )
+                          ],
+                        ),
+                      ),
+                    )
                   ],
                 ),
               );
@@ -124,8 +171,11 @@ class _QuestionPageState extends State<QuestionPage> {
 }
 
 class AnswerWidget extends StatefulWidget {
-  const AnswerWidget(
-      {super.key, required this.answer, required this.questionModel});
+  const AnswerWidget({
+    super.key,
+    required this.answer,
+    required this.questionModel,
+  });
 
   final String answer;
   final QuestionModel questionModel;
@@ -150,14 +200,12 @@ class _AnswerWidgetState extends State<AnswerWidget> {
             child: InkWell(
               onTap: () async {
                 setState(() {
-                  if (isChoosed == true) {
-                    isChoosed = false;
-                  } else {
+                  if (isChoosed == false) {
                     isChoosed = true;
+
                     answerName = widget.answer;
                   }
                 });
-                print(widget.answer);
               },
               child: Container(
                   alignment: Alignment.center,
