@@ -61,4 +61,46 @@ class QuestionPageCubit extends Cubit<QuestionPageState> {
       ));
     }
   }
+
+  Future<void> getMockQuestions(
+      {required String difficulty, required int category}) async {
+    final List<QuestionModel> mockList = [
+      QuestionModel(
+          type: "type",
+          difficulty: "difficulty",
+          category: "category",
+          question: "quesiton1",
+          correctAnswer: "correctAnswer1",
+          incorrectAnswers: ["11", "1,2", "1,3"]),
+      QuestionModel(
+          type: "type",
+          difficulty: "difficulty",
+          category: "category",
+          question: "quesiton2",
+          correctAnswer: "correctAnswer2",
+          incorrectAnswers: ["21", "22", "23"]),
+      QuestionModel(
+          type: "type",
+          difficulty: "difficulty",
+          category: "category",
+          question: "quesiton3",
+          correctAnswer: "correctAnswer3",
+          incorrectAnswers: ["31", "32", "33"]),
+      QuestionModel(
+          type: "type",
+          difficulty: "difficulty",
+          category: "category",
+          question: "quesiton4",
+          correctAnswer: "correctAnswer4",
+          incorrectAnswers: ["41", "42", "43"]),
+      QuestionModel(
+          type: "type",
+          difficulty: "difficulty",
+          category: "category",
+          question: "quesiton5",
+          correctAnswer: "correctAnswer5",
+          incorrectAnswers: ["51", "52", "53"]),
+    ];
+    emit(QuestionPageState(errorMessage: null, questions: mockList));
+  }
 }

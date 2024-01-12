@@ -34,7 +34,7 @@ class _CategoryPageState extends State<CategoryPage> {
           Center(child: BlocBuilder<CategoriesPageCubit, CategoriesPageState>(
             builder: (context, state) {
               if (state.categories.isEmpty) {
-                return CircularProgressIndicator();
+                return Center(child: CircularProgressIndicator());
               }
               return Wrap(children: [
                 Text("Choose category:",
