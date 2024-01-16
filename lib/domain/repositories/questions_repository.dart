@@ -1,7 +1,6 @@
-import 'package:brain_check/app/data_sources/questions_data_source.dart';
-import 'package:brain_check/app/domain/models/categories_model.dart';
-
-import 'package:brain_check/app/domain/models/question_model.dart';
+import 'package:brain_check/data_sources/questions_data_source.dart';
+import 'package:brain_check/domain/models/categories_model.dart';
+import 'package:brain_check/domain/models/question_model.dart';
 
 class QuestionRepository {
   QuestionRepository({required this.questionDataSource});
@@ -15,9 +14,17 @@ class QuestionRepository {
     return questionContent;
   }
 
+  Future<List<QuestionModel>> getListOfQuestions(
+      {required int category, required String difficulty}) async {
+    final questions =
+        await questionDataSource.getListofQuestions(difficulty, category);
+    print("  5 QUESTIONS  ${questions.results}");
+    return questions.results;
+  }
+
   Future<List<TriviaCategory>> getCategories() async {
     final categoryList = await questionDataSource.getCategories();
-    print("REPOSITORY PRINT   ${categoryList}");
+
     final categories = categoryList.triviaCategories;
 
     return categories;

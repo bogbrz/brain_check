@@ -1,6 +1,6 @@
-import 'package:brain_check/app/domain/models/categories_model.dart';
-import 'package:brain_check/app/features/pages/question_page/question_page.dart';
-
+import 'package:brain_check/device_size.dart';
+import 'package:brain_check/domain/models/categories_model.dart';
+import 'package:brain_check/features/pages/question_page/question_page.dart';
 import 'package:flutter/material.dart';
 
 class DifficultyPage extends StatefulWidget {
@@ -19,6 +19,8 @@ class _DifficultyPageState extends State<DifficultyPage> {
   var choosedDifficulty = '';
   @override
   Widget build(BuildContext context) {
+    double screenWidth = context.deviceWidth;
+    double screenHeight = context.deviceHeight;
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -32,7 +34,7 @@ class _DifficultyPageState extends State<DifficultyPage> {
         child: Column(
           children: [
             SizedBox(
-              height: MediaQuery.of(context).size.height / 4,
+              height: screenHeight / 4,
               child: Wrap(
                 children: [
                   Text("Choosed category: ${widget.categoriesModel.name}",
@@ -57,7 +59,6 @@ class _DifficultyPageState extends State<DifficultyPage> {
                   print("${widget.categoriesModel.id}, $choosedDifficulty)}");
                   Navigator.of(context).push(MaterialPageRoute(
                       builder: ((context) => QuestionPage(
-                       
                             category: widget.categoriesModel.id,
                             difficulty: choosedDifficulty,
                           ))));
@@ -65,7 +66,7 @@ class _DifficultyPageState extends State<DifficultyPage> {
                   print("$choosedDifficulty");
                 },
                 child: Container(
-                  width: MediaQuery.of(context).size.width / 1.75,
+                  width: screenWidth / 3,
                   padding: EdgeInsets.all(20),
                   decoration: BoxDecoration(
                       color: Colors.yellow,
@@ -105,7 +106,7 @@ class _DifficultyPageState extends State<DifficultyPage> {
                   print("$choosedDifficulty");
                 },
                 child: Container(
-                  width: MediaQuery.of(context).size.width / 1.75,
+                  width: screenWidth / 3,
                   padding: EdgeInsets.all(20),
                   decoration: BoxDecoration(
                       color: const Color.fromARGB(255, 50, 115, 52),
@@ -146,7 +147,7 @@ class _DifficultyPageState extends State<DifficultyPage> {
                   print("$choosedDifficulty");
                 },
                 child: Container(
-                  width: MediaQuery.of(context).size.width / 1.75,
+                  width: screenWidth / 3,
                   padding: EdgeInsets.all(20),
                   decoration: BoxDecoration(
                       color: Colors.yellow,
@@ -186,7 +187,7 @@ class _DifficultyPageState extends State<DifficultyPage> {
                   print("$choosedDifficulty");
                 },
                 child: Container(
-                  width: MediaQuery.of(context).size.width / 1.75,
+                  width: screenWidth / 3,
                   padding: EdgeInsets.all(20),
                   decoration: BoxDecoration(
                       color: Colors.red,

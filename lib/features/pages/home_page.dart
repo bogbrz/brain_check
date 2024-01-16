@@ -1,6 +1,6 @@
-import 'package:brain_check/app/features/pages/categories_page/categories_page.dart';
 
-import 'package:brain_check/app/features/pages/settings_page.dart';
+import 'package:brain_check/features/pages/categories_page/categories_page.dart';
+import 'package:brain_check/features/pages/settings_page.dart';
 
 import 'package:flutter/material.dart';
 
@@ -11,6 +11,7 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+   
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,

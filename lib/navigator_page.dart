@@ -1,5 +1,5 @@
-import 'package:brain_check/app/features/pages/home_page.dart';
-import 'package:brain_check/app/features/pages/user_page.dart';
+import 'package:brain_check/features/pages/home_page.dart';
+import 'package:brain_check/features/pages/user_page.dart';
 import 'package:flutter/material.dart';
 
 class NavigatorPage extends StatefulWidget {
@@ -37,14 +37,14 @@ class _NavigatorPageState extends State<NavigatorPage> {
               Icons.home,
               color: Colors.white,
             ),
-            label: "Tables",
+            label: "HOME",
           ),
           BottomNavigationBarItem(
             icon: Icon(
               Icons.person,
               color: Colors.white,
             ),
-            label: "Bar",
+            label: "USER",
           ),
         ],
       ),

@@ -1,7 +1,7 @@
-import 'package:brain_check/app/features/pages/categories_page/cubit/categories_page_cubit.dart';
-import 'package:brain_check/app/features/pages/difficulty_page.dart';
-import 'package:brain_check/app/injection_container.dart';
 
+import 'package:brain_check/app/injection_container.dart';
+import 'package:brain_check/features/pages/categories_page/cubit/categories_page_cubit.dart';
+import 'package:brain_check/features/pages/difficulty_page.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -34,7 +34,7 @@ class _CategoryPageState extends State<CategoryPage> {
           Center(child: BlocBuilder<CategoriesPageCubit, CategoriesPageState>(
             builder: (context, state) {
               if (state.categories.isEmpty) {
-                return CircularProgressIndicator();
+                return Center(child: CircularProgressIndicator());
               }
               return Wrap(children: [
                 Text("Choose category:",
@@ -54,6 +54,7 @@ class _CategoryPageState extends State<CategoryPage> {
                                 ))));
                       },
                       child: Container(
+                        alignment: Alignment.center,
                         height: MediaQuery.of(context).size.height / 6,
                         width: MediaQuery.of(context).size.width / 2.5,
                         padding: EdgeInsets.all(10),
@@ -62,16 +63,11 @@ class _CategoryPageState extends State<CategoryPage> {
                           border: Border.all(width: 2, color: Colors.black),
                           borderRadius: BorderRadius.circular(10),
                         ),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              category.name,
-                              style: Theme.of(context).textTheme.bodyLarge,
-                              selectionColor: Colors.white,
-                              textAlign: TextAlign.center,
-                            ),
-                          ],
+                        child: Text(
+                          category.name,
+                          style: Theme.of(context).textTheme.bodyLarge,
+                          selectionColor: Colors.white,
+                          textAlign: TextAlign.center,
                         ),
                       ),
                     ),

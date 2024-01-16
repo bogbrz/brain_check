@@ -52,6 +52,39 @@ class _QuestionDataSource implements QuestionDataSource {
   }
 
   @override
+  Future<Questions> getListofQuestions(
+    String difficulty,
+    int category,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{
+      r'difficulty': difficulty,
+      r'category': category,
+    };
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<Questions>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/api.php?amount=5',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = Questions.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
   Future<CategoryModel> getCategories() async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
