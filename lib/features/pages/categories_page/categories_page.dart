@@ -1,4 +1,3 @@
-
 import 'package:brain_check/app/injection_container.dart';
 import 'package:brain_check/features/pages/categories_page/cubit/categories_page_cubit.dart';
 import 'package:brain_check/features/pages/difficulty_page.dart';
