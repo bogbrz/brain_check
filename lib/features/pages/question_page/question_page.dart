@@ -104,9 +104,15 @@ class _QuestionPageState extends State<QuestionPage> {
                   Wrap(
                     children: [
                       for (final option in state.answers) ...[
-                        InkWell(
-                          onTap:
-                              choosedQuestion != null || noAnswerChoosed == true
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Material(
+                            shape: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10)),
+                            clipBehavior: Clip.hardEdge,
+                            child: InkWell(
+                              onTap: choosedQuestion != null ||
+                                      noAnswerChoosed == true
                                   ? null
                                   : () {
                                       if (state.answers.length == 4) {
@@ -174,28 +180,30 @@ class _QuestionPageState extends State<QuestionPage> {
                                       print(points);
                                       print(youLose);
                                     },
-                          child: Container(
-                              alignment: Alignment.center,
-                              margin: EdgeInsetsDirectional.all(4),
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  color: choosedQuestion == null
-                                      ? Colors.white
-                                      : isCorrect &&
-                                              option ==
-                                                  state.answers[choosedQuestion]
-                                          ? Colors.green
-                                          : isCorrect == false &&
+                              child: Container(
+                                  alignment: Alignment.center,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                      color: choosedQuestion == null
+                                          ? Colors.white
+                                          : isCorrect &&
                                                   option ==
                                                       state.answers[
                                                           choosedQuestion]
-                                              ? Colors.red
-                                              : Colors.white,
-                                  border: Border.all(
-                                      width: 2, color: Colors.black)),
-                              width: screenWidth * 0.2,
-                              height: screenHeight * 0.2,
-                              child: Text(HtmlUnescape().convert(option))),
+                                              ? Colors.green
+                                              : isCorrect == false &&
+                                                      option ==
+                                                          state.answers[
+                                                              choosedQuestion]
+                                                  ? Colors.red
+                                                  : Colors.white,
+                                      border: Border.all(
+                                          width: 2, color: Colors.black)),
+                                  width: screenWidth * 0.2,
+                                  height: screenHeight * 0.2,
+                                  child: Text(HtmlUnescape().convert(option))),
+                            ),
+                          ),
                         )
                       ],
                     ],
@@ -228,7 +236,7 @@ class _QuestionPageState extends State<QuestionPage> {
                             child: Text("Next")),
                         Countdown(
                           controller: _controller,
-                          seconds: 20,
+                          seconds: 15,
                           build: (BuildContext context, double time) =>
                               Text(time.toString()),
                           interval: Duration(milliseconds: 100),

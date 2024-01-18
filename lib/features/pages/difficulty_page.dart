@@ -17,7 +17,8 @@ class DifficultyPage extends StatefulWidget {
 
 class _DifficultyPageState extends State<DifficultyPage> {
   var choosedDifficulty = '';
-  var questionsNumber = 0;
+  var questionsNumber = null;
+
   @override
   Widget build(BuildContext context) {
     double screenWidth = context.deviceWidth;
@@ -48,6 +49,7 @@ class _DifficultyPageState extends State<DifficultyPage> {
               Text("Choose difficulty:",
                   style: Theme.of(context).textTheme.displaySmall),
               Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Material(
                     shape: OutlineInputBorder(),
@@ -59,21 +61,26 @@ class _DifficultyPageState extends State<DifficultyPage> {
                         });
                         print(
                             "${widget.categoriesModel.id}, $choosedDifficulty)}");
-      
+
                         print("$choosedDifficulty");
                       },
                       child: Container(
-                        height: MediaQuery.of(context).size.height / 10,
-                        width: MediaQuery.of(context).size.width / 4,
-                        padding: EdgeInsets.all(20),
+                        height: choosedDifficulty == null.toString()
+                            ? MediaQuery.of(context).size.height / 8
+                            : MediaQuery.of(context).size.height / 10,
+                        width: choosedDifficulty == null.toString()
+                            ? MediaQuery.of(context).size.width / 3.5
+                            : MediaQuery.of(context).size.width / 4.2,
+                        padding: EdgeInsets.all(15),
                         decoration: BoxDecoration(
-                            color: Colors.blueGrey,
-                            border: Border.all(width: 2, color: Colors.black)),
+                          border: Border.all(),
+                          color: Colors.blueGrey,
+                        ),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text("Random",
-                                style: Theme.of(context).textTheme.bodySmall),
+                                style: Theme.of(context).textTheme.labelSmall),
                             Image(
                               image: AssetImage("images/question_mark.png"),
                               width: MediaQuery.of(context).size.width / 20,
@@ -91,21 +98,26 @@ class _DifficultyPageState extends State<DifficultyPage> {
                         setState(() {
                           choosedDifficulty = "easy";
                         });
-      
+
                         print("$choosedDifficulty");
                       },
                       child: Container(
-                        height: MediaQuery.of(context).size.height / 10,
-                        width: MediaQuery.of(context).size.width / 4,
-                        padding: EdgeInsets.all(20),
+                        height: choosedDifficulty == "easy"
+                            ? MediaQuery.of(context).size.height / 8
+                            : MediaQuery.of(context).size.height / 10,
+                        width: choosedDifficulty == "easy"
+                            ? MediaQuery.of(context).size.width / 3.5
+                            : MediaQuery.of(context).size.width / 4.2,
+                        padding: EdgeInsets.all(15),
                         decoration: BoxDecoration(
-                            color: const Color.fromARGB(255, 50, 115, 52),
-                            border: Border.all(width: 2, color: Colors.black)),
+                          border: Border.all(),
+                          color: const Color.fromARGB(255, 50, 115, 52),
+                        ),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text("Easy",
-                                style: Theme.of(context).textTheme.bodySmall),
+                                style: Theme.of(context).textTheme.labelSmall),
                             Image(
                               image: AssetImage("images/leave.png"),
                               width: MediaQuery.of(context).size.width / 21,
@@ -116,29 +128,36 @@ class _DifficultyPageState extends State<DifficultyPage> {
                     ),
                   ),
                   Material(
+                    shape: OutlineInputBorder(),
                     clipBehavior: Clip.hardEdge,
                     child: InkWell(
                       onTap: () {
                         setState(() {
                           choosedDifficulty = "medium";
                         });
-      
+
                         print("$choosedDifficulty");
                       },
                       child: Container(
-                        height: MediaQuery.of(context).size.height / 10,
-                        width: MediaQuery.of(context).size.width / 4,
-                        padding: EdgeInsets.all(20),
+                        height: choosedDifficulty == "medium"
+                            ? MediaQuery.of(context).size.height / 8
+                            : MediaQuery.of(context).size.height / 10,
+                        width: choosedDifficulty == "medium"
+                            ? MediaQuery.of(context).size.width / 3.5
+                            : MediaQuery.of(context).size.width / 4.2,
+                        padding: EdgeInsets.all(15),
                         decoration: BoxDecoration(
-                            color: Colors.yellow,
-                            border: Border.all(width: 2, color: Colors.black)),
+                          border: Border.all(),
+                          color: Colors.yellow,
+                        ),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text("Medium",
-                                style: Theme.of(context).textTheme.bodySmall),
+                                style: Theme.of(context).textTheme.labelSmall),
                             Image(
-                              image: AssetImage("images/bitten_leaf_scaled.png"),
+                              image:
+                                  AssetImage("images/bitten_leaf_scaled.png"),
                               width: MediaQuery.of(context).size.width / 20,
                             )
                           ],
@@ -154,21 +173,26 @@ class _DifficultyPageState extends State<DifficultyPage> {
                         setState(() {
                           choosedDifficulty = "hard";
                         });
-      
+
                         print("$choosedDifficulty");
                       },
                       child: Container(
-                        height: MediaQuery.of(context).size.height / 10,
-                        width: MediaQuery.of(context).size.width / 4,
-                        padding: EdgeInsets.all(20),
+                        height: choosedDifficulty == "hard"
+                            ? MediaQuery.of(context).size.height / 8
+                            : MediaQuery.of(context).size.height / 10,
+                        width: choosedDifficulty == "hard"
+                            ? MediaQuery.of(context).size.width / 3.5
+                            : MediaQuery.of(context).size.width / 4.2,
+                        padding: EdgeInsets.all(15),
                         decoration: BoxDecoration(
-                            color: Colors.red,
-                            border: Border.all(width: 2, color: Colors.black)),
+                          border: Border.all(),
+                          color: Colors.red,
+                        ),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text("Hard",
-                                style: Theme.of(context).textTheme.bodySmall),
+                                style: Theme.of(context).textTheme.labelSmall),
                             Image(
                               image: AssetImage("images/fire_leaf_scale.png"),
                               width: MediaQuery.of(context).size.width / 20,
@@ -180,9 +204,10 @@ class _DifficultyPageState extends State<DifficultyPage> {
                   ),
                 ],
               ),
-              Text("Choose number of quesitons:",
-                  style: Theme.of(context).textTheme.displaySmall),
+              Text("number of quesitons:",
+                  style: Theme.of(context).textTheme.headlineMedium),
               Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Material(
                     shape: OutlineInputBorder(),
@@ -196,12 +221,18 @@ class _DifficultyPageState extends State<DifficultyPage> {
                       },
                       child: Container(
                         alignment: Alignment.center,
-                        height: MediaQuery.of(context).size.height / 10,
-                        width: MediaQuery.of(context).size.width / 4,
-                        padding: EdgeInsets.all(20),
+                        height: questionsNumber == 1
+                            ? MediaQuery.of(context).size.height / 8
+                            : MediaQuery.of(context).size.height / 10,
+                        width: questionsNumber == 1
+                            ? MediaQuery.of(context).size.width / 3.5
+                            : MediaQuery.of(context).size.width / 4.2,
+                        padding: EdgeInsets.all(15),
                         decoration: BoxDecoration(
-                            color: Colors.blue,
-                            border: Border.all(width: 4, color: Colors.black)),
+                          color: questionsNumber == 1
+                              ? Colors.orangeAccent
+                              : Colors.blue,
+                        ),
                         child: Text("1",
                             style: Theme.of(context).textTheme.bodySmall),
                       ),
@@ -219,11 +250,17 @@ class _DifficultyPageState extends State<DifficultyPage> {
                       },
                       child: Container(
                         alignment: Alignment.center,
-                        height: MediaQuery.of(context).size.height / 10,
-                        width: MediaQuery.of(context).size.width / 4,
+                        height: questionsNumber == 5
+                            ? MediaQuery.of(context).size.height / 8
+                            : MediaQuery.of(context).size.height / 10,
+                        width: questionsNumber == 5
+                            ? MediaQuery.of(context).size.width / 3.5
+                            : MediaQuery.of(context).size.width / 4.2,
                         decoration: BoxDecoration(
-                            color: Colors.blue,
-                            border: Border.all(width: 4, color: Colors.black)),
+                          color: questionsNumber == 5
+                              ? Colors.orangeAccent
+                              : Colors.blue,
+                        ),
                         child: Text("5",
                             style: Theme.of(context).textTheme.bodySmall),
                       ),
@@ -241,12 +278,18 @@ class _DifficultyPageState extends State<DifficultyPage> {
                       },
                       child: Container(
                         alignment: Alignment.center,
-                        height: MediaQuery.of(context).size.height / 10,
-                        width: MediaQuery.of(context).size.width / 4,
-                        padding: EdgeInsets.all(20),
+                        height: questionsNumber == 10
+                            ? MediaQuery.of(context).size.height / 8
+                            : MediaQuery.of(context).size.height / 10,
+                        width: questionsNumber == 10
+                            ? MediaQuery.of(context).size.width / 3.5
+                            : MediaQuery.of(context).size.width / 4.2,
+                        padding: EdgeInsets.all(15),
                         decoration: BoxDecoration(
-                            color: Colors.blue,
-                            border: Border.all(width: 4, color: Colors.black)),
+                          color: questionsNumber == 10
+                              ? Colors.orangeAccent
+                              : Colors.blue,
+                        ),
                         child: Text("10",
                             style: Theme.of(context).textTheme.bodySmall),
                       ),
@@ -264,12 +307,18 @@ class _DifficultyPageState extends State<DifficultyPage> {
                       },
                       child: Container(
                         alignment: Alignment.center,
-                        height: MediaQuery.of(context).size.height / 10,
-                        width: MediaQuery.of(context).size.width / 4,
-                        padding: EdgeInsets.all(20),
+                        height: questionsNumber == 0
+                            ? MediaQuery.of(context).size.height / 8
+                            : MediaQuery.of(context).size.height / 10,
+                        width: questionsNumber == 0
+                            ? MediaQuery.of(context).size.width / 3.5
+                            : MediaQuery.of(context).size.width / 4.2,
+                        padding: EdgeInsets.all(15),
                         decoration: BoxDecoration(
-                            color: Colors.blue,
-                            border: Border.all(width: 4, color: Colors.black)),
+                          color: questionsNumber == 0
+                              ? Colors.orangeAccent
+                              : Colors.blue,
+                        ),
                         child: Text("Survival",
                             style: Theme.of(context).textTheme.bodySmall),
                       ),
@@ -278,7 +327,8 @@ class _DifficultyPageState extends State<DifficultyPage> {
                 ],
               ),
               Material(
-                shape: OutlineInputBorder(),
+                shape:
+                    OutlineInputBorder(borderRadius: BorderRadius.circular(25)),
                 clipBehavior: Clip.hardEdge,
                 child: InkWell(
                   onTap: () {
@@ -293,11 +343,12 @@ class _DifficultyPageState extends State<DifficultyPage> {
                   child: Container(
                     alignment: Alignment.center,
                     height: MediaQuery.of(context).size.height / 10,
-                    width: MediaQuery.of(context).size.width / 4,
+                    width: MediaQuery.of(context).size.width / 2,
                     padding: EdgeInsets.all(20),
                     decoration: BoxDecoration(
                         color: Colors.blue,
-                        border: Border.all(width: 4, color: Colors.black)),
+                        borderRadius: BorderRadius.circular(25),
+                        border: Border.all(width: 2, color: Colors.black)),
                     child: Text("START",
                         style: Theme.of(context).textTheme.bodySmall),
                   ),

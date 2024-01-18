@@ -20,14 +20,15 @@ class _QuestionDataSource implements QuestionDataSource {
 
   @override
   Future<Questions> getQuestionWithCatAndDiff(
-    String difficulty,
-    int category,
+    String? difficulty,
+    int? category,
   ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'difficulty': difficulty,
       r'category': category,
     };
+    queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
     final _result = await _dio

@@ -18,9 +18,15 @@ class QuestionPageCubit extends Cubit<QuestionPageState> {
   final QuestionRepository questionRepository;
 
   Future<void> getQuestion({
-    required int category,
-    required String difficulty,
+    required int? category,
+    required String? difficulty,
   }) async {
+    if (difficulty == null.toString()) {
+      difficulty = null;
+    }
+    if (category == 0) {
+      category = null;
+    }
     List<String> answers = [];
     final questionContent = await questionRepository.getQuestion(
         category: category, difficulty: difficulty);
@@ -29,7 +35,6 @@ class QuestionPageCubit extends Cubit<QuestionPageState> {
     answers.shuffle();
     print(questionContent);
     try {
-     
       emit(QuestionPageState(
         answers: answers,
         errorMessage: null,
