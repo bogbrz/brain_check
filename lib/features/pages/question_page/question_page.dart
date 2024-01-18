@@ -78,8 +78,8 @@ class _QuestionPageState extends State<QuestionPage> {
                 children: [
                   Container(
                     alignment: Alignment.center,
-                    margin: EdgeInsetsDirectional.all(4),
-                    padding: EdgeInsets.all(4),
+                    margin: EdgeInsetsDirectional.all(16),
+                    padding: EdgeInsets.all(8),
                     decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(10),
@@ -90,8 +90,29 @@ class _QuestionPageState extends State<QuestionPage> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text("Question number${index + 1}"),
+                            Countdown(
+                              controller: _controller,
+                              seconds: 15,
+                              build: (BuildContext context, double time) =>
+                                  Text(time.toString(),
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .headlineLarge),
+                              interval: Duration(milliseconds: 100),
+                              onFinished: () {
+                                setState(() {
+                                  coolDown = false;
+                                });
+                                if (choosedQuestion == null) {
+                                  setState(() {
+                                    noAnswerChoosed = true;
+                                  });
+                                }
+                              },
+                            )
                           ],
                         ),
                         SizedBox(
@@ -141,6 +162,7 @@ class _QuestionPageState extends State<QuestionPage> {
                                           setState(() {
                                             isCorrect = true;
                                             points++;
+                                            
                                           });
                                         }
                                         if (state.answers[choosedQuestion] !=
@@ -148,6 +170,7 @@ class _QuestionPageState extends State<QuestionPage> {
                                           setState(() {
                                             isCorrect = false;
                                             youLose = true;
+                                           
                                           });
                                         }
                                       } else {
@@ -181,6 +204,7 @@ class _QuestionPageState extends State<QuestionPage> {
                                       print(youLose);
                                     },
                               child: Container(
+                                  padding: EdgeInsets.all(4),
                                   alignment: Alignment.center,
                                   decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(10),
@@ -234,23 +258,9 @@ class _QuestionPageState extends State<QuestionPage> {
                                         );
                                   },
                             child: Text("Next")),
-                        Countdown(
-                          controller: _controller,
-                          seconds: 15,
-                          build: (BuildContext context, double time) =>
-                              Text(time.toString()),
-                          interval: Duration(milliseconds: 100),
-                          onFinished: () {
-                            setState(() {
-                              coolDown = false;
-                            });
-                            if (choosedQuestion == null) {
-                              setState(() {
-                                noAnswerChoosed = true;
-                              });
-                            }
-                          },
-                        )
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width * 0.1,
+                        ),
                       ],
                     ),
                   ),
