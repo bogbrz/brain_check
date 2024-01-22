@@ -48,6 +48,8 @@ dependencies:
   html_unescape: ^2.0.0
   flutter_hooks: ^0.20.4
   timer_count_down: ^2.2.2
+  firebase_core: ^2.24.2
+  firebase_auth: ^4.16.0
   
 
 dev_dependencies:

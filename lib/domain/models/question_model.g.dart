@@ -22,9 +22,9 @@ Map<String, dynamic> _$$QuestionsImplToJson(_$QuestionsImpl instance) =>
 
 _$QuestionModelImpl _$$QuestionModelImplFromJson(Map<String, dynamic> json) =>
     _$QuestionModelImpl(
-      type: json['type'] as String,
-      difficulty: json['difficulty'] as String,
-      category: json['category'] as String,
+      type: json['type'] as String?,
+      difficulty: json['difficulty'] as String?,
+      category: json['category'] as String?,
       question: json['question'] as String,
       correctAnswer: json['correct_answer'] as String,
       incorrectAnswers: (json['incorrect_answers'] as List<dynamic>)

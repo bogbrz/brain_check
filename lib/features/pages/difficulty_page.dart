@@ -1,6 +1,7 @@
 import 'package:brain_check/device_size.dart';
 import 'package:brain_check/domain/models/categories_model.dart';
 import 'package:brain_check/features/pages/question_page/question_page.dart';
+
 import 'package:flutter/material.dart';
 
 class DifficultyPage extends StatefulWidget {
@@ -45,16 +46,17 @@ class _DifficultyPageState extends State<DifficultyPage> {
                       borderRadius: BorderRadius.circular(10),
                       color: Colors.white),
                   width: MediaQuery.of(context).size.width * 0.9,
-                  height: MediaQuery.of(context).size.height * 0.35,
+                  height: MediaQuery.of(context).size.height * 0.38,
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         Row(
                           children: [
                             Expanded(
                               child: Text(
-                                  "Choosed category: ${widget.categoriesModel.name}",
+                                  "Choosed category: ${widget.categoriesModel.name}.",
                                   style: Theme.of(context)
                                       .textTheme
                                       .headlineMedium),
@@ -66,10 +68,10 @@ class _DifficultyPageState extends State<DifficultyPage> {
                             Expanded(
                               child: Text(
                                   choosedDifficulty.isEmpty
-                                      ? "Choose difficulty: not choosed"
+                                      ? "Choose difficulty: not choosed."
                                       : choosedDifficulty == null.toString()
-                                          ? "Choose difficulty: random"
-                                          : "Choose difficulty: $choosedDifficulty",
+                                          ? "Choose difficulty: random."
+                                          : "Choose difficulty: $choosedDifficulty.",
                                   style: Theme.of(context)
                                       .textTheme
                                       .headlineMedium),
@@ -80,10 +82,10 @@ class _DifficultyPageState extends State<DifficultyPage> {
                           children: [
                             Text(
                                 questionsNumber == null
-                                    ? "Amount: not choosed"
+                                    ? "Amount: not choosed."
                                     : questionsNumber == 0
-                                        ? "Amount: Survival"
-                                        : "Amount: $questionsNumber",
+                                        ? "Amount: Survival."
+                                        : "Amount: $questionsNumber.",
                                 style:
                                     Theme.of(context).textTheme.headlineMedium),
                           ],

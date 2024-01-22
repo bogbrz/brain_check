@@ -140,21 +140,29 @@ class _QuestionPageState extends State<QuestionPage> {
                                         if (option == state.answers[0]) {
                                           setState(() {
                                             choosedQuestion = 0;
+                                            _controller.pause();
+                                            coolDown = false;
                                           });
                                         }
                                         if (option == state.answers[1]) {
                                           setState(() {
                                             choosedQuestion = 1;
+                                            _controller.pause();
+                                            coolDown = false;
                                           });
                                         }
                                         if (option == state.answers[2]) {
                                           setState(() {
                                             choosedQuestion = 2;
+                                            _controller.pause();
+                                            coolDown = false;
                                           });
                                         }
                                         if (option == state.answers[3]) {
                                           setState(() {
                                             choosedQuestion = 3;
+                                            _controller.pause();
+                                            coolDown = false;
                                           });
                                         }
                                         if (state.answers[choosedQuestion] ==
@@ -162,7 +170,6 @@ class _QuestionPageState extends State<QuestionPage> {
                                           setState(() {
                                             isCorrect = true;
                                             points++;
-                                            
                                           });
                                         }
                                         if (state.answers[choosedQuestion] !=
@@ -170,18 +177,21 @@ class _QuestionPageState extends State<QuestionPage> {
                                           setState(() {
                                             isCorrect = false;
                                             youLose = true;
-                                           
                                           });
                                         }
                                       } else {
                                         if (option == state.answers[0]) {
                                           setState(() {
                                             choosedQuestion = 0;
+                                            _controller.pause();
+                                            coolDown = false;
                                           });
                                         }
                                         if (option == state.answers[1]) {
                                           setState(() {
                                             choosedQuestion = 1;
+                                            _controller.pause();
+                                            coolDown = false;
                                           });
                                         }
                                         if (state.answers[choosedQuestion] ==
@@ -234,35 +244,27 @@ class _QuestionPageState extends State<QuestionPage> {
                   ),
                   Padding(
                     padding: const EdgeInsets.only(bottom: 20),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        ElevatedButton(
-                            onPressed: coolDown
-                                ? null
-                                : () {
-                                    setState(() {
-                                      index++;
-                                      choosedQuestion = null;
-                                      isCorrect = false;
-                                      coolDown = true;
-                                      noAnswerChoosed = false;
-                                      _controller.restart();
-                                    });
+                    child: ElevatedButton(
+                        onPressed: coolDown
+                            ? null
+                            : () {
+                                setState(() {
+                                  index++;
+                                  choosedQuestion = null;
+                                  isCorrect = false;
+                                  coolDown = true;
+                                  noAnswerChoosed = false;
+                                });
 
-                                    context
-                                        .read<QuestionPageCubit>()
-                                        .getQuestion(
-                                          difficulty: widget.difficulty,
-                                          category: widget.category,
-                                        );
-                                  },
-                            child: Text("Next")),
-                        SizedBox(
-                          width: MediaQuery.of(context).size.width * 0.1,
-                        ),
-                      ],
-                    ),
+                                context
+                                    .read<QuestionPageCubit>()
+                                    .getQuestion(
+                                      difficulty: widget.difficulty,
+                                      category: widget.category,
+                                    )
+                                    .then((value) => _controller.restart());
+                              },
+                        child: Text("Next")),
                   ),
                 ],
               )),

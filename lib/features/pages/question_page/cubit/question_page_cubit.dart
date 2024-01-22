@@ -52,9 +52,9 @@ class QuestionPageCubit extends Cubit<QuestionPageState> {
   Future<void> getFiveQuestions(
       {required int category,
       required String difficulty,
-      required int index}) async {
+      required int index, required int amount}) async {
     final questionContent = await questionRepository.getListOfQuestions(
-        category: category, difficulty: difficulty);
+        category: category, difficulty: difficulty ,amount: amount );
     final List<String> answers = [];
     answers.addAll(questionContent[index].incorrectAnswers);
     answers.add(questionContent[index].correctAnswer);
