@@ -10,52 +10,65 @@ part 'question_page_cubit.freezed.dart';
 class QuestionPageCubit extends Cubit<QuestionPageState> {
   QuestionPageCubit({required this.questionRepository})
       : super(QuestionPageState(
+          answers: [],
           errorMessage: null,
           questions: [],
         ));
 
   final QuestionRepository questionRepository;
 
-  Future<void> getQuestion(
-      {required int category, required String difficulty}) async {
+  Future<void> getQuestion({
+    required int? category,
+    required String? difficulty,
+  }) async {
+    if (difficulty == null.toString()) {
+      difficulty = null;
+    }
+    if (category == 0) {
+      category = null;
+    }
     List<String> answers = [];
     final questionContent = await questionRepository.getQuestion(
         category: category, difficulty: difficulty);
-    for (final answer in questionContent) {
-      for (final incorrectAnswers in answer.incorrectAnswers) {
-        answers.add(incorrectAnswers);
-      }
-      answers.add(answer.correctAnswer);
-    }
+    answers.addAll(questionContent[0].incorrectAnswers);
+    answers.add(questionContent[0].correctAnswer);
     answers.shuffle();
+    print(questionContent);
     try {
       emit(QuestionPageState(
+        answers: answers,
         errorMessage: null,
         questions: questionContent,
       ));
     } catch (error) {
       emit(QuestionPageState(
+        answers: [],
         errorMessage: error.toString(),
         questions: [],
       ));
     }
   }
 
-  Future<void> getFiveQuestions({
-    required int category,
-    required String difficulty,
-  }) async {
-    List<String> answers = [];
+  Future<void> getFiveQuestions(
+      {required int category,
+      required String difficulty,
+      required int index}) async {
     final questionContent = await questionRepository.getListOfQuestions(
         category: category, difficulty: difficulty);
+    final List<String> answers = [];
+    answers.addAll(questionContent[index].incorrectAnswers);
+    answers.add(questionContent[index].correctAnswer);
+    answers.shuffle();
 
     try {
       emit(QuestionPageState(
+        answers: answers,
         errorMessage: null,
         questions: questionContent,
       ));
     } catch (error) {
       emit(QuestionPageState(
+        answers: [],
         errorMessage: error.toString(),
         questions: [],
       ));
@@ -63,7 +76,10 @@ class QuestionPageCubit extends Cubit<QuestionPageState> {
   }
 
   Future<void> getMockQuestions(
-      {required String difficulty, required int category}) async {
+      {required String difficulty,
+      required int category,
+      required int index}) async {
+    final List<String> answers = [];
     final List<QuestionModel> mockList = [
       QuestionModel(
           type: "type",
@@ -101,6 +117,13 @@ class QuestionPageCubit extends Cubit<QuestionPageState> {
           correctAnswer: "correctAnswer5",
           incorrectAnswers: ["51", "52", "53"]),
     ];
-    emit(QuestionPageState(errorMessage: null, questions: mockList));
+    answers.addAll(mockList[index].incorrectAnswers);
+    answers.add(mockList[index].correctAnswer);
+    answers.shuffle();
+    emit(QuestionPageState(
+      answers: answers,
+      errorMessage: null,
+      questions: mockList,
+    ));
   }
 }

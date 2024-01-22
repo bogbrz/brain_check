@@ -46,6 +46,8 @@ dependencies:
   font_awesome_flutter: ^10.6.0
   http: ^1.1.0
   html_unescape: ^2.0.0
+  flutter_hooks: ^0.20.4
+  timer_count_down: ^2.2.2
   
 
 dev_dependencies:

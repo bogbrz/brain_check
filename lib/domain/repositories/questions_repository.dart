@@ -7,7 +7,7 @@ class QuestionRepository {
   final QuestionDataSource questionDataSource;
 
   Future<List<QuestionModel>> getQuestion(
-      {required int category, required String difficulty}) async {
+      {required int? category, required String? difficulty}) async {
     final questions = await questionDataSource.getQuestionWithCatAndDiff(
         difficulty, category);
     final questionContent = questions.results;
