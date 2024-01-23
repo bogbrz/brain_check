@@ -26,6 +26,7 @@ class _LogInPageState extends State<LogInPage> {
         builder: (context, state) {
           return Scaffold(
             appBar: AppBar(
+                 backgroundColor: Color.fromARGB(255, 27, 58, 93),
                 title: Text(
               "Welcome to:",
               style: Theme.of(context).textTheme.headlineLarge,

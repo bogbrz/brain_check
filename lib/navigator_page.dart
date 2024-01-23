@@ -1,5 +1,5 @@
 import 'package:brain_check/features/pages/home_page.dart';
-import 'package:brain_check/features/pages/user_page.dart';
+import 'package:brain_check/features/pages/log_in/user_page.dart';
 import 'package:flutter/material.dart';
 
 class NavigatorPage extends StatefulWidget {

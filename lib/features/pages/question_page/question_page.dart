@@ -50,7 +50,9 @@ class _QuestionPageState extends State<QuestionPage> {
           if (widget.questionsNumber == 0) {
             if (youLose == true) {
               return Scaffold(
-                appBar: AppBar(),
+                appBar: AppBar(
+                     backgroundColor: Color.fromARGB(255, 27, 58, 93),
+                ),
                 body: Center(
                     child: Container(
                   child: Column(
@@ -62,7 +64,7 @@ class _QuestionPageState extends State<QuestionPage> {
           } else if (widget.questionsNumber != 0 &&
               index == widget.questionsNumber) {
             return Scaffold(
-              appBar: AppBar(),
+              appBar: AppBar(   backgroundColor: Color.fromARGB(255, 27, 58, 93),),
               body: Center(
                   child: Container(
                 child: Text("Your Score $points/${index}"),
