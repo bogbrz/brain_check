@@ -9,8 +9,5 @@ class SettingsPageCubit extends Cubit<SettingsPageState> {
   SettingsPageCubit({required this.rankingRepository})
       : super(SettingsPageState(errorMessage: null));
   final RankingRepository rankingRepository;
-  Future<void> addProfile(
-      {required String nickName, required String email}) async {
-    await rankingRepository.addProfile(nickName: nickName, email: email);
-  }
+
 }

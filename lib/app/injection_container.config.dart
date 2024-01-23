@@ -76,7 +76,9 @@ extension GetItInjectableX on _i1.GetIt {
     gh.factory<_i14.CategoriesPageCubit>(() => _i14.CategoriesPageCubit(
         questionRepository: gh<_i13.QuestionRepository>()));
     gh.factory<_i15.QuestionPageCubit>(() => _i15.QuestionPageCubit(
-        questionRepository: gh<_i13.QuestionRepository>()));
+          questionRepository: gh<_i13.QuestionRepository>(),
+          rankingRepository: gh<_i7.RankingRepository>(),
+        ));
     return this;
   }
 }

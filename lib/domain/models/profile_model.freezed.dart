@@ -19,6 +19,8 @@ mixin _$ProfileModel {
   String get email => throw _privateConstructorUsedError;
   String get nickName => throw _privateConstructorUsedError;
   int get points => throw _privateConstructorUsedError;
+  int get gamesPlayed => throw _privateConstructorUsedError;
+  String get id => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ProfileModelCopyWith<ProfileModel> get copyWith =>
@@ -31,7 +33,8 @@ abstract class $ProfileModelCopyWith<$Res> {
           ProfileModel value, $Res Function(ProfileModel) then) =
       _$ProfileModelCopyWithImpl<$Res, ProfileModel>;
   @useResult
-  $Res call({String email, String nickName, int points});
+  $Res call(
+      {String email, String nickName, int points, int gamesPlayed, String id});
 }
 
 /// @nodoc
@@ -50,6 +53,8 @@ class _$ProfileModelCopyWithImpl<$Res, $Val extends ProfileModel>
     Object? email = null,
     Object? nickName = null,
     Object? points = null,
+    Object? gamesPlayed = null,
+    Object? id = null,
   }) {
     return _then(_value.copyWith(
       email: null == email
@@ -64,6 +69,14 @@ class _$ProfileModelCopyWithImpl<$Res, $Val extends ProfileModel>
           ? _value.points
           : points // ignore: cast_nullable_to_non_nullable
               as int,
+      gamesPlayed: null == gamesPlayed
+          ? _value.gamesPlayed
+          : gamesPlayed // ignore: cast_nullable_to_non_nullable
+              as int,
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -76,7 +89,8 @@ abstract class _$$ProfileModelImplCopyWith<$Res>
       __$$ProfileModelImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String email, String nickName, int points});
+  $Res call(
+      {String email, String nickName, int points, int gamesPlayed, String id});
 }
 
 /// @nodoc
@@ -93,6 +107,8 @@ class __$$ProfileModelImplCopyWithImpl<$Res>
     Object? email = null,
     Object? nickName = null,
     Object? points = null,
+    Object? gamesPlayed = null,
+    Object? id = null,
   }) {
     return _then(_$ProfileModelImpl(
       email: null == email
@@ -107,6 +123,14 @@ class __$$ProfileModelImplCopyWithImpl<$Res>
           ? _value.points
           : points // ignore: cast_nullable_to_non_nullable
               as int,
+      gamesPlayed: null == gamesPlayed
+          ? _value.gamesPlayed
+          : gamesPlayed // ignore: cast_nullable_to_non_nullable
+              as int,
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -115,7 +139,11 @@ class __$$ProfileModelImplCopyWithImpl<$Res>
 
 class _$ProfileModelImpl implements _ProfileModel {
   _$ProfileModelImpl(
-      {required this.email, required this.nickName, required this.points});
+      {required this.email,
+      required this.nickName,
+      required this.points,
+      required this.gamesPlayed,
+      required this.id});
 
   @override
   final String email;
@@ -123,10 +151,14 @@ class _$ProfileModelImpl implements _ProfileModel {
   final String nickName;
   @override
   final int points;
+  @override
+  final int gamesPlayed;
+  @override
+  final String id;
 
   @override
   String toString() {
-    return 'ProfileModel(email: $email, nickName: $nickName, points: $points)';
+    return 'ProfileModel(email: $email, nickName: $nickName, points: $points, gamesPlayed: $gamesPlayed, id: $id)';
   }
 
   @override
@@ -137,11 +169,15 @@ class _$ProfileModelImpl implements _ProfileModel {
             (identical(other.email, email) || other.email == email) &&
             (identical(other.nickName, nickName) ||
                 other.nickName == nickName) &&
-            (identical(other.points, points) || other.points == points));
+            (identical(other.points, points) || other.points == points) &&
+            (identical(other.gamesPlayed, gamesPlayed) ||
+                other.gamesPlayed == gamesPlayed) &&
+            (identical(other.id, id) || other.id == id));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, email, nickName, points);
+  int get hashCode =>
+      Object.hash(runtimeType, email, nickName, points, gamesPlayed, id);
 
   @JsonKey(ignore: true)
   @override
@@ -154,7 +190,9 @@ abstract class _ProfileModel implements ProfileModel {
   factory _ProfileModel(
       {required final String email,
       required final String nickName,
-      required final int points}) = _$ProfileModelImpl;
+      required final int points,
+      required final int gamesPlayed,
+      required final String id}) = _$ProfileModelImpl;
 
   @override
   String get email;
@@ -162,6 +200,10 @@ abstract class _ProfileModel implements ProfileModel {
   String get nickName;
   @override
   int get points;
+  @override
+  int get gamesPlayed;
+  @override
+  String get id;
   @override
   @JsonKey(ignore: true)
   _$$ProfileModelImplCopyWith<_$ProfileModelImpl> get copyWith =>

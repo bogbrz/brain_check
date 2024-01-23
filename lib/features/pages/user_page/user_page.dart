@@ -1,7 +1,6 @@
 import 'package:brain_check/app/global%20cubit/cubit/user_page_cubit.dart';
 import 'package:brain_check/app/injection_container.dart';
 
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -40,12 +39,16 @@ class UserPage extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
+                    CircleAvatar(
+                      backgroundColor: Color.fromARGB(255, 27, 58, 93),
+                      radius: 40,
+                    ),
                     for (final profile in state.profile) ...[
-                      Text("Your email adress: ${user!.email}",
-                          style: Theme.of(context).textTheme.headlineMedium),
                       Text("Your nickname: ${profile.nickName}",
                           style: Theme.of(context).textTheme.headlineMedium),
-                      Text("Quiz played:  ",
+                      Text("Your email adress: ${user!.email}",
+                          style: Theme.of(context).textTheme.headlineMedium),
+                      Text("Quiz played: ${profile.gamesPlayed} ",
                           style: Theme.of(context).textTheme.headlineMedium),
                       Text("Personal rating: ${profile.points}",
                           style: Theme.of(context).textTheme.headlineMedium),

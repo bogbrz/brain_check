@@ -7,7 +7,7 @@ part 'profile_model.freezed.dart';
 class ProfileModel with _$ProfileModel {
  
   factory ProfileModel({
-    required String email, required String nickName, required int points,
+    required String email, required String nickName, required int points, required int gamesPlayed, required String id
   }) = _ProfileModel;
 
 }

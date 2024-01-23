@@ -1,3 +1,4 @@
+import 'package:brain_check/app/global%20cubit/cubit/user_page_cubit.dart';
 import 'package:brain_check/app/injection_container.dart';
 import 'package:brain_check/device_size.dart';
 
@@ -50,13 +51,60 @@ class _QuestionPageState extends State<QuestionPage> {
           if (widget.questionsNumber == 0) {
             if (youLose == true) {
               return Scaffold(
-                appBar: AppBar(
-                     backgroundColor: Color.fromARGB(255, 27, 58, 93),
-                ),
                 body: Center(
                     child: Container(
+                  width: MediaQuery.of(context).size.width * 0.7,
+                  height: MediaQuery.of(context).size.height * 0.5,
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      border: Border.all(),
+                      borderRadius: BorderRadius.circular(10)),
                   child: Column(
-                    children: [Text("Your Score $points")],
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Text("Your Score $points",
+                          style: Theme.of(context).textTheme.headlineLarge),
+                      Material(
+                        clipBehavior: Clip.hardEdge,
+                        shape: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: BlocBuilder<UserPageCubit, UserPageState>(
+                          builder: (context, state) {
+                            return InkWell(
+                              onTap: () {
+                                for (final profile in state.profile) {
+                                  context.read<QuestionPageCubit>().updateStats(
+                                        points: points,
+                                        id: profile.id,
+                                      );
+                                }
+
+                                Navigator.of(context).pop();
+                                Navigator.of(context).pop();
+                                Navigator.of(context).pop();
+                              },
+                              child: Container(
+                                alignment: Alignment.center,
+                                width: MediaQuery.of(context).size.width * 0.5,
+                                height:
+                                    MediaQuery.of(context).size.height * 0.05,
+                                padding: EdgeInsets.all(4),
+                                decoration: BoxDecoration(
+                                    color: Color.fromARGB(255, 27, 58, 93),
+                                    border: Border.all(),
+                                    borderRadius: BorderRadius.circular(10)),
+                                child: Text(
+                                  "FINISH",
+                                  style: TextStyle(
+                                      color: Colors.white, fontSize: 25),
+                                ),
+                              ),
+                            );
+                          },
+                        ),
+                      )
+                    ],
                   ),
                 )),
               );
@@ -64,10 +112,60 @@ class _QuestionPageState extends State<QuestionPage> {
           } else if (widget.questionsNumber != 0 &&
               index == widget.questionsNumber) {
             return Scaffold(
-              appBar: AppBar(   backgroundColor: Color.fromARGB(255, 27, 58, 93),),
               body: Center(
                   child: Container(
-                child: Text("Your Score $points/${index}"),
+                width: MediaQuery.of(context).size.width * 0.7,
+                height: MediaQuery.of(context).size.height * 0.5,
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    border: Border.all(),
+                    borderRadius: BorderRadius.circular(25)),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Text("Your Score $points/$index",
+                        style: Theme.of(context).textTheme.headlineLarge),
+                    Material(
+                      clipBehavior: Clip.hardEdge,
+                      shape: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: BlocBuilder<UserPageCubit, UserPageState>(
+                        builder: (context, state) {
+                          return InkWell(
+                            onTap: () {
+                              for (final profile in state.profile) {
+                                context.read<QuestionPageCubit>().updateStats(
+                                      points: points,
+                                      id: profile.id,
+                                    );
+                              }
+
+                              Navigator.of(context).pop();
+                              Navigator.of(context).pop();
+                              Navigator.of(context).pop();
+                            },
+                            child: Container(
+                              alignment: Alignment.center,
+                              width: MediaQuery.of(context).size.width * 0.5,
+                              height: MediaQuery.of(context).size.height * 0.05,
+                              padding: EdgeInsets.all(4),
+                              decoration: BoxDecoration(
+                                  color: Color.fromARGB(255, 27, 58, 93),
+                                  border: Border.all(),
+                                  borderRadius: BorderRadius.circular(10)),
+                              child: Text(
+                                "FINISH",
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 25),
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+                    )
+                  ],
+                ),
               )),
             );
           }

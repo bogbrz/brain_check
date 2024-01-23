@@ -16,14 +16,21 @@ class RankingRepository {
   }
 
   Stream<List<ProfileModel>> getProfile() {
+
+    
     return rankingFireBaseDataSource.getProfileInfo().map((snapshot) {
       return snapshot.docs.map((doc) {
         return ProfileModel(
-          email: doc['email'],
-          nickName: doc['nickName'],
-          points: doc['points'],
-        );
+            id: doc.id,
+            email: doc['email'],
+            nickName: doc['nickName'],
+            points: doc['points'],
+            gamesPlayed: doc["gamesPlayed"]);
       }).toList();
     });
+  }
+
+  Future<void> updateStats({required int points, required String id}) async {
+    return rankingFireBaseDataSource.updateStats(points: points, docId: id);
   }
 }
