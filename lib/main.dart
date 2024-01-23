@@ -1,4 +1,4 @@
-import 'package:brain_check/app.dart';
+import 'package:brain_check/app/app.dart';
 import 'package:brain_check/app/injection_container.dart';
 import 'package:brain_check/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';

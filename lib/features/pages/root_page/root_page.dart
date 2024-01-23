@@ -20,7 +20,7 @@ class RootPage extends StatelessWidget {
           if (state.user == null) {
             return const LogInPage();
           }
-          return const NavigatorPage();
+          return  NavigatorPage(user: state.user,);
         }));
   }
 }

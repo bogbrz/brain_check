@@ -53,7 +53,9 @@ class LogInPageCubit extends Cubit<LogInPageState> {
       );
     }
   }
-  Future<void> signOut() async {
-    return authRepository.signOut();
+ 
+
+  Future<void> setNickName() async {
+    
   }
 }

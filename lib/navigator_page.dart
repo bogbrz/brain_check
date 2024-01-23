@@ -1,12 +1,14 @@
 import 'package:brain_check/features/pages/home_page.dart';
-import 'package:brain_check/features/pages/log_in/user_page.dart';
+import 'package:brain_check/features/pages/user_page/user_page.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class NavigatorPage extends StatefulWidget {
   const NavigatorPage({
+    required this.user,
     super.key,
   });
-
+  final User? user;
   @override
   State<NavigatorPage> createState() => _NavigatorPageState();
 }
@@ -18,9 +20,13 @@ class _NavigatorPageState extends State<NavigatorPage> {
     return Scaffold(
       body: Builder(builder: (context) {
         if (pageIndex == 0) {
-          return HomePage();
+          return HomePage(
+            user: widget.user,
+          );
         } else {
-          return UserPage();
+          return UserPage(
+            user: widget.user,
+          );
         }
       }),
       bottomNavigationBar: BottomNavigationBar(
