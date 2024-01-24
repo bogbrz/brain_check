@@ -46,6 +46,9 @@ class SettingsPage extends StatelessWidget {
                       context.read<UserPageCubit>().addProfile(
                           nickName: controller.text,
                           email: user!.email.toString());
+                      context.read<UserPageCubit>().addProfileToGlobalRanking(
+                          nickName: controller.text,
+                          email: user!.email.toString());
                     },
                     child: Text("SET"))
               ],

@@ -10,7 +10,7 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:brain_check/app/global%20cubit/cubit/user_page_cubit.dart'
     as _i10;
-import 'package:brain_check/app/injection_container.dart' as _i16;
+import 'package:brain_check/app/injection_container.dart' as _i17;
 import 'package:brain_check/data_sources/authentication_data_source.dart'
     as _i3;
 import 'package:brain_check/data_sources/questions_data_source.dart' as _i12;
@@ -21,11 +21,13 @@ import 'package:brain_check/domain/repositories/questions_repository.dart'
     as _i13;
 import 'package:brain_check/domain/repositories/ranking_repository.dart' as _i7;
 import 'package:brain_check/features/pages/categories_page/cubit/categories_page_cubit.dart'
-    as _i14;
+    as _i15;
 import 'package:brain_check/features/pages/log_in/cubit/log_in_page_cubit.dart'
     as _i5;
 import 'package:brain_check/features/pages/question_page/cubit/question_page_cubit.dart'
-    as _i15;
+    as _i16;
+import 'package:brain_check/features/pages/ranking_page/cubit/ranking_page_cubit.dart'
+    as _i14;
 import 'package:brain_check/features/pages/root_page/cubit/root_page_cubit.dart'
     as _i8;
 import 'package:brain_check/features/pages/settings_page/cubit/settings_page_cubit.dart'
@@ -73,9 +75,11 @@ extension GetItInjectableX on _i1.GetIt {
         () => _i12.QuestionDataSource(gh<_i11.Dio>()));
     gh.factory<_i13.QuestionRepository>(() => _i13.QuestionRepository(
         questionDataSource: gh<_i12.QuestionDataSource>()));
-    gh.factory<_i14.CategoriesPageCubit>(() => _i14.CategoriesPageCubit(
+    gh.factory<_i14.RankingPageCubit>(() =>
+        _i14.RankingPageCubit(rankingRepository: gh<_i7.RankingRepository>()));
+    gh.factory<_i15.CategoriesPageCubit>(() => _i15.CategoriesPageCubit(
         questionRepository: gh<_i13.QuestionRepository>()));
-    gh.factory<_i15.QuestionPageCubit>(() => _i15.QuestionPageCubit(
+    gh.factory<_i16.QuestionPageCubit>(() => _i16.QuestionPageCubit(
           questionRepository: gh<_i13.QuestionRepository>(),
           rankingRepository: gh<_i7.RankingRepository>(),
         ));
@@ -83,4 +87,4 @@ extension GetItInjectableX on _i1.GetIt {
   }
 }
 
-class _$RegisterModule extends _i16.RegisterModule {}
+class _$RegisterModule extends _i17.RegisterModule {}

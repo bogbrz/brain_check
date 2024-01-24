@@ -5,7 +5,7 @@ import 'package:brain_check/domain/models/profile_model.dart';
 
 class RankingRepository {
   final RankingFireBaseDataSource rankingFireBaseDataSource;
-  StreamSubscription? streamSubscription;
+ 
 
   RankingRepository({required this.rankingFireBaseDataSource});
 
@@ -14,11 +14,30 @@ class RankingRepository {
     await rankingFireBaseDataSource.setProfile(
         nickName: nickName, email: email);
   }
+   Future<void> addProfileToGlobal(
+      {required String nickName, required String email}) async {
+    await rankingFireBaseDataSource.addToRanking(
+        nickName: nickName, email: email);
+  }
 
   Stream<List<ProfileModel>> getProfile() {
 
     
     return rankingFireBaseDataSource.getProfileInfo().map((snapshot) {
+      return snapshot.docs.map((doc) {
+        return ProfileModel(
+            id: doc.id,
+            email: doc['email'],
+            nickName: doc['nickName'],
+            points: doc['points'],
+            gamesPlayed: doc["gamesPlayed"]);
+      }).toList();
+    });
+  }
+    Stream<List<ProfileModel>> getRanking() {
+
+    
+    return rankingFireBaseDataSource.getRanking().map((snapshot) {
       return snapshot.docs.map((doc) {
         return ProfileModel(
             id: doc.id,

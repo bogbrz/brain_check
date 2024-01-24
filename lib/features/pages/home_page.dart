@@ -1,5 +1,6 @@
 import 'package:brain_check/app/global%20cubit/cubit/user_page_cubit.dart';
 import 'package:brain_check/features/pages/categories_page/categories_page.dart';
+import 'package:brain_check/features/pages/ranking_page/ranking_page.dart';
 
 import 'package:brain_check/features/pages/settings_page/settings_page.dart';
 
@@ -81,22 +82,61 @@ class HomePage extends StatelessWidget {
               SizedBox(
                 height: 12,
               ),
-              Material(
-                shape: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(100)),
-                clipBehavior: Clip.hardEdge,
-                child: InkWell(
-                  onTap: () {},
-                  child: Container(
-                    padding: EdgeInsets.all(20),
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(100),
-                        border: Border.all(width: 4, color: Colors.black)),
-                    child: Text("HOW TO PLAY",
-                        style: Theme.of(context).textTheme.bodyLarge),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Material(
+                    shape: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(100)),
+                    clipBehavior: Clip.hardEdge,
+                    child: InkWell(
+                      onTap: () {},
+                      child: Container(
+                        alignment: Alignment.center,
+                        width: MediaQuery.of(context).size.width * 0.4,
+                        padding: EdgeInsets.all(20),
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(100),
+                            border: Border.all(width: 4, color: Colors.black)),
+                        child: Text("HOW TO PLAY",
+                            style: Theme.of(context).textTheme.bodyLarge),
+                      ),
+                    ),
                   ),
-                ),
+                  Material(
+                    shape: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(100)),
+                    clipBehavior: Clip.hardEdge,
+                    child: InkWell(
+                      onTap: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => RankingPage()));
+                      },
+                      child: Container(
+                        width: MediaQuery.of(context).size.width * 0.4,
+                        padding: EdgeInsets.all(20),
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(100),
+                            border: Border.all(width: 4, color: Colors.black)),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text("RANKING",
+                                style: Theme.of(context).textTheme.bodyLarge),
+                            Image(
+                              image: AssetImage(
+                                "images/trophy.png",
+                              ),
+                              width: 25,
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ],
           );

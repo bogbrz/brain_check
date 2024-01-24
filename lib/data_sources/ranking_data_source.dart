@@ -24,10 +24,16 @@ class RankingFireBaseDataSource {
     });
   }
 
-  Stream<QuerySnapshot<Map<String, dynamic>>> getProfileInfo() {
+  Future<void> addToRanking(
+      {required String nickName, required String email}) async {
     if (UserId == null) {
       throw Exception("user not logged in");
     }
+    await FirebaseFirestore.instance.collection("Ranking").add(
+        {"email": email, "nickName": nickName, "points": 0, "gamesPlayed": 0});
+  }
+
+  Stream<QuerySnapshot<Map<String, dynamic>>> getProfileInfo() {
     return FirebaseFirestore.instance
         .collection("users")
         .doc(UserId)
@@ -48,5 +54,22 @@ class RankingFireBaseDataSource {
       "points": FieldValue.increment(points),
       "gamesPlayed": FieldValue.increment(1)
     });
+  }
+  Future<void> updateRanking({required int points, required String nickName}) async {
+    if (UserId == null) {
+      throw Exception("user not logged in");
+    }
+    await FirebaseFirestore.instance
+       
+        .collection("Ranking")
+        .doc()
+        .update({
+      "points": FieldValue.increment(points),
+      "gamesPlayed": FieldValue.increment(1)
+    });
+  }
+
+  Stream<QuerySnapshot<Map<String, dynamic>>> getRanking() {
+    return FirebaseFirestore.instance.collection("Ranking").snapshots();
   }
 }

@@ -68,7 +68,7 @@ class _DifficultyPageState extends State<DifficultyPage> {
                             Expanded(
                               child: Text(
                                   choosedDifficulty.isEmpty
-                                      ? "Choose difficulty: not choosed."
+                                      ? "Choose difficulty: not choosen."
                                       : choosedDifficulty == null.toString()
                                           ? "Choose difficulty: random."
                                           : "Choose difficulty: $choosedDifficulty.",
@@ -82,7 +82,7 @@ class _DifficultyPageState extends State<DifficultyPage> {
                           children: [
                             Text(
                                 questionsNumber == null
-                                    ? "Amount: not choosed."
+                                    ? "Amount: not choosen."
                                     : questionsNumber == 0
                                         ? "Amount: Survival."
                                         : "Amount: $questionsNumber.",

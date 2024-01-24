@@ -26,9 +26,16 @@ class UserPageCubit extends Cubit<UserPageState> {
       }
     });
   }
-    Future<void> addProfile(
+
+  Future<void> addProfile(
       {required String nickName, required String email}) async {
     await rankingRepository.addProfile(nickName: nickName, email: email);
+  }
+
+  Future<void> addProfileToGlobalRanking(
+      {required String nickName, required String email}) async {
+    await rankingRepository.addProfileToGlobal(
+        nickName: nickName, email: email);
   }
 
   Future<void> signOut() async {
