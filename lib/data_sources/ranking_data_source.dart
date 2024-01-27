@@ -34,6 +34,10 @@ class RankingFireBaseDataSource {
   }
 
   Stream<QuerySnapshot<Map<String, dynamic>>> getProfileInfo() {
+    if (UserId == null) {
+      throw Exception("user not logged in");
+    }
+    print(UserId);
     return FirebaseFirestore.instance
         .collection("users")
         .doc(UserId)
@@ -55,15 +59,10 @@ class RankingFireBaseDataSource {
       "gamesPlayed": FieldValue.increment(1)
     });
   }
-  Future<void> updateRanking({required int points, required String nickName}) async {
-    if (UserId == null) {
-      throw Exception("user not logged in");
-    }
-    await FirebaseFirestore.instance
-       
-        .collection("Ranking")
-        .doc()
-        .update({
+
+  Future<void> updateRanking(
+      {required int points, required String docId}) async {
+    await FirebaseFirestore.instance.collection("Ranking").doc(docId).update({
       "points": FieldValue.increment(points),
       "gamesPlayed": FieldValue.increment(1)
     });

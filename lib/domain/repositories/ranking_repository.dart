@@ -34,6 +34,21 @@ class RankingRepository {
       }).toList();
     });
   }
+  
+  Stream<List<ProfileModel>> getProfileWithId({required String id}) {
+
+    
+    return rankingFireBaseDataSource.getProfileInfo().map((snapshot) {
+      return snapshot.docs.map((doc) {
+        return ProfileModel(
+            id: doc.id,
+            email: doc['email'],
+            nickName: doc['nickName'],
+            points: doc['points'],
+            gamesPlayed: doc["gamesPlayed"]);
+      }).where((element) => element.id == id).toList();
+    });
+  }
     Stream<List<ProfileModel>> getRanking() {
 
     
@@ -51,5 +66,8 @@ class RankingRepository {
 
   Future<void> updateStats({required int points, required String id}) async {
     return rankingFireBaseDataSource.updateStats(points: points, docId: id);
+  }
+   Future<void> updateRanking({required int points, required String id}) async {
+    return rankingFireBaseDataSource.updateRanking(points: points, docId: id);
   }
 }

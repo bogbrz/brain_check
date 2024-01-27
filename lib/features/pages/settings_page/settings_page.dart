@@ -22,6 +22,7 @@ class SettingsPage extends StatelessWidget {
     }
     return BlocBuilder<UserPageCubit, UserPageState>(
       builder: (context, state) {
+        context.read<UserPageCubit>().getProfile();
         if (state.profile.isNotEmpty) {
           return Scaffold(
             appBar: AppBar(

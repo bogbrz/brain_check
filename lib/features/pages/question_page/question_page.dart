@@ -3,6 +3,7 @@ import 'package:brain_check/app/injection_container.dart';
 import 'package:brain_check/device_size.dart';
 
 import 'package:brain_check/features/pages/question_page/cubit/question_page_cubit.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -11,14 +12,17 @@ import 'package:timer_count_down/timer_controller.dart';
 import 'package:timer_count_down/timer_count_down.dart';
 
 class QuestionPage extends StatefulWidget {
-  const QuestionPage(
-      {super.key,
-      required this.category,
-      required this.difficulty,
-      required this.questionsNumber});
+  const QuestionPage({
+    super.key,
+    required this.category,
+    required this.difficulty,
+    required this.questionsNumber,
+    required this.user,
+  });
   final int category;
   final String difficulty;
   final int questionsNumber;
+  final User? user;
 
   @override
   State<QuestionPage> createState() => _QuestionPageState();
@@ -79,6 +83,9 @@ class _QuestionPageState extends State<QuestionPage> {
                                         id: profile.id,
                                       );
                                 }
+                                context.read<QuestionPageCubit>().updateRanking(
+                                    points: points,
+                                    email: widget.user!.email.toString());
 
                                 Navigator.of(context).pop();
                                 Navigator.of(context).pop();
@@ -140,6 +147,9 @@ class _QuestionPageState extends State<QuestionPage> {
                                       id: profile.id,
                                     );
                               }
+                              context.read<QuestionPageCubit>().updateRanking(
+                                  points: points,
+                                  email: widget.user!.email.toString());
 
                               Navigator.of(context).pop();
                               Navigator.of(context).pop();

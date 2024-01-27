@@ -1,16 +1,19 @@
-import 'package:brain_check/device_size.dart';
+
 import 'package:brain_check/domain/models/categories_model.dart';
 import 'package:brain_check/features/pages/question_page/question_page.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:flutter/material.dart';
 
 class DifficultyPage extends StatefulWidget {
   const DifficultyPage({
     required this.categoriesModel,
+    required this.user,
     super.key,
   });
 
   final TriviaCategory categoriesModel;
+  final User? user;
 
   @override
   State<DifficultyPage> createState() => _DifficultyPageState();
@@ -22,8 +25,7 @@ class _DifficultyPageState extends State<DifficultyPage> {
 
   @override
   Widget build(BuildContext context) {
-    double screenWidth = context.deviceWidth;
-    double screenHeight = context.deviceHeight;
+
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -389,6 +391,7 @@ class _DifficultyPageState extends State<DifficultyPage> {
                   onTap: () {
                     Navigator.of(context).push(MaterialPageRoute(
                         builder: ((context) => QuestionPage(
+                          user: widget.user,
                               category: widget.categoriesModel.id,
                               difficulty: choosedDifficulty,
                               questionsNumber: questionsNumber,

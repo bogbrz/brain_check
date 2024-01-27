@@ -51,7 +51,8 @@ dependencies:
   firebase_core: ^2.24.2
   firebase_auth: ^4.16.0
   cloud_firestore: ^4.14.0
-  icon_forest: ^1.1.8
+  js: ^0.6.2
+ 
   
 
 dev_dependencies:
@@ -63,7 +64,7 @@ dev_dependencies:
   # activated in the `analysis_options.yaml` file located at the root of your
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
-  flutter_lints: ^2.0.0
+  flutter_lints: ^3.0.1
   build_runner: ^2.4.7
   retrofit_generator: ^8.0.6
   json_serializable: ^6.7.1

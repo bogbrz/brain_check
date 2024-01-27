@@ -82,6 +82,19 @@ class QuestionPageCubit extends Cubit<QuestionPageState> {
     }
   }
 
+  Future<void> updateRanking(
+      {required int points, required String email}) async {
+    String id = "";
+    streamSubscription = rankingRepository.getRanking().listen((event) {
+      for (final profile in event) {
+        if (profile.email == email) {
+          id = profile.id;
+        }
+      }
+    });
+    return rankingRepository.updateRanking(points: points, id: id);
+  }
+
   Future<void> updateStats({required int points, required String id}) async {
     try {
       return rankingRepository.updateStats(points: points, id: id);
@@ -140,5 +153,11 @@ class QuestionPageCubit extends Cubit<QuestionPageState> {
       errorMessage: null,
       questions: mockList,
     ));
+  }
+
+  @override
+  Future<void> close() {
+    streamSubscription?.cancel();
+    return super.close();
   }
 }

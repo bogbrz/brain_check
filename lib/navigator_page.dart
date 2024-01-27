@@ -1,4 +1,4 @@
-import 'package:brain_check/features/pages/home_page.dart';
+import 'package:brain_check/features/pages/home_page/home_page.dart';
 import 'package:brain_check/features/pages/user_page/user_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';

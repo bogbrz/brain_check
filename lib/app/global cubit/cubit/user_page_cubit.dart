@@ -26,6 +26,33 @@ class UserPageCubit extends Cubit<UserPageState> {
       }
     });
   }
+   Future<void> getProfileWithId({required String id}) async {
+    streamSubscription = rankingRepository.getProfile().listen((event) {
+      try {
+        emit(UserPageState(errorMessage: null, profile: event));
+      } catch (error) {
+        emit(UserPageState(errorMessage: error.toString(), profile: []));
+      }
+    });
+  }
+
+  Future<void> getRanking() async {
+    streamSubscription = rankingRepository.getRanking().listen((event) {
+      try {
+        emit(UserPageState(errorMessage: null, profile: event));
+      } catch (error) {
+        emit(UserPageState(errorMessage: error.toString(), profile: []));
+      }
+    });
+  }
+
+  Future<void> updateRanking({required int points, required String id}) async {
+    try {
+      return rankingRepository.updateRanking(points: points, id: id);
+    } catch (error) {
+      throw Exception(error.toString());
+    }
+  }
 
   Future<void> addProfile(
       {required String nickName, required String email}) async {

@@ -1,6 +1,6 @@
 import 'package:brain_check/app/injection_container.dart';
 import 'package:brain_check/features/pages/ranking_page/cubit/ranking_page_cubit.dart';
-import 'package:flutter/foundation.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
