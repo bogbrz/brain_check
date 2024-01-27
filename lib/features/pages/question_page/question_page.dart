@@ -37,8 +37,11 @@ class _QuestionPageState extends State<QuestionPage> {
   var youLose = false;
   var coolDown = true;
   var noAnswerChoosed = false;
+  var safeCheck = false;
 
   final CountdownController _controller = CountdownController(autoStart: true);
+  final CountdownController _controllerSafe =
+      CountdownController(autoStart: true);
   @override
   Widget build(BuildContext context) {
     final screenWidth = context.deviceWidth;
@@ -354,27 +357,61 @@ class _QuestionPageState extends State<QuestionPage> {
                   ),
                   Padding(
                     padding: const EdgeInsets.only(bottom: 20),
-                    child: ElevatedButton(
-                        onPressed: coolDown
-                            ? null
-                            : () {
-                                setState(() {
-                                  index++;
-                                  choosedQuestion = null;
-                                  isCorrect = false;
-                                  coolDown = true;
-                                  noAnswerChoosed = false;
-                                });
+                    child: SizedBox(
+                      width: MediaQuery.of(context).size.width * 0.35,
+                      child: ElevatedButton(
+                          onPressed: coolDown && safeCheck == false ||
+                                  coolDown == false && safeCheck == false
+                              ? null
+                              : () async {
+                                  setState(() {
+                                    index++;
+                                    choosedQuestion = null;
+                                    isCorrect = false;
+                                    coolDown = true;
+                                    noAnswerChoosed = false;
+                                    safeCheck = false;
+                                  });
 
-                                context
-                                    .read<QuestionPageCubit>()
-                                    .getQuestion(
-                                      difficulty: widget.difficulty,
-                                      category: widget.category,
+                                  await context
+                                      .read<QuestionPageCubit>()
+                                      .getQuestion(
+                                        difficulty: widget.difficulty,
+                                        category: widget.category,
+                                      )
+                                      .then((value) => _controller.restart())
+                                      .then(
+                                          (value) => _controllerSafe.restart());
+                                },
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Text("Next",
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .headlineSmall),
+                              safeCheck == false
+                                  ? Countdown(
+                                      controller: _controllerSafe,
+                                      seconds: 5,
+                                      build:
+                                          (BuildContext context, double time) =>
+                                              Text(time.toString(),
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .headlineSmall),
+                                      interval: Duration(milliseconds: 100),
+                                      onFinished: () {
+                                        setState(() {
+                                          safeCheck = true;
+                                        });
+                                        print(safeCheck);
+                                      },
                                     )
-                                    .then((value) => _controller.restart());
-                              },
-                        child: Text("Next")),
+                                  : Icon(Icons.arrow_forward)
+                            ],
+                          )),
+                    ),
                   ),
                 ],
               )),
