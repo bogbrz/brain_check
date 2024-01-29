@@ -1,6 +1,9 @@
+import 'dart:async';
+
 import 'package:bloc/bloc.dart';
 import 'package:brain_check/domain/models/question_model.dart';
 import 'package:brain_check/domain/repositories/questions_repository.dart';
+import 'package:brain_check/domain/repositories/ranking_repository.dart';
 
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -8,7 +11,8 @@ part 'question_page_state.dart';
 part 'question_page_cubit.freezed.dart';
 
 class QuestionPageCubit extends Cubit<QuestionPageState> {
-  QuestionPageCubit({required this.questionRepository})
+  QuestionPageCubit(
+      {required this.questionRepository, required this.rankingRepository})
       : super(QuestionPageState(
           answers: [],
           errorMessage: null,
@@ -16,6 +20,8 @@ class QuestionPageCubit extends Cubit<QuestionPageState> {
         ));
 
   final QuestionRepository questionRepository;
+  final RankingRepository rankingRepository;
+  StreamSubscription? streamSubscription;
 
   Future<void> getQuestion({
     required int? category,
@@ -52,9 +58,10 @@ class QuestionPageCubit extends Cubit<QuestionPageState> {
   Future<void> getFiveQuestions(
       {required int category,
       required String difficulty,
-      required int index}) async {
+      required int index,
+      required int amount}) async {
     final questionContent = await questionRepository.getListOfQuestions(
-        category: category, difficulty: difficulty);
+        category: category, difficulty: difficulty, amount: amount);
     final List<String> answers = [];
     answers.addAll(questionContent[index].incorrectAnswers);
     answers.add(questionContent[index].correctAnswer);
@@ -72,6 +79,27 @@ class QuestionPageCubit extends Cubit<QuestionPageState> {
         errorMessage: error.toString(),
         questions: [],
       ));
+    }
+  }
+
+  Future<void> updateRanking(
+      {required int points, required String email}) async {
+    String id = "";
+    streamSubscription = rankingRepository.getRanking().listen((event) {
+      for (final profile in event) {
+        if (profile.email == email) {
+          id = profile.id;
+        }
+      }
+    });
+    return rankingRepository.updateRanking(points: points, id: id);
+  }
+
+  Future<void> updateStats({required int points, required String id}) async {
+    try {
+      return rankingRepository.updateStats(points: points, id: id);
+    } catch (error) {
+      throw Exception(error.toString());
     }
   }
 
@@ -125,5 +153,11 @@ class QuestionPageCubit extends Cubit<QuestionPageState> {
       errorMessage: null,
       questions: mockList,
     ));
+  }
+
+  @override
+  Future<void> close() {
+    streamSubscription?.cancel();
+    return super.close();
   }
 }

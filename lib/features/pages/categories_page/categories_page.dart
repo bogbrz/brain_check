@@ -1,18 +1,20 @@
-import 'dart:math';
+
 
 import 'package:brain_check/app/injection_container.dart';
 import 'package:brain_check/domain/models/categories_model.dart';
 import 'package:brain_check/features/pages/categories_page/cubit/categories_page_cubit.dart';
 import 'package:brain_check/features/pages/difficulty_page.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CategoryPage extends StatefulWidget {
   const CategoryPage({
+    required this.user,
     super.key,
   });
-
+  final User? user;
   @override
   State<CategoryPage> createState() => _CategoryPageState();
 }
@@ -36,6 +38,7 @@ class _CategoryPageState extends State<CategoryPage> {
           Center(child: BlocBuilder<CategoriesPageCubit, CategoriesPageState>(
             builder: (context, state) {
               if (state.categories.isEmpty) {
+                print("EMPTY");
                 return Center(child: CircularProgressIndicator());
               }
 
@@ -55,6 +58,7 @@ class _CategoryPageState extends State<CategoryPage> {
 
                         Navigator.of(context).push(MaterialPageRoute(
                             builder: ((context) => DifficultyPage(
+                                  user: widget.user,
                                   categoriesModel:
                                       TriviaCategory(id: 0, name: "Random"),
                                 ))));
@@ -95,6 +99,7 @@ class _CategoryPageState extends State<CategoryPage> {
                           print("${category.name} , ${category.id}");
                           Navigator.of(context).push(MaterialPageRoute(
                               builder: ((context) => DifficultyPage(
+                                user: widget.user,
                                     categoriesModel: category,
                                   ))));
                         },

@@ -15,9 +15,9 @@ class QuestionRepository {
   }
 
   Future<List<QuestionModel>> getListOfQuestions(
-      {required int category, required String difficulty}) async {
+      {required int? category, required String? difficulty, required int? amount}) async {
     final questions =
-        await questionDataSource.getListofQuestions(difficulty, category);
+        await questionDataSource.getListofQuestions(difficulty, category, amount);
     print("  5 QUESTIONS  ${questions.results}");
     return questions.results;
   }

@@ -1,7 +1,9 @@
+import 'package:brain_check/app/global%20cubit/cubit/user_page_cubit.dart';
 import 'package:brain_check/app/injection_container.dart';
 import 'package:brain_check/device_size.dart';
 
 import 'package:brain_check/features/pages/question_page/cubit/question_page_cubit.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -10,14 +12,17 @@ import 'package:timer_count_down/timer_controller.dart';
 import 'package:timer_count_down/timer_count_down.dart';
 
 class QuestionPage extends StatefulWidget {
-  const QuestionPage(
-      {super.key,
-      required this.category,
-      required this.difficulty,
-      required this.questionsNumber});
+  const QuestionPage({
+    super.key,
+    required this.category,
+    required this.difficulty,
+    required this.questionsNumber,
+    required this.user,
+  });
   final int category;
   final String difficulty;
   final int questionsNumber;
+  final User? user;
 
   @override
   State<QuestionPage> createState() => _QuestionPageState();
@@ -32,8 +37,11 @@ class _QuestionPageState extends State<QuestionPage> {
   var youLose = false;
   var coolDown = true;
   var noAnswerChoosed = false;
+  var safeCheck = false;
 
   final CountdownController _controller = CountdownController(autoStart: true);
+  final CountdownController _controllerSafe =
+      CountdownController(autoStart: true);
   @override
   Widget build(BuildContext context) {
     final screenWidth = context.deviceWidth;
@@ -50,11 +58,63 @@ class _QuestionPageState extends State<QuestionPage> {
           if (widget.questionsNumber == 0) {
             if (youLose == true) {
               return Scaffold(
-                appBar: AppBar(),
                 body: Center(
                     child: Container(
+                  width: MediaQuery.of(context).size.width * 0.7,
+                  height: MediaQuery.of(context).size.height * 0.5,
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      border: Border.all(),
+                      borderRadius: BorderRadius.circular(10)),
                   child: Column(
-                    children: [Text("Your Score $points")],
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Text("Your Score $points",
+                          style: Theme.of(context).textTheme.headlineLarge),
+                      Material(
+                        clipBehavior: Clip.hardEdge,
+                        shape: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: BlocBuilder<UserPageCubit, UserPageState>(
+                          builder: (context, state) {
+                            return InkWell(
+                              onTap: () {
+                                for (final profile in state.profile) {
+                                  context.read<QuestionPageCubit>().updateStats(
+                                        points: points,
+                                        id: profile.id,
+                                      );
+                                }
+                                context.read<QuestionPageCubit>().updateRanking(
+                                    points: points,
+                                    email: widget.user!.email.toString());
+
+                                Navigator.of(context).pop();
+                                Navigator.of(context).pop();
+                                Navigator.of(context).pop();
+                              },
+                              child: Container(
+                                alignment: Alignment.center,
+                                width: MediaQuery.of(context).size.width * 0.5,
+                                height:
+                                    MediaQuery.of(context).size.height * 0.05,
+                                padding: EdgeInsets.all(4),
+                                decoration: BoxDecoration(
+                                    color: Color.fromARGB(255, 27, 58, 93),
+                                    border: Border.all(),
+                                    borderRadius: BorderRadius.circular(10)),
+                                child: Text(
+                                  "FINISH",
+                                  style: TextStyle(
+                                      color: Colors.white, fontSize: 25),
+                                ),
+                              ),
+                            );
+                          },
+                        ),
+                      )
+                    ],
                   ),
                 )),
               );
@@ -62,10 +122,63 @@ class _QuestionPageState extends State<QuestionPage> {
           } else if (widget.questionsNumber != 0 &&
               index == widget.questionsNumber) {
             return Scaffold(
-              appBar: AppBar(),
               body: Center(
                   child: Container(
-                child: Text("Your Score $points/${index}"),
+                width: MediaQuery.of(context).size.width * 0.7,
+                height: MediaQuery.of(context).size.height * 0.5,
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    border: Border.all(),
+                    borderRadius: BorderRadius.circular(25)),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Text("Your Score $points/$index",
+                        style: Theme.of(context).textTheme.headlineLarge),
+                    Material(
+                      clipBehavior: Clip.hardEdge,
+                      shape: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: BlocBuilder<UserPageCubit, UserPageState>(
+                        builder: (context, state) {
+                          return InkWell(
+                            onTap: () {
+                              for (final profile in state.profile) {
+                                context.read<QuestionPageCubit>().updateStats(
+                                      points: points,
+                                      id: profile.id,
+                                    );
+                              }
+                              context.read<QuestionPageCubit>().updateRanking(
+                                  points: points,
+                                  email: widget.user!.email.toString());
+
+                              Navigator.of(context).pop();
+                              Navigator.of(context).pop();
+                              Navigator.of(context).pop();
+                            },
+                            child: Container(
+                              alignment: Alignment.center,
+                              width: MediaQuery.of(context).size.width * 0.5,
+                              height: MediaQuery.of(context).size.height * 0.05,
+                              padding: EdgeInsets.all(4),
+                              decoration: BoxDecoration(
+                                  color: Color.fromARGB(255, 27, 58, 93),
+                                  border: Border.all(),
+                                  borderRadius: BorderRadius.circular(10)),
+                              child: Text(
+                                "FINISH",
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 25),
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+                    )
+                  ],
+                ),
               )),
             );
           }
@@ -140,21 +253,29 @@ class _QuestionPageState extends State<QuestionPage> {
                                         if (option == state.answers[0]) {
                                           setState(() {
                                             choosedQuestion = 0;
+                                            _controller.pause();
+                                            coolDown = false;
                                           });
                                         }
                                         if (option == state.answers[1]) {
                                           setState(() {
                                             choosedQuestion = 1;
+                                            _controller.pause();
+                                            coolDown = false;
                                           });
                                         }
                                         if (option == state.answers[2]) {
                                           setState(() {
                                             choosedQuestion = 2;
+                                            _controller.pause();
+                                            coolDown = false;
                                           });
                                         }
                                         if (option == state.answers[3]) {
                                           setState(() {
                                             choosedQuestion = 3;
+                                            _controller.pause();
+                                            coolDown = false;
                                           });
                                         }
                                         if (state.answers[choosedQuestion] ==
@@ -162,7 +283,6 @@ class _QuestionPageState extends State<QuestionPage> {
                                           setState(() {
                                             isCorrect = true;
                                             points++;
-                                            
                                           });
                                         }
                                         if (state.answers[choosedQuestion] !=
@@ -170,18 +290,21 @@ class _QuestionPageState extends State<QuestionPage> {
                                           setState(() {
                                             isCorrect = false;
                                             youLose = true;
-                                           
                                           });
                                         }
                                       } else {
                                         if (option == state.answers[0]) {
                                           setState(() {
                                             choosedQuestion = 0;
+                                            _controller.pause();
+                                            coolDown = false;
                                           });
                                         }
                                         if (option == state.answers[1]) {
                                           setState(() {
                                             choosedQuestion = 1;
+                                            _controller.pause();
+                                            coolDown = false;
                                           });
                                         }
                                         if (state.answers[choosedQuestion] ==
@@ -234,34 +357,60 @@ class _QuestionPageState extends State<QuestionPage> {
                   ),
                   Padding(
                     padding: const EdgeInsets.only(bottom: 20),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        ElevatedButton(
-                            onPressed: coolDown
-                                ? null
-                                : () {
-                                    setState(() {
-                                      index++;
-                                      choosedQuestion = null;
-                                      isCorrect = false;
-                                      coolDown = true;
-                                      noAnswerChoosed = false;
-                                      _controller.restart();
-                                    });
+                    child: SizedBox(
+                      width: MediaQuery.of(context).size.width * 0.35,
+                      child: ElevatedButton(
+                          onPressed: coolDown && safeCheck == false ||
+                                  coolDown == false && safeCheck == false
+                              ? null
+                              : () async {
+                                  setState(() {
+                                    index++;
+                                    choosedQuestion = null;
+                                    isCorrect = false;
+                                    coolDown = true;
+                                    noAnswerChoosed = false;
+                                    safeCheck = false;
+                                  });
 
-                                    context
-                                        .read<QuestionPageCubit>()
-                                        .getQuestion(
-                                          difficulty: widget.difficulty,
-                                          category: widget.category,
-                                        );
-                                  },
-                            child: Text("Next")),
-                        SizedBox(
-                          width: MediaQuery.of(context).size.width * 0.1,
-                        ),
-                      ],
+                                  await context
+                                      .read<QuestionPageCubit>()
+                                      .getQuestion(
+                                        difficulty: widget.difficulty,
+                                        category: widget.category,
+                                      )
+                                      .then((value) => _controller.restart())
+                                      .then(
+                                          (value) => _controllerSafe.restart());
+                                },
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Text("Next",
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .headlineSmall),
+                              safeCheck == false
+                                  ? Countdown(
+                                      controller: _controllerSafe,
+                                      seconds: 5,
+                                      build:
+                                          (BuildContext context, double time) =>
+                                              Text(time.toString(),
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .headlineSmall),
+                                      interval: Duration(milliseconds: 100),
+                                      onFinished: () {
+                                        setState(() {
+                                          safeCheck = true;
+                                        });
+                                        print(safeCheck);
+                                      },
+                                    )
+                                  : Icon(Icons.arrow_forward)
+                            ],
+                          )),
                     ),
                   ),
                 ],

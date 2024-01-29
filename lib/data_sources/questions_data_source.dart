@@ -23,9 +23,9 @@ abstract class QuestionDataSource {
   Future<Questions> getQuestionWithCatAndDiff(
       @Query("difficulty") String? difficulty, @Query("category") int? category);
 
- @GET('/api.php?amount=5')
+ @GET('/api.php')
   Future<Questions> getListofQuestions(
-      @Query("difficulty") String difficulty, @Query("category") int category);
+      @Query("difficulty") String? difficulty, @Query("category") int? category, @Query("amount") int? amount);
 
   // @GET('/api.php?amount=5')
   // Future<List<QuestionModel>> getQuestionWithCat(

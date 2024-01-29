@@ -1,0 +1,49 @@
+{
+  "project_info": {
+    "project_number": "1001768142153",
+    "firebase_url": "https://microclimat-monitoring-app-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "microclimat-monitoring-app",
+    "storage_bucket": "microclimat-monitoring-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1001768142153:android:6d9437c4479fc7687ec698",
+        "android_client_info": {
+          "package_name": "com.boguszbrzoska.brain_check"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCABVrAji5OfKd8CDBsipHbycRODD8R3FU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1001768142153:android:d0509b625811a9657ec698",
+        "android_client_info": {
+          "package_name": "com.boguszbrzoska.microclimat_monitoring_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCABVrAji5OfKd8CDBsipHbycRODD8R3FU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

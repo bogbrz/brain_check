@@ -183,9 +183,9 @@ QuestionModel _$QuestionModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$QuestionModel {
-  String get type => throw _privateConstructorUsedError;
-  String get difficulty => throw _privateConstructorUsedError;
-  String get category => throw _privateConstructorUsedError;
+  String? get type => throw _privateConstructorUsedError;
+  String? get difficulty => throw _privateConstructorUsedError;
+  String? get category => throw _privateConstructorUsedError;
   String get question => throw _privateConstructorUsedError;
   String get correctAnswer => throw _privateConstructorUsedError;
   List<String> get incorrectAnswers => throw _privateConstructorUsedError;
@@ -203,9 +203,9 @@ abstract class $QuestionModelCopyWith<$Res> {
       _$QuestionModelCopyWithImpl<$Res, QuestionModel>;
   @useResult
   $Res call(
-      {String type,
-      String difficulty,
-      String category,
+      {String? type,
+      String? difficulty,
+      String? category,
       String question,
       String correctAnswer,
       List<String> incorrectAnswers});
@@ -224,26 +224,26 @@ class _$QuestionModelCopyWithImpl<$Res, $Val extends QuestionModel>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? type = null,
-    Object? difficulty = null,
-    Object? category = null,
+    Object? type = freezed,
+    Object? difficulty = freezed,
+    Object? category = freezed,
     Object? question = null,
     Object? correctAnswer = null,
     Object? incorrectAnswers = null,
   }) {
     return _then(_value.copyWith(
-      type: null == type
+      type: freezed == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
-              as String,
-      difficulty: null == difficulty
+              as String?,
+      difficulty: freezed == difficulty
           ? _value.difficulty
           : difficulty // ignore: cast_nullable_to_non_nullable
-              as String,
-      category: null == category
+              as String?,
+      category: freezed == category
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       question: null == question
           ? _value.question
           : question // ignore: cast_nullable_to_non_nullable
@@ -269,9 +269,9 @@ abstract class _$$QuestionModelImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String type,
-      String difficulty,
-      String category,
+      {String? type,
+      String? difficulty,
+      String? category,
       String question,
       String correctAnswer,
       List<String> incorrectAnswers});
@@ -288,26 +288,26 @@ class __$$QuestionModelImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? type = null,
-    Object? difficulty = null,
-    Object? category = null,
+    Object? type = freezed,
+    Object? difficulty = freezed,
+    Object? category = freezed,
     Object? question = null,
     Object? correctAnswer = null,
     Object? incorrectAnswers = null,
   }) {
     return _then(_$QuestionModelImpl(
-      type: null == type
+      type: freezed == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
-              as String,
-      difficulty: null == difficulty
+              as String?,
+      difficulty: freezed == difficulty
           ? _value.difficulty
           : difficulty // ignore: cast_nullable_to_non_nullable
-              as String,
-      category: null == category
+              as String?,
+      category: freezed == category
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       question: null == question
           ? _value.question
           : question // ignore: cast_nullable_to_non_nullable
@@ -327,7 +327,7 @@ class __$$QuestionModelImplCopyWithImpl<$Res>
 /// @nodoc
 
 @JsonSerializable(fieldRename: FieldRename.snake)
-class _$QuestionModelImpl implements _QuestionModel {
+class _$QuestionModelImpl extends _QuestionModel {
   _$QuestionModelImpl(
       {required this.type,
       required this.difficulty,
@@ -335,17 +335,18 @@ class _$QuestionModelImpl implements _QuestionModel {
       required this.question,
       required this.correctAnswer,
       required final List<String> incorrectAnswers})
-      : _incorrectAnswers = incorrectAnswers;
+      : _incorrectAnswers = incorrectAnswers,
+        super._();
 
   factory _$QuestionModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$QuestionModelImplFromJson(json);
 
   @override
-  final String type;
+  final String? type;
   @override
-  final String difficulty;
+  final String? difficulty;
   @override
-  final String category;
+  final String? category;
   @override
   final String question;
   @override
@@ -407,24 +408,25 @@ class _$QuestionModelImpl implements _QuestionModel {
   }
 }
 
-abstract class _QuestionModel implements QuestionModel {
+abstract class _QuestionModel extends QuestionModel {
   factory _QuestionModel(
-      {required final String type,
-      required final String difficulty,
-      required final String category,
+      {required final String? type,
+      required final String? difficulty,
+      required final String? category,
       required final String question,
       required final String correctAnswer,
       required final List<String> incorrectAnswers}) = _$QuestionModelImpl;
+  _QuestionModel._() : super._();
 
   factory _QuestionModel.fromJson(Map<String, dynamic> json) =
       _$QuestionModelImpl.fromJson;
 
   @override
-  String get type;
+  String? get type;
   @override
-  String get difficulty;
+  String? get difficulty;
   @override
-  String get category;
+  String? get category;
   @override
   String get question;
   @override

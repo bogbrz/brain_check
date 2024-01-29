@@ -54,14 +54,17 @@ class _QuestionDataSource implements QuestionDataSource {
 
   @override
   Future<Questions> getListofQuestions(
-    String difficulty,
-    int category,
+    String? difficulty,
+    int? category,
+    int? amount,
   ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'difficulty': difficulty,
       r'category': category,
+      r'amount': amount,
     };
+    queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
     final _result = await _dio
@@ -72,7 +75,7 @@ class _QuestionDataSource implements QuestionDataSource {
     )
             .compose(
               _dio.options,
-              '/api.php?amount=5',
+              '/api.php',
               queryParameters: queryParameters,
               data: _data,
             )
