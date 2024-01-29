@@ -1,4 +1,4 @@
-import 'package:brain_check/app/global%20cubit/cubit/user_page_cubit.dart';
+import 'package:brain_check/app/global%20cubit/cubit/global_user_cubit.dart';
 import 'package:brain_check/app/injection_container.dart';
 import 'package:brain_check/features/pages/settings_page/cubit/settings_page_cubit.dart';
 import 'package:brain_check/features/pages/user_page/user_page.dart';
@@ -20,9 +20,9 @@ class SettingsPage extends StatelessWidget {
         child: Text("YOU ARE NOT LOGGED IN"),
       );
     }
-    return BlocBuilder<UserPageCubit, UserPageState>(
+    return BlocBuilder<GlobalUserCubit, GlobalUserState>(
       builder: (context, state) {
-        context.read<UserPageCubit>().getProfile();
+        context.read<GlobalUserCubit>().getProfile();
         if (state.profile.isNotEmpty) {
           return Scaffold(
             appBar: AppBar(
@@ -44,10 +44,10 @@ class SettingsPage extends StatelessWidget {
                 TextField(controller: controller),
                 ElevatedButton(
                     onPressed: () {
-                      context.read<UserPageCubit>().addProfile(
+                      context.read<GlobalUserCubit>().addProfile(
                           nickName: controller.text,
                           email: user!.email.toString());
-                      context.read<UserPageCubit>().addProfileToGlobalRanking(
+                      context.read<GlobalUserCubit>().addProfileToGlobalRanking(
                           nickName: controller.text,
                           email: user!.email.toString());
                     },

@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'user_page_cubit.dart';
+part of 'global_user_cubit.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,28 +15,28 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-mixin _$UserPageState {
+mixin _$GlobalUserState {
   String? get errorMessage => throw _privateConstructorUsedError;
   List<ProfileModel> get profile => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $UserPageStateCopyWith<UserPageState> get copyWith =>
+  $GlobalUserStateCopyWith<GlobalUserState> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $UserPageStateCopyWith<$Res> {
-  factory $UserPageStateCopyWith(
-          UserPageState value, $Res Function(UserPageState) then) =
-      _$UserPageStateCopyWithImpl<$Res, UserPageState>;
+abstract class $GlobalUserStateCopyWith<$Res> {
+  factory $GlobalUserStateCopyWith(
+          GlobalUserState value, $Res Function(GlobalUserState) then) =
+      _$GlobalUserStateCopyWithImpl<$Res, GlobalUserState>;
   @useResult
   $Res call({String? errorMessage, List<ProfileModel> profile});
 }
 
 /// @nodoc
-class _$UserPageStateCopyWithImpl<$Res, $Val extends UserPageState>
-    implements $UserPageStateCopyWith<$Res> {
-  _$UserPageStateCopyWithImpl(this._value, this._then);
+class _$GlobalUserStateCopyWithImpl<$Res, $Val extends GlobalUserState>
+    implements $GlobalUserStateCopyWith<$Res> {
+  _$GlobalUserStateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -64,7 +64,7 @@ class _$UserPageStateCopyWithImpl<$Res, $Val extends UserPageState>
 
 /// @nodoc
 abstract class _$$InitialImplCopyWith<$Res>
-    implements $UserPageStateCopyWith<$Res> {
+    implements $GlobalUserStateCopyWith<$Res> {
   factory _$$InitialImplCopyWith(
           _$InitialImpl value, $Res Function(_$InitialImpl) then) =
       __$$InitialImplCopyWithImpl<$Res>;
@@ -75,7 +75,7 @@ abstract class _$$InitialImplCopyWith<$Res>
 
 /// @nodoc
 class __$$InitialImplCopyWithImpl<$Res>
-    extends _$UserPageStateCopyWithImpl<$Res, _$InitialImpl>
+    extends _$GlobalUserStateCopyWithImpl<$Res, _$InitialImpl>
     implements _$$InitialImplCopyWith<$Res> {
   __$$InitialImplCopyWithImpl(
       _$InitialImpl _value, $Res Function(_$InitialImpl) _then)
@@ -119,7 +119,7 @@ class _$InitialImpl implements _Initial {
 
   @override
   String toString() {
-    return 'UserPageState(errorMessage: $errorMessage, profile: $profile)';
+    return 'GlobalUserState(errorMessage: $errorMessage, profile: $profile)';
   }
 
   @override
@@ -143,7 +143,7 @@ class _$InitialImpl implements _Initial {
       __$$InitialImplCopyWithImpl<_$InitialImpl>(this, _$identity);
 }
 
-abstract class _Initial implements UserPageState {
+abstract class _Initial implements GlobalUserState {
   const factory _Initial(
       {required final String? errorMessage,
       required final List<ProfileModel> profile}) = _$InitialImpl;

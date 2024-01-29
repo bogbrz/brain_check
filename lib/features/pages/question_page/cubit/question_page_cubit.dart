@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math';
 
 import 'package:bloc/bloc.dart';
 import 'package:brain_check/domain/models/question_model.dart';
@@ -82,26 +83,10 @@ class QuestionPageCubit extends Cubit<QuestionPageState> {
     }
   }
 
-  Future<void> updateRanking(
-      {required int points, required String email}) async {
-    String id = "";
-    streamSubscription = rankingRepository.getRanking().listen((event) {
-      for (final profile in event) {
-        if (profile.email == email) {
-          id = profile.id;
-        }
-      }
-    });
-    return rankingRepository.updateRanking(points: points, id: id);
-  }
 
-  Future<void> updateStats({required int points, required String id}) async {
-    try {
-      return rankingRepository.updateStats(points: points, id: id);
-    } catch (error) {
-      throw Exception(error.toString());
-    }
-  }
+
+  
+
 
   Future<void> getMockQuestions(
       {required String difficulty,

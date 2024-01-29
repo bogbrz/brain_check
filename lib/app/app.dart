@@ -1,4 +1,4 @@
-import 'package:brain_check/app/global%20cubit/cubit/user_page_cubit.dart';
+import 'package:brain_check/app/global%20cubit/cubit/global_user_cubit.dart';
 import 'package:brain_check/app/injection_container.dart';
 import 'package:brain_check/features/pages/root_page/root_page.dart';
 
@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => getIt<UserPageCubit>()..getProfile(),
+      create: (context) => getIt<GlobalUserCubit>()..getProfile(),
       child: MaterialApp(
           title: 'Flutter Demo',
           theme: ThemeData(

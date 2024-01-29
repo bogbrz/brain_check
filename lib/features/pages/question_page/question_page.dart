@@ -1,4 +1,4 @@
-import 'package:brain_check/app/global%20cubit/cubit/user_page_cubit.dart';
+import 'package:brain_check/app/global%20cubit/cubit/global_user_cubit.dart';
 import 'package:brain_check/app/injection_container.dart';
 import 'package:brain_check/device_size.dart';
 
@@ -52,6 +52,7 @@ class _QuestionPageState extends State<QuestionPage> {
         ..getQuestion(difficulty: widget.difficulty, category: widget.category),
       child: BlocBuilder<QuestionPageCubit, QuestionPageState>(
         builder: (context, state) {
+          print(widget.user!.email);
           if (state.questions.isEmpty) {
             return Center(child: CircularProgressIndicator());
           }
@@ -76,20 +77,20 @@ class _QuestionPageState extends State<QuestionPage> {
                         shape: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
                         ),
-                        child: BlocBuilder<UserPageCubit, UserPageState>(
+                        child: BlocBuilder<GlobalUserCubit, GlobalUserState>(
                           builder: (context, state) {
                             return InkWell(
                               onTap: () {
+                                context.read<GlobalUserCubit>().getProfile();
                                 for (final profile in state.profile) {
-                                  context.read<QuestionPageCubit>().updateStats(
+                                  context.read<GlobalUserCubit>().updateStats(
                                         points: points,
                                         id: profile.id,
                                       );
                                 }
-                                context.read<QuestionPageCubit>().updateRanking(
-                                    points: points,
-                                    email: widget.user!.email.toString());
-
+                                // context.read<QuestionPageCubit>().updateRanking(
+                                //     points: points,
+                                //     email: widget.user!.email.toString());
                                 Navigator.of(context).pop();
                                 Navigator.of(context).pop();
                                 Navigator.of(context).pop();
@@ -140,20 +141,20 @@ class _QuestionPageState extends State<QuestionPage> {
                       shape: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),
-                      child: BlocBuilder<UserPageCubit, UserPageState>(
+                      child: BlocBuilder<GlobalUserCubit, GlobalUserState>(
                         builder: (context, state) {
                           return InkWell(
                             onTap: () {
+                              context.read<GlobalUserCubit>().getProfile();
                               for (final profile in state.profile) {
-                                context.read<QuestionPageCubit>().updateStats(
+                                context.read<GlobalUserCubit>().updateStats(
                                       points: points,
                                       id: profile.id,
                                     );
                               }
-                              context.read<QuestionPageCubit>().updateRanking(
-                                  points: points,
-                                  email: widget.user!.email.toString());
-
+                              // context.read<QuestionPageCubit>().updateRanking(
+                              //     points: points,
+                              //     email: widget.user!.email.toString());
                               Navigator.of(context).pop();
                               Navigator.of(context).pop();
                               Navigator.of(context).pop();
@@ -361,7 +362,8 @@ class _QuestionPageState extends State<QuestionPage> {
                       width: MediaQuery.of(context).size.width * 0.35,
                       child: ElevatedButton(
                           onPressed: coolDown && safeCheck == false ||
-                                  coolDown == false && safeCheck == false
+                                  coolDown == false && safeCheck == false ||
+                                  choosedQuestion == null && safeCheck
                               ? null
                               : () async {
                                   setState(() {
@@ -396,11 +398,11 @@ class _QuestionPageState extends State<QuestionPage> {
                                       seconds: 5,
                                       build:
                                           (BuildContext context, double time) =>
-                                              Text(time.toString(),
+                                              Text(time.toInt().toString(),
                                                   style: Theme.of(context)
                                                       .textTheme
                                                       .headlineSmall),
-                                      interval: Duration(milliseconds: 100),
+                                      interval: Duration(milliseconds: 1000),
                                       onFinished: () {
                                         setState(() {
                                           safeCheck = true;

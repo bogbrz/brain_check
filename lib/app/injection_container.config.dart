@@ -8,8 +8,8 @@
 // coverage:ignore-file
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:brain_check/app/global%20cubit/cubit/user_page_cubit.dart'
-    as _i10;
+import 'package:brain_check/app/global%20cubit/cubit/global_user_cubit.dart'
+    as _i11;
 import 'package:brain_check/app/injection_container.dart' as _i18;
 import 'package:brain_check/data_sources/authentication_data_source.dart'
     as _i3;
@@ -34,7 +34,7 @@ import 'package:brain_check/features/pages/root_page/cubit/root_page_cubit.dart'
     as _i8;
 import 'package:brain_check/features/pages/settings_page/cubit/settings_page_cubit.dart'
     as _i9;
-import 'package:dio/dio.dart' as _i11;
+import 'package:dio/dio.dart' as _i10;
 import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;
 
@@ -67,16 +67,16 @@ extension GetItInjectableX on _i1.GetIt {
       () => registerModule.baseUrl,
       instanceName: 'BaseUrl',
     );
-    gh.factory<_i10.UserPageCubit>(() => _i10.UserPageCubit(
+    gh.lazySingleton<_i10.Dio>(
+        () => registerModule.dio(gh<String>(instanceName: 'BaseUrl')));
+    gh.factory<_i11.GlobalUserCubit>(() => _i11.GlobalUserCubit(
           authRepository: gh<_i4.AuthRepository>(),
           rankingRepository: gh<_i7.RankingRepository>(),
         ));
-    gh.lazySingleton<_i11.Dio>(
-        () => registerModule.dio(gh<String>(instanceName: 'BaseUrl')));
     gh.factory<_i12.HomePageCubit>(() =>
         _i12.HomePageCubit(rankingRepository: gh<_i7.RankingRepository>()));
     gh.factory<_i13.QuestionDataSource>(
-        () => _i13.QuestionDataSource(gh<_i11.Dio>()));
+        () => _i13.QuestionDataSource(gh<_i10.Dio>()));
     gh.factory<_i14.QuestionRepository>(() => _i14.QuestionRepository(
         questionDataSource: gh<_i13.QuestionDataSource>()));
     gh.factory<_i15.RankingPageCubit>(() =>

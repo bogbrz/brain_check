@@ -1,4 +1,4 @@
-import 'package:brain_check/app/global%20cubit/cubit/user_page_cubit.dart';
+import 'package:brain_check/app/global%20cubit/cubit/global_user_cubit.dart';
 import 'package:brain_check/app/injection_container.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
@@ -15,28 +15,28 @@ class UserPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => getIt<UserPageCubit>()..getProfile(),
-      child: BlocBuilder<UserPageCubit, UserPageState>(
-        builder: (context, state) {
-          return Scaffold(
-            appBar: AppBar(
-              title: Text(
-                "User info",
-                style: TextStyle(color: Colors.white),
-              ),
-              centerTitle: true,
-              backgroundColor: Color.fromARGB(255, 27, 58, 93),
-            ),
-            body: Center(
-              child: Container(
-                padding: EdgeInsets.all(8),
-                height: MediaQuery.of(context).size.height * 0.7,
-                width: MediaQuery.of(context).size.width * 0.7,
-                decoration: BoxDecoration(
-                    color: Colors.white,
-                    border: Border.all(),
-                    borderRadius: BorderRadius.circular(10)),
-                child: Column(
+      create: (context) => getIt<GlobalUserCubit>()..getProfile(),
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text(
+            "User info",
+            style: TextStyle(color: Colors.white),
+          ),
+          centerTitle: true,
+          backgroundColor: Color.fromARGB(255, 27, 58, 93),
+        ),
+        body: Center(
+          child: Container(
+            padding: EdgeInsets.all(8),
+            height: MediaQuery.of(context).size.height * 0.7,
+            width: MediaQuery.of(context).size.width * 0.7,
+            decoration: BoxDecoration(
+                color: Colors.white,
+                border: Border.all(),
+                borderRadius: BorderRadius.circular(10)),
+            child: BlocBuilder<GlobalUserCubit, GlobalUserState>(
+              builder: (context, state) {
+                return Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     CircleAvatar(
@@ -55,15 +55,15 @@ class UserPage extends StatelessWidget {
                     ],
                     ElevatedButton(
                         onPressed: () {
-                          context.read<UserPageCubit>().signOut();
+                          context.read<GlobalUserCubit>().signOut();
                         },
                         child: Text("Log out"))
                   ],
-                ),
-              ),
+                );
+              },
             ),
-          );
-        },
+          ),
+        ),
       ),
     );
   }
