@@ -31,6 +31,15 @@ class GlobalUserCubit extends Cubit<GlobalUserState> {
     }
   }
 
+   Future<void> updateRanking({required int points, required String id}) async {
+    
+    try {
+      return rankingRepository.updateRanking(points: points, id: id);
+    } catch (error) {
+      throw Exception(error.toString());
+    }
+  }
+
   Future<void> getRanking() async {
     streamSubscription = rankingRepository.getRanking().listen((event) {
       try {
