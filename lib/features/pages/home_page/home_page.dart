@@ -1,4 +1,4 @@
-import 'package:brain_check/app/global%20cubit/cubit/global_user_cubit.dart';
+
 import 'package:brain_check/app/injection_container.dart';
 import 'package:brain_check/features/pages/categories_page/categories_page.dart';
 import 'package:brain_check/features/pages/home_page/cubit/home_page_cubit.dart';
@@ -20,7 +20,8 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => getIt<HomePageCubit>()..getProfile(),
+      create: (context) => getIt<HomePageCubit>()
+        ..getRankingForUpdate(email: user!.email.toString()),
       child: Scaffold(
           appBar: AppBar(
             centerTitle: true,

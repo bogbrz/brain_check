@@ -62,6 +62,22 @@ class RankingRepository {
     });
   }
 
+  Stream<List<ProfileModel>> getRankingForUpdate({required String email}) {
+    return rankingFireBaseDataSource.getRanking().map((snapshot) {
+      return snapshot.docs
+          .map((doc) {
+            return ProfileModel(
+                id: doc.id,
+                email: doc['email'],
+                nickName: doc['nickName'],
+                points: doc['points'],
+                gamesPlayed: doc["gamesPlayed"]);
+          })
+          .where((element) => element.email == email)
+          .toList();
+    });
+  }
+
   // Future<List<ProfileModel>> getRankingforUpdate({required String email}) {
   //   final respone = rankingFireBaseDataSource.getRankingForUpdate(email: email);
 

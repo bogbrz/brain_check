@@ -70,14 +70,17 @@ class RankingFireBaseDataSource {
   }
 
   Stream<QuerySnapshot<Map<String, dynamic>>> getRanking() {
-    return FirebaseFirestore.instance.collection("Ranking").snapshots();
+    return FirebaseFirestore.instance
+        .collection("Ranking")
+        .orderBy("points", descending: true)
+        .snapshots();
   }
 
-  Future<QuerySnapshot<Map<String, dynamic>>> getRankingForUpdate(
+  Stream<QuerySnapshot<Map<String, dynamic>>> getRankingForUpdate(
       {required String email}) {
     return FirebaseFirestore.instance
         .collection("Ranking")
         .where("email" == email)
-        .get();
+        .snapshots();
   }
 }

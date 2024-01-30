@@ -1,5 +1,6 @@
-import 'package:brain_check/app/global%20cubit/cubit/global_user_cubit.dart';
+
 import 'package:brain_check/app/injection_container.dart';
+import 'package:brain_check/features/pages/user_page/cubit/user_page_cubit.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +16,8 @@ class UserPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => getIt<GlobalUserCubit>()..getProfile(),
+      create: (context) => getIt<UserPageCubit>()
+        ..getRankingForUpdate(email: user!.email.toString()),
       child: Scaffold(
         appBar: AppBar(
           title: Text(
@@ -34,7 +36,7 @@ class UserPage extends StatelessWidget {
                 color: Colors.white,
                 border: Border.all(),
                 borderRadius: BorderRadius.circular(10)),
-            child: BlocBuilder<GlobalUserCubit, GlobalUserState>(
+            child: BlocBuilder<UserPageCubit, UserPageState>(
               builder: (context, state) {
                 return Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -55,7 +57,7 @@ class UserPage extends StatelessWidget {
                     ],
                     ElevatedButton(
                         onPressed: () {
-                          context.read<GlobalUserCubit>().signOut();
+                          context.read<UserPageCubit>().signOut();
                         },
                         child: Text("Log out"))
                   ],
