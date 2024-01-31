@@ -5,6 +5,7 @@ import 'package:brain_check/features/pages/result_page/cubit/result_page_cubit.d
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class ResultsPage extends StatelessWidget {
   const ResultsPage({
@@ -31,7 +32,7 @@ class ResultsPage extends StatelessWidget {
           height: MediaQuery.of(context).size.height * 0.5,
           decoration: BoxDecoration(
               color: Colors.white,
-              border: Border.all(),
+              border: Border.all(width: 8),
               borderRadius: BorderRadius.circular(10)),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -40,7 +41,7 @@ class ResultsPage extends StatelessWidget {
                   widget.questionsNumber != 0 && index == widget.questionsNumber
                       ? "Your Score $points/$index"
                       : "Your Score $points",
-                  style: Theme.of(context).textTheme.headlineLarge),
+                  style: GoogleFonts.bungee(fontSize: 30)),
               Material(
                 clipBehavior: Clip.hardEdge,
                 shape: OutlineInputBorder(
@@ -63,15 +64,14 @@ class ResultsPage extends StatelessWidget {
                       child: Container(
                         alignment: Alignment.center,
                         width: MediaQuery.of(context).size.width * 0.5,
-                        height: MediaQuery.of(context).size.height * 0.05,
-                        padding: EdgeInsets.all(4),
                         decoration: BoxDecoration(
                             color: Color.fromARGB(255, 27, 58, 93),
-                            border: Border.all(),
+                            border: Border.all(width: 6),
                             borderRadius: BorderRadius.circular(10)),
                         child: Text(
                           "FINISH",
-                          style: TextStyle(color: Colors.white, fontSize: 25),
+                          style: GoogleFonts.bungee(
+                              fontSize: 30, color: Colors.white),
                         ),
                       ),
                     );

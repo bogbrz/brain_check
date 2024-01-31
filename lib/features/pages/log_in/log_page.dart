@@ -26,11 +26,11 @@ class _LogInPageState extends State<LogInPage> {
         builder: (context, state) {
           return Scaffold(
             appBar: AppBar(
-                 backgroundColor: Color.fromARGB(255, 27, 58, 93),
+                backgroundColor: Color.fromARGB(255, 27, 58, 93),
                 title: Text(
-              "Welcome to:",
-              style: Theme.of(context).textTheme.headlineLarge,
-            )),
+                  "Welcome to:",
+                  style: Theme.of(context).textTheme.headlineLarge,
+                )),
             body: Padding(
               padding: const EdgeInsets.all(15.0),
               child: Column(
@@ -41,7 +41,7 @@ class _LogInPageState extends State<LogInPage> {
                       Row(
                         children: [
                           Text(
-                            "QuickDrink",
+                            "BRAINCHECK",
                             style: Theme.of(context).textTheme.headlineLarge,
                           ),
                         ],

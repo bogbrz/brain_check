@@ -43,7 +43,7 @@ class SettingsPage extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  TextField(controller: controller),
+                  TextField(controller: controller,),
                   ElevatedButton(
                       onPressed: () {
                       

@@ -6,6 +6,7 @@ import 'package:brain_check/features/pages/result_page/result_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import 'package:html_unescape/html_unescape.dart';
 import 'package:timer_count_down/timer_controller.dart';
@@ -74,7 +75,7 @@ class _QuestionPageState extends State<QuestionPage> {
                       decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(10),
-                          border: Border.all(width: 2, color: Colors.black)),
+                          border: Border.all(width: 8, color: Colors.black)),
                       width: screenWidth * 0.5,
                       height: screenHeight * 0.3,
                       child: Column(
@@ -83,15 +84,18 @@ class _QuestionPageState extends State<QuestionPage> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text("Question number${index + 1}"),
+                              Text(
+                                "Question number${index + 1}",
+                                style: GoogleFonts.bungee(fontSize: 20),
+                              ),
                               Countdown(
                                 controller: controller,
                                 seconds: 15,
                                 build: (BuildContext context, double time) =>
-                                    Text(time.toString(),
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .headlineLarge),
+                                    Text(
+                                  time.toString(),
+                                  style: GoogleFonts.bungee(fontSize: 20),
+                                ),
                                 interval: Duration(milliseconds: 100),
                                 onFinished: () {
                                   setState(() {
@@ -108,8 +112,11 @@ class _QuestionPageState extends State<QuestionPage> {
                           ),
                           SizedBox(
                               height: screenHeight * 0.15,
-                              child: Text(HtmlUnescape()
-                                  .convert(state.questions[0].question))),
+                              child: Text(
+                                HtmlUnescape()
+                                    .convert(state.questions[0].question),
+                                style: GoogleFonts.bungee(fontSize: 15),
+                              )),
                         ],
                       ),
                     ),
@@ -221,67 +228,79 @@ class _QuestionPageState extends State<QuestionPage> {
                         ],
                       ],
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 20),
-                      child: SizedBox(
-                        width: MediaQuery.of(context).size.width * 0.35,
-                        child: ElevatedButton(
-                            onPressed: coolDown && safeCheck == false ||
-                                    coolDown == false && safeCheck == false ||
-                                    choosedQuestion == null && safeCheck
-                                ? null
-                                : () {
-                                    setState(() {
-                                      index++;
-                                      choosedQuestion = null;
-                                      isCorrect = false;
-                                      coolDown = true;
-                                      noAnswerChoosed = false;
-                                      safeCheck = false;
-                                    });
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.025,
+                    ),
+                    InkWell(
+                        onTap: coolDown && safeCheck == false ||
+                                coolDown == false && safeCheck == false ||
+                                choosedQuestion == null && safeCheck == false
+                            ? null
+                            : () async {
+                                setState(() {
+                                  index++;
+                                  choosedQuestion = null;
+                                  isCorrect = false;
+                                  coolDown = true;
+                                  noAnswerChoosed = false;
+                                  safeCheck = false;
+                                });
 
-                                    index < widget.questionsNumber
-                                        ? context
-                                            .read<QuestionPageCubit>()
-                                            .getQuestion(
-                                              difficulty: widget.difficulty,
-                                              category: widget.category,
-                                            )
-                                            .then(
-                                                (value) => controller.restart())
-                                            .then((value) =>
-                                                controllerSafe.restart())
-                                        : null;
-                                  },
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                Text("Next",
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .headlineSmall),
-                                safeCheck == false
-                                    ? Countdown(
-                                        controller: controllerSafe,
-                                        seconds: 5,
-                                        build: (BuildContext context,
-                                                double time) =>
-                                            Text(time.toInt().toString(),
-                                                style: Theme.of(context)
-                                                    .textTheme
-                                                    .headlineSmall),
-                                        interval: Duration(milliseconds: 1000),
-                                        onFinished: () {
-                                          setState(() {
-                                            safeCheck = true;
-                                          });
-                                          print(safeCheck);
-                                        },
-                                      )
-                                    : Icon(Icons.arrow_forward)
-                              ],
-                            )),
-                      ),
+                                index < widget.questionsNumber
+                                    ? await context
+                                        .read<QuestionPageCubit>()
+                                        .getQuestion(
+                                          difficulty: widget.difficulty,
+                                          category: widget.category,
+                                        )
+                                        .then((value) => controller.restart())
+                                        .then(
+                                            (value) => controllerSafe.restart())
+                                    : null;
+                              },
+                        child: Container(
+                          width: MediaQuery.of(context).size.width * 0.45,
+                          padding: EdgeInsets.all(8),
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              border: Border.all(width: 8),
+                              borderRadius: BorderRadius.circular(10)),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Text("Next",
+                                  style: GoogleFonts.bungee(fontSize: 35)),
+                              safeCheck == false
+                                  ? Countdown(
+                                      controller: controllerSafe,
+                                      seconds: 5,
+                                      build:
+                                          (BuildContext context, double time) =>
+                                              Text(time.toInt().toString(),
+                                                  style: GoogleFonts.bungee(
+                                                      fontSize: 35)),
+                                      interval: Duration(milliseconds: 1000),
+                                      onFinished: () {
+                                        setState(() {
+                                          safeCheck = true;
+                                        });
+                                        print(safeCheck);
+                                      },
+                                    )
+                                  : Text("->",
+                                      style: GoogleFonts.bungee(fontSize: 30)),
+
+                              //  Image(
+                              //     image: AssetImage(
+                              //       "images/arrrrow.png",
+                              //     ),
+                              //     width: 30,
+                              //   )
+                            ],
+                          ),
+                        )),
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.05,
                     ),
                   ],
                 )),
@@ -305,7 +324,7 @@ class OptionWidget extends StatelessWidget {
     required this.screenHeight,
   });
 
-  final choosedQuestion;
+  final dynamic choosedQuestion;
   final bool isCorrect;
   final String option;
   final List<String> answers;
@@ -315,7 +334,6 @@ class OptionWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        padding: EdgeInsets.all(4),
         alignment: Alignment.center,
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
@@ -326,9 +344,13 @@ class OptionWidget extends StatelessWidget {
                     : isCorrect == false && option == answers[choosedQuestion]
                         ? Colors.red
                         : Colors.white,
-            border: Border.all(width: 2, color: Colors.black)),
+            border: Border.all(width: 8, color: Colors.black)),
         width: screenWidth * 0.2,
         height: screenHeight * 0.2,
-        child: Text(HtmlUnescape().convert(option)));
+        child: Text(
+          HtmlUnescape().convert(option),
+          style: GoogleFonts.bungee(fontSize: 20),
+          textAlign: TextAlign.center,
+        ));
   }
 }

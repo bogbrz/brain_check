@@ -1,13 +1,12 @@
-
-
 import 'package:brain_check/app/injection_container.dart';
 import 'package:brain_check/domain/models/categories_model.dart';
 import 'package:brain_check/features/pages/categories_page/cubit/categories_page_cubit.dart';
-import 'package:brain_check/features/pages/difficulty_page.dart';
+import 'package:brain_check/features/pages/difficulty_page/difficulty_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class CategoryPage extends StatefulWidget {
   const CategoryPage({
@@ -30,7 +29,7 @@ class _CategoryPageState extends State<CategoryPage> {
           centerTitle: true,
           title: Text(
             "Choose category",
-            style: TextStyle(color: Colors.white, fontSize: 30),
+            style: GoogleFonts.bungee(fontSize: 30, color: Colors.white),
           ),
           backgroundColor: Color.fromARGB(255, 27, 58, 93),
         ),
@@ -70,12 +69,12 @@ class _CategoryPageState extends State<CategoryPage> {
                         padding: EdgeInsets.all(10),
                         decoration: BoxDecoration(
                           color: Color.fromARGB(255, 56, 146, 249),
-                          border: Border.all(color: Colors.black),
+                          border: Border.all(width: 8),
                           borderRadius: BorderRadius.circular(10),
                         ),
                         child: Text(
                           "Random",
-                          style: Theme.of(context).textTheme.bodyLarge,
+                          style: GoogleFonts.bungee(fontSize: 15),
                           selectionColor: Colors.white,
                           textAlign: TextAlign.center,
                         ),
@@ -99,7 +98,7 @@ class _CategoryPageState extends State<CategoryPage> {
                           print("${category.name} , ${category.id}");
                           Navigator.of(context).push(MaterialPageRoute(
                               builder: ((context) => DifficultyPage(
-                                user: widget.user,
+                                    user: widget.user,
                                     categoriesModel: category,
                                   ))));
                         },
@@ -110,12 +109,12 @@ class _CategoryPageState extends State<CategoryPage> {
                           padding: EdgeInsets.all(10),
                           decoration: BoxDecoration(
                             color: Color.fromARGB(255, 56, 146, 249),
-                            border: Border.all(color: Colors.black),
+                            border: Border.all(width: 8),
                             borderRadius: BorderRadius.circular(10),
                           ),
                           child: Text(
                             category.name,
-                            style: Theme.of(context).textTheme.bodyLarge,
+                            style: GoogleFonts.bungee(fontSize: 15),
                             selectionColor: Colors.white,
                             textAlign: TextAlign.center,
                           ),
