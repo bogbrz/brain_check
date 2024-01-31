@@ -61,9 +61,26 @@ class RankingFireBaseDataSource {
     });
   }
 
-
+  Future<void> updateRanking(
+      {required int points, required String docId}) async {
+    await FirebaseFirestore.instance.collection("Ranking").doc(docId).update({
+      "points": FieldValue.increment(points),
+      "gamesPlayed": FieldValue.increment(1)
+    });
+  }
 
   Stream<QuerySnapshot<Map<String, dynamic>>> getRanking() {
-    return FirebaseFirestore.instance.collection("Ranking").snapshots();
+    return FirebaseFirestore.instance
+        .collection("Ranking")
+        .orderBy("points", descending: true)
+        .snapshots();
+  }
+
+  Stream<QuerySnapshot<Map<String, dynamic>>> getRankingForUpdate(
+      {required String email}) {
+    return FirebaseFirestore.instance
+        .collection("Ranking")
+        .where("email" == email)
+        .snapshots();
   }
 }

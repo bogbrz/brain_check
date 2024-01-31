@@ -5,12 +5,12 @@ import 'package:brain_check/domain/models/profile_model.dart';
 import 'package:brain_check/domain/repositories/ranking_repository.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'home_page_state.dart';
-part 'home_page_cubit.freezed.dart';
+part 'result_page_state.dart';
+part 'result_page_cubit.freezed.dart';
 
-class HomePageCubit extends Cubit<HomePageState> {
-  HomePageCubit({required this.rankingRepository})
-      : super(HomePageState(errorMessage: null, profile: []));
+class ResultPageCubit extends Cubit<ResultPageState> {
+  ResultPageCubit({required this.rankingRepository}) : super(ResultPageState(errorMessage: null, profile: []));
+
   final RankingRepository rankingRepository;
   StreamSubscription? streamSubscription;
 
@@ -18,14 +18,22 @@ class HomePageCubit extends Cubit<HomePageState> {
     streamSubscription =
         rankingRepository.getRankingForUpdate(email: email).listen((event) {
       try {
-        emit(HomePageState(errorMessage: null, profile: event));
+        emit(ResultPageState(errorMessage: null, profile: event));
       } catch (error) {
-        emit(HomePageState(errorMessage: error.toString(), profile: []));
+        emit(ResultPageState(errorMessage: error.toString(), profile: []));
       }
     });
   }
 
-  @override
+     Future<void> updateRanking({required int points, required String id}) async {
+    
+    try {
+      return rankingRepository.updateRanking(points: points, id: id);
+    } catch (error) {
+      throw Exception(error.toString());
+    }
+  }
+   @override
   Future<void> close() {
     streamSubscription?.cancel();
     return super.close();

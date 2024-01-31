@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'settings_page_cubit.dart';
+part of 'result_page_cubit.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,28 +15,28 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-mixin _$SettingsPageState {
+mixin _$ResultPageState {
   String? get errorMessage => throw _privateConstructorUsedError;
   List<ProfileModel> get profile => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $SettingsPageStateCopyWith<SettingsPageState> get copyWith =>
+  $ResultPageStateCopyWith<ResultPageState> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $SettingsPageStateCopyWith<$Res> {
-  factory $SettingsPageStateCopyWith(
-          SettingsPageState value, $Res Function(SettingsPageState) then) =
-      _$SettingsPageStateCopyWithImpl<$Res, SettingsPageState>;
+abstract class $ResultPageStateCopyWith<$Res> {
+  factory $ResultPageStateCopyWith(
+          ResultPageState value, $Res Function(ResultPageState) then) =
+      _$ResultPageStateCopyWithImpl<$Res, ResultPageState>;
   @useResult
   $Res call({String? errorMessage, List<ProfileModel> profile});
 }
 
 /// @nodoc
-class _$SettingsPageStateCopyWithImpl<$Res, $Val extends SettingsPageState>
-    implements $SettingsPageStateCopyWith<$Res> {
-  _$SettingsPageStateCopyWithImpl(this._value, this._then);
+class _$ResultPageStateCopyWithImpl<$Res, $Val extends ResultPageState>
+    implements $ResultPageStateCopyWith<$Res> {
+  _$ResultPageStateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -64,7 +64,7 @@ class _$SettingsPageStateCopyWithImpl<$Res, $Val extends SettingsPageState>
 
 /// @nodoc
 abstract class _$$InitialImplCopyWith<$Res>
-    implements $SettingsPageStateCopyWith<$Res> {
+    implements $ResultPageStateCopyWith<$Res> {
   factory _$$InitialImplCopyWith(
           _$InitialImpl value, $Res Function(_$InitialImpl) then) =
       __$$InitialImplCopyWithImpl<$Res>;
@@ -75,7 +75,7 @@ abstract class _$$InitialImplCopyWith<$Res>
 
 /// @nodoc
 class __$$InitialImplCopyWithImpl<$Res>
-    extends _$SettingsPageStateCopyWithImpl<$Res, _$InitialImpl>
+    extends _$ResultPageStateCopyWithImpl<$Res, _$InitialImpl>
     implements _$$InitialImplCopyWith<$Res> {
   __$$InitialImplCopyWithImpl(
       _$InitialImpl _value, $Res Function(_$InitialImpl) _then)
@@ -119,7 +119,7 @@ class _$InitialImpl implements _Initial {
 
   @override
   String toString() {
-    return 'SettingsPageState(errorMessage: $errorMessage, profile: $profile)';
+    return 'ResultPageState(errorMessage: $errorMessage, profile: $profile)';
   }
 
   @override
@@ -143,7 +143,7 @@ class _$InitialImpl implements _Initial {
       __$$InitialImplCopyWithImpl<_$InitialImpl>(this, _$identity);
 }
 
-abstract class _Initial implements SettingsPageState {
+abstract class _Initial implements ResultPageState {
   const factory _Initial(
       {required final String? errorMessage,
       required final List<ProfileModel> profile}) = _$InitialImpl;

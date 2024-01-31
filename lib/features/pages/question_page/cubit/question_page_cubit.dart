@@ -24,6 +24,7 @@ class QuestionPageCubit extends Cubit<QuestionPageState> {
   final RankingRepository rankingRepository;
   StreamSubscription? streamSubscription;
 
+
   Future<void> getQuestion({
     required int? category,
     required String? difficulty,
@@ -83,11 +84,6 @@ class QuestionPageCubit extends Cubit<QuestionPageState> {
     }
   }
 
-
-
-  
-
-
   Future<void> getMockQuestions(
       {required String difficulty,
       required int category,
@@ -139,8 +135,7 @@ class QuestionPageCubit extends Cubit<QuestionPageState> {
       questions: mockList,
     ));
   }
-
-  @override
+   @override
   Future<void> close() {
     streamSubscription?.cancel();
     return super.close();

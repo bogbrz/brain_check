@@ -1,9 +1,10 @@
-import 'package:brain_check/app/global%20cubit/cubit/global_user_cubit.dart';
 import 'package:brain_check/app/injection_container.dart';
+import 'package:brain_check/features/pages/user_page/cubit/user_page_cubit.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class UserPage extends StatelessWidget {
   const UserPage({
@@ -15,12 +16,13 @@ class UserPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => getIt<GlobalUserCubit>()..getProfile(),
+      create: (context) => getIt<UserPageCubit>()
+        ..getRankingForUpdate(email: user!.email.toString()),
       child: Scaffold(
         appBar: AppBar(
           title: Text(
             "User info",
-            style: TextStyle(color: Colors.white),
+            style: GoogleFonts.bungee(color: Colors.white, fontSize: 30),
           ),
           centerTitle: true,
           backgroundColor: Color.fromARGB(255, 27, 58, 93),
@@ -32,9 +34,9 @@ class UserPage extends StatelessWidget {
             width: MediaQuery.of(context).size.width * 0.7,
             decoration: BoxDecoration(
                 color: Colors.white,
-                border: Border.all(),
+                border: Border.all(width: 8),
                 borderRadius: BorderRadius.circular(10)),
-            child: BlocBuilder<GlobalUserCubit, GlobalUserState>(
+            child: BlocBuilder<UserPageCubit, UserPageState>(
               builder: (context, state) {
                 return Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -45,19 +47,35 @@ class UserPage extends StatelessWidget {
                     ),
                     for (final profile in state.profile) ...[
                       Text("Your nickname: ${profile.nickName}",
-                          style: Theme.of(context).textTheme.headlineMedium),
-                      Text("Your email adress: ${user!.email}",
-                          style: Theme.of(context).textTheme.headlineMedium),
+                          style: GoogleFonts.bungee(fontSize: 20)),
+                      Text(
+                        "Your email adress: ${user!.email}",
+                        style: GoogleFonts.bungee(fontSize: 20),
+                        textAlign: TextAlign.center,
+                      ),
                       Text("Quiz played: ${profile.gamesPlayed} ",
-                          style: Theme.of(context).textTheme.headlineMedium),
+                          style: GoogleFonts.bungee(fontSize: 20)),
                       Text("Personal rating: ${profile.points}",
-                          style: Theme.of(context).textTheme.headlineMedium),
+                          style: GoogleFonts.bungee(fontSize: 20)),
                     ],
-                    ElevatedButton(
-                        onPressed: () {
-                          context.read<GlobalUserCubit>().signOut();
+                    InkWell(
+                        onTap: () {
+                          context.read<UserPageCubit>().signOut();
                         },
-                        child: Text("Log out"))
+                        child: Container(
+                          padding: EdgeInsets.all(8),
+                          decoration: BoxDecoration(
+                              color: Color.fromARGB(255, 27, 58, 93),
+                              border: Border.all(
+                                width: 8,
+                              ),
+                              borderRadius: BorderRadius.circular(10)),
+                          child: Text(
+                            "Log out",
+                            style: GoogleFonts.bungee(
+                                color: Colors.white, fontSize: 25),
+                          ),
+                        ))
                   ],
                 );
               },
