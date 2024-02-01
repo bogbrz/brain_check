@@ -1,9 +1,6 @@
 import 'package:brain_check/app/injection_container.dart';
 import 'package:brain_check/features/pages/categories_page/categories_page.dart';
 import 'package:brain_check/features/pages/home_page/cubit/home_page_cubit.dart';
-import 'package:brain_check/features/pages/ranking_page/ranking_page.dart';
-
-import 'package:brain_check/features/pages/settings_page/settings_page.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -27,26 +24,9 @@ class HomePage extends StatelessWidget {
             centerTitle: true,
             title: Text(
               "BRAIN CHECK APP",
-              style: GoogleFonts.bungee(color: Colors.white, fontSize: 30),
+              style: GoogleFonts.bungee(color: Colors.white, fontSize: 35),
             ),
-            actions: [
-              InkWell(
-                onTap: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: ((context) => SettingsPage(
-                            user: user,
-                          ))));
-                },
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Icon(
-                    Icons.settings,
-                    color: Colors.white,
-                  ),
-                ),
-              )
-            ],
-            backgroundColor: Color.fromARGB(255, 27, 58, 93),
+            backgroundColor: const Color.fromARGB(255, 27, 58, 93),
           ),
           body: BlocBuilder<HomePageCubit, HomePageState>(
             builder: (context, state) {
@@ -87,6 +67,13 @@ class HomePage extends StatelessWidget {
                           width: MediaQuery.of(context).size.width * 0.6,
                           height: MediaQuery.of(context).size.height * 0.1,
                           decoration: BoxDecoration(
+                              boxShadow: const [
+                                BoxShadow(
+                                    color: Colors.white,
+                                    spreadRadius: 8,
+                                    blurRadius: 4,
+                                    offset: Offset(4, 8))
+                              ],
                               color: Colors.white,
                               borderRadius: BorderRadius.circular(10),
                               border:

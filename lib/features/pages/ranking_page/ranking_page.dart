@@ -15,7 +15,7 @@ class RankingPage extends StatelessWidget {
       create: (context) => getIt<RankingPageCubit>()..getRanking(),
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor: Color.fromARGB(255, 27, 58, 93),
+          backgroundColor: const Color.fromARGB(255, 27, 58, 93),
           centerTitle: true,
           title: Text("RANKING",
               style: GoogleFonts.bungee(color: Colors.white, fontSize: 35)),
@@ -25,8 +25,8 @@ class RankingPage extends StatelessWidget {
             return Column(
               children: [
                 Container(
-                  margin: EdgeInsets.only(bottom: 6, top: 6),
-                  decoration: BoxDecoration(
+                  margin: const EdgeInsets.only(bottom: 6, top: 6),
+                  decoration: const BoxDecoration(
                       border:
                           Border.symmetric(horizontal: BorderSide(width: 4)),
                       color: Colors.white),
@@ -66,7 +66,7 @@ class RankingPage extends StatelessWidget {
                         height: i == 1 || i == 2 || i == 3
                             ? MediaQuery.of(context).size.height * 0.075
                             : MediaQuery.of(context).size.height * 0.05,
-                        margin: EdgeInsets.only(
+                        margin: const EdgeInsets.only(
                             left: 2.5, right: 2.5, bottom: 6, top: 6),
                         decoration: BoxDecoration(
                             border: Border.all(width: 4),
@@ -74,7 +74,7 @@ class RankingPage extends StatelessWidget {
                             color: i == 1
                                 ? Colors.yellowAccent
                                 : i == 2
-                                    ? Color.fromARGB(255, 199, 192, 192)
+                                    ? const Color.fromARGB(255, 199, 192, 192)
                                     : i == 3
                                         ? Colors.orangeAccent
                                         : Colors.white),
@@ -85,21 +85,21 @@ class RankingPage extends StatelessWidget {
                                 width: MediaQuery.of(context).size.width * 0.1,
                                 child: Center(
                                     child: i == 1
-                                        ? Image(
+                                        ? const Image(
                                             image: AssetImage(
                                               "images/first_place.png",
                                             ),
                                             width: 40,
                                           )
                                         : i == 2
-                                            ? Image(
+                                            ? const Image(
                                                 image: AssetImage(
                                                   "images/second-prize.png",
                                                 ),
                                                 width: 40,
                                               )
                                             : i == 3
-                                                ? Image(
+                                                ? const Image(
                                                     image: AssetImage(
                                                       "images/third-prize.png",
                                                     ),

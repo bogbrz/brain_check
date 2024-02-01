@@ -5,16 +5,16 @@ import 'package:injectable/injectable.dart';
 
 @injectable
 class RankingFireBaseDataSource {
-  final UserId = FirebaseAuth.instance.currentUser?.uid;
+  final userId = FirebaseAuth.instance.currentUser?.uid;
 
   Future<void> setProfile(
       {required String nickName, required String email}) async {
-    if (UserId == null) {
+    if (userId == null) {
       throw Exception("user not logged in");
     }
     await FirebaseFirestore.instance
         .collection("users")
-        .doc(UserId)
+        .doc(userId)
         .collection("profile")
         .add({
       "email": email,
@@ -26,7 +26,7 @@ class RankingFireBaseDataSource {
 
   Future<void> addToRanking(
       {required String nickName, required String email}) async {
-    if (UserId == null) {
+    if (userId == null) {
       throw Exception("user not logged in");
     }
     await FirebaseFirestore.instance.collection("Ranking").add(
@@ -34,25 +34,25 @@ class RankingFireBaseDataSource {
   }
 
   Stream<QuerySnapshot<Map<String, dynamic>>> getProfileInfo() {
-    if (UserId == null) {
+    if (userId == null) {
       throw Exception("user not logged in");
     }
-    print(UserId);
+
     return FirebaseFirestore.instance
         .collection("users")
-        .doc(UserId)
+        .doc(userId)
         .collection("profile")
         .snapshots();
   }
 
   Future<void> updateStats({required int points, required String docId}) async {
-    if (UserId == null) {
+    if (userId == null) {
       throw Exception("user not logged in");
     }
 
     await FirebaseFirestore.instance
         .collection("users")
-        .doc(UserId)
+        .doc(userId)
         .collection("profile")
         .doc(docId)
         .update({

@@ -65,7 +65,7 @@ class ResultsPage extends StatelessWidget {
                         alignment: Alignment.center,
                         width: MediaQuery.of(context).size.width * 0.5,
                         decoration: BoxDecoration(
-                            color: Color.fromARGB(255, 27, 58, 93),
+                            color: const Color.fromARGB(255, 27, 58, 93),
                             border: Border.all(width: 6),
                             borderRadius: BorderRadius.circular(10)),
                         child: Text(

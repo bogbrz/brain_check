@@ -21,7 +21,7 @@ class CategoriesPageCubit extends Cubit<CategoriesPageState> {
 
       // print(categories);
     } catch (error) {
-      print(error.toString());
+   
       emit(CategoriesPageState(errorMessage: error.toString(), categories: []));
     }
   }

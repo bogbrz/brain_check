@@ -1,5 +1,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
+// ignore_for_file: prefer_const_declarations
+
 part of 'questions_data_source.dart';
 
 // **************************************************************************
@@ -11,6 +13,7 @@ part of 'questions_data_source.dart';
 class _QuestionDataSource implements QuestionDataSource {
   _QuestionDataSource(
     this._dio, {
+    // ignore: unused_element
     this.baseUrl,
   });
 

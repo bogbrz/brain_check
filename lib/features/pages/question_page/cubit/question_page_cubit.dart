@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'dart:math';
+
 
 import 'package:bloc/bloc.dart';
 import 'package:brain_check/domain/models/question_model.dart';
@@ -41,7 +41,7 @@ class QuestionPageCubit extends Cubit<QuestionPageState> {
     answers.addAll(questionContent[0].incorrectAnswers);
     answers.add(questionContent[0].correctAnswer);
     answers.shuffle();
-    print(questionContent);
+   
     try {
       emit(QuestionPageState(
         answers: answers,

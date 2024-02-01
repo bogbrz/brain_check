@@ -31,19 +31,18 @@ class _CategoryPageState extends State<CategoryPage> {
             "Choose category",
             style: GoogleFonts.bungee(fontSize: 30, color: Colors.white),
           ),
-          backgroundColor: Color.fromARGB(255, 27, 58, 93),
+          backgroundColor: const Color.fromARGB(255, 27, 58, 93),
         ),
         body: ListView(children: [
           Center(child: BlocBuilder<CategoriesPageCubit, CategoriesPageState>(
             builder: (context, state) {
               if (state.categories.isEmpty) {
-                print("EMPTY");
-                return Center(child: CircularProgressIndicator());
+                return const Center(child: CircularProgressIndicator());
               }
 
               return Wrap(children: [
                 Padding(
-                  padding: EdgeInsets.all(5),
+                  padding: const EdgeInsets.all(5),
                   child: Material(
                     shape: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
@@ -66,9 +65,9 @@ class _CategoryPageState extends State<CategoryPage> {
                         alignment: Alignment.center,
                         height: MediaQuery.of(context).size.height / 6,
                         width: MediaQuery.of(context).size.width / 2.2,
-                        padding: EdgeInsets.all(10),
+                        padding: const EdgeInsets.all(10),
                         decoration: BoxDecoration(
-                          color: Color.fromARGB(255, 56, 146, 249),
+                          color: const Color.fromARGB(255, 56, 146, 249),
                           border: Border.all(width: 8),
                           borderRadius: BorderRadius.circular(10),
                         ),
@@ -84,7 +83,7 @@ class _CategoryPageState extends State<CategoryPage> {
                 ),
                 for (final category in state.categories) ...[
                   Padding(
-                    padding: EdgeInsets.all(5),
+                    padding: const EdgeInsets.all(5),
                     child: Material(
                       shape: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
@@ -95,7 +94,7 @@ class _CategoryPageState extends State<CategoryPage> {
                           setState(() {
                             choosedCategory = category.id;
                           });
-                          print("${category.name} , ${category.id}");
+
                           Navigator.of(context).push(MaterialPageRoute(
                               builder: ((context) => DifficultyPage(
                                     user: widget.user,
@@ -106,9 +105,9 @@ class _CategoryPageState extends State<CategoryPage> {
                           alignment: Alignment.center,
                           height: MediaQuery.of(context).size.height / 6,
                           width: MediaQuery.of(context).size.width / 2.2,
-                          padding: EdgeInsets.all(10),
+                          padding: const EdgeInsets.all(10),
                           decoration: BoxDecoration(
-                            color: Color.fromARGB(255, 56, 146, 249),
+                            color: const Color.fromARGB(255, 56, 146, 249),
                             border: Border.all(width: 8),
                             borderRadius: BorderRadius.circular(10),
                           ),

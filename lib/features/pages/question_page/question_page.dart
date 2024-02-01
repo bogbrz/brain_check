@@ -2,6 +2,7 @@ import 'package:brain_check/app/injection_container.dart';
 import 'package:brain_check/device_size.dart';
 
 import 'package:brain_check/features/pages/question_page/cubit/question_page_cubit.dart';
+import 'package:brain_check/features/pages/question_page/option_widget.dart';
 import 'package:brain_check/features/pages/result_page/result_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -54,9 +55,9 @@ class _QuestionPageState extends State<QuestionPage> {
       child: BlocBuilder<QuestionPageCubit, QuestionPageState>(
         builder: (context, state) {
           final answers = state.answers;
-          print(widget.user!.email);
+
           if (state.questions.isEmpty) {
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           }
           if (widget.questionsNumber == 0 && youLose ||
               widget.questionsNumber != 0 && index == widget.questionsNumber) {
@@ -70,8 +71,8 @@ class _QuestionPageState extends State<QuestionPage> {
                   children: [
                     Container(
                       alignment: Alignment.center,
-                      margin: EdgeInsetsDirectional.all(16),
-                      padding: EdgeInsets.all(8),
+                      margin: const EdgeInsetsDirectional.all(16),
+                      padding: const EdgeInsets.all(8),
                       decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(10),
@@ -96,7 +97,7 @@ class _QuestionPageState extends State<QuestionPage> {
                                   time.toString(),
                                   style: GoogleFonts.bungee(fontSize: 20),
                                 ),
-                                interval: Duration(milliseconds: 100),
+                                interval: const Duration(milliseconds: 100),
                                 onFinished: () {
                                   setState(() {
                                     coolDown = false;
@@ -211,9 +212,6 @@ class _QuestionPageState extends State<QuestionPage> {
                                             });
                                           }
                                         }
-
-                                        print(points);
-                                        print(youLose);
                                       },
                                 child: OptionWidget(
                                     choosedQuestion: choosedQuestion,
@@ -260,7 +258,7 @@ class _QuestionPageState extends State<QuestionPage> {
                               },
                         child: Container(
                           width: MediaQuery.of(context).size.width * 0.45,
-                          padding: EdgeInsets.all(8),
+                          padding: const EdgeInsets.all(8),
                           decoration: BoxDecoration(
                               color: Colors.white,
                               border: Border.all(width: 8),
@@ -279,23 +277,16 @@ class _QuestionPageState extends State<QuestionPage> {
                                               Text(time.toInt().toString(),
                                                   style: GoogleFonts.bungee(
                                                       fontSize: 35)),
-                                      interval: Duration(milliseconds: 1000),
+                                      interval:
+                                          const Duration(milliseconds: 1000),
                                       onFinished: () {
                                         setState(() {
                                           safeCheck = true;
                                         });
-                                        print(safeCheck);
                                       },
                                     )
                                   : Text("->",
                                       style: GoogleFonts.bungee(fontSize: 30)),
-
-                              //  Image(
-                              //     image: AssetImage(
-                              //       "images/arrrrow.png",
-                              //     ),
-                              //     width: 30,
-                              //   )
                             ],
                           ),
                         )),
@@ -310,47 +301,5 @@ class _QuestionPageState extends State<QuestionPage> {
         },
       ),
     );
-  }
-}
-
-class OptionWidget extends StatelessWidget {
-  const OptionWidget({
-    super.key,
-    required this.choosedQuestion,
-    required this.isCorrect,
-    required this.option,
-    required this.answers,
-    required this.screenWidth,
-    required this.screenHeight,
-  });
-
-  final dynamic choosedQuestion;
-  final bool isCorrect;
-  final String option;
-  final List<String> answers;
-  final double screenWidth;
-  final double screenHeight;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-        alignment: Alignment.center,
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
-            color: choosedQuestion == null
-                ? Colors.white
-                : isCorrect && option == answers[choosedQuestion]
-                    ? Colors.green
-                    : isCorrect == false && option == answers[choosedQuestion]
-                        ? Colors.red
-                        : Colors.white,
-            border: Border.all(width: 8, color: Colors.black)),
-        width: screenWidth * 0.2,
-        height: screenHeight * 0.2,
-        child: Text(
-          HtmlUnescape().convert(option),
-          style: GoogleFonts.bungee(fontSize: 20),
-          textAlign: TextAlign.center,
-        ));
   }
 }

@@ -3,6 +3,7 @@ import 'package:brain_check/features/pages/ranking_page/ranking_page.dart';
 import 'package:brain_check/features/pages/user_page/user_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class NavigatorPage extends StatefulWidget {
   const NavigatorPage({
@@ -32,37 +33,43 @@ class _NavigatorPageState extends State<NavigatorPage> {
           return RankingPage();
         }
       }),
-      bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Color.fromARGB(255, 27, 58, 93),
-        onTap: (newIndex) {
-          setState(() {
-            pageIndex = newIndex;
-          });
-        },
-        currentIndex: pageIndex,
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.home,
-              color: Colors.white,
+      bottomNavigationBar: SizedBox(
+        height: MediaQuery.of(context).size.height * 0.1,
+        child: BottomNavigationBar(
+          selectedItemColor: Colors.white,
+          selectedLabelStyle: GoogleFonts.bungee(),
+          unselectedLabelStyle: GoogleFonts.bungee(),
+          backgroundColor: const Color.fromARGB(255, 27, 58, 93),
+          onTap: (newIndex) {
+            setState(() {
+              pageIndex = newIndex;
+            });
+          },
+          currentIndex: pageIndex,
+          items: [
+            BottomNavigationBarItem(
+              icon: Image(
+                image: const AssetImage("images/house.png"),
+                width: pageIndex == 0 ? 50 : 35,
+              ),
+              label: "HOME",
             ),
-            label: "HOME",
-          ),
-          BottomNavigationBarItem(
-            icon: Image(
-              image: AssetImage("images/trophy.png"),
-              width: 35,
+            BottomNavigationBarItem(
+              icon: Image(
+                image: const AssetImage("images/trophy.png"),
+                width: pageIndex == 1 ? 50 : 40,
+              ),
+              label: "RANKING",
             ),
-            label: "RANKING",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.person,
-              color: Colors.white,
+            BottomNavigationBarItem(
+              icon: Image(
+                image: const AssetImage("images/user.png"),
+                width: pageIndex == 2 ? 50 : 35,
+              ),
+              label: "USER",
             ),
-            label: "USER",
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

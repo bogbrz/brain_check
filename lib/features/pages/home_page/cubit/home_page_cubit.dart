@@ -10,7 +10,7 @@ part 'home_page_cubit.freezed.dart';
 
 class HomePageCubit extends Cubit<HomePageState> {
   HomePageCubit({required this.rankingRepository})
-      : super(HomePageState(errorMessage: null, profile: []));
+      : super(const HomePageState(errorMessage: null, profile: []));
   final RankingRepository rankingRepository;
   StreamSubscription? streamSubscription;
 
