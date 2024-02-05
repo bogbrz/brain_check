@@ -1,7 +1,7 @@
 import 'dart:async';
-import 'dart:math';
 
 import 'package:bloc/bloc.dart';
+import 'package:brain_check/app/core.dart';
 import 'package:brain_check/domain/models/question_model.dart';
 import 'package:brain_check/domain/repositories/questions_repository.dart';
 import 'package:brain_check/domain/repositories/ranking_repository.dart';
@@ -15,6 +15,7 @@ class QuestionPageCubit extends Cubit<QuestionPageState> {
   QuestionPageCubit(
       {required this.questionRepository, required this.rankingRepository})
       : super(QuestionPageState(
+          status: Status.initial,
           answers: [],
           errorMessage: null,
           questions: [],
@@ -24,11 +25,15 @@ class QuestionPageCubit extends Cubit<QuestionPageState> {
   final RankingRepository rankingRepository;
   StreamSubscription? streamSubscription;
 
-
   Future<void> getQuestion({
     required int? category,
     required String? difficulty,
   }) async {
+    emit(QuestionPageState(
+        errorMessage: null,
+        questions: [],
+        answers: [],
+        status: Status.loading));
     if (difficulty == null.toString()) {
       difficulty = null;
     }
@@ -41,15 +46,16 @@ class QuestionPageCubit extends Cubit<QuestionPageState> {
     answers.addAll(questionContent[0].incorrectAnswers);
     answers.add(questionContent[0].correctAnswer);
     answers.shuffle();
-    print(questionContent);
+
     try {
       emit(QuestionPageState(
-        answers: answers,
-        errorMessage: null,
-        questions: questionContent,
-      ));
+          answers: answers,
+          errorMessage: null,
+          questions: questionContent,
+          status: Status.success));
     } catch (error) {
       emit(QuestionPageState(
+        status: Status.error,
         answers: [],
         errorMessage: error.toString(),
         questions: [],
@@ -62,6 +68,11 @@ class QuestionPageCubit extends Cubit<QuestionPageState> {
       required String difficulty,
       required int index,
       required int amount}) async {
+    emit(QuestionPageState(
+        errorMessage: null,
+        questions: [],
+        answers: [],
+        status: Status.loading));
     final questionContent = await questionRepository.getListOfQuestions(
         category: category, difficulty: difficulty, amount: amount);
     final List<String> answers = [];
@@ -71,12 +82,14 @@ class QuestionPageCubit extends Cubit<QuestionPageState> {
 
     try {
       emit(QuestionPageState(
+        status: Status.success,
         answers: answers,
         errorMessage: null,
         questions: questionContent,
       ));
     } catch (error) {
       emit(QuestionPageState(
+        status: Status.error,
         answers: [],
         errorMessage: error.toString(),
         questions: [],
@@ -88,6 +101,11 @@ class QuestionPageCubit extends Cubit<QuestionPageState> {
       {required String difficulty,
       required int category,
       required int index}) async {
+    emit(QuestionPageState(
+        errorMessage: null,
+        questions: [],
+        answers: [],
+        status: Status.loading));
     final List<String> answers = [];
     final List<QuestionModel> mockList = [
       QuestionModel(
@@ -130,12 +148,14 @@ class QuestionPageCubit extends Cubit<QuestionPageState> {
     answers.add(mockList[index].correctAnswer);
     answers.shuffle();
     emit(QuestionPageState(
+      status: Status.success,
       answers: answers,
       errorMessage: null,
       questions: mockList,
     ));
   }
-   @override
+
+  @override
   Future<void> close() {
     streamSubscription?.cancel();
     return super.close();

@@ -2,5 +2,5 @@ part of 'categories_page_cubit.dart';
 
 @freezed
 class CategoriesPageState with _$CategoriesPageState {
-   factory CategoriesPageState({required String? errorMessage, required List<TriviaCategory> categories }) = _Initial;
+   factory CategoriesPageState({required String? errorMessage, required List<TriviaCategory> categories, required Status status, }) = _Initial;
 }

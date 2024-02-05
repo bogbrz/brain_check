@@ -32,7 +32,7 @@ import 'package:brain_check/features/pages/result_page/cubit/result_page_cubit.d
     as _i8;
 import 'package:brain_check/features/pages/root_page/cubit/root_page_cubit.dart'
     as _i9;
-import 'package:brain_check/features/pages/settings_page/cubit/settings_page_cubit.dart'
+import 'package:brain_check/features/pages/set_up_user_page/cubit/set_up_user_cubit.dart'
     as _i10;
 import 'package:brain_check/features/pages/user_page/cubit/user_page_cubit.dart'
     as _i11;
@@ -65,8 +65,8 @@ extension GetItInjectableX on _i1.GetIt {
         _i8.ResultPageCubit(rankingRepository: gh<_i7.RankingRepository>()));
     gh.factory<_i9.RootPageCubit>(
         () => _i9.RootPageCubit(authRepository: gh<_i4.AuthRepository>()));
-    gh.factory<_i10.SettingsPageCubit>(() =>
-        _i10.SettingsPageCubit(rankingRepository: gh<_i7.RankingRepository>()));
+    gh.factory<_i10.SetUpUserCubit>(() =>
+        _i10.SetUpUserCubit(rankingRepository: gh<_i7.RankingRepository>()));
     gh.factory<String>(
       () => registerModule.baseUrl,
       instanceName: 'BaseUrl',

@@ -22,58 +22,73 @@ class UserPage extends StatelessWidget {
         appBar: AppBar(
           title: Text(
             "User info",
-            style: GoogleFonts.bungee(color: Colors.white, fontSize: 30),
+            style: GoogleFonts.bungee(color: Colors.white, fontSize: 35),
           ),
           centerTitle: true,
-          backgroundColor: Color.fromARGB(255, 27, 58, 93),
+          backgroundColor: const Color.fromARGB(255, 27, 58, 93),
         ),
         body: Center(
           child: Container(
-            padding: EdgeInsets.all(8),
+            padding: const EdgeInsets.all(8),
             height: MediaQuery.of(context).size.height * 0.7,
             width: MediaQuery.of(context).size.width * 0.7,
             decoration: BoxDecoration(
                 color: Colors.white,
-                border: Border.all(width: 8),
+                border:
+                    Border.all(width: MediaQuery.of(context).size.width / 45),
                 borderRadius: BorderRadius.circular(10)),
             child: BlocBuilder<UserPageCubit, UserPageState>(
               builder: (context, state) {
                 return Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    CircleAvatar(
+                    const CircleAvatar(
                       backgroundColor: Color.fromARGB(255, 27, 58, 93),
                       radius: 40,
                     ),
                     for (final profile in state.profile) ...[
                       Text("Your nickname: ${profile.nickName}",
-                          style: GoogleFonts.bungee(fontSize: 20)),
+                          textAlign: TextAlign.left,
+                          style: GoogleFonts.bungee(
+                              fontSize:
+                                  MediaQuery.of(context).size.height / 35)),
                       Text(
                         "Your email adress: ${user!.email}",
-                        style: GoogleFonts.bungee(fontSize: 20),
-                        textAlign: TextAlign.center,
+                        style: GoogleFonts.bungee(
+                            fontSize: MediaQuery.of(context).size.height / 35),
+                        textAlign: TextAlign.left,
                       ),
-                      Text("Quiz played: ${profile.gamesPlayed} ",
-                          style: GoogleFonts.bungee(fontSize: 20)),
-                      Text("Personal rating: ${profile.points}",
-                          style: GoogleFonts.bungee(fontSize: 20)),
+                      Text(
+                        "Quiz played: ${profile.gamesPlayed} ",
+                        style: GoogleFonts.bungee(
+                            fontSize: MediaQuery.of(context).size.height / 35),
+                        textAlign: TextAlign.left,
+                      ),
+                      Text(
+                        "Personal rating: ${profile.points}",
+                        style: GoogleFonts.bungee(
+                            fontSize: MediaQuery.of(context).size.height / 35),
+                        textAlign: TextAlign.left,
+                      ),
                     ],
                     InkWell(
                         onTap: () {
                           context.read<UserPageCubit>().signOut();
                         },
                         child: Container(
-                          padding: EdgeInsets.all(8),
+                          padding: const EdgeInsets.all(8),
                           decoration: BoxDecoration(
-                              color: Color.fromARGB(255, 27, 58, 93),
+                              color: const Color.fromARGB(255, 27, 58, 93),
                               border: Border.all(
-                                width: 8,
-                              ),
+                                  width:
+                                      MediaQuery.of(context).size.width / 45),
                               borderRadius: BorderRadius.circular(10)),
                           child: Text(
                             "Log out",
                             style: GoogleFonts.bungee(
-                                color: Colors.white, fontSize: 25),
+                                color: Colors.white,
+                                fontSize:
+                                    MediaQuery.of(context).size.height / 35),
                           ),
                         ))
                   ],

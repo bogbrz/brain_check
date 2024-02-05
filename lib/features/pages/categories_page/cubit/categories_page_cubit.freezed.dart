@@ -18,6 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$CategoriesPageState {
   String? get errorMessage => throw _privateConstructorUsedError;
   List<TriviaCategory> get categories => throw _privateConstructorUsedError;
+  Status get status => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $CategoriesPageStateCopyWith<CategoriesPageState> get copyWith =>
@@ -30,7 +31,8 @@ abstract class $CategoriesPageStateCopyWith<$Res> {
           CategoriesPageState value, $Res Function(CategoriesPageState) then) =
       _$CategoriesPageStateCopyWithImpl<$Res, CategoriesPageState>;
   @useResult
-  $Res call({String? errorMessage, List<TriviaCategory> categories});
+  $Res call(
+      {String? errorMessage, List<TriviaCategory> categories, Status status});
 }
 
 /// @nodoc
@@ -48,6 +50,7 @@ class _$CategoriesPageStateCopyWithImpl<$Res, $Val extends CategoriesPageState>
   $Res call({
     Object? errorMessage = freezed,
     Object? categories = null,
+    Object? status = null,
   }) {
     return _then(_value.copyWith(
       errorMessage: freezed == errorMessage
@@ -58,6 +61,10 @@ class _$CategoriesPageStateCopyWithImpl<$Res, $Val extends CategoriesPageState>
           ? _value.categories
           : categories // ignore: cast_nullable_to_non_nullable
               as List<TriviaCategory>,
+      status: null == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as Status,
     ) as $Val);
   }
 }
@@ -70,7 +77,8 @@ abstract class _$$InitialImplCopyWith<$Res>
       __$$InitialImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String? errorMessage, List<TriviaCategory> categories});
+  $Res call(
+      {String? errorMessage, List<TriviaCategory> categories, Status status});
 }
 
 /// @nodoc
@@ -86,6 +94,7 @@ class __$$InitialImplCopyWithImpl<$Res>
   $Res call({
     Object? errorMessage = freezed,
     Object? categories = null,
+    Object? status = null,
   }) {
     return _then(_$InitialImpl(
       errorMessage: freezed == errorMessage
@@ -96,6 +105,10 @@ class __$$InitialImplCopyWithImpl<$Res>
           ? _value._categories
           : categories // ignore: cast_nullable_to_non_nullable
               as List<TriviaCategory>,
+      status: null == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as Status,
     ));
   }
 }
@@ -105,7 +118,8 @@ class __$$InitialImplCopyWithImpl<$Res>
 class _$InitialImpl implements _Initial {
   _$InitialImpl(
       {required this.errorMessage,
-      required final List<TriviaCategory> categories})
+      required final List<TriviaCategory> categories,
+      required this.status})
       : _categories = categories;
 
   @override
@@ -119,8 +133,11 @@ class _$InitialImpl implements _Initial {
   }
 
   @override
+  final Status status;
+
+  @override
   String toString() {
-    return 'CategoriesPageState(errorMessage: $errorMessage, categories: $categories)';
+    return 'CategoriesPageState(errorMessage: $errorMessage, categories: $categories, status: $status)';
   }
 
   @override
@@ -131,12 +148,13 @@ class _$InitialImpl implements _Initial {
             (identical(other.errorMessage, errorMessage) ||
                 other.errorMessage == errorMessage) &&
             const DeepCollectionEquality()
-                .equals(other._categories, _categories));
+                .equals(other._categories, _categories) &&
+            (identical(other.status, status) || other.status == status));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, errorMessage,
-      const DeepCollectionEquality().hash(_categories));
+      const DeepCollectionEquality().hash(_categories), status);
 
   @JsonKey(ignore: true)
   @override
@@ -148,12 +166,15 @@ class _$InitialImpl implements _Initial {
 abstract class _Initial implements CategoriesPageState {
   factory _Initial(
       {required final String? errorMessage,
-      required final List<TriviaCategory> categories}) = _$InitialImpl;
+      required final List<TriviaCategory> categories,
+      required final Status status}) = _$InitialImpl;
 
   @override
   String? get errorMessage;
   @override
   List<TriviaCategory> get categories;
+  @override
+  Status get status;
   @override
   @JsonKey(ignore: true)
   _$$InitialImplCopyWith<_$InitialImpl> get copyWith =>

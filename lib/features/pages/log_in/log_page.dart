@@ -2,6 +2,7 @@ import 'package:brain_check/app/injection_container.dart';
 import 'package:brain_check/features/pages/log_in/cubit/log_in_page_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 final emailController = TextEditingController();
 final passwordController = TextEditingController();
@@ -26,33 +27,45 @@ class _LogInPageState extends State<LogInPage> {
         builder: (context, state) {
           return Scaffold(
             appBar: AppBar(
-                backgroundColor: Color.fromARGB(255, 27, 58, 93),
+                backgroundColor: const Color.fromARGB(255, 27, 58, 93),
                 title: Text(
                   "Welcome to:",
-                  style: Theme.of(context).textTheme.headlineLarge,
+                  style: GoogleFonts.bungee(
+                      fontSize: MediaQuery.of(context).size.height / 20,
+                      color: Colors.white),
                 )),
             body: Padding(
               padding: const EdgeInsets.all(15.0),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Column(
+                  Row(
                     children: [
-                      Row(
-                        children: [
-                          Text(
-                            "BRAINCHECK",
-                            style: Theme.of(context).textTheme.headlineLarge,
-                          ),
-                        ],
+                      Text(
+                        "BRAINCHECK",
+                        style: GoogleFonts.bungee(
+                            fontSize: MediaQuery.of(context).size.height / 20,
+                            color: Colors.white),
                       ),
                     ],
                   ),
                   TextField(
+                    style: GoogleFonts.bungee(
+                      fontSize: MediaQuery.of(context).size.height / 40,
+                    ),
                     decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10.0)),
-                      label: const Text("Email"),
+                      focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                        width: MediaQuery.of(context).size.width / 55,
+                      )),
+                      enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                        width: MediaQuery.of(context).size.width / 55,
+                      )),
+                      hintText: "Email",
+                      fillColor: Colors.white,
+                      filled: true,
+                      hintStyle: GoogleFonts.bungee(color: Colors.black),
                     ),
                     controller: emailController,
                   ),
@@ -60,11 +73,23 @@ class _LogInPageState extends State<LogInPage> {
                     height: 10,
                   ),
                   TextField(
+                    style: GoogleFonts.bungee(
+                      fontSize: MediaQuery.of(context).size.height / 40,
+                    ),
                     obscureText: true,
                     decoration: InputDecoration(
-                      label: const Text("Password"),
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10.0)),
+                      hintText: "Password",
+                      fillColor: Colors.white,
+                      filled: true,
+                      hintStyle: GoogleFonts.bungee(color: Colors.black),
+                      focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                        width: MediaQuery.of(context).size.width / 55,
+                      )),
+                      enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                        width: MediaQuery.of(context).size.width / 55,
+                      )),
                     ),
                     controller: passwordController,
                   ),
@@ -89,21 +114,21 @@ class _LogInPageState extends State<LogInPage> {
                     },
                     child: Container(
                       alignment: Alignment.center,
-                      width: isCreatingAccount ? 200 : 100,
+                      width: MediaQuery.of(context).size.width / 2,
                       decoration: BoxDecoration(
-                          border: Border.all(
-                            width: 2,
-                            color: Colors.black,
-                          ),
-                          borderRadius: BorderRadius.circular(10)),
+                        color: Colors.white,
+                        border: Border.all(
+                            width: MediaQuery.of(context).size.width / 55,
+                            color: Colors.black),
+                      ),
                       child: Padding(
                         padding: const EdgeInsets.all(4.0),
                         child: Text(
                           isCreatingAccount ? "Create Account " : "Log in",
-                          style: const TextStyle(
-                              color: Colors.black,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 20),
+                          textAlign: TextAlign.center,
+                          style: GoogleFonts.bungee(
+                              fontSize:
+                                  MediaQuery.of(context).size.height / 30),
                         ),
                       ),
                     ),
@@ -117,9 +142,11 @@ class _LogInPageState extends State<LogInPage> {
                             isCreatingAccount = true;
                           });
                         },
-                        child: const Text(
+                        child: Text(
                           "Doesn't have an Account?",
-                          style: TextStyle(color: Colors.black, fontSize: 10),
+                          style: GoogleFonts.bungee(
+                              fontSize: MediaQuery.of(context).size.height / 50,
+                              color: Colors.black),
                         )),
                   ],
                   if (isCreatingAccount == true) ...[
@@ -131,9 +158,11 @@ class _LogInPageState extends State<LogInPage> {
                             isCreatingAccount = false;
                           });
                         },
-                        child: const Text(
+                        child: Text(
                           "Already have an account?",
-                          style: TextStyle(color: Colors.black, fontSize: 10),
+                          style: GoogleFonts.bungee(
+                              fontSize: MediaQuery.of(context).size.height / 50,
+                              color: Colors.black),
                         ))
                   ],
                 ],

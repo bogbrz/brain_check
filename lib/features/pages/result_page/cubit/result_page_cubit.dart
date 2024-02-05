@@ -9,7 +9,7 @@ part 'result_page_state.dart';
 part 'result_page_cubit.freezed.dart';
 
 class ResultPageCubit extends Cubit<ResultPageState> {
-  ResultPageCubit({required this.rankingRepository}) : super(ResultPageState(errorMessage: null, profile: []));
+  ResultPageCubit({required this.rankingRepository}) : super(const ResultPageState(errorMessage: null, profile: []));
 
   final RankingRepository rankingRepository;
   StreamSubscription? streamSubscription;

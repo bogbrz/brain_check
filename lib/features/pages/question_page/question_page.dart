@@ -1,7 +1,9 @@
+import 'package:brain_check/app/core.dart';
 import 'package:brain_check/app/injection_container.dart';
 import 'package:brain_check/device_size.dart';
 
 import 'package:brain_check/features/pages/question_page/cubit/question_page_cubit.dart';
+import 'package:brain_check/features/pages/question_page/widgets/option_widget.dart';
 import 'package:brain_check/features/pages/result_page/result_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -49,33 +51,48 @@ class _QuestionPageState extends State<QuestionPage> {
     final screenHeight = context.deviceHeight;
 
     return BlocProvider(
-      create: (context) => getIt<QuestionPageCubit>()
-        ..getQuestion(difficulty: widget.difficulty, category: widget.category),
-      child: BlocBuilder<QuestionPageCubit, QuestionPageState>(
-        builder: (context, state) {
-          final answers = state.answers;
-          print(widget.user!.email);
-          if (state.questions.isEmpty) {
-            return Center(child: CircularProgressIndicator());
-          }
-          if (widget.questionsNumber == 0 && youLose ||
-              widget.questionsNumber != 0 && index == widget.questionsNumber) {
-            return ResultsPage(widget: widget, index: index, points: points);
-          } else {
-            return Scaffold(
-              body: SafeArea(
-                child: Center(
-                    child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        create: (context) => getIt<QuestionPageCubit>()
+          ..getQuestion(
+              difficulty: widget.difficulty, category: widget.category),
+        child: Scaffold(
+          body: SafeArea(
+            child: BlocConsumer<QuestionPageCubit, QuestionPageState>(
+              listener: (context, state) {
+                if (state.status == Status.loading) {
+                  Center(child: CircularProgressIndicator());
+                }
+                if (state.status == Status.error) {
+                  Center(
+                      child: Text(
+                    state.errorMessage.toString(),
+                  ));
+                }
+              },
+              builder: (context, state) {
+                final answers = state.answers;
+
+                if (state.questions.isEmpty) {
+                  return const Center(child: CircularProgressIndicator());
+                }
+                if (widget.questionsNumber == 0 && youLose ||
+                    widget.questionsNumber != 0 &&
+                        index == widget.questionsNumber) {
+                  return ResultsPage(
+                      widget: widget, index: index, points: points);
+                }
+                return Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Container(
                       alignment: Alignment.center,
-                      margin: EdgeInsetsDirectional.all(16),
-                      padding: EdgeInsets.all(8),
+                      margin: const EdgeInsetsDirectional.all(16),
+                      padding: const EdgeInsets.all(8),
                       decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(10),
-                          border: Border.all(width: 8, color: Colors.black)),
+                          border: Border.all(
+                              width: MediaQuery.of(context).size.width / 55,
+                              color: Colors.black)),
                       width: screenWidth * 0.5,
                       height: screenHeight * 0.3,
                       child: Column(
@@ -85,8 +102,11 @@ class _QuestionPageState extends State<QuestionPage> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                "Question number${index + 1}",
-                                style: GoogleFonts.bungee(fontSize: 20),
+                                "Question number ${index + 1}",
+                                style: GoogleFonts.bungee(
+                                  fontSize:
+                                      MediaQuery.of(context).size.height / 45,
+                                ),
                               ),
                               Countdown(
                                 controller: controller,
@@ -94,9 +114,12 @@ class _QuestionPageState extends State<QuestionPage> {
                                 build: (BuildContext context, double time) =>
                                     Text(
                                   time.toString(),
-                                  style: GoogleFonts.bungee(fontSize: 20),
+                                  style: GoogleFonts.bungee(
+                                    fontSize:
+                                        MediaQuery.of(context).size.height / 35,
+                                  ),
                                 ),
-                                interval: Duration(milliseconds: 100),
+                                interval: const Duration(milliseconds: 100),
                                 onFinished: () {
                                   setState(() {
                                     coolDown = false;
@@ -110,13 +133,19 @@ class _QuestionPageState extends State<QuestionPage> {
                               )
                             ],
                           ),
-                          SizedBox(
-                              height: screenHeight * 0.15,
-                              child: Text(
-                                HtmlUnescape()
-                                    .convert(state.questions[0].question),
-                                style: GoogleFonts.bungee(fontSize: 15),
-                              )),
+                          Padding(
+                            padding: const EdgeInsets.all(12.0),
+                            child: SizedBox(
+                                height: screenHeight * 0.15,
+                                child: Text(
+                                  HtmlUnescape()
+                                      .convert(state.questions[0].question),
+                                  style: GoogleFonts.bungee(
+                                    fontSize:
+                                        MediaQuery.of(context).size.height / 45,
+                                  ),
+                                )),
+                          ),
                         ],
                       ),
                     ),
@@ -124,7 +153,7 @@ class _QuestionPageState extends State<QuestionPage> {
                       children: [
                         for (final option in answers) ...[
                           Padding(
-                            padding: const EdgeInsets.all(8.0),
+                            padding: const EdgeInsets.all(4.0),
                             child: Material(
                               shape: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(10)),
@@ -211,9 +240,6 @@ class _QuestionPageState extends State<QuestionPage> {
                                             });
                                           }
                                         }
-
-                                        print(points);
-                                        print(youLose);
                                       },
                                 child: OptionWidget(
                                     choosedQuestion: choosedQuestion,
@@ -260,7 +286,7 @@ class _QuestionPageState extends State<QuestionPage> {
                               },
                         child: Container(
                           width: MediaQuery.of(context).size.width * 0.45,
-                          padding: EdgeInsets.all(8),
+                          padding: const EdgeInsets.all(8),
                           decoration: BoxDecoration(
                               color: Colors.white,
                               border: Border.all(width: 8),
@@ -269,88 +295,45 @@ class _QuestionPageState extends State<QuestionPage> {
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
                               Text("Next",
-                                  style: GoogleFonts.bungee(fontSize: 35)),
+                                  style: GoogleFonts.bungee(
+                                    fontSize:
+                                        MediaQuery.of(context).size.height / 25,
+                                  )),
                               safeCheck == false
                                   ? Countdown(
                                       controller: controllerSafe,
                                       seconds: 5,
-                                      build:
-                                          (BuildContext context, double time) =>
-                                              Text(time.toInt().toString(),
-                                                  style: GoogleFonts.bungee(
-                                                      fontSize: 35)),
-                                      interval: Duration(milliseconds: 1000),
+                                      build: (BuildContext context,
+                                              double time) =>
+                                          Text(time.toInt().toString(),
+                                              style: GoogleFonts.bungee(
+                                                fontSize: MediaQuery.of(context)
+                                                        .size
+                                                        .height /
+                                                    25,
+                                              )),
+                                      interval:
+                                          const Duration(milliseconds: 1000),
                                       onFinished: () {
                                         setState(() {
                                           safeCheck = true;
                                         });
-                                        print(safeCheck);
                                       },
                                     )
                                   : Text("->",
-                                      style: GoogleFonts.bungee(fontSize: 30)),
-
-                              //  Image(
-                              //     image: AssetImage(
-                              //       "images/arrrrow.png",
-                              //     ),
-                              //     width: 30,
-                              //   )
+                                      style: GoogleFonts.bungee(
+                                        fontSize:
+                                            MediaQuery.of(context).size.height /
+                                                25,
+                                      )),
                             ],
                           ),
                         )),
-                    SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.05,
-                    ),
                   ],
-                )),
-              ),
-            );
-          }
-        },
-      ),
-    );
-  }
-}
-
-class OptionWidget extends StatelessWidget {
-  const OptionWidget({
-    super.key,
-    required this.choosedQuestion,
-    required this.isCorrect,
-    required this.option,
-    required this.answers,
-    required this.screenWidth,
-    required this.screenHeight,
-  });
-
-  final dynamic choosedQuestion;
-  final bool isCorrect;
-  final String option;
-  final List<String> answers;
-  final double screenWidth;
-  final double screenHeight;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-        alignment: Alignment.center,
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
-            color: choosedQuestion == null
-                ? Colors.white
-                : isCorrect && option == answers[choosedQuestion]
-                    ? Colors.green
-                    : isCorrect == false && option == answers[choosedQuestion]
-                        ? Colors.red
-                        : Colors.white,
-            border: Border.all(width: 8, color: Colors.black)),
-        width: screenWidth * 0.2,
-        height: screenHeight * 0.2,
-        child: Text(
-          HtmlUnescape().convert(option),
-          style: GoogleFonts.bungee(fontSize: 20),
-          textAlign: TextAlign.center,
+                );
+              },
+            ),
+          ),
         ));
   }
 }

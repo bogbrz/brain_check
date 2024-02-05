@@ -18,7 +18,7 @@ class QuestionRepository {
       {required int? category, required String? difficulty, required int? amount}) async {
     final questions =
         await questionDataSource.getListofQuestions(difficulty, category, amount);
-    print("  5 QUESTIONS  ${questions.results}");
+  
     return questions.results;
   }
 
