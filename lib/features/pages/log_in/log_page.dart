@@ -30,32 +30,38 @@ class _LogInPageState extends State<LogInPage> {
                 backgroundColor: const Color.fromARGB(255, 27, 58, 93),
                 title: Text(
                   "Welcome to:",
-                  style: GoogleFonts.bungee(fontSize: 35),
+                  style: GoogleFonts.bungee(
+                      fontSize: MediaQuery.of(context).size.height / 20,
+                      color: Colors.white),
                 )),
             body: Padding(
               padding: const EdgeInsets.all(15.0),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Column(
+                  Row(
                     children: [
-                      Row(
-                        children: [
-                          Text(
-                            "BRAINCHECK",
-                            style: GoogleFonts.bungee(fontSize: 40),
-                          ),
-                        ],
+                      Text(
+                        "BRAINCHECK",
+                        style: GoogleFonts.bungee(
+                            fontSize: MediaQuery.of(context).size.height / 20,
+                            color: Colors.white),
                       ),
                     ],
                   ),
                   TextField(
-                    style: GoogleFonts.bungee(fontSize: 20),
+                    style: GoogleFonts.bungee(
+                      fontSize: MediaQuery.of(context).size.height / 40,
+                    ),
                     decoration: InputDecoration(
-                      focusedBorder: const OutlineInputBorder(
-                          borderSide: BorderSide(width: 8)),
-                      enabledBorder: const OutlineInputBorder(
-                          borderSide: BorderSide(width: 8)),
+                      focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                        width: MediaQuery.of(context).size.width / 55,
+                      )),
+                      enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                        width: MediaQuery.of(context).size.width / 55,
+                      )),
                       hintText: "Email",
                       fillColor: Colors.white,
                       filled: true,
@@ -67,17 +73,23 @@ class _LogInPageState extends State<LogInPage> {
                     height: 10,
                   ),
                   TextField(
-                    style: GoogleFonts.bungee(fontSize: 20),
+                    style: GoogleFonts.bungee(
+                      fontSize: MediaQuery.of(context).size.height / 40,
+                    ),
                     obscureText: true,
                     decoration: InputDecoration(
                       hintText: "Password",
                       fillColor: Colors.white,
                       filled: true,
                       hintStyle: GoogleFonts.bungee(color: Colors.black),
-                      focusedBorder: const OutlineInputBorder(
-                          borderSide: BorderSide(width: 8)),
-                      enabledBorder: const OutlineInputBorder(
-                          borderSide: BorderSide(width: 8)),
+                      focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                        width: MediaQuery.of(context).size.width / 55,
+                      )),
+                      enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                        width: MediaQuery.of(context).size.width / 55,
+                      )),
                     ),
                     controller: passwordController,
                   ),
@@ -102,20 +114,21 @@ class _LogInPageState extends State<LogInPage> {
                     },
                     child: Container(
                       alignment: Alignment.center,
-                      width: isCreatingAccount ? 250 : 200,
+                      width: MediaQuery.of(context).size.width / 2,
                       decoration: BoxDecoration(
                         color: Colors.white,
                         border: Border.all(
-                          width: 8,
-                          color: Colors.black,
-                        ),
+                            width: MediaQuery.of(context).size.width / 55,
+                            color: Colors.black),
                       ),
                       child: Padding(
                         padding: const EdgeInsets.all(4.0),
                         child: Text(
                           isCreatingAccount ? "Create Account " : "Log in",
                           textAlign: TextAlign.center,
-                          style: GoogleFonts.bungee(fontSize: 35),
+                          style: GoogleFonts.bungee(
+                              fontSize:
+                                  MediaQuery.of(context).size.height / 30),
                         ),
                       ),
                     ),
@@ -132,7 +145,8 @@ class _LogInPageState extends State<LogInPage> {
                         child: Text(
                           "Doesn't have an Account?",
                           style: GoogleFonts.bungee(
-                              fontSize: 15, color: Colors.black),
+                              fontSize: MediaQuery.of(context).size.height / 50,
+                              color: Colors.black),
                         )),
                   ],
                   if (isCreatingAccount == true) ...[
@@ -147,7 +161,8 @@ class _LogInPageState extends State<LogInPage> {
                         child: Text(
                           "Already have an account?",
                           style: GoogleFonts.bungee(
-                              fontSize: 15, color: Colors.black),
+                              fontSize: MediaQuery.of(context).size.height / 50,
+                              color: Colors.black),
                         ))
                   ],
                 ],

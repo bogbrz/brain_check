@@ -34,7 +34,8 @@ class UserPage extends StatelessWidget {
             width: MediaQuery.of(context).size.width * 0.7,
             decoration: BoxDecoration(
                 color: Colors.white,
-                border: Border.all(width: 8),
+                border:
+                    Border.all(width: MediaQuery.of(context).size.width / 45),
                 borderRadius: BorderRadius.circular(10)),
             child: BlocBuilder<UserPageCubit, UserPageState>(
               builder: (context, state) {
@@ -48,20 +49,25 @@ class UserPage extends StatelessWidget {
                     for (final profile in state.profile) ...[
                       Text("Your nickname: ${profile.nickName}",
                           textAlign: TextAlign.left,
-                          style: GoogleFonts.bungee(fontSize: 20)),
+                          style: GoogleFonts.bungee(
+                              fontSize:
+                                  MediaQuery.of(context).size.height / 35)),
                       Text(
                         "Your email adress: ${user!.email}",
-                        style: GoogleFonts.bungee(fontSize: 20),
+                        style: GoogleFonts.bungee(
+                            fontSize: MediaQuery.of(context).size.height / 35),
                         textAlign: TextAlign.left,
                       ),
                       Text(
                         "Quiz played: ${profile.gamesPlayed} ",
-                        style: GoogleFonts.bungee(fontSize: 20),
+                        style: GoogleFonts.bungee(
+                            fontSize: MediaQuery.of(context).size.height / 35),
                         textAlign: TextAlign.left,
                       ),
                       Text(
                         "Personal rating: ${profile.points}",
-                        style: GoogleFonts.bungee(fontSize: 20),
+                        style: GoogleFonts.bungee(
+                            fontSize: MediaQuery.of(context).size.height / 35),
                         textAlign: TextAlign.left,
                       ),
                     ],
@@ -74,13 +80,15 @@ class UserPage extends StatelessWidget {
                           decoration: BoxDecoration(
                               color: const Color.fromARGB(255, 27, 58, 93),
                               border: Border.all(
-                                width: 8,
-                              ),
+                                  width:
+                                      MediaQuery.of(context).size.width / 45),
                               borderRadius: BorderRadius.circular(10)),
                           child: Text(
                             "Log out",
                             style: GoogleFonts.bungee(
-                                color: Colors.white, fontSize: 25),
+                                color: Colors.white,
+                                fontSize:
+                                    MediaQuery.of(context).size.height / 35),
                           ),
                         ))
                   ],

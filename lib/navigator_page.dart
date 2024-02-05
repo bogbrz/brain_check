@@ -50,21 +50,27 @@ class _NavigatorPageState extends State<NavigatorPage> {
             BottomNavigationBarItem(
               icon: Image(
                 image: const AssetImage("images/house.png"),
-                width: pageIndex == 0 ? 50 : 35,
+                width: pageIndex == 0
+                    ? MediaQuery.of(context).size.height / 20
+                    : MediaQuery.of(context).size.height / 30,
               ),
               label: "HOME",
             ),
             BottomNavigationBarItem(
               icon: Image(
                 image: const AssetImage("images/trophy.png"),
-                width: pageIndex == 1 ? 50 : 40,
+                width: pageIndex == 1
+                    ? MediaQuery.of(context).size.height / 20
+                    : MediaQuery.of(context).size.height / 35,
               ),
               label: "RANKING",
             ),
             BottomNavigationBarItem(
               icon: Image(
                 image: const AssetImage("images/user.png"),
-                width: pageIndex == 2 ? 50 : 35,
+                width: pageIndex == 2
+                    ? MediaQuery.of(context).size.height / 20
+                    : MediaQuery.of(context).size.height / 30,
               ),
               label: "USER",
             ),

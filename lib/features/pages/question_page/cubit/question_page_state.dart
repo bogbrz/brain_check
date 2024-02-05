@@ -6,5 +6,6 @@ class QuestionPageState with _$QuestionPageState {
     required String? errorMessage,
     required List<QuestionModel> questions,
     required List<String> answers,
+    required Status  status,
   }) = _QuestionPageState;
 }

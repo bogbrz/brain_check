@@ -46,7 +46,8 @@ class SetUpUserPage extends StatelessWidget {
                       backgroundColor: Colors.black,
                       radius: MediaQuery.of(context).size.width * 0.22,
                       child: CircleAvatar(
-                        backgroundColor: const Color.fromARGB(255, 56, 113, 178),
+                        backgroundColor:
+                            const Color.fromARGB(255, 56, 113, 178),
                         radius: MediaQuery.of(context).size.width * 0.2,
                         child: const Icon(
                           Icons.add_outlined,
@@ -61,7 +62,7 @@ class SetUpUserPage extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: TextField(
-                        maxLength: 15,
+                        maxLength: 13,
                         style: GoogleFonts.bungee(fontSize: 20),
                         decoration: InputDecoration(
                             hintText: "NickName",
@@ -104,6 +105,5 @@ class SetUpUserPage extends StatelessWidget {
         },
       ),
     );
-   
   }
 }

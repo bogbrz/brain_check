@@ -27,20 +27,23 @@ class OptionWidget extends StatelessWidget {
     return Container(
         alignment: Alignment.center,
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
-            color: choosedQuestion == null
-                ? Colors.white
-                : isCorrect && option == answers[choosedQuestion]
-                    ? Colors.green
-                    : isCorrect == false && option == answers[choosedQuestion]
-                        ? Colors.red
-                        : Colors.white,
-            border: Border.all(width: 8, color: Colors.black)),
+          borderRadius: BorderRadius.circular(10),
+          color: choosedQuestion == null
+              ? Colors.white
+              : isCorrect && option == answers[choosedQuestion]
+                  ? Colors.green
+                  : isCorrect == false && option == answers[choosedQuestion]
+                      ? Colors.red
+                      : Colors.white,
+          border: Border.all(width: MediaQuery.of(context).size.width / 45),
+        ),
         width: screenWidth * 0.2,
         height: screenHeight * 0.2,
         child: Text(
           HtmlUnescape().convert(option),
-          style: GoogleFonts.bungee(fontSize: 20),
+          style: GoogleFonts.bungee(
+            fontSize: MediaQuery.of(context).size.height / 45,
+          ),
           textAlign: TextAlign.center,
         ));
   }

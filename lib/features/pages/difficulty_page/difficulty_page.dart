@@ -30,7 +30,9 @@ class _DifficultyPageState extends State<DifficultyPage> {
         centerTitle: true,
         title: Text(
           "BRAIN CHECK APP",
-          style: GoogleFonts.bungee(fontSize: 30, color: Colors.white),
+          style: GoogleFonts.bungee(
+              fontSize: MediaQuery.of(context).size.height / 30,
+              color: Colors.white),
         ),
         backgroundColor: const Color.fromARGB(255, 27, 58, 93),
       ),
@@ -43,7 +45,9 @@ class _DifficultyPageState extends State<DifficultyPage> {
                 padding: const EdgeInsets.all(20),
                 child: Container(
                   decoration: BoxDecoration(
-                      border: Border.all(width: 8),
+                      border: Border.all(
+                        width: MediaQuery.of(context).size.width / 55,
+                      ),
                       borderRadius: BorderRadius.circular(10),
                       color: Colors.white),
                   width: MediaQuery.of(context).size.width * 0.9,
@@ -122,9 +126,8 @@ class _DifficultyPageState extends State<DifficultyPage> {
                               ? MediaQuery.of(context).size.width / 3.5
                               : MediaQuery.of(context).size.width / 4.2,
                           decoration: BoxDecoration(
-                            border: choosedDifficulty == "null"
-                                ? Border.all(width: 2)
-                                : Border.all(width: 6),
+                            border: Border.all(
+                                width: MediaQuery.of(context).size.width / 55),
                             color: Colors.blueGrey,
                           ),
                           child: Column(
@@ -134,21 +137,25 @@ class _DifficultyPageState extends State<DifficultyPage> {
                                   ? Text(
                                       "Random",
                                       style: GoogleFonts.bungee(
-                                        fontSize: 24,
+                                        fontSize:
+                                            MediaQuery.of(context).size.height /
+                                                45,
                                       ),
                                     )
                                   : Text(
                                       "Random",
                                       style: GoogleFonts.bungee(
-                                        fontSize: 12,
+                                        fontSize:
+                                            MediaQuery.of(context).size.height /
+                                                60,
                                       ),
                                     ),
                               choosedDifficulty == "null"
                                   ? Image(
                                       image: const AssetImage(
                                           "images/question_mark.png"),
-                                      width:
-                                          MediaQuery.of(context).size.width / 5,
+                                      width: MediaQuery.of(context).size.width /
+                                          5.1,
                                     )
                                   : Image(
                                       image: const AssetImage(
@@ -178,9 +185,8 @@ class _DifficultyPageState extends State<DifficultyPage> {
                               ? MediaQuery.of(context).size.width / 3.5
                               : MediaQuery.of(context).size.width / 4.2,
                           decoration: BoxDecoration(
-                            border: choosedDifficulty == "easy"
-                                ? Border.all(width: 2)
-                                : Border.all(width: 6),
+                            border: Border.all(
+                                width: MediaQuery.of(context).size.width / 55),
                             color: const Color.fromARGB(255, 50, 115, 52),
                           ),
                           child: Column(
@@ -190,13 +196,17 @@ class _DifficultyPageState extends State<DifficultyPage> {
                                   ? Text(
                                       "Easy",
                                       style: GoogleFonts.bungee(
-                                        fontSize: 25,
+                                        fontSize:
+                                            MediaQuery.of(context).size.height /
+                                                45,
                                       ),
                                     )
                                   : Text(
                                       "Easy",
                                       style: GoogleFonts.bungee(
-                                        fontSize: 12,
+                                        fontSize:
+                                            MediaQuery.of(context).size.height /
+                                                60,
                                       ),
                                     ),
                               choosedDifficulty == "easy"
@@ -206,8 +216,8 @@ class _DifficultyPageState extends State<DifficultyPage> {
                                         image: const AssetImage(
                                             "images/leave.png"),
                                         width:
-                                            MediaQuery.of(context).size.width /
-                                                7,
+                                            MediaQuery.of(context).size.height /
+                                                20,
                                       ),
                                     )
                                   : Image(
@@ -238,9 +248,8 @@ class _DifficultyPageState extends State<DifficultyPage> {
                               ? MediaQuery.of(context).size.width / 3.5
                               : MediaQuery.of(context).size.width / 4.2,
                           decoration: BoxDecoration(
-                            border: choosedDifficulty == "medium"
-                                ? Border.all(width: 2)
-                                : Border.all(width: 6),
+                            border: Border.all(
+                                width: MediaQuery.of(context).size.width / 55),
                             color: Colors.yellow,
                           ),
                           child: Column(
@@ -250,13 +259,17 @@ class _DifficultyPageState extends State<DifficultyPage> {
                                   ? Text(
                                       "Medium",
                                       style: GoogleFonts.bungee(
-                                        fontSize: 25,
+                                        fontSize:
+                                            MediaQuery.of(context).size.height /
+                                                45,
                                       ),
                                     )
                                   : Text(
                                       "Medium",
                                       style: GoogleFonts.bungee(
-                                        fontSize: 12,
+                                        fontSize:
+                                            MediaQuery.of(context).size.height /
+                                                60,
                                       ),
                                     ),
                               choosedDifficulty == "medium"
@@ -294,9 +307,8 @@ class _DifficultyPageState extends State<DifficultyPage> {
                               ? MediaQuery.of(context).size.width / 3.5
                               : MediaQuery.of(context).size.width / 4.2,
                           decoration: BoxDecoration(
-                            border: choosedDifficulty == "hard"
-                                ? Border.all(width: 2)
-                                : Border.all(width: 6),
+                            border: Border.all(
+                                width: MediaQuery.of(context).size.width / 55),
                             color: Colors.red,
                           ),
                           child: Column(
@@ -306,13 +318,17 @@ class _DifficultyPageState extends State<DifficultyPage> {
                                   ? Text(
                                       "Hard",
                                       style: GoogleFonts.bungee(
-                                        fontSize: 25,
+                                        fontSize:
+                                            MediaQuery.of(context).size.height /
+                                                45,
                                       ),
                                     )
                                   : Text(
                                       "Hard",
                                       style: GoogleFonts.bungee(
-                                        fontSize: 12,
+                                        fontSize:
+                                            MediaQuery.of(context).size.height /
+                                                60,
                                       ),
                                     ),
                               choosedDifficulty == "hard"
@@ -360,9 +376,9 @@ class _DifficultyPageState extends State<DifficultyPage> {
                                 : MediaQuery.of(context).size.width / 4.2,
                             padding: const EdgeInsets.all(15),
                             decoration: BoxDecoration(
-                              border: questionsNumber == 1
-                                  ? Border.all(width: 2)
-                                  : Border.all(width: 6),
+                              border: Border.all(
+                                width: MediaQuery.of(context).size.width / 55,
+                              ),
                               color: questionsNumber == 1
                                   ? Colors.orangeAccent
                                   : Colors.blue,
@@ -371,13 +387,17 @@ class _DifficultyPageState extends State<DifficultyPage> {
                                 ? Text(
                                     "1",
                                     style: GoogleFonts.bungee(
-                                      fontSize: 30,
+                                      fontSize:
+                                          MediaQuery.of(context).size.height /
+                                              25,
                                     ),
                                   )
                                 : Text(
                                     "1",
                                     style: GoogleFonts.bungee(
-                                      fontSize: 20,
+                                      fontSize:
+                                          MediaQuery.of(context).size.height /
+                                              45,
                                     ),
                                   )),
                       ),
@@ -400,9 +420,9 @@ class _DifficultyPageState extends State<DifficultyPage> {
                                 ? MediaQuery.of(context).size.width / 3.5
                                 : MediaQuery.of(context).size.width / 4.2,
                             decoration: BoxDecoration(
-                              border: questionsNumber == 5
-                                  ? Border.all(width: 2)
-                                  : Border.all(width: 6),
+                              border: Border.all(
+                                width: MediaQuery.of(context).size.width / 55,
+                              ),
                               color: questionsNumber == 5
                                   ? Colors.orangeAccent
                                   : Colors.blue,
@@ -411,13 +431,17 @@ class _DifficultyPageState extends State<DifficultyPage> {
                                 ? Text(
                                     "5",
                                     style: GoogleFonts.bungee(
-                                      fontSize: 30,
+                                      fontSize:
+                                          MediaQuery.of(context).size.height /
+                                              25,
                                     ),
                                   )
                                 : Text(
                                     "5",
                                     style: GoogleFonts.bungee(
-                                      fontSize: 20,
+                                      fontSize:
+                                          MediaQuery.of(context).size.height /
+                                              45,
                                     ),
                                   )),
                       ),
@@ -440,9 +464,9 @@ class _DifficultyPageState extends State<DifficultyPage> {
                                 ? MediaQuery.of(context).size.width / 3.5
                                 : MediaQuery.of(context).size.width / 4.2,
                             decoration: BoxDecoration(
-                              border: questionsNumber == 10
-                                  ? Border.all(width: 2)
-                                  : Border.all(width: 6),
+                              border: Border.all(
+                                width: MediaQuery.of(context).size.width / 55,
+                              ),
                               color: questionsNumber == 10
                                   ? Colors.orangeAccent
                                   : Colors.blue,
@@ -451,13 +475,17 @@ class _DifficultyPageState extends State<DifficultyPage> {
                                 ? Text(
                                     "10",
                                     style: GoogleFonts.bungee(
-                                      fontSize: 30,
+                                      fontSize:
+                                          MediaQuery.of(context).size.height /
+                                              25,
                                     ),
                                   )
                                 : Text(
                                     "10",
                                     style: GoogleFonts.bungee(
-                                      fontSize: 15,
+                                      fontSize:
+                                          MediaQuery.of(context).size.height /
+                                              45,
                                     ),
                                   )),
                       ),
@@ -480,9 +508,9 @@ class _DifficultyPageState extends State<DifficultyPage> {
                                 ? MediaQuery.of(context).size.width / 3.5
                                 : MediaQuery.of(context).size.width / 4.2,
                             decoration: BoxDecoration(
-                              border: questionsNumber == 0
-                                  ? Border.all(width: 2)
-                                  : Border.all(width: 6),
+                              border: Border.all(
+                                width: MediaQuery.of(context).size.width / 55,
+                              ),
                               color: questionsNumber == 0
                                   ? Colors.orangeAccent
                                   : Colors.blue,
@@ -491,13 +519,17 @@ class _DifficultyPageState extends State<DifficultyPage> {
                                 ? Text(
                                     "Survival",
                                     style: GoogleFonts.bungee(
-                                      fontSize: 19,
+                                      fontSize:
+                                          MediaQuery.of(context).size.height /
+                                              50,
                                     ),
                                   )
                                 : Text(
                                     "Survival",
                                     style: GoogleFonts.bungee(
-                                      fontSize: 14,
+                                      fontSize:
+                                          MediaQuery.of(context).size.height /
+                                              65,
                                     ),
                                   )),
                       ),
@@ -525,13 +557,16 @@ class _DifficultyPageState extends State<DifficultyPage> {
                     width: MediaQuery.of(context).size.width / 2,
                     padding: const EdgeInsets.all(4),
                     decoration: BoxDecoration(
-                        color: Colors.blue,
-                        borderRadius: BorderRadius.circular(25),
-                        border: Border.all(width: 8, color: Colors.black)),
+                      color: Colors.blue,
+                      borderRadius: BorderRadius.circular(25),
+                      border: Border.all(
+                        width: MediaQuery.of(context).size.width / 55,
+                      ),
+                    ),
                     child: Text(
                       "START",
                       style: GoogleFonts.bungee(
-                        fontSize: 35,
+                        fontSize: MediaQuery.of(context).size.height / 25,
                       ),
                     ),
                   ),

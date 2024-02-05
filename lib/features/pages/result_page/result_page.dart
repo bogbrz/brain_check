@@ -32,7 +32,9 @@ class ResultsPage extends StatelessWidget {
           height: MediaQuery.of(context).size.height * 0.5,
           decoration: BoxDecoration(
               color: Colors.white,
-              border: Border.all(width: 8),
+              border: Border.all(
+                width: MediaQuery.of(context).size.width / 55,
+              ),
               borderRadius: BorderRadius.circular(10)),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -41,7 +43,10 @@ class ResultsPage extends StatelessWidget {
                   widget.questionsNumber != 0 && index == widget.questionsNumber
                       ? "Your Score $points/$index"
                       : "Your Score $points",
-                  style: GoogleFonts.bungee(fontSize: 30)),
+                  textAlign: TextAlign.center,
+                  style: GoogleFonts.bungee(
+                    fontSize: MediaQuery.of(context).size.height / 35,
+                  )),
               Material(
                 clipBehavior: Clip.hardEdge,
                 shape: OutlineInputBorder(
@@ -66,12 +71,15 @@ class ResultsPage extends StatelessWidget {
                         width: MediaQuery.of(context).size.width * 0.5,
                         decoration: BoxDecoration(
                             color: const Color.fromARGB(255, 27, 58, 93),
-                            border: Border.all(width: 6),
+                            border: Border.all(
+                              width: MediaQuery.of(context).size.width / 55,
+                            ),
                             borderRadius: BorderRadius.circular(10)),
                         child: Text(
                           "FINISH",
                           style: GoogleFonts.bungee(
-                              fontSize: 30, color: Colors.white),
+                              fontSize: MediaQuery.of(context).size.height / 25,
+                              color: Colors.white),
                         ),
                       ),
                     );

@@ -19,6 +19,7 @@ mixin _$QuestionPageState {
   String? get errorMessage => throw _privateConstructorUsedError;
   List<QuestionModel> get questions => throw _privateConstructorUsedError;
   List<String> get answers => throw _privateConstructorUsedError;
+  Status get status => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $QuestionPageStateCopyWith<QuestionPageState> get copyWith =>
@@ -34,7 +35,8 @@ abstract class $QuestionPageStateCopyWith<$Res> {
   $Res call(
       {String? errorMessage,
       List<QuestionModel> questions,
-      List<String> answers});
+      List<String> answers,
+      Status status});
 }
 
 /// @nodoc
@@ -53,6 +55,7 @@ class _$QuestionPageStateCopyWithImpl<$Res, $Val extends QuestionPageState>
     Object? errorMessage = freezed,
     Object? questions = null,
     Object? answers = null,
+    Object? status = null,
   }) {
     return _then(_value.copyWith(
       errorMessage: freezed == errorMessage
@@ -67,6 +70,10 @@ class _$QuestionPageStateCopyWithImpl<$Res, $Val extends QuestionPageState>
           ? _value.answers
           : answers // ignore: cast_nullable_to_non_nullable
               as List<String>,
+      status: null == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as Status,
     ) as $Val);
   }
 }
@@ -82,7 +89,8 @@ abstract class _$$QuestionPageStateImplCopyWith<$Res>
   $Res call(
       {String? errorMessage,
       List<QuestionModel> questions,
-      List<String> answers});
+      List<String> answers,
+      Status status});
 }
 
 /// @nodoc
@@ -99,6 +107,7 @@ class __$$QuestionPageStateImplCopyWithImpl<$Res>
     Object? errorMessage = freezed,
     Object? questions = null,
     Object? answers = null,
+    Object? status = null,
   }) {
     return _then(_$QuestionPageStateImpl(
       errorMessage: freezed == errorMessage
@@ -113,6 +122,10 @@ class __$$QuestionPageStateImplCopyWithImpl<$Res>
           ? _value._answers
           : answers // ignore: cast_nullable_to_non_nullable
               as List<String>,
+      status: null == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as Status,
     ));
   }
 }
@@ -123,7 +136,8 @@ class _$QuestionPageStateImpl implements _QuestionPageState {
   _$QuestionPageStateImpl(
       {required this.errorMessage,
       required final List<QuestionModel> questions,
-      required final List<String> answers})
+      required final List<String> answers,
+      required this.status})
       : _questions = questions,
         _answers = answers;
 
@@ -146,8 +160,11 @@ class _$QuestionPageStateImpl implements _QuestionPageState {
   }
 
   @override
+  final Status status;
+
+  @override
   String toString() {
-    return 'QuestionPageState(errorMessage: $errorMessage, questions: $questions, answers: $answers)';
+    return 'QuestionPageState(errorMessage: $errorMessage, questions: $questions, answers: $answers, status: $status)';
   }
 
   @override
@@ -159,7 +176,8 @@ class _$QuestionPageStateImpl implements _QuestionPageState {
                 other.errorMessage == errorMessage) &&
             const DeepCollectionEquality()
                 .equals(other._questions, _questions) &&
-            const DeepCollectionEquality().equals(other._answers, _answers));
+            const DeepCollectionEquality().equals(other._answers, _answers) &&
+            (identical(other.status, status) || other.status == status));
   }
 
   @override
@@ -167,7 +185,8 @@ class _$QuestionPageStateImpl implements _QuestionPageState {
       runtimeType,
       errorMessage,
       const DeepCollectionEquality().hash(_questions),
-      const DeepCollectionEquality().hash(_answers));
+      const DeepCollectionEquality().hash(_answers),
+      status);
 
   @JsonKey(ignore: true)
   @override
@@ -181,7 +200,8 @@ abstract class _QuestionPageState implements QuestionPageState {
   factory _QuestionPageState(
       {required final String? errorMessage,
       required final List<QuestionModel> questions,
-      required final List<String> answers}) = _$QuestionPageStateImpl;
+      required final List<String> answers,
+      required final Status status}) = _$QuestionPageStateImpl;
 
   @override
   String? get errorMessage;
@@ -189,6 +209,8 @@ abstract class _QuestionPageState implements QuestionPageState {
   List<QuestionModel> get questions;
   @override
   List<String> get answers;
+  @override
+  Status get status;
   @override
   @JsonKey(ignore: true)
   _$$QuestionPageStateImplCopyWith<_$QuestionPageStateImpl> get copyWith =>

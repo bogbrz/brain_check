@@ -1,1 +1,1 @@
-enum Status { initial, correct, wrong, notChoosed }
+enum Status { initial, loading, success, error }
