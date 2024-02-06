@@ -18,6 +18,8 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$HomePageState {
   String? get errorMessage => throw _privateConstructorUsedError;
   List<ProfileModel> get profile => throw _privateConstructorUsedError;
+  Overall get overAllInfo => throw _privateConstructorUsedError;
+  Status get status => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $HomePageStateCopyWith<HomePageState> get copyWith =>
@@ -30,7 +32,11 @@ abstract class $HomePageStateCopyWith<$Res> {
           HomePageState value, $Res Function(HomePageState) then) =
       _$HomePageStateCopyWithImpl<$Res, HomePageState>;
   @useResult
-  $Res call({String? errorMessage, List<ProfileModel> profile});
+  $Res call(
+      {String? errorMessage,
+      List<ProfileModel> profile,
+      Overall overAllInfo,
+      Status status});
 }
 
 /// @nodoc
@@ -48,6 +54,8 @@ class _$HomePageStateCopyWithImpl<$Res, $Val extends HomePageState>
   $Res call({
     Object? errorMessage = freezed,
     Object? profile = null,
+    Object? overAllInfo = null,
+    Object? status = null,
   }) {
     return _then(_value.copyWith(
       errorMessage: freezed == errorMessage
@@ -58,6 +66,14 @@ class _$HomePageStateCopyWithImpl<$Res, $Val extends HomePageState>
           ? _value.profile
           : profile // ignore: cast_nullable_to_non_nullable
               as List<ProfileModel>,
+      overAllInfo: null == overAllInfo
+          ? _value.overAllInfo
+          : overAllInfo // ignore: cast_nullable_to_non_nullable
+              as Overall,
+      status: null == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as Status,
     ) as $Val);
   }
 }
@@ -70,7 +86,11 @@ abstract class _$$InitialImplCopyWith<$Res>
       __$$InitialImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String? errorMessage, List<ProfileModel> profile});
+  $Res call(
+      {String? errorMessage,
+      List<ProfileModel> profile,
+      Overall overAllInfo,
+      Status status});
 }
 
 /// @nodoc
@@ -86,6 +106,8 @@ class __$$InitialImplCopyWithImpl<$Res>
   $Res call({
     Object? errorMessage = freezed,
     Object? profile = null,
+    Object? overAllInfo = null,
+    Object? status = null,
   }) {
     return _then(_$InitialImpl(
       errorMessage: freezed == errorMessage
@@ -96,6 +118,14 @@ class __$$InitialImplCopyWithImpl<$Res>
           ? _value._profile
           : profile // ignore: cast_nullable_to_non_nullable
               as List<ProfileModel>,
+      overAllInfo: null == overAllInfo
+          ? _value.overAllInfo
+          : overAllInfo // ignore: cast_nullable_to_non_nullable
+              as Overall,
+      status: null == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as Status,
     ));
   }
 }
@@ -104,7 +134,10 @@ class __$$InitialImplCopyWithImpl<$Res>
 
 class _$InitialImpl implements _Initial {
   const _$InitialImpl(
-      {required this.errorMessage, required final List<ProfileModel> profile})
+      {required this.errorMessage,
+      required final List<ProfileModel> profile,
+      required this.overAllInfo,
+      required this.status})
       : _profile = profile;
 
   @override
@@ -118,8 +151,13 @@ class _$InitialImpl implements _Initial {
   }
 
   @override
+  final Overall overAllInfo;
+  @override
+  final Status status;
+
+  @override
   String toString() {
-    return 'HomePageState(errorMessage: $errorMessage, profile: $profile)';
+    return 'HomePageState(errorMessage: $errorMessage, profile: $profile, overAllInfo: $overAllInfo, status: $status)';
   }
 
   @override
@@ -129,12 +167,15 @@ class _$InitialImpl implements _Initial {
             other is _$InitialImpl &&
             (identical(other.errorMessage, errorMessage) ||
                 other.errorMessage == errorMessage) &&
-            const DeepCollectionEquality().equals(other._profile, _profile));
+            const DeepCollectionEquality().equals(other._profile, _profile) &&
+            (identical(other.overAllInfo, overAllInfo) ||
+                other.overAllInfo == overAllInfo) &&
+            (identical(other.status, status) || other.status == status));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, errorMessage, const DeepCollectionEquality().hash(_profile));
+  int get hashCode => Object.hash(runtimeType, errorMessage,
+      const DeepCollectionEquality().hash(_profile), overAllInfo, status);
 
   @JsonKey(ignore: true)
   @override
@@ -146,12 +187,18 @@ class _$InitialImpl implements _Initial {
 abstract class _Initial implements HomePageState {
   const factory _Initial(
       {required final String? errorMessage,
-      required final List<ProfileModel> profile}) = _$InitialImpl;
+      required final List<ProfileModel> profile,
+      required final Overall overAllInfo,
+      required final Status status}) = _$InitialImpl;
 
   @override
   String? get errorMessage;
   @override
   List<ProfileModel> get profile;
+  @override
+  Overall get overAllInfo;
+  @override
+  Status get status;
   @override
   @JsonKey(ignore: true)
   _$$InitialImplCopyWith<_$InitialImpl> get copyWith =>

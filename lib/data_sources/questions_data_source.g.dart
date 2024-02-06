@@ -1,7 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-// ignore_for_file: prefer_const_declarations
-
 part of 'questions_data_source.dart';
 
 // **************************************************************************
@@ -13,7 +11,6 @@ part of 'questions_data_source.dart';
 class _QuestionDataSource implements QuestionDataSource {
   _QuestionDataSource(
     this._dio, {
-    // ignore: unused_element
     this.baseUrl,
   });
 
@@ -115,6 +112,60 @@ class _QuestionDataSource implements QuestionDataSource {
               baseUrl,
             ))));
     final value = CategoryModel.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<Welcome> getOverallInfo() async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
+    final _result =
+        await _dio.fetch<Map<String, dynamic>>(_setStreamType<Welcome>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/api_count_global.php',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = Welcome.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<WelcomeCategory> getCategoriesInfo(int category) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'category': category};
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<WelcomeCategory>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/api_count_global.php',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = WelcomeCategory.fromJson(_result.data!);
     return value;
   }
 

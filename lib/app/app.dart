@@ -1,3 +1,4 @@
+import 'package:brain_check/app/core/config.dart';
 import 'package:brain_check/features/pages/root_page/root_page.dart';
 
 import 'package:flutter/material.dart';
@@ -9,6 +10,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
         title: 'Flutter Demo',
+        debugShowCheckedModeBanner: Config.debugShowCheckModeBanner,
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(
             background: const Color.fromARGB(255, 31, 81, 135),
