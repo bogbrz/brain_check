@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:brain_check/app/core.dart';
+import 'package:brain_check/app/core/enums/enums.dart';
 import 'package:brain_check/domain/models/question_model.dart';
 import 'package:brain_check/domain/repositories/questions_repository.dart';
 import 'package:brain_check/domain/repositories/ranking_repository.dart';

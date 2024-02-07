@@ -18,6 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$RankingPageState {
   String? get errorMessage => throw _privateConstructorUsedError;
   List<ProfileModel> get profiles => throw _privateConstructorUsedError;
+  Status get status => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $RankingPageStateCopyWith<RankingPageState> get copyWith =>
@@ -30,7 +31,7 @@ abstract class $RankingPageStateCopyWith<$Res> {
           RankingPageState value, $Res Function(RankingPageState) then) =
       _$RankingPageStateCopyWithImpl<$Res, RankingPageState>;
   @useResult
-  $Res call({String? errorMessage, List<ProfileModel> profiles});
+  $Res call({String? errorMessage, List<ProfileModel> profiles, Status status});
 }
 
 /// @nodoc
@@ -48,6 +49,7 @@ class _$RankingPageStateCopyWithImpl<$Res, $Val extends RankingPageState>
   $Res call({
     Object? errorMessage = freezed,
     Object? profiles = null,
+    Object? status = null,
   }) {
     return _then(_value.copyWith(
       errorMessage: freezed == errorMessage
@@ -58,6 +60,10 @@ class _$RankingPageStateCopyWithImpl<$Res, $Val extends RankingPageState>
           ? _value.profiles
           : profiles // ignore: cast_nullable_to_non_nullable
               as List<ProfileModel>,
+      status: null == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as Status,
     ) as $Val);
   }
 }
@@ -70,7 +76,7 @@ abstract class _$$RankingPageStateImplCopyWith<$Res>
       __$$RankingPageStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String? errorMessage, List<ProfileModel> profiles});
+  $Res call({String? errorMessage, List<ProfileModel> profiles, Status status});
 }
 
 /// @nodoc
@@ -86,6 +92,7 @@ class __$$RankingPageStateImplCopyWithImpl<$Res>
   $Res call({
     Object? errorMessage = freezed,
     Object? profiles = null,
+    Object? status = null,
   }) {
     return _then(_$RankingPageStateImpl(
       errorMessage: freezed == errorMessage
@@ -96,6 +103,10 @@ class __$$RankingPageStateImplCopyWithImpl<$Res>
           ? _value._profiles
           : profiles // ignore: cast_nullable_to_non_nullable
               as List<ProfileModel>,
+      status: null == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as Status,
     ));
   }
 }
@@ -104,7 +115,9 @@ class __$$RankingPageStateImplCopyWithImpl<$Res>
 
 class _$RankingPageStateImpl implements _RankingPageState {
   const _$RankingPageStateImpl(
-      {required this.errorMessage, required final List<ProfileModel> profiles})
+      {required this.errorMessage,
+      required final List<ProfileModel> profiles,
+      required this.status})
       : _profiles = profiles;
 
   @override
@@ -118,8 +131,11 @@ class _$RankingPageStateImpl implements _RankingPageState {
   }
 
   @override
+  final Status status;
+
+  @override
   String toString() {
-    return 'RankingPageState(errorMessage: $errorMessage, profiles: $profiles)';
+    return 'RankingPageState(errorMessage: $errorMessage, profiles: $profiles, status: $status)';
   }
 
   @override
@@ -129,12 +145,13 @@ class _$RankingPageStateImpl implements _RankingPageState {
             other is _$RankingPageStateImpl &&
             (identical(other.errorMessage, errorMessage) ||
                 other.errorMessage == errorMessage) &&
-            const DeepCollectionEquality().equals(other._profiles, _profiles));
+            const DeepCollectionEquality().equals(other._profiles, _profiles) &&
+            (identical(other.status, status) || other.status == status));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, errorMessage,
-      const DeepCollectionEquality().hash(_profiles));
+      const DeepCollectionEquality().hash(_profiles), status);
 
   @JsonKey(ignore: true)
   @override
@@ -147,12 +164,15 @@ class _$RankingPageStateImpl implements _RankingPageState {
 abstract class _RankingPageState implements RankingPageState {
   const factory _RankingPageState(
       {required final String? errorMessage,
-      required final List<ProfileModel> profiles}) = _$RankingPageStateImpl;
+      required final List<ProfileModel> profiles,
+      required final Status status}) = _$RankingPageStateImpl;
 
   @override
   String? get errorMessage;
   @override
   List<ProfileModel> get profiles;
+  @override
+  Status get status;
   @override
   @JsonKey(ignore: true)
   _$$RankingPageStateImplCopyWith<_$RankingPageStateImpl> get copyWith =>

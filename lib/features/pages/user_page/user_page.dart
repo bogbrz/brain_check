@@ -1,5 +1,9 @@
+import 'package:brain_check/app/core/enums/enums.dart';
 import 'package:brain_check/app/injection_container.dart';
+
 import 'package:brain_check/features/pages/user_page/cubit/user_page_cubit.dart';
+import 'package:brain_check/features/pages/user_page/widgets/profile_info_widget.dart';
+import 'package:brain_check/features/pages/user_page/widgets/sign_out_widget.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -39,60 +43,26 @@ class UserPage extends StatelessWidget {
                 borderRadius: BorderRadius.circular(10)),
             child: BlocBuilder<UserPageCubit, UserPageState>(
               builder: (context, state) {
-                return Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    const CircleAvatar(
-                      backgroundColor: Color.fromARGB(255, 27, 58, 93),
-                      radius: 40,
-                    ),
-                    for (final profile in state.profile) ...[
-                      Text("Your nickname: ${profile.nickName}",
-                          textAlign: TextAlign.left,
-                          style: GoogleFonts.bungee(
-                              fontSize:
-                                  MediaQuery.of(context).size.height / 35)),
-                      Text(
-                        "Your email adress: ${user!.email}",
-                        style: GoogleFonts.bungee(
-                            fontSize: MediaQuery.of(context).size.height / 35),
-                        textAlign: TextAlign.left,
-                      ),
-                      Text(
-                        "Quiz played: ${profile.gamesPlayed} ",
-                        style: GoogleFonts.bungee(
-                            fontSize: MediaQuery.of(context).size.height / 35),
-                        textAlign: TextAlign.left,
-                      ),
-                      Text(
-                        "Personal rating: ${profile.points}",
-                        style: GoogleFonts.bungee(
-                            fontSize: MediaQuery.of(context).size.height / 35),
-                        textAlign: TextAlign.left,
-                      ),
-                    ],
-                    InkWell(
-                        onTap: () {
-                          context.read<UserPageCubit>().signOut();
-                        },
-                        child: Container(
-                          padding: const EdgeInsets.all(8),
-                          decoration: BoxDecoration(
-                              color: const Color.fromARGB(255, 27, 58, 93),
-                              border: Border.all(
-                                  width:
-                                      MediaQuery.of(context).size.width / 45),
-                              borderRadius: BorderRadius.circular(10)),
-                          child: Text(
-                            "Log out",
-                            style: GoogleFonts.bungee(
-                                color: Colors.white,
-                                fontSize:
-                                    MediaQuery.of(context).size.height / 35),
-                          ),
-                        ))
-                  ],
-                );
+                switch (state.status) {
+                  case Status.initial:
+                    return InitialStateWidget();
+                  case Status.loading:
+                    return LoadingStateWidget();
+
+                  case Status.error:
+                    return ErrorStateWidget(
+                        errorMessage: state.errorMessage.toString());
+                  case Status.success:
+                    return Column(
+                      children: [
+                        ProfileInfoWidget(
+                          user: user,
+                          profiles: state.profile,
+                        ),
+                        SignOutWidget()
+                      ],
+                    );
+                }
               },
             ),
           ),
@@ -101,3 +71,5 @@ class UserPage extends StatelessWidget {
     );
   }
 }
+
+

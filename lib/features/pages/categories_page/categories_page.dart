@@ -1,4 +1,4 @@
-import 'package:brain_check/app/core.dart';
+import 'package:brain_check/app/core/enums/enums.dart';
 import 'package:brain_check/app/injection_container.dart';
 import 'package:brain_check/domain/models/categories_model.dart';
 import 'package:brain_check/features/pages/categories_page/cubit/categories_page_cubit.dart';
@@ -16,6 +16,7 @@ class CategoryPage extends StatefulWidget {
     super.key,
   });
   final User? user;
+
   @override
   State<CategoryPage> createState() => _CategoryPageState();
 }
@@ -37,72 +38,75 @@ class _CategoryPageState extends State<CategoryPage> {
           ),
           backgroundColor: const Color.fromARGB(255, 27, 58, 93),
         ),
-        body: ListView(children: [
-          Center(
-              child: BlocConsumer<CategoriesPageCubit, CategoriesPageState>(
-            listener: (context, state) {
-              if (state.categories.isEmpty) {
-                Center(child: Text("NO CATEGORIES RECIVED"));
-              }
-              if (state.status == Status.loading) {
-                Center(child: CircularProgressIndicator());
-              }
-            },
-            builder: (context, state) {
-              return Wrap(children: [
-                Padding(
-                  padding: const EdgeInsets.all(5),
-                  child: Material(
-                    shape: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    clipBehavior: Clip.hardEdge,
-                    child: InkWell(
-                      onTap: () {
-                        setState(() {
-                          choosedCategory = 0;
-                        });
+        body: BlocBuilder<CategoriesPageCubit, CategoriesPageState>(
+          builder: (context, state) {
+            switch (state.status) {
+              case Status.initial:
+                return InitialStateWidget();
+              case Status.loading:
+                return LoadingStateWidget();
+              case Status.error:
+                return ErrorStateWidget(
+                    errorMessage: state.errorMessage.toString());
+              case Status.success:
+                return ListView(children: [
+                  Center(
+                      child: Wrap(children: [
+                    Padding(
+                      padding: const EdgeInsets.all(5),
+                      child: Material(
+                        shape: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        clipBehavior: Clip.hardEdge,
+                        child: InkWell(
+                          onTap: () {
+                            setState(() {
+                              choosedCategory = 0;
+                            });
 
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: ((context) => DifficultyPage(
-                                  user: widget.user,
-                                  categoriesModel:
-                                      TriviaCategory(id: 0, name: "Random"),
-                                ))));
-                      },
-                      child: RandomCategoryWidget(),
-                    ),
-                  ),
-                ),
-                for (final category in state.categories) ...[
-                  Padding(
-                    padding: const EdgeInsets.all(5),
-                    child: Material(
-                      shape: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      clipBehavior: Clip.hardEdge,
-                      child: InkWell(
-                        onTap: () {
-                          setState(() {
-                            choosedCategory = category.id;
-                          });
-
-                          Navigator.of(context).push(MaterialPageRoute(
-                              builder: ((context) => DifficultyPage(
-                                    user: widget.user,
-                                    categoriesModel: category,
-                                  ))));
-                        },
-                        child: CategoryWidget(category: category),
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: ((context) => DifficultyPage(
+                                      user: widget.user,
+                                      categoriesModel:
+                                          TriviaCategory(id: 0, name: "Random"),
+                                    ))));
+                          },
+                          child: RandomCategoryWidget(),
+                        ),
                       ),
                     ),
-                  )
-                ],
-              ]);
-            },
-          ))
-        ]),
+                    for (final category in state.categories) ...[
+                      Padding(
+                        padding: const EdgeInsets.all(5),
+                        child: Material(
+                          shape: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          clipBehavior: Clip.hardEdge,
+                          child: InkWell(
+                            onTap: () {
+                              setState(() {
+                                choosedCategory = category.id;
+                              });
+                              print("CATEGORY ID ${category.id}");
+
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: ((context) => DifficultyPage(
+                                        user: widget.user,
+                                        categoriesModel: category,
+                                      ))));
+                            },
+                            child: CategoryWidget(category: category),
+                          ),
+                        ),
+                      )
+                    ],
+                  ]))
+                ]);
+            }
+          },
+        ),
       ),
     );
   }

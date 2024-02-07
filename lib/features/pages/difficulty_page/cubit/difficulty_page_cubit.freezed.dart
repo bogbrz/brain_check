@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'result_page_cubit.dart';
+part of 'difficulty_page_cubit.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,29 +15,36 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-mixin _$ResultPageState {
+mixin _$DifficultyPageState {
   String? get errorMessage => throw _privateConstructorUsedError;
-  List<ProfileModel> get profile => throw _privateConstructorUsedError;
+  CategoryQuestionCount get info => throw _privateConstructorUsedError;
+  Overall get overAll => throw _privateConstructorUsedError;
   Status get status => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $ResultPageStateCopyWith<ResultPageState> get copyWith =>
+  $DifficultyPageStateCopyWith<DifficultyPageState> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $ResultPageStateCopyWith<$Res> {
-  factory $ResultPageStateCopyWith(
-          ResultPageState value, $Res Function(ResultPageState) then) =
-      _$ResultPageStateCopyWithImpl<$Res, ResultPageState>;
+abstract class $DifficultyPageStateCopyWith<$Res> {
+  factory $DifficultyPageStateCopyWith(
+          DifficultyPageState value, $Res Function(DifficultyPageState) then) =
+      _$DifficultyPageStateCopyWithImpl<$Res, DifficultyPageState>;
   @useResult
-  $Res call({String? errorMessage, List<ProfileModel> profile, Status status});
+  $Res call(
+      {String? errorMessage,
+      CategoryQuestionCount info,
+      Overall overAll,
+      Status status});
+
+  $CategoryQuestionCountCopyWith<$Res> get info;
 }
 
 /// @nodoc
-class _$ResultPageStateCopyWithImpl<$Res, $Val extends ResultPageState>
-    implements $ResultPageStateCopyWith<$Res> {
-  _$ResultPageStateCopyWithImpl(this._value, this._then);
+class _$DifficultyPageStateCopyWithImpl<$Res, $Val extends DifficultyPageState>
+    implements $DifficultyPageStateCopyWith<$Res> {
+  _$DifficultyPageStateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -48,7 +55,8 @@ class _$ResultPageStateCopyWithImpl<$Res, $Val extends ResultPageState>
   @override
   $Res call({
     Object? errorMessage = freezed,
-    Object? profile = null,
+    Object? info = null,
+    Object? overAll = null,
     Object? status = null,
   }) {
     return _then(_value.copyWith(
@@ -56,32 +64,51 @@ class _$ResultPageStateCopyWithImpl<$Res, $Val extends ResultPageState>
           ? _value.errorMessage
           : errorMessage // ignore: cast_nullable_to_non_nullable
               as String?,
-      profile: null == profile
-          ? _value.profile
-          : profile // ignore: cast_nullable_to_non_nullable
-              as List<ProfileModel>,
+      info: null == info
+          ? _value.info
+          : info // ignore: cast_nullable_to_non_nullable
+              as CategoryQuestionCount,
+      overAll: null == overAll
+          ? _value.overAll
+          : overAll // ignore: cast_nullable_to_non_nullable
+              as Overall,
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as Status,
     ) as $Val);
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $CategoryQuestionCountCopyWith<$Res> get info {
+    return $CategoryQuestionCountCopyWith<$Res>(_value.info, (value) {
+      return _then(_value.copyWith(info: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
 abstract class _$$InitialImplCopyWith<$Res>
-    implements $ResultPageStateCopyWith<$Res> {
+    implements $DifficultyPageStateCopyWith<$Res> {
   factory _$$InitialImplCopyWith(
           _$InitialImpl value, $Res Function(_$InitialImpl) then) =
       __$$InitialImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String? errorMessage, List<ProfileModel> profile, Status status});
+  $Res call(
+      {String? errorMessage,
+      CategoryQuestionCount info,
+      Overall overAll,
+      Status status});
+
+  @override
+  $CategoryQuestionCountCopyWith<$Res> get info;
 }
 
 /// @nodoc
 class __$$InitialImplCopyWithImpl<$Res>
-    extends _$ResultPageStateCopyWithImpl<$Res, _$InitialImpl>
+    extends _$DifficultyPageStateCopyWithImpl<$Res, _$InitialImpl>
     implements _$$InitialImplCopyWith<$Res> {
   __$$InitialImplCopyWithImpl(
       _$InitialImpl _value, $Res Function(_$InitialImpl) _then)
@@ -91,7 +118,8 @@ class __$$InitialImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? errorMessage = freezed,
-    Object? profile = null,
+    Object? info = null,
+    Object? overAll = null,
     Object? status = null,
   }) {
     return _then(_$InitialImpl(
@@ -99,10 +127,14 @@ class __$$InitialImplCopyWithImpl<$Res>
           ? _value.errorMessage
           : errorMessage // ignore: cast_nullable_to_non_nullable
               as String?,
-      profile: null == profile
-          ? _value._profile
-          : profile // ignore: cast_nullable_to_non_nullable
-              as List<ProfileModel>,
+      info: null == info
+          ? _value.info
+          : info // ignore: cast_nullable_to_non_nullable
+              as CategoryQuestionCount,
+      overAll: null == overAll
+          ? _value.overAll
+          : overAll // ignore: cast_nullable_to_non_nullable
+              as Overall,
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
@@ -116,26 +148,22 @@ class __$$InitialImplCopyWithImpl<$Res>
 class _$InitialImpl implements _Initial {
   const _$InitialImpl(
       {required this.errorMessage,
-      required final List<ProfileModel> profile,
-      required this.status})
-      : _profile = profile;
+      required this.info,
+      required this.overAll,
+      required this.status});
 
   @override
   final String? errorMessage;
-  final List<ProfileModel> _profile;
   @override
-  List<ProfileModel> get profile {
-    if (_profile is EqualUnmodifiableListView) return _profile;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_profile);
-  }
-
+  final CategoryQuestionCount info;
+  @override
+  final Overall overAll;
   @override
   final Status status;
 
   @override
   String toString() {
-    return 'ResultPageState(errorMessage: $errorMessage, profile: $profile, status: $status)';
+    return 'DifficultyPageState(errorMessage: $errorMessage, info: $info, overAll: $overAll, status: $status)';
   }
 
   @override
@@ -145,13 +173,14 @@ class _$InitialImpl implements _Initial {
             other is _$InitialImpl &&
             (identical(other.errorMessage, errorMessage) ||
                 other.errorMessage == errorMessage) &&
-            const DeepCollectionEquality().equals(other._profile, _profile) &&
+            (identical(other.info, info) || other.info == info) &&
+            (identical(other.overAll, overAll) || other.overAll == overAll) &&
             (identical(other.status, status) || other.status == status));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, errorMessage,
-      const DeepCollectionEquality().hash(_profile), status);
+  int get hashCode =>
+      Object.hash(runtimeType, errorMessage, info, overAll, status);
 
   @JsonKey(ignore: true)
   @override
@@ -160,16 +189,19 @@ class _$InitialImpl implements _Initial {
       __$$InitialImplCopyWithImpl<_$InitialImpl>(this, _$identity);
 }
 
-abstract class _Initial implements ResultPageState {
+abstract class _Initial implements DifficultyPageState {
   const factory _Initial(
       {required final String? errorMessage,
-      required final List<ProfileModel> profile,
+      required final CategoryQuestionCount info,
+      required final Overall overAll,
       required final Status status}) = _$InitialImpl;
 
   @override
   String? get errorMessage;
   @override
-  List<ProfileModel> get profile;
+  CategoryQuestionCount get info;
+  @override
+  Overall get overAll;
   @override
   Status get status;
   @override

@@ -4,5 +4,5 @@ part of 'set_up_user_cubit.dart';
 class SetUpUserState with _$SetUpUserState {
   const factory SetUpUserState(
       {required String? errorMessage,
-      required List<ProfileModel> profile}) = _SetUpUserState;
+      required List<ProfileModel> profile, required Status status}) = _SetUpUserState;
 }

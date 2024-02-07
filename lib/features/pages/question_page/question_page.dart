@@ -1,4 +1,4 @@
-import 'package:brain_check/app/core.dart';
+import 'package:brain_check/app/core/enums/enums.dart';
 import 'package:brain_check/app/injection_container.dart';
 import 'package:brain_check/device_size.dart';
 
@@ -56,281 +56,291 @@ class _QuestionPageState extends State<QuestionPage> {
               difficulty: widget.difficulty, category: widget.category),
         child: Scaffold(
           body: SafeArea(
-            child: BlocConsumer<QuestionPageCubit, QuestionPageState>(
-              listener: (context, state) {
-                if (state.status == Status.loading) {
-                  Center(child: CircularProgressIndicator());
-                }
-                if (state.status == Status.error) {
-                  Center(
-                      child: Text(
-                    state.errorMessage.toString(),
-                  ));
-                }
-              },
+            child: BlocBuilder<QuestionPageCubit, QuestionPageState>(
               builder: (context, state) {
                 final answers = state.answers;
 
-                if (state.questions.isEmpty) {
-                  return const Center(child: CircularProgressIndicator());
-                }
                 if (widget.questionsNumber == 0 && youLose ||
                     widget.questionsNumber != 0 &&
                         index == widget.questionsNumber) {
                   return ResultsPage(
                       widget: widget, index: index, points: points);
                 }
-                return Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Container(
-                      alignment: Alignment.center,
-                      margin: const EdgeInsetsDirectional.all(16),
-                      padding: const EdgeInsets.all(8),
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(10),
-                          border: Border.all(
-                              width: MediaQuery.of(context).size.width / 55,
-                              color: Colors.black)),
-                      width: screenWidth * 0.5,
-                      height: screenHeight * 0.3,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                "Question number ${index + 1}",
-                                style: GoogleFonts.bungee(
-                                  fontSize:
-                                      MediaQuery.of(context).size.height / 45,
-                                ),
-                              ),
-                              Countdown(
-                                controller: controller,
-                                seconds: 15,
-                                build: (BuildContext context, double time) =>
-                                    Text(
-                                  time.toString(),
-                                  style: GoogleFonts.bungee(
-                                    fontSize:
-                                        MediaQuery.of(context).size.height / 35,
-                                  ),
-                                ),
-                                interval: const Duration(milliseconds: 100),
-                                onFinished: () {
-                                  setState(() {
-                                    coolDown = false;
-                                  });
-                                  if (choosedQuestion == null) {
-                                    setState(() {
-                                      noAnswerChoosed = true;
-                                    });
-                                  }
-                                },
-                              )
-                            ],
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(12.0),
-                            child: SizedBox(
-                                height: screenHeight * 0.15,
-                                child: Text(
-                                  HtmlUnescape()
-                                      .convert(state.questions[0].question),
-                                  style: GoogleFonts.bungee(
-                                    fontSize:
-                                        MediaQuery.of(context).size.height / 45,
-                                  ),
-                                )),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Wrap(
-                      children: [
-                        for (final option in answers) ...[
-                          Padding(
-                            padding: const EdgeInsets.all(4.0),
-                            child: Material(
-                              shape: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10)),
-                              clipBehavior: Clip.hardEdge,
-                              child: InkWell(
-                                onTap: choosedQuestion != null ||
-                                        noAnswerChoosed == true
-                                    ? null
-                                    : () {
-                                        if (answers.length == 4) {
-                                          if (option == answers[0]) {
-                                            setState(() {
-                                              choosedQuestion = 0;
-                                              controller.pause();
-                                              coolDown = false;
-                                            });
-                                          }
-                                          if (option == answers[1]) {
-                                            setState(() {
-                                              choosedQuestion = 1;
-                                              controller.pause();
-                                              coolDown = false;
-                                            });
-                                          }
-                                          if (option == answers[2]) {
-                                            setState(() {
-                                              choosedQuestion = 2;
-                                              controller.pause();
-                                              coolDown = false;
-                                            });
-                                          }
-                                          if (option == answers[3]) {
-                                            setState(() {
-                                              choosedQuestion = 3;
-                                              controller.pause();
-                                              coolDown = false;
-                                            });
-                                          }
-                                          if (answers[choosedQuestion] ==
-                                              state
-                                                  .questions[0].correctAnswer) {
-                                            setState(() {
-                                              isCorrect = true;
-                                              points++;
-                                            });
-                                          }
-                                          if (answers[choosedQuestion] !=
-                                              state
-                                                  .questions[0].correctAnswer) {
-                                            setState(() {
-                                              isCorrect = false;
-                                              youLose = true;
-                                            });
-                                          }
-                                        } else {
-                                          if (option == answers[0]) {
-                                            setState(() {
-                                              choosedQuestion = 0;
-                                              controller.pause();
-                                              coolDown = false;
-                                            });
-                                          }
-                                          if (option == answers[1]) {
-                                            setState(() {
-                                              choosedQuestion = 1;
-                                              controller.pause();
-                                              coolDown = false;
-                                            });
-                                          }
-                                          if (answers[choosedQuestion] ==
-                                              state
-                                                  .questions[0].correctAnswer) {
-                                            setState(() {
-                                              isCorrect = true;
-                                              points++;
-                                            });
-                                          }
-                                          if (answers[choosedQuestion] !=
-                                              state
-                                                  .questions[0].correctAnswer) {
-                                            setState(() {
-                                              isCorrect = false;
-                                              youLose = true;
-                                            });
-                                          }
-                                        }
-                                      },
-                                child: OptionWidget(
-                                    choosedQuestion: choosedQuestion,
-                                    isCorrect: isCorrect,
-                                    option: option,
-                                    answers: answers,
-                                    screenWidth: screenWidth,
-                                    screenHeight: screenHeight),
-                              ),
-                            ),
-                          )
-                        ],
-                      ],
-                    ),
-                    SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.025,
-                    ),
-                    InkWell(
-                        onTap: coolDown && safeCheck == false ||
-                                coolDown == false && safeCheck == false ||
-                                choosedQuestion == null && safeCheck == false
-                            ? null
-                            : () async {
-                                setState(() {
-                                  index++;
-                                  choosedQuestion = null;
-                                  isCorrect = false;
-                                  coolDown = true;
-                                  noAnswerChoosed = false;
-                                  safeCheck = false;
-                                });
 
-                                index < widget.questionsNumber
-                                    ? await context
-                                        .read<QuestionPageCubit>()
-                                        .getQuestion(
-                                          difficulty: widget.difficulty,
-                                          category: widget.category,
-                                        )
-                                        .then((value) => controller.restart())
-                                        .then(
-                                            (value) => controllerSafe.restart())
-                                    : null;
-                              },
-                        child: Container(
-                          width: MediaQuery.of(context).size.width * 0.45,
+                switch (state.status) {
+                  case Status.initial:
+                    return InitialStateWidget();
+                  case Status.loading:
+                    return LoadingStateWidget();
+                  case Status.error:
+                    return ErrorStateWidget(
+                        errorMessage: state.errorMessage.toString());
+
+                  case Status.success:
+                    return Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Container(
+                          alignment: Alignment.center,
+                          margin: const EdgeInsetsDirectional.all(16),
                           padding: const EdgeInsets.all(8),
                           decoration: BoxDecoration(
                               color: Colors.white,
-                              border: Border.all(width: 8),
-                              borderRadius: BorderRadius.circular(10)),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              borderRadius: BorderRadius.circular(10),
+                              border: Border.all(
+                                  width: MediaQuery.of(context).size.width / 55,
+                                  color: Colors.black)),
+                          width: screenWidth * 0.5,
+                          height: screenHeight * 0.3,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text("Next",
-                                  style: GoogleFonts.bungee(
-                                    fontSize:
-                                        MediaQuery.of(context).size.height / 25,
-                                  )),
-                              safeCheck == false
-                                  ? Countdown(
-                                      controller: controllerSafe,
-                                      seconds: 5,
-                                      build: (BuildContext context,
-                                              double time) =>
-                                          Text(time.toInt().toString(),
-                                              style: GoogleFonts.bungee(
-                                                fontSize: MediaQuery.of(context)
-                                                        .size
-                                                        .height /
-                                                    25,
-                                              )),
-                                      interval:
-                                          const Duration(milliseconds: 1000),
-                                      onFinished: () {
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    "Question number ${index + 1}",
+                                    style: GoogleFonts.bungee(
+                                      fontSize:
+                                          MediaQuery.of(context).size.height /
+                                              45,
+                                    ),
+                                  ),
+                                  Countdown(
+                                    controller: controller,
+                                    seconds: 15,
+                                    build:
+                                        (BuildContext context, double time) =>
+                                            Text(
+                                      time.toString(),
+                                      style: GoogleFonts.bungee(
+                                        fontSize:
+                                            MediaQuery.of(context).size.height /
+                                                35,
+                                      ),
+                                    ),
+                                    interval: const Duration(milliseconds: 100),
+                                    onFinished: () {
+                                      setState(() {
+                                        coolDown = false;
+                                      });
+                                      if (choosedQuestion == null) {
                                         setState(() {
-                                          safeCheck = true;
+                                          noAnswerChoosed = true;
                                         });
-                                      },
-                                    )
-                                  : Text("->",
+                                      }
+                                    },
+                                  )
+                                ],
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(12.0),
+                                child: SizedBox(
+                                    height: screenHeight * 0.15,
+                                    child: Text(
+                                      HtmlUnescape()
+                                          .convert(state.questions[0].question),
+                                      style: GoogleFonts.bungee(
+                                        fontSize:
+                                            MediaQuery.of(context).size.height /
+                                                45,
+                                      ),
+                                    )),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Wrap(
+                          children: [
+                            for (final option in answers) ...[
+                              Padding(
+                                padding: const EdgeInsets.all(4.0),
+                                child: Material(
+                                  shape: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(10)),
+                                  clipBehavior: Clip.hardEdge,
+                                  child: InkWell(
+                                    onTap: choosedQuestion != null ||
+                                            noAnswerChoosed == true
+                                        ? null
+                                        : () {
+                                            if (answers.length == 4) {
+                                              if (option == answers[0]) {
+                                                setState(() {
+                                                  choosedQuestion = 0;
+                                                  controller.pause();
+                                                  coolDown = false;
+                                                });
+                                              }
+                                              if (option == answers[1]) {
+                                                setState(() {
+                                                  choosedQuestion = 1;
+                                                  controller.pause();
+                                                  coolDown = false;
+                                                });
+                                              }
+                                              if (option == answers[2]) {
+                                                setState(() {
+                                                  choosedQuestion = 2;
+                                                  controller.pause();
+                                                  coolDown = false;
+                                                });
+                                              }
+                                              if (option == answers[3]) {
+                                                setState(() {
+                                                  choosedQuestion = 3;
+                                                  controller.pause();
+                                                  coolDown = false;
+                                                });
+                                              }
+                                              if (answers[choosedQuestion] ==
+                                                  state.questions[0]
+                                                      .correctAnswer) {
+                                                setState(() {
+                                                  isCorrect = true;
+                                                  points++;
+                                                });
+                                              }
+                                              if (answers[choosedQuestion] !=
+                                                  state.questions[0]
+                                                      .correctAnswer) {
+                                                setState(() {
+                                                  isCorrect = false;
+                                                  youLose = true;
+                                                });
+                                              }
+                                            } else {
+                                              if (option == answers[0]) {
+                                                setState(() {
+                                                  choosedQuestion = 0;
+                                                  controller.pause();
+                                                  coolDown = false;
+                                                });
+                                              }
+                                              if (option == answers[1]) {
+                                                setState(() {
+                                                  choosedQuestion = 1;
+                                                  controller.pause();
+                                                  coolDown = false;
+                                                });
+                                              }
+                                              if (answers[choosedQuestion] ==
+                                                  state.questions[0]
+                                                      .correctAnswer) {
+                                                setState(() {
+                                                  isCorrect = true;
+                                                  points++;
+                                                });
+                                              }
+                                              if (answers[choosedQuestion] !=
+                                                  state.questions[0]
+                                                      .correctAnswer) {
+                                                setState(() {
+                                                  isCorrect = false;
+                                                  youLose = true;
+                                                });
+                                              }
+                                            }
+                                          },
+                                    child: OptionWidget(
+                                        choosedQuestion: choosedQuestion,
+                                        isCorrect: isCorrect,
+                                        option: option,
+                                        answers: answers,
+                                        screenWidth: screenWidth,
+                                        screenHeight: screenHeight),
+                                  ),
+                                ),
+                              )
+                            ],
+                          ],
+                        ),
+                        SizedBox(
+                          height: MediaQuery.of(context).size.height * 0.025,
+                        ),
+                        InkWell(
+                            onTap: coolDown && safeCheck == false ||
+                                    coolDown == false && safeCheck == false ||
+                                    choosedQuestion == null &&
+                                        safeCheck == false
+                                ? null
+                                : () async {
+                                    setState(() {
+                                      index++;
+                                      choosedQuestion = null;
+                                      isCorrect = false;
+                                      coolDown = true;
+                                      noAnswerChoosed = false;
+                                      safeCheck = false;
+                                    });
+
+                                    index < widget.questionsNumber ||
+                                            widget.questionsNumber == 0
+                                        ? await context
+                                            .read<QuestionPageCubit>()
+                                            .getQuestion(
+                                              difficulty: widget.difficulty,
+                                              category: widget.category,
+                                            )
+                                            .then(
+                                                (value) => controller.restart())
+                                            .then((value) =>
+                                                controllerSafe.restart())
+                                        : null;
+                                  },
+                            child: Container(
+                              width: MediaQuery.of(context).size.width * 0.45,
+                              padding: const EdgeInsets.all(8),
+                              decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  border: Border.all(width: 8),
+                                  borderRadius: BorderRadius.circular(10)),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  Text("Next",
                                       style: GoogleFonts.bungee(
                                         fontSize:
                                             MediaQuery.of(context).size.height /
                                                 25,
                                       )),
-                            ],
-                          ),
-                        )),
-                  ],
-                );
+                                  safeCheck == false
+                                      ? Countdown(
+                                          controller: controllerSafe,
+                                          seconds: 5,
+                                          build: (BuildContext context,
+                                                  double time) =>
+                                              Text(time.toInt().toString(),
+                                                  style: GoogleFonts.bungee(
+                                                    fontSize:
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .height /
+                                                            25,
+                                                  )),
+                                          interval: const Duration(
+                                              milliseconds: 1000),
+                                          onFinished: () {
+                                            setState(() {
+                                              safeCheck = true;
+                                            });
+                                          },
+                                        )
+                                      : Text("->",
+                                          style: GoogleFonts.bungee(
+                                            fontSize: MediaQuery.of(context)
+                                                    .size
+                                                    .height /
+                                                25,
+                                          )),
+                                ],
+                              ),
+                            )),
+                      ],
+                    );
+                }
               },
             ),
           ),
