@@ -1,8 +1,12 @@
 import 'package:brain_check/app/core/enums/enums.dart';
+import 'package:brain_check/app/cubit%20copy/token_cubit_cubit.dart';
+
 import 'package:brain_check/app/injection_container.dart';
 import 'package:brain_check/domain/models/categories_model.dart';
+
 import 'package:brain_check/features/pages/difficulty_page/cubit/difficulty_page_cubit.dart';
 import 'package:brain_check/features/pages/question_page/question_page.dart';
+
 import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:flutter/material.dart';
@@ -13,13 +17,11 @@ class DifficultyPage extends StatefulWidget {
   const DifficultyPage({
     required this.categoriesModel,
     required this.user,
- 
     super.key,
   });
 
   final TriviaCategory categoriesModel;
   final User? user;
-
 
   @override
   State<DifficultyPage> createState() => _DifficultyPageState();
@@ -84,7 +86,7 @@ class _DifficultyPageState extends State<DifficultyPage> {
                                         children: [
                                           Expanded(
                                             child: Text(
-                                              "Choosed category: ${widget.categoriesModel.name}",
+                                              "Choosed category: //${widget.categoriesModel.name}",
                                               style: GoogleFonts.bungee(
                                                 fontSize: MediaQuery.of(context)
                                                         .size
@@ -135,7 +137,7 @@ class _DifficultyPageState extends State<DifficultyPage> {
                                                   : choosedDifficulty ==
                                                           null.toString()
                                                       ? "Choose difficulty: random"
-                                                      : "Choose difficulty: $choosedDifficulty",
+                                                      : "Choose difficulty: ",
                                               style: GoogleFonts.bungee(
                                                 fontSize: MediaQuery.of(context)
                                                         .size
@@ -154,7 +156,7 @@ class _DifficultyPageState extends State<DifficultyPage> {
                                                   ? "Amount of rounds: not choosen"
                                                   : questionsNumber == 0
                                                       ? "Amount of rounds: Survival"
-                                                      : "Amount of rounds: $questionsNumber",
+                                                      : "Amount of rounds: ",
                                               style: GoogleFonts.bungee(
                                                 fontSize: MediaQuery.of(context)
                                                         .size
@@ -755,39 +757,57 @@ class _DifficultyPageState extends State<DifficultyPage> {
                             shape: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(25)),
                             clipBehavior: Clip.hardEdge,
-                            child: InkWell(
-                              onTap: () {
-                                Navigator.of(context).push(MaterialPageRoute(
-                                    builder: ((context) => QuestionPage(
-                                          user: widget.user,
-                                          category: widget.categoriesModel.id,
-                                          difficulty: choosedDifficulty,
-                                          questionsNumber: questionsNumber,
-                                        ))));
-                              },
-                              child: Container(
-                                alignment: Alignment.center,
-                                height: MediaQuery.of(context).size.height / 10,
-                                width: MediaQuery.of(context).size.width / 2,
-                                padding: const EdgeInsets.all(4),
-                                decoration: BoxDecoration(
-                                  color: Colors.blue,
-                                  borderRadius: BorderRadius.circular(25),
-                                  border: Border.all(
+                            child:
+                                BlocBuilder<TokenCubitCubit, TokenCubitState>(
+                              builder: (context, state) {
+                                return InkWell(
+                                  onTap: () async {
+                                    await context
+                                        .read<TokenCubitCubit>()
+                                        .fetchToken();
+
+                                    Navigator.of(context)
+                                        .push(MaterialPageRoute(
+                                            builder: ((context) => QuestionPage(
+                                                  token: state.tokenModel.token
+                                                      .toString(),
+                                                  user: widget.user,
+                                                  category:
+                                                      widget.categoriesModel.id,
+                                                  difficulty: choosedDifficulty,
+                                                  questionsNumber:
+                                                      questionsNumber,
+                                                ))));
+                                  },
+                                  child: Container(
+                                    alignment: Alignment.center,
+                                    height:
+                                        MediaQuery.of(context).size.height / 10,
                                     width:
-                                        MediaQuery.of(context).size.width / 55,
+                                        MediaQuery.of(context).size.width / 2,
+                                    padding: const EdgeInsets.all(4),
+                                    decoration: BoxDecoration(
+                                      color: Colors.blue,
+                                      borderRadius: BorderRadius.circular(25),
+                                      border: Border.all(
+                                        width:
+                                            MediaQuery.of(context).size.width /
+                                                55,
+                                      ),
+                                    ),
+                                    child: Text(
+                                      "START",
+                                      style: GoogleFonts.bungee(
+                                        fontSize:
+                                            MediaQuery.of(context).size.height /
+                                                25,
+                                      ),
+                                    ),
                                   ),
-                                ),
-                                child: Text(
-                                  "START",
-                                  style: GoogleFonts.bungee(
-                                    fontSize:
-                                        MediaQuery.of(context).size.height / 25,
-                                  ),
-                                ),
-                              ),
+                                );
+                              },
                             ),
-                          ),
+                          )
                         ],
                       ),
                     );

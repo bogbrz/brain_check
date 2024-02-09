@@ -13,9 +13,11 @@ import 'package:google_fonts/google_fonts.dart';
 class CategoryPage extends StatefulWidget {
   const CategoryPage({
     required this.user,
+
     super.key,
   });
   final User? user;
+  
 
   @override
   State<CategoryPage> createState() => _CategoryPageState();
@@ -67,6 +69,7 @@ class _CategoryPageState extends State<CategoryPage> {
 
                             Navigator.of(context).push(MaterialPageRoute(
                                 builder: ((context) => DifficultyPage(
+                               
                                       user: widget.user,
                                       categoriesModel:
                                           TriviaCategory(id: 0, name: "Random"),
@@ -93,6 +96,7 @@ class _CategoryPageState extends State<CategoryPage> {
 
                               Navigator.of(context).push(MaterialPageRoute(
                                   builder: ((context) => DifficultyPage(
+                                    
                                         user: widget.user,
                                         categoriesModel: category,
                                       ))));

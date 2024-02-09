@@ -8,7 +8,8 @@
 // coverage:ignore-file
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:brain_check/app/injection_container.dart' as _i20;
+import 'package:brain_check/app/cubit%20copy/token_cubit_cubit.dart' as _i17;
+import 'package:brain_check/app/injection_container.dart' as _i22;
 import 'package:brain_check/data_sources/authentication_data_source.dart'
     as _i3;
 import 'package:brain_check/data_sources/questions_data_source.dart' as _i13;
@@ -19,17 +20,19 @@ import 'package:brain_check/domain/repositories/questions_repository.dart'
     as _i14;
 import 'package:brain_check/domain/repositories/ranking_repository.dart' as _i7;
 import 'package:brain_check/features/pages/categories_page/cubit/categories_page_cubit.dart'
-    as _i16;
-import 'package:brain_check/features/pages/difficulty_page/cubit/difficulty_page_cubit.dart'
-    as _i17;
-import 'package:brain_check/features/pages/home_page/cubit/home_page_cubit.dart'
     as _i18;
+import 'package:brain_check/features/pages/difficulty_page/cubit/difficulty_page_cubit.dart'
+    as _i19;
+import 'package:brain_check/features/pages/home_page/cubit/home_page_cubit.dart'
+    as _i20;
 import 'package:brain_check/features/pages/log_in/cubit/log_in_page_cubit.dart'
     as _i5;
 import 'package:brain_check/features/pages/question_page/cubit/question_page_cubit.dart'
-    as _i19;
-import 'package:brain_check/features/pages/ranking_page/cubit/ranking_page_cubit.dart'
+    as _i21;
+import 'package:brain_check/features/pages/question_page_test/cubit/question_test_cubit.dart'
     as _i15;
+import 'package:brain_check/features/pages/ranking_page/cubit/ranking_page_cubit.dart'
+    as _i16;
 import 'package:brain_check/features/pages/result_page/cubit/result_page_cubit.dart'
     as _i8;
 import 'package:brain_check/features/pages/root_page/cubit/root_page_cubit.dart'
@@ -83,17 +86,23 @@ extension GetItInjectableX on _i1.GetIt {
         () => _i13.QuestionDataSource(gh<_i12.Dio>()));
     gh.factory<_i14.QuestionRepository>(() => _i14.QuestionRepository(
         questionDataSource: gh<_i13.QuestionDataSource>()));
-    gh.factory<_i15.RankingPageCubit>(() =>
-        _i15.RankingPageCubit(rankingRepository: gh<_i7.RankingRepository>()));
-    gh.factory<_i16.CategoriesPageCubit>(() => _i16.CategoriesPageCubit(
+    gh.factory<_i15.QuestionTestPageCubit>(() => _i15.QuestionTestPageCubit(
+          questionRepository: gh<_i14.QuestionRepository>(),
+          rankingRepository: gh<_i7.RankingRepository>(),
+        ));
+    gh.factory<_i16.RankingPageCubit>(() =>
+        _i16.RankingPageCubit(rankingRepository: gh<_i7.RankingRepository>()));
+    gh.factory<_i17.TokenCubitCubit>(() => _i17.TokenCubitCubit(
         questionRepository: gh<_i14.QuestionRepository>()));
-    gh.factory<_i17.DifficultyPageCubit>(() => _i17.DifficultyPageCubit(
+    gh.factory<_i18.CategoriesPageCubit>(() => _i18.CategoriesPageCubit(
         questionRepository: gh<_i14.QuestionRepository>()));
-    gh.factory<_i18.HomePageCubit>(() => _i18.HomePageCubit(
+    gh.factory<_i19.DifficultyPageCubit>(() => _i19.DifficultyPageCubit(
+        questionRepository: gh<_i14.QuestionRepository>()));
+    gh.factory<_i20.HomePageCubit>(() => _i20.HomePageCubit(
           rankingRepository: gh<_i7.RankingRepository>(),
           questionRepository: gh<_i14.QuestionRepository>(),
         ));
-    gh.factory<_i19.QuestionPageCubit>(() => _i19.QuestionPageCubit(
+    gh.factory<_i21.QuestionPageCubit>(() => _i21.QuestionPageCubit(
           questionRepository: gh<_i14.QuestionRepository>(),
           rankingRepository: gh<_i7.RankingRepository>(),
         ));
@@ -101,4 +110,4 @@ extension GetItInjectableX on _i1.GetIt {
   }
 }
 
-class _$RegisterModule extends _i20.RegisterModule {}
+class _$RegisterModule extends _i22.RegisterModule {}

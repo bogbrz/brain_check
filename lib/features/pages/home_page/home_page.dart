@@ -15,8 +15,10 @@ class HomePage extends StatelessWidget {
   const HomePage({
     super.key,
     required this.user,
+  
   });
   final User? user;
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -51,7 +53,7 @@ class HomePage extends StatelessWidget {
                         user: user,
                         overall: state.overAllInfo,
                       ),
-                      StartButtonWidget(user: user),
+                      StartButtonWidget(user: user, ),
                     ],
                   );
               }

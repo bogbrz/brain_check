@@ -12,8 +12,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class SetUpUserPage extends StatelessWidget {
-  const SetUpUserPage({super.key, required this.user});
+  const SetUpUserPage({super.key, required this.user, });
   final User? user;
+  
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +30,7 @@ class SetUpUserPage extends StatelessWidget {
             child: BlocBuilder<SetUpUserCubit, SetUpUserState>(
               builder: (context, state) {
                 if (state.profile.isNotEmpty) {
-                  return NavigatorPage(user: user);
+                  return NavigatorPage(user: user,  );
                 }
                 switch (state.status) {
                   case Status.initial:
