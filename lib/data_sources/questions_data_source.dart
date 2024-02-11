@@ -27,10 +27,10 @@ abstract class QuestionDataSource {
 
   @GET('/api.php')
   Future<Questions> getListofQuestions(
-      @Query("difficulty") String? difficulty,
-      @Query("category") int? category,
-      @Query("amount") int? amount,
-      );
+    @Query("difficulty") String? difficulty,
+    @Query("category") int? category,
+    @Query("amount") int? amount,
+  );
 
   @GET("/api_category.php/")
   Future<CategoryModel> getCategories();
@@ -38,7 +38,7 @@ abstract class QuestionDataSource {
   @GET("/api_count_global.php")
   Future<Welcome> getOverallInfo();
 
-  @GET("/api_count_global.php")
+  @GET("/api_count.php")
   Future<WelcomeCategory> getCategoriesInfo(@Query("category") int category);
 
   @GET("/api_token.php?command=request")

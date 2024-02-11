@@ -51,9 +51,10 @@ class QuestionRepository {
     return categories;
   }
 
-  Future<CategoryQuestionCount> getCategoryInfo({required int category}) async {
+  Future<CategoryQuestionCount?> getCategoryInfo({required int category}) async {
     final response = await questionDataSource.getCategoriesInfo(category);
     final info = response.categoryQuestionCount;
+   
     return info;
   }
 

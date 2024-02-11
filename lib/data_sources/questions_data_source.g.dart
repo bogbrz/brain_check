@@ -158,7 +158,7 @@ class _QuestionDataSource implements QuestionDataSource {
     )
             .compose(
               _dio.options,
-              '/api_count_global.php',
+              '/api_count.php',
               queryParameters: queryParameters,
               data: _data,
             )

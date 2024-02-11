@@ -6,7 +6,7 @@ part 'difficulty_model.freezed.dart';
 class DifficultyModel with _$DifficultyModel {
  
   factory DifficultyModel({
-    required String name, required Image icon, required String nameId
+    required String name, required Image icon, required String nameId, required MaterialColor color,
   }) = _DifficultyModel;
 
 }

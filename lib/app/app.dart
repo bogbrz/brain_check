@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => getIt<TokenCubitCubit>()..fetchToken(),
+      create: (context) => getIt<TokenCubitCubit>(),
       child: MaterialApp(
           title: 'Flutter Demo',
           debugShowCheckedModeBanner: Config.debugShowCheckModeBanner,

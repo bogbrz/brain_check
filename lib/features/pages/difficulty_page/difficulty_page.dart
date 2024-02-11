@@ -1,7 +1,9 @@
+import 'package:brain_check/amount_list.dart';
 import 'package:brain_check/app/core/enums/enums.dart';
 import 'package:brain_check/app/cubit%20copy/token_cubit_cubit.dart';
 
 import 'package:brain_check/app/injection_container.dart';
+import 'package:brain_check/difficulty_list.dart';
 import 'package:brain_check/domain/models/categories_model.dart';
 
 import 'package:brain_check/features/pages/difficulty_page/cubit/difficulty_page_cubit.dart';
@@ -60,9 +62,9 @@ class _DifficultyPageState extends State<DifficultyPage> {
                         errorMessage: state.errorMessage.toString());
                   case Status.success:
                     return Center(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
+                        child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
                           Padding(
                               padding: const EdgeInsets.all(20),
                               child: Container(
@@ -86,7 +88,7 @@ class _DifficultyPageState extends State<DifficultyPage> {
                                         children: [
                                           Expanded(
                                             child: Text(
-                                              "Choosed category: //${widget.categoriesModel.name}",
+                                              "Choosed category: ${widget.categoriesModel.name}",
                                               style: GoogleFonts.bungee(
                                                 fontSize: MediaQuery.of(context)
                                                         .size
@@ -100,12 +102,9 @@ class _DifficultyPageState extends State<DifficultyPage> {
                                       Row(
                                         children: [
                                           Expanded(
-                                              child: widget.categoriesModel
-                                                              .name ==
-                                                          "Random" &&
-                                                      widget.categoriesModel
-                                                              .id ==
-                                                          0
+                                              child: widget
+                                                          .categoriesModel.id ==
+                                                      0
                                                   ? Text(
                                                       "Amount questions in this category: ${state.overAll.totalNumOfVerifiedQuestions}",
                                                       style: GoogleFonts.bungee(
@@ -117,7 +116,7 @@ class _DifficultyPageState extends State<DifficultyPage> {
                                                       ),
                                                     )
                                                   : Text(
-                                                      "Amount questions in this category: ${state.info.totalQuestionCount}",
+                                                      "Amount questions in this category: ${state.info!.totalQuestionCount} ",
                                                       style: GoogleFonts.bungee(
                                                         fontSize: MediaQuery.of(
                                                                     context)
@@ -137,7 +136,7 @@ class _DifficultyPageState extends State<DifficultyPage> {
                                                   : choosedDifficulty ==
                                                           null.toString()
                                                       ? "Choose difficulty: random"
-                                                      : "Choose difficulty: ",
+                                                      : "Choose difficulty: $choosedDifficulty",
                                               style: GoogleFonts.bungee(
                                                 fontSize: MediaQuery.of(context)
                                                         .size
@@ -156,7 +155,7 @@ class _DifficultyPageState extends State<DifficultyPage> {
                                                   ? "Amount of rounds: not choosen"
                                                   : questionsNumber == 0
                                                       ? "Amount of rounds: Survival"
-                                                      : "Amount of rounds: ",
+                                                      : "Amount of rounds: $questionsNumber",
                                               style: GoogleFonts.bungee(
                                                 fontSize: MediaQuery.of(context)
                                                         .size
@@ -176,315 +175,54 @@ class _DifficultyPageState extends State<DifficultyPage> {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
-                                Material(
-                                  shape: const OutlineInputBorder(),
-                                  clipBehavior: Clip.hardEdge,
-                                  child: InkWell(
-                                    onTap: () {
-                                      setState(() {
-                                        choosedDifficulty = null.toString();
-                                      });
-                                    },
-                                    child: Container(
-                                      height: choosedDifficulty ==
-                                              null.toString()
-                                          ? MediaQuery.of(context).size.height /
-                                              8
-                                          : MediaQuery.of(context).size.height /
-                                              10,
-                                      width: choosedDifficulty ==
-                                              null.toString()
-                                          ? MediaQuery.of(context).size.width /
-                                              3.5
-                                          : MediaQuery.of(context).size.width /
-                                              4.2,
-                                      decoration: BoxDecoration(
-                                        border: Border.all(
-                                            width: MediaQuery.of(context)
-                                                    .size
-                                                    .width /
-                                                55),
-                                        color: Colors.blueGrey,
-                                      ),
-                                      child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          choosedDifficulty == "null"
-                                              ? Text(
-                                                  "Random",
-                                                  style: GoogleFonts.bungee(
-                                                    fontSize:
-                                                        MediaQuery.of(context)
-                                                                .size
-                                                                .height /
-                                                            48,
-                                                  ),
-                                                )
-                                              : Text(
-                                                  "Random",
-                                                  style: GoogleFonts.bungee(
-                                                    fontSize:
-                                                        MediaQuery.of(context)
-                                                                .size
-                                                                .height /
-                                                            60,
-                                                  ),
-                                                ),
-                                          choosedDifficulty == "null"
-                                              ? Image(
-                                                  image: const AssetImage(
-                                                      "images/question_mark.png"),
-                                                  width: MediaQuery.of(context)
-                                                          .size
-                                                          .width /
-                                                      5.1,
-                                                )
-                                              : Image(
-                                                  image: const AssetImage(
-                                                      "images/question_mark.png"),
-                                                  width: MediaQuery.of(context)
-                                                          .size
-                                                          .width /
-                                                      10,
-                                                )
-                                        ],
+                                for (final difficulty in difficulties) ...[
+                                  Material(
+                                    shape: const OutlineInputBorder(),
+                                    clipBehavior: Clip.hardEdge,
+                                    child: InkWell(
+                                      onTap: () {
+                                        setState(() {
+                                          choosedDifficulty = difficulty.nameId;
+                                          print(choosedDifficulty);
+                                        });
+                                      },
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                            border: Border.all(
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width /
+                                                    55),
+                                            color: difficulty.color),
+                                        child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Text(
+                                              difficulty.name,
+                                              style: GoogleFonts.bungee(
+                                                fontSize: MediaQuery.of(context)
+                                                        .size
+                                                        .height /
+                                                    45,
+                                              ),
+                                            ),
+                                            SizedBox(
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width /
+                                                    10,
+                                                height: MediaQuery.of(context)
+                                                        .size
+                                                        .height /
+                                                    10,
+                                                child: difficulty.icon),
+                                          ],
+                                        ),
                                       ),
                                     ),
                                   ),
-                                ),
-                                Material(
-                                  shape: const OutlineInputBorder(),
-                                  clipBehavior: Clip.hardEdge,
-                                  child: InkWell(
-                                    onTap: () {
-                                      setState(() {
-                                        choosedDifficulty = "easy";
-                                      });
-                                    },
-                                    child: Container(
-                                      height: choosedDifficulty == "easy"
-                                          ? MediaQuery.of(context).size.height /
-                                              8
-                                          : MediaQuery.of(context).size.height /
-                                              10,
-                                      width: choosedDifficulty == "easy"
-                                          ? MediaQuery.of(context).size.width /
-                                              3.5
-                                          : MediaQuery.of(context).size.width /
-                                              4.2,
-                                      decoration: BoxDecoration(
-                                        border: Border.all(
-                                            width: MediaQuery.of(context)
-                                                    .size
-                                                    .width /
-                                                55),
-                                        color: const Color.fromARGB(
-                                            255, 50, 115, 52),
-                                      ),
-                                      child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          choosedDifficulty == "easy"
-                                              ? Text(
-                                                  "Easy",
-                                                  style: GoogleFonts.bungee(
-                                                    fontSize:
-                                                        MediaQuery.of(context)
-                                                                .size
-                                                                .height /
-                                                            45,
-                                                  ),
-                                                )
-                                              : Text(
-                                                  "Easy",
-                                                  style: GoogleFonts.bungee(
-                                                    fontSize:
-                                                        MediaQuery.of(context)
-                                                                .size
-                                                                .height /
-                                                            60,
-                                                  ),
-                                                ),
-                                          choosedDifficulty == "easy"
-                                              ? Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          bottom: 4),
-                                                  child: Image(
-                                                    image: const AssetImage(
-                                                        "images/leave.png"),
-                                                    width:
-                                                        MediaQuery.of(context)
-                                                                .size
-                                                                .height /
-                                                            20,
-                                                  ),
-                                                )
-                                              : Image(
-                                                  image: const AssetImage(
-                                                      "images/leave.png"),
-                                                  width: MediaQuery.of(context)
-                                                          .size
-                                                          .width /
-                                                      15,
-                                                )
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                Material(
-                                  shape: const OutlineInputBorder(),
-                                  clipBehavior: Clip.hardEdge,
-                                  child: InkWell(
-                                    onTap: () {
-                                      setState(() {
-                                        choosedDifficulty = "medium";
-                                      });
-                                    },
-                                    child: Container(
-                                      height: choosedDifficulty == "medium"
-                                          ? MediaQuery.of(context).size.height /
-                                              8
-                                          : MediaQuery.of(context).size.height /
-                                              10,
-                                      width: choosedDifficulty == "medium"
-                                          ? MediaQuery.of(context).size.width /
-                                              3.5
-                                          : MediaQuery.of(context).size.width /
-                                              4.2,
-                                      decoration: BoxDecoration(
-                                        border: Border.all(
-                                            width: MediaQuery.of(context)
-                                                    .size
-                                                    .width /
-                                                55),
-                                        color: Colors.yellow,
-                                      ),
-                                      child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          choosedDifficulty == "medium"
-                                              ? Text(
-                                                  "Medium",
-                                                  style: GoogleFonts.bungee(
-                                                    fontSize:
-                                                        MediaQuery.of(context)
-                                                                .size
-                                                                .height /
-                                                            48,
-                                                  ),
-                                                )
-                                              : Text(
-                                                  "Medium",
-                                                  style: GoogleFonts.bungee(
-                                                    fontSize:
-                                                        MediaQuery.of(context)
-                                                                .size
-                                                                .height /
-                                                            60,
-                                                  ),
-                                                ),
-                                          choosedDifficulty == "medium"
-                                              ? Image(
-                                                  image: const AssetImage(
-                                                      "images/bitten_leaf_scaled.png"),
-                                                  width: MediaQuery.of(context)
-                                                          .size
-                                                          .width /
-                                                      5.1,
-                                                )
-                                              : Image(
-                                                  image: const AssetImage(
-                                                      "images/bitten_leaf_scaled.png"),
-                                                  width: MediaQuery.of(context)
-                                                          .size
-                                                          .width /
-                                                      10,
-                                                )
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                Material(
-                                  shape: const OutlineInputBorder(),
-                                  clipBehavior: Clip.hardEdge,
-                                  child: InkWell(
-                                    onTap: () {
-                                      setState(() {
-                                        choosedDifficulty = "hard";
-                                      });
-                                    },
-                                    child: Container(
-                                      height: choosedDifficulty == "hard"
-                                          ? MediaQuery.of(context).size.height /
-                                              8
-                                          : MediaQuery.of(context).size.height /
-                                              10,
-                                      width: choosedDifficulty == "hard"
-                                          ? MediaQuery.of(context).size.width /
-                                              3.5
-                                          : MediaQuery.of(context).size.width /
-                                              4.2,
-                                      decoration: BoxDecoration(
-                                        border: Border.all(
-                                            width: MediaQuery.of(context)
-                                                    .size
-                                                    .width /
-                                                55),
-                                        color: Colors.red,
-                                      ),
-                                      child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          choosedDifficulty == "hard"
-                                              ? Text(
-                                                  "Hard",
-                                                  style: GoogleFonts.bungee(
-                                                    fontSize:
-                                                        MediaQuery.of(context)
-                                                                .size
-                                                                .height /
-                                                            48,
-                                                  ),
-                                                )
-                                              : Text(
-                                                  "Hard",
-                                                  style: GoogleFonts.bungee(
-                                                    fontSize:
-                                                        MediaQuery.of(context)
-                                                                .size
-                                                                .height /
-                                                            60,
-                                                  ),
-                                                ),
-                                          choosedDifficulty == "hard"
-                                              ? Image(
-                                                  image: const AssetImage(
-                                                      "images/fire_leaf_scale.png"),
-                                                  width: MediaQuery.of(context)
-                                                          .size
-                                                          .width /
-                                                      5.1,
-                                                )
-                                              : Image(
-                                                  image: const AssetImage(
-                                                      "images/fire_leaf_scale.png"),
-                                                  width: MediaQuery.of(context)
-                                                          .size
-                                                          .width /
-                                                      10,
-                                                )
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                ),
+                                ]
                               ],
                             ),
                           ),
@@ -493,263 +231,40 @@ class _DifficultyPageState extends State<DifficultyPage> {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Material(
-                                  shape: const OutlineInputBorder(),
-                                  clipBehavior: Clip.hardEdge,
-                                  child: InkWell(
-                                    onTap: () {
-                                      setState(() {
-                                        questionsNumber = 1;
-                                      });
-                                    },
-                                    child: Container(
-                                        alignment: Alignment.center,
-                                        height:
-                                            questionsNumber == 1
-                                                ? MediaQuery.of(context)
-                                                        .size
-                                                        .height /
-                                                    8
-                                                : MediaQuery.of(context)
-                                                        .size
-                                                        .height /
-                                                    10,
-                                        width: questionsNumber == 1
-                                            ? MediaQuery.of(context)
-                                                    .size
-                                                    .width /
-                                                3.5
-                                            : MediaQuery.of(context)
-                                                    .size
-                                                    .width /
-                                                4.2,
-                                        padding: const EdgeInsets.all(15),
-                                        decoration: BoxDecoration(
-                                          border: Border.all(
-                                            width: MediaQuery.of(context)
-                                                    .size
-                                                    .width /
-                                                55,
+                                for (final amount in amountButtons) ...[
+                                  Material(
+                                    shape: const OutlineInputBorder(),
+                                    clipBehavior: Clip.hardEdge,
+                                    child: InkWell(
+                                      onTap: () {
+                                        setState(() {
+                                          questionsNumber = amount.nameId;
+                                          print(questionsNumber);
+                                        });
+                                      },
+                                      child: Container(
+                                          alignment: Alignment.center,
+                                          decoration: BoxDecoration(
+                                            border: Border.all(
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width /
+                                                  55,
+                                            ),
+                                            color: Colors.blue,
                                           ),
-                                          color: questionsNumber == 1
-                                              ? Colors.orangeAccent
-                                              : Colors.blue,
-                                        ),
-                                        child: questionsNumber == 1
-                                            ? Text(
-                                                "1",
-                                                style: GoogleFonts.bungee(
-                                                  fontSize:
-                                                      MediaQuery.of(context)
-                                                              .size
-                                                              .height /
-                                                          25,
-                                                ),
-                                              )
-                                            : Text(
-                                                "1",
-                                                style: GoogleFonts.bungee(
-                                                  fontSize:
-                                                      MediaQuery.of(context)
-                                                              .size
-                                                              .height /
-                                                          45,
-                                                ),
-                                              )),
+                                          child: Text(
+                                            amount.name,
+                                            style: GoogleFonts.bungee(
+                                              fontSize: MediaQuery.of(context)
+                                                      .size
+                                                      .height /
+                                                  25,
+                                            ),
+                                          )),
+                                    ),
                                   ),
-                                ),
-                                Material(
-                                  shape: const OutlineInputBorder(),
-                                  clipBehavior: Clip.hardEdge,
-                                  child: InkWell(
-                                    onTap: () {
-                                      setState(() {
-                                        questionsNumber = 5;
-                                      });
-                                    },
-                                    child: Container(
-                                        alignment: Alignment.center,
-                                        height:
-                                            questionsNumber == 5
-                                                ? MediaQuery.of(context)
-                                                        .size
-                                                        .height /
-                                                    8
-                                                : MediaQuery.of(context)
-                                                        .size
-                                                        .height /
-                                                    10,
-                                        width: questionsNumber == 5
-                                            ? MediaQuery.of(context)
-                                                    .size
-                                                    .width /
-                                                3.5
-                                            : MediaQuery.of(context)
-                                                    .size
-                                                    .width /
-                                                4.2,
-                                        decoration: BoxDecoration(
-                                          border: Border.all(
-                                            width: MediaQuery.of(context)
-                                                    .size
-                                                    .width /
-                                                55,
-                                          ),
-                                          color: questionsNumber == 5
-                                              ? Colors.orangeAccent
-                                              : Colors.blue,
-                                        ),
-                                        child: questionsNumber == 5
-                                            ? Text(
-                                                "5",
-                                                style: GoogleFonts.bungee(
-                                                  fontSize:
-                                                      MediaQuery.of(context)
-                                                              .size
-                                                              .height /
-                                                          25,
-                                                ),
-                                              )
-                                            : Text(
-                                                "5",
-                                                style: GoogleFonts.bungee(
-                                                  fontSize:
-                                                      MediaQuery.of(context)
-                                                              .size
-                                                              .height /
-                                                          45,
-                                                ),
-                                              )),
-                                  ),
-                                ),
-                                Material(
-                                  shape: const OutlineInputBorder(),
-                                  clipBehavior: Clip.hardEdge,
-                                  child: InkWell(
-                                    onTap: () {
-                                      setState(() {
-                                        questionsNumber = 10;
-                                      });
-                                    },
-                                    child: Container(
-                                        alignment: Alignment.center,
-                                        height:
-                                            questionsNumber == 10
-                                                ? MediaQuery.of(context)
-                                                        .size
-                                                        .height /
-                                                    8
-                                                : MediaQuery.of(context)
-                                                        .size
-                                                        .height /
-                                                    10,
-                                        width: questionsNumber == 10
-                                            ? MediaQuery.of(context)
-                                                    .size
-                                                    .width /
-                                                3.5
-                                            : MediaQuery.of(context)
-                                                    .size
-                                                    .width /
-                                                4.2,
-                                        decoration: BoxDecoration(
-                                          border: Border.all(
-                                            width: MediaQuery.of(context)
-                                                    .size
-                                                    .width /
-                                                55,
-                                          ),
-                                          color: questionsNumber == 10
-                                              ? Colors.orangeAccent
-                                              : Colors.blue,
-                                        ),
-                                        child: questionsNumber == 10
-                                            ? Text(
-                                                "10",
-                                                style: GoogleFonts.bungee(
-                                                  fontSize:
-                                                      MediaQuery.of(context)
-                                                              .size
-                                                              .height /
-                                                          25,
-                                                ),
-                                              )
-                                            : Text(
-                                                "10",
-                                                style: GoogleFonts.bungee(
-                                                  fontSize:
-                                                      MediaQuery.of(context)
-                                                              .size
-                                                              .height /
-                                                          45,
-                                                ),
-                                              )),
-                                  ),
-                                ),
-                                Material(
-                                  shape: const OutlineInputBorder(),
-                                  clipBehavior: Clip.hardEdge,
-                                  child: InkWell(
-                                    onTap: () {
-                                      setState(() {
-                                        questionsNumber = 0;
-                                      });
-                                    },
-                                    child: Container(
-                                        alignment: Alignment.center,
-                                        height:
-                                            questionsNumber == 0
-                                                ? MediaQuery.of(context)
-                                                        .size
-                                                        .height /
-                                                    8
-                                                : MediaQuery.of(context)
-                                                        .size
-                                                        .height /
-                                                    10,
-                                        width: questionsNumber == 0
-                                            ? MediaQuery.of(context)
-                                                    .size
-                                                    .width /
-                                                3.5
-                                            : MediaQuery.of(context)
-                                                    .size
-                                                    .width /
-                                                4.2,
-                                        decoration: BoxDecoration(
-                                          border: Border.all(
-                                            width: MediaQuery.of(context)
-                                                    .size
-                                                    .width /
-                                                55,
-                                          ),
-                                          color: questionsNumber == 0
-                                              ? Colors.orangeAccent
-                                              : Colors.blue,
-                                        ),
-                                        child: questionsNumber == 0
-                                            ? Text(
-                                                "Survival",
-                                                style: GoogleFonts.bungee(
-                                                  fontSize:
-                                                      MediaQuery.of(context)
-                                                              .size
-                                                              .height /
-                                                          50,
-                                                ),
-                                              )
-                                            : Text(
-                                                "Survival",
-                                                style: GoogleFonts.bungee(
-                                                  fontSize:
-                                                      MediaQuery.of(context)
-                                                              .size
-                                                              .height /
-                                                          65,
-                                                ),
-                                              )),
-                                  ),
-                                ),
+                                ],
                               ],
                             ),
                           ),
@@ -762,6 +277,7 @@ class _DifficultyPageState extends State<DifficultyPage> {
                               builder: (context, state) {
                                 return InkWell(
                                   onTap: () async {
+                                    print(widget.categoriesModel.id);
                                     await context
                                         .read<TokenCubitCubit>()
                                         .fetchToken();
@@ -808,9 +324,7 @@ class _DifficultyPageState extends State<DifficultyPage> {
                               },
                             ),
                           )
-                        ],
-                      ),
-                    );
+                        ]));
                 }
               },
             ),

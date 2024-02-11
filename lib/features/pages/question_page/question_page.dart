@@ -58,7 +58,7 @@ class _QuestionPageState extends State<QuestionPage> {
           ..getQuestion(
             difficulty: widget.difficulty,
             category: widget.category,
-            token : widget.token,
+            token: widget.token,
           ),
         child: Scaffold(
           body: SafeArea(
@@ -73,7 +73,7 @@ class _QuestionPageState extends State<QuestionPage> {
                     index: index,
                     points: points,
                     questionPage: QuestionPage(
-                      token: widget.token,
+                        token: widget.token,
                         category: widget.category,
                         difficulty: widget.difficulty,
                         questionsNumber: widget.questionsNumber,
@@ -353,6 +353,7 @@ class _QuestionPageState extends State<QuestionPage> {
                                 ],
                               ),
                             )),
+                        Text(widget.token)
                       ],
                     );
                 }

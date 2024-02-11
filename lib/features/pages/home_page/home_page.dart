@@ -15,7 +15,6 @@ class HomePage extends StatelessWidget {
   const HomePage({
     super.key,
     required this.user,
-  
   });
   final User? user;
 
@@ -27,11 +26,32 @@ class HomePage extends StatelessWidget {
       child: Scaffold(
           appBar: AppBar(
             centerTitle: true,
-            title: Text(
-              "BRAIN CHECK APP",
-              style: GoogleFonts.bungee(
-                  color: Colors.white,
-                  fontSize: MediaQuery.of(context).size.width / 12),
+            title: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Text(
+                  "BRAIN CHECK APP",
+                  style: GoogleFonts.bungee(
+                      color: Colors.white,
+                      fontSize: MediaQuery.of(context).size.width / 15),
+                ),
+                SizedBox(
+                  child: Row(
+                    children: [
+                      Image(
+                        image: AssetImage("images/brain.png"),
+                        width: MediaQuery.of(context).size.height / 20,
+                      ),
+                      Text(
+                        "5",
+                        style: GoogleFonts.bungee(
+                            color: Colors.white,
+                            fontSize: MediaQuery.of(context).size.width / 15),
+                      )
+                    ],
+                  ),
+                )
+              ],
             ),
             backgroundColor: const Color.fromARGB(255, 27, 58, 93),
           ),
@@ -53,7 +73,9 @@ class HomePage extends StatelessWidget {
                         user: user,
                         overall: state.overAllInfo,
                       ),
-                      StartButtonWidget(user: user, ),
+                      StartButtonWidget(
+                        user: user,
+                      ),
                     ],
                   );
               }

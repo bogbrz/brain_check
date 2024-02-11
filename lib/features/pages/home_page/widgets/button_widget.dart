@@ -1,4 +1,5 @@
 import 'package:brain_check/features/pages/categories_page/categories_page.dart';
+import 'package:brain_check/features/pages/game_type_page.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -26,7 +27,7 @@ class StartButtonWidget extends StatelessWidget {
         child: InkWell(
           onTap: () {
             Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => CategoryPage(
+                builder: (context) => GameTypePage(
                       user: user,
                     )));
           },

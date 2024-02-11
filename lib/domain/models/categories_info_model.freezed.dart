@@ -20,8 +20,8 @@ WelcomeCategory _$WelcomeCategoryFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$WelcomeCategory {
-  int get categoryId => throw _privateConstructorUsedError;
-  CategoryQuestionCount get categoryQuestionCount =>
+  int? get categoryId => throw _privateConstructorUsedError;
+  CategoryQuestionCount? get categoryQuestionCount =>
       throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -36,9 +36,9 @@ abstract class $WelcomeCategoryCopyWith<$Res> {
           WelcomeCategory value, $Res Function(WelcomeCategory) then) =
       _$WelcomeCategoryCopyWithImpl<$Res, WelcomeCategory>;
   @useResult
-  $Res call({int categoryId, CategoryQuestionCount categoryQuestionCount});
+  $Res call({int? categoryId, CategoryQuestionCount? categoryQuestionCount});
 
-  $CategoryQuestionCountCopyWith<$Res> get categoryQuestionCount;
+  $CategoryQuestionCountCopyWith<$Res>? get categoryQuestionCount;
 }
 
 /// @nodoc
@@ -54,25 +54,29 @@ class _$WelcomeCategoryCopyWithImpl<$Res, $Val extends WelcomeCategory>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? categoryId = null,
-    Object? categoryQuestionCount = null,
+    Object? categoryId = freezed,
+    Object? categoryQuestionCount = freezed,
   }) {
     return _then(_value.copyWith(
-      categoryId: null == categoryId
+      categoryId: freezed == categoryId
           ? _value.categoryId
           : categoryId // ignore: cast_nullable_to_non_nullable
-              as int,
-      categoryQuestionCount: null == categoryQuestionCount
+              as int?,
+      categoryQuestionCount: freezed == categoryQuestionCount
           ? _value.categoryQuestionCount
           : categoryQuestionCount // ignore: cast_nullable_to_non_nullable
-              as CategoryQuestionCount,
+              as CategoryQuestionCount?,
     ) as $Val);
   }
 
   @override
   @pragma('vm:prefer-inline')
-  $CategoryQuestionCountCopyWith<$Res> get categoryQuestionCount {
-    return $CategoryQuestionCountCopyWith<$Res>(_value.categoryQuestionCount,
+  $CategoryQuestionCountCopyWith<$Res>? get categoryQuestionCount {
+    if (_value.categoryQuestionCount == null) {
+      return null;
+    }
+
+    return $CategoryQuestionCountCopyWith<$Res>(_value.categoryQuestionCount!,
         (value) {
       return _then(_value.copyWith(categoryQuestionCount: value) as $Val);
     });
@@ -87,10 +91,10 @@ abstract class _$$WelcomeCategoryImplCopyWith<$Res>
       __$$WelcomeCategoryImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int categoryId, CategoryQuestionCount categoryQuestionCount});
+  $Res call({int? categoryId, CategoryQuestionCount? categoryQuestionCount});
 
   @override
-  $CategoryQuestionCountCopyWith<$Res> get categoryQuestionCount;
+  $CategoryQuestionCountCopyWith<$Res>? get categoryQuestionCount;
 }
 
 /// @nodoc
@@ -104,18 +108,18 @@ class __$$WelcomeCategoryImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? categoryId = null,
-    Object? categoryQuestionCount = null,
+    Object? categoryId = freezed,
+    Object? categoryQuestionCount = freezed,
   }) {
     return _then(_$WelcomeCategoryImpl(
-      categoryId: null == categoryId
+      categoryId: freezed == categoryId
           ? _value.categoryId
           : categoryId // ignore: cast_nullable_to_non_nullable
-              as int,
-      categoryQuestionCount: null == categoryQuestionCount
+              as int?,
+      categoryQuestionCount: freezed == categoryQuestionCount
           ? _value.categoryQuestionCount
           : categoryQuestionCount // ignore: cast_nullable_to_non_nullable
-              as CategoryQuestionCount,
+              as CategoryQuestionCount?,
     ));
   }
 }
@@ -131,9 +135,9 @@ class _$WelcomeCategoryImpl implements _WelcomeCategory {
       _$$WelcomeCategoryImplFromJson(json);
 
   @override
-  final int categoryId;
+  final int? categoryId;
   @override
-  final CategoryQuestionCount categoryQuestionCount;
+  final CategoryQuestionCount? categoryQuestionCount;
 
   @override
   String toString() {
@@ -173,17 +177,17 @@ class _$WelcomeCategoryImpl implements _WelcomeCategory {
 
 abstract class _WelcomeCategory implements WelcomeCategory {
   factory _WelcomeCategory(
-          {required final int categoryId,
-          required final CategoryQuestionCount categoryQuestionCount}) =
+          {required final int? categoryId,
+          required final CategoryQuestionCount? categoryQuestionCount}) =
       _$WelcomeCategoryImpl;
 
   factory _WelcomeCategory.fromJson(Map<String, dynamic> json) =
       _$WelcomeCategoryImpl.fromJson;
 
   @override
-  int get categoryId;
+  int? get categoryId;
   @override
-  CategoryQuestionCount get categoryQuestionCount;
+  CategoryQuestionCount? get categoryQuestionCount;
   @override
   @JsonKey(ignore: true)
   _$$WelcomeCategoryImplCopyWith<_$WelcomeCategoryImpl> get copyWith =>

@@ -17,7 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$DifficultyPageState {
   String? get errorMessage => throw _privateConstructorUsedError;
-  CategoryQuestionCount get info => throw _privateConstructorUsedError;
+  CategoryQuestionCount? get info => throw _privateConstructorUsedError;
   Overall get overAll => throw _privateConstructorUsedError;
   Status get status => throw _privateConstructorUsedError;
 
@@ -34,11 +34,11 @@ abstract class $DifficultyPageStateCopyWith<$Res> {
   @useResult
   $Res call(
       {String? errorMessage,
-      CategoryQuestionCount info,
+      CategoryQuestionCount? info,
       Overall overAll,
       Status status});
 
-  $CategoryQuestionCountCopyWith<$Res> get info;
+  $CategoryQuestionCountCopyWith<$Res>? get info;
 }
 
 /// @nodoc
@@ -55,7 +55,7 @@ class _$DifficultyPageStateCopyWithImpl<$Res, $Val extends DifficultyPageState>
   @override
   $Res call({
     Object? errorMessage = freezed,
-    Object? info = null,
+    Object? info = freezed,
     Object? overAll = null,
     Object? status = null,
   }) {
@@ -64,10 +64,10 @@ class _$DifficultyPageStateCopyWithImpl<$Res, $Val extends DifficultyPageState>
           ? _value.errorMessage
           : errorMessage // ignore: cast_nullable_to_non_nullable
               as String?,
-      info: null == info
+      info: freezed == info
           ? _value.info
           : info // ignore: cast_nullable_to_non_nullable
-              as CategoryQuestionCount,
+              as CategoryQuestionCount?,
       overAll: null == overAll
           ? _value.overAll
           : overAll // ignore: cast_nullable_to_non_nullable
@@ -81,8 +81,12 @@ class _$DifficultyPageStateCopyWithImpl<$Res, $Val extends DifficultyPageState>
 
   @override
   @pragma('vm:prefer-inline')
-  $CategoryQuestionCountCopyWith<$Res> get info {
-    return $CategoryQuestionCountCopyWith<$Res>(_value.info, (value) {
+  $CategoryQuestionCountCopyWith<$Res>? get info {
+    if (_value.info == null) {
+      return null;
+    }
+
+    return $CategoryQuestionCountCopyWith<$Res>(_value.info!, (value) {
       return _then(_value.copyWith(info: value) as $Val);
     });
   }
@@ -98,12 +102,12 @@ abstract class _$$InitialImplCopyWith<$Res>
   @useResult
   $Res call(
       {String? errorMessage,
-      CategoryQuestionCount info,
+      CategoryQuestionCount? info,
       Overall overAll,
       Status status});
 
   @override
-  $CategoryQuestionCountCopyWith<$Res> get info;
+  $CategoryQuestionCountCopyWith<$Res>? get info;
 }
 
 /// @nodoc
@@ -118,7 +122,7 @@ class __$$InitialImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? errorMessage = freezed,
-    Object? info = null,
+    Object? info = freezed,
     Object? overAll = null,
     Object? status = null,
   }) {
@@ -127,10 +131,10 @@ class __$$InitialImplCopyWithImpl<$Res>
           ? _value.errorMessage
           : errorMessage // ignore: cast_nullable_to_non_nullable
               as String?,
-      info: null == info
+      info: freezed == info
           ? _value.info
           : info // ignore: cast_nullable_to_non_nullable
-              as CategoryQuestionCount,
+              as CategoryQuestionCount?,
       overAll: null == overAll
           ? _value.overAll
           : overAll // ignore: cast_nullable_to_non_nullable
@@ -155,7 +159,7 @@ class _$InitialImpl implements _Initial {
   @override
   final String? errorMessage;
   @override
-  final CategoryQuestionCount info;
+  final CategoryQuestionCount? info;
   @override
   final Overall overAll;
   @override
@@ -192,14 +196,14 @@ class _$InitialImpl implements _Initial {
 abstract class _Initial implements DifficultyPageState {
   const factory _Initial(
       {required final String? errorMessage,
-      required final CategoryQuestionCount info,
+      required final CategoryQuestionCount? info,
       required final Overall overAll,
       required final Status status}) = _$InitialImpl;
 
   @override
   String? get errorMessage;
   @override
-  CategoryQuestionCount get info;
+  CategoryQuestionCount? get info;
   @override
   Overall get overAll;
   @override

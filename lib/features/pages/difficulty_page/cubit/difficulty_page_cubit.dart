@@ -40,33 +40,63 @@ class DifficultyPageCubit extends Cubit<DifficultyPageState> {
             totalHardQuestionCount: 0),
         status: Status.loading));
 
-    try {
-      final overall = await questionRepository.getOverAllInfo();
-      // final info = await questionRepository.getCategoryInfo(category: category);
-
-      emit(DifficultyPageState(
-          overAll: overall,
-          errorMessage: null,
-          info: CategoryQuestionCount(
-              totalQuestionCount: 0,
-              totalEasyQuestionCount: 0,
-              totalMediumQuestionCount: 0,
-              totalHardQuestionCount: 0),
-          status: Status.success));
-    } catch (error) {
-      emit(DifficultyPageState(
-          overAll: Overall(
-              totalNumOfQuestions: 0,
-              totalNumOfPendingQuestions: 0,
-              totalNumOfVerifiedQuestions: 0,
-              totalNumOfRejectedQuestions: 0),
-          errorMessage: error.toString(),
-          info: CategoryQuestionCount(
-              totalQuestionCount: 0,
-              totalEasyQuestionCount: 0,
-              totalMediumQuestionCount: 0,
-              totalHardQuestionCount: 0),
-          status: Status.error));
+    if (category == 0) {
+      try {
+        final info = await questionRepository.getOverAllInfo();
+        print("CUBIT INFO $info");
+        emit(DifficultyPageState(
+            overAll: info,
+            errorMessage: null,
+            info: CategoryQuestionCount(
+                totalQuestionCount: 0,
+                totalEasyQuestionCount: 0,
+                totalMediumQuestionCount: 0,
+                totalHardQuestionCount: 0),
+            status: Status.success));
+      } catch (error) {
+        emit(DifficultyPageState(
+            overAll: Overall(
+                totalNumOfQuestions: 0,
+                totalNumOfPendingQuestions: 0,
+                totalNumOfVerifiedQuestions: 0,
+                totalNumOfRejectedQuestions: 0),
+            errorMessage: error.toString(),
+            info: CategoryQuestionCount(
+                totalQuestionCount: 0,
+                totalEasyQuestionCount: 0,
+                totalMediumQuestionCount: 0,
+                totalHardQuestionCount: 0),
+            status: Status.error));
+      }
+    } else {
+      try {
+        final info =
+            await questionRepository.getCategoryInfo(category: category);
+        print("CUBIT INFO $info");
+        emit(DifficultyPageState(
+            overAll: Overall(
+                totalNumOfQuestions: 0,
+                totalNumOfPendingQuestions: 0,
+                totalNumOfVerifiedQuestions: 0,
+                totalNumOfRejectedQuestions: 0),
+            errorMessage: null,
+            info: info,
+            status: Status.success));
+      } catch (error) {
+        emit(DifficultyPageState(
+            overAll: Overall(
+                totalNumOfQuestions: 0,
+                totalNumOfPendingQuestions: 0,
+                totalNumOfVerifiedQuestions: 0,
+                totalNumOfRejectedQuestions: 0),
+            errorMessage: error.toString(),
+            info: CategoryQuestionCount(
+                totalQuestionCount: 0,
+                totalEasyQuestionCount: 0,
+                totalMediumQuestionCount: 0,
+                totalHardQuestionCount: 0),
+            status: Status.error));
+      }
     }
   }
 }

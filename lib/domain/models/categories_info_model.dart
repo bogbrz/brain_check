@@ -7,8 +7,8 @@ part 'categories_info_model.g.dart';
 class WelcomeCategory with _$WelcomeCategory {
   @JsonSerializable(fieldRename: FieldRename.snake)
   factory WelcomeCategory({
-    required int categoryId,
-    required CategoryQuestionCount categoryQuestionCount,
+    required int? categoryId,
+    required CategoryQuestionCount? categoryQuestionCount,
   }) = _WelcomeCategory;
 
   factory WelcomeCategory.fromJson(Map<String, dynamic> json) =>

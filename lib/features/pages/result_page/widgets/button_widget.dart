@@ -34,6 +34,7 @@ class FinishButtonWidget extends StatelessWidget {
             Navigator.of(context).pop();
             Navigator.of(context).pop();
             Navigator.of(context).pop();
+            Navigator.of(context).pop();
           },
           child: Container(
             alignment: Alignment.center,
