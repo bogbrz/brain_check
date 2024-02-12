@@ -7,30 +7,20 @@ import 'package:injectable/injectable.dart';
 class RankingFireBaseDataSource {
   final userId = FirebaseAuth.instance.currentUser?.uid;
 
-  Future<void> setProfile(
-      {required String nickName, required String email}) async {
-    if (userId == null) {
-      throw Exception("user not logged in");
-    }
-    await FirebaseFirestore.instance
-        .collection("users")
-        .doc(userId)
-        .collection("profile")
-        .add({
-      "email": email,
-      "nickName": nickName,
-      "points": 0,
-      "gamesPlayed": 0
-    });
-  }
+
 
   Future<void> addToRanking(
       {required String nickName, required String email}) async {
     if (userId == null) {
       throw Exception("user not logged in");
     }
-    await FirebaseFirestore.instance.collection("Ranking").add(
-        {"email": email, "nickName": nickName, "points": 0, "gamesPlayed": 0});
+    await FirebaseFirestore.instance.collection("Ranking").add({
+      "email": email,
+      "nickName": nickName,
+      "points": 0,
+      "gamesPlayed": 0,
+      "lifes": 5
+    });
   }
 
   Stream<QuerySnapshot<Map<String, dynamic>>> getProfileInfo() {

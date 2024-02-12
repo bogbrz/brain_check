@@ -1,4 +1,7 @@
+import 'dart:ffi';
+
 import 'package:brain_check/features/pages/categories_page/categories_page.dart';
+import 'package:brain_check/features/pages/duel_page.dart';
 import 'package:brain_check/features/pages/ranked_game_page/ranked_game_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -74,8 +77,36 @@ class GameTypePage extends StatelessWidget {
                   ),
                 ],
               ),
+              SizedBox(
+                height: MediaQuery.of(context).size.height * 0.005,
+              ),
+              InkWell(
+                onTap: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => DuelPage(),
+                  ));
+                },
+                child: Container(
+                  alignment: Alignment.center,
+                  width: MediaQuery.of(context).size.width * 0.99,
+                  height: MediaQuery.of(context).size.height * 0.15,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(10),
+                    border: Border.all(
+                        width: MediaQuery.of(context).size.width / 40),
+                  ),
+                  child: SizedBox(
+                    child: Text('''D U E L''',
+                        style: GoogleFonts.bungee(
+                          fontSize: MediaQuery.of(context).size.height / 20,
+                        )),
+                  ),
+                ),
+              ),
             ],
           ),
         ));
   }
 }
+

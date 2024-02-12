@@ -4,7 +4,9 @@ import 'package:brain_check/app/cubit%20copy/token_cubit_cubit.dart';
 
 import 'package:brain_check/app/injection_container.dart';
 import 'package:brain_check/difficulty_list.dart';
+import 'package:brain_check/domain/models/amount_button_model.dart';
 import 'package:brain_check/domain/models/categories_model.dart';
+import 'package:brain_check/domain/models/difficulty_model.dart';
 
 import 'package:brain_check/features/pages/difficulty_page/cubit/difficulty_page_cubit.dart';
 import 'package:brain_check/features/pages/question_page/question_page.dart';
@@ -66,7 +68,7 @@ class _DifficultyPageState extends State<DifficultyPage> {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                           Padding(
-                              padding: const EdgeInsets.all(20),
+                              padding: const EdgeInsets.all(10),
                               child: Container(
                                 decoration: BoxDecoration(
                                     border: Border.all(
@@ -170,101 +172,60 @@ class _DifficultyPageState extends State<DifficultyPage> {
                                   ),
                                 ),
                               )),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 15, bottom: 15),
-                            child: Row(
+                          SizedBox(
+                            height: MediaQuery.of(context).size.height / 3,
+                            child: Column(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
-                                for (final difficulty in difficulties) ...[
-                                  Material(
-                                    shape: const OutlineInputBorder(),
-                                    clipBehavior: Clip.hardEdge,
-                                    child: InkWell(
-                                      onTap: () {
-                                        setState(() {
-                                          choosedDifficulty = difficulty.nameId;
-                                          print(choosedDifficulty);
-                                        });
-                                      },
-                                      child: Container(
-                                        decoration: BoxDecoration(
-                                            border: Border.all(
-                                                width: MediaQuery.of(context)
-                                                        .size
-                                                        .width /
-                                                    55),
-                                            color: difficulty.color),
-                                        child: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            Text(
-                                              difficulty.name,
-                                              style: GoogleFonts.bungee(
-                                                fontSize: MediaQuery.of(context)
-                                                        .size
-                                                        .height /
-                                                    45,
-                                              ),
-                                            ),
-                                            SizedBox(
-                                                width: MediaQuery.of(context)
-                                                        .size
-                                                        .width /
-                                                    10,
-                                                height: MediaQuery.of(context)
-                                                        .size
-                                                        .height /
-                                                    10,
-                                                child: difficulty.icon),
-                                          ],
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    for (final difficulty in difficulties) ...[
+                                      Material(
+                                        shape: const OutlineInputBorder(),
+                                        clipBehavior: Clip.hardEdge,
+                                        child: InkWell(
+                                          onTap: () {
+                                            setState(() {
+                                              choosedDifficulty =
+                                                  difficulty.nameId;
+                                              print(choosedDifficulty);
+                                            });
+                                          },
+                                          child: DifficultyWidget(
+                                              choosedDifficulty:
+                                                  choosedDifficulty,
+                                              difficulty: difficulty),
                                         ),
                                       ),
-                                    ),
-                                  ),
-                                ]
-                              ],
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 15, bottom: 15),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                for (final amount in amountButtons) ...[
-                                  Material(
-                                    shape: const OutlineInputBorder(),
-                                    clipBehavior: Clip.hardEdge,
-                                    child: InkWell(
-                                      onTap: () {
-                                        setState(() {
-                                          questionsNumber = amount.nameId;
-                                          print(questionsNumber);
-                                        });
-                                      },
-                                      child: Container(
-                                          alignment: Alignment.center,
-                                          decoration: BoxDecoration(
-                                            border: Border.all(
-                                              width: MediaQuery.of(context)
-                                                      .size
-                                                      .width /
-                                                  55,
-                                            ),
-                                            color: Colors.blue,
+                                    ]
+                                  ],
+                                ),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    for (final amount in amountButtons) ...[
+                                      Material(
+                                        shape: const OutlineInputBorder(),
+                                        clipBehavior: Clip.hardEdge,
+                                        child: InkWell(
+                                          onTap: () {
+                                            setState(() {
+                                              questionsNumber = amount.nameId;
+                                              print(questionsNumber);
+                                            });
+                                          },
+                                          child: AmountWidget(
+                                            amount: amount,
+                                            choosedAmount: questionsNumber,
                                           ),
-                                          child: Text(
-                                            amount.name,
-                                            style: GoogleFonts.bungee(
-                                              fontSize: MediaQuery.of(context)
-                                                      .size
-                                                      .height /
-                                                  25,
-                                            ),
-                                          )),
-                                    ),
-                                  ),
-                                ],
+                                        ),
+                                      ),
+                                    ],
+                                  ],
+                                ),
                               ],
                             ),
                           ),
@@ -330,5 +291,99 @@ class _DifficultyPageState extends State<DifficultyPage> {
             ),
           ),
         ));
+  }
+}
+
+class AmountWidget extends StatelessWidget {
+  const AmountWidget({
+    super.key,
+    required this.amount,
+    required this.choosedAmount,
+  });
+
+  final AmountModel amount;
+  final int? choosedAmount;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        height: choosedAmount == null
+            ? MediaQuery.of(context).size.height * 0.1
+            : choosedAmount == amount.nameId
+                ? MediaQuery.of(context).size.height * 0.15
+                : MediaQuery.of(context).size.height * 0.1,
+        width: choosedAmount == null
+            ? MediaQuery.of(context).size.width * 0.25
+            : choosedAmount == amount.nameId
+                ? MediaQuery.of(context).size.width * 0.35
+                : MediaQuery.of(context).size.width * 0.21,
+        alignment: Alignment.center,
+        decoration: BoxDecoration(
+          border: Border.all(
+            width: MediaQuery.of(context).size.width / 55,
+          ),
+          color: Colors.blue,
+        ),
+        child: Text(
+          amount.name,
+          style: GoogleFonts.bungee(
+              fontSize: choosedAmount == null
+                  ? MediaQuery.of(context).size.width / 35
+                  : choosedAmount == amount.nameId && amount.nameId != 0
+                      ? MediaQuery.of(context).size.width / 10
+                      : choosedAmount == amount.nameId && amount.nameId == 0
+                          ? MediaQuery.of(context).size.width / 20
+                          : MediaQuery.of(context).size.width / 35),
+        ));
+  }
+}
+
+class DifficultyWidget extends StatelessWidget {
+  const DifficultyWidget({
+    super.key,
+    required this.difficulty,
+    required this.choosedDifficulty,
+  });
+
+  final DifficultyModel difficulty;
+  final String choosedDifficulty;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: choosedDifficulty == ""
+          ? MediaQuery.of(context).size.height * 0.1
+          : choosedDifficulty == difficulty.nameId
+              ? MediaQuery.of(context).size.height * 0.15
+              : MediaQuery.of(context).size.height * 0.1,
+      width: choosedDifficulty == ""
+          ? MediaQuery.of(context).size.width * 0.25
+          : choosedDifficulty == difficulty.nameId
+              ? MediaQuery.of(context).size.width * 0.35
+              : MediaQuery.of(context).size.width * 0.21,
+      decoration: BoxDecoration(
+          border: Border.all(width: MediaQuery.of(context).size.width / 55),
+          color: difficulty.color),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            difficulty.name,
+            style: GoogleFonts.bungee(
+              fontSize: choosedDifficulty == ''
+                  ? MediaQuery.of(context).size.width / 25
+                  : choosedDifficulty == difficulty.nameId
+                      ? MediaQuery.of(context).size.width / 15
+                      : MediaQuery.of(context).size.width / 35,
+            ),
+          ),
+          Expanded(
+            child: SizedBox(
+              child: difficulty.icon,
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }
