@@ -1,7 +1,5 @@
-
-
 import 'package:brain_check/features/pages/categories_page/categories_page.dart';
-
+import 'package:brain_check/features/pages/game_type_page.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -9,15 +7,15 @@ import 'package:flutter/material.dart';
 
 import 'package:google_fonts/google_fonts.dart';
 
-
-
 class StartButtonWidget extends StatelessWidget {
   const StartButtonWidget({
     super.key,
     required this.user,
+    
   });
 
   final User? user;
+  
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +27,7 @@ class StartButtonWidget extends StatelessWidget {
         child: InkWell(
           onTap: () {
             Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => CategoryPage(
+                builder: (context) => GameTypePage(
                       user: user,
                     )));
           },

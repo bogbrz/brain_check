@@ -1,15 +1,8 @@
-
-
 import 'package:brain_check/domain/models/profile_model.dart';
-
 
 import 'package:flutter/material.dart';
 
 import 'package:google_fonts/google_fonts.dart';
-
-
-
-
 
 class RankingProfileWidget extends StatelessWidget {
   const RankingProfileWidget({
@@ -103,7 +96,7 @@ class RankingProfileWidget extends StatelessWidget {
                           fontSize: MediaQuery.of(context).size.height / 55),
                     )),
           SizedBox(
-            width: MediaQuery.of(context).size.width * 0.1,
+            width: MediaQuery.of(context).size.width * 0.11,
             child: Center(
                 child: i == 1 || i == 2 || i == 3
                     ? Text(

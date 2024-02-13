@@ -18,6 +18,7 @@ class Questions with _$Questions {
 
 @freezed
 class QuestionModel with _$QuestionModel {
+  
   const QuestionModel._();
   @JsonSerializable(fieldRename: FieldRename.snake)
   factory QuestionModel({
@@ -28,13 +29,15 @@ class QuestionModel with _$QuestionModel {
     required String correctAnswer,
     required List<String> incorrectAnswers,
   }) = _QuestionModel;
-  List<String> get answers {
-    List<String> answers = [];
-    answers.addAll(incorrectAnswers);
-    answers.add(correctAnswer);
-    answers.shuffle();
-    return answers;
-  }
+  
+  // List<String> get answers {
+  //   List<String> answers = [];
+  //   answers.addAll(incorrectAnswers);
+  //   answers.add(correctAnswer);
+  //   answers.shuffle();
+    
+  //   return answers;
+  // }
 
   factory QuestionModel.fromJson(Map<String, dynamic> json) =>
       _$QuestionModelFromJson(json);

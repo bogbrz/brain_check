@@ -8,9 +8,11 @@ import 'package:google_fonts/google_fonts.dart';
 class NavigatorPage extends StatefulWidget {
   const NavigatorPage({
     required this.user,
+    
     super.key,
   });
   final User? user;
+  
   @override
   State<NavigatorPage> createState() => _NavigatorPageState();
 }
@@ -23,7 +25,7 @@ class _NavigatorPageState extends State<NavigatorPage> {
       body: Builder(builder: (context) {
         if (pageIndex == 0) {
           return HomePage(
-            user: widget.user,
+            user: widget.user, 
           );
         } else if (pageIndex == 2) {
           return UserPage(

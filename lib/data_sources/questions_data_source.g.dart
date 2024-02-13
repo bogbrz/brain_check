@@ -22,11 +22,13 @@ class _QuestionDataSource implements QuestionDataSource {
   Future<Questions> getQuestionWithCatAndDiff(
     String? difficulty,
     int? category,
+    String? token,
   ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'difficulty': difficulty,
       r'category': category,
+      r'token': token,
     };
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
@@ -156,7 +158,7 @@ class _QuestionDataSource implements QuestionDataSource {
     )
             .compose(
               _dio.options,
-              '/api_count_global.php',
+              '/api_count.php',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -166,6 +168,33 @@ class _QuestionDataSource implements QuestionDataSource {
               baseUrl,
             ))));
     final value = WelcomeCategory.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<TokenModel> getToken() async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<TokenModel>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/api_token.php?command=request',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = TokenModel.fromJson(_result.data!);
     return value;
   }
 

@@ -11,16 +11,32 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class SetUpUserPage extends StatelessWidget {
-  const SetUpUserPage({super.key, required this.user});
+class SetUpUserPage extends StatefulWidget {
+  const SetUpUserPage({
+    super.key,
+    required this.user,
+  });
   final User? user;
 
   @override
+  State<SetUpUserPage> createState() => _SetUpUserPageState();
+}
+
+class _SetUpUserPageState extends State<SetUpUserPage> {
+  final controller = TextEditingController();
+  @override
+  void initState() {
+    controller.addListener(() {
+      setState(() {});
+    });
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final controller = TextEditingController();
     return BlocProvider(
         create: (context) => getIt<SetUpUserCubit>()
-          ..getRankingForUpdate(email: user!.email.toString()),
+          ..getRankingForUpdate(email: widget.user!.email.toString()),
         child: Scaffold(
           appBar: AppBar(
             backgroundColor: const Color.fromARGB(255, 27, 58, 93),
@@ -29,7 +45,9 @@ class SetUpUserPage extends StatelessWidget {
             child: BlocBuilder<SetUpUserCubit, SetUpUserState>(
               builder: (context, state) {
                 if (state.profile.isNotEmpty) {
-                  return NavigatorPage(user: user);
+                  return NavigatorPage(
+                    user: widget.user,
+                  );
                 }
                 switch (state.status) {
                   case Status.initial:
@@ -62,8 +80,10 @@ class SetUpUserPage extends StatelessWidget {
                                       context
                                           .read<SetUpUserCubit>()
                                           .addProfileToGlobalRanking(
-                                              nickName: controller.text,
-                                              email: user!.email.toString());
+                                            nickName: controller.text,
+                                            email:
+                                                widget.user!.email.toString(),
+                                          );
                                     },
                               child: Container(
                                   width:

@@ -21,7 +21,9 @@ class QuestionPage extends StatefulWidget {
     required this.difficulty,
     required this.questionsNumber,
     required this.user,
+    required this.token,
   });
+  final String token;
   final int category;
   final String difficulty;
   final int questionsNumber;
@@ -32,6 +34,7 @@ class QuestionPage extends StatefulWidget {
 }
 
 class _QuestionPageState extends State<QuestionPage> {
+  @override
   var choosedQuestion = null;
   var index = 0;
   var isCorrect = false;
@@ -53,7 +56,10 @@ class _QuestionPageState extends State<QuestionPage> {
     return BlocProvider(
         create: (context) => getIt<QuestionPageCubit>()
           ..getQuestion(
-              difficulty: widget.difficulty, category: widget.category),
+            difficulty: widget.difficulty,
+            category: widget.category,
+            token: widget.token,
+          ),
         child: Scaffold(
           body: SafeArea(
             child: BlocBuilder<QuestionPageCubit, QuestionPageState>(
@@ -64,7 +70,15 @@ class _QuestionPageState extends State<QuestionPage> {
                     widget.questionsNumber != 0 &&
                         index == widget.questionsNumber) {
                   return ResultsPage(
-                      widget: widget, index: index, points: points);
+                    index: index,
+                    points: points,
+                    questionPage: QuestionPage(
+                        token: widget.token,
+                        category: widget.category,
+                        difficulty: widget.difficulty,
+                        questionsNumber: widget.questionsNumber,
+                        user: widget.user),
+                  );
                 }
 
                 switch (state.status) {
@@ -282,6 +296,7 @@ class _QuestionPageState extends State<QuestionPage> {
                                             .getQuestion(
                                               difficulty: widget.difficulty,
                                               category: widget.category,
+                                              token: widget.token,
                                             )
                                             .then(
                                                 (value) => controller.restart())
@@ -338,6 +353,7 @@ class _QuestionPageState extends State<QuestionPage> {
                                 ],
                               ),
                             )),
+                        Text(widget.token)
                       ],
                     );
                 }

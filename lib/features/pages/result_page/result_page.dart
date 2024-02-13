@@ -1,10 +1,10 @@
 import 'package:brain_check/app/core/enums/enums.dart';
 import 'package:brain_check/app/injection_container.dart';
 
-
 import 'package:brain_check/features/pages/question_page/question_page.dart';
 import 'package:brain_check/features/pages/result_page/cubit/result_page_cubit.dart';
 import 'package:brain_check/features/pages/result_page/widgets/button_widget.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -12,13 +12,13 @@ import 'package:google_fonts/google_fonts.dart';
 
 class ResultsPage extends StatelessWidget {
   const ResultsPage({
-    super.key,
-    required this.widget,
+    required this.questionPage,
     required this.index,
+    super.key,
     required this.points,
   });
 
-  final QuestionPage widget;
+  final QuestionPage questionPage;
   final int index;
 
   final int points;
@@ -27,7 +27,7 @@ class ResultsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => getIt<ResultPageCubit>()
-        ..getRankingForUpdate(email: widget.user!.email.toString()),
+        ..getRankingForUpdate(email: questionPage.user!.email.toString()),
       child: Scaffold(
         body: Center(child: BlocBuilder<ResultPageCubit, ResultPageState>(
           builder: (context, state) {
@@ -53,8 +53,8 @@ class ResultsPage extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       Text(
-                          widget.questionsNumber != 0 &&
-                                  index == widget.questionsNumber
+                          questionPage.questionsNumber != 0 &&
+                                  index == questionPage.questionsNumber
                               ? "Your Score $points/$index"
                               : "Your Score $points",
                           textAlign: TextAlign.center,
@@ -75,4 +75,3 @@ class ResultsPage extends StatelessWidget {
     );
   }
 }
-

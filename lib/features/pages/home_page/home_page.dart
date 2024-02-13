@@ -17,46 +17,66 @@ class HomePage extends StatelessWidget {
     required this.user,
   });
   final User? user;
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => getIt<HomePageCubit>()
-        ..getRankingForUpdate(email: user!.email.toString()),
-      child: Scaffold(
-          appBar: AppBar(
-            centerTitle: true,
-            title: Text(
-              "BRAIN CHECK APP",
-              style: GoogleFonts.bungee(
-                  color: Colors.white,
-                  fontSize: MediaQuery.of(context).size.width / 12),
-            ),
-            backgroundColor: const Color.fromARGB(255, 27, 58, 93),
-          ),
-          body: BlocBuilder<HomePageCubit, HomePageState>(
+        create: (context) => getIt<HomePageCubit>()
+          ..getRankingForUpdate(email: user!.email.toString()),
+        child: BlocBuilder<HomePageCubit, HomePageState>(
             builder: (context, state) {
-              switch (state.status) {
-                case Status.initial:
-                  return InitialStateWidget();
-                case Status.loading:
-                  return LoadingStateWidget();
-                case Status.error:
-                  return ErrorStateWidget(
-                      errorMessage: state.errorMessage.toString());
-                case Status.success:
-                  return Column(
+          switch (state.status) {
+            case Status.initial:
+              return InitialStateWidget();
+            case Status.loading:
+              return LoadingStateWidget();
+            case Status.error:
+              return ErrorStateWidget(
+                  errorMessage: state.errorMessage.toString());
+            case Status.success:
+              return Scaffold(
+                  appBar: AppBar(
+                    title: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Text(
+                          "BRAIN CHECK APP",
+                          style: GoogleFonts.bungee(
+                              color: Colors.white,
+                              fontSize: MediaQuery.of(context).size.width / 15),
+                        ),
+                        Row(
+                          children: [
+                            Image(
+                              image: AssetImage("images/brain.png"),
+                              width: MediaQuery.of(context).size.width / 10,
+                            ),
+                            Text(
+                              state.profile[0].lifes.toString(),
+                              style: GoogleFonts.bungee(
+                                  color: Colors.white,
+                                  fontSize:
+                                      MediaQuery.of(context).size.width / 15),
+                            )
+                          ],
+                        )
+                      ],
+                    ),
+                    backgroundColor: const Color.fromARGB(255, 27, 58, 93),
+                  ),
+                  body: Column(
                     children: [
                       PageExtrasWidget(
                         profiles: state.profile,
                         user: user,
                         overall: state.overAllInfo,
                       ),
-                      StartButtonWidget(user: user),
+                      StartButtonWidget(
+                        user: user,
+                      ),
                     ],
-                  );
-              }
-            },
-          )),
-    );
+                  ));
+          }
+        }));
   }
 }

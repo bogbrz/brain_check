@@ -9,9 +9,11 @@ part of 'categories_info_model.dart';
 _$WelcomeCategoryImpl _$$WelcomeCategoryImplFromJson(
         Map<String, dynamic> json) =>
     _$WelcomeCategoryImpl(
-      categoryId: json['category_id'] as int,
-      categoryQuestionCount: CategoryQuestionCount.fromJson(
-          json['category_question_count'] as Map<String, dynamic>),
+      categoryId: json['category_id'] as int?,
+      categoryQuestionCount: json['category_question_count'] == null
+          ? null
+          : CategoryQuestionCount.fromJson(
+              json['category_question_count'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$WelcomeCategoryImplToJson(

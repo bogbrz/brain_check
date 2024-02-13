@@ -3,25 +3,42 @@ import 'package:brain_check/domain/models/categories_info_model.dart';
 import 'package:brain_check/domain/models/overall_info_model.dart';
 import 'package:brain_check/domain/models/categories_model.dart';
 import 'package:brain_check/domain/models/question_model.dart';
+import 'package:brain_check/domain/models/token_model.dart';
 
 class QuestionRepository {
   QuestionRepository({required this.questionDataSource});
   final QuestionDataSource questionDataSource;
 
   Future<List<QuestionModel>> getQuestion(
-      {required int? category, required String? difficulty}) async {
+      {required int? category,
+      required String? difficulty,
+      required String token}) async {
     final questions = await questionDataSource.getQuestionWithCatAndDiff(
-        difficulty, category);
+        difficulty, category, token);
     final questionContent = questions.results;
     return questionContent;
   }
 
-  Future<List<QuestionModel>> getListOfQuestions(
-      {required int? category,
-      required String? difficulty,
-      required int? amount}) async {
+  Future<TokenModel> fetchToken() async {
+    final tokenModel = await questionDataSource.getToken();
+
+    print("REPOSITORY TOKEN $tokenModel");
+
+    return tokenModel;
+  }
+
+  Future<List<QuestionModel>> getListOfQuestions({
+    required int? category,
+    required String? difficulty,
+    required int? amount,
+  }) async {
     final questions = await questionDataSource.getListofQuestions(
-        difficulty, category, amount);
+      difficulty,
+      category,
+      amount,
+    );
+
+    print("Questions ${questions.results}");
 
     return questions.results;
   }
@@ -34,9 +51,10 @@ class QuestionRepository {
     return categories;
   }
 
-  Future<CategoryQuestionCount> getCategoryInfo({required int category}) async {
+  Future<CategoryQuestionCount?> getCategoryInfo({required int category}) async {
     final response = await questionDataSource.getCategoriesInfo(category);
     final info = response.categoryQuestionCount;
+   
     return info;
   }
 

@@ -19,6 +19,7 @@ mixin _$DifficultyModel {
   String get name => throw _privateConstructorUsedError;
   Image get icon => throw _privateConstructorUsedError;
   String get nameId => throw _privateConstructorUsedError;
+  MaterialColor get color => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $DifficultyModelCopyWith<DifficultyModel> get copyWith =>
@@ -31,7 +32,7 @@ abstract class $DifficultyModelCopyWith<$Res> {
           DifficultyModel value, $Res Function(DifficultyModel) then) =
       _$DifficultyModelCopyWithImpl<$Res, DifficultyModel>;
   @useResult
-  $Res call({String name, Image icon, String nameId});
+  $Res call({String name, Image icon, String nameId, MaterialColor color});
 }
 
 /// @nodoc
@@ -50,6 +51,7 @@ class _$DifficultyModelCopyWithImpl<$Res, $Val extends DifficultyModel>
     Object? name = null,
     Object? icon = null,
     Object? nameId = null,
+    Object? color = null,
   }) {
     return _then(_value.copyWith(
       name: null == name
@@ -64,6 +66,10 @@ class _$DifficultyModelCopyWithImpl<$Res, $Val extends DifficultyModel>
           ? _value.nameId
           : nameId // ignore: cast_nullable_to_non_nullable
               as String,
+      color: null == color
+          ? _value.color
+          : color // ignore: cast_nullable_to_non_nullable
+              as MaterialColor,
     ) as $Val);
   }
 }
@@ -76,7 +82,7 @@ abstract class _$$DifficultyModelImplCopyWith<$Res>
       __$$DifficultyModelImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String name, Image icon, String nameId});
+  $Res call({String name, Image icon, String nameId, MaterialColor color});
 }
 
 /// @nodoc
@@ -93,6 +99,7 @@ class __$$DifficultyModelImplCopyWithImpl<$Res>
     Object? name = null,
     Object? icon = null,
     Object? nameId = null,
+    Object? color = null,
   }) {
     return _then(_$DifficultyModelImpl(
       name: null == name
@@ -107,6 +114,10 @@ class __$$DifficultyModelImplCopyWithImpl<$Res>
           ? _value.nameId
           : nameId // ignore: cast_nullable_to_non_nullable
               as String,
+      color: null == color
+          ? _value.color
+          : color // ignore: cast_nullable_to_non_nullable
+              as MaterialColor,
     ));
   }
 }
@@ -115,7 +126,10 @@ class __$$DifficultyModelImplCopyWithImpl<$Res>
 
 class _$DifficultyModelImpl implements _DifficultyModel {
   _$DifficultyModelImpl(
-      {required this.name, required this.icon, required this.nameId});
+      {required this.name,
+      required this.icon,
+      required this.nameId,
+      required this.color});
 
   @override
   final String name;
@@ -123,10 +137,12 @@ class _$DifficultyModelImpl implements _DifficultyModel {
   final Image icon;
   @override
   final String nameId;
+  @override
+  final MaterialColor color;
 
   @override
   String toString() {
-    return 'DifficultyModel(name: $name, icon: $icon, nameId: $nameId)';
+    return 'DifficultyModel(name: $name, icon: $icon, nameId: $nameId, color: $color)';
   }
 
   @override
@@ -136,11 +152,12 @@ class _$DifficultyModelImpl implements _DifficultyModel {
             other is _$DifficultyModelImpl &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.icon, icon) || other.icon == icon) &&
-            (identical(other.nameId, nameId) || other.nameId == nameId));
+            (identical(other.nameId, nameId) || other.nameId == nameId) &&
+            (identical(other.color, color) || other.color == color));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, name, icon, nameId);
+  int get hashCode => Object.hash(runtimeType, name, icon, nameId, color);
 
   @JsonKey(ignore: true)
   @override
@@ -154,7 +171,8 @@ abstract class _DifficultyModel implements DifficultyModel {
   factory _DifficultyModel(
       {required final String name,
       required final Image icon,
-      required final String nameId}) = _$DifficultyModelImpl;
+      required final String nameId,
+      required final MaterialColor color}) = _$DifficultyModelImpl;
 
   @override
   String get name;
@@ -162,6 +180,8 @@ abstract class _DifficultyModel implements DifficultyModel {
   Image get icon;
   @override
   String get nameId;
+  @override
+  MaterialColor get color;
   @override
   @JsonKey(ignore: true)
   _$$DifficultyModelImplCopyWith<_$DifficultyModelImpl> get copyWith =>

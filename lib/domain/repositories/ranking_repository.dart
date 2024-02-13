@@ -8,12 +8,6 @@ class RankingRepository {
 
   RankingRepository({required this.rankingFireBaseDataSource});
 
-  Future<void> addProfile(
-      {required String nickName, required String email}) async {
-    await rankingFireBaseDataSource.setProfile(
-        nickName: nickName, email: email);
-  }
-
   Future<void> addProfileToGlobal(
       {required String nickName, required String email}) async {
     await rankingFireBaseDataSource.addToRanking(
@@ -28,7 +22,8 @@ class RankingRepository {
             email: doc['email'],
             nickName: doc['nickName'],
             points: doc['points'],
-            gamesPlayed: doc["gamesPlayed"]);
+            gamesPlayed: doc["gamesPlayed"],
+            lifes: doc["lifes"]);
       }).toList();
     });
   }
@@ -42,7 +37,8 @@ class RankingRepository {
                 email: doc['email'],
                 nickName: doc['nickName'],
                 points: doc['points'],
-                gamesPlayed: doc["gamesPlayed"]);
+                gamesPlayed: doc["gamesPlayed"],
+                lifes: doc["lifes"]);
           })
           .where((element) => element.id == id)
           .toList();
@@ -57,7 +53,8 @@ class RankingRepository {
             email: doc['email'],
             nickName: doc['nickName'],
             points: doc['points'],
-            gamesPlayed: doc["gamesPlayed"]);
+            gamesPlayed: doc["gamesPlayed"],
+            lifes: doc["lifes"]);
       }).toList();
     });
   }
@@ -71,7 +68,8 @@ class RankingRepository {
                 email: doc['email'],
                 nickName: doc['nickName'],
                 points: doc['points'],
-                gamesPlayed: doc["gamesPlayed"]);
+                gamesPlayed: doc["gamesPlayed"],
+                lifes: doc["lifes"]);
           })
           .where((element) => element.email == email)
           .toList();
