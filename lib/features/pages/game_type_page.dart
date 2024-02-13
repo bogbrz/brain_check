@@ -54,7 +54,9 @@ class GameTypePage extends StatelessWidget {
                   InkWell(
                     onTap: () {
                       Navigator.of(context).push(MaterialPageRoute(
-                          builder: ((context) => RankedGamePage())));
+                          builder: ((context) => RankedGamePage(
+                                user: user,
+                              ))));
                     },
                     child: Container(
                       alignment: Alignment.center,
@@ -109,4 +111,3 @@ class GameTypePage extends StatelessWidget {
         ));
   }
 }
-
