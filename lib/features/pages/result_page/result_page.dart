@@ -16,12 +16,14 @@ class ResultsPage extends StatelessWidget {
     required this.index,
     super.key,
     required this.points,
+    required this.isRanked,
   });
 
   final QuestionPage questionPage;
   final int index;
 
   final int points;
+  final bool isRanked;
 
   @override
   Widget build(BuildContext context) {
@@ -62,6 +64,7 @@ class ResultsPage extends StatelessWidget {
                             fontSize: MediaQuery.of(context).size.height / 35,
                           )),
                       FinishButtonWidget(
+                        isRanked: isRanked ,
                         points: points,
                         profiles: state.profile,
                       )

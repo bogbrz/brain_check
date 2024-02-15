@@ -11,10 +11,12 @@ class FinishButtonWidget extends StatelessWidget {
     super.key,
     required this.points,
     required this.profiles,
+    required this.isRanked,
   });
 
   final int points;
   final List<ProfileModel> profiles;
+  final bool isRanked;
 
   @override
   Widget build(BuildContext context) {
@@ -25,16 +27,20 @@ class FinishButtonWidget extends StatelessWidget {
         ),
         child: InkWell(
           onTap: () {
-            for (final profile in profiles) {
+            if (isRanked) {
               context
                   .read<ResultPageCubit>()
-                  .updateRanking(points: points, id: profile.id);
-            }
+                  .updateRanking(points: points, id: profiles[0].id);
 
-            Navigator.of(context).pop();
-            Navigator.of(context).pop();
-            Navigator.of(context).pop();
-            Navigator.of(context).pop();
+              Navigator.of(context).pop();
+              Navigator.of(context).pop();
+              Navigator.of(context).pop();
+            } else {
+              Navigator.of(context).pop();
+              Navigator.of(context).pop();
+              Navigator.of(context).pop();
+              Navigator.of(context).pop();
+            }
           },
           child: Container(
             alignment: Alignment.center,

@@ -22,12 +22,14 @@ class QuestionPage extends StatefulWidget {
     required this.questionsNumber,
     required this.user,
     required this.token,
+    required this.isRanked,
   });
   final String token;
   final int category;
   final String difficulty;
   final int questionsNumber;
   final User? user;
+  final bool isRanked;
 
   @override
   State<QuestionPage> createState() => _QuestionPageState();
@@ -70,9 +72,11 @@ class _QuestionPageState extends State<QuestionPage> {
                     widget.questionsNumber != 0 &&
                         index == widget.questionsNumber) {
                   return ResultsPage(
+                    isRanked: widget.isRanked,
                     index: index,
                     points: points,
                     questionPage: QuestionPage(
+                        isRanked: widget.isRanked,
                         token: widget.token,
                         category: widget.category,
                         difficulty: widget.difficulty,

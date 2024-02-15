@@ -7,8 +7,6 @@ import 'package:injectable/injectable.dart';
 class RankingFireBaseDataSource {
   final userId = FirebaseAuth.instance.currentUser?.uid;
 
-
-
   Future<void> addToRanking(
       {required String nickName, required String email}) async {
     if (userId == null) {
@@ -55,7 +53,8 @@ class RankingFireBaseDataSource {
       {required int points, required String docId}) async {
     await FirebaseFirestore.instance.collection("Ranking").doc(docId).update({
       "points": FieldValue.increment(points),
-      "gamesPlayed": FieldValue.increment(1)
+      "gamesPlayed": FieldValue.increment(1),
+      "lifes": FieldValue.increment(-1),
     });
   }
 
