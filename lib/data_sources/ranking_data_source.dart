@@ -65,6 +65,13 @@ class RankingFireBaseDataSource {
         .snapshots();
   }
 
+  Future<void> restoreLifes({required String id}) async {
+    return FirebaseFirestore.instance
+        .collection("Ranking")
+        .doc(id)
+        .update({"lifes": 5});
+  }
+
   Stream<QuerySnapshot<Map<String, dynamic>>> getRankingForUpdate(
       {required String email}) {
     return FirebaseFirestore.instance

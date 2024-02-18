@@ -76,19 +76,9 @@ class RankingRepository {
     });
   }
 
-  // Future<List<ProfileModel>> getRankingforUpdate({required String email}) {
-  //   final respone = rankingFireBaseDataSource.getRankingForUpdate(email: email);
-
-  //   //   return snapshot.docs.map((doc) {
-  //   //     return ProfileModel(
-  //   //         id: doc.id,
-  //   //         email: doc['email'],
-  //   //         nickName: doc['nickName'],
-  //   //         points: doc['points'],
-  //   //         gamesPlayed: doc["gamesPlayed"]);
-  //   //   }).toList();
-  //   // });
-  // }
+  Future<void> restoreLifes({required String id}) async {
+    return rankingFireBaseDataSource.restoreLifes(id: id);
+  }
 
   Future<void> updateStats({required int points, required String id}) async {
     return rankingFireBaseDataSource.updateStats(points: points, docId: id);

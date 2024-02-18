@@ -1,7 +1,7 @@
 import 'dart:ffi';
 
 import 'package:brain_check/features/pages/categories_page/categories_page.dart';
-import 'package:brain_check/features/pages/duel_page.dart';
+import 'package:brain_check/features/pages/duel_page/duel_page.dart';
 import 'package:brain_check/features/pages/ranked_game_page/ranked_game_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';

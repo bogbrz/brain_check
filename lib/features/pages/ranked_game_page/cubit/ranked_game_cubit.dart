@@ -31,4 +31,14 @@ class RankedGameCubit extends Cubit<RankedGameState> {
       }
     });
   }
+
+  Future<void> restoreLifes() async {
+    await rankingRepository.getRanking().listen((event) {
+      for (final profile in event) {
+        rankingRepository.restoreLifes(
+          id: profile.id,
+        );
+      }
+    });
+  }
 }
