@@ -246,6 +246,7 @@ class _DifficultyPageState extends State<DifficultyPage> {
                                     Navigator.of(context)
                                         .push(MaterialPageRoute(
                                             builder: ((context) => QuestionPage(
+                                              isRanked: false ,
                                                   token: state.tokenModel.token
                                                       .toString(),
                                                   user: widget.user,

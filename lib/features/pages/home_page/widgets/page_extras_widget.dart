@@ -20,25 +20,24 @@ class PageExtrasWidget extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text(
-            "TOTAL AMOUNT OF QUESTIONS: ${overall.totalNumOfVerifiedQuestions} "),
-        Padding(
-          padding: const EdgeInsets.all(4.0),
-          child: SizedBox(
-            height: MediaQuery.of(context).size.height * 0.3,
-            child: Center(
-              child: Text(
-                '''Welcome back ${profiles[0].nickName}''',
-                textAlign: TextAlign.center,
-                style: GoogleFonts.bungee(
-                    color: Colors.white,
-                    fontSize: MediaQuery.of(context).size.height / 15),
-              ),
+        SizedBox(
+            height: MediaQuery.of(context).size.height / 4,
+            child: Image(image: AssetImage("images/brain_question_white.png"))),
+        SizedBox(
+          height: MediaQuery.of(context).size.height * 0.3,
+          child: Center(
+            child: Column(
+              children: [
+                Text(
+                  '''Welcome back ${profiles[0].nickName}''',
+                  textAlign: TextAlign.center,
+                  style: GoogleFonts.bungee(
+                      color: Colors.white,
+                      fontSize: MediaQuery.of(context).size.height / 15),
+                ),
+              ],
             ),
           ),
-        ),
-        SizedBox(
-          height: MediaQuery.of(context).size.height * 0.05,
         ),
       ],
     );
