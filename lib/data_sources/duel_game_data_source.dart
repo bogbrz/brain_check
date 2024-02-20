@@ -14,4 +14,8 @@ class DuelGameDataSource {
       "password": password,
     });
   }
+
+  Stream<QuerySnapshot<Map<String, dynamic>>> getGameRooms() {
+    return FirebaseFirestore.instance.collection("GameRooms").snapshots();
+  }
 }

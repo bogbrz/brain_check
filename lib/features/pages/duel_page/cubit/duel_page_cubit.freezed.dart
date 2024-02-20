@@ -17,6 +17,8 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$DuelPageState {
   String? get errorMessage => throw _privateConstructorUsedError;
+  List<GameRoomModel> get rooms => throw _privateConstructorUsedError;
+  Status get status => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $DuelPageStateCopyWith<DuelPageState> get copyWith =>
@@ -29,7 +31,7 @@ abstract class $DuelPageStateCopyWith<$Res> {
           DuelPageState value, $Res Function(DuelPageState) then) =
       _$DuelPageStateCopyWithImpl<$Res, DuelPageState>;
   @useResult
-  $Res call({String? errorMessage});
+  $Res call({String? errorMessage, List<GameRoomModel> rooms, Status status});
 }
 
 /// @nodoc
@@ -46,12 +48,22 @@ class _$DuelPageStateCopyWithImpl<$Res, $Val extends DuelPageState>
   @override
   $Res call({
     Object? errorMessage = freezed,
+    Object? rooms = null,
+    Object? status = null,
   }) {
     return _then(_value.copyWith(
       errorMessage: freezed == errorMessage
           ? _value.errorMessage
           : errorMessage // ignore: cast_nullable_to_non_nullable
               as String?,
+      rooms: null == rooms
+          ? _value.rooms
+          : rooms // ignore: cast_nullable_to_non_nullable
+              as List<GameRoomModel>,
+      status: null == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as Status,
     ) as $Val);
   }
 }
@@ -64,7 +76,7 @@ abstract class _$$InitialImplCopyWith<$Res>
       __$$InitialImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String? errorMessage});
+  $Res call({String? errorMessage, List<GameRoomModel> rooms, Status status});
 }
 
 /// @nodoc
@@ -79,12 +91,22 @@ class __$$InitialImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? errorMessage = freezed,
+    Object? rooms = null,
+    Object? status = null,
   }) {
     return _then(_$InitialImpl(
       errorMessage: freezed == errorMessage
           ? _value.errorMessage
           : errorMessage // ignore: cast_nullable_to_non_nullable
               as String?,
+      rooms: null == rooms
+          ? _value._rooms
+          : rooms // ignore: cast_nullable_to_non_nullable
+              as List<GameRoomModel>,
+      status: null == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as Status,
     ));
   }
 }
@@ -92,14 +114,28 @@ class __$$InitialImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$InitialImpl implements _Initial {
-  const _$InitialImpl({required this.errorMessage});
+  const _$InitialImpl(
+      {required this.errorMessage,
+      required final List<GameRoomModel> rooms,
+      required this.status})
+      : _rooms = rooms;
 
   @override
   final String? errorMessage;
+  final List<GameRoomModel> _rooms;
+  @override
+  List<GameRoomModel> get rooms {
+    if (_rooms is EqualUnmodifiableListView) return _rooms;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_rooms);
+  }
+
+  @override
+  final Status status;
 
   @override
   String toString() {
-    return 'DuelPageState(errorMessage: $errorMessage)';
+    return 'DuelPageState(errorMessage: $errorMessage, rooms: $rooms, status: $status)';
   }
 
   @override
@@ -108,11 +144,14 @@ class _$InitialImpl implements _Initial {
         (other.runtimeType == runtimeType &&
             other is _$InitialImpl &&
             (identical(other.errorMessage, errorMessage) ||
-                other.errorMessage == errorMessage));
+                other.errorMessage == errorMessage) &&
+            const DeepCollectionEquality().equals(other._rooms, _rooms) &&
+            (identical(other.status, status) || other.status == status));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, errorMessage);
+  int get hashCode => Object.hash(runtimeType, errorMessage,
+      const DeepCollectionEquality().hash(_rooms), status);
 
   @JsonKey(ignore: true)
   @override
@@ -122,10 +161,17 @@ class _$InitialImpl implements _Initial {
 }
 
 abstract class _Initial implements DuelPageState {
-  const factory _Initial({required final String? errorMessage}) = _$InitialImpl;
+  const factory _Initial(
+      {required final String? errorMessage,
+      required final List<GameRoomModel> rooms,
+      required final Status status}) = _$InitialImpl;
 
   @override
   String? get errorMessage;
+  @override
+  List<GameRoomModel> get rooms;
+  @override
+  Status get status;
   @override
   @JsonKey(ignore: true)
   _$$InitialImplCopyWith<_$InitialImpl> get copyWith =>

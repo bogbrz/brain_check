@@ -14,36 +14,7 @@ class RankingRepository {
         nickName: nickName, email: email);
   }
 
-  Stream<List<ProfileModel>> getProfile() {
-    return rankingFireBaseDataSource.getProfileInfo().map((snapshot) {
-      return snapshot.docs.map((doc) {
-        return ProfileModel(
-            id: doc.id,
-            email: doc['email'],
-            nickName: doc['nickName'],
-            points: doc['points'],
-            gamesPlayed: doc["gamesPlayed"],
-            lifes: doc["lifes"]);
-      }).toList();
-    });
-  }
 
-  Stream<List<ProfileModel>> getProfileWithId({required String id}) {
-    return rankingFireBaseDataSource.getProfileInfo().map((snapshot) {
-      return snapshot.docs
-          .map((doc) {
-            return ProfileModel(
-                id: doc.id,
-                email: doc['email'],
-                nickName: doc['nickName'],
-                points: doc['points'],
-                gamesPlayed: doc["gamesPlayed"],
-                lifes: doc["lifes"]);
-          })
-          .where((element) => element.id == id)
-          .toList();
-    });
-  }
 
   Stream<List<ProfileModel>> getRanking() {
     return rankingFireBaseDataSource.getRanking().map((snapshot) {
@@ -80,9 +51,6 @@ class RankingRepository {
     return rankingFireBaseDataSource.restoreLifes(id: id);
   }
 
-  Future<void> updateStats({required int points, required String id}) async {
-    return rankingFireBaseDataSource.updateStats(points: points, docId: id);
-  }
 
   Future<void> updateRanking({required int points, required String id}) async {
     return rankingFireBaseDataSource.updateRanking(points: points, docId: id);
