@@ -4,13 +4,16 @@ import 'package:brain_check/domain/models/game_room_model.dart';
 import 'package:brain_check/features/pages/duel_page/cubit/duel_page_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class DuelPage extends StatelessWidget {
   DuelPage({
+    required this.nickName,
     super.key,
   });
   final TextEditingController nameController = TextEditingController();
   final TextEditingController passControler = TextEditingController();
+  final String nickName;
 
   @override
   Widget build(BuildContext context) {
@@ -39,19 +42,107 @@ class DuelPage extends StatelessWidget {
                                 itemBuilder: (context, index) {
                                   final room = state.rooms[index];
                                   int i = index + 1;
-                                  return RoomWidget(
-                                    room: room,
-                                    index: i,
+                                  return InkWell(
+                                    onTap: () {
+                                      showDialog(
+                                          context: context,
+                                          builder: (BuildContext context) {
+                                            return JoinRoomWidget(
+                                              nickName: nickName,
+                                              model: room,
+                                            );
+                                          });
+                                    },
+                                    child: RoomWidget(
+                                      room: room,
+                                      index: i,
+                                    ),
                                   );
                                 })),
                         CreateRoomWidget(
-                            nameController: nameController,
-                            passControler: passControler)
+                          nameController: nameController,
+                          passControler: passControler,
+                          nickName: nickName,
+                        )
                       ],
                     );
                 }
               },
             )));
+  }
+}
+
+class JoinRoomWidget extends StatelessWidget {
+  JoinRoomWidget({
+    required this.nickName,
+    required this.model,
+    super.key,
+  });
+  final String nickName;
+  final GameRoomModel model;
+
+  final TextEditingController passwordController = TextEditingController();
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      scrollable: true,
+      title: Text(
+        "$nickName's room",
+        style: GoogleFonts.bungee(
+            color: Colors.white,
+            fontSize: MediaQuery.of(context).size.height / 35),
+      ),
+      content: Form(
+          child: Column(
+        children: [
+          Row(
+            children: [
+              Text(
+                "Enter password",
+                style: GoogleFonts.bungee(
+                    color: Colors.white,
+                    fontSize: MediaQuery.of(context).size.height / 55),
+              ),
+            ],
+          ),
+          TextField(
+            decoration: InputDecoration(
+              focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                width: MediaQuery.of(context).size.width / 85,
+              )),
+              enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                width: MediaQuery.of(context).size.width / 85,
+              )),
+            ),
+            controller: passwordController,
+          ),
+          ElevatedButton(
+              onPressed: () {
+                if (passwordController.text == model.password) {
+                  print("DUPA");
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => Scaffold(
+                            appBar: AppBar(),
+                            body: Center(
+                              child: Text("GAME ROOM PAGE"),
+                            ),
+                          )));
+                } else {
+                  Navigator.of(context).pop();
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text("Wrong password"),
+                      backgroundColor: Colors.red,
+                    ),
+                  );
+                }
+              },
+              child: Text("Join"))
+        ],
+      )),
+    );
   }
 }
 
@@ -63,19 +154,45 @@ class RoomWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Container(
-        margin: EdgeInsets.all(4),
-        width: MediaQuery.of(context).size.width * 0.3,
-        height: MediaQuery.of(context).size.height * 0.1,
-        decoration: BoxDecoration(border: Border.all()),
-        child: Column(
-          children: [
-            Row(
-              children: [Text(index.toString())],
-            ),
-            Text(room.name),
-          ],
+    return Material(
+      clipBehavior: Clip.hardEdge,
+      child: Center(
+        child: Container(
+          margin: EdgeInsets.all(8),
+          width: MediaQuery.of(context).size.width * 0.5,
+          height: MediaQuery.of(context).size.height * 0.15,
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20),
+              color: Colors.black,
+              border: Border.all(
+                  width: MediaQuery.of(context).size.width * 0.01,
+                  color: Colors.white)),
+          child: Column(
+            children: [
+              Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(left: 8, top: 8),
+                    child: Text(
+                      index.toString(),
+                      style: GoogleFonts.bungee(
+                          color: Colors.white,
+                          fontSize: MediaQuery.of(context).size.height / 55),
+                    ),
+                  )
+                ],
+              ),
+              SizedBox(
+                height: MediaQuery.of(context).size.height * 0.02,
+              ),
+              Text(
+                room.name,
+                style: GoogleFonts.bungee(
+                    color: Colors.white,
+                    fontSize: MediaQuery.of(context).size.height / 55),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -87,10 +204,12 @@ class CreateRoomWidget extends StatelessWidget {
     super.key,
     required this.nameController,
     required this.passControler,
+    required this.nickName,
   });
 
   final TextEditingController nameController;
   final TextEditingController passControler;
+  final String nickName;
 
   @override
   Widget build(BuildContext context) {
@@ -161,9 +280,10 @@ class CreateRoomWidget extends StatelessWidget {
                                             context
                                                 .read<DuelPageCubit>()
                                                 .createRoom(
-                                                    name: nameController.text,
-                                                    password:
-                                                        passControler.text);
+                                                  name: nameController.text,
+                                                  password: passControler.text,
+                                                  nickName: nickName,
+                                                );
 
                                             Navigator.of(context).pop();
                                           },

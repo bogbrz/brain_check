@@ -26,106 +26,102 @@ class RankedGamePage extends StatelessWidget {
     Duration difference = resetTime.difference(now);
 
     return BlocProvider(
-      create: (context) => getIt<RankedGameCubit>()
-        ..getRankingForUpdate(email: user!.email.toString()),
-      child: BlocBuilder<RankedGameCubit, RankedGameState>(
-        builder: (context, state) {
-      
-          switch (state.status) {
-            case Status.initial:
-              return InitialStateWidget();
-            case Status.loading:
-              return LoadingStateWidget();
-            case Status.error:
-              return ErrorStateWidget(
-                  errorMessage: state.errorMessage.toString());
-            case Status.success:
-              return Scaffold(
-                appBar: AppBar(
-                  title: Text(
-                    "Time to reset tokens: ${difference.inHours}:${difference.inMinutes.remainder(60)}",
-                    style: GoogleFonts.bungee(
-                        fontSize: MediaQuery.of(context).size.height / 55,
-                        color: Colors.white),
-                  ),
-                  backgroundColor: const Color.fromARGB(255, 27, 58, 93),
-                  actions: [
-                    InkWell(
-                        onTap: () =>
-                            context.read<RankedGameCubit>().restoreLifes(),
-                        child: Icon(Icons.refresh))
-                  ],
-                ),
-                body: Center(
-                  child: Column(
-                    children: [
-                      Padding(
-                          padding: const EdgeInsets.all(10),
-                          child: InfoWidget(
-                            profile: state.profile[0],
-                          )),
-                      if (state.profile[0].lifes != 0) ...[
-                        BlocBuilder<TokenCubitCubit, TokenCubitState>(
-                          builder: (context, state) {
-                            return InkWell(
-                              onTap: () async {
-                                await context
-                                    .read<TokenCubitCubit>()
-                                    .fetchToken();
-                                Navigator.of(context).push(MaterialPageRoute(
-                                    builder: (context) => QuestionPage(
-                                        isRanked: true,
-                                        category: 0,
-                                        difficulty: null.toString(),
-                                        questionsNumber: 5,
-                                        user: user,
-                                        token: state.tokenModel.token
-                                            .toString())));
-                              },
-                              child: Container(
-                                padding: EdgeInsets.all(8),
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(50),
-                                    color: Colors.black,
-                                    border: Border.all(
-                                        width:
-                                            MediaQuery.of(context).size.width /
-                                                55,
-                                        color: Colors.white)),
-                                width: MediaQuery.of(context).size.width * 0.6,
-                                height:
-                                    MediaQuery.of(context).size.height * 0.15,
-                                child: Center(
-                                  child: Text(
-                                    "PLAY",
-                                    style: GoogleFonts.bungee(
-                                        fontSize:
-                                            MediaQuery.of(context).size.height /
-                                                20,
-                                        color: Colors.white),
+        create: (context) => getIt<RankedGameCubit>()
+          ..getRankingForUpdate(email: user!.email.toString()),
+        child: Scaffold(
+          appBar: AppBar(
+            title: Text(
+              "Time to reset tokens: ${difference.inHours}:${difference.inMinutes.remainder(60)}",
+              style: GoogleFonts.bungee(
+                  fontSize: MediaQuery.of(context).size.height / 55,
+                  color: Colors.white),
+            ),
+            backgroundColor: const Color.fromARGB(255, 27, 58, 93),
+          ),
+          body: BlocBuilder<RankedGameCubit, RankedGameState>(
+            builder: (context, state) {
+              switch (state.status) {
+                case Status.initial:
+                  return InitialStateWidget();
+                case Status.loading:
+                  return LoadingStateWidget();
+                case Status.error:
+                  return ErrorStateWidget(
+                      errorMessage: state.errorMessage.toString());
+                case Status.success:
+                  return Center(
+                    child: Column(
+                      children: [
+                        Padding(
+                            padding: const EdgeInsets.all(10),
+                            child: InfoWidget(
+                              profile: state.profile[0],
+                            )),
+                        if (state.profile[0].lifes != 0) ...[
+                          BlocBuilder<TokenCubitCubit, TokenCubitState>(
+                            builder: (context, state) {
+                              return InkWell(
+                                onTap: () async {
+                                  await context
+                                      .read<TokenCubitCubit>()
+                                      .fetchToken();
+                                  Navigator.of(context).push(MaterialPageRoute(
+                                      builder: (context) => QuestionPage(
+                                          isRanked: true,
+                                          category: 0,
+                                          difficulty: null.toString(),
+                                          questionsNumber: 5,
+                                          user: user,
+                                          token: state.tokenModel.token
+                                              .toString())));
+                                },
+                                child: Container(
+                                  padding: EdgeInsets.all(8),
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(50),
+                                      color: Colors.black,
+                                      border: Border.all(
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width /
+                                              55,
+                                          color: Colors.white)),
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.6,
+                                  height:
+                                      MediaQuery.of(context).size.height * 0.15,
+                                  child: Center(
+                                    child: Text(
+                                      "PLAY",
+                                      style: GoogleFonts.bungee(
+                                          fontSize: MediaQuery.of(context)
+                                                  .size
+                                                  .height /
+                                              20,
+                                          color: Colors.white),
+                                    ),
                                   ),
                                 ),
-                              ),
-                            );
-                          },
-                        )
-                      ] else ...[
-                        Text(
-                          "COME BACK TOMMOROW",
-                          textAlign: TextAlign.center,
-                          style: GoogleFonts.bungee(
-                              fontSize: MediaQuery.of(context).size.height / 20,
-                              color: Colors.white),
-                        ),
-                      ]
-                    ],
-                  ),
-                ),
-              );
-          }
-        },
-      ),
-    );
+                              );
+                            },
+                          )
+                        ] else ...[
+                          Text(
+                            "COME BACK TOMMOROW",
+                            textAlign: TextAlign.center,
+                            style: GoogleFonts.bungee(
+                                fontSize:
+                                    MediaQuery.of(context).size.height / 20,
+                                color: Colors.white),
+                          ),
+                        ]
+                      ],
+                    ),
+                  );
+              }
+            },
+          ),
+        ));
   }
 }
 

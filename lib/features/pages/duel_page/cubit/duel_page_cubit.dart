@@ -15,8 +15,8 @@ class DuelPageCubit extends Cubit<DuelPageState> {
   final DuelGameRepository duelGameRepository;
 
   Future<void> createRoom(
-      {required String name, required String password}) async {
-    return duelGameRepository.createRoom(name: name, password: password);
+      {required String name, required String password, required String nickName}) async {
+    return duelGameRepository.createRoom(name: name, password: password, nickName: nickName);
   }
 
   Future<void> getRooms() async {

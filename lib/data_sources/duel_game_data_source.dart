@@ -7,11 +7,12 @@ import 'package:injectable/injectable.dart';
 class DuelGameDataSource {
   final user = FirebaseAuth.instance.currentUser;
   Future<void> createRoom(
-      {required String name, required String password}) async {
+      {required String name, required String password, required String nickName}) async {
     await FirebaseFirestore.instance.collection("GameRooms").add({
       "owner": user!.email,
       "name": name,
       "password": password,
+      "nickName" : nickName,
     });
   }
 

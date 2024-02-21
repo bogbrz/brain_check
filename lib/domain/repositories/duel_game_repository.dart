@@ -5,8 +5,8 @@ class DuelGameRepository {
   DuelGameRepository({required this.duelGameDataSource});
   final DuelGameDataSource duelGameDataSource;
   Future<void> createRoom(
-      {required String name, required String password}) async {
-    return duelGameDataSource.createRoom(name: name, password: password);
+      {required String name, required String password, required String nickName}) async {
+    return duelGameDataSource.createRoom(name: name, password: password, nickName: nickName);
   }
 
   Stream<List<GameRoomModel>> getRooms() {

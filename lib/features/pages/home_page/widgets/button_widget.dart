@@ -11,11 +11,12 @@ class StartButtonWidget extends StatelessWidget {
   const StartButtonWidget({
     super.key,
     required this.user,
-    
+    required this.nickName,
   });
 
   final User? user;
-  
+
+  final String nickName;
 
   @override
   Widget build(BuildContext context) {
@@ -28,6 +29,7 @@ class StartButtonWidget extends StatelessWidget {
           onTap: () {
             Navigator.of(context).push(MaterialPageRoute(
                 builder: (context) => GameTypePage(
+                      nickName: nickName,
                       user: user,
                     )));
           },
