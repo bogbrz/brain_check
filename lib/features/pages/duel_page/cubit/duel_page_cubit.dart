@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:brain_check/app/core/enums/enums.dart';
 import 'package:brain_check/domain/models/game_room_model.dart';
+import 'package:brain_check/domain/models/player_model.dart';
 import 'package:brain_check/domain/repositories/duel_game_repository.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -10,7 +11,7 @@ part 'duel_page_cubit.freezed.dart';
 class DuelPageCubit extends Cubit<DuelPageState> {
   DuelPageCubit({required this.duelGameRepository})
       : super(DuelPageState(
-            errorMessage: null, rooms: [], status: Status.initial));
+            errorMessage: null, rooms: [], status: Status.initial, ));
 
   final DuelGameRepository duelGameRepository;
 
@@ -20,7 +21,7 @@ class DuelPageCubit extends Cubit<DuelPageState> {
   }
 
   Future<void> getRooms() async {
-    emit(DuelPageState(errorMessage: null, rooms: [], status: Status.loading));
+    emit(DuelPageState(errorMessage: null, rooms: [], status: Status.loading, ));
 
     duelGameRepository.getRooms().listen((event) {
       try {

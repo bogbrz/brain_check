@@ -86,7 +86,10 @@ class GameTypePage extends StatelessWidget {
               InkWell(
                 onTap: () {
                   Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => DuelPage(nickName: nickName,),
+                    builder: (context) => DuelPage(
+                      nickName: nickName,
+                      email: user!.email.toString(),
+                    ),
                   ));
                 },
                 child: Container(

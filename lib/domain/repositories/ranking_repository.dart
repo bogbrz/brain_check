@@ -55,4 +55,5 @@ class RankingRepository {
   Future<void> updateRanking({required int points, required String id}) async {
     return rankingFireBaseDataSource.updateRanking(points: points, docId: id);
   }
+ 
 }

@@ -1,7 +1,11 @@
+import 'dart:math';
+
 import 'package:brain_check/app/core/enums/enums.dart';
 import 'package:brain_check/app/injection_container.dart';
 import 'package:brain_check/domain/models/game_room_model.dart';
 import 'package:brain_check/features/pages/duel_page/cubit/duel_page_cubit.dart';
+import 'package:brain_check/features/pages/duel_room_page/duel_room_page.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -9,11 +13,13 @@ import 'package:google_fonts/google_fonts.dart';
 class DuelPage extends StatelessWidget {
   DuelPage({
     required this.nickName,
+    required this.email,
     super.key,
   });
   final TextEditingController nameController = TextEditingController();
   final TextEditingController passControler = TextEditingController();
   final String nickName;
+  final String email;
 
   @override
   Widget build(BuildContext context) {
@@ -48,8 +54,10 @@ class DuelPage extends StatelessWidget {
                                           context: context,
                                           builder: (BuildContext context) {
                                             return JoinRoomWidget(
+                                              email: email,
                                               nickName: nickName,
                                               model: room,
+                                              id: room.id,
                                             );
                                           });
                                     },
@@ -60,6 +68,7 @@ class DuelPage extends StatelessWidget {
                                   );
                                 })),
                         CreateRoomWidget(
+                          email: email,
                           nameController: nameController,
                           passControler: passControler,
                           nickName: nickName,
@@ -76,10 +85,14 @@ class JoinRoomWidget extends StatelessWidget {
   JoinRoomWidget({
     required this.nickName,
     required this.model,
+    required this.email,
+    required this.id,
     super.key,
   });
   final String nickName;
   final GameRoomModel model;
+  final String email;
+  final String id;
 
   final TextEditingController passwordController = TextEditingController();
   @override
@@ -123,13 +136,14 @@ class JoinRoomWidget extends StatelessWidget {
                 if (passwordController.text == model.password) {
                   print("DUPA");
                   Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => Scaffold(
-                            appBar: AppBar(),
-                            body: Center(
-                              child: Text("GAME ROOM PAGE"),
-                            ),
+                      builder: (context) => GameRoomPage(
+                            id: id,
+                            email: email,
+                            nickName: nickName,
                           )));
+                  passwordController.clear();
                 } else {
+                  passwordController.clear();
                   Navigator.of(context).pop();
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
@@ -205,11 +219,13 @@ class CreateRoomWidget extends StatelessWidget {
     required this.nameController,
     required this.passControler,
     required this.nickName,
+    required this.email,
   });
 
   final TextEditingController nameController;
   final TextEditingController passControler;
   final String nickName;
+  final String email;
 
   @override
   Widget build(BuildContext context) {
@@ -284,8 +300,8 @@ class CreateRoomWidget extends StatelessWidget {
                                                   password: passControler.text,
                                                   nickName: nickName,
                                                 );
-
-                                            Navigator.of(context).pop();
+                                            nameController.clear();
+                                            passControler.clear();
                                           },
                                           child: Text("Create"));
                                     },

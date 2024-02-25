@@ -19,6 +19,7 @@ mixin _$GameRoomModel {
   String get name => throw _privateConstructorUsedError;
   String get ownerMail => throw _privateConstructorUsedError;
   String get password => throw _privateConstructorUsedError;
+  String get id => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $GameRoomModelCopyWith<GameRoomModel> get copyWith =>
@@ -31,7 +32,7 @@ abstract class $GameRoomModelCopyWith<$Res> {
           GameRoomModel value, $Res Function(GameRoomModel) then) =
       _$GameRoomModelCopyWithImpl<$Res, GameRoomModel>;
   @useResult
-  $Res call({String name, String ownerMail, String password});
+  $Res call({String name, String ownerMail, String password, String id});
 }
 
 /// @nodoc
@@ -50,6 +51,7 @@ class _$GameRoomModelCopyWithImpl<$Res, $Val extends GameRoomModel>
     Object? name = null,
     Object? ownerMail = null,
     Object? password = null,
+    Object? id = null,
   }) {
     return _then(_value.copyWith(
       name: null == name
@@ -64,6 +66,10 @@ class _$GameRoomModelCopyWithImpl<$Res, $Val extends GameRoomModel>
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
               as String,
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -76,7 +82,7 @@ abstract class _$$GameRoomModelImplCopyWith<$Res>
       __$$GameRoomModelImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String name, String ownerMail, String password});
+  $Res call({String name, String ownerMail, String password, String id});
 }
 
 /// @nodoc
@@ -93,6 +99,7 @@ class __$$GameRoomModelImplCopyWithImpl<$Res>
     Object? name = null,
     Object? ownerMail = null,
     Object? password = null,
+    Object? id = null,
   }) {
     return _then(_$GameRoomModelImpl(
       name: null == name
@@ -107,6 +114,10 @@ class __$$GameRoomModelImplCopyWithImpl<$Res>
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
               as String,
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -115,7 +126,10 @@ class __$$GameRoomModelImplCopyWithImpl<$Res>
 
 class _$GameRoomModelImpl implements _GameRoomModel {
   _$GameRoomModelImpl(
-      {required this.name, required this.ownerMail, required this.password});
+      {required this.name,
+      required this.ownerMail,
+      required this.password,
+      required this.id});
 
   @override
   final String name;
@@ -123,10 +137,12 @@ class _$GameRoomModelImpl implements _GameRoomModel {
   final String ownerMail;
   @override
   final String password;
+  @override
+  final String id;
 
   @override
   String toString() {
-    return 'GameRoomModel(name: $name, ownerMail: $ownerMail, password: $password)';
+    return 'GameRoomModel(name: $name, ownerMail: $ownerMail, password: $password, id: $id)';
   }
 
   @override
@@ -138,11 +154,12 @@ class _$GameRoomModelImpl implements _GameRoomModel {
             (identical(other.ownerMail, ownerMail) ||
                 other.ownerMail == ownerMail) &&
             (identical(other.password, password) ||
-                other.password == password));
+                other.password == password) &&
+            (identical(other.id, id) || other.id == id));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, name, ownerMail, password);
+  int get hashCode => Object.hash(runtimeType, name, ownerMail, password, id);
 
   @JsonKey(ignore: true)
   @override
@@ -155,7 +172,8 @@ abstract class _GameRoomModel implements GameRoomModel {
   factory _GameRoomModel(
       {required final String name,
       required final String ownerMail,
-      required final String password}) = _$GameRoomModelImpl;
+      required final String password,
+      required final String id}) = _$GameRoomModelImpl;
 
   @override
   String get name;
@@ -163,6 +181,8 @@ abstract class _GameRoomModel implements GameRoomModel {
   String get ownerMail;
   @override
   String get password;
+  @override
+  String get id;
   @override
   @JsonKey(ignore: true)
   _$$GameRoomModelImplCopyWith<_$GameRoomModelImpl> get copyWith =>

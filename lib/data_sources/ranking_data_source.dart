@@ -21,8 +21,6 @@ class RankingFireBaseDataSource {
     });
   }
 
-
-
   Future<void> updateRanking(
       {required int points, required String docId}) async {
     await FirebaseFirestore.instance.collection("Ranking").doc(docId).update({
@@ -31,6 +29,8 @@ class RankingFireBaseDataSource {
       "lifes": FieldValue.increment(-1),
     });
   }
+
+ 
 
   Stream<QuerySnapshot<Map<String, dynamic>>> getRanking() {
     return FirebaseFirestore.instance

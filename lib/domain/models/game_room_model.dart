@@ -6,5 +6,6 @@ class GameRoomModel with _$GameRoomModel {
   factory GameRoomModel(
       {required String name,
       required String ownerMail,
-      required String password}) = _GameRoomModel;
+      required String password,
+      required String id}) = _GameRoomModel;
 }
