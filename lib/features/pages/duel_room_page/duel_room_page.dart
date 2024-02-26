@@ -31,19 +31,33 @@ class GameRoomPage extends StatelessWidget {
           children: [
             BlocBuilder<DuelRoomPageCubit, DuelRoomPageState>(
               builder: (context, state) {
-                
                 return Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     IconButton.filledTonal(
                         onPressed: () {
-                          if(state.playerOne[0].email == user!.email.toString() ) { 
-                            
-                            context.read<DuelRoomPageCubit>().leaveRoom(id: state.playerOne[0].id, roomId: id);}
-                         
+                          if (state.playerOne[0].email ==
+                              user!.email.toString()) {
+                            context.read<DuelRoomPageCubit>().leaveRoom(
+                                id: state.playerOne[0].id, roomId: id);
+                          }
+
                           Navigator.of(context).pop();
                           Navigator.of(context).pop();
                         },
-                        icon: Icon(Icons.logout))
+                        icon: Icon(Icons.logout)),
+                    IconButton.filledTonal(
+                        onPressed: () {
+                          if (user!.email == email) {
+                            context
+                                .read<DuelRoomPageCubit>()
+                                .deleteRoom(id: id);
+
+                            Navigator.of(context).pop();
+                            Navigator.of(context).pop();
+                          }
+                        },
+                        icon: Icon(Icons.delete)),
                   ],
                 );
               },

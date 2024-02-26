@@ -24,6 +24,10 @@ class DuelRoomPageCubit extends Cubit<DuelRoomPageState> {
   Future<void> leaveRoom({required String id, required String roomId}) async {
     return duelGameRepository.leaveRoom(id: id, roomId: roomId);
   }
+  Future<void> deleteRoom({required String id, }) async {
+    return duelGameRepository.deleteRoom(id: id, );
+  }
+
 
   Future<void> playerOneInfo({required String id}) async {
     await duelGameRepository.getPlayerOneInfo(id: id).listen((event) {

@@ -48,4 +48,7 @@ class DuelGameRepository {
    Future<void> leaveRoom({required String id, required String roomId}) async {
     return duelGameDataSource.leaveRoom(id: id, roomId: roomId);
   }
+    Future<void> deleteRoom({required String id, }) async {
+    return duelGameDataSource.deleteRoom(id: id, );
+  }
 }

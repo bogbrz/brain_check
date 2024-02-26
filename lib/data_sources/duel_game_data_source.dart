@@ -54,4 +54,10 @@ class DuelGameDataSource {
         .doc(id)
         .delete();
   }
+
+  Future<void> deleteRoom({
+    required String id,
+  }) async {
+    return FirebaseFirestore.instance.collection("GameRooms").doc(id).delete();
+  }
 }
