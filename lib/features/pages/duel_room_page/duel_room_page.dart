@@ -13,11 +13,13 @@ class GameRoomPage extends StatelessWidget {
     required this.nickName,
     required this.email,
     required this.id,
+    required this.user,
     super.key,
   });
   final String email;
   final String nickName;
   final String id;
+  final User? user;
 
   @override
   Widget build(BuildContext context) {
@@ -27,15 +29,24 @@ class GameRoomPage extends StatelessWidget {
           body: SafeArea(
         child: Column(
           children: [
-            Row(
-              children: [
-                IconButton.filledTonal(
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                      Navigator.of(context).pop();
-                    },
-                    icon: Icon(Icons.logout))
-              ],
+            BlocBuilder<DuelRoomPageCubit, DuelRoomPageState>(
+              builder: (context, state) {
+                
+                return Row(
+                  children: [
+                    IconButton.filledTonal(
+                        onPressed: () {
+                          if(state.playerOne[0].email == user!.email.toString() ) { 
+                            
+                            context.read<DuelRoomPageCubit>().leaveRoom(id: state.playerOne[0].id, roomId: id);}
+                         
+                          Navigator.of(context).pop();
+                          Navigator.of(context).pop();
+                        },
+                        icon: Icon(Icons.logout))
+                  ],
+                );
+              },
             ),
             SizedBox(
               height: MediaQuery.of(context).size.height / 3,

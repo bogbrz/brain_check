@@ -44,4 +44,8 @@ class DuelGameRepository {
       }).toList();
     });
   }
+
+   Future<void> leaveRoom({required String id, required String roomId}) async {
+    return duelGameDataSource.leaveRoom(id: id, roomId: roomId);
+  }
 }

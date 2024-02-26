@@ -14,12 +14,14 @@ class DuelPage extends StatelessWidget {
   DuelPage({
     required this.nickName,
     required this.email,
+    required this.user,
     super.key,
   });
   final TextEditingController nameController = TextEditingController();
   final TextEditingController passControler = TextEditingController();
   final String nickName;
   final String email;
+  final User? user;
 
   @override
   Widget build(BuildContext context) {
@@ -58,6 +60,7 @@ class DuelPage extends StatelessWidget {
                                               nickName: nickName,
                                               model: room,
                                               id: room.id,
+                                              user: user,
                                             );
                                           });
                                     },
@@ -87,12 +90,14 @@ class JoinRoomWidget extends StatelessWidget {
     required this.model,
     required this.email,
     required this.id,
+    required this.user,
     super.key,
   });
   final String nickName;
   final GameRoomModel model;
   final String email;
   final String id;
+  final User? user;
 
   final TextEditingController passwordController = TextEditingController();
   @override
@@ -137,6 +142,7 @@ class JoinRoomWidget extends StatelessWidget {
                   print("DUPA");
                   Navigator.of(context).push(MaterialPageRoute(
                       builder: (context) => GameRoomPage(
+                            user: user,
                             id: id,
                             email: email,
                             nickName: nickName,
@@ -302,6 +308,7 @@ class CreateRoomWidget extends StatelessWidget {
                                                 );
                                             nameController.clear();
                                             passControler.clear();
+                                            Navigator.of(context).pop();
                                           },
                                           child: Text("Create"));
                                     },

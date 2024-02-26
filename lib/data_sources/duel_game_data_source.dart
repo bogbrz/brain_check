@@ -37,11 +37,21 @@ class DuelGameDataSource {
     });
   }
 
-  Stream<QuerySnapshot<Map<String, dynamic>>> getPlayerOneInfo({required String id}) {
+  Stream<QuerySnapshot<Map<String, dynamic>>> getPlayerOneInfo(
+      {required String id}) {
     return FirebaseFirestore.instance
         .collection("GameRooms")
         .doc(id)
         .collection("PlayerOne")
         .snapshots();
+  }
+
+  Future<void> leaveRoom({required String id, required String roomId}) async {
+    return FirebaseFirestore.instance
+        .collection("GameRooms")
+        .doc(roomId)
+        .collection("PlayerOne")
+        .doc(id)
+        .delete();
   }
 }

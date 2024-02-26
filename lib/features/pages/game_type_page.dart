@@ -87,6 +87,7 @@ class GameTypePage extends StatelessWidget {
                 onTap: () {
                   Navigator.of(context).push(MaterialPageRoute(
                     builder: (context) => DuelPage(
+                      user: user,
                       nickName: nickName,
                       email: user!.email.toString(),
                     ),
