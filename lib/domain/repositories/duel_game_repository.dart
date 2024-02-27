@@ -25,25 +25,28 @@ class DuelGameRepository {
     });
   }
 
-  Future<void> joinPlayerOne(
+  Future<void> joinPlayer(
       {required String email,
       required String nickName,
-      required String id}) async {
-    return duelGameDataSource.joinPlayerOne(
-        email: email, nickName: nickName, id: id);
+      required String id,required int playerNumber}) async {
+    return duelGameDataSource.joinPlayer(
+        email: email, nickName: nickName, id: id, playerNumber: playerNumber);
   }
 
-  Stream<List<PlayerModel>> getPlayerOneInfo({required String id}) {
-    return duelGameDataSource.getPlayerOneInfo(id: id).map((event) {
+
+  Stream<List<PlayerModel>> getPlayerInfo({required String id, required int playerNumber}) {
+    return duelGameDataSource.getPlayers(id: id).map((event) {
       return event.docs.map((e) {
         return PlayerModel(
             email: e["email"],
             nickName: e["nickName"],
             points: e["points"],
+            player: e["player"],
             id: e.id);
       }).toList();
     });
   }
+
 
    Future<void> leaveRoom({required String id, required String roomId}) async {
     return duelGameDataSource.leaveRoom(id: id, roomId: roomId);

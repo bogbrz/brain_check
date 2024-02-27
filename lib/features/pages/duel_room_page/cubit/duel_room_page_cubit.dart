@@ -10,33 +10,44 @@ part 'duel_room_page_cubit.freezed.dart';
 class DuelRoomPageCubit extends Cubit<DuelRoomPageState> {
   DuelRoomPageCubit({required this.duelGameRepository})
       : super(DuelRoomPageState(
-            errorMessage: null, status: Status.initial, playerOne: []));
+          errorMessage: null,
+          status: Status.initial,
+          player: [],
+        ));
   final DuelGameRepository duelGameRepository;
 
-  Future<void> joinPlayerOne(
+  Future<void> joinPlayer(
       {required String email,
       required String nickName,
-      required String id}) async {
-    return duelGameRepository.joinPlayerOne(
-        email: email, nickName: nickName, id: id);
+      required String id, required int playerNumber}) async {
+    return duelGameRepository.joinPlayer(
+        email: email, nickName: nickName, id: id, playerNumber: playerNumber);
   }
+
 
   Future<void> leaveRoom({required String id, required String roomId}) async {
     return duelGameRepository.leaveRoom(id: id, roomId: roomId);
   }
-  Future<void> deleteRoom({required String id, }) async {
-    return duelGameRepository.deleteRoom(id: id, );
+
+  Future<void> deleteRoom({
+    required String id,
+  }) async {
+    return duelGameRepository.deleteRoom(
+      id: id,
+    );
   }
 
-
-  Future<void> playerOneInfo({required String id}) async {
-    await duelGameRepository.getPlayerOneInfo(id: id).listen((event) {
+  Future<void> playerInfo(
+      {required String id, required int playerNumber}) async {
+    duelGameRepository
+        .getPlayerInfo(id: id, playerNumber: playerNumber)
+        .listen((event) {
       try {
         emit(DuelRoomPageState(
-            errorMessage: null, status: Status.success, playerOne: event));
+            errorMessage: null, status: Status.success, player: event));
       } catch (e) {
         emit(DuelRoomPageState(
-            errorMessage: e.toString(), status: Status.error, playerOne: []));
+            errorMessage: e.toString(), status: Status.error, player: []));
       }
     });
   }

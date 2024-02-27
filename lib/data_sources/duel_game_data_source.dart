@@ -22,27 +22,28 @@ class DuelGameDataSource {
     return FirebaseFirestore.instance.collection("GameRooms").snapshots();
   }
 
-  Future<void> joinPlayerOne(
+  Future<void> joinPlayer(
       {required String email,
       required String nickName,
-      required String id}) async {
+      required String id,
+      required int playerNumber}) async {
     await FirebaseFirestore.instance
         .collection("GameRooms")
         .doc(id)
-        .collection("PlayerOne")
+        .collection("Players")
         .add({
       "email": email,
       "nickName": nickName,
       "points": 0,
+      "player": playerNumber,
     });
   }
 
-  Stream<QuerySnapshot<Map<String, dynamic>>> getPlayerOneInfo(
-      {required String id}) {
+  Stream<QuerySnapshot<Map<String, dynamic>>> getPlayers({required String id}) {
     return FirebaseFirestore.instance
         .collection("GameRooms")
         .doc(id)
-        .collection("PlayerOne")
+        .collection("Players")
         .snapshots();
   }
 
@@ -50,7 +51,7 @@ class DuelGameDataSource {
     return FirebaseFirestore.instance
         .collection("GameRooms")
         .doc(roomId)
-        .collection("PlayerOne")
+        .collection("Players")
         .doc(id)
         .delete();
   }

@@ -7,7 +7,7 @@ part 'player_model.freezed.dart';
 class PlayerModel with _$PlayerModel {
  
   factory PlayerModel({
-    required String email, required String nickName, required int points, required String id, 
+    required String email, required String nickName, required int points, required String id,required int player 
   }) = _PlayerModel;
 
 }
