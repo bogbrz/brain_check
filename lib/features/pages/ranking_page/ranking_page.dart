@@ -31,16 +31,16 @@ class RankingPage extends StatelessWidget {
           builder: (context, state) {
             switch (state.status) {
               case Status.initial:
-                return InitialStateWidget();
+                return const InitialStateWidget();
               case Status.loading:
-                return LoadingStateWidget();
+                return const LoadingStateWidget();
               case Status.error:
                 return ErrorStateWidget(
                     errorMessage: state.errorMessage.toString());
               case Status.success:
                 return Column(
                   children: [
-                    LabelWidget(),
+                    const LabelWidget(),
                     Expanded(
                       child: ListView.builder(
                         itemCount: state.profiles.length,

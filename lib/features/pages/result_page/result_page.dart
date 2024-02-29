@@ -4,7 +4,6 @@ import 'package:brain_check/app/injection_container.dart';
 import 'package:brain_check/features/pages/question_page/question_page.dart';
 import 'package:brain_check/features/pages/result_page/cubit/result_page_cubit.dart';
 import 'package:brain_check/features/pages/result_page/widgets/button_widget.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -35,9 +34,9 @@ class ResultsPage extends StatelessWidget {
           builder: (context, state) {
             switch (state.status) {
               case Status.initial:
-                return InitialStateWidget();
+                return const InitialStateWidget();
               case Status.loading:
-                return LoadingStateWidget();
+                return const LoadingStateWidget();
               case Status.error:
                 return ErrorStateWidget(
                     errorMessage: state.errorMessage.toString());

@@ -22,6 +22,18 @@ class DuelGameDataSource {
     return FirebaseFirestore.instance.collection("GameRooms").snapshots();
   }
 
+  Future<void> readyStatus(
+      {required String id, required bool ready, required String roomId}) async {
+    return FirebaseFirestore.instance
+        .collection("GameRooms")
+        .doc(roomId)
+        .collection("Players")
+        .doc(id)
+        .update({
+      "ready": ready,
+    });
+  }
+
   Future<void> joinPlayer(
       {required String email,
       required String nickName,
@@ -36,6 +48,7 @@ class DuelGameDataSource {
       "nickName": nickName,
       "points": 0,
       "player": playerNumber,
+      "ready": false,
     });
   }
 

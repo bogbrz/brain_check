@@ -51,9 +51,9 @@ class _SetUpUserPageState extends State<SetUpUserPage> {
                 }
                 switch (state.status) {
                   case Status.initial:
-                    return InitialStateWidget();
+                    return const InitialStateWidget();
                   case Status.loading:
-                    return LoadingStateWidget();
+                    return const LoadingStateWidget();
 
                   case Status.error:
                     return ErrorStateWidget(

@@ -18,7 +18,7 @@ class ResultPageCubit extends Cubit<ResultPageState> {
   StreamSubscription? streamSubscription;
 
   Future<void> getRankingForUpdate({required String email}) async {
-    emit(ResultPageState(
+    emit(const ResultPageState(
         errorMessage: null, profile: [], status: Status.loading));
     streamSubscription =
         rankingRepository.getRankingForUpdate(email: email).listen((event) {

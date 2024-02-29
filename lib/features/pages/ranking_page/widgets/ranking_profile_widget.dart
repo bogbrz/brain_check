@@ -43,21 +43,21 @@ class RankingProfileWidget extends StatelessWidget {
               child: Center(
                   child: i == 1
                       ? Image(
-                          image: AssetImage(
+                          image: const AssetImage(
                             "images/first_place.png",
                           ),
                           width: MediaQuery.of(context).size.width / 5,
                         )
                       : i == 2
                           ? Image(
-                              image: AssetImage(
+                              image: const AssetImage(
                                 "images/second-prize.png",
                               ),
                               width: MediaQuery.of(context).size.width / 5,
                             )
                           : i == 3
                               ? Image(
-                                  image: AssetImage(
+                                  image: const AssetImage(
                                     "images/third-prize.png",
                                   ),
                                   width: MediaQuery.of(context).size.width / 5,

@@ -18,7 +18,8 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$DuelRoomPageState {
   String? get errorMessage => throw _privateConstructorUsedError;
   Status get status => throw _privateConstructorUsedError;
-  List<PlayerModel> get player => throw _privateConstructorUsedError;
+  List<PlayerModel> get playerOne => throw _privateConstructorUsedError;
+  List<PlayerModel> get playerTwo => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $DuelRoomPageStateCopyWith<DuelRoomPageState> get copyWith =>
@@ -31,7 +32,11 @@ abstract class $DuelRoomPageStateCopyWith<$Res> {
           DuelRoomPageState value, $Res Function(DuelRoomPageState) then) =
       _$DuelRoomPageStateCopyWithImpl<$Res, DuelRoomPageState>;
   @useResult
-  $Res call({String? errorMessage, Status status, List<PlayerModel> player});
+  $Res call(
+      {String? errorMessage,
+      Status status,
+      List<PlayerModel> playerOne,
+      List<PlayerModel> playerTwo});
 }
 
 /// @nodoc
@@ -49,7 +54,8 @@ class _$DuelRoomPageStateCopyWithImpl<$Res, $Val extends DuelRoomPageState>
   $Res call({
     Object? errorMessage = freezed,
     Object? status = null,
-    Object? player = null,
+    Object? playerOne = null,
+    Object? playerTwo = null,
   }) {
     return _then(_value.copyWith(
       errorMessage: freezed == errorMessage
@@ -60,9 +66,13 @@ class _$DuelRoomPageStateCopyWithImpl<$Res, $Val extends DuelRoomPageState>
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as Status,
-      player: null == player
-          ? _value.player
-          : player // ignore: cast_nullable_to_non_nullable
+      playerOne: null == playerOne
+          ? _value.playerOne
+          : playerOne // ignore: cast_nullable_to_non_nullable
+              as List<PlayerModel>,
+      playerTwo: null == playerTwo
+          ? _value.playerTwo
+          : playerTwo // ignore: cast_nullable_to_non_nullable
               as List<PlayerModel>,
     ) as $Val);
   }
@@ -76,7 +86,11 @@ abstract class _$$InitialImplCopyWith<$Res>
       __$$InitialImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String? errorMessage, Status status, List<PlayerModel> player});
+  $Res call(
+      {String? errorMessage,
+      Status status,
+      List<PlayerModel> playerOne,
+      List<PlayerModel> playerTwo});
 }
 
 /// @nodoc
@@ -92,7 +106,8 @@ class __$$InitialImplCopyWithImpl<$Res>
   $Res call({
     Object? errorMessage = freezed,
     Object? status = null,
-    Object? player = null,
+    Object? playerOne = null,
+    Object? playerTwo = null,
   }) {
     return _then(_$InitialImpl(
       errorMessage: freezed == errorMessage
@@ -103,9 +118,13 @@ class __$$InitialImplCopyWithImpl<$Res>
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as Status,
-      player: null == player
-          ? _value._player
-          : player // ignore: cast_nullable_to_non_nullable
+      playerOne: null == playerOne
+          ? _value._playerOne
+          : playerOne // ignore: cast_nullable_to_non_nullable
+              as List<PlayerModel>,
+      playerTwo: null == playerTwo
+          ? _value._playerTwo
+          : playerTwo // ignore: cast_nullable_to_non_nullable
               as List<PlayerModel>,
     ));
   }
@@ -117,24 +136,34 @@ class _$InitialImpl implements _Initial {
   const _$InitialImpl(
       {required this.errorMessage,
       required this.status,
-      required final List<PlayerModel> player})
-      : _player = player;
+      required final List<PlayerModel> playerOne,
+      required final List<PlayerModel> playerTwo})
+      : _playerOne = playerOne,
+        _playerTwo = playerTwo;
 
   @override
   final String? errorMessage;
   @override
   final Status status;
-  final List<PlayerModel> _player;
+  final List<PlayerModel> _playerOne;
   @override
-  List<PlayerModel> get player {
-    if (_player is EqualUnmodifiableListView) return _player;
+  List<PlayerModel> get playerOne {
+    if (_playerOne is EqualUnmodifiableListView) return _playerOne;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_player);
+    return EqualUnmodifiableListView(_playerOne);
+  }
+
+  final List<PlayerModel> _playerTwo;
+  @override
+  List<PlayerModel> get playerTwo {
+    if (_playerTwo is EqualUnmodifiableListView) return _playerTwo;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_playerTwo);
   }
 
   @override
   String toString() {
-    return 'DuelRoomPageState(errorMessage: $errorMessage, status: $status, player: $player)';
+    return 'DuelRoomPageState(errorMessage: $errorMessage, status: $status, playerOne: $playerOne, playerTwo: $playerTwo)';
   }
 
   @override
@@ -145,12 +174,19 @@ class _$InitialImpl implements _Initial {
             (identical(other.errorMessage, errorMessage) ||
                 other.errorMessage == errorMessage) &&
             (identical(other.status, status) || other.status == status) &&
-            const DeepCollectionEquality().equals(other._player, _player));
+            const DeepCollectionEquality()
+                .equals(other._playerOne, _playerOne) &&
+            const DeepCollectionEquality()
+                .equals(other._playerTwo, _playerTwo));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, errorMessage, status,
-      const DeepCollectionEquality().hash(_player));
+  int get hashCode => Object.hash(
+      runtimeType,
+      errorMessage,
+      status,
+      const DeepCollectionEquality().hash(_playerOne),
+      const DeepCollectionEquality().hash(_playerTwo));
 
   @JsonKey(ignore: true)
   @override
@@ -163,14 +199,17 @@ abstract class _Initial implements DuelRoomPageState {
   const factory _Initial(
       {required final String? errorMessage,
       required final Status status,
-      required final List<PlayerModel> player}) = _$InitialImpl;
+      required final List<PlayerModel> playerOne,
+      required final List<PlayerModel> playerTwo}) = _$InitialImpl;
 
   @override
   String? get errorMessage;
   @override
   Status get status;
   @override
-  List<PlayerModel> get player;
+  List<PlayerModel> get playerOne;
+  @override
+  List<PlayerModel> get playerTwo;
   @override
   @JsonKey(ignore: true)
   _$$InitialImplCopyWith<_$InitialImpl> get copyWith =>

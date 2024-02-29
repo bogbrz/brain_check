@@ -37,7 +37,7 @@ class QuestionPage extends StatefulWidget {
 
 class _QuestionPageState extends State<QuestionPage> {
   @override
-  var choosedQuestion = null;
+  var choosedQuestion;
   var index = 0;
   var isCorrect = false;
   var next = false;
@@ -87,9 +87,9 @@ class _QuestionPageState extends State<QuestionPage> {
 
                 switch (state.status) {
                   case Status.initial:
-                    return InitialStateWidget();
+                    return const InitialStateWidget();
                   case Status.loading:
-                    return LoadingStateWidget();
+                    return const LoadingStateWidget();
                   case Status.error:
                     return ErrorStateWidget(
                         errorMessage: state.errorMessage.toString());

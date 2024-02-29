@@ -1,4 +1,3 @@
-import 'dart:math';
 
 import 'package:brain_check/app/core/enums/enums.dart';
 import 'package:brain_check/app/injection_container.dart';
@@ -35,9 +34,9 @@ class DuelPage extends StatelessWidget {
               builder: (context, state) {
                 switch (state.status) {
                   case Status.initial:
-                    return InitialStateWidget();
+                    return const InitialStateWidget();
                   case Status.loading:
-                    return LoadingStateWidget();
+                    return const LoadingStateWidget();
                   case Status.error:
                     return ErrorStateWidget(
                         errorMessage: state.errorMessage.toString());
@@ -56,7 +55,7 @@ class DuelPage extends StatelessWidget {
                                           context: context,
                                           builder: (BuildContext context) {
                                             return JoinRoomWidget(
-                                              email: email,
+                                              email: room.ownerMail,
                                               nickName: nickName,
                                               model: room,
                                               id: room.id,
@@ -154,14 +153,14 @@ class JoinRoomWidget extends StatelessWidget {
                   passwordController.clear();
                   Navigator.of(context).pop();
                   ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
+                    const SnackBar(
                       content: Text("Wrong password"),
                       backgroundColor: Colors.red,
                     ),
                   );
                 }
               },
-              child: Text("Join"))
+              child: const Text("Join"))
         ],
       )),
     );
@@ -180,7 +179,7 @@ class RoomWidget extends StatelessWidget {
       clipBehavior: Clip.hardEdge,
       child: Center(
         child: Container(
-          margin: EdgeInsets.all(8),
+          margin: const EdgeInsets.all(8),
           width: MediaQuery.of(context).size.width * 0.5,
           height: MediaQuery.of(context).size.height * 0.15,
           decoration: BoxDecoration(
@@ -255,10 +254,10 @@ class CreateRoomWidget extends StatelessWidget {
                         create: (context) => getIt<DuelPageCubit>(),
                         child: AlertDialog(
                           scrollable: true,
-                          title: Text("Create new game"),
+                          title: const Text("Create new game"),
                           content: Form(
                             child: Column(children: [
-                              Row(
+                              const Row(
                                 children: [
                                   Text("Room name"),
                                 ],
@@ -278,7 +277,7 @@ class CreateRoomWidget extends StatelessWidget {
                                 ),
                                 controller: nameController,
                               ),
-                              Row(
+                              const Row(
                                 children: [
                                   Text("Password"),
                                 ],
@@ -316,7 +315,7 @@ class CreateRoomWidget extends StatelessWidget {
                                             passControler.clear();
                                             Navigator.of(context).pop();
                                           },
-                                          child: Text("Create"));
+                                          child: const Text("Create"));
                                     },
                                   ))
                             ]),
@@ -325,7 +324,7 @@ class CreateRoomWidget extends StatelessWidget {
                       );
                     });
               },
-              label: Row(
+              label: const Row(
                 children: [Text("Create new room"), Icon(Icons.add)],
               )),
         ],

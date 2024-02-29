@@ -33,7 +33,7 @@ class DifficultyPage extends StatefulWidget {
 
 class _DifficultyPageState extends State<DifficultyPage> {
   var choosedDifficulty = '';
-  var questionsNumber = null;
+  var questionsNumber;
 
   @override
   Widget build(BuildContext context) {
@@ -56,9 +56,9 @@ class _DifficultyPageState extends State<DifficultyPage> {
               builder: (context, state) {
                 switch (state.status) {
                   case Status.initial:
-                    return InitialStateWidget();
+                    return const InitialStateWidget();
                   case Status.loading:
-                    return LoadingStateWidget();
+                    return const LoadingStateWidget();
                   case Status.error:
                     return ErrorStateWidget(
                         errorMessage: state.errorMessage.toString());

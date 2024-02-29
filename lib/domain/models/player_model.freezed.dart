@@ -21,6 +21,7 @@ mixin _$PlayerModel {
   int get points => throw _privateConstructorUsedError;
   String get id => throw _privateConstructorUsedError;
   int get player => throw _privateConstructorUsedError;
+  bool get ready => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $PlayerModelCopyWith<PlayerModel> get copyWith =>
@@ -33,7 +34,13 @@ abstract class $PlayerModelCopyWith<$Res> {
           PlayerModel value, $Res Function(PlayerModel) then) =
       _$PlayerModelCopyWithImpl<$Res, PlayerModel>;
   @useResult
-  $Res call({String email, String nickName, int points, String id, int player});
+  $Res call(
+      {String email,
+      String nickName,
+      int points,
+      String id,
+      int player,
+      bool ready});
 }
 
 /// @nodoc
@@ -54,6 +61,7 @@ class _$PlayerModelCopyWithImpl<$Res, $Val extends PlayerModel>
     Object? points = null,
     Object? id = null,
     Object? player = null,
+    Object? ready = null,
   }) {
     return _then(_value.copyWith(
       email: null == email
@@ -76,6 +84,10 @@ class _$PlayerModelCopyWithImpl<$Res, $Val extends PlayerModel>
           ? _value.player
           : player // ignore: cast_nullable_to_non_nullable
               as int,
+      ready: null == ready
+          ? _value.ready
+          : ready // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -88,7 +100,13 @@ abstract class _$$PlayerModelImplCopyWith<$Res>
       __$$PlayerModelImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String email, String nickName, int points, String id, int player});
+  $Res call(
+      {String email,
+      String nickName,
+      int points,
+      String id,
+      int player,
+      bool ready});
 }
 
 /// @nodoc
@@ -107,6 +125,7 @@ class __$$PlayerModelImplCopyWithImpl<$Res>
     Object? points = null,
     Object? id = null,
     Object? player = null,
+    Object? ready = null,
   }) {
     return _then(_$PlayerModelImpl(
       email: null == email
@@ -129,6 +148,10 @@ class __$$PlayerModelImplCopyWithImpl<$Res>
           ? _value.player
           : player // ignore: cast_nullable_to_non_nullable
               as int,
+      ready: null == ready
+          ? _value.ready
+          : ready // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -141,7 +164,8 @@ class _$PlayerModelImpl implements _PlayerModel {
       required this.nickName,
       required this.points,
       required this.id,
-      required this.player});
+      required this.player,
+      required this.ready});
 
   @override
   final String email;
@@ -153,10 +177,12 @@ class _$PlayerModelImpl implements _PlayerModel {
   final String id;
   @override
   final int player;
+  @override
+  final bool ready;
 
   @override
   String toString() {
-    return 'PlayerModel(email: $email, nickName: $nickName, points: $points, id: $id, player: $player)';
+    return 'PlayerModel(email: $email, nickName: $nickName, points: $points, id: $id, player: $player, ready: $ready)';
   }
 
   @override
@@ -169,12 +195,13 @@ class _$PlayerModelImpl implements _PlayerModel {
                 other.nickName == nickName) &&
             (identical(other.points, points) || other.points == points) &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.player, player) || other.player == player));
+            (identical(other.player, player) || other.player == player) &&
+            (identical(other.ready, ready) || other.ready == ready));
   }
 
   @override
   int get hashCode =>
-      Object.hash(runtimeType, email, nickName, points, id, player);
+      Object.hash(runtimeType, email, nickName, points, id, player, ready);
 
   @JsonKey(ignore: true)
   @override
@@ -189,7 +216,8 @@ abstract class _PlayerModel implements PlayerModel {
       required final String nickName,
       required final int points,
       required final String id,
-      required final int player}) = _$PlayerModelImpl;
+      required final int player,
+      required final bool ready}) = _$PlayerModelImpl;
 
   @override
   String get email;
@@ -201,6 +229,8 @@ abstract class _PlayerModel implements PlayerModel {
   String get id;
   @override
   int get player;
+  @override
+  bool get ready;
   @override
   @JsonKey(ignore: true)
   _$$PlayerModelImplCopyWith<_$PlayerModelImpl> get copyWith =>

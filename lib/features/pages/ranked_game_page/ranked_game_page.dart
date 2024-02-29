@@ -8,10 +8,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:intl/intl.dart';
 
 class RankedGamePage extends StatelessWidget {
-  RankedGamePage({
+  const RankedGamePage({
     required this.user,
     super.key,
   });
@@ -42,9 +41,9 @@ class RankedGamePage extends StatelessWidget {
             builder: (context, state) {
               switch (state.status) {
                 case Status.initial:
-                  return InitialStateWidget();
+                  return const InitialStateWidget();
                 case Status.loading:
-                  return LoadingStateWidget();
+                  return const LoadingStateWidget();
                 case Status.error:
                   return ErrorStateWidget(
                       errorMessage: state.errorMessage.toString());
@@ -76,7 +75,7 @@ class RankedGamePage extends StatelessWidget {
                                               .toString())));
                                 },
                                 child: Container(
-                                  padding: EdgeInsets.all(8),
+                                  padding: const EdgeInsets.all(8),
                                   decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(50),
                                       color: Colors.black,
@@ -160,7 +159,7 @@ class InfoWidget extends StatelessWidget {
                       ),
                       SizedBox(
                         height: MediaQuery.of(context).size.height / 25,
-                        child: Image(
+                        child: const Image(
                           image: AssetImage("images/brain.png"),
                         ),
                       )

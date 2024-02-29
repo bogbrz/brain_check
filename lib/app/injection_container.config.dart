@@ -8,8 +8,8 @@
 // coverage:ignore-file
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:brain_check/app/cubit%20copy/token_cubit_cubit.dart' as _i22;
-import 'package:brain_check/app/injection_container.dart' as _i27;
+import 'package:brain_check/app/cubit%20copy/token_cubit_cubit.dart' as _i21;
+import 'package:brain_check/app/injection_container.dart' as _i26;
 import 'package:brain_check/data_sources/authentication_data_source.dart'
     as _i3;
 import 'package:brain_check/data_sources/duel_game_data_source.dart' as _i5;
@@ -24,25 +24,23 @@ import 'package:brain_check/domain/repositories/questions_repository.dart'
 import 'package:brain_check/domain/repositories/ranking_repository.dart'
     as _i11;
 import 'package:brain_check/features/pages/categories_page/cubit/categories_page_cubit.dart'
-    as _i23;
+    as _i22;
 import 'package:brain_check/features/pages/difficulty_page/cubit/difficulty_page_cubit.dart'
-    as _i24;
+    as _i23;
 import 'package:brain_check/features/pages/duel_page/cubit/duel_page_cubit.dart'
     as _i7;
 import 'package:brain_check/features/pages/duel_room_page/cubit/duel_room_page_cubit.dart'
     as _i8;
 import 'package:brain_check/features/pages/home_page/cubit/home_page_cubit.dart'
-    as _i25;
+    as _i24;
 import 'package:brain_check/features/pages/log_in/cubit/log_in_page_cubit.dart'
     as _i9;
 import 'package:brain_check/features/pages/question_page/cubit/question_page_cubit.dart'
-    as _i26;
-import 'package:brain_check/features/pages/question_page_test/cubit/question_test_cubit.dart'
-    as _i19;
+    as _i25;
 import 'package:brain_check/features/pages/ranked_game_page/cubit/ranked_game_cubit.dart'
-    as _i20;
+    as _i19;
 import 'package:brain_check/features/pages/ranking_page/cubit/ranking_page_cubit.dart'
-    as _i21;
+    as _i20;
 import 'package:brain_check/features/pages/result_page/cubit/result_page_cubit.dart'
     as _i12;
 import 'package:brain_check/features/pages/root_page/cubit/root_page_cubit.dart'
@@ -103,27 +101,23 @@ extension GetItInjectableX on _i1.GetIt {
         () => _i17.QuestionDataSource(gh<_i16.Dio>()));
     gh.factory<_i18.QuestionRepository>(() => _i18.QuestionRepository(
         questionDataSource: gh<_i17.QuestionDataSource>()));
-    gh.factory<_i19.QuestionTestPageCubit>(() => _i19.QuestionTestPageCubit(
-          questionRepository: gh<_i18.QuestionRepository>(),
-          rankingRepository: gh<_i11.RankingRepository>(),
-        ));
-    gh.factory<_i20.RankedGameCubit>(() => _i20.RankedGameCubit(
+    gh.factory<_i19.RankedGameCubit>(() => _i19.RankedGameCubit(
           rankingRepository: gh<_i11.RankingRepository>(),
           questionRepository: gh<_i18.QuestionRepository>(),
         ));
-    gh.factory<_i21.RankingPageCubit>(() =>
-        _i21.RankingPageCubit(rankingRepository: gh<_i11.RankingRepository>()));
-    gh.factory<_i22.TokenCubitCubit>(() => _i22.TokenCubitCubit(
+    gh.factory<_i20.RankingPageCubit>(() =>
+        _i20.RankingPageCubit(rankingRepository: gh<_i11.RankingRepository>()));
+    gh.factory<_i21.TokenCubitCubit>(() => _i21.TokenCubitCubit(
         questionRepository: gh<_i18.QuestionRepository>()));
-    gh.factory<_i23.CategoriesPageCubit>(() => _i23.CategoriesPageCubit(
+    gh.factory<_i22.CategoriesPageCubit>(() => _i22.CategoriesPageCubit(
         questionRepository: gh<_i18.QuestionRepository>()));
-    gh.factory<_i24.DifficultyPageCubit>(() => _i24.DifficultyPageCubit(
+    gh.factory<_i23.DifficultyPageCubit>(() => _i23.DifficultyPageCubit(
         questionRepository: gh<_i18.QuestionRepository>()));
-    gh.factory<_i25.HomePageCubit>(() => _i25.HomePageCubit(
+    gh.factory<_i24.HomePageCubit>(() => _i24.HomePageCubit(
           rankingRepository: gh<_i11.RankingRepository>(),
           questionRepository: gh<_i18.QuestionRepository>(),
         ));
-    gh.factory<_i26.QuestionPageCubit>(() => _i26.QuestionPageCubit(
+    gh.factory<_i25.QuestionPageCubit>(() => _i25.QuestionPageCubit(
           questionRepository: gh<_i18.QuestionRepository>(),
           rankingRepository: gh<_i11.RankingRepository>(),
         ));
@@ -131,4 +125,4 @@ extension GetItInjectableX on _i1.GetIt {
   }
 }
 
-class _$RegisterModule extends _i27.RegisterModule {}
+class _$RegisterModule extends _i26.RegisterModule {}
