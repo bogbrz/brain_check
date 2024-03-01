@@ -21,6 +21,7 @@ class DuelGameRepository {
             name: e["name"],
             ownerMail: e["owner"],
             password: e["password"],
+            nickName: e["nickName"],
             id: e.id);
       }).toList();
     });

@@ -1,7 +1,7 @@
 import 'package:brain_check/app/core/enums/enums.dart';
 import 'package:brain_check/app/injection_container.dart';
 import 'package:brain_check/domain/models/player_model.dart';
-import 'package:brain_check/domain/models/profile_model.dart';
+
 import 'package:brain_check/features/pages/duel_room_page/cubit/duel_room_page_cubit.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -25,51 +25,55 @@ class GameRoomPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => getIt<DuelRoomPageCubit>()..playerInfo(id: id),
-      child: Scaffold(body: SafeArea(
-        child: BlocBuilder<DuelRoomPageCubit, DuelRoomPageState>(
-          builder: (context, state) {
-            switch (state.status) {
-              case Status.initial:
-                return const InitialStateWidget();
-              case Status.loading:
-                return const LoadingStateWidget();
-              case Status.error:
-                return ErrorStateWidget(
-                    errorMessage: state.errorMessage.toString());
-              case Status.success:
-                return Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                      SizedBox(
-                        width: MediaQuery.of(context).size.width / 2,
-                        child: JoinPlayerOneWidget(
-                          email: email,
-                          nickName: nickName,
-                          id: id,
-                          playerOne: state.playerOne,
-                          playerTwo: state.playerTwo,
-                          user: user,
-                        ),
-                      ),
-                      SizedBox(
-                        width: MediaQuery.of(context).size.width / 2,
-                        child: JoinPlayerTwoWidget(
-                          email: email,
-                          nickName: nickName,
-                          id: id,
-                          playerTwo: state.playerTwo,
-                          playerOne: state.playerOne,
-                          user: user,
-                        ),
-                      ),
-                    ])
-                  ],
-                );
-            }
-          },
-        ),
-      )),
+      child: Scaffold(
+          appBar: AppBar(
+            title: Text("$nickName's room"),
+          ),
+          body: SafeArea(
+            child: BlocBuilder<DuelRoomPageCubit, DuelRoomPageState>(
+              builder: (context, state) {
+                switch (state.status) {
+                  case Status.initial:
+                    return const InitialStateWidget();
+                  case Status.loading:
+                    return const LoadingStateWidget();
+                  case Status.error:
+                    return ErrorStateWidget(
+                        errorMessage: state.errorMessage.toString());
+                  case Status.success:
+                    return Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              SizedBox(
+                                width: MediaQuery.of(context).size.width / 2,
+                                child: JoinPlayerOneWidget(
+                                  nickName: nickName,
+                                  id: id,
+                                  playerOne: state.playerOne,
+                                  playerTwo: state.playerTwo,
+                                  user: user,
+                                ),
+                              ),
+                              SizedBox(
+                                width: MediaQuery.of(context).size.width / 2,
+                                child: JoinPlayerTwoWidget(
+                                  nickName: nickName,
+                                  id: id,
+                                  playerTwo: state.playerTwo,
+                                  playerOne: state.playerOne,
+                                  user: user,
+                                ),
+                              ),
+                            ])
+                      ],
+                    );
+                }
+              },
+            ),
+          )),
     );
   }
 }
@@ -77,7 +81,6 @@ class GameRoomPage extends StatelessWidget {
 class JoinPlayerTwoWidget extends StatelessWidget {
   const JoinPlayerTwoWidget({
     super.key,
-    required this.email,
     required this.nickName,
     required this.id,
     required this.playerTwo,
@@ -85,7 +88,6 @@ class JoinPlayerTwoWidget extends StatelessWidget {
     required this.playerOne,
   });
 
-  final String email;
   final String nickName;
   final String id;
   final List<PlayerModel> playerTwo;
@@ -100,16 +102,16 @@ class JoinPlayerTwoWidget extends StatelessWidget {
           SizedBox(
               width: MediaQuery.of(context).size.width / 3,
               child: InkWell(
-                  onTap:
-                      playerOne.isNotEmpty && playerOne[0].email == user!.email
-                          ? null
-                          : () {
-                              context.read<DuelRoomPageCubit>().joinPlayer(
-                                  email: email,
-                                  nickName: nickName,
-                                  id: id,
-                                  playerNumber: 2);
-                            },
+                  onTap: playerOne.isNotEmpty &&
+                          playerOne[0].email == user!.email.toString()
+                      ? null
+                      : () {
+                          context.read<DuelRoomPageCubit>().joinPlayer(
+                              email: user!.email.toString(),
+                              nickName: nickName,
+                              id: id,
+                              playerNumber: 2);
+                        },
                   child:
                       const Image(image: AssetImage("images/join_game.png")))),
           Text(
@@ -180,7 +182,6 @@ class JoinPlayerTwoWidget extends StatelessWidget {
 class JoinPlayerOneWidget extends StatelessWidget {
   const JoinPlayerOneWidget({
     super.key,
-    required this.email,
     required this.nickName,
     required this.id,
     required this.playerOne,
@@ -188,7 +189,6 @@ class JoinPlayerOneWidget extends StatelessWidget {
     required this.user,
   });
 
-  final String email;
   final String nickName;
   final String id;
   final List<PlayerModel> playerOne;
@@ -203,16 +203,16 @@ class JoinPlayerOneWidget extends StatelessWidget {
           SizedBox(
               width: MediaQuery.of(context).size.width / 3,
               child: InkWell(
-                  onTap:
-                      playerTwo.isNotEmpty && playerTwo[0].email == user!.email
-                          ? null
-                          : () {
-                              context.read<DuelRoomPageCubit>().joinPlayer(
-                                  email: email,
-                                  nickName: nickName,
-                                  id: id,
-                                  playerNumber: 1);
-                            },
+                  onTap: playerTwo.isNotEmpty &&
+                          playerTwo[0].email == user!.email.toString()
+                      ? null
+                      : () {
+                          context.read<DuelRoomPageCubit>().joinPlayer(
+                              email: user!.email.toString(),
+                              nickName: nickName,
+                              id: id,
+                              playerNumber: 1);
+                        },
                   child:
                       const Image(image: AssetImage("images/join_game.png")))),
           Text(

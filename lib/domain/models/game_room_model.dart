@@ -7,5 +7,6 @@ class GameRoomModel with _$GameRoomModel {
       {required String name,
       required String ownerMail,
       required String password,
-      required String id}) = _GameRoomModel;
+      required String id,
+      required String nickName}) = _GameRoomModel;
 }

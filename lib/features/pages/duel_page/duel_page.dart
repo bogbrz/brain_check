@@ -1,4 +1,3 @@
-
 import 'package:brain_check/app/core/enums/enums.dart';
 import 'package:brain_check/app/injection_container.dart';
 import 'package:brain_check/domain/models/game_room_model.dart';
@@ -75,7 +74,6 @@ class DuelPage extends StatelessWidget {
                           passControler: passControler,
                           nickName: nickName,
                           user: user,
-                      
                         )
                       ],
                     );
@@ -228,7 +226,6 @@ class CreateRoomWidget extends StatelessWidget {
     required this.nickName,
     required this.email,
     required this.user,
-   
   });
 
   final TextEditingController nameController;
@@ -236,7 +233,6 @@ class CreateRoomWidget extends StatelessWidget {
   final String nickName;
   final String email;
   final User? user;
-  
 
   @override
   Widget build(BuildContext context) {
@@ -246,7 +242,7 @@ class CreateRoomWidget extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
           FloatingActionButton.extended(
-              onPressed:  () {
+              onPressed: () {
                 showDialog(
                     context: context,
                     builder: (BuildContext context) {
