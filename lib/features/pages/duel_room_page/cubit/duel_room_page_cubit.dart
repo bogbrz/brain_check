@@ -16,6 +16,7 @@ class DuelRoomPageCubit extends Cubit<DuelRoomPageState> {
           status: Status.initial,
           playerTwo: [],
           playerOne: [],
+          players: []
         ));
   final DuelGameRepository duelGameRepository;
   StreamSubscription? streamSubscription;
@@ -50,6 +51,7 @@ class DuelRoomPageCubit extends Cubit<DuelRoomPageState> {
     required String id,
   }) async {
     emit(const DuelRoomPageState(
+      players: [],
       errorMessage: null,
       status: Status.loading,
       playerTwo: [],
@@ -77,6 +79,7 @@ class DuelRoomPageCubit extends Cubit<DuelRoomPageState> {
           status: Status.success,
           playerTwo: playerTwoList,
           playerOne: playerOneList,
+          players: event
         ));
       } catch (e) {
         emit(DuelRoomPageState(
@@ -84,6 +87,7 @@ class DuelRoomPageCubit extends Cubit<DuelRoomPageState> {
           status: Status.error,
           playerTwo: [],
           playerOne: [],
+          players: []
         ));
       }
     });

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:brain_check/app/core/enums/enums.dart';
 import 'package:brain_check/app/injection_container.dart';
 import 'package:brain_check/domain/models/player_model.dart';
@@ -14,66 +16,147 @@ class GameRoomPage extends StatelessWidget {
     required this.email,
     required this.id,
     required this.user,
+    required this.roomName,
     super.key,
   });
   final String email;
   final String nickName;
   final String id;
   final User? user;
+  final String roomName;
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => getIt<DuelRoomPageCubit>()..playerInfo(id: id),
-      child: Scaffold(
-          appBar: AppBar(
-            title: Text("$nickName's room"),
+      child: WillPopScope(
+        onWillPop: () async => false,
+        child: Scaffold(body: SafeArea(
+          child: BlocBuilder<DuelRoomPageCubit, DuelRoomPageState>(
+            builder: (context, state) {
+              switch (state.status) {
+                case Status.initial:
+                  return const InitialStateWidget();
+                case Status.loading:
+                  return const LoadingStateWidget();
+                case Status.error:
+                  return ErrorStateWidget(
+                      errorMessage: state.errorMessage.toString());
+                case Status.success:
+                  return Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          IconButton.filledTonal(
+                              onPressed: () {
+                                if (state.players.isEmpty) {
+                                  Navigator.of(context).pop();
+                                  Navigator.of(context).pop();
+                                } else {
+                                  for (final player in state.players) {
+                                    if (player.email.toString() ==
+                                        user!.email.toString()) {
+                                      context
+                                          .read<DuelRoomPageCubit>()
+                                          .leaveRoom(id: player.id, roomId: id);
+                                      Navigator.of(context).pop();
+                                      Navigator.of(context).pop();
+                                    }
+                                  }
+                                }
+
+                                // if (state.playerOne.isNotEmpty) {
+                                //   for (final player in state.playerOne) {
+                                //     if (player.email
+                                //         .contains(user!.email.toString())) {
+                                //       context
+                                //           .read<DuelRoomPageCubit>()
+                                //           .leaveRoom(id: player.id, roomId: id);
+                                //     }
+                                //   }
+                                // } else if (state.playerTwo.isNotEmpty) {
+                                //   for (final player in state.playerTwo) {
+                                //     if (player.email ==
+                                //         user!.email.toString()) {
+                                //       context
+                                //           .read<DuelRoomPageCubit>()
+                                //           .leaveRoom(id: player.id, roomId: id);
+                                //       Navigator.of(context).pop();
+                                //       Navigator.of(context).pop();
+                                //     }
+
+                                //     Navigator.of(context).pop();
+                                //     Navigator.of(context).pop();
+                                //   }
+                                // } else {
+                                //   Navigator.of(context).pop();
+                                //   Navigator.of(context).pop();
+                                // }
+                              },
+                              icon: const Icon(Icons.logout)),
+                          Text(
+                            "$roomName's room",
+                            style: GoogleFonts.bungee(
+                                color: Colors.white,
+                                fontSize:
+                                    MediaQuery.of(context).size.height / 35),
+                          ),
+                          IconButton.filledTonal(
+                              onPressed: user!.email != email
+                                  ? null
+                                  : () {
+                                      context
+                                          .read<DuelRoomPageCubit>()
+                                          .deleteRoom(id: id);
+
+                                      Navigator.of(context).pop();
+                                      Navigator.of(context).pop();
+                                    },
+                              icon: const Icon(Icons.delete)),
+                        ],
+                      ),
+                      Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            SizedBox(
+                              width: MediaQuery.of(context).size.width / 2,
+                              child: JoinPlayerOneWidget(
+                                nickName: nickName,
+                                id: id,
+                                playerOne: state.playerOne,
+                                playerTwo: state.playerTwo,
+                                user: user,
+                              ),
+                            ),
+                            SizedBox(
+                              width: MediaQuery.of(context).size.width / 2,
+                              child: JoinPlayerTwoWidget(
+                                nickName: nickName,
+                                id: id,
+                                playerTwo: state.playerTwo,
+                                playerOne: state.playerOne,
+                                user: user,
+                              ),
+                            ),
+                          ]),
+                      ElevatedButton(
+                          onPressed: () {},
+                          child: Text(
+                              state.playerOne.isEmpty || state.playerTwo.isEmpty
+                                  ? "Not enough players"
+                                  : state.playerOne[0].ready == false ||
+                                          state.playerTwo[0].ready == false
+                                      ? "Players are not ready"
+                                      : 'Start Game'))
+                    ],
+                  );
+              }
+            },
           ),
-          body: SafeArea(
-            child: BlocBuilder<DuelRoomPageCubit, DuelRoomPageState>(
-              builder: (context, state) {
-                switch (state.status) {
-                  case Status.initial:
-                    return const InitialStateWidget();
-                  case Status.loading:
-                    return const LoadingStateWidget();
-                  case Status.error:
-                    return ErrorStateWidget(
-                        errorMessage: state.errorMessage.toString());
-                  case Status.success:
-                    return Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              SizedBox(
-                                width: MediaQuery.of(context).size.width / 2,
-                                child: JoinPlayerOneWidget(
-                                  nickName: nickName,
-                                  id: id,
-                                  playerOne: state.playerOne,
-                                  playerTwo: state.playerTwo,
-                                  user: user,
-                                ),
-                              ),
-                              SizedBox(
-                                width: MediaQuery.of(context).size.width / 2,
-                                child: JoinPlayerTwoWidget(
-                                  nickName: nickName,
-                                  id: id,
-                                  playerTwo: state.playerTwo,
-                                  playerOne: state.playerOne,
-                                  user: user,
-                                ),
-                              ),
-                            ])
-                      ],
-                    );
-                }
-              },
-            ),
-          )),
+        )),
+      ),
     );
   }
 }
@@ -284,30 +367,7 @@ class JoinPlayerOneWidget extends StatelessWidget {
               //     Row(
               //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
               //       children: [
-              //         IconButton.filledTonal(
-              //             onPressed: () {
-              //               if (player[0].email == user!.email.toString()) {
-              //                 context
-              //                     .read<DuelRoomPageCubit>()
-              //                     .leaveRoom(id: player[0].id, roomId: id);
-              //               }
-
-              //               Navigator.of(context).pop();
-              //               Navigator.of(context).pop();
-              //             },
-              //             icon: const Icon(Icons.logout)),
-              //         IconButton.filledTonal(
-              //             onPressed: () {
-              //               if (user!.email == email) {
-              //                 context
-              //                     .read<DuelRoomPageCubit>()
-              //                     .deleteRoom(id: id);
-
-              //                 Navigator.of(context).pop();
-              //                 Navigator.of(context).pop();
-              //               }
-              //             },
-              //             icon: const Icon(Icons.delete)),
+              //      
               //       ],
               //     ),
               //     SizedBox(
@@ -451,12 +511,7 @@ class JoinPlayerOneWidget extends StatelessWidget {
               //     SizedBox(
               //       height: MediaQuery.of(context).size.height / 4.5,
               //     ),
-              //     ElevatedButton(
-              //         onPressed: () {},
-              //         child: Text(
-              //             playerOne.ready == true && playerTwo.ready == true
-              //                 ? "Start Game"
-              //                 : "Players are not ready"))
+              //    
               //   ],
               // );
   

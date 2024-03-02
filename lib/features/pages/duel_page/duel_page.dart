@@ -59,6 +59,7 @@ class DuelPage extends StatelessWidget {
                                               model: room,
                                               id: room.id,
                                               user: user,
+                                              room: room,
                                             );
                                           });
                                     },
@@ -90,6 +91,7 @@ class JoinRoomWidget extends StatelessWidget {
     required this.email,
     required this.id,
     required this.user,
+    required this.room,
     super.key,
   });
   final String nickName;
@@ -97,6 +99,7 @@ class JoinRoomWidget extends StatelessWidget {
   final String email;
   final String id;
   final User? user;
+   final GameRoomModel room;
 
   final TextEditingController passwordController = TextEditingController();
   @override
@@ -104,7 +107,7 @@ class JoinRoomWidget extends StatelessWidget {
     return AlertDialog(
       scrollable: true,
       title: Text(
-        "$nickName's room",
+        "${room.nickName}'s room",
         style: GoogleFonts.bungee(
             color: Colors.white,
             fontSize: MediaQuery.of(context).size.height / 35),
@@ -145,6 +148,7 @@ class JoinRoomWidget extends StatelessWidget {
                             id: id,
                             email: email,
                             nickName: nickName,
+                            roomName: room.nickName,
                           )));
                   passwordController.clear();
                 } else {
