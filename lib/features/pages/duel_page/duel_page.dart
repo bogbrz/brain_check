@@ -99,7 +99,7 @@ class JoinRoomWidget extends StatelessWidget {
   final String email;
   final String id;
   final User? user;
-   final GameRoomModel room;
+  final GameRoomModel room;
 
   final TextEditingController passwordController = TextEditingController();
   @override
@@ -149,6 +149,9 @@ class JoinRoomWidget extends StatelessWidget {
                             email: email,
                             nickName: nickName,
                             roomName: room.nickName,
+                    
+                    
+                          
                           )));
                   passwordController.clear();
                 } else {

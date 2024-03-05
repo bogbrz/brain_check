@@ -49,6 +49,7 @@ class DuelGameDataSource {
       "points": 0,
       "player": playerNumber,
       "ready": false,
+      "startGame": false
     });
   }
 
@@ -67,6 +68,47 @@ class DuelGameDataSource {
         .collection("Players")
         .doc(id)
         .delete();
+  }
+
+  Future<void> resetGameStatus({
+    required String roomId,
+    required bool status,
+    required String playerId,
+  }) async {
+    return FirebaseFirestore.instance
+        .collection("GameRooms")
+        .doc(roomId)
+        .collection("Players")
+        .doc(playerId)
+        .update({"startGame": status});
+  }
+
+  Future<void> startGame(
+      {required String roomId,
+      required bool status,
+      required String playerOneId,
+      required String playerTwoId}) async {
+    await FirebaseFirestore.instance
+        .collection("GameRooms")
+        .doc(roomId)
+        .collection("Players")
+        .doc(playerOneId)
+        .update({"startGame": status});
+    await FirebaseFirestore.instance
+        .collection("GameRooms")
+        .doc(roomId)
+        .collection("Players")
+        .doc(playerTwoId)
+        .update({"startGame": status});
+  }
+
+  Stream<QuerySnapshot<Map<String, dynamic>>> roomStatus(
+      {required String roomId}) {
+    return FirebaseFirestore.instance
+        .collection("GameRooms")
+        .doc(roomId)
+        .collection("RoomStatus")
+        .snapshots();
   }
 
   Future<void> deleteRoom({

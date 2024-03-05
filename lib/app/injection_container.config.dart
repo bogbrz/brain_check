@@ -81,8 +81,10 @@ extension GetItInjectableX on _i1.GetIt {
         () => _i10.RankingFireBaseDataSource());
     gh.factory<_i11.RankingRepository>(() => _i11.RankingRepository(
         rankingFireBaseDataSource: gh<_i10.RankingFireBaseDataSource>()));
-    gh.factory<_i12.ResultPageCubit>(() =>
-        _i12.ResultPageCubit(rankingRepository: gh<_i11.RankingRepository>()));
+    gh.factory<_i12.ResultPageCubit>(() => _i12.ResultPageCubit(
+          rankingRepository: gh<_i11.RankingRepository>(),
+          duelGameRepository: gh<_i6.DuelGameRepository>(),
+        ));
     gh.factory<_i13.RootPageCubit>(
         () => _i13.RootPageCubit(authRepository: gh<_i4.AuthRepository>()));
     gh.factory<_i14.SetUpUserCubit>(() =>

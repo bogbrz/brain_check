@@ -66,13 +66,16 @@ class RankedGamePage extends StatelessWidget {
                                       .fetchToken();
                                   Navigator.of(context).push(MaterialPageRoute(
                                       builder: (context) => QuestionPage(
+                                       players: null,
+                                       roomId: null,
                                           isRanked: true,
                                           category: 0,
                                           difficulty: null.toString(),
                                           questionsNumber: 5,
                                           user: user,
                                           token: state.tokenModel.token
-                                              .toString())));
+                                              .toString(),
+                                              isDuel: false,)));
                                 },
                                 child: Container(
                                   padding: const EdgeInsets.all(8),

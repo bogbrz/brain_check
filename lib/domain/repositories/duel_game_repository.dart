@@ -1,7 +1,9 @@
 import 'package:brain_check/data_sources/duel_game_data_source.dart';
 import 'package:brain_check/domain/models/game_room_model.dart';
 import 'package:brain_check/domain/models/player_model.dart';
+import 'package:brain_check/domain/models/room_status_model.dart';
 import 'package:injectable/injectable.dart';
+
 @injectable
 class DuelGameRepository {
   DuelGameRepository({required this.duelGameDataSource});
@@ -27,9 +29,32 @@ class DuelGameRepository {
     });
   }
 
+  Future<void> resetGameStatus(
+      {required String roomId,
+      required bool status,
+      required String playerId,
+      }) async {
+    return duelGameDataSource.resetGameStatus(
+        roomId: roomId,
+        status: status,
+        playerId: playerId);
+  }
+
+  Stream<List<RoomStatusModel>> getRoomStatus({required String roomId}) {
+    return duelGameDataSource.roomStatus(roomId: roomId).map((event) {
+      return event.docs.map((e) {
+        return RoomStatusModel(startGame: e["startGame"], id: e.id);
+      }).toList();
+    });
+  }
+
   Future<void> readyStatus(
       {required String id, required bool ready, required String roomId}) async {
     return duelGameDataSource.readyStatus(id: id, ready: ready, roomId: roomId);
+  }
+
+  Future<void> startGame({required String roomId, required bool status, required String playerOneId, required String playerTwoId}) async {
+    return duelGameDataSource.startGame(roomId: roomId, status: status, playerOneId:playerOneId, playerTwoId: playerTwoId);
   }
 
   Future<void> joinPlayer(
@@ -52,6 +77,7 @@ class DuelGameRepository {
             points: e["points"],
             player: e["player"],
             ready: e["ready"],
+            startGame: e["startGame"],
             id: e.id);
       }).toList();
     });

@@ -5,6 +5,7 @@ import 'package:brain_check/app/injection_container.dart';
 import 'package:brain_check/domain/models/player_model.dart';
 
 import 'package:brain_check/features/pages/duel_room_page/cubit/duel_room_page_cubit.dart';
+import 'package:brain_check/features/pages/question_page/question_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -43,6 +44,22 @@ class GameRoomPage extends StatelessWidget {
                   return ErrorStateWidget(
                       errorMessage: state.errorMessage.toString());
                 case Status.success:
+                  for (final player in state.players) {
+                    if (player.startGame == true) {
+                      return QuestionPage(
+                        players: state.players,
+                        roomId: id,
+                        category: 9,
+                        difficulty: "easy",
+                        questionsNumber: 1,
+                        user: user,
+                        token: "",
+                        isRanked: false,
+                        isDuel: true,
+                      );
+                    }
+                  }
+
                   return Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
@@ -66,34 +83,6 @@ class GameRoomPage extends StatelessWidget {
                                     }
                                   }
                                 }
-
-                                // if (state.playerOne.isNotEmpty) {
-                                //   for (final player in state.playerOne) {
-                                //     if (player.email
-                                //         .contains(user!.email.toString())) {
-                                //       context
-                                //           .read<DuelRoomPageCubit>()
-                                //           .leaveRoom(id: player.id, roomId: id);
-                                //     }
-                                //   }
-                                // } else if (state.playerTwo.isNotEmpty) {
-                                //   for (final player in state.playerTwo) {
-                                //     if (player.email ==
-                                //         user!.email.toString()) {
-                                //       context
-                                //           .read<DuelRoomPageCubit>()
-                                //           .leaveRoom(id: player.id, roomId: id);
-                                //       Navigator.of(context).pop();
-                                //       Navigator.of(context).pop();
-                                //     }
-
-                                //     Navigator.of(context).pop();
-                                //     Navigator.of(context).pop();
-                                //   }
-                                // } else {
-                                //   Navigator.of(context).pop();
-                                //   Navigator.of(context).pop();
-                                // }
                               },
                               icon: const Icon(Icons.logout)),
                           Text(
@@ -141,15 +130,33 @@ class GameRoomPage extends StatelessWidget {
                               ),
                             ),
                           ]),
-                      ElevatedButton(
-                          onPressed: () {},
-                          child: Text(
-                              state.playerOne.isEmpty || state.playerTwo.isEmpty
-                                  ? "Not enough players"
-                                  : state.playerOne[0].ready == false ||
-                                          state.playerTwo[0].ready == false
-                                      ? "Players are not ready"
-                                      : 'Start Game'))
+                      if (user!.email.toString() == email.toString()) ...[
+                        ElevatedButton(
+                            onPressed: state.playerOne.isEmpty ||
+                                    state.playerTwo.isEmpty
+                                ? null
+                                : state.playerOne[0].ready == false ||
+                                        state.playerTwo[0].ready == false
+                                    ? null
+                                    : () {
+                                        context
+                                            .read<DuelRoomPageCubit>()
+                                            .startGame(
+                                                roomId: id,
+                                                playerOneId:
+                                                    state.playerOne[0].id,
+                                                playerTwoId:
+                                                    state.playerTwo[0].id,
+                                                status: true);
+                                      },
+                            child: Text(state.playerOne.isEmpty ||
+                                    state.playerTwo.isEmpty
+                                ? "Not enough players"
+                                : state.playerOne[0].ready == false ||
+                                        state.playerTwo[0].ready == false
+                                    ? "Players are not ready"
+                                    : 'Start Game'))
+                      ]
                     ],
                   );
               }

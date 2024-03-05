@@ -1,6 +1,7 @@
 import 'package:brain_check/app/core/enums/enums.dart';
 import 'package:brain_check/app/injection_container.dart';
 import 'package:brain_check/device_size.dart';
+import 'package:brain_check/domain/models/player_model.dart';
 
 import 'package:brain_check/features/pages/question_page/cubit/question_page_cubit.dart';
 import 'package:brain_check/features/pages/question_page/widgets/option_widget.dart';
@@ -8,6 +9,7 @@ import 'package:brain_check/features/pages/result_page/result_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'package:html_unescape/html_unescape.dart';
@@ -15,21 +17,26 @@ import 'package:timer_count_down/timer_controller.dart';
 import 'package:timer_count_down/timer_count_down.dart';
 
 class QuestionPage extends StatefulWidget {
-  const QuestionPage({
-    super.key,
-    required this.category,
-    required this.difficulty,
-    required this.questionsNumber,
-    required this.user,
-    required this.token,
-    required this.isRanked,
-  });
+  const QuestionPage(
+      {super.key,
+      required this.category,
+      required this.difficulty,
+      required this.questionsNumber,
+      required this.user,
+      required this.token,
+      required this.isRanked,
+      required this.isDuel,
+      required this.players,
+      required this.roomId});
   final String token;
   final int category;
   final String difficulty;
   final int questionsNumber;
   final User? user;
   final bool isRanked;
+  final bool isDuel;
+  final List<PlayerModel>? players;
+  final String? roomId;
 
   @override
   State<QuestionPage> createState() => _QuestionPageState();
@@ -70,19 +77,42 @@ class _QuestionPageState extends State<QuestionPage> {
 
                 if (widget.questionsNumber == 0 && youLose ||
                     widget.questionsNumber != 0 &&
-                        index == widget.questionsNumber) {
+                        index == widget.questionsNumber &&
+                        widget.isDuel == false) {
                   return ResultsPage(
                     isRanked: widget.isRanked,
                     index: index,
                     points: points,
+                    isDuel: widget.isDuel,
+                    players: widget.players,
+                    roomId: widget.roomId,
+                    user: widget.user,
                     questionPage: QuestionPage(
+                        players: widget.players,
+                        roomId: widget.roomId,
                         isRanked: widget.isRanked,
                         token: widget.token,
                         category: widget.category,
                         difficulty: widget.difficulty,
                         questionsNumber: widget.questionsNumber,
+                        isDuel: widget.isDuel,
                         user: widget.user),
                   );
+                }
+
+                if (widget.questionsNumber == index && widget.isDuel == true) {
+                  return Scaffold(
+                      body: Center(
+                    child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                        Navigator.of(context).pop();
+                        Navigator.of(context).pop();
+                        Navigator.of(context).pop();
+                      },
+                      child: Text("END OF DUEL"),
+                    ),
+                  ));
                 }
 
                 switch (state.status) {

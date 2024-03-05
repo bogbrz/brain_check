@@ -21,6 +21,7 @@ mixin _$DuelRoomPageState {
   List<PlayerModel> get playerOne => throw _privateConstructorUsedError;
   List<PlayerModel> get playerTwo => throw _privateConstructorUsedError;
   List<PlayerModel> get players => throw _privateConstructorUsedError;
+  List<RoomStatusModel> get roomStatus => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $DuelRoomPageStateCopyWith<DuelRoomPageState> get copyWith =>
@@ -38,7 +39,8 @@ abstract class $DuelRoomPageStateCopyWith<$Res> {
       Status status,
       List<PlayerModel> playerOne,
       List<PlayerModel> playerTwo,
-      List<PlayerModel> players});
+      List<PlayerModel> players,
+      List<RoomStatusModel> roomStatus});
 }
 
 /// @nodoc
@@ -59,6 +61,7 @@ class _$DuelRoomPageStateCopyWithImpl<$Res, $Val extends DuelRoomPageState>
     Object? playerOne = null,
     Object? playerTwo = null,
     Object? players = null,
+    Object? roomStatus = null,
   }) {
     return _then(_value.copyWith(
       errorMessage: freezed == errorMessage
@@ -81,6 +84,10 @@ class _$DuelRoomPageStateCopyWithImpl<$Res, $Val extends DuelRoomPageState>
           ? _value.players
           : players // ignore: cast_nullable_to_non_nullable
               as List<PlayerModel>,
+      roomStatus: null == roomStatus
+          ? _value.roomStatus
+          : roomStatus // ignore: cast_nullable_to_non_nullable
+              as List<RoomStatusModel>,
     ) as $Val);
   }
 }
@@ -98,7 +105,8 @@ abstract class _$$InitialImplCopyWith<$Res>
       Status status,
       List<PlayerModel> playerOne,
       List<PlayerModel> playerTwo,
-      List<PlayerModel> players});
+      List<PlayerModel> players,
+      List<RoomStatusModel> roomStatus});
 }
 
 /// @nodoc
@@ -117,6 +125,7 @@ class __$$InitialImplCopyWithImpl<$Res>
     Object? playerOne = null,
     Object? playerTwo = null,
     Object? players = null,
+    Object? roomStatus = null,
   }) {
     return _then(_$InitialImpl(
       errorMessage: freezed == errorMessage
@@ -139,6 +148,10 @@ class __$$InitialImplCopyWithImpl<$Res>
           ? _value._players
           : players // ignore: cast_nullable_to_non_nullable
               as List<PlayerModel>,
+      roomStatus: null == roomStatus
+          ? _value._roomStatus
+          : roomStatus // ignore: cast_nullable_to_non_nullable
+              as List<RoomStatusModel>,
     ));
   }
 }
@@ -151,10 +164,12 @@ class _$InitialImpl implements _Initial {
       required this.status,
       required final List<PlayerModel> playerOne,
       required final List<PlayerModel> playerTwo,
-      required final List<PlayerModel> players})
+      required final List<PlayerModel> players,
+      required final List<RoomStatusModel> roomStatus})
       : _playerOne = playerOne,
         _playerTwo = playerTwo,
-        _players = players;
+        _players = players,
+        _roomStatus = roomStatus;
 
   @override
   final String? errorMessage;
@@ -184,9 +199,17 @@ class _$InitialImpl implements _Initial {
     return EqualUnmodifiableListView(_players);
   }
 
+  final List<RoomStatusModel> _roomStatus;
+  @override
+  List<RoomStatusModel> get roomStatus {
+    if (_roomStatus is EqualUnmodifiableListView) return _roomStatus;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_roomStatus);
+  }
+
   @override
   String toString() {
-    return 'DuelRoomPageState(errorMessage: $errorMessage, status: $status, playerOne: $playerOne, playerTwo: $playerTwo, players: $players)';
+    return 'DuelRoomPageState(errorMessage: $errorMessage, status: $status, playerOne: $playerOne, playerTwo: $playerTwo, players: $players, roomStatus: $roomStatus)';
   }
 
   @override
@@ -201,7 +224,9 @@ class _$InitialImpl implements _Initial {
                 .equals(other._playerOne, _playerOne) &&
             const DeepCollectionEquality()
                 .equals(other._playerTwo, _playerTwo) &&
-            const DeepCollectionEquality().equals(other._players, _players));
+            const DeepCollectionEquality().equals(other._players, _players) &&
+            const DeepCollectionEquality()
+                .equals(other._roomStatus, _roomStatus));
   }
 
   @override
@@ -211,7 +236,8 @@ class _$InitialImpl implements _Initial {
       status,
       const DeepCollectionEquality().hash(_playerOne),
       const DeepCollectionEquality().hash(_playerTwo),
-      const DeepCollectionEquality().hash(_players));
+      const DeepCollectionEquality().hash(_players),
+      const DeepCollectionEquality().hash(_roomStatus));
 
   @JsonKey(ignore: true)
   @override
@@ -226,7 +252,8 @@ abstract class _Initial implements DuelRoomPageState {
       required final Status status,
       required final List<PlayerModel> playerOne,
       required final List<PlayerModel> playerTwo,
-      required final List<PlayerModel> players}) = _$InitialImpl;
+      required final List<PlayerModel> players,
+      required final List<RoomStatusModel> roomStatus}) = _$InitialImpl;
 
   @override
   String? get errorMessage;
@@ -238,6 +265,8 @@ abstract class _Initial implements DuelRoomPageState {
   List<PlayerModel> get playerTwo;
   @override
   List<PlayerModel> get players;
+  @override
+  List<RoomStatusModel> get roomStatus;
   @override
   @JsonKey(ignore: true)
   _$$InitialImplCopyWith<_$InitialImpl> get copyWith =>

@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:brain_check/app/core/enums/enums.dart';
 import 'package:brain_check/domain/models/player_model.dart';
+import 'package:brain_check/domain/models/room_status_model.dart';
 import 'package:brain_check/domain/repositories/duel_game_repository.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -12,12 +13,12 @@ part 'duel_room_page_cubit.freezed.dart';
 class DuelRoomPageCubit extends Cubit<DuelRoomPageState> {
   DuelRoomPageCubit({required this.duelGameRepository})
       : super(const DuelRoomPageState(
-          errorMessage: null,
-          status: Status.initial,
-          playerTwo: [],
-          playerOne: [],
-          players: []
-        ));
+            errorMessage: null,
+            status: Status.initial,
+            playerTwo: [],
+            playerOne: [],
+            players: [],
+            roomStatus: []));
   final DuelGameRepository duelGameRepository;
   StreamSubscription? streamSubscription;
 
@@ -35,7 +36,19 @@ class DuelRoomPageCubit extends Cubit<DuelRoomPageState> {
     return duelGameRepository.readyStatus(id: id, ready: ready, roomId: roomId);
   }
 
+  Future<void> startGame(
+      {required String roomId,
+      required bool status,
+      required String playerOneId,
+      required String playerTwoId}) async {
+    return duelGameRepository.startGame(roomId: roomId, status: status, playerOneId:playerOneId, playerTwoId:playerTwoId);
+  }
+
   Future<void> leaveRoom({required String id, required String roomId}) async {
+    return duelGameRepository.leaveRoom(id: id, roomId: roomId);
+  }
+
+  Future<void> setCategory({required String id, required String roomId}) async {
     return duelGameRepository.leaveRoom(id: id, roomId: roomId);
   }
 
@@ -47,6 +60,28 @@ class DuelRoomPageCubit extends Cubit<DuelRoomPageState> {
     );
   }
 
+  Future<void> roomStatus({required String roomId}) async {
+    emit(DuelRoomPageState(
+        errorMessage: null,
+        status: Status.initial,
+        playerOne: [],
+        playerTwo: [],
+        players: [],
+        roomStatus: []));
+
+    duelGameRepository.getRoomStatus(roomId: roomId).listen((event) {
+      try {
+        emit(DuelRoomPageState(
+            errorMessage: null,
+            status: Status.success,
+            playerOne: [],
+            playerTwo: [],
+            players: [],
+            roomStatus: event));
+      } catch (e) {}
+    });
+  }
+
   Future<void> playerInfo({
     required String id,
   }) async {
@@ -56,7 +91,9 @@ class DuelRoomPageCubit extends Cubit<DuelRoomPageState> {
       status: Status.loading,
       playerTwo: [],
       playerOne: [],
+      roomStatus: [],
     ));
+
     duelGameRepository
         .getPlayerInfo(
       id: id,
@@ -79,7 +116,8 @@ class DuelRoomPageCubit extends Cubit<DuelRoomPageState> {
           status: Status.success,
           playerTwo: playerTwoList,
           playerOne: playerOneList,
-          players: event
+          players: event,
+          roomStatus: [],
         ));
       } catch (e) {
         emit(DuelRoomPageState(
@@ -87,7 +125,8 @@ class DuelRoomPageCubit extends Cubit<DuelRoomPageState> {
           status: Status.error,
           playerTwo: [],
           playerOne: [],
-          players: []
+          players: [],
+          roomStatus: [],
         ));
       }
     });
