@@ -59,12 +59,14 @@ class _QuestionDataSource implements QuestionDataSource {
     String? difficulty,
     int? category,
     int? amount,
+    String? token,
   ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'difficulty': difficulty,
       r'category': category,
       r'amount': amount,
+      r'token': token,
     };
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};

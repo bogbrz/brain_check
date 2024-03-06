@@ -33,8 +33,9 @@ class DuelGameRepository {
   }
 
   Future<void> addQtoFirebase({required String roomId}) async {
+    final token = await questionDataSource.getToken();
     final questionsList =
-        await questionDataSource.getListofQuestions("easy", 9, 5);
+        await questionDataSource.getListofQuestions("easy", 9, 5, token.token);
     final results = questionsList.results;
     for (final question in results) {
       duelGameDataSource.addQtoFirebase(
