@@ -41,7 +41,11 @@ class DuelRoomPageCubit extends Cubit<DuelRoomPageState> {
       required bool status,
       required String playerOneId,
       required String playerTwoId}) async {
-    return duelGameRepository.startGame(roomId: roomId, status: status, playerOneId:playerOneId, playerTwoId:playerTwoId);
+    return duelGameRepository.startGame(
+        roomId: roomId,
+        status: status,
+        playerOneId: playerOneId,
+        playerTwoId: playerTwoId);
   }
 
   Future<void> leaveRoom({required String id, required String roomId}) async {
@@ -80,6 +84,10 @@ class DuelRoomPageCubit extends Cubit<DuelRoomPageState> {
             roomStatus: event));
       } catch (e) {}
     });
+  }
+
+  Future<void> addQtoFirebase({required String roomId}) async {
+    return duelGameRepository.addQtoFirebase(roomId: roomId);
   }
 
   Future<void> playerInfo({

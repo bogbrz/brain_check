@@ -53,16 +53,7 @@ class _FinishButtonWidgetState extends State<FinishButtonWidget> {
               Navigator.of(context).pop();
               Navigator.of(context).pop();
               Navigator.of(context).pop();
-            } else if (widget.isDuel && isFinished) {
-              for (final player in widget.players!) {
-                if (player.email.toString() == widget.user!.email.toString())
-                  context.read<ResultPageCubit>().resetGameStatus(
-                        roomId: widget.roomId!,
-                        playerId: player.id,
-                        status: false,
-                      );
-              }
-            } else {
+            }  else {
               Navigator.of(context).pop();
               Navigator.of(context).pop();
               Navigator.of(context).pop();

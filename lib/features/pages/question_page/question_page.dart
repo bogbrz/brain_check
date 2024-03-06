@@ -2,6 +2,7 @@ import 'package:brain_check/app/core/enums/enums.dart';
 import 'package:brain_check/app/injection_container.dart';
 import 'package:brain_check/device_size.dart';
 import 'package:brain_check/domain/models/player_model.dart';
+import 'package:brain_check/features/pages/duel_result_page/duel_result_page.dart';
 
 import 'package:brain_check/features/pages/question_page/cubit/question_page_cubit.dart';
 import 'package:brain_check/features/pages/question_page/widgets/option_widget.dart';
@@ -101,18 +102,11 @@ class _QuestionPageState extends State<QuestionPage> {
                 }
 
                 if (widget.questionsNumber == index && widget.isDuel == true) {
-                  return Scaffold(
-                      body: Center(
-                    child: ElevatedButton(
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                        Navigator.of(context).pop();
-                        Navigator.of(context).pop();
-                        Navigator.of(context).pop();
-                      },
-                      child: Text("END OF DUEL"),
-                    ),
-                  ));
+                  return DuelResultPage(
+                    roomId: widget.roomId,
+                    user: widget.user,
+                    players: widget.players,
+                  );
                 }
 
                 switch (state.status) {

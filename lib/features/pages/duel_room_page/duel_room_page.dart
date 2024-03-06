@@ -155,7 +155,14 @@ class GameRoomPage extends StatelessWidget {
                                 : state.playerOne[0].ready == false ||
                                         state.playerTwo[0].ready == false
                                     ? "Players are not ready"
-                                    : 'Start Game'))
+                                    : 'Start Game')),
+                        ElevatedButton(
+                            onPressed: () {
+                              context
+                                  .read<DuelRoomPageCubit>()
+                                  .addQtoFirebase(roomId: id);
+                            },
+                            child: Text("Test"))
                       ]
                     ],
                   );

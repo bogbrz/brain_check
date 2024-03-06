@@ -1,4 +1,5 @@
 import 'package:brain_check/data_sources/duel_game_data_source.dart';
+import 'package:brain_check/data_sources/questions_data_source.dart';
 import 'package:brain_check/domain/models/game_room_model.dart';
 import 'package:brain_check/domain/models/player_model.dart';
 import 'package:brain_check/domain/models/room_status_model.dart';
@@ -6,8 +7,10 @@ import 'package:injectable/injectable.dart';
 
 @injectable
 class DuelGameRepository {
-  DuelGameRepository({required this.duelGameDataSource});
+  DuelGameRepository(
+      {required this.duelGameDataSource, required this.questionDataSource});
   final DuelGameDataSource duelGameDataSource;
+  final QuestionDataSource questionDataSource;
   Future<void> createRoom(
       {required String name,
       required String password,
@@ -29,15 +32,23 @@ class DuelGameRepository {
     });
   }
 
-  Future<void> resetGameStatus(
-      {required String roomId,
-      required bool status,
-      required String playerId,
-      }) async {
+  Future<void> addQtoFirebase({required String roomId}) async {
+    final questionsList =
+        await questionDataSource.getListofQuestions("easy", 9, 5);
+    final results = questionsList.results;
+    for (final question in results) {
+      duelGameDataSource.addQtoFirebase(
+          questionModel: question, roomId: roomId);
+    }
+  }
+
+  Future<void> resetGameStatus({
+    required String roomId,
+    required bool status,
+    required String playerId,
+  }) async {
     return duelGameDataSource.resetGameStatus(
-        roomId: roomId,
-        status: status,
-        playerId: playerId);
+        roomId: roomId, status: status, playerId: playerId);
   }
 
   Stream<List<RoomStatusModel>> getRoomStatus({required String roomId}) {
@@ -53,8 +64,16 @@ class DuelGameRepository {
     return duelGameDataSource.readyStatus(id: id, ready: ready, roomId: roomId);
   }
 
-  Future<void> startGame({required String roomId, required bool status, required String playerOneId, required String playerTwoId}) async {
-    return duelGameDataSource.startGame(roomId: roomId, status: status, playerOneId:playerOneId, playerTwoId: playerTwoId);
+  Future<void> startGame(
+      {required String roomId,
+      required bool status,
+      required String playerOneId,
+      required String playerTwoId}) async {
+    return duelGameDataSource.startGame(
+        roomId: roomId,
+        status: status,
+        playerOneId: playerOneId,
+        playerTwoId: playerTwoId);
   }
 
   Future<void> joinPlayer(

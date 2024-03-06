@@ -1,0 +1,20 @@
+import 'package:bloc/bloc.dart';
+import 'package:brain_check/domain/repositories/duel_game_repository.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+
+part 'duel_result_state.dart';
+part 'duel_result_cubit.freezed.dart';
+
+class DuelResultCubit extends Cubit<DuelResultState> {
+  DuelResultCubit({required this.duelGameRepository})
+      : super(DuelResultState());
+  final DuelGameRepository duelGameRepository;
+  Future<void> resetGameStatus({
+    required String roomId,
+    required bool status,
+    required String playerId,
+  }) async {
+    return duelGameRepository.resetGameStatus(
+        roomId: roomId, status: status, playerId: playerId);
+  }
+}

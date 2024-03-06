@@ -1,3 +1,4 @@
+import 'package:brain_check/domain/models/question_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -20,6 +21,24 @@ class DuelGameDataSource {
 
   Stream<QuerySnapshot<Map<String, dynamic>>> getGameRooms() {
     return FirebaseFirestore.instance.collection("GameRooms").snapshots();
+  }
+
+  Future<void> addQtoFirebase(
+      {required QuestionModel questionModel, required String roomId}) async {
+    await FirebaseFirestore.instance
+        .collection("GameRooms")
+        .doc(roomId)
+        .collection("Questions")
+        .add({
+      "question": questionModel.question,
+      "correctAnswer": questionModel.correctAnswer,
+      "incorrectOne": questionModel.incorrectAnswers[0],
+      "incorrectTwo": questionModel.incorrectAnswers[1],
+      "incorrectThree": questionModel.incorrectAnswers[2],
+      "category" : questionModel.category,
+      "difficulty" : questionModel.difficulty,
+
+    });
   }
 
   Future<void> readyStatus(
