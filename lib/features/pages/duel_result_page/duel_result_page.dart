@@ -1,6 +1,8 @@
 import 'package:brain_check/app/injection_container.dart';
 import 'package:brain_check/domain/models/player_model.dart';
 import 'package:brain_check/features/pages/duel_result_page/cubit/duel_result_cubit.dart';
+import 'package:brain_check/features/pages/duel_room_page/cubit/duel_room_page_cubit.dart';
+import 'package:brain_check/features/pages/duel_room_page/duel_room_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

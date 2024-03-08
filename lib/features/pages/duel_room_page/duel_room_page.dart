@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:brain_check/app/core/enums/enums.dart';
 import 'package:brain_check/app/injection_container.dart';
 import 'package:brain_check/domain/models/player_model.dart';
+import 'package:brain_check/features/pages/duel_question_page/duel_question_page.dart';
 
 import 'package:brain_check/features/pages/duel_room_page/cubit/duel_room_page_cubit.dart';
 import 'package:brain_check/features/pages/question_page/question_page.dart';
@@ -45,18 +46,24 @@ class GameRoomPage extends StatelessWidget {
                       errorMessage: state.errorMessage.toString());
                 case Status.success:
                   for (final player in state.players) {
-                    if (player.startGame == true) {
-                      return QuestionPage(
-                        players: state.players,
+                    if (player.startGame != false) {
+                      return DuelQuestionPage(
                         roomId: id,
-                        category: 9,
-                        difficulty: "easy",
-                        questionsNumber: 1,
+                        players: state.players,
                         user: user,
-                        token: "",
-                        isRanked: false,
-                        isDuel: true,
                       );
+
+                      // return QuestionPage(
+                      //   players: state.players,
+                      //   roomId: id,
+                      //   category: 9,
+                      //   difficulty: "easy",
+                      //   questionsNumber: 1,
+                      //   user: user,
+                      //   token: "",
+                      //   isRanked: false,
+                      //   isDuel: true,
+                      // );
                     }
                   }
 

@@ -16,6 +16,7 @@ class DuelGameDataSource {
       "name": name,
       "password": password,
       "nickName": nickName,
+      
     });
   }
 
@@ -23,8 +24,10 @@ class DuelGameDataSource {
     return FirebaseFirestore.instance.collection("GameRooms").snapshots();
   }
 
-  Future<void> addQtoFirebase(
-      {required QuestionModel questionModel, required String roomId}) async {
+  Future<void> addQtoFirebase({
+    required QuestionModel questionModel,
+    required String roomId,
+  }) async {
     await FirebaseFirestore.instance
         .collection("GameRooms")
         .doc(roomId)
@@ -35,10 +38,18 @@ class DuelGameDataSource {
       "incorrectOne": questionModel.incorrectAnswers[0],
       "incorrectTwo": questionModel.incorrectAnswers[1],
       "incorrectThree": questionModel.incorrectAnswers[2],
-      "category" : questionModel.category,
-      "difficulty" : questionModel.difficulty,
-
+      "category": questionModel.category,
+      "difficulty": questionModel.difficulty,
     });
+  }
+
+  Stream<QuerySnapshot<Map<String, dynamic>>> getQuestionsFromFb(
+      {required String roomId}) {
+    return FirebaseFirestore.instance
+        .collection("GameRooms")
+        .doc(roomId)
+        .collection("Questions")
+        .snapshots();
   }
 
   Future<void> readyStatus(

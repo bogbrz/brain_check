@@ -1,7 +1,9 @@
 import 'package:brain_check/data_sources/duel_game_data_source.dart';
 import 'package:brain_check/data_sources/questions_data_source.dart';
+import 'package:brain_check/domain/models/duel_question_model.dart';
 import 'package:brain_check/domain/models/game_room_model.dart';
 import 'package:brain_check/domain/models/player_model.dart';
+import 'package:brain_check/domain/models/question_model.dart';
 import 'package:brain_check/domain/models/room_status_model.dart';
 import 'package:injectable/injectable.dart';
 
@@ -33,14 +35,34 @@ class DuelGameRepository {
   }
 
   Future<void> addQtoFirebase({required String roomId}) async {
+   
     final token = await questionDataSource.getToken();
     final questionsList =
         await questionDataSource.getListofQuestions("easy", 9, 5, token.token);
     final results = questionsList.results;
     for (final question in results) {
-      duelGameDataSource.addQtoFirebase(
-          questionModel: question, roomId: roomId);
+    
+
+      await duelGameDataSource.addQtoFirebase(
+          questionModel: question, roomId: roomId, );
     }
+  }
+
+  Stream<List<DuelQuestionModel>> getQuestionsFromFb({required String roomId}) {
+    return duelGameDataSource.getQuestionsFromFb(roomId: roomId).map((event) {
+      return event.docs.map((e) {
+        return DuelQuestionModel(
+           
+            question: e["question"],
+            correctAnswer: e["correctAnswer"],
+            incorrectOne: e["incorrectOne"],
+            incorrectTwo: e["incorrectTwo"],
+            incorrectThree: e["incorrectThree"],
+            category: e["category"],
+            difficulty: e["difficulty"],
+            id: e.id);
+      }).toList();
+    });
   }
 
   Future<void> resetGameStatus({
