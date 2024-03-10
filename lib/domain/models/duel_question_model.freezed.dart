@@ -16,14 +16,14 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$DuelQuestionModel {
-  String get question => throw _privateConstructorUsedError;
-  String get correctAnswer => throw _privateConstructorUsedError;
-  String get incorrectOne => throw _privateConstructorUsedError;
-  String get incorrectTwo => throw _privateConstructorUsedError;
-  String get incorrectThree => throw _privateConstructorUsedError;
-  String get difficulty => throw _privateConstructorUsedError;
-  String get category => throw _privateConstructorUsedError;
-  String get id => throw _privateConstructorUsedError;
+  String? get question => throw _privateConstructorUsedError;
+  String? get correctAnswer => throw _privateConstructorUsedError;
+  String? get incorrectOne => throw _privateConstructorUsedError;
+  String? get incorrectTwo => throw _privateConstructorUsedError;
+  String? get incorrectThree => throw _privateConstructorUsedError;
+  String? get difficulty => throw _privateConstructorUsedError;
+  String? get category => throw _privateConstructorUsedError;
+  String? get id => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $DuelQuestionModelCopyWith<DuelQuestionModel> get copyWith =>
@@ -37,14 +37,14 @@ abstract class $DuelQuestionModelCopyWith<$Res> {
       _$DuelQuestionModelCopyWithImpl<$Res, DuelQuestionModel>;
   @useResult
   $Res call(
-      {String question,
-      String correctAnswer,
-      String incorrectOne,
-      String incorrectTwo,
-      String incorrectThree,
-      String difficulty,
-      String category,
-      String id});
+      {String? question,
+      String? correctAnswer,
+      String? incorrectOne,
+      String? incorrectTwo,
+      String? incorrectThree,
+      String? difficulty,
+      String? category,
+      String? id});
 }
 
 /// @nodoc
@@ -60,48 +60,48 @@ class _$DuelQuestionModelCopyWithImpl<$Res, $Val extends DuelQuestionModel>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? question = null,
-    Object? correctAnswer = null,
-    Object? incorrectOne = null,
-    Object? incorrectTwo = null,
-    Object? incorrectThree = null,
-    Object? difficulty = null,
-    Object? category = null,
-    Object? id = null,
+    Object? question = freezed,
+    Object? correctAnswer = freezed,
+    Object? incorrectOne = freezed,
+    Object? incorrectTwo = freezed,
+    Object? incorrectThree = freezed,
+    Object? difficulty = freezed,
+    Object? category = freezed,
+    Object? id = freezed,
   }) {
     return _then(_value.copyWith(
-      question: null == question
+      question: freezed == question
           ? _value.question
           : question // ignore: cast_nullable_to_non_nullable
-              as String,
-      correctAnswer: null == correctAnswer
+              as String?,
+      correctAnswer: freezed == correctAnswer
           ? _value.correctAnswer
           : correctAnswer // ignore: cast_nullable_to_non_nullable
-              as String,
-      incorrectOne: null == incorrectOne
+              as String?,
+      incorrectOne: freezed == incorrectOne
           ? _value.incorrectOne
           : incorrectOne // ignore: cast_nullable_to_non_nullable
-              as String,
-      incorrectTwo: null == incorrectTwo
+              as String?,
+      incorrectTwo: freezed == incorrectTwo
           ? _value.incorrectTwo
           : incorrectTwo // ignore: cast_nullable_to_non_nullable
-              as String,
-      incorrectThree: null == incorrectThree
+              as String?,
+      incorrectThree: freezed == incorrectThree
           ? _value.incorrectThree
           : incorrectThree // ignore: cast_nullable_to_non_nullable
-              as String,
-      difficulty: null == difficulty
+              as String?,
+      difficulty: freezed == difficulty
           ? _value.difficulty
           : difficulty // ignore: cast_nullable_to_non_nullable
-              as String,
-      category: null == category
+              as String?,
+      category: freezed == category
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
-              as String,
-      id: null == id
+              as String?,
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ) as $Val);
   }
 }
@@ -115,14 +115,14 @@ abstract class _$$DuelQuestionModelImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String question,
-      String correctAnswer,
-      String incorrectOne,
-      String incorrectTwo,
-      String incorrectThree,
-      String difficulty,
-      String category,
-      String id});
+      {String? question,
+      String? correctAnswer,
+      String? incorrectOne,
+      String? incorrectTwo,
+      String? incorrectThree,
+      String? difficulty,
+      String? category,
+      String? id});
 }
 
 /// @nodoc
@@ -136,48 +136,48 @@ class __$$DuelQuestionModelImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? question = null,
-    Object? correctAnswer = null,
-    Object? incorrectOne = null,
-    Object? incorrectTwo = null,
-    Object? incorrectThree = null,
-    Object? difficulty = null,
-    Object? category = null,
-    Object? id = null,
+    Object? question = freezed,
+    Object? correctAnswer = freezed,
+    Object? incorrectOne = freezed,
+    Object? incorrectTwo = freezed,
+    Object? incorrectThree = freezed,
+    Object? difficulty = freezed,
+    Object? category = freezed,
+    Object? id = freezed,
   }) {
     return _then(_$DuelQuestionModelImpl(
-      question: null == question
+      question: freezed == question
           ? _value.question
           : question // ignore: cast_nullable_to_non_nullable
-              as String,
-      correctAnswer: null == correctAnswer
+              as String?,
+      correctAnswer: freezed == correctAnswer
           ? _value.correctAnswer
           : correctAnswer // ignore: cast_nullable_to_non_nullable
-              as String,
-      incorrectOne: null == incorrectOne
+              as String?,
+      incorrectOne: freezed == incorrectOne
           ? _value.incorrectOne
           : incorrectOne // ignore: cast_nullable_to_non_nullable
-              as String,
-      incorrectTwo: null == incorrectTwo
+              as String?,
+      incorrectTwo: freezed == incorrectTwo
           ? _value.incorrectTwo
           : incorrectTwo // ignore: cast_nullable_to_non_nullable
-              as String,
-      incorrectThree: null == incorrectThree
+              as String?,
+      incorrectThree: freezed == incorrectThree
           ? _value.incorrectThree
           : incorrectThree // ignore: cast_nullable_to_non_nullable
-              as String,
-      difficulty: null == difficulty
+              as String?,
+      difficulty: freezed == difficulty
           ? _value.difficulty
           : difficulty // ignore: cast_nullable_to_non_nullable
-              as String,
-      category: null == category
+              as String?,
+      category: freezed == category
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
-              as String,
-      id: null == id
+              as String?,
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ));
   }
 }
@@ -197,21 +197,21 @@ class _$DuelQuestionModelImpl extends _DuelQuestionModel {
       : super._();
 
   @override
-  final String question;
+  final String? question;
   @override
-  final String correctAnswer;
+  final String? correctAnswer;
   @override
-  final String incorrectOne;
+  final String? incorrectOne;
   @override
-  final String incorrectTwo;
+  final String? incorrectTwo;
   @override
-  final String incorrectThree;
+  final String? incorrectThree;
   @override
-  final String difficulty;
+  final String? difficulty;
   @override
-  final String category;
+  final String? category;
   @override
-  final String id;
+  final String? id;
 
   @override
   String toString() {
@@ -254,32 +254,32 @@ class _$DuelQuestionModelImpl extends _DuelQuestionModel {
 
 abstract class _DuelQuestionModel extends DuelQuestionModel {
   factory _DuelQuestionModel(
-      {required final String question,
-      required final String correctAnswer,
-      required final String incorrectOne,
-      required final String incorrectTwo,
-      required final String incorrectThree,
-      required final String difficulty,
-      required final String category,
-      required final String id}) = _$DuelQuestionModelImpl;
+      {required final String? question,
+      required final String? correctAnswer,
+      required final String? incorrectOne,
+      required final String? incorrectTwo,
+      required final String? incorrectThree,
+      required final String? difficulty,
+      required final String? category,
+      required final String? id}) = _$DuelQuestionModelImpl;
   _DuelQuestionModel._() : super._();
 
   @override
-  String get question;
+  String? get question;
   @override
-  String get correctAnswer;
+  String? get correctAnswer;
   @override
-  String get incorrectOne;
+  String? get incorrectOne;
   @override
-  String get incorrectTwo;
+  String? get incorrectTwo;
   @override
-  String get incorrectThree;
+  String? get incorrectThree;
   @override
-  String get difficulty;
+  String? get difficulty;
   @override
-  String get category;
+  String? get category;
   @override
-  String get id;
+  String? get id;
   @override
   @JsonKey(ignore: true)
   _$$DuelQuestionModelImplCopyWith<_$DuelQuestionModelImpl> get copyWith =>

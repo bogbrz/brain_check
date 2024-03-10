@@ -13,19 +13,161 @@ class DuelQuestionPageCubit extends Cubit<DuelQuestionPageState> {
   DuelQuestionPageCubit({
     required this.duelGameRepository,
   }) : super(DuelQuestionPageState(
-            questions: [], errorMessage: null, status: Status.initial));
+            firstQuestion: DuelQuestionModel(
+                question: null,
+                correctAnswer: null,
+                incorrectOne: null,
+                incorrectTwo: null,
+                incorrectThree: null,
+                difficulty: null,
+                category: null,
+                id: null),
+            secondQuestion: DuelQuestionModel(
+                question: null,
+                correctAnswer: null,
+                incorrectOne: null,
+                incorrectTwo: null,
+                incorrectThree: null,
+                difficulty: null,
+                category: null,
+                id: null),
+            thirdQuestion: DuelQuestionModel(
+                question: null,
+                correctAnswer: null,
+                incorrectOne: null,
+                incorrectTwo: null,
+                incorrectThree: null,
+                difficulty: null,
+                category: null,
+                id: null),
+            fourthQuestion: DuelQuestionModel(
+                question: null,
+                correctAnswer: null,
+                incorrectOne: null,
+                incorrectTwo: null,
+                incorrectThree: null,
+                difficulty: null,
+                category: null,
+                id: null),
+            fifthQuestion: DuelQuestionModel(
+                question: null,
+                correctAnswer: null,
+                incorrectOne: null,
+                incorrectTwo: null,
+                incorrectThree: null,
+                difficulty: null,
+                category: null,
+                id: null),
+            errorMessage: null,
+            status: Status.initial));
   final DuelGameRepository duelGameRepository;
 
   Future<void> getQfromFb({required String roomId}) async {
     emit(DuelQuestionPageState(
-        errorMessage: null, questions: [], status: Status.loading));
+        errorMessage: null,
+        firstQuestion: DuelQuestionModel(
+            question: null,
+            correctAnswer: null,
+            incorrectOne: null,
+            incorrectTwo: null,
+            incorrectThree: null,
+            difficulty: null,
+            category: null,
+            id: null),
+        secondQuestion: DuelQuestionModel(
+            question: null,
+            correctAnswer: null,
+            incorrectOne: null,
+            incorrectTwo: null,
+            incorrectThree: null,
+            difficulty: null,
+            category: null,
+            id: null),
+        thirdQuestion: DuelQuestionModel(
+            question: null,
+            correctAnswer: null,
+            incorrectOne: null,
+            incorrectTwo: null,
+            incorrectThree: null,
+            difficulty: null,
+            category: null,
+            id: null),
+        fourthQuestion: DuelQuestionModel(
+            question: null,
+            correctAnswer: null,
+            incorrectOne: null,
+            incorrectTwo: null,
+            incorrectThree: null,
+            difficulty: null,
+            category: null,
+            id: null),
+        fifthQuestion: DuelQuestionModel(
+            question: null,
+            correctAnswer: null,
+            incorrectOne: null,
+            incorrectTwo: null,
+            incorrectThree: null,
+            difficulty: null,
+            category: null,
+            id: null),
+        status: Status.loading));
     duelGameRepository.getQuestionsFromFb(roomId: roomId).listen((event) {
       try {
         emit(DuelQuestionPageState(
-            errorMessage: null, questions: event, status: Status.success));
+            errorMessage: null,
+            status: Status.success,
+            firstQuestion: event[0],
+            secondQuestion: event[1],
+            thirdQuestion: event[2],
+            fourthQuestion: event[3],
+            fifthQuestion: event[4]));
       } catch (e) {
         emit(DuelQuestionPageState(
-            errorMessage: e.toString(), questions: [], status: Status.error));
+            errorMessage: e.toString(), firstQuestion: DuelQuestionModel(
+            question: null,
+            correctAnswer: null,
+            incorrectOne: null,
+            incorrectTwo: null,
+            incorrectThree: null,
+            difficulty: null,
+            category: null,
+            id: null),
+        secondQuestion: DuelQuestionModel(
+            question: null,
+            correctAnswer: null,
+            incorrectOne: null,
+            incorrectTwo: null,
+            incorrectThree: null,
+            difficulty: null,
+            category: null,
+            id: null),
+        thirdQuestion: DuelQuestionModel(
+            question: null,
+            correctAnswer: null,
+            incorrectOne: null,
+            incorrectTwo: null,
+            incorrectThree: null,
+            difficulty: null,
+            category: null,
+            id: null),
+        fourthQuestion: DuelQuestionModel(
+            question: null,
+            correctAnswer: null,
+            incorrectOne: null,
+            incorrectTwo: null,
+            incorrectThree: null,
+            difficulty: null,
+            category: null,
+            id: null),
+        fifthQuestion: DuelQuestionModel(
+            question: null,
+            correctAnswer: null,
+            incorrectOne: null,
+            incorrectTwo: null,
+            incorrectThree: null,
+            difficulty: null,
+            category: null,
+            id: null), status: Status.error));
       }
     });
   }

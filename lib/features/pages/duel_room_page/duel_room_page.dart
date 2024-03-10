@@ -46,7 +46,8 @@ class GameRoomPage extends StatelessWidget {
                       errorMessage: state.errorMessage.toString());
                 case Status.success:
                   for (final player in state.players) {
-                    if (player.startGame != false) {
+                    if (player.email == user!.email.toString() &&
+                        player.startGame == true) {
                       return DuelQuestionPage(
                         roomId: id,
                         players: state.players,
