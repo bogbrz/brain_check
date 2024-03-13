@@ -1,4 +1,5 @@
-import 'package:flutter/material.dart';
+import 'dart:math';
+
 import 'package:freezed_annotation/freezed_annotation.dart';
 part 'duel_question_model.freezed.dart';
 
@@ -16,15 +17,16 @@ class DuelQuestionModel with _$DuelQuestionModel {
     required String? id,
   }) = _DuelQuestionModel;
 
-  List<String?> get answers {
-    List<String?> listOfAnswers = [];
-    listOfAnswers.add(correctAnswer);
-    listOfAnswers.add(incorrectOne);
-    listOfAnswers.add(incorrectTwo);
+  // List<String?> get answers {
+  //   List<String?> listOfAnswers = [];
 
-    listOfAnswers.add(incorrectThree);
-    listOfAnswers.shuffle();
+  //   listOfAnswers.add(correctAnswer);
+  //   listOfAnswers.add(incorrectOne);
+  //   listOfAnswers.add(incorrectTwo);
 
-    return listOfAnswers;
-  }
+  //   listOfAnswers.add(incorrectThree);
+  //   listOfAnswers.shuffle();
+
+  //   return listOfAnswers;
+  // }
 }

@@ -23,6 +23,11 @@ mixin _$DuelQuestionPageState {
   DuelQuestionModel get fourthQuestion => throw _privateConstructorUsedError;
   DuelQuestionModel get fifthQuestion => throw _privateConstructorUsedError;
   Status get status => throw _privateConstructorUsedError;
+  List<String> get answersOne => throw _privateConstructorUsedError;
+  List<String> get answersTwo => throw _privateConstructorUsedError;
+  List<String> get answersThree => throw _privateConstructorUsedError;
+  List<String> get answersFour => throw _privateConstructorUsedError;
+  List<String> get answersFive => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $DuelQuestionPageStateCopyWith<DuelQuestionPageState> get copyWith =>
@@ -42,7 +47,12 @@ abstract class $DuelQuestionPageStateCopyWith<$Res> {
       DuelQuestionModel thirdQuestion,
       DuelQuestionModel fourthQuestion,
       DuelQuestionModel fifthQuestion,
-      Status status});
+      Status status,
+      List<String> answersOne,
+      List<String> answersTwo,
+      List<String> answersThree,
+      List<String> answersFour,
+      List<String> answersFive});
 
   $DuelQuestionModelCopyWith<$Res> get firstQuestion;
   $DuelQuestionModelCopyWith<$Res> get secondQuestion;
@@ -72,6 +82,11 @@ class _$DuelQuestionPageStateCopyWithImpl<$Res,
     Object? fourthQuestion = null,
     Object? fifthQuestion = null,
     Object? status = null,
+    Object? answersOne = null,
+    Object? answersTwo = null,
+    Object? answersThree = null,
+    Object? answersFour = null,
+    Object? answersFive = null,
   }) {
     return _then(_value.copyWith(
       errorMessage: freezed == errorMessage
@@ -102,6 +117,26 @@ class _$DuelQuestionPageStateCopyWithImpl<$Res,
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as Status,
+      answersOne: null == answersOne
+          ? _value.answersOne
+          : answersOne // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      answersTwo: null == answersTwo
+          ? _value.answersTwo
+          : answersTwo // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      answersThree: null == answersThree
+          ? _value.answersThree
+          : answersThree // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      answersFour: null == answersFour
+          ? _value.answersFour
+          : answersFour // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      answersFive: null == answersFive
+          ? _value.answersFive
+          : answersFive // ignore: cast_nullable_to_non_nullable
+              as List<String>,
     ) as $Val);
   }
 
@@ -161,7 +196,12 @@ abstract class _$$InitialImplCopyWith<$Res>
       DuelQuestionModel thirdQuestion,
       DuelQuestionModel fourthQuestion,
       DuelQuestionModel fifthQuestion,
-      Status status});
+      Status status,
+      List<String> answersOne,
+      List<String> answersTwo,
+      List<String> answersThree,
+      List<String> answersFour,
+      List<String> answersFive});
 
   @override
   $DuelQuestionModelCopyWith<$Res> get firstQuestion;
@@ -193,6 +233,11 @@ class __$$InitialImplCopyWithImpl<$Res>
     Object? fourthQuestion = null,
     Object? fifthQuestion = null,
     Object? status = null,
+    Object? answersOne = null,
+    Object? answersTwo = null,
+    Object? answersThree = null,
+    Object? answersFour = null,
+    Object? answersFive = null,
   }) {
     return _then(_$InitialImpl(
       errorMessage: freezed == errorMessage
@@ -223,6 +268,26 @@ class __$$InitialImplCopyWithImpl<$Res>
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as Status,
+      answersOne: null == answersOne
+          ? _value._answersOne
+          : answersOne // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      answersTwo: null == answersTwo
+          ? _value._answersTwo
+          : answersTwo // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      answersThree: null == answersThree
+          ? _value._answersThree
+          : answersThree // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      answersFour: null == answersFour
+          ? _value._answersFour
+          : answersFour // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      answersFive: null == answersFive
+          ? _value._answersFive
+          : answersFive // ignore: cast_nullable_to_non_nullable
+              as List<String>,
     ));
   }
 }
@@ -237,7 +302,17 @@ class _$InitialImpl implements _Initial {
       required this.thirdQuestion,
       required this.fourthQuestion,
       required this.fifthQuestion,
-      required this.status});
+      required this.status,
+      required final List<String> answersOne,
+      required final List<String> answersTwo,
+      required final List<String> answersThree,
+      required final List<String> answersFour,
+      required final List<String> answersFive})
+      : _answersOne = answersOne,
+        _answersTwo = answersTwo,
+        _answersThree = answersThree,
+        _answersFour = answersFour,
+        _answersFive = answersFive;
 
   @override
   final String? errorMessage;
@@ -253,10 +328,49 @@ class _$InitialImpl implements _Initial {
   final DuelQuestionModel fifthQuestion;
   @override
   final Status status;
+  final List<String> _answersOne;
+  @override
+  List<String> get answersOne {
+    if (_answersOne is EqualUnmodifiableListView) return _answersOne;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_answersOne);
+  }
+
+  final List<String> _answersTwo;
+  @override
+  List<String> get answersTwo {
+    if (_answersTwo is EqualUnmodifiableListView) return _answersTwo;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_answersTwo);
+  }
+
+  final List<String> _answersThree;
+  @override
+  List<String> get answersThree {
+    if (_answersThree is EqualUnmodifiableListView) return _answersThree;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_answersThree);
+  }
+
+  final List<String> _answersFour;
+  @override
+  List<String> get answersFour {
+    if (_answersFour is EqualUnmodifiableListView) return _answersFour;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_answersFour);
+  }
+
+  final List<String> _answersFive;
+  @override
+  List<String> get answersFive {
+    if (_answersFive is EqualUnmodifiableListView) return _answersFive;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_answersFive);
+  }
 
   @override
   String toString() {
-    return 'DuelQuestionPageState(errorMessage: $errorMessage, firstQuestion: $firstQuestion, secondQuestion: $secondQuestion, thirdQuestion: $thirdQuestion, fourthQuestion: $fourthQuestion, fifthQuestion: $fifthQuestion, status: $status)';
+    return 'DuelQuestionPageState(errorMessage: $errorMessage, firstQuestion: $firstQuestion, secondQuestion: $secondQuestion, thirdQuestion: $thirdQuestion, fourthQuestion: $fourthQuestion, fifthQuestion: $fifthQuestion, status: $status, answersOne: $answersOne, answersTwo: $answersTwo, answersThree: $answersThree, answersFour: $answersFour, answersFive: $answersFive)';
   }
 
   @override
@@ -276,12 +390,34 @@ class _$InitialImpl implements _Initial {
                 other.fourthQuestion == fourthQuestion) &&
             (identical(other.fifthQuestion, fifthQuestion) ||
                 other.fifthQuestion == fifthQuestion) &&
-            (identical(other.status, status) || other.status == status));
+            (identical(other.status, status) || other.status == status) &&
+            const DeepCollectionEquality()
+                .equals(other._answersOne, _answersOne) &&
+            const DeepCollectionEquality()
+                .equals(other._answersTwo, _answersTwo) &&
+            const DeepCollectionEquality()
+                .equals(other._answersThree, _answersThree) &&
+            const DeepCollectionEquality()
+                .equals(other._answersFour, _answersFour) &&
+            const DeepCollectionEquality()
+                .equals(other._answersFive, _answersFive));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, errorMessage, firstQuestion,
-      secondQuestion, thirdQuestion, fourthQuestion, fifthQuestion, status);
+  int get hashCode => Object.hash(
+      runtimeType,
+      errorMessage,
+      firstQuestion,
+      secondQuestion,
+      thirdQuestion,
+      fourthQuestion,
+      fifthQuestion,
+      status,
+      const DeepCollectionEquality().hash(_answersOne),
+      const DeepCollectionEquality().hash(_answersTwo),
+      const DeepCollectionEquality().hash(_answersThree),
+      const DeepCollectionEquality().hash(_answersFour),
+      const DeepCollectionEquality().hash(_answersFive));
 
   @JsonKey(ignore: true)
   @override
@@ -298,7 +434,12 @@ abstract class _Initial implements DuelQuestionPageState {
       required final DuelQuestionModel thirdQuestion,
       required final DuelQuestionModel fourthQuestion,
       required final DuelQuestionModel fifthQuestion,
-      required final Status status}) = _$InitialImpl;
+      required final Status status,
+      required final List<String> answersOne,
+      required final List<String> answersTwo,
+      required final List<String> answersThree,
+      required final List<String> answersFour,
+      required final List<String> answersFive}) = _$InitialImpl;
 
   @override
   String? get errorMessage;
@@ -314,6 +455,16 @@ abstract class _Initial implements DuelQuestionPageState {
   DuelQuestionModel get fifthQuestion;
   @override
   Status get status;
+  @override
+  List<String> get answersOne;
+  @override
+  List<String> get answersTwo;
+  @override
+  List<String> get answersThree;
+  @override
+  List<String> get answersFour;
+  @override
+  List<String> get answersFive;
   @override
   @JsonKey(ignore: true)
   _$$InitialImplCopyWith<_$InitialImpl> get copyWith =>

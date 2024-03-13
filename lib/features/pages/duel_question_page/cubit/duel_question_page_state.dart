@@ -10,5 +10,10 @@ class DuelQuestionPageState with _$DuelQuestionPageState {
     required DuelQuestionModel fourthQuestion,
     required DuelQuestionModel fifthQuestion,
     required Status status,
+    required List<String> answersOne,
+    required List<String> answersTwo,
+    required List<String> answersThree,
+    required List<String> answersFour,
+    required List<String> answersFive,
   }) = _Initial;
 }

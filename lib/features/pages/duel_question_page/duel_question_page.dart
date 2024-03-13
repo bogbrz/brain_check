@@ -7,6 +7,7 @@ import 'package:brain_check/features/pages/duel_result_page/duel_result_page.dar
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:html_unescape/html_unescape.dart';
 
 class DuelQuestionPage extends StatefulWidget {
   const DuelQuestionPage({
@@ -26,6 +27,7 @@ class DuelQuestionPage extends StatefulWidget {
 class _DuelQuestionPageState extends State<DuelQuestionPage> {
   @override
   var index = 0;
+  var choosedQuestion = null;
 
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -54,58 +56,142 @@ class _DuelQuestionPageState extends State<DuelQuestionPage> {
                   child: Column(
                     children: [
                       Text(index == 0
-                          ? state.firstQuestion.question.toString()
+                          ? HtmlUnescape()
+                              .convert(state.firstQuestion.question.toString())
                           : index == 1
-                              ? state.secondQuestion.question.toString()
+                              ? HtmlUnescape().convert(
+                                  state.secondQuestion.question.toString())
                               : index == 2
-                                  ? state.thirdQuestion.question.toString()
+                                  ? HtmlUnescape().convert(
+                                      state.thirdQuestion.question.toString())
                                   : index == 3
-                                      ? state.fourthQuestion.question.toString()
-                                      : state.fifthQuestion.question
-                                          .toString()),
+                                      ? HtmlUnescape().convert(state
+                                          .fourthQuestion.question
+                                          .toString())
+                                      : HtmlUnescape().convert(state
+                                          .fifthQuestion.question
+                                          .toString())),
                       Wrap(
                         children: [
                           if (index == 0) ...[
-                            for (final answer
-                                in state.firstQuestion.answers) ...[
-                              InkWell(
-                                  onTap: () {},
-                                  child:
-                                      AnswerWidget(answer: answer.toString()))
-                            ]
-                          ] else if (index == 1) ...[
-                            for (final answer
-                                in state.secondQuestion.answers) ...[
-                              InkWell(
-                                  onTap: () {},
-                                  child:
-                                      AnswerWidget(answer: answer.toString()))
-                            ]
-                          ] else if (index == 2) ...[
-                            for (final answer
-                                in state.thirdQuestion.answers) ...[
-                              InkWell(
-                                  onTap: () {},
-                                  child:
-                                      AnswerWidget(answer: answer.toString()))
-                            ]
-                          ] else if (index == 3) ...[
-                            for (final answer
-                                in state.fourthQuestion.answers) ...[
-                              InkWell(
-                                  onTap: () {},
-                                  child:
-                                      AnswerWidget(answer: answer.toString()))
-                            ]
-                          ] else if (index == 1) ...[
-                            for (final answer
-                                in state.fifthQuestion.answers) ...[
+                            for (final answer in state.answersOne) ...[
                               InkWell(
                                   onTap: () {
-                                    setState(() {});
+                                    setState(() {
+                                      if (answer == state.answersOne[0]) {
+                                        choosedQuestion = 0;
+                                      } else if (answer ==
+                                          state.answersOne[1]) {
+                                        choosedQuestion = 1;
+                                      } else if (answer ==
+                                          state.answersOne[2]) {
+                                        choosedQuestion = 2;
+                                      } else if (answer ==
+                                          state.answersOne[3]) {
+                                        choosedQuestion = 3;
+                                      }
+                                    });
+                                    print(choosedQuestion);
                                   },
-                                  child:
-                                      AnswerWidget(answer: answer.toString()))
+                                  child: AnswerWidget(
+                                      answer: HtmlUnescape()
+                                          .convert(answer.toString())))
+                            ]
+                          ] else if (index == 1) ...[
+                            for (final answer in state.answersTwo) ...[
+                              InkWell(
+                                  onTap: () {
+                                    setState(() {
+                                      if (answer == state.answersTwo[0]) {
+                                        choosedQuestion = 0;
+                                      } else if (answer ==
+                                          state.answersTwo[1]) {
+                                        choosedQuestion = 1;
+                                      } else if (answer ==
+                                          state.answersTwo[2]) {
+                                        choosedQuestion = 2;
+                                      } else if (answer ==
+                                          state.answersTwo[3]) {
+                                        choosedQuestion = 3;
+                                      }
+                                    });
+                                    print(choosedQuestion);
+                                  },
+                                  child: AnswerWidget(
+                                      answer: HtmlUnescape()
+                                          .convert(answer.toString())))
+                            ]
+                          ] else if (index == 2) ...[
+                            for (final answer in state.answersThree) ...[
+                              InkWell(
+                                  onTap: () {
+                                    setState(() {
+                                      if (answer == state.answersThree[0]) {
+                                        choosedQuestion = 0;
+                                      } else if (answer ==
+                                          state.answersThree[1]) {
+                                        choosedQuestion = 1;
+                                      } else if (answer ==
+                                          state.answersThree[2]) {
+                                        choosedQuestion = 2;
+                                      } else if (answer ==
+                                          state.answersThree[3]) {
+                                        choosedQuestion = 3;
+                                      }
+                                    });
+                                    print(choosedQuestion);
+                                  },
+                                  child: AnswerWidget(
+                                      answer: HtmlUnescape()
+                                          .convert(answer.toString())))
+                            ]
+                          ] else if (index == 3) ...[
+                            for (final answer in state.answersFour) ...[
+                              InkWell(
+                                  onTap: () {
+                                    setState(() {
+                                      if (answer == state.answersFour[0]) {
+                                        choosedQuestion = 0;
+                                      } else if (answer ==
+                                          state.answersFour[1]) {
+                                        choosedQuestion = 1;
+                                      } else if (answer ==
+                                          state.answersFour[2]) {
+                                        choosedQuestion = 2;
+                                      } else if (answer ==
+                                          state.answersFour[3]) {
+                                        choosedQuestion = 3;
+                                      }
+                                    });
+                                    print(choosedQuestion);
+                                  },
+                                  child: AnswerWidget(
+                                      answer: HtmlUnescape()
+                                          .convert(answer.toString())))
+                            ]
+                          ] else if (index == 4) ...[
+                            for (final answer in state.answersFive) ...[
+                              InkWell(
+                                  onTap: () {
+                                    setState(() {
+                                      if (answer == state.answersFive[0]) {
+                                        choosedQuestion = 0;
+                                      } else if (answer ==
+                                          state.answersFive[1]) {
+                                        choosedQuestion = 1;
+                                      } else if (answer ==
+                                          state.answersFive[2]) {
+                                        choosedQuestion = 2;
+                                      } else if (answer ==
+                                          state.answersFive[3]) {
+                                        choosedQuestion = 3;
+                                      }
+                                    });
+                                    print(choosedQuestion);
+                                  },
+                                  child: AnswerWidget(
+                                      answer: HtmlUnescape()
+                                          .convert(answer.toString())))
                             ]
                           ]
                         ],
@@ -114,6 +200,10 @@ class _DuelQuestionPageState extends State<DuelQuestionPage> {
                           onPressed: () {
                             setState(() {
                               index++;
+
+                              print(state.secondQuestion);
+                              print(state.thirdQuestion);
+                              print(state.fourthQuestion);
                             });
                           },
                           child: Text("NEXT"))
