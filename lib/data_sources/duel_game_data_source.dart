@@ -16,7 +16,6 @@ class DuelGameDataSource {
       "name": name,
       "password": password,
       "nickName": nickName,
-      
     });
   }
 
@@ -104,13 +103,14 @@ class DuelGameDataSource {
     required String roomId,
     required bool status,
     required String playerId,
+    required int points,
   }) async {
     return FirebaseFirestore.instance
         .collection("GameRooms")
         .doc(roomId)
         .collection("Players")
         .doc(playerId)
-        .update({"startGame": status});
+        .update({"startGame": status, "points": FieldValue.increment(points)});
   }
 
   Future<void> startGame(

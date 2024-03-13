@@ -69,9 +69,10 @@ class DuelGameRepository {
     required String roomId,
     required bool status,
     required String playerId,
+    required int points
   }) async {
     return duelGameDataSource.resetGameStatus(
-        roomId: roomId, status: status, playerId: playerId);
+        roomId: roomId, status: status, playerId: playerId, points: points,);
   }
 
   Stream<List<RoomStatusModel>> getRoomStatus({required String roomId}) {

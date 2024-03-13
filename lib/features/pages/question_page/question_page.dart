@@ -101,14 +101,6 @@ class _QuestionPageState extends State<QuestionPage> {
                   );
                 }
 
-                if (widget.questionsNumber == index && widget.isDuel == true) {
-                  return DuelResultPage(
-                    roomId: widget.roomId,
-                    user: widget.user,
-                    players: widget.players,
-                  );
-                }
-
                 switch (state.status) {
                   case Status.initial:
                     return const InitialStateWidget();

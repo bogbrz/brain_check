@@ -13,10 +13,12 @@ class DuelResultPage extends StatelessWidget {
       {required this.roomId,
       super.key,
       required this.players,
-      required this.user});
+      required this.user,
+      required this.points});
   final String? roomId;
   final List<PlayerModel>? players;
   final User? user;
+  final int points;
 
   @override
   Widget build(BuildContext context) {
@@ -25,17 +27,23 @@ class DuelResultPage extends StatelessWidget {
       child: Scaffold(body: BlocBuilder<DuelResultCubit, DuelResultState>(
         builder: (context, state) {
           return Center(
-            child: ElevatedButton(
-              onPressed: () {
-                for (final player in players!) {
-                  if (player.email.toString() == user!.email.toString())
-                    context.read<DuelResultCubit>().resetGameStatus(
-                        roomId: roomId!, status: false, playerId: player.id);
-                }
-
-                Navigator.of(context).pop();
-              },
-              child: Text("END OF DUEL"),
+            child: Column(
+              children: [
+                Text("POINTS: ${points}"),
+                ElevatedButton(
+                  onPressed: () {
+                    for (final player in players!) {
+                      if (player.email.toString() == user!.email.toString())
+                        context.read<DuelResultCubit>().resetGameStatus(
+                            roomId: roomId!,
+                            status: false,
+                            playerId: player.id,
+                            points: points);
+                    }
+                  },
+                  child: Text("END OF DUEL"),
+                ),
+              ],
             ),
           );
         },

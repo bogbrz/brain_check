@@ -11,7 +11,8 @@ part 'result_page_state.dart';
 part 'result_page_cubit.freezed.dart';
 
 class ResultPageCubit extends Cubit<ResultPageState> {
-  ResultPageCubit({required this.rankingRepository, required this.duelGameRepository})
+  ResultPageCubit(
+      {required this.rankingRepository, required this.duelGameRepository})
       : super(const ResultPageState(
             errorMessage: null, profile: [], status: Status.initial));
 
@@ -34,15 +35,14 @@ class ResultPageCubit extends Cubit<ResultPageState> {
     });
   }
 
-  Future<void> resetGameStatus(
-      {required String roomId,
-      required bool status,
-      required String playerId,
-      }) async {
+  Future<void> resetGameStatus({
+    required String roomId,
+    required bool status,
+    required String playerId,
+    required int points,
+  }) async {
     return duelGameRepository.resetGameStatus(
-        roomId: roomId,
-        status: status,
-        playerId: playerId);
+        roomId: roomId, status: status, playerId: playerId, points: points);
   }
 
   Future<void> updateRanking({required int points, required String id}) async {

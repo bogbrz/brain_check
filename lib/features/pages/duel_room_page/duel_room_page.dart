@@ -53,18 +53,6 @@ class GameRoomPage extends StatelessWidget {
                         players: state.players,
                         user: user,
                       );
-
-                      // return QuestionPage(
-                      //   players: state.players,
-                      //   roomId: id,
-                      //   category: 9,
-                      //   difficulty: "easy",
-                      //   questionsNumber: 1,
-                      //   user: user,
-                      //   token: "",
-                      //   isRanked: false,
-                      //   isDuel: true,
-                      // );
                     }
                   }
 
@@ -247,6 +235,12 @@ class JoinPlayerTwoWidget extends StatelessWidget {
                 child: Column(
                   children: [
                     Text(
+                      playerTwo[0].points.toString(),
+                      style: GoogleFonts.bungee(
+                          color: Colors.white,
+                          fontSize: MediaQuery.of(context).size.height / 15),
+                    ),
+                    Text(
                       playerTwo[0].nickName,
                       style: GoogleFonts.bungee(
                           color: Colors.white,
@@ -347,6 +341,12 @@ class JoinPlayerOneWidget extends StatelessWidget {
               child: Container(
                 child: Column(
                   children: [
+                    Text(
+                      playerOne[0].points.toString(),
+                      style: GoogleFonts.bungee(
+                          color: Colors.white,
+                          fontSize: MediaQuery.of(context).size.height / 15),
+                    ),
                     Text(
                       playerOne[0].nickName,
                       style: GoogleFonts.bungee(
