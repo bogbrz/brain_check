@@ -16,6 +16,8 @@ class DuelGameDataSource {
       "name": name,
       "password": password,
       "nickName": nickName,
+      "playersAmount": 0,
+      "roundNumber": 1
     });
   }
 
@@ -26,6 +28,7 @@ class DuelGameDataSource {
   Future<void> addQtoFirebase({
     required QuestionModel questionModel,
     required String roomId,
+    required int roundNumber,
   }) async {
     await FirebaseFirestore.instance
         .collection("GameRooms")
@@ -49,6 +52,16 @@ class DuelGameDataSource {
         .doc(roomId)
         .collection("Questions")
         .snapshots();
+  }
+
+  Future<void> deleteQuestions(
+      {required String roomId, required String questionId}) {
+    return FirebaseFirestore.instance
+        .collection("GameRooms")
+        .doc(roomId)
+        .collection("Questions")
+        .doc(questionId)
+        .delete();
   }
 
   Future<void> readyStatus(
@@ -78,7 +91,9 @@ class DuelGameDataSource {
       "points": 0,
       "player": playerNumber,
       "ready": false,
-      "startGame": false
+      "startGame": false,
+      "roundNumber": 1,
+      "questionsAdded": false,
     });
   }
 
@@ -110,7 +125,22 @@ class DuelGameDataSource {
         .doc(roomId)
         .collection("Players")
         .doc(playerId)
-        .update({"startGame": status, "points": FieldValue.increment(points)});
+        .update({
+      "startGame": status,
+      "points": FieldValue.increment(points),
+      "ready": false,
+      "roundNumber": FieldValue.increment(1)
+    });
+  }
+
+  Future<void> updatePlayersCount({
+    required String roomId,
+    required int value,
+  }) async {
+    return FirebaseFirestore.instance
+        .collection("GameRooms")
+        .doc(roomId)
+        .update({"playersAmount": FieldValue.increment(value)});
   }
 
   Future<void> startGame(
@@ -123,13 +153,15 @@ class DuelGameDataSource {
         .doc(roomId)
         .collection("Players")
         .doc(playerOneId)
-        .update({"startGame": status});
+        .update({
+      "startGame": status,
+    });
     await FirebaseFirestore.instance
         .collection("GameRooms")
         .doc(roomId)
         .collection("Players")
         .doc(playerTwoId)
-        .update({"startGame": status});
+        .update({"startGame": status, "questionsAdded": true});
   }
 
   Stream<QuerySnapshot<Map<String, dynamic>>> roomStatus(

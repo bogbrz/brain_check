@@ -2,24 +2,29 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:brain_check/app/core/enums/enums.dart';
+import 'package:brain_check/domain/models/categories_model.dart';
 import 'package:brain_check/domain/models/player_model.dart';
 import 'package:brain_check/domain/models/room_status_model.dart';
 import 'package:brain_check/domain/repositories/duel_game_repository.dart';
+import 'package:brain_check/domain/repositories/questions_repository.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'duel_room_page_state.dart';
 part 'duel_room_page_cubit.freezed.dart';
 
 class DuelRoomPageCubit extends Cubit<DuelRoomPageState> {
-  DuelRoomPageCubit({required this.duelGameRepository})
+  DuelRoomPageCubit(
+      {required this.duelGameRepository, required this.questionRepository})
       : super(const DuelRoomPageState(
             errorMessage: null,
             status: Status.initial,
             playerTwo: [],
             playerOne: [],
             players: [],
-            roomStatus: []));
+            roomStatus: [],
+            categories: []));
   final DuelGameRepository duelGameRepository;
+  final QuestionRepository questionRepository;
   StreamSubscription? streamSubscription;
 
   Future<void> joinPlayer(
@@ -64,30 +69,13 @@ class DuelRoomPageCubit extends Cubit<DuelRoomPageState> {
     );
   }
 
-  Future<void> roomStatus({required String roomId}) async {
-    emit(DuelRoomPageState(
-        errorMessage: null,
-        status: Status.initial,
-        playerOne: [],
-        playerTwo: [],
-        players: [],
-        roomStatus: []));
-
-    duelGameRepository.getRoomStatus(roomId: roomId).listen((event) {
-      try {
-        emit(DuelRoomPageState(
-            errorMessage: null,
-            status: Status.success,
-            playerOne: [],
-            playerTwo: [],
-            players: [],
-            roomStatus: event));
-      } catch (e) {}
-    });
-  }
-
   Future<void> addQtoFirebase({required String roomId}) async {
     return duelGameRepository.addQtoFirebase(roomId: roomId);
+  }
+
+  Future<void> updatePlayersCount(
+      {required String roomId, required int value}) async {
+    return duelGameRepository.updatePlayersCount(roomId: roomId, value: value);
   }
 
   Future<void> playerInfo({
@@ -100,7 +88,10 @@ class DuelRoomPageCubit extends Cubit<DuelRoomPageState> {
       playerTwo: [],
       playerOne: [],
       roomStatus: [],
+      categories: [],
     ));
+
+    final categories = await questionRepository.getCategories();
 
     duelGameRepository
         .getPlayerInfo(
@@ -120,22 +111,22 @@ class DuelRoomPageCubit extends Cubit<DuelRoomPageState> {
           .toList();
       try {
         emit(DuelRoomPageState(
-          errorMessage: null,
-          status: Status.success,
-          playerTwo: playerTwoList,
-          playerOne: playerOneList,
-          players: event,
-          roomStatus: [],
-        ));
+            errorMessage: null,
+            status: Status.success,
+            playerTwo: playerTwoList,
+            playerOne: playerOneList,
+            players: event,
+            roomStatus: [],
+            categories: categories));
       } catch (e) {
         emit(DuelRoomPageState(
-          errorMessage: e.toString(),
-          status: Status.error,
-          playerTwo: [],
-          playerOne: [],
-          players: [],
-          roomStatus: [],
-        ));
+            errorMessage: e.toString(),
+            status: Status.error,
+            playerTwo: [],
+            playerOne: [],
+            players: [],
+            roomStatus: [],
+            categories: []));
       }
     });
   }

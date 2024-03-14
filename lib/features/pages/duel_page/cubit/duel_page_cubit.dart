@@ -25,10 +25,10 @@ class DuelPageCubit extends Cubit<DuelPageState> {
     duelGameRepository.getRooms().listen((event) {
       try {
         emit(DuelPageState(
-            errorMessage: null, rooms: event, status: Status.success));
+            errorMessage: null, rooms: event, status: Status.success,));
       } catch (e) {
         emit(DuelPageState(
-            errorMessage: e.toString(), rooms: [], status: Status.error));
+            errorMessage: e.toString(), rooms: [], status: Status.error,));
       }
     });
   }

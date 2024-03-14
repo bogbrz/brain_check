@@ -21,6 +21,7 @@ mixin _$GameRoomModel {
   String get password => throw _privateConstructorUsedError;
   String get id => throw _privateConstructorUsedError;
   String get nickName => throw _privateConstructorUsedError;
+  int get playersAmount => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $GameRoomModelCopyWith<GameRoomModel> get copyWith =>
@@ -38,7 +39,8 @@ abstract class $GameRoomModelCopyWith<$Res> {
       String ownerMail,
       String password,
       String id,
-      String nickName});
+      String nickName,
+      int playersAmount});
 }
 
 /// @nodoc
@@ -59,6 +61,7 @@ class _$GameRoomModelCopyWithImpl<$Res, $Val extends GameRoomModel>
     Object? password = null,
     Object? id = null,
     Object? nickName = null,
+    Object? playersAmount = null,
   }) {
     return _then(_value.copyWith(
       name: null == name
@@ -81,6 +84,10 @@ class _$GameRoomModelCopyWithImpl<$Res, $Val extends GameRoomModel>
           ? _value.nickName
           : nickName // ignore: cast_nullable_to_non_nullable
               as String,
+      playersAmount: null == playersAmount
+          ? _value.playersAmount
+          : playersAmount // ignore: cast_nullable_to_non_nullable
+              as int,
     ) as $Val);
   }
 }
@@ -98,7 +105,8 @@ abstract class _$$GameRoomModelImplCopyWith<$Res>
       String ownerMail,
       String password,
       String id,
-      String nickName});
+      String nickName,
+      int playersAmount});
 }
 
 /// @nodoc
@@ -117,6 +125,7 @@ class __$$GameRoomModelImplCopyWithImpl<$Res>
     Object? password = null,
     Object? id = null,
     Object? nickName = null,
+    Object? playersAmount = null,
   }) {
     return _then(_$GameRoomModelImpl(
       name: null == name
@@ -139,6 +148,10 @@ class __$$GameRoomModelImplCopyWithImpl<$Res>
           ? _value.nickName
           : nickName // ignore: cast_nullable_to_non_nullable
               as String,
+      playersAmount: null == playersAmount
+          ? _value.playersAmount
+          : playersAmount // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -151,7 +164,8 @@ class _$GameRoomModelImpl implements _GameRoomModel {
       required this.ownerMail,
       required this.password,
       required this.id,
-      required this.nickName});
+      required this.nickName,
+      required this.playersAmount});
 
   @override
   final String name;
@@ -163,10 +177,12 @@ class _$GameRoomModelImpl implements _GameRoomModel {
   final String id;
   @override
   final String nickName;
+  @override
+  final int playersAmount;
 
   @override
   String toString() {
-    return 'GameRoomModel(name: $name, ownerMail: $ownerMail, password: $password, id: $id, nickName: $nickName)';
+    return 'GameRoomModel(name: $name, ownerMail: $ownerMail, password: $password, id: $id, nickName: $nickName, playersAmount: $playersAmount)';
   }
 
   @override
@@ -181,12 +197,14 @@ class _$GameRoomModelImpl implements _GameRoomModel {
                 other.password == password) &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.nickName, nickName) ||
-                other.nickName == nickName));
+                other.nickName == nickName) &&
+            (identical(other.playersAmount, playersAmount) ||
+                other.playersAmount == playersAmount));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, name, ownerMail, password, id, nickName);
+  int get hashCode => Object.hash(
+      runtimeType, name, ownerMail, password, id, nickName, playersAmount);
 
   @JsonKey(ignore: true)
   @override
@@ -201,7 +219,8 @@ abstract class _GameRoomModel implements GameRoomModel {
       required final String ownerMail,
       required final String password,
       required final String id,
-      required final String nickName}) = _$GameRoomModelImpl;
+      required final String nickName,
+      required final int playersAmount}) = _$GameRoomModelImpl;
 
   @override
   String get name;
@@ -213,6 +232,8 @@ abstract class _GameRoomModel implements GameRoomModel {
   String get id;
   @override
   String get nickName;
+  @override
+  int get playersAmount;
   @override
   @JsonKey(ignore: true)
   _$$GameRoomModelImplCopyWith<_$GameRoomModelImpl> get copyWith =>

@@ -29,22 +29,40 @@ class DuelGameRepository {
             ownerMail: e["owner"],
             password: e["password"],
             nickName: e["nickName"],
-            id: e.id);
+            playersAmount: e["playersAmount"],
+            id: e.id,
+           );
       }).toList();
     });
   }
 
   Future<void> addQtoFirebase({required String roomId}) async {
-   
+    int i = 1;
+    int roundNumber = 1;
     final token = await questionDataSource.getToken();
+
     final questionsList =
-        await questionDataSource.getListofQuestions("easy", 9, 5, token.token);
+        await questionDataSource.getListofQuestions("easy", 9, 25, token.token);
     final results = questionsList.results;
     for (final question in results) {
-    
+      i++;
+      if (i <= 5) {
+        roundNumber = 1;
+      } else if (i > 5 && i <= 10) {
+        roundNumber = 2;
+      } else if (i > 10 && i <= 15) {
+        roundNumber = 3;
+      } else if (i > 15 && i <= 20) {
+        roundNumber = 4;
+      } else if (i > 20 && i <= 25) {
+        roundNumber = 5;
+      }
 
-      await duelGameDataSource.addQtoFirebase(
-          questionModel: question, roomId: roomId, );
+      duelGameDataSource.addQtoFirebase(
+        questionModel: question,
+        roomId: roomId,
+        roundNumber: roundNumber,
+      );
     }
   }
 
@@ -52,7 +70,6 @@ class DuelGameRepository {
     return duelGameDataSource.getQuestionsFromFb(roomId: roomId).map((event) {
       return event.docs.map((e) {
         return DuelQuestionModel(
-           
             question: e["question"],
             correctAnswer: e["correctAnswer"],
             incorrectOne: e["incorrectOne"],
@@ -65,14 +82,34 @@ class DuelGameRepository {
     });
   }
 
-  Future<void> resetGameStatus({
-    required String roomId,
-    required bool status,
-    required String playerId,
-    required int points
-  }) async {
+  Future<void> resetGameStatus(
+      {required String roomId,
+      required bool status,
+      required String playerId,
+      required int points}) async {
     return duelGameDataSource.resetGameStatus(
-        roomId: roomId, status: status, playerId: playerId, points: points,);
+      roomId: roomId,
+      status: status,
+      playerId: playerId,
+      points: points,
+    );
+  }
+
+  Future<void> updatePlayersCount({
+    required String roomId,
+    required int value,
+  }) async {
+    return duelGameDataSource.updatePlayersCount(roomId: roomId, value: value);
+  }
+
+ 
+
+  Future<void> deleteQuestions({
+    required String roomId,
+    required String questionId,
+  }) async {
+    return duelGameDataSource.deleteQuestions(
+        roomId: roomId, questionId: questionId);
   }
 
   Stream<List<RoomStatusModel>> getRoomStatus({required String roomId}) {
@@ -121,7 +158,9 @@ class DuelGameRepository {
             player: e["player"],
             ready: e["ready"],
             startGame: e["startGame"],
-            id: e.id);
+            id: e.id,
+             roundNumber: e["roundNumber"],
+             questionsAdded: e["questionsAdded"]);
       }).toList();
     });
   }

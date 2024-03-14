@@ -52,6 +52,7 @@ class GameRoomPage extends StatelessWidget {
                         roomId: id,
                         players: state.players,
                         user: user,
+                        ownerEmail: email,
                       );
                     }
                   }
@@ -74,6 +75,10 @@ class GameRoomPage extends StatelessWidget {
                                       context
                                           .read<DuelRoomPageCubit>()
                                           .leaveRoom(id: player.id, roomId: id);
+                                      context
+                                          .read<DuelRoomPageCubit>()
+                                          .updatePlayersCount(
+                                              roomId: id, value: -1);
                                       Navigator.of(context).pop();
                                       Navigator.of(context).pop();
                                     }
@@ -103,10 +108,10 @@ class GameRoomPage extends StatelessWidget {
                         ],
                       ),
                       Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             SizedBox(
-                              width: MediaQuery.of(context).size.width / 2,
+                              width: MediaQuery.of(context).size.width * 0.45,
                               child: JoinPlayerOneWidget(
                                 nickName: nickName,
                                 id: id,
@@ -116,7 +121,16 @@ class GameRoomPage extends StatelessWidget {
                               ),
                             ),
                             SizedBox(
-                              width: MediaQuery.of(context).size.width / 2,
+                              width: MediaQuery.of(context).size.width * 0.1,
+                              child: Text(state.players.isEmpty
+                                  ? "Round 1"
+                                  : state.playerOne[0].email.toString() ==
+                                          email.toString()
+                                      ? "Round ${state.playerOne[0].roundNumber}"
+                                      : "Round ${state.playerTwo[0].roundNumber}"),
+                            ),
+                            SizedBox(
+                              width: MediaQuery.of(context).size.width * 0.45,
                               child: JoinPlayerTwoWidget(
                                 nickName: nickName,
                                 id: id,
@@ -135,6 +149,15 @@ class GameRoomPage extends StatelessWidget {
                                         state.playerTwo[0].ready == false
                                     ? null
                                     : () {
+                                        for (final player in state.players) {
+                                          if (player.email.toString() ==
+                                                  email.toString() &&
+                                              player.questionsAdded == false) {
+                                            context
+                                                .read<DuelRoomPageCubit>()
+                                                .addQtoFirebase(roomId: id);
+                                          }
+                                        }
                                         context
                                             .read<DuelRoomPageCubit>()
                                             .startGame(
@@ -152,13 +175,15 @@ class GameRoomPage extends StatelessWidget {
                                         state.playerTwo[0].ready == false
                                     ? "Players are not ready"
                                     : 'Start Game')),
-                        ElevatedButton(
-                            onPressed: () {
-                              context
-                                  .read<DuelRoomPageCubit>()
-                                  .addQtoFirebase(roomId: id);
-                            },
-                            child: Text("Test"))
+                        // ElevatedButton(
+                        //     onPressed: () {
+                        //       context
+                        //           .read<DuelRoomPageCubit>()
+                        //           .addQtoFirebase(roomId: id);
+                        //     },
+                        //     child: Text("Test"))
+                      ] else ...[
+                        Text("WAIT FOR ROOM OWNER TO START")
                       ]
                     ],
                   );
@@ -204,6 +229,9 @@ class JoinPlayerTwoWidget extends StatelessWidget {
                               nickName: nickName,
                               id: id,
                               playerNumber: 2);
+                          context
+                              .read<DuelRoomPageCubit>()
+                              .updatePlayersCount(roomId: id, value: 1);
                         },
                   child:
                       const Image(image: AssetImage("images/join_game.png")))),
@@ -311,6 +339,9 @@ class JoinPlayerOneWidget extends StatelessWidget {
                               nickName: nickName,
                               id: id,
                               playerNumber: 1);
+                          context
+                              .read<DuelRoomPageCubit>()
+                              .updatePlayersCount(roomId: id, value: 1);
                         },
                   child:
                       const Image(image: AssetImage("images/join_game.png")))),
@@ -384,200 +415,3 @@ class JoinPlayerOneWidget extends StatelessWidget {
     );
   }
 }
-              // return Column(
-              //   children: [
-              //     Row(
-              //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              //       children: [
-              //      
-              //       ],
-              //     ),
-              //     SizedBox(
-              //       height: MediaQuery.of(context).size.height / 3,
-              //     ),
-              //     Row(
-              //       children: [
-              //         SizedBox(
-              //             width: MediaQuery.of(context).size.width / 2,
-              //             child: Column(children: [
-              //               if (player.isEmpty) ...[
-              //                 SizedBox(
-              //                     width:
-              //                         MediaQuery.of(context).size.width / 3,
-              //                     child: InkWell(
-              //                         onTap: () {
-              //                           context
-              //                               .read<DuelRoomPageCubit>()
-              //                               .joinPlayer(
-              //                                   email: email,
-              //                                   nickName: nickName,
-              //                                   id: id,
-              //                                   playerNumber: 1);
-              //                         },
-              //                         child: const Image(
-              //                             image: AssetImage(
-              //                                 "images/join_game.png")))),
-              //                 Text(
-              //                   "JOIN PLAYER 1",
-              //                   style: GoogleFonts.bungee(
-              //                       color: Colors.white,
-              //                       fontSize:
-              //                           MediaQuery.of(context).size.height /
-              //                               40),
-              //                 )
-              //               ] else ...[
-                    
-              //               ]
-              //             ])),
-              //         SizedBox(
-              //           width: MediaQuery.of(context).size.width / 2,
-              //           child: Column(children: [
-              //             if (player.isEmpty) ...[
-              //               SizedBox(
-              //                   width: MediaQuery.of(context).size.width / 3,
-              //                   child: InkWell(
-              //                       onTap: () {
-              //                         context
-              //                             .read<DuelRoomPageCubit>()
-              //                             .joinPlayer(
-              //                                 email: email,
-              //                                 nickName: nickName,
-              //                                 id: id,
-              //                                 playerNumber: 2);
-              //                       },
-              //                       child: const Image(
-              //                           image: AssetImage(
-              //                               "images/join_game.png")))),
-              //               Text(
-              //                 "JOIN PLAYER 2",
-              //                 style: GoogleFonts.bungee(
-              //                     color: Colors.white,
-              //                     fontSize:
-              //                         MediaQuery.of(context).size.height /
-              //                             40),
-              //               )
-              //             ] else ...[
-              //               Material(
-              //                 clipBehavior: Clip.hardEdge,
-              //                 shape: OutlineInputBorder(
-              //                     borderRadius: BorderRadius.circular(
-              //                       150,
-              //                     ),
-              //                     borderSide: const BorderSide(
-              //                         color: Colors.transparent)),
-              //                 child: InkWell(
-              //                   onTap: () {
-              //                     player[0].ready == true
-              //                         ? context
-              //                             .read<DuelRoomPageCubit>()
-              //                             .readyStatus(
-              //                                 id: player[0].id,
-              //                                 ready: false,
-              //                                 roomId: id)
-              //                         : context
-              //                             .read<DuelRoomPageCubit>()
-              //                             .readyStatus(
-              //                                 id: player[0].id,
-              //                                 ready: true,
-              //                                 roomId: id);
-              //                   },
-              //                   child: Container(
-              //                     child: Column(
-              //                       children: [
-              //                         Text(
-              //                           player[0].nickName,
-              //                           style: GoogleFonts.bungee(
-              //                               color: Colors.white,
-              //                               fontSize: MediaQuery.of(context)
-              //                                       .size
-              //                                       .height /
-              //                                   40),
-              //                         ),
-              //                         Row(
-              //                           mainAxisAlignment:
-              //                               MainAxisAlignment.center,
-              //                           children: [
-              //                             Text(
-              //                               player[0].ready == true
-              //                                   ? "Ready"
-              //                                   : "Not ready",
-              //                               style: GoogleFonts.bungee(
-              //                                   color: player[0].ready == true
-              //                                       ? Colors.green
-              //                                       : Colors.red,
-              //                                   fontSize:
-              //                                       MediaQuery.of(context)
-              //                                               .size
-              //                                               .height /
-              //                                           40),
-              //                             ),
-              //                             Icon(
-              //                                 player[0].ready == true
-              //                                     ? Icons.check_box
-              //                                     : Icons.cancel,
-              //                                 color: player[0].ready == true
-              //                                     ? Colors.green
-              //                                     : Colors.red)
-              //                           ],
-              //                         )
-              //                       ],
-              //                     ),
-              //                   ),
-              //                 ),
-              //               ),
-              //             ]
-              //           ]),
-              //         ),
-              //       ],
-              //     ),
-              //     SizedBox(
-              //       height: MediaQuery.of(context).size.height / 4.5,
-              //     ),
-              //    
-              //   ],
-              // );
-  
-
-// class PlayerOneWidget extends StatelessWidget {
-//   const PlayerOneWidget({
-//     super.key,
-//     required this.player,
-//     required this.email,
-//     required this.nickName,
-//     required this.id,
-//   });
-
-//   final List<PlayerModel> player;
-//   final String email;
-//   final String nickName;
-//   final String id;
-
-//   @override
-//   Widget build(BuildContext context) {
-    
-//         return 
-     
-//   }
-// }
-
-// class PlayerTwoWidget extends StatelessWidget {
-//   const PlayerTwoWidget({
-//     super.key,
-//     required this.player,
-//     required this.email,
-//     required this.nickName,
-//     required this.id,
-//   });
-
-//   final List<PlayerModel> player;
-//   final String email;
-//   final String nickName;
-//   final String id;
-
-//   @override
-//   Widget build(BuildContext context) {
-    
-//         return 
-   
-//   }
-// }

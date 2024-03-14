@@ -23,6 +23,8 @@ mixin _$PlayerModel {
   int get player => throw _privateConstructorUsedError;
   bool get ready => throw _privateConstructorUsedError;
   bool get startGame => throw _privateConstructorUsedError;
+  int get roundNumber => throw _privateConstructorUsedError;
+  bool get questionsAdded => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $PlayerModelCopyWith<PlayerModel> get copyWith =>
@@ -42,7 +44,9 @@ abstract class $PlayerModelCopyWith<$Res> {
       String id,
       int player,
       bool ready,
-      bool startGame});
+      bool startGame,
+      int roundNumber,
+      bool questionsAdded});
 }
 
 /// @nodoc
@@ -65,6 +69,8 @@ class _$PlayerModelCopyWithImpl<$Res, $Val extends PlayerModel>
     Object? player = null,
     Object? ready = null,
     Object? startGame = null,
+    Object? roundNumber = null,
+    Object? questionsAdded = null,
   }) {
     return _then(_value.copyWith(
       email: null == email
@@ -95,6 +101,14 @@ class _$PlayerModelCopyWithImpl<$Res, $Val extends PlayerModel>
           ? _value.startGame
           : startGame // ignore: cast_nullable_to_non_nullable
               as bool,
+      roundNumber: null == roundNumber
+          ? _value.roundNumber
+          : roundNumber // ignore: cast_nullable_to_non_nullable
+              as int,
+      questionsAdded: null == questionsAdded
+          ? _value.questionsAdded
+          : questionsAdded // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -114,7 +128,9 @@ abstract class _$$PlayerModelImplCopyWith<$Res>
       String id,
       int player,
       bool ready,
-      bool startGame});
+      bool startGame,
+      int roundNumber,
+      bool questionsAdded});
 }
 
 /// @nodoc
@@ -135,6 +151,8 @@ class __$$PlayerModelImplCopyWithImpl<$Res>
     Object? player = null,
     Object? ready = null,
     Object? startGame = null,
+    Object? roundNumber = null,
+    Object? questionsAdded = null,
   }) {
     return _then(_$PlayerModelImpl(
       email: null == email
@@ -165,6 +183,14 @@ class __$$PlayerModelImplCopyWithImpl<$Res>
           ? _value.startGame
           : startGame // ignore: cast_nullable_to_non_nullable
               as bool,
+      roundNumber: null == roundNumber
+          ? _value.roundNumber
+          : roundNumber // ignore: cast_nullable_to_non_nullable
+              as int,
+      questionsAdded: null == questionsAdded
+          ? _value.questionsAdded
+          : questionsAdded // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -179,7 +205,9 @@ class _$PlayerModelImpl implements _PlayerModel {
       required this.id,
       required this.player,
       required this.ready,
-      required this.startGame});
+      required this.startGame,
+      required this.roundNumber,
+      required this.questionsAdded});
 
   @override
   final String email;
@@ -195,10 +223,14 @@ class _$PlayerModelImpl implements _PlayerModel {
   final bool ready;
   @override
   final bool startGame;
+  @override
+  final int roundNumber;
+  @override
+  final bool questionsAdded;
 
   @override
   String toString() {
-    return 'PlayerModel(email: $email, nickName: $nickName, points: $points, id: $id, player: $player, ready: $ready, startGame: $startGame)';
+    return 'PlayerModel(email: $email, nickName: $nickName, points: $points, id: $id, player: $player, ready: $ready, startGame: $startGame, roundNumber: $roundNumber, questionsAdded: $questionsAdded)';
   }
 
   @override
@@ -214,12 +246,16 @@ class _$PlayerModelImpl implements _PlayerModel {
             (identical(other.player, player) || other.player == player) &&
             (identical(other.ready, ready) || other.ready == ready) &&
             (identical(other.startGame, startGame) ||
-                other.startGame == startGame));
+                other.startGame == startGame) &&
+            (identical(other.roundNumber, roundNumber) ||
+                other.roundNumber == roundNumber) &&
+            (identical(other.questionsAdded, questionsAdded) ||
+                other.questionsAdded == questionsAdded));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, email, nickName, points, id, player, ready, startGame);
+  int get hashCode => Object.hash(runtimeType, email, nickName, points, id,
+      player, ready, startGame, roundNumber, questionsAdded);
 
   @JsonKey(ignore: true)
   @override
@@ -236,7 +272,9 @@ abstract class _PlayerModel implements PlayerModel {
       required final String id,
       required final int player,
       required final bool ready,
-      required final bool startGame}) = _$PlayerModelImpl;
+      required final bool startGame,
+      required final int roundNumber,
+      required final bool questionsAdded}) = _$PlayerModelImpl;
 
   @override
   String get email;
@@ -252,6 +290,10 @@ abstract class _PlayerModel implements PlayerModel {
   bool get ready;
   @override
   bool get startGame;
+  @override
+  int get roundNumber;
+  @override
+  bool get questionsAdded;
   @override
   @JsonKey(ignore: true)
   _$$PlayerModelImplCopyWith<_$PlayerModelImpl> get copyWith =>

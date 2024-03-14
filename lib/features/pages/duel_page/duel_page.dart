@@ -144,14 +144,13 @@ class JoinRoomWidget extends StatelessWidget {
                   print("DUPA");
                   Navigator.of(context).push(MaterialPageRoute(
                       builder: (context) => GameRoomPage(
+                          
                             user: user,
                             id: id,
                             email: email,
                             nickName: nickName,
                             roomName: room.nickName,
-                    
-                    
-                          
+                           
                           )));
                   passwordController.clear();
                 } else {
@@ -173,7 +172,11 @@ class JoinRoomWidget extends StatelessWidget {
 }
 
 class RoomWidget extends StatelessWidget {
-  const RoomWidget({super.key, required this.room, required this.index});
+  const RoomWidget({
+    super.key,
+    required this.room,
+    required this.index,
+  });
 
   final GameRoomModel room;
   final int index;
@@ -196,11 +199,21 @@ class RoomWidget extends StatelessWidget {
           child: Column(
             children: [
               Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Padding(
                     padding: const EdgeInsets.only(left: 8, top: 8),
                     child: Text(
                       index.toString(),
+                      style: GoogleFonts.bungee(
+                          color: Colors.white,
+                          fontSize: MediaQuery.of(context).size.height / 55),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(right: 8, top: 8),
+                    child: Text(
+                      "${room.playersAmount}/2",
                       style: GoogleFonts.bungee(
                           color: Colors.white,
                           fontSize: MediaQuery.of(context).size.height / 55),

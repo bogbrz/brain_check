@@ -14,11 +14,13 @@ class DuelResultPage extends StatelessWidget {
       super.key,
       required this.players,
       required this.user,
-      required this.points});
+      required this.points,
+      required this.ownerEmail});
   final String? roomId;
   final List<PlayerModel>? players;
   final User? user;
   final int points;
+  final String ownerEmail;
 
   @override
   Widget build(BuildContext context) {
@@ -32,13 +34,16 @@ class DuelResultPage extends StatelessWidget {
                 Text("POINTS: ${points}"),
                 ElevatedButton(
                   onPressed: () {
+                  
+
                     for (final player in players!) {
-                      if (player.email.toString() == user!.email.toString())
+                      if (player.email.toString() == user!.email.toString()) {
                         context.read<DuelResultCubit>().resetGameStatus(
                             roomId: roomId!,
                             status: false,
                             playerId: player.id,
                             points: points);
+                      }
                     }
                   },
                   child: Text("END OF DUEL"),

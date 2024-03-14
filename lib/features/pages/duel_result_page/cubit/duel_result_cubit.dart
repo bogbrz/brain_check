@@ -16,6 +16,12 @@ class DuelResultCubit extends Cubit<DuelResultState> {
     required int points,
   }) async {
     return duelGameRepository.resetGameStatus(
-        roomId: roomId, status: status, playerId: playerId, points: points,);
+      roomId: roomId,
+      status: status,
+      playerId: playerId,
+      points: points,
+    );
   }
+
+  
 }

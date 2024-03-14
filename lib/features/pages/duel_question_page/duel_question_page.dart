@@ -7,7 +7,10 @@ import 'package:brain_check/features/pages/duel_result_page/duel_result_page.dar
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:html_unescape/html_unescape.dart';
+import 'package:timer_count_down/timer_controller.dart';
+import 'package:timer_count_down/timer_count_down.dart';
 
 class DuelQuestionPage extends StatefulWidget {
   const DuelQuestionPage({
@@ -15,10 +18,12 @@ class DuelQuestionPage extends StatefulWidget {
     required this.roomId,
     required this.players,
     required this.user,
+    required this.ownerEmail,
   });
   final String roomId;
   final List<PlayerModel> players;
   final User? user;
+  final String ownerEmail;
 
   @override
   State<DuelQuestionPage> createState() => _DuelQuestionPageState();
@@ -30,6 +35,7 @@ class _DuelQuestionPageState extends State<DuelQuestionPage> {
   var choosedAnswer = "";
   var isChoosed = false;
   var points = 0;
+  final CountdownController controller = CountdownController(autoStart: true);
 
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -48,32 +54,110 @@ class _DuelQuestionPageState extends State<DuelQuestionPage> {
             case Status.success:
               if (index == 4) {
                 return DuelResultPage(
-                    roomId: widget.roomId,
-                    players: widget.players,
-                    user: widget.user,
-                    points: points);
+                  roomId: widget.roomId,
+                  players: widget.players,
+                  user: widget.user,
+                  points: points,
+                  ownerEmail: widget.ownerEmail,
+                );
               }
 
               return Scaffold(
                 body: Center(
                   child: Column(
                     children: [
-                      Text(index == 0
-                          ? HtmlUnescape()
-                              .convert(state.firstQuestion.question.toString())
-                          : index == 1
-                              ? HtmlUnescape().convert(
-                                  state.secondQuestion.question.toString())
-                              : index == 2
-                                  ? HtmlUnescape().convert(
-                                      state.thirdQuestion.question.toString())
-                                  : index == 3
+                      Container(
+                        alignment: Alignment.center,
+                        margin: EdgeInsetsDirectional.all(
+                            MediaQuery.of(context).size.height * 0.01),
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(10),
+                            border: Border.all(
+                                width: MediaQuery.of(context).size.width / 55,
+                                color: Colors.black)),
+                        height: MediaQuery.of(context).size.height * 0.4,
+                        child: Column(
+                          children: [
+                            Padding(
+                              padding: EdgeInsets.only(
+                                  top: MediaQuery.of(context).size.height *
+                                      0.00125,
+                                  left:
+                                      MediaQuery.of(context).size.height * 0.01,
+                                  right: MediaQuery.of(context).size.height *
+                                      0.01),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text("Question number ${index + 1}",
+                                      style: GoogleFonts.bungee(
+                                        fontSize:
+                                            MediaQuery.of(context).size.height /
+                                                40,
+                                      )),
+                                  Countdown(
+                                    controller: controller,
+                                    seconds: 1,
+                                    build: (BuildContext context,
+                                            double time) =>
+                                        Text(time.toInt().toString(),
+                                            style: GoogleFonts.bungee(
+                                              fontSize: MediaQuery.of(context)
+                                                      .size
+                                                      .height /
+                                                  30,
+                                            )),
+                                    interval:
+                                        const Duration(milliseconds: 1000),
+                                    onFinished: () {
+                                      setState(() {
+                                        index++;
+                                        choosedAnswer = "";
+                                        isChoosed = false;
+                                      });
+
+                                      controller.restart();
+                                    },
+                                  )
+                                ],
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.only(
+                                top: MediaQuery.of(context).size.height * 0.09,
+                                left: MediaQuery.of(context).size.width * 0.01,
+                                right: MediaQuery.of(context).size.width * 0.01,
+                              ),
+                              child: Text(
+                                  index == 0
                                       ? HtmlUnescape().convert(state
-                                          .fourthQuestion.question
+                                          .firstQuestion.question
                                           .toString())
-                                      : HtmlUnescape().convert(state
-                                          .fifthQuestion.question
-                                          .toString())),
+                                      : index == 1
+                                          ? HtmlUnescape().convert(state
+                                              .secondQuestion.question
+                                              .toString())
+                                          : index == 2
+                                              ? HtmlUnescape().convert(state
+                                                  .thirdQuestion.question
+                                                  .toString())
+                                              : index == 3
+                                                  ? HtmlUnescape().convert(state
+                                                      .fourthQuestion.question
+                                                      .toString())
+                                                  : HtmlUnescape().convert(state
+                                                      .fifthQuestion.question
+                                                      .toString()),
+                                  style: GoogleFonts.bungee(
+                                    fontSize:
+                                        MediaQuery.of(context).size.height / 45,
+                                  )),
+                            ),
+                          ],
+                        ),
+                      ),
                       Wrap(
                         children: [
                           if (index == 0) ...[
@@ -219,19 +303,6 @@ class _DuelQuestionPageState extends State<DuelQuestionPage> {
                           ]
                         ],
                       ),
-                      ElevatedButton(
-                          onPressed: () {
-                            setState(() {
-                              index++;
-                              choosedAnswer = "";
-                              isChoosed = false;
-
-                              print(state.secondQuestion);
-                              print(state.thirdQuestion);
-                              print(state.fourthQuestion);
-                            });
-                          },
-                          child: Text("NEXT"))
                     ],
                   ),
                 ),
@@ -260,21 +331,64 @@ class AnswerWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        color: choosedAnswer.isEmpty && isChoosed == false
-            ? Colors.white
-            : choosedAnswer == correctAnswer &&
-                    choosedAnswer == answer &&
-                    isChoosed == true
-                ? Colors.green
-                : choosedAnswer == answer &&
-                        choosedAnswer != correctAnswer &&
-                        isChoosed == true
-                    ? Colors.red
-                    : Colors.white,
-        margin: EdgeInsets.all(4),
-        width: MediaQuery.of(context).size.width / 2.2,
-        height: MediaQuery.of(context).size.height / 5,
-        child: Center(child: Text(answer)));
+    return Material(
+      clipBehavior: Clip.hardEdge,
+      child: Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10),
+            border: Border.all(width: MediaQuery.of(context).size.width / 55),
+            color: choosedAnswer.isEmpty && isChoosed == false
+                ? Colors.white
+                : choosedAnswer == correctAnswer &&
+                            choosedAnswer == answer &&
+                            isChoosed == true ||
+                        choosedAnswer != answer &&
+                            choosedAnswer != correctAnswer &&
+                            answer == correctAnswer
+                    ? Colors.green
+                    : choosedAnswer == answer &&
+                            choosedAnswer != correctAnswer &&
+                            isChoosed == true
+                        ? Colors.red
+                        : Colors.white,
+          ),
+          margin: EdgeInsetsDirectional.all(
+              MediaQuery.of(context).size.height * 0.005),
+          width: MediaQuery.of(context).size.width * 0.47,
+          height: MediaQuery.of(context).size.height * 0.25,
+          child: Center(
+              child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              SizedBox(
+                child: Row(
+                  children: [
+                    isChoosed &&
+                            choosedAnswer == answer &&
+                            choosedAnswer != correctAnswer
+                        ? Icon(
+                            Icons.cancel_outlined,
+                            size: 30,
+                          )
+                        : isChoosed && answer == correctAnswer
+                            ? Icon(
+                                Icons.check,
+                                size: 30,
+                              )
+                            : SizedBox.shrink()
+                  ],
+                ),
+                height: MediaQuery.of(context).size.height * 0.025,
+              ),
+              Text(answer,
+                  style: GoogleFonts.bungee(
+                    fontSize: MediaQuery.of(context).size.height / 55,
+                  )),
+              SizedBox(
+                height: MediaQuery.of(context).size.height * 0.025,
+              ),
+            ],
+          ))),
+    );
   }
 }

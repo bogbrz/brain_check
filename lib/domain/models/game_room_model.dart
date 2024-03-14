@@ -8,5 +8,8 @@ class GameRoomModel with _$GameRoomModel {
       required String ownerMail,
       required String password,
       required String id,
-      required String nickName,}) = _GameRoomModel;
+      required String nickName,
+      required int playersAmount,
+     
+    }) = _GameRoomModel;
 }
