@@ -88,7 +88,7 @@ class GameTypePage extends StatelessWidget {
                     builder: (context) => DuelPage(
                       user: user,
                       nickName: nickName,
-                      email: user!.email.toString(),
+                    
                     ),
                   ));
                 },

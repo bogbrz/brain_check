@@ -1,4 +1,3 @@
-import 'dart:math';
 
 import 'package:freezed_annotation/freezed_annotation.dart';
 part 'duel_question_model.freezed.dart';

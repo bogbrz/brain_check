@@ -17,7 +17,6 @@ class DuelGameDataSource {
       "password": password,
       "nickName": nickName,
       "playersAmount": 0,
-      "roundNumber": 1
     });
   }
 
@@ -76,6 +75,18 @@ class DuelGameDataSource {
     });
   }
 
+  Future<void> resetRounds(
+      {required String playerId, required String roomId}) async {
+    return FirebaseFirestore.instance
+        .collection("GameRooms")
+        .doc(roomId)
+        .collection("Players")
+        .doc(playerId)
+        .update({
+      "roundNumber": 0,
+    });
+  }
+
   Future<void> joinPlayer(
       {required String email,
       required String nickName,
@@ -92,7 +103,7 @@ class DuelGameDataSource {
       "player": playerNumber,
       "ready": false,
       "startGame": false,
-      "roundNumber": 1,
+      "roundNumber": 0,
       "questionsAdded": false,
     });
   }

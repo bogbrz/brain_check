@@ -3,7 +3,6 @@ import 'package:brain_check/data_sources/questions_data_source.dart';
 import 'package:brain_check/domain/models/duel_question_model.dart';
 import 'package:brain_check/domain/models/game_room_model.dart';
 import 'package:brain_check/domain/models/player_model.dart';
-import 'package:brain_check/domain/models/question_model.dart';
 import 'package:brain_check/domain/models/room_status_model.dart';
 import 'package:injectable/injectable.dart';
 
@@ -167,6 +166,9 @@ class DuelGameRepository {
 
   Future<void> leaveRoom({required String id, required String roomId}) async {
     return duelGameDataSource.leaveRoom(id: id, roomId: roomId);
+  }
+  Future<void> resetRounds({required String playerId, required String roomId}) async {
+    return duelGameDataSource.resetRounds(playerId: playerId, roomId: roomId);
   }
 
   Future<void> deleteRoom({

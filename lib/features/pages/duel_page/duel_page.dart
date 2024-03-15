@@ -11,14 +11,13 @@ import 'package:google_fonts/google_fonts.dart';
 class DuelPage extends StatelessWidget {
   DuelPage({
     required this.nickName,
-    required this.email,
     required this.user,
     super.key,
   });
   final TextEditingController nameController = TextEditingController();
   final TextEditingController passControler = TextEditingController();
   final String nickName;
-  final String email;
+
   final User? user;
 
   @override
@@ -70,11 +69,9 @@ class DuelPage extends StatelessWidget {
                                   );
                                 })),
                         CreateRoomWidget(
-                          email: email,
                           nameController: nameController,
                           passControler: passControler,
                           nickName: nickName,
-                          user: user,
                         )
                       ],
                     );
@@ -141,18 +138,24 @@ class JoinRoomWidget extends StatelessWidget {
           ElevatedButton(
               onPressed: () {
                 if (passwordController.text == model.password) {
-                  print("DUPA");
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => GameRoomPage(
-                          
-                            user: user,
-                            id: id,
-                            email: email,
-                            nickName: nickName,
-                            roomName: room.nickName,
-                           
-                          )));
-                  passwordController.clear();
+                  if (room.playersAmount == 2) {
+                    passwordController.clear();
+                    Navigator.of(context).pop();
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text("Room is full"),
+                        backgroundColor: Colors.red,
+                      ),
+                    );
+                  } else {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => GameRoomPage(
+                              nickName: nickName,
+                              user: user,
+                              roomModel: room,
+                            )));
+                    passwordController.clear();
+                  }
                 } else {
                   passwordController.clear();
                   Navigator.of(context).pop();
@@ -244,15 +247,11 @@ class CreateRoomWidget extends StatelessWidget {
     required this.nameController,
     required this.passControler,
     required this.nickName,
-    required this.email,
-    required this.user,
   });
 
   final TextEditingController nameController;
   final TextEditingController passControler;
   final String nickName;
-  final String email;
-  final User? user;
 
   @override
   Widget build(BuildContext context) {

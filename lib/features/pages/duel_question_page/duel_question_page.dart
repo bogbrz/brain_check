@@ -1,6 +1,5 @@
 import 'package:brain_check/app/core/enums/enums.dart';
 import 'package:brain_check/app/injection_container.dart';
-import 'package:brain_check/domain/models/duel_question_model.dart';
 import 'package:brain_check/domain/models/player_model.dart';
 import 'package:brain_check/features/pages/duel_question_page/cubit/duel_question_page_cubit.dart';
 import 'package:brain_check/features/pages/duel_result_page/duel_result_page.dart';

@@ -1,36 +1,33 @@
-import 'dart:developer';
-
 import 'package:brain_check/app/core/enums/enums.dart';
 import 'package:brain_check/app/injection_container.dart';
 import 'package:brain_check/domain/models/player_model.dart';
 import 'package:brain_check/features/pages/duel_question_page/duel_question_page.dart';
 
 import 'package:brain_check/features/pages/duel_room_page/cubit/duel_room_page_cubit.dart';
-import 'package:brain_check/features/pages/question_page/question_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:brain_check/domain/models/game_room_model.dart';
 
 class GameRoomPage extends StatelessWidget {
   const GameRoomPage({
-    required this.nickName,
-    required this.email,
-    required this.id,
     required this.user,
-    required this.roomName,
+    required this.roomModel,
+    required this.nickName,
     super.key,
   });
-  final String email;
-  final String nickName;
-  final String id;
+
   final User? user;
-  final String roomName;
+  final String nickName;
+
+  final GameRoomModel roomModel;
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => getIt<DuelRoomPageCubit>()..playerInfo(id: id),
+      create: (context) =>
+          getIt<DuelRoomPageCubit>()..playerInfo(id: roomModel.id),
       child: WillPopScope(
         onWillPop: () async => false,
         child: Scaffold(body: SafeArea(
@@ -49,10 +46,10 @@ class GameRoomPage extends StatelessWidget {
                     if (player.email == user!.email.toString() &&
                         player.startGame == true) {
                       return DuelQuestionPage(
-                        roomId: id,
+                        roomId: roomModel.id,
                         players: state.players,
                         user: user,
-                        ownerEmail: email,
+                        ownerEmail: roomModel.ownerMail,
                       );
                     }
                   }
@@ -74,32 +71,42 @@ class GameRoomPage extends StatelessWidget {
                                         user!.email.toString()) {
                                       context
                                           .read<DuelRoomPageCubit>()
-                                          .leaveRoom(id: player.id, roomId: id);
+                                          .leaveRoom(
+                                              id: player.id,
+                                              roomId: roomModel.id);
                                       context
                                           .read<DuelRoomPageCubit>()
                                           .updatePlayersCount(
-                                              roomId: id, value: -1);
+                                              roomId: roomModel.id, value: -1);
                                       Navigator.of(context).pop();
                                       Navigator.of(context).pop();
+                                    }
+                                    if (player.email.toString() ==
+                                        roomModel.ownerMail.toString()) {
+                                      context
+                                          .read<DuelRoomPageCubit>()
+                                          .resetRounds(
+                                              roomId: roomModel.id,
+                                              playerId: player.id);
                                     }
                                   }
                                 }
                               },
                               icon: const Icon(Icons.logout)),
                           Text(
-                            "$roomName's room",
+                            "${roomModel.nickName}'s room",
                             style: GoogleFonts.bungee(
                                 color: Colors.white,
                                 fontSize:
                                     MediaQuery.of(context).size.height / 35),
                           ),
                           IconButton.filledTonal(
-                              onPressed: user!.email != email
+                              onPressed: user!.email != roomModel.ownerMail
                                   ? null
                                   : () {
                                       context
                                           .read<DuelRoomPageCubit>()
-                                          .deleteRoom(id: id);
+                                          .deleteRoom(id: roomModel.id);
 
                                       Navigator.of(context).pop();
                                       Navigator.of(context).pop();
@@ -114,33 +121,42 @@ class GameRoomPage extends StatelessWidget {
                               width: MediaQuery.of(context).size.width * 0.45,
                               child: JoinPlayerOneWidget(
                                 nickName: nickName,
-                                id: id,
+                                id: roomModel.id,
                                 playerOne: state.playerOne,
                                 playerTwo: state.playerTwo,
                                 user: user,
                               ),
                             ),
-                            SizedBox(
-                              width: MediaQuery.of(context).size.width * 0.1,
-                              child: Text(state.players.isEmpty
-                                  ? "Round 1"
-                                  : state.playerOne[0].email.toString() ==
-                                          email.toString()
-                                      ? "Round ${state.playerOne[0].roundNumber}"
-                                      : "Round ${state.playerTwo[0].roundNumber}"),
-                            ),
+                            for (final player in state.players) ...[
+                              if (state.players.isEmpty) ...[
+                                SizedBox(
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.1,
+                                  child: Text("Round number 0"),
+                                ),
+                              ] else if (player.email.toString() ==
+                                  roomModel.ownerMail.toString()) ...[
+                                SizedBox(
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.1,
+                                  child: Text(
+                                      "Round number ${player.roundNumber}"),
+                                ),
+                              ],
+                            ],
                             SizedBox(
                               width: MediaQuery.of(context).size.width * 0.45,
                               child: JoinPlayerTwoWidget(
-                                nickName: nickName,
-                                id: id,
+                                nickName: roomModel.nickName,
+                                id: roomModel.id,
                                 playerTwo: state.playerTwo,
                                 playerOne: state.playerOne,
                                 user: user,
                               ),
                             ),
                           ]),
-                      if (user!.email.toString() == email.toString()) ...[
+                      if (user!.email.toString() ==
+                          roomModel.ownerMail.toString()) ...[
                         ElevatedButton(
                             onPressed: state.playerOne.isEmpty ||
                                     state.playerTwo.isEmpty
@@ -148,26 +164,33 @@ class GameRoomPage extends StatelessWidget {
                                 : state.playerOne[0].ready == false ||
                                         state.playerTwo[0].ready == false
                                     ? null
-                                    : () {
-                                        for (final player in state.players) {
-                                          if (player.email.toString() ==
-                                                  email.toString() &&
-                                              player.questionsAdded == false) {
+                                    : state.playerOne[0].startGame ||
+                                            state.playerTwo[0].startGame
+                                        ? null
+                                        : () {
+                                            for (final player
+                                                in state.players) {
+                                              if (player.email.toString() ==
+                                                      roomModel.ownerMail
+                                                          .toString() &&
+                                                  player.questionsAdded ==
+                                                      false) {
+                                                context
+                                                    .read<DuelRoomPageCubit>()
+                                                    .addQtoFirebase(
+                                                        roomId: roomModel.id);
+                                              }
+                                            }
                                             context
                                                 .read<DuelRoomPageCubit>()
-                                                .addQtoFirebase(roomId: id);
-                                          }
-                                        }
-                                        context
-                                            .read<DuelRoomPageCubit>()
-                                            .startGame(
-                                                roomId: id,
-                                                playerOneId:
-                                                    state.playerOne[0].id,
-                                                playerTwoId:
-                                                    state.playerTwo[0].id,
-                                                status: true);
-                                      },
+                                                .startGame(
+                                                    roomId: roomModel.id,
+                                                    playerOneId:
+                                                        state.playerOne[0].id,
+                                                    playerTwoId:
+                                                        state.playerTwo[0].id,
+                                                    status: true);
+                                          },
                             child: Text(state.playerOne.isEmpty ||
                                     state.playerTwo.isEmpty
                                 ? "Not enough players"
@@ -175,13 +198,6 @@ class GameRoomPage extends StatelessWidget {
                                         state.playerTwo[0].ready == false
                                     ? "Players are not ready"
                                     : 'Start Game')),
-                        // ElevatedButton(
-                        //     onPressed: () {
-                        //       context
-                        //           .read<DuelRoomPageCubit>()
-                        //           .addQtoFirebase(roomId: id);
-                        //     },
-                        //     child: Text("Test"))
                       ] else ...[
                         Text("WAIT FOR ROOM OWNER TO START")
                       ]

@@ -57,6 +57,11 @@ class DuelRoomPageCubit extends Cubit<DuelRoomPageState> {
     return duelGameRepository.leaveRoom(id: id, roomId: roomId);
   }
 
+  Future<void> resetRounds(
+      {required String playerId, required String roomId}) async {
+    return duelGameRepository.resetRounds(playerId: playerId, roomId: roomId);
+  }
+
   Future<void> setCategory({required String id, required String roomId}) async {
     return duelGameRepository.leaveRoom(id: id, roomId: roomId);
   }
