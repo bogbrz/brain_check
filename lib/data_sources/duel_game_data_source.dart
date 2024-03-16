@@ -27,7 +27,7 @@ class DuelGameDataSource {
   Future<void> addQtoFirebase({
     required QuestionModel questionModel,
     required String roomId,
-    required int roundNumber,
+  
   }) async {
     await FirebaseFirestore.instance
         .collection("GameRooms")
@@ -41,6 +41,7 @@ class DuelGameDataSource {
       "incorrectThree": questionModel.incorrectAnswers[2],
       "category": questionModel.category,
       "difficulty": questionModel.difficulty,
+     
     });
   }
 

@@ -30,7 +30,7 @@ class GameRoomPage extends StatefulWidget {
 
 class _GameRoomPageState extends State<GameRoomPage> {
   @override
-  TriviaCategory? category;
+  var category = null;
 
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -175,61 +175,91 @@ class _GameRoomPageState extends State<GameRoomPage> {
                           ]),
                       if (widget.user!.email.toString() ==
                           widget.roomModel.ownerMail.toString()) ...[
-                        DropdownButton<TriviaCategory>(
-                          items: categories.map((TriviaCategory categories) {
-                            return DropdownMenuItem<TriviaCategory>(
-                                value: categories,
-                                child: Text(categories.name));
-                          }).toList(),
-                          onChanged: (TriviaCategory? selectedItem) {
-                            setState(() {
-                              category = selectedItem!;
-                            });
-                          },
-                          value: category,
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width * 0.6,
+                          height: MediaQuery.of(context).size.height * 0.075,
+                          child: DropdownButton<TriviaCategory>(
+                            isExpanded: true,
+                            items: categories.map((TriviaCategory categories) {
+                              return DropdownMenuItem<TriviaCategory>(
+                                  value: categories,
+                                  child: Text(
+                                    categories.name,
+                                    style: GoogleFonts.bungee(
+                                        color: Colors.white,
+                                        fontSize:
+                                            MediaQuery.of(context).size.height /
+                                                65),
+                                  ));
+                            }).toList(),
+                            onChanged: (TriviaCategory? selectedItem) {
+                              setState(() {
+                                category = selectedItem!;
+                              });
+                            },
+                            value: category,
+                            hint: Text('Select category'),
+                          ),
                         ),
-                        ElevatedButton(
-                            onPressed: state.playerOne.isEmpty ||
-                                    state.playerTwo.isEmpty
-                                ? null
-                                : state.playerOne[0].ready == false ||
-                                        state.playerTwo[0].ready == false
+                        Column(
+                          children: [
+                            ElevatedButton(
+                                onPressed: state.playerOne.isEmpty ||
+                                        state.playerTwo.isEmpty
                                     ? null
-                                    : state.playerOne[0].startGame ||
-                                            state.playerTwo[0].startGame
+                                    : state.playerOne[0].ready == false ||
+                                            state.playerTwo[0].ready == false
                                         ? null
-                                        : () {
-                                            for (final player
-                                                in state.players) {
-                                              if (player.email.toString() ==
-                                                      widget.roomModel.ownerMail
-                                                          .toString() &&
-                                                  player.questionsAdded ==
-                                                      false) {
-                                                context
-                                                    .read<DuelRoomPageCubit>()
-                                                    .addQtoFirebase(
-                                                        roomId: widget
-                                                            .roomModel.id);
-                                              }
-                                            }
-                                            context
-                                                .read<DuelRoomPageCubit>()
-                                                .startGame(
-                                                    roomId: widget.roomModel.id,
-                                                    playerOneId:
-                                                        state.playerOne[0].id,
-                                                    playerTwoId:
-                                                        state.playerTwo[0].id,
-                                                    status: true);
-                                          },
-                            child: Text(state.playerOne.isEmpty ||
-                                    state.playerTwo.isEmpty
-                                ? "Not enough players"
-                                : state.playerOne[0].ready == false ||
-                                        state.playerTwo[0].ready == false
-                                    ? "Players are not ready"
-                                    : 'Start Game')),
+                                        : state.playerOne[0].startGame ||
+                                                state.playerTwo[0].startGame
+                                            ? null
+                                            : category == null
+                                                ? null
+                                                : () {
+                                                    for (final player
+                                                        in state.players) {
+                                                      if (player.email
+                                                                  .toString() ==
+                                                              widget.roomModel
+                                                                  .ownerMail
+                                                                  .toString() &&
+                                                          player.questionsAdded ==
+                                                              false) {
+                                                        context
+                                                            .read<
+                                                                DuelRoomPageCubit>()
+                                                            .addQtoFirebase(
+                                                                roomId: widget
+                                                                    .roomModel
+                                                                    .id,
+                                                                categoryId:
+                                                                    category!
+                                                                        .id);
+                                                      }
+                                                    }
+                                                    context
+                                                        .read<
+                                                            DuelRoomPageCubit>()
+                                                        .startGame(
+                                                            roomId: widget
+                                                                .roomModel.id,
+                                                            playerOneId: state
+                                                                .playerOne[0]
+                                                                .id,
+                                                            playerTwoId: state
+                                                                .playerTwo[0]
+                                                                .id,
+                                                            status: true);
+                                                  },
+                                child: Text(state.playerOne.isEmpty ||
+                                        state.playerTwo.isEmpty
+                                    ? "Not enough players"
+                                    : state.playerOne[0].ready == false ||
+                                            state.playerTwo[0].ready == false
+                                        ? "Players are not ready"
+                                        : 'Start Game')),
+                          ],
+                        ),
                       ] else ...[
                         Text("WAIT FOR ROOM OWNER TO START")
                       ]
@@ -294,7 +324,7 @@ class JoinPlayerTwoWidget extends StatelessWidget {
             clipBehavior: Clip.hardEdge,
             shape: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(
-                  50,
+                  35,
                 ),
                 borderSide: const BorderSide(color: Colors.transparent)),
             child: InkWell(

@@ -12,7 +12,7 @@ part of 'duel_question_model.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$DuelQuestionModel {
@@ -184,7 +184,7 @@ class __$$DuelQuestionModelImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$DuelQuestionModelImpl extends _DuelQuestionModel {
+class _$DuelQuestionModelImpl implements _DuelQuestionModel {
   _$DuelQuestionModelImpl(
       {required this.question,
       required this.correctAnswer,
@@ -193,8 +193,7 @@ class _$DuelQuestionModelImpl extends _DuelQuestionModel {
       required this.incorrectThree,
       required this.difficulty,
       required this.category,
-      required this.id})
-      : super._();
+      required this.id});
 
   @override
   final String? question;
@@ -252,7 +251,7 @@ class _$DuelQuestionModelImpl extends _DuelQuestionModel {
           this, _$identity);
 }
 
-abstract class _DuelQuestionModel extends DuelQuestionModel {
+abstract class _DuelQuestionModel implements DuelQuestionModel {
   factory _DuelQuestionModel(
       {required final String? question,
       required final String? correctAnswer,
@@ -262,7 +261,6 @@ abstract class _DuelQuestionModel extends DuelQuestionModel {
       required final String? difficulty,
       required final String? category,
       required final String? id}) = _$DuelQuestionModelImpl;
-  _DuelQuestionModel._() : super._();
 
   @override
   String? get question;

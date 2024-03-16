@@ -22,6 +22,7 @@ class DuelQuestionPageCubit extends Cubit<DuelQuestionPageState> {
               difficulty: null,
               category: null,
               id: null,
+              
             ),
             secondQuestion: DuelQuestionModel(
                 question: null,
@@ -31,7 +32,8 @@ class DuelQuestionPageCubit extends Cubit<DuelQuestionPageState> {
                 incorrectThree: null,
                 difficulty: null,
                 category: null,
-                id: null),
+                id: null,
+                 ),
             thirdQuestion: DuelQuestionModel(
                 question: null,
                 correctAnswer: null,
@@ -40,7 +42,8 @@ class DuelQuestionPageCubit extends Cubit<DuelQuestionPageState> {
                 incorrectThree: null,
                 difficulty: null,
                 category: null,
-                id: null),
+                id: null
+                , ),
             fourthQuestion: DuelQuestionModel(
                 question: null,
                 correctAnswer: null,
@@ -49,7 +52,7 @@ class DuelQuestionPageCubit extends Cubit<DuelQuestionPageState> {
                 incorrectThree: null,
                 difficulty: null,
                 category: null,
-                id: null),
+                id: null, ),
             fifthQuestion: DuelQuestionModel(
                 question: null,
                 correctAnswer: null,
@@ -58,7 +61,7 @@ class DuelQuestionPageCubit extends Cubit<DuelQuestionPageState> {
                 incorrectThree: null,
                 difficulty: null,
                 category: null,
-                id: null),
+                id: null, ),
             errorMessage: null,
             status: Status.initial,
             answersFive: [],
@@ -79,7 +82,7 @@ class DuelQuestionPageCubit extends Cubit<DuelQuestionPageState> {
             incorrectThree: null,
             difficulty: null,
             category: null,
-            id: null),
+            id: null, ),
         secondQuestion: DuelQuestionModel(
             question: null,
             correctAnswer: null,
@@ -88,7 +91,7 @@ class DuelQuestionPageCubit extends Cubit<DuelQuestionPageState> {
             incorrectThree: null,
             difficulty: null,
             category: null,
-            id: null),
+            id: null, ),
         thirdQuestion: DuelQuestionModel(
             question: null,
             correctAnswer: null,
@@ -97,7 +100,7 @@ class DuelQuestionPageCubit extends Cubit<DuelQuestionPageState> {
             incorrectThree: null,
             difficulty: null,
             category: null,
-            id: null),
+            id: null, ),
         fourthQuestion: DuelQuestionModel(
             question: null,
             correctAnswer: null,
@@ -106,7 +109,7 @@ class DuelQuestionPageCubit extends Cubit<DuelQuestionPageState> {
             incorrectThree: null,
             difficulty: null,
             category: null,
-            id: null),
+            id: null, ),
         fifthQuestion: DuelQuestionModel(
             question: null,
             correctAnswer: null,
@@ -115,7 +118,7 @@ class DuelQuestionPageCubit extends Cubit<DuelQuestionPageState> {
             incorrectThree: null,
             difficulty: null,
             category: null,
-            id: null),
+            id: null, ),
         status: Status.loading,
         answersFive: [],
         answersFour: [],
@@ -168,7 +171,8 @@ class DuelQuestionPageCubit extends Cubit<DuelQuestionPageState> {
             answersTwo: answersTwo,
             answersThree: answersThree,
             answersFour: answersFour,
-            answersFive: answersFive));
+            answersFive: answersFive
+            ));
       } catch (e) {
         emit(DuelQuestionPageState(
             errorMessage: e.toString(),
@@ -180,7 +184,7 @@ class DuelQuestionPageCubit extends Cubit<DuelQuestionPageState> {
                 incorrectThree: null,
                 difficulty: null,
                 category: null,
-                id: null),
+                id: null, ),
             secondQuestion: DuelQuestionModel(
                 question: null,
                 correctAnswer: null,
@@ -189,7 +193,7 @@ class DuelQuestionPageCubit extends Cubit<DuelQuestionPageState> {
                 incorrectThree: null,
                 difficulty: null,
                 category: null,
-                id: null),
+                id: null, ),
             thirdQuestion: DuelQuestionModel(
                 question: null,
                 correctAnswer: null,
@@ -198,7 +202,7 @@ class DuelQuestionPageCubit extends Cubit<DuelQuestionPageState> {
                 incorrectThree: null,
                 difficulty: null,
                 category: null,
-                id: null),
+                id: null, ),
             fourthQuestion: DuelQuestionModel(
                 question: null,
                 correctAnswer: null,
@@ -207,7 +211,7 @@ class DuelQuestionPageCubit extends Cubit<DuelQuestionPageState> {
                 incorrectThree: null,
                 difficulty: null,
                 category: null,
-                id: null),
+                id: null, ),
             fifthQuestion: DuelQuestionModel(
                 question: null,
                 correctAnswer: null,
@@ -216,7 +220,7 @@ class DuelQuestionPageCubit extends Cubit<DuelQuestionPageState> {
                 incorrectThree: null,
                 difficulty: null,
                 category: null,
-                id: null),
+                id: null, ),
             status: Status.error,
             answersFive: [],
             answersFour: [],

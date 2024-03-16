@@ -24,43 +24,28 @@ class DuelGameRepository {
     return duelGameDataSource.getGameRooms().map((event) {
       return event.docs.map((e) {
         return GameRoomModel(
-            name: e["name"],
-            ownerMail: e["owner"],
-            password: e["password"],
-            nickName: e["nickName"],
-            playersAmount: e["playersAmount"],
-            id: e.id,
-           );
+          name: e["name"],
+          ownerMail: e["owner"],
+          password: e["password"],
+          nickName: e["nickName"],
+          playersAmount: e["playersAmount"],
+          id: e.id,
+        );
       }).toList();
     });
   }
 
-  Future<void> addQtoFirebase({required String roomId}) async {
-    int i = 1;
-    int roundNumber = 1;
+  Future<void> addQtoFirebase(
+      {required String roomId, required int categoryId}) async {
     final token = await questionDataSource.getToken();
 
-    final questionsList =
-        await questionDataSource.getListofQuestions("easy", 9, 25, token.token);
+    final questionsList = await questionDataSource.getListofQuestions(
+        "easy", categoryId, 5, token.token);
     final results = questionsList.results;
     for (final question in results) {
-      i++;
-      if (i <= 5) {
-        roundNumber = 1;
-      } else if (i > 5 && i <= 10) {
-        roundNumber = 2;
-      } else if (i > 10 && i <= 15) {
-        roundNumber = 3;
-      } else if (i > 15 && i <= 20) {
-        roundNumber = 4;
-      } else if (i > 20 && i <= 25) {
-        roundNumber = 5;
-      }
-
       duelGameDataSource.addQtoFirebase(
         questionModel: question,
         roomId: roomId,
-        roundNumber: roundNumber,
       );
     }
   }
@@ -100,8 +85,6 @@ class DuelGameRepository {
   }) async {
     return duelGameDataSource.updatePlayersCount(roomId: roomId, value: value);
   }
-
- 
 
   Future<void> deleteQuestions({
     required String roomId,
@@ -158,8 +141,8 @@ class DuelGameRepository {
             ready: e["ready"],
             startGame: e["startGame"],
             id: e.id,
-             roundNumber: e["roundNumber"],
-             questionsAdded: e["questionsAdded"]);
+            roundNumber: e["roundNumber"],
+            questionsAdded: e["questionsAdded"]);
       }).toList();
     });
   }
@@ -167,7 +150,9 @@ class DuelGameRepository {
   Future<void> leaveRoom({required String id, required String roomId}) async {
     return duelGameDataSource.leaveRoom(id: id, roomId: roomId);
   }
-  Future<void> resetRounds({required String playerId, required String roomId}) async {
+
+  Future<void> resetRounds(
+      {required String playerId, required String roomId}) async {
     return duelGameDataSource.resetRounds(playerId: playerId, roomId: roomId);
   }
 
