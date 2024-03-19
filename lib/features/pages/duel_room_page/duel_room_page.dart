@@ -227,26 +227,33 @@ class _GameRoomPageState extends State<GameRoomPage> {
                                                           widget.roomModel
                                                               .ownerMail
                                                               .toString()) {
-                                                        await context.read< DuelRoomPageCubit>().addQtoFirebase(
-                                                                playerId: player.id,
-                                                                roundNumber: player.roundNumber, 
-                                                                roomId: widget.roomModel.id,
-                                                                categoryId:  category!.id     
-                                                                  );
+                                                        await context
+                                                            .read<
+                                                                DuelRoomPageCubit>()
+                                                            .addQtoFirebase(
+                                                                playerId:
+                                                                    player.id,
+                                                                roundNumber: player
+                                                                    .roundNumber,
+                                                                roomId: widget
+                                                                    .roomModel
+                                                                    .id,
+                                                                categoryId:
+                                                                    category!
+                                                                        .id)
+                                                            .then((value) => context.read<DuelRoomPageCubit>().startGame(
+                                                                roomId: widget
+                                                                    .roomModel
+                                                                    .id,
+                                                                playerOneId: state
+                                                                    .playerOne[
+                                                                        0]
+                                                                    .id,
+                                                                playerTwoId: state
+                                                                    .playerTwo[0]
+                                                                    .id,
+                                                                status: true));
                                                       }
-                                                      // context
-                                                      //     .read<
-                                                      //         DuelRoomPageCubit>()
-                                                      //     .startGame(
-                                                      //         roomId: widget
-                                                      //             .roomModel.id,
-                                                      //         playerOneId: state
-                                                      //             .playerOne[0]
-                                                      //             .id,
-                                                      //         playerTwoId: state
-                                                      //             .playerTwo[0]
-                                                      //             .id,
-                                                      //         status: true);
                                                     }
                                                   },
                                 child: Text(state.playerOne.isEmpty ||

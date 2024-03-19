@@ -33,7 +33,7 @@ class DuelGameDataSource {
       await FirebaseFirestore.instance
           .collection("GameRooms")
           .doc(roomId)
-          .collection("Round$roundNumber")
+          .collection("Questions$roundNumber")
           .add({
         "question": questionModel.question,
         "correctAnswer": questionModel.correctAnswer,
@@ -42,18 +42,22 @@ class DuelGameDataSource {
         "incorrectThree": questionModel.incorrectAnswers[2],
         "category": questionModel.category,
         "difficulty": questionModel.difficulty,
+        "roundNumber": roundNumber,
       });
     } else {
       await FirebaseFirestore.instance
           .collection("GameRooms")
           .doc(roomId)
-          .collection("Round$roundNumber")
+          .collection("Questions$roundNumber")
           .add({
         "question": questionModel.question,
         "correctAnswer": questionModel.correctAnswer,
         "incorrectOne": questionModel.incorrectAnswers[0],
+        "incorrectTwo": null,
+        "incorrectThree": null,
         "category": questionModel.category,
         "difficulty": questionModel.difficulty,
+        "roundNumber": roundNumber,
       });
     }
   }
@@ -63,7 +67,7 @@ class DuelGameDataSource {
     return FirebaseFirestore.instance
         .collection("GameRooms")
         .doc(roomId)
-        .collection("Round$roundNumber")
+        .collection("Questions$roundNumber")
         .snapshots();
   }
 

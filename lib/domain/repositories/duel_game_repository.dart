@@ -58,18 +58,22 @@ class DuelGameRepository {
     return duelGameDataSource
         .getQuestionsFromFb(roomId: roomId, roundNumber: roundNumber)
         .map((event) {
-      return event.docs.map((e) {
-        return DuelQuestionModel(
-          question: e["question"],
-          correctAnswer: e["correctAnswer"],
-          incorrectOne: e["incorrectOne"],
-          incorrectTwo: e["incorrectTwo"],
-          incorrectThree: e["incorrectThree"],
-          category: e["category"],
-          difficulty: e["difficulty"],
-          id: e.id,
-        );
-      }).toList();
+      return event.docs
+          .map((e) {
+            return DuelQuestionModel(
+              question: e["question"],
+              correctAnswer: e["correctAnswer"],
+              incorrectOne: e["incorrectOne"],
+              incorrectTwo: e["incorrectTwo"],
+              incorrectThree: e["incorrectThree"],
+              category: e["category"],
+              difficulty: e["difficulty"],
+              id: e.id,
+              roundNumber: e["roundNumber"],
+            );
+          })
+         
+          .toList();
     });
   }
 

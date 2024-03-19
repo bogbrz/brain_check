@@ -14,6 +14,7 @@ class DuelQuestionModel with _$DuelQuestionModel {
     required String? difficulty,
     required String? category,
     required String? id,
+    required int? roundNumber,
    
    
   }) = _DuelQuestionModel;

@@ -24,6 +24,7 @@ mixin _$DuelQuestionModel {
   String? get difficulty => throw _privateConstructorUsedError;
   String? get category => throw _privateConstructorUsedError;
   String? get id => throw _privateConstructorUsedError;
+  int? get roundNumber => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $DuelQuestionModelCopyWith<DuelQuestionModel> get copyWith =>
@@ -44,7 +45,8 @@ abstract class $DuelQuestionModelCopyWith<$Res> {
       String? incorrectThree,
       String? difficulty,
       String? category,
-      String? id});
+      String? id,
+      int? roundNumber});
 }
 
 /// @nodoc
@@ -68,6 +70,7 @@ class _$DuelQuestionModelCopyWithImpl<$Res, $Val extends DuelQuestionModel>
     Object? difficulty = freezed,
     Object? category = freezed,
     Object? id = freezed,
+    Object? roundNumber = freezed,
   }) {
     return _then(_value.copyWith(
       question: freezed == question
@@ -102,6 +105,10 @@ class _$DuelQuestionModelCopyWithImpl<$Res, $Val extends DuelQuestionModel>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String?,
+      roundNumber: freezed == roundNumber
+          ? _value.roundNumber
+          : roundNumber // ignore: cast_nullable_to_non_nullable
+              as int?,
     ) as $Val);
   }
 }
@@ -122,7 +129,8 @@ abstract class _$$DuelQuestionModelImplCopyWith<$Res>
       String? incorrectThree,
       String? difficulty,
       String? category,
-      String? id});
+      String? id,
+      int? roundNumber});
 }
 
 /// @nodoc
@@ -144,6 +152,7 @@ class __$$DuelQuestionModelImplCopyWithImpl<$Res>
     Object? difficulty = freezed,
     Object? category = freezed,
     Object? id = freezed,
+    Object? roundNumber = freezed,
   }) {
     return _then(_$DuelQuestionModelImpl(
       question: freezed == question
@@ -178,6 +187,10 @@ class __$$DuelQuestionModelImplCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String?,
+      roundNumber: freezed == roundNumber
+          ? _value.roundNumber
+          : roundNumber // ignore: cast_nullable_to_non_nullable
+              as int?,
     ));
   }
 }
@@ -193,7 +206,8 @@ class _$DuelQuestionModelImpl implements _DuelQuestionModel {
       required this.incorrectThree,
       required this.difficulty,
       required this.category,
-      required this.id});
+      required this.id,
+      required this.roundNumber});
 
   @override
   final String? question;
@@ -211,10 +225,12 @@ class _$DuelQuestionModelImpl implements _DuelQuestionModel {
   final String? category;
   @override
   final String? id;
+  @override
+  final int? roundNumber;
 
   @override
   String toString() {
-    return 'DuelQuestionModel(question: $question, correctAnswer: $correctAnswer, incorrectOne: $incorrectOne, incorrectTwo: $incorrectTwo, incorrectThree: $incorrectThree, difficulty: $difficulty, category: $category, id: $id)';
+    return 'DuelQuestionModel(question: $question, correctAnswer: $correctAnswer, incorrectOne: $incorrectOne, incorrectTwo: $incorrectTwo, incorrectThree: $incorrectThree, difficulty: $difficulty, category: $category, id: $id, roundNumber: $roundNumber)';
   }
 
   @override
@@ -236,12 +252,23 @@ class _$DuelQuestionModelImpl implements _DuelQuestionModel {
                 other.difficulty == difficulty) &&
             (identical(other.category, category) ||
                 other.category == category) &&
-            (identical(other.id, id) || other.id == id));
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.roundNumber, roundNumber) ||
+                other.roundNumber == roundNumber));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, question, correctAnswer,
-      incorrectOne, incorrectTwo, incorrectThree, difficulty, category, id);
+  int get hashCode => Object.hash(
+      runtimeType,
+      question,
+      correctAnswer,
+      incorrectOne,
+      incorrectTwo,
+      incorrectThree,
+      difficulty,
+      category,
+      id,
+      roundNumber);
 
   @JsonKey(ignore: true)
   @override
@@ -260,7 +287,8 @@ abstract class _DuelQuestionModel implements DuelQuestionModel {
       required final String? incorrectThree,
       required final String? difficulty,
       required final String? category,
-      required final String? id}) = _$DuelQuestionModelImpl;
+      required final String? id,
+      required final int? roundNumber}) = _$DuelQuestionModelImpl;
 
   @override
   String? get question;
@@ -278,6 +306,8 @@ abstract class _DuelQuestionModel implements DuelQuestionModel {
   String? get category;
   @override
   String? get id;
+  @override
+  int? get roundNumber;
   @override
   @JsonKey(ignore: true)
   _$$DuelQuestionModelImplCopyWith<_$DuelQuestionModelImpl> get copyWith =>

@@ -178,7 +178,7 @@ class _DuelQuestionPageState extends State<DuelQuestionPage> {
                                       ? null
                                       : () {
                                           setState(() {
-                                            choosedAnswer = answer;
+                                            choosedAnswer = answer.toString();
                                             isChoosed = true;
                                             if (choosedAnswer ==
                                                 state
@@ -206,7 +206,7 @@ class _DuelQuestionPageState extends State<DuelQuestionPage> {
                                       ? null
                                       : () {
                                           setState(() {
-                                            choosedAnswer = answer;
+                                            choosedAnswer = answer.toString();
                                             isChoosed = true;
                                             if (choosedAnswer ==
                                                 state.secondQuestion
@@ -234,7 +234,7 @@ class _DuelQuestionPageState extends State<DuelQuestionPage> {
                                       ? null
                                       : () {
                                           setState(() {
-                                            choosedAnswer = answer;
+                                            choosedAnswer = answer.toString();
                                             isChoosed = true;
                                             if (choosedAnswer ==
                                                 state
@@ -262,7 +262,7 @@ class _DuelQuestionPageState extends State<DuelQuestionPage> {
                                       ? null
                                       : () {
                                           setState(() {
-                                            choosedAnswer = answer;
+                                            choosedAnswer = answer.toString();
                                             isChoosed = true;
                                             if (choosedAnswer ==
                                                 state.fourthQuestion
@@ -290,7 +290,7 @@ class _DuelQuestionPageState extends State<DuelQuestionPage> {
                                       ? null
                                       : () {
                                           setState(() {
-                                            choosedAnswer = answer;
+                                            choosedAnswer = answer.toString();
                                             isChoosed = true;
                                             if (choosedAnswer ==
                                                 state
