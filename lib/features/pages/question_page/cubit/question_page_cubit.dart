@@ -41,7 +41,7 @@ class QuestionPageCubit extends Cubit<QuestionPageState> {
     if (category == 0) {
       category = null;
     }
-    List<String> answers = [];
+    List<String?> answers = [];
     final questionContent = await questionRepository.getQuestion(
         token: token, category: category, difficulty: difficulty);
     answers.addAll(questionContent[0].incorrectAnswers);
@@ -76,7 +76,7 @@ class QuestionPageCubit extends Cubit<QuestionPageState> {
         status: Status.loading));
     final questionContent = await questionRepository.getListOfQuestions(
         category: category, difficulty: difficulty, amount: amount);
-    final List<String> answers = [];
+    final List<String?> answers = [];
     answers.addAll(questionContent[index].incorrectAnswers);
     answers.add(questionContent[index].correctAnswer);
     answers.shuffle();
@@ -98,63 +98,63 @@ class QuestionPageCubit extends Cubit<QuestionPageState> {
     }
   }
 
-  Future<void> getMockQuestions(
-      {required String difficulty,
-      required int category,
-      required int index}) async {
-    emit(QuestionPageState(
-        errorMessage: null,
-        questions: [],
-        answers: [],
-        status: Status.loading));
-    final List<String> answers = [];
-    final List<QuestionModel> mockList = [
-      QuestionModel(
-          type: "type",
-          difficulty: "difficulty",
-          category: "category",
-          question: "quesiton1",
-          correctAnswer: "correctAnswer1",
-          incorrectAnswers: ["11", "1,2", "1,3"]),
-      QuestionModel(
-          type: "type",
-          difficulty: "difficulty",
-          category: "category",
-          question: "quesiton2",
-          correctAnswer: "correctAnswer2",
-          incorrectAnswers: ["21", "22", "23"]),
-      QuestionModel(
-          type: "type",
-          difficulty: "difficulty",
-          category: "category",
-          question: "quesiton3",
-          correctAnswer: "correctAnswer3",
-          incorrectAnswers: ["31", "32", "33"]),
-      QuestionModel(
-          type: "type",
-          difficulty: "difficulty",
-          category: "category",
-          question: "quesiton4",
-          correctAnswer: "correctAnswer4",
-          incorrectAnswers: ["41", "42", "43"]),
-      QuestionModel(
-          type: "type",
-          difficulty: "difficulty",
-          category: "category",
-          question: "quesiton5",
-          correctAnswer: "correctAnswer5",
-          incorrectAnswers: ["51", "52", "53"]),
-    ];
-    answers.addAll(mockList[index].incorrectAnswers);
-    answers.add(mockList[index].correctAnswer);
-    answers.shuffle();
-    emit(QuestionPageState(
-      status: Status.success,
-      answers: answers,
-      errorMessage: null,
-      questions: mockList,
-    ));
-  }
+  // Future<void> getMockQuestions(
+  //     {required String difficulty,
+  //     required int category,
+  //     required int index}) async {
+  //   emit(QuestionPageState(
+  //       errorMessage: null,
+  //       questions: [],
+  //       answers: [],
+  //       status: Status.loading));
+  //   final List<String> answers = [];
+  //   final List<QuestionModel> mockList = [
+  //     QuestionModel(
+  //         type: "type",
+  //         difficulty: "difficulty",
+  //         category: "category",
+  //         question: "quesiton1",
+  //         correctAnswer: "correctAnswer1",
+  //         incorrectAnswers: ["11", "1,2", "1,3"]),
+  //     QuestionModel(
+  //         type: "type",
+  //         difficulty: "difficulty",
+  //         category: "category",
+  //         question: "quesiton2",
+  //         correctAnswer: "correctAnswer2",
+  //         incorrectAnswers: ["21", "22", "23"]),
+  //     QuestionModel(
+  //         type: "type",
+  //         difficulty: "difficulty",
+  //         category: "category",
+  //         question: "quesiton3",
+  //         correctAnswer: "correctAnswer3",
+  //         incorrectAnswers: ["31", "32", "33"]),
+  //     QuestionModel(
+  //         type: "type",
+  //         difficulty: "difficulty",
+  //         category: "category",
+  //         question: "quesiton4",
+  //         correctAnswer: "correctAnswer4",
+  //         incorrectAnswers: ["41", "42", "43"]),
+  //     QuestionModel(
+  //         type: "type",
+  //         difficulty: "difficulty",
+  //         category: "category",
+  //         question: "quesiton5",
+  //         correctAnswer: "correctAnswer5",
+  //         incorrectAnswers: ["51", "52", "53"]),
+  //   ];
+  //   answers.addAll(mockList[index].incorrectAnswers);
+  //   answers.add(mockList[index].correctAnswer);
+  //   answers.shuffle();
+  //   emit(QuestionPageState(
+  //     status: Status.success,
+  //     answers: answers,
+  //     errorMessage: null,
+  //     questions: mockList,
+  //   ));
+  // }
 
   @override
   Future<void> close() {

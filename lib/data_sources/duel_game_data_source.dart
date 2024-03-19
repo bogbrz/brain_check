@@ -27,41 +27,44 @@ class DuelGameDataSource {
   Future<void> addQtoFirebase({
     required QuestionModel questionModel,
     required String roomId,
-  
+    required int roundNumber,
   }) async {
-    await FirebaseFirestore.instance
-        .collection("GameRooms")
-        .doc(roomId)
-        .collection("Questions")
-        .add({
-      "question": questionModel.question,
-      "correctAnswer": questionModel.correctAnswer,
-      "incorrectOne": questionModel.incorrectAnswers[0],
-      "incorrectTwo": questionModel.incorrectAnswers[1],
-      "incorrectThree": questionModel.incorrectAnswers[2],
-      "category": questionModel.category,
-      "difficulty": questionModel.difficulty,
-     
-    });
+    if (questionModel.incorrectAnswers.length != 1) {
+      await FirebaseFirestore.instance
+          .collection("GameRooms")
+          .doc(roomId)
+          .collection("Round$roundNumber")
+          .add({
+        "question": questionModel.question,
+        "correctAnswer": questionModel.correctAnswer,
+        "incorrectOne": questionModel.incorrectAnswers[0],
+        "incorrectTwo": questionModel.incorrectAnswers[1],
+        "incorrectThree": questionModel.incorrectAnswers[2],
+        "category": questionModel.category,
+        "difficulty": questionModel.difficulty,
+      });
+    } else {
+      await FirebaseFirestore.instance
+          .collection("GameRooms")
+          .doc(roomId)
+          .collection("Round$roundNumber")
+          .add({
+        "question": questionModel.question,
+        "correctAnswer": questionModel.correctAnswer,
+        "incorrectOne": questionModel.incorrectAnswers[0],
+        "category": questionModel.category,
+        "difficulty": questionModel.difficulty,
+      });
+    }
   }
 
   Stream<QuerySnapshot<Map<String, dynamic>>> getQuestionsFromFb(
-      {required String roomId}) {
+      {required String roomId, required int roundNumber}) {
     return FirebaseFirestore.instance
         .collection("GameRooms")
         .doc(roomId)
-        .collection("Questions")
+        .collection("Round$roundNumber")
         .snapshots();
-  }
-
-  Future<void> deleteQuestions(
-      {required String roomId, required String questionId}) {
-    return FirebaseFirestore.instance
-        .collection("GameRooms")
-        .doc(roomId)
-        .collection("Questions")
-        .doc(questionId)
-        .delete();
   }
 
   Future<void> readyStatus(
@@ -105,7 +108,6 @@ class DuelGameDataSource {
       "ready": false,
       "startGame": false,
       "roundNumber": 0,
-      "questionsAdded": false,
     });
   }
 
@@ -141,7 +143,7 @@ class DuelGameDataSource {
       "startGame": status,
       "points": FieldValue.increment(points),
       "ready": false,
-      "roundNumber": FieldValue.increment(1)
+      "roundNumber": FieldValue.increment(1),
     });
   }
 

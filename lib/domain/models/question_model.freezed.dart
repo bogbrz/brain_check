@@ -188,7 +188,7 @@ mixin _$QuestionModel {
   String? get category => throw _privateConstructorUsedError;
   String get question => throw _privateConstructorUsedError;
   String get correctAnswer => throw _privateConstructorUsedError;
-  List<String> get incorrectAnswers => throw _privateConstructorUsedError;
+  List<String?> get incorrectAnswers => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -208,7 +208,7 @@ abstract class $QuestionModelCopyWith<$Res> {
       String? category,
       String question,
       String correctAnswer,
-      List<String> incorrectAnswers});
+      List<String?> incorrectAnswers});
 }
 
 /// @nodoc
@@ -255,7 +255,7 @@ class _$QuestionModelCopyWithImpl<$Res, $Val extends QuestionModel>
       incorrectAnswers: null == incorrectAnswers
           ? _value.incorrectAnswers
           : incorrectAnswers // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+              as List<String?>,
     ) as $Val);
   }
 }
@@ -274,7 +274,7 @@ abstract class _$$QuestionModelImplCopyWith<$Res>
       String? category,
       String question,
       String correctAnswer,
-      List<String> incorrectAnswers});
+      List<String?> incorrectAnswers});
 }
 
 /// @nodoc
@@ -319,7 +319,7 @@ class __$$QuestionModelImplCopyWithImpl<$Res>
       incorrectAnswers: null == incorrectAnswers
           ? _value._incorrectAnswers
           : incorrectAnswers // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+              as List<String?>,
     ));
   }
 }
@@ -334,7 +334,7 @@ class _$QuestionModelImpl extends _QuestionModel {
       required this.category,
       required this.question,
       required this.correctAnswer,
-      required final List<String> incorrectAnswers})
+      required final List<String?> incorrectAnswers})
       : _incorrectAnswers = incorrectAnswers,
         super._();
 
@@ -351,9 +351,9 @@ class _$QuestionModelImpl extends _QuestionModel {
   final String question;
   @override
   final String correctAnswer;
-  final List<String> _incorrectAnswers;
+  final List<String?> _incorrectAnswers;
   @override
-  List<String> get incorrectAnswers {
+  List<String?> get incorrectAnswers {
     if (_incorrectAnswers is EqualUnmodifiableListView)
       return _incorrectAnswers;
     // ignore: implicit_dynamic_type
@@ -415,7 +415,7 @@ abstract class _QuestionModel extends QuestionModel {
       required final String? category,
       required final String question,
       required final String correctAnswer,
-      required final List<String> incorrectAnswers}) = _$QuestionModelImpl;
+      required final List<String?> incorrectAnswers}) = _$QuestionModelImpl;
   _QuestionModel._() : super._();
 
   factory _QuestionModel.fromJson(Map<String, dynamic> json) =
@@ -432,7 +432,7 @@ abstract class _QuestionModel extends QuestionModel {
   @override
   String get correctAnswer;
   @override
-  List<String> get incorrectAnswers;
+  List<String?> get incorrectAnswers;
   @override
   @JsonKey(ignore: true)
   _$$QuestionModelImplCopyWith<_$QuestionModelImpl> get copyWith =>

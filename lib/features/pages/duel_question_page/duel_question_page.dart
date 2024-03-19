@@ -18,11 +18,13 @@ class DuelQuestionPage extends StatefulWidget {
     required this.players,
     required this.user,
     required this.ownerEmail,
+    required this.roundNumber,
   });
   final String roomId;
   final List<PlayerModel> players;
   final User? user;
   final String ownerEmail;
+  final int roundNumber;
 
   @override
   State<DuelQuestionPage> createState() => _DuelQuestionPageState();
@@ -34,12 +36,17 @@ class _DuelQuestionPageState extends State<DuelQuestionPage> {
   var choosedAnswer = "";
   var isChoosed = false;
   var points = 0;
+  var answerOne = 0;
+  var answerTwo = 0;
+  var answerThree = 0;
+  var answerFour = 0;
+  var answerFive = 0;
   final CountdownController controller = CountdownController(autoStart: true);
 
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) =>
-          getIt<DuelQuestionPageCubit>()..getQfromFb(roomId: widget.roomId),
+      create: (context) => getIt<DuelQuestionPageCubit>()
+        ..getQfromFb(roomId: widget.roomId, roundNumber: widget.roundNumber),
       child: BlocBuilder<DuelQuestionPageCubit, DuelQuestionPageState>(
         builder: (context, state) {
           switch (state.status) {
@@ -58,6 +65,11 @@ class _DuelQuestionPageState extends State<DuelQuestionPage> {
                   user: widget.user,
                   points: points,
                   ownerEmail: widget.ownerEmail,
+                  answerOne: answerOne,
+                  answerTwo: answerTwo,
+                  answerThree: answerThree,
+                  answerFour: answerFour,
+                  answerFive: answerFive,
                 );
               }
 
@@ -98,7 +110,7 @@ class _DuelQuestionPageState extends State<DuelQuestionPage> {
                                       )),
                                   Countdown(
                                     controller: controller,
-                                    seconds: 1,
+                                    seconds: 2,
                                     build: (BuildContext context,
                                             double time) =>
                                         Text(time.toInt().toString(),

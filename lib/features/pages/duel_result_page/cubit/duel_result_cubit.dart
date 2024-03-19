@@ -23,5 +23,13 @@ class DuelResultCubit extends Cubit<DuelResultState> {
     );
   }
 
-  
+  Future<void> addRoundResults(
+      {required String roomId,
+      required String playerId,
+      required int roundNumber,
+      required int answerOne,
+      required int answerTwo,
+      required int answerThree,
+      required int answerFour,
+      required int answerFive}) async {}
 }

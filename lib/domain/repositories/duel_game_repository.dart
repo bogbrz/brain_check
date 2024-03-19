@@ -3,6 +3,7 @@ import 'package:brain_check/data_sources/questions_data_source.dart';
 import 'package:brain_check/domain/models/duel_question_model.dart';
 import 'package:brain_check/domain/models/game_room_model.dart';
 import 'package:brain_check/domain/models/player_model.dart';
+import 'package:brain_check/domain/models/question_model.dart';
 import 'package:brain_check/domain/models/room_status_model.dart';
 import 'package:injectable/injectable.dart';
 
@@ -35,33 +36,39 @@ class DuelGameRepository {
     });
   }
 
-  Future<void> addQtoFirebase(
-      {required String roomId, required int categoryId}) async {
+  Future<void> addQtoFirebase({
+    required String roomId,
+    required int categoryId,
+    required int roundNumber,
+    required String playerId,
+  }) async {
     final token = await questionDataSource.getToken();
 
     final questionsList = await questionDataSource.getListofQuestions(
         "easy", categoryId, 5, token.token);
     final results = questionsList.results;
     for (final question in results) {
-      duelGameDataSource.addQtoFirebase(
-        questionModel: question,
-        roomId: roomId,
-      );
+      await duelGameDataSource.addQtoFirebase(
+          questionModel: question, roomId: roomId, roundNumber: roundNumber);
     }
   }
 
-  Stream<List<DuelQuestionModel>> getQuestionsFromFb({required String roomId}) {
-    return duelGameDataSource.getQuestionsFromFb(roomId: roomId).map((event) {
+  Stream<List<DuelQuestionModel>> getQuestionsFromFb(
+      {required String roomId, required int roundNumber}) {
+    return duelGameDataSource
+        .getQuestionsFromFb(roomId: roomId, roundNumber: roundNumber)
+        .map((event) {
       return event.docs.map((e) {
         return DuelQuestionModel(
-            question: e["question"],
-            correctAnswer: e["correctAnswer"],
-            incorrectOne: e["incorrectOne"],
-            incorrectTwo: e["incorrectTwo"],
-            incorrectThree: e["incorrectThree"],
-            category: e["category"],
-            difficulty: e["difficulty"],
-            id: e.id);
+          question: e["question"],
+          correctAnswer: e["correctAnswer"],
+          incorrectOne: e["incorrectOne"],
+          incorrectTwo: e["incorrectTwo"],
+          incorrectThree: e["incorrectThree"],
+          category: e["category"],
+          difficulty: e["difficulty"],
+          id: e.id,
+        );
       }).toList();
     });
   }
@@ -71,7 +78,7 @@ class DuelGameRepository {
       required bool status,
       required String playerId,
       required int points}) async {
-    return duelGameDataSource.resetGameStatus(
+    await duelGameDataSource.resetGameStatus(
       roomId: roomId,
       status: status,
       playerId: playerId,
@@ -84,14 +91,6 @@ class DuelGameRepository {
     required int value,
   }) async {
     return duelGameDataSource.updatePlayersCount(roomId: roomId, value: value);
-  }
-
-  Future<void> deleteQuestions({
-    required String roomId,
-    required String questionId,
-  }) async {
-    return duelGameDataSource.deleteQuestions(
-        roomId: roomId, questionId: questionId);
   }
 
   Stream<List<RoomStatusModel>> getRoomStatus({required String roomId}) {
@@ -134,15 +133,15 @@ class DuelGameRepository {
     return duelGameDataSource.getPlayers(id: id).map((event) {
       return event.docs.map((e) {
         return PlayerModel(
-            email: e["email"],
-            nickName: e["nickName"],
-            points: e["points"],
-            player: e["player"],
-            ready: e["ready"],
-            startGame: e["startGame"],
-            id: e.id,
-            roundNumber: e["roundNumber"],
-            questionsAdded: e["questionsAdded"]);
+          email: e["email"],
+          nickName: e["nickName"],
+          points: e["points"],
+          player: e["player"],
+          ready: e["ready"],
+          startGame: e["startGame"],
+          id: e.id,
+          roundNumber: e["roundNumber"],
+        );
       }).toList();
     });
   }

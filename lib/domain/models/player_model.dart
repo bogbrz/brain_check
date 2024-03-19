@@ -12,5 +12,7 @@ class PlayerModel with _$PlayerModel {
       required int player,
       required bool ready, required bool startGame,
       required int roundNumber,
-      required bool questionsAdded}) = _PlayerModel;
+    
+   
+     }) = _PlayerModel;
 }

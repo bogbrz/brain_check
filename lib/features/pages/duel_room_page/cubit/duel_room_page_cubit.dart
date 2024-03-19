@@ -74,8 +74,16 @@ class DuelRoomPageCubit extends Cubit<DuelRoomPageState> {
     );
   }
 
-  Future<void> addQtoFirebase({required String roomId, required int categoryId}) async {
-    return duelGameRepository.addQtoFirebase(roomId: roomId, categoryId: categoryId);
+  Future<void> addQtoFirebase(
+      {required String roomId,
+      required int categoryId,
+      required int roundNumber,
+      required String playerId}) async {
+    await duelGameRepository.addQtoFirebase(
+        playerId: playerId,
+        roomId: roomId,
+        categoryId: categoryId,
+        roundNumber: roundNumber);
   }
 
   Future<void> updatePlayersCount(
