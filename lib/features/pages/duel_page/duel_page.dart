@@ -142,8 +142,14 @@ class JoinRoomWidget extends StatelessWidget {
                     passwordController.clear();
                     Navigator.of(context).pop();
                     ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text("Room is full"),
+                      SnackBar(
+                        content: Text(
+                          "Room is full",
+                          style: GoogleFonts.bungee(
+                              color: Colors.white,
+                              fontSize:
+                                  MediaQuery.of(context).size.height / 50),
+                        ),
                         backgroundColor: Colors.red,
                       ),
                     );
@@ -160,14 +166,24 @@ class JoinRoomWidget extends StatelessWidget {
                   passwordController.clear();
                   Navigator.of(context).pop();
                   ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text("Wrong password"),
+                    SnackBar(
+                      content: Text(
+                        "Wrong password",
+                        style: GoogleFonts.bungee(
+                            color: Colors.white,
+                            fontSize: MediaQuery.of(context).size.height / 50),
+                      ),
                       backgroundColor: Colors.red,
                     ),
                   );
                 }
               },
-              child: const Text("Join"))
+              child: Text(
+                "Join",
+                style: GoogleFonts.bungee(
+                    color: Colors.black,
+                    fontSize: MediaQuery.of(context).size.height / 50),
+              ))
         ],
       )),
     );
@@ -269,12 +285,25 @@ class CreateRoomWidget extends StatelessWidget {
                         create: (context) => getIt<DuelPageCubit>(),
                         child: AlertDialog(
                           scrollable: true,
-                          title: const Text("Create new game"),
+                          title: Text(
+                            "Create new game",
+                            style: GoogleFonts.bungee(
+                                color: Colors.white,
+                                fontSize:
+                                    MediaQuery.of(context).size.height / 50),
+                          ),
                           content: Form(
                             child: Column(children: [
-                              const Row(
+                              Row(
                                 children: [
-                                  Text("Room name"),
+                                  Text(
+                                    "Room name",
+                                    style: GoogleFonts.bungee(
+                                        color: Colors.white,
+                                        fontSize:
+                                            MediaQuery.of(context).size.height /
+                                                50),
+                                  ),
                                 ],
                               ),
                               TextField(
@@ -292,9 +321,16 @@ class CreateRoomWidget extends StatelessWidget {
                                 ),
                                 controller: nameController,
                               ),
-                              const Row(
+                              Row(
                                 children: [
-                                  Text("Password"),
+                                  Text(
+                                    "Password",
+                                    style: GoogleFonts.bungee(
+                                        color: Colors.white,
+                                        fontSize:
+                                            MediaQuery.of(context).size.height /
+                                                50),
+                                  ),
                                 ],
                               ),
                               TextField(
@@ -330,7 +366,15 @@ class CreateRoomWidget extends StatelessWidget {
                                             passControler.clear();
                                             Navigator.of(context).pop();
                                           },
-                                          child: const Text("Create"));
+                                          child: Text(
+                                            "Create",
+                                            style: GoogleFonts.bungee(
+                                                color: Colors.black,
+                                                fontSize: MediaQuery.of(context)
+                                                        .size
+                                                        .height /
+                                                    50),
+                                          ));
                                     },
                                   ))
                             ]),
@@ -339,8 +383,16 @@ class CreateRoomWidget extends StatelessWidget {
                       );
                     });
               },
-              label: const Row(
-                children: [Text("Create new room"), Icon(Icons.add)],
+              label: Row(
+                children: [
+                  Text(
+                    "Create new room",
+                    style: GoogleFonts.bungee(
+                        color: Colors.black,
+                        fontSize: MediaQuery.of(context).size.height / 50),
+                  ),
+                  Icon(Icons.add)
+                ],
               )),
         ],
       ),

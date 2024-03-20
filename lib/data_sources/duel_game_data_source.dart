@@ -146,7 +146,7 @@ class DuelGameDataSource {
       "player": playerNumber,
       "ready": false,
       "startGame": false,
-      "roundNumber": 0,
+      "roundNumber": 1,
       "category": "not choosen"
     });
   }

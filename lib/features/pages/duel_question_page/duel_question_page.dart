@@ -35,7 +35,7 @@ class _DuelQuestionPageState extends State<DuelQuestionPage> {
   var index = 0;
   var choosedAnswer = "";
   var isChoosed = false;
-  var points = 0;
+ 
   var answerOne = 0;
   var answerTwo = 0;
   var answerThree = 0;
@@ -58,12 +58,12 @@ class _DuelQuestionPageState extends State<DuelQuestionPage> {
               return ErrorStateWidget(
                   errorMessage: state.errorMessage.toString());
             case Status.success:
-              if (index == 4) {
+              if (index == 5) {
                 return DuelResultPage(
                   roomId: widget.roomId,
                   players: widget.players,
                   user: widget.user,
-                  points: points,
+                 
                   ownerEmail: widget.ownerEmail,
                   answerOne: answerOne,
                   answerTwo: answerTwo,
@@ -185,7 +185,7 @@ class _DuelQuestionPageState extends State<DuelQuestionPage> {
                                                     .firstQuestion.correctAnswer
                                                     .toString()) {
                                               answerOne++;
-                                              points++;
+                                              
                                             }
                                           });
 
@@ -214,7 +214,7 @@ class _DuelQuestionPageState extends State<DuelQuestionPage> {
                                                     .correctAnswer
                                                     .toString()) {
                                               answerTwo++;
-                                              points++;
+                                              
                                             }
                                           });
 
@@ -243,7 +243,7 @@ class _DuelQuestionPageState extends State<DuelQuestionPage> {
                                                     .thirdQuestion.correctAnswer
                                                     .toString()) {
                                               answerThree++;
-                                              points++;
+                                              
                                             }
                                           });
 
@@ -271,7 +271,7 @@ class _DuelQuestionPageState extends State<DuelQuestionPage> {
                                                 state.fourthQuestion
                                                     .correctAnswer
                                                     .toString()) {
-                                              points++;
+                                              
                                             }
                                           });
 
@@ -300,7 +300,7 @@ class _DuelQuestionPageState extends State<DuelQuestionPage> {
                                                     .fifthQuestion.correctAnswer
                                                     .toString()) {
                                               answerFive++;
-                                              points++;
+                                              
                                             }
                                           });
 

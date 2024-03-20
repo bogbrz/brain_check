@@ -5,11 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-
-
-
-
-
 class JoinPlayerOneWidget extends StatelessWidget {
   const JoinPlayerOneWidget({
     super.key,
@@ -31,24 +26,21 @@ class JoinPlayerOneWidget extends StatelessWidget {
     return Column(
       children: [
         if (playerOne.isEmpty) ...[
-          SizedBox(
-              width: MediaQuery.of(context).size.width / 3,
-              child: InkWell(
-                  onTap: playerTwo.isNotEmpty &&
-                          playerTwo[0].email == user!.email.toString()
-                      ? null
-                      : () {
-                          context.read<DuelRoomPageCubit>().joinPlayer(
-                              email: user!.email.toString(),
-                              nickName: nickName,
-                              id: id,
-                              playerNumber: 1);
-                          context
-                              .read<DuelRoomPageCubit>()
-                              .updatePlayersCount(roomId: id, value: 1);
-                        },
-                  child:
-                      const Image(image: AssetImage("images/join_game.png")))),
+          InkWell(
+              onTap: playerTwo.isNotEmpty &&
+                      playerTwo[0].email == user!.email.toString()
+                  ? null
+                  : () {
+                      context.read<DuelRoomPageCubit>().joinPlayer(
+                          email: user!.email.toString(),
+                          nickName: nickName,
+                          id: id,
+                          playerNumber: 1);
+                      context
+                          .read<DuelRoomPageCubit>()
+                          .updatePlayersCount(roomId: id, value: 1);
+                    },
+              child: const Image(image: AssetImage("images/join_game.png"))),
           Text(
             "JOIN PLAYER 1",
             style: GoogleFonts.bungee(
@@ -60,7 +52,7 @@ class JoinPlayerOneWidget extends StatelessWidget {
             clipBehavior: Clip.hardEdge,
             shape: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(
-                  50,
+                  25,
                 ),
                 borderSide: const BorderSide(color: Colors.transparent)),
             child: InkWell(
