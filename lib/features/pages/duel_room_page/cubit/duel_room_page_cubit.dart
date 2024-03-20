@@ -40,6 +40,10 @@ class DuelRoomPageCubit extends Cubit<DuelRoomPageState> {
       {required String id, required bool ready, required String roomId}) async {
     return duelGameRepository.readyStatus(id: id, ready: ready, roomId: roomId);
   }
+  Future<void> updateCategory(
+      {required String playerId, required String category, required String roomId}) async {
+    return duelGameRepository.updateCategory(playerId: playerId, category: category, roomId: roomId);
+  }
 
   Future<void> startGame(
       {required String roomId,

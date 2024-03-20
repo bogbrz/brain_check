@@ -38,15 +38,9 @@ class DuelResultPage extends StatelessWidget {
                   onPressed: () {
                     for (final player in players!) {
                       if (player.email.toString() == user!.email.toString()) {
-                        context.read<DuelResultCubit>().resetGameStatus(
-                            roomId: roomId!,
-                            status: false,
-                            playerId: player.id,
-                            points: points);
-
                         context.read<DuelResultCubit>().addRoundResults(
                             roomId: roomId!,
-                            playerId: player.id,
+                            playerNumber: player.player,
                             roundNumber: player.roundNumber,
                             answerOne: answerOne,
                             answerTwo: answerTwo,
@@ -54,6 +48,13 @@ class DuelResultPage extends StatelessWidget {
                             answerFour: answerFour,
                             answerFive:
                             answerFive);
+                        context.read<DuelResultCubit>().resetGameStatus(
+                            roomId: roomId!,
+                            status: false,
+                            playerId: player.id,
+                            points: points);
+
+                        
                       }
                     }
                   },

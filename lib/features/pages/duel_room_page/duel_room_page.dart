@@ -5,6 +5,9 @@ import 'package:brain_check/domain/models/player_model.dart';
 import 'package:brain_check/features/pages/duel_question_page/duel_question_page.dart';
 
 import 'package:brain_check/features/pages/duel_room_page/cubit/duel_room_page_cubit.dart';
+import 'package:brain_check/features/pages/duel_room_page/widgets/player_one_widget.dart';
+import 'package:brain_check/features/pages/duel_room_page/widgets/players_score.dart';
+import 'package:brain_check/features/pages/duel_room_page/widgets/player_two_widget.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -174,100 +177,182 @@ class _GameRoomPageState extends State<GameRoomPage> {
                               ),
                             ),
                           ]),
-                      Column(
-                        children: [
-                          if (widget.user!.email.toString() ==
-                              widget.roomModel.ownerMail.toString()) ...[
-                            SizedBox(
-                              width: MediaQuery.of(context).size.width * 0.6,
-                              height:
-                                  MediaQuery.of(context).size.height * 0.075,
-                              child: DropdownButton<TriviaCategory>(
-                                isExpanded: true,
-                                items:
-                                    categories.map((TriviaCategory categories) {
-                                  return DropdownMenuItem<TriviaCategory>(
-                                      value: categories,
-                                      child: Text(
-                                        categories.name,
-                                        style: GoogleFonts.bungee(
-                                            color: Colors.white,
-                                            fontSize: MediaQuery.of(context)
+                      Container(
+                        height: MediaQuery.of(context).size.height * 0.6,
+                        alignment: Alignment.center,
+                        margin: EdgeInsetsDirectional.all(
+                            MediaQuery.of(context).size.height * 0.01),
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(10),
+                            border: Border.all(
+                                width: MediaQuery.of(context).size.width / 55,
+                                color: Colors.black)),
+                        child: Column(
+                          children: [
+                            if (widget.user!.email.toString() ==
+                                widget.roomModel.ownerMail.toString()) ...[
+                              Container(
+                                decoration: BoxDecoration(
+                                    border: Border(
+                                        bottom: BorderSide(
+                                            color: Colors.black,
+                                            width: MediaQuery.of(context)
                                                     .size
-                                                    .height /
-                                                65),
-                                      ));
-                                }).toList(),
-                                onChanged: (TriviaCategory? selectedItem) {
-                                  setState(() {
-                                    category = selectedItem!;
-                                  });
-                                },
-                                value: category,
-                                hint: Text('Select category'),
+                                                    .width *
+                                                0.01))),
+                                width: MediaQuery.of(context).size.width * 0.98,
+                                height:
+                                    MediaQuery.of(context).size.height * 0.075,
+                                child: SizedBox(
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.6,
+                                  child: Center(
+                                    child: Padding(
+                                      padding: EdgeInsets.all(
+                                          MediaQuery.of(context).size.width *
+                                              0.02),
+                                      child: DropdownButton<TriviaCategory>(
+                                        isExpanded: true,
+                                        items: categories
+                                            .map((TriviaCategory categories) {
+                                          return DropdownMenuItem<
+                                                  TriviaCategory>(
+                                              value: categories,
+                                              child: Text(
+                                                categories.name,
+                                                style: GoogleFonts.bungee(
+                                                    color: Colors.black,
+                                                    fontSize:
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .height /
+                                                            65),
+                                              ));
+                                        }).toList(),
+                                        onChanged:
+                                            (TriviaCategory? selectedItem) {
+                                          setState(() {
+                                            category = selectedItem!;
+                                          });
+                                          for (final player in state.players) {
+                                            context
+                                                .read<DuelRoomPageCubit>()
+                                                .updateCategory(
+                                                    roomId: widget.roomModel.id,
+                                                    playerId: player.id,
+                                                    category:
+                                                        selectedItem!.name);
+                                          }
+                                        },
+                                        value: category,
+                                        hint: Text('Select category'),
+                                      ),
+                                    ),
+                                  ),
+                                ),
                               ),
-                            ),
-                            ElevatedButton(
-                                onPressed: state.playerOne.isEmpty ||
-                                        state.playerTwo.isEmpty
-                                    ? null
-                                    : state.playerOne[0].ready == false ||
-                                            state.playerTwo[0].ready == false
-                                        ? null
-                                        : state.playerOne[0].startGame ||
-                                                state.playerTwo[0].startGame
-                                            ? null
-                                            : category == null
-                                                ? null
-                                                : () async {
-                                                    for (final player
-                                                        in state.players) {
-                                                      if (player.email
-                                                              .toString() ==
-                                                          widget.roomModel
-                                                              .ownerMail
-                                                              .toString()) {
-                                                        await context
-                                                            .read<
-                                                                DuelRoomPageCubit>()
-                                                            .addQtoFirebase(
-                                                                playerId:
-                                                                    player.id,
-                                                                roundNumber: player
-                                                                    .roundNumber,
-                                                                roomId: widget
-                                                                    .roomModel
-                                                                    .id,
-                                                                categoryId:
-                                                                    category!
-                                                                        .id)
-                                                            .then((value) => context.read<DuelRoomPageCubit>().startGame(
-                                                                roomId: widget
-                                                                    .roomModel
-                                                                    .id,
-                                                                playerOneId: state
-                                                                    .playerOne[
-                                                                        0]
-                                                                    .id,
-                                                                playerTwoId: state
-                                                                    .playerTwo[0]
-                                                                    .id,
-                                                                status: true));
-                                                      }
-                                                    }
-                                                  },
-                                child: Text(state.playerOne.isEmpty ||
-                                        state.playerTwo.isEmpty
-                                    ? "Not enough players"
-                                    : state.playerOne[0].ready == false ||
-                                            state.playerTwo[0].ready == false
-                                        ? "Players are not ready"
-                                        : 'Start Game')),
-                          ] else ...[
-                            Text("WAIT FOR ROOM OWNER TO START")
-                          ]
-                        ],
+                            ] else ...[
+                              Container(
+                                decoration: BoxDecoration(
+                                    border: Border(
+                                        bottom: BorderSide(
+                                            color: Colors.black,
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                0.01))),
+                                width: MediaQuery.of(context).size.width * 0.98,
+                                height:
+                                    MediaQuery.of(context).size.height * 0.075,
+                                child: SizedBox(
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.6,
+                                  child: Center(
+                                    child: Padding(
+                                        padding: EdgeInsets.all(
+                                            MediaQuery.of(context).size.width *
+                                                0.02),
+                                        child: Text(state.playerOne.isNotEmpty
+                                            ? state.playerOne[0].category
+                                            : state.playerTwo.isNotEmpty
+                                                ? state.playerTwo[0].category
+                                                : "not chosen")),
+                                  ),
+                                ),
+                              ),
+                            ],
+                            PlayersScore(
+                              roomId: widget.roomModel.id,
+                            )
+                          ],
+                        ),
                       ),
+                      if (widget.user!.email.toString() ==
+                          widget.roomModel.ownerMail.toString()) ...[
+                        Padding(
+                          padding: EdgeInsets.all(
+                              MediaQuery.of(context).size.height * 0.01),
+                          child: ElevatedButton(
+                              onPressed:
+                                  state.playerOne.isEmpty ||
+                                          state.playerTwo.isEmpty
+                                      ? null
+                                      : state.playerOne[0].ready == false ||
+                                              state.playerTwo[0].ready == false
+                                          ? null
+                                          : state.playerOne[0].startGame ||
+                                                  state.playerTwo[0].startGame
+                                              ? null
+                                              : category == null
+                                                  ? null
+                                                  : () async {
+                                                      for (final player
+                                                          in state.players) {
+                                                        if (player.email
+                                                                .toString() ==
+                                                            widget.roomModel
+                                                                .ownerMail
+                                                                .toString()) {
+                                                          await context
+                                                              .read<
+                                                                  DuelRoomPageCubit>()
+                                                              .addQtoFirebase(
+                                                                  playerId:
+                                                                      player.id,
+                                                                  roundNumber:
+                                                                      player
+                                                                          .roundNumber,
+                                                                  roomId: widget
+                                                                      .roomModel
+                                                                      .id,
+                                                                  categoryId:
+                                                                      category!
+                                                                          .id)
+                                                              .then((value) => context.read<DuelRoomPageCubit>().startGame(
+                                                                  roomId: widget
+                                                                      .roomModel
+                                                                      .id,
+                                                                  playerOneId: state
+                                                                      .playerOne[
+                                                                          0]
+                                                                      .id,
+                                                                  playerTwoId: state
+                                                                      .playerTwo[0]
+                                                                      .id,
+                                                                  status: true));
+                                                        }
+                                                      }
+                                                    },
+                              child: Text(state.playerOne.isEmpty ||
+                                      state.playerTwo.isEmpty
+                                  ? "Not enough players"
+                                  : state.playerOne[0].ready == false ||
+                                          state.playerTwo[0].ready == false
+                                      ? "Players are not ready"
+                                      : 'Start Game')),
+                        ),
+                      ]
                     ],
                   );
               }
@@ -275,223 +360,6 @@ class _GameRoomPageState extends State<GameRoomPage> {
           ),
         )),
       ),
-    );
-  }
-}
-
-class JoinPlayerTwoWidget extends StatelessWidget {
-  const JoinPlayerTwoWidget({
-    super.key,
-    required this.nickName,
-    required this.id,
-    required this.playerTwo,
-    required this.user,
-    required this.playerOne,
-  });
-
-  final String nickName;
-  final String id;
-  final List<PlayerModel> playerTwo;
-  final List<PlayerModel> playerOne;
-  final User? user;
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        if (playerTwo.isEmpty) ...[
-          SizedBox(
-              width: MediaQuery.of(context).size.width / 3,
-              child: InkWell(
-                  onTap: playerOne.isNotEmpty &&
-                          playerOne[0].email == user!.email.toString()
-                      ? null
-                      : () {
-                          context.read<DuelRoomPageCubit>().joinPlayer(
-                              email: user!.email.toString(),
-                              nickName: nickName,
-                              id: id,
-                              playerNumber: 2);
-                          context
-                              .read<DuelRoomPageCubit>()
-                              .updatePlayersCount(roomId: id, value: 1);
-                        },
-                  child:
-                      const Image(image: AssetImage("images/join_game.png")))),
-          Text(
-            "JOIN PLAYER 2",
-            style: GoogleFonts.bungee(
-                color: Colors.white,
-                fontSize: MediaQuery.of(context).size.height / 40),
-          )
-        ] else ...[
-          Material(
-            clipBehavior: Clip.hardEdge,
-            shape: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(
-                  35,
-                ),
-                borderSide: const BorderSide(color: Colors.transparent)),
-            child: InkWell(
-              onTap: playerTwo[0].email == user!.email
-                  ? () {
-                      playerTwo[0].ready == true
-                          ? context.read<DuelRoomPageCubit>().readyStatus(
-                              id: playerTwo[0].id, ready: false, roomId: id)
-                          : context.read<DuelRoomPageCubit>().readyStatus(
-                              id: playerTwo[0].id, ready: true, roomId: id);
-                    }
-                  : null,
-              child: Column(
-                children: [
-                  Text(
-                    playerTwo[0].points.toString(),
-                    style: GoogleFonts.bungee(
-                        color: Colors.white,
-                        fontSize: MediaQuery.of(context).size.height / 15),
-                  ),
-                  Text(
-                    playerTwo[0].nickName,
-                    style: GoogleFonts.bungee(
-                        color: Colors.white,
-                        fontSize: MediaQuery.of(context).size.height / 40),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        playerTwo[0].ready == true ? "Ready" : "Not ready",
-                        style: GoogleFonts.bungee(
-                            color: playerTwo[0].ready == true
-                                ? Colors.green
-                                : Colors.red,
-                            fontSize: MediaQuery.of(context).size.height / 40),
-                      ),
-                      Icon(
-                          playerTwo[0].ready == true
-                              ? Icons.check_box
-                              : Icons.cancel,
-                          color: playerTwo[0].ready == true
-                              ? Colors.green
-                              : Colors.red)
-                    ],
-                  )
-                ],
-              ),
-            ),
-          ),
-        ]
-      ],
-    );
-  }
-}
-
-class JoinPlayerOneWidget extends StatelessWidget {
-  const JoinPlayerOneWidget({
-    super.key,
-    required this.nickName,
-    required this.id,
-    required this.playerOne,
-    required this.playerTwo,
-    required this.user,
-  });
-
-  final String nickName;
-  final String id;
-  final List<PlayerModel> playerOne;
-  final List<PlayerModel> playerTwo;
-  final User? user;
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        if (playerOne.isEmpty) ...[
-          SizedBox(
-              width: MediaQuery.of(context).size.width / 3,
-              child: InkWell(
-                  onTap: playerTwo.isNotEmpty &&
-                          playerTwo[0].email == user!.email.toString()
-                      ? null
-                      : () {
-                          context.read<DuelRoomPageCubit>().joinPlayer(
-                              email: user!.email.toString(),
-                              nickName: nickName,
-                              id: id,
-                              playerNumber: 1);
-                          context
-                              .read<DuelRoomPageCubit>()
-                              .updatePlayersCount(roomId: id, value: 1);
-                        },
-                  child:
-                      const Image(image: AssetImage("images/join_game.png")))),
-          Text(
-            "JOIN PLAYER 1",
-            style: GoogleFonts.bungee(
-                color: Colors.white,
-                fontSize: MediaQuery.of(context).size.height / 40),
-          )
-        ] else ...[
-          Material(
-            clipBehavior: Clip.hardEdge,
-            shape: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(
-                  50,
-                ),
-                borderSide: const BorderSide(color: Colors.transparent)),
-            child: InkWell(
-              onTap: playerOne[0].email != user!.email
-                  ? null
-                  : () {
-                      playerOne[0].ready == true
-                          ? context.read<DuelRoomPageCubit>().readyStatus(
-                              id: playerOne[0].id, ready: false, roomId: id)
-                          : context.read<DuelRoomPageCubit>().readyStatus(
-                              id: playerOne[0].id, ready: true, roomId: id);
-                    },
-              child: Container(
-                child: Column(
-                  children: [
-                    Text(
-                      playerOne[0].points.toString(),
-                      style: GoogleFonts.bungee(
-                          color: Colors.white,
-                          fontSize: MediaQuery.of(context).size.height / 15),
-                    ),
-                    Text(
-                      playerOne[0].nickName,
-                      style: GoogleFonts.bungee(
-                          color: Colors.white,
-                          fontSize: MediaQuery.of(context).size.height / 40),
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          playerOne[0].ready == true ? "Ready" : "Not ready",
-                          style: GoogleFonts.bungee(
-                              color: playerOne[0].ready == true
-                                  ? Colors.green
-                                  : Colors.red,
-                              fontSize:
-                                  MediaQuery.of(context).size.height / 40),
-                        ),
-                        Icon(
-                            playerOne[0].ready == true
-                                ? Icons.check_box
-                                : Icons.cancel,
-                            color: playerOne[0].ready == true
-                                ? Colors.green
-                                : Colors.red)
-                      ],
-                    )
-                  ],
-                ),
-              ),
-            ),
-          ),
-        ]
-      ],
     );
   }
 }

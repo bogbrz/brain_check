@@ -25,11 +25,21 @@ class DuelResultCubit extends Cubit<DuelResultState> {
 
   Future<void> addRoundResults(
       {required String roomId,
-      required String playerId,
+     required int playerNumber,
       required int roundNumber,
       required int answerOne,
       required int answerTwo,
       required int answerThree,
       required int answerFour,
-      required int answerFive}) async {}
+      required int answerFive}) async {
+    return duelGameRepository.addRoundResults(
+      roundNumber:roundNumber,
+        roomId: roomId,
+       playerNumber: playerNumber,
+        answerOne: answerOne,
+        answerTwo: answerTwo,
+        answerThree: answerThree,
+        answerFour: answerFour,
+        answerFive: answerFive);
+  }
 }

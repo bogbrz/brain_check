@@ -184,6 +184,7 @@ class _DuelQuestionPageState extends State<DuelQuestionPage> {
                                                 state
                                                     .firstQuestion.correctAnswer
                                                     .toString()) {
+                                              answerOne++;
                                               points++;
                                             }
                                           });
@@ -212,6 +213,7 @@ class _DuelQuestionPageState extends State<DuelQuestionPage> {
                                                 state.secondQuestion
                                                     .correctAnswer
                                                     .toString()) {
+                                              answerTwo++;
                                               points++;
                                             }
                                           });
@@ -240,6 +242,7 @@ class _DuelQuestionPageState extends State<DuelQuestionPage> {
                                                 state
                                                     .thirdQuestion.correctAnswer
                                                     .toString()) {
+                                              answerThree++;
                                               points++;
                                             }
                                           });
@@ -296,6 +299,7 @@ class _DuelQuestionPageState extends State<DuelQuestionPage> {
                                                 state
                                                     .fifthQuestion.correctAnswer
                                                     .toString()) {
+                                              answerFive++;
                                               points++;
                                             }
                                           });

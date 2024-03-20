@@ -83,6 +83,30 @@ class DuelGameDataSource {
     });
   }
 
+  Future<void> addRoundResults(
+      {required String roomId,
+      required int roundNumber,
+      required int answerOne,
+      required int answerTwo,
+      required int answerThree,
+      required int answerFour,
+      required int answerFive,
+      required int playerNumber}) async {
+    await FirebaseFirestore.instance
+        .collection("GameRooms")
+        .doc(roomId)
+        .collection("Rounds")
+        .add({
+      "roundNumber": roundNumber,
+      "answerOne": answerOne,
+      "answerTwo": answerTwo,
+      "answerThree": answerThree,
+      "answerFour": answerFour,
+      "answerFive": answerFive,
+      "playerNumber": playerNumber,
+    });
+  }
+
   Future<void> resetRounds(
       {required String playerId, required String roomId}) async {
     return FirebaseFirestore.instance
@@ -93,6 +117,17 @@ class DuelGameDataSource {
         .update({
       "roundNumber": 0,
     });
+  }
+
+  Stream<QuerySnapshot<Map<String, dynamic>>> roundsScores({
+    required String roomId,
+  }) {
+    return FirebaseFirestore.instance
+        .collection("GameRooms")
+        .doc(roomId)
+        .collection("Rounds")
+        .orderBy("roundNumber", descending: false)
+        .snapshots();
   }
 
   Future<void> joinPlayer(
@@ -112,6 +147,7 @@ class DuelGameDataSource {
       "ready": false,
       "startGame": false,
       "roundNumber": 0,
+      "category": "not choosen"
     });
   }
 
@@ -149,6 +185,19 @@ class DuelGameDataSource {
       "ready": false,
       "roundNumber": FieldValue.increment(1),
     });
+  }
+
+  Future<void> updateCategory({
+    required String roomId,
+    required String category,
+    required String playerId,
+  }) async {
+    return FirebaseFirestore.instance
+        .collection("GameRooms")
+        .doc(roomId)
+        .collection("Players")
+        .doc(playerId)
+        .update({"category": category});
   }
 
   Future<void> updatePlayersCount({
