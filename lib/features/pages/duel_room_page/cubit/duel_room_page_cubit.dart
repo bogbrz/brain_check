@@ -40,9 +40,13 @@ class DuelRoomPageCubit extends Cubit<DuelRoomPageState> {
       {required String id, required bool ready, required String roomId}) async {
     return duelGameRepository.readyStatus(id: id, ready: ready, roomId: roomId);
   }
+
   Future<void> updateCategory(
-      {required String playerId, required String category, required String roomId}) async {
-    return duelGameRepository.updateCategory(playerId: playerId, category: category, roomId: roomId);
+      {required String playerId,
+      required String category,
+      required String roomId}) async {
+    return duelGameRepository.updateCategory(
+        playerId: playerId, category: category, roomId: roomId);
   }
 
   Future<void> startGame(
@@ -64,6 +68,31 @@ class DuelRoomPageCubit extends Cubit<DuelRoomPageState> {
   Future<void> resetRounds(
       {required String playerId, required String roomId}) async {
     return duelGameRepository.resetRounds(playerId: playerId, roomId: roomId);
+  }
+
+  Future<void> deleteQuestions({
+    required String roomId,
+    required int roundNumber,
+  }) async {
+    duelGameRepository
+        .getQuestionsFromFb(roomId: roomId, roundNumber: roundNumber)
+        .listen((event) {
+      for (final question in event) {
+        duelGameRepository.deleteQuestions(
+            roomId: roomId,
+            roundNumber: roundNumber,
+            questionId: question.id.toString());
+      }
+    });
+  }
+
+  Future<void> deleteScore({required String roomId}) async {
+    streamSubscription =
+        duelGameRepository.getRoundsScores(roomId: roomId).listen((event) {
+      for (final score in event) {
+        duelGameRepository.deleteScore(roomId: roomId, roundId: score.id);
+      }
+    });
   }
 
   Future<void> setCategory({required String id, required String roomId}) async {
@@ -146,5 +175,11 @@ class DuelRoomPageCubit extends Cubit<DuelRoomPageState> {
             categories: []));
       }
     });
+  }
+
+  @override
+  Future<void> close() {
+    streamSubscription?.cancel();
+    return super.close();
   }
 }

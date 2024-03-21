@@ -77,13 +77,41 @@ class _GameRoomPageState extends State<GameRoomPage> {
                         children: [
                           IconButton.filledTonal(
                               onPressed: () {
-                                if (state.players.isEmpty) {
+                                if (widget.user!.email.toString() ==
+                                    widget.roomModel.ownerMail.toString()) {
+                                  context
+                                      .read<DuelRoomPageCubit>()
+                                      .deleteRoom(id: widget.roomModel.id);
+                                  Navigator.of(context).pop();
+                                  Navigator.of(context).pop();
+                                } else if (state.players.isEmpty) {
                                   Navigator.of(context).pop();
                                   Navigator.of(context).pop();
                                 } else {
                                   for (final player in state.players) {
-                                    if (player.email.toString() ==
+                                    if (player.email ==
                                         widget.user!.email.toString()) {
+                                      for (final player in state.players) {
+                                        context
+                                            .read<DuelRoomPageCubit>()
+                                            .resetRounds(
+                                                roomId: widget.roomModel.id,
+                                                playerId: player.id);
+                                      }
+
+                                      context
+                                          .read<DuelRoomPageCubit>()
+                                          .deleteScore(
+                                            roomId: widget.roomModel.id,
+                                          );
+                                    
+                                        context
+                                            .read<DuelRoomPageCubit>()
+                                            .deleteQuestions(
+                                                roomId: widget.roomModel.id,
+                                                roundNumber: player.roundNumber);
+                                  
+
                                       context
                                           .read<DuelRoomPageCubit>()
                                           .updatePlayersCount(
@@ -97,25 +125,18 @@ class _GameRoomPageState extends State<GameRoomPage> {
 
                                       Navigator.of(context).pop();
                                       Navigator.of(context).pop();
-                                    }
-                                    if (player.email.toString() !=
-                                        widget.roomModel.ownerMail.toString()) {
-                                      context
-                                          .read<DuelRoomPageCubit>()
-                                          .resetRounds(
-                                              roomId: widget.roomModel.id,
-                                              playerId: player.id);
-                                              
-                                    }
-                                    if (widget.user!.email.toString() !=
+                                    } else if (widget.user!.email.toString() !=
                                         player.email.toString()) {
                                       Navigator.of(context).pop();
                                       Navigator.of(context).pop();
-                                    }
-                                    if (player.roundNumber == 5) {
+                                    } else if (player.email ==
+                                            widget.user!.email.toString() &&
+                                        player.roundNumber == 5) {
                                       context
                                           .read<DuelRoomPageCubit>()
                                           .deleteRoom(id: widget.roomModel.id);
+                                      Navigator.of(context).pop();
+                                      Navigator.of(context).pop();
                                     }
                                   }
                                 }

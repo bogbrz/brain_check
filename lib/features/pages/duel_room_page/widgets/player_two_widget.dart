@@ -45,7 +45,7 @@ class JoinPlayerTwoWidget extends StatelessWidget {
             "JOIN PLAYER 2",
             style: GoogleFonts.bungee(
                 color: Colors.white,
-                fontSize: MediaQuery.of(context).size.height / 40),
+                fontSize: MediaQuery.of(context).size.height / 45),
           )
         ] else ...[
           Material(

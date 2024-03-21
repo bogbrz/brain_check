@@ -23,6 +23,7 @@ mixin _$RoundScoreModel {
   int get answerFive => throw _privateConstructorUsedError;
   int get roundNumber => throw _privateConstructorUsedError;
   int get playerNumber => throw _privateConstructorUsedError;
+  String get id => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $RoundScoreModelCopyWith<RoundScoreModel> get copyWith =>
@@ -42,7 +43,8 @@ abstract class $RoundScoreModelCopyWith<$Res> {
       int answerFour,
       int answerFive,
       int roundNumber,
-      int playerNumber});
+      int playerNumber,
+      String id});
 }
 
 /// @nodoc
@@ -65,6 +67,7 @@ class _$RoundScoreModelCopyWithImpl<$Res, $Val extends RoundScoreModel>
     Object? answerFive = null,
     Object? roundNumber = null,
     Object? playerNumber = null,
+    Object? id = null,
   }) {
     return _then(_value.copyWith(
       answerOne: null == answerOne
@@ -95,6 +98,10 @@ class _$RoundScoreModelCopyWithImpl<$Res, $Val extends RoundScoreModel>
           ? _value.playerNumber
           : playerNumber // ignore: cast_nullable_to_non_nullable
               as int,
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -114,7 +121,8 @@ abstract class _$$RoundScoreModelImplCopyWith<$Res>
       int answerFour,
       int answerFive,
       int roundNumber,
-      int playerNumber});
+      int playerNumber,
+      String id});
 }
 
 /// @nodoc
@@ -135,6 +143,7 @@ class __$$RoundScoreModelImplCopyWithImpl<$Res>
     Object? answerFive = null,
     Object? roundNumber = null,
     Object? playerNumber = null,
+    Object? id = null,
   }) {
     return _then(_$RoundScoreModelImpl(
       answerOne: null == answerOne
@@ -165,6 +174,10 @@ class __$$RoundScoreModelImplCopyWithImpl<$Res>
           ? _value.playerNumber
           : playerNumber // ignore: cast_nullable_to_non_nullable
               as int,
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -179,7 +192,8 @@ class _$RoundScoreModelImpl implements _RoundScoreModel {
       required this.answerFour,
       required this.answerFive,
       required this.roundNumber,
-      required this.playerNumber});
+      required this.playerNumber,
+      required this.id});
 
   @override
   final int answerOne;
@@ -195,10 +209,12 @@ class _$RoundScoreModelImpl implements _RoundScoreModel {
   final int roundNumber;
   @override
   final int playerNumber;
+  @override
+  final String id;
 
   @override
   String toString() {
-    return 'RoundScoreModel(answerOne: $answerOne, answerTwo: $answerTwo, answerThree: $answerThree, answerFour: $answerFour, answerFive: $answerFive, roundNumber: $roundNumber, playerNumber: $playerNumber)';
+    return 'RoundScoreModel(answerOne: $answerOne, answerTwo: $answerTwo, answerThree: $answerThree, answerFour: $answerFour, answerFive: $answerFive, roundNumber: $roundNumber, playerNumber: $playerNumber, id: $id)';
   }
 
   @override
@@ -219,12 +235,13 @@ class _$RoundScoreModelImpl implements _RoundScoreModel {
             (identical(other.roundNumber, roundNumber) ||
                 other.roundNumber == roundNumber) &&
             (identical(other.playerNumber, playerNumber) ||
-                other.playerNumber == playerNumber));
+                other.playerNumber == playerNumber) &&
+            (identical(other.id, id) || other.id == id));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, answerOne, answerTwo,
-      answerThree, answerFour, answerFive, roundNumber, playerNumber);
+      answerThree, answerFour, answerFive, roundNumber, playerNumber, id);
 
   @JsonKey(ignore: true)
   @override
@@ -242,7 +259,8 @@ abstract class _RoundScoreModel implements RoundScoreModel {
       required final int answerFour,
       required final int answerFive,
       required final int roundNumber,
-      required final int playerNumber}) = _$RoundScoreModelImpl;
+      required final int playerNumber,
+      required final String id}) = _$RoundScoreModelImpl;
 
   @override
   int get answerOne;
@@ -258,6 +276,8 @@ abstract class _RoundScoreModel implements RoundScoreModel {
   int get roundNumber;
   @override
   int get playerNumber;
+  @override
+  String get id;
   @override
   @JsonKey(ignore: true)
   _$$RoundScoreModelImplCopyWith<_$RoundScoreModelImpl> get copyWith =>

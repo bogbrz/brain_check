@@ -12,6 +12,7 @@ class RoundScoreModel with _$RoundScoreModel {
       required int answerFive,
       required int roundNumber,
       required int playerNumber,
+      required String id,
     
    
      }) = _RoundScoreModel;

@@ -91,7 +91,8 @@ class DuelGameRepository {
             answerThree: e["answerThree"],
             answerFour: e["answerFour"],
             answerFive: e["answerFive"],
-            roundNumber: e["roundNumber"]);
+            roundNumber: e["roundNumber"],
+            id: e.id);
       }).toList();
     });
   }
@@ -127,6 +128,11 @@ class DuelGameRepository {
   Future<void> readyStatus(
       {required String id, required bool ready, required String roomId}) async {
     return duelGameDataSource.readyStatus(id: id, ready: ready, roomId: roomId);
+  }
+
+  Future<void> deleteScore(
+      {required String roomId, required String roundId}) async {
+    return duelGameDataSource.deleteScore(roundId: roundId, roomId: roomId);
   }
 
   Future<void> addRoundResults(
@@ -197,9 +203,22 @@ class DuelGameRepository {
       {required String playerId, required String roomId}) async {
     return duelGameDataSource.resetRounds(playerId: playerId, roomId: roomId);
   }
+
   Future<void> updateCategory(
-      {required String playerId, required String category, required String roomId}) async {
-    return duelGameDataSource.updateCategory(playerId: playerId, category: category, roomId: roomId);
+      {required String playerId,
+      required String category,
+      required String roomId}) async {
+    return duelGameDataSource.updateCategory(
+        playerId: playerId, category: category, roomId: roomId);
+  }
+   Future<void> deleteQuestions({
+    required String roomId, required int roundNumber, required String questionId
+  }) async {
+    return duelGameDataSource.deleteQuestions(
+      roomId: roomId,
+                roundNumber: roundNumber,
+                questionId: questionId
+    );
   }
 
   Future<void> deleteRoom({

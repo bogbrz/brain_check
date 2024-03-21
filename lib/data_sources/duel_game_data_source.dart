@@ -115,7 +115,8 @@ class DuelGameDataSource {
         .collection("Players")
         .doc(playerId)
         .update({
-      "roundNumber": 0,
+      "roundNumber": 1,
+      "points": 0,
     });
   }
 
@@ -165,6 +166,18 @@ class DuelGameDataSource {
         .doc(roomId)
         .collection("Players")
         .doc(id)
+        .delete();
+  }
+
+  Future<void> deleteQuestions(
+      {required String roomId,
+      required int roundNumber,
+      required String questionId}) async {
+    return FirebaseFirestore.instance
+        .collection("GameRooms")
+        .doc(roomId)
+        .collection("Questions$roundNumber")
+        .doc(questionId)
         .delete();
   }
 
@@ -238,6 +251,16 @@ class DuelGameDataSource {
         .doc(roomId)
         .collection("RoomStatus")
         .snapshots();
+  }
+
+  Future<void> deleteScore(
+      {required String roomId, required String roundId}) async {
+    return FirebaseFirestore.instance
+        .collection("GameRooms")
+        .doc(roomId)
+        .collection("Rounds")
+        .doc(roundId)
+        .delete();
   }
 
   Future<void> deleteRoom({
