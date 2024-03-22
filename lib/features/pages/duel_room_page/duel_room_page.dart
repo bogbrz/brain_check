@@ -91,6 +91,12 @@ class _GameRoomPageState extends State<GameRoomPage> {
                                   for (final player in state.players) {
                                     if (player.email ==
                                         widget.user!.email.toString()) {
+                                      context
+                                          .read<DuelRoomPageCubit>()
+                                          .deleteScore(
+                                              roomId: widget.roomModel.id,
+                                              roundNumber: player.roundNumber);
+
                                       for (final player in state.players) {
                                         context
                                             .read<DuelRoomPageCubit>()
@@ -98,19 +104,6 @@ class _GameRoomPageState extends State<GameRoomPage> {
                                                 roomId: widget.roomModel.id,
                                                 playerId: player.id);
                                       }
-
-                                      context
-                                          .read<DuelRoomPageCubit>()
-                                          .deleteScore(
-                                            roomId: widget.roomModel.id,
-                                          );
-                                    
-                                        context
-                                            .read<DuelRoomPageCubit>()
-                                            .deleteQuestions(
-                                                roomId: widget.roomModel.id,
-                                                roundNumber: player.roundNumber);
-                                  
 
                                       context
                                           .read<DuelRoomPageCubit>()

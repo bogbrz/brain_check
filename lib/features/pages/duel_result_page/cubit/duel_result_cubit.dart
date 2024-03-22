@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:bloc/bloc.dart';
 import 'package:brain_check/domain/repositories/duel_game_repository.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -9,6 +11,7 @@ class DuelResultCubit extends Cubit<DuelResultState> {
   DuelResultCubit({required this.duelGameRepository})
       : super(DuelResultState());
   final DuelGameRepository duelGameRepository;
+  StreamSubscription? streamSubscription;
   Future<void> resetGameStatus({
     required String roomId,
     required bool status,
@@ -23,9 +26,25 @@ class DuelResultCubit extends Cubit<DuelResultState> {
     );
   }
 
+  Future<void> deleteQuestions({
+    required String roomId,
+    required int roundNumber,
+  }) async {
+    duelGameRepository
+        .getQuestionsFromFb(roomId: roomId, roundNumber: roundNumber)
+        .listen((event) {
+      for (final question in event) {
+        duelGameRepository.deleteQuestions(
+            roomId: roomId,
+            roundNumber: roundNumber,
+            questionId: question.id.toString());
+      }
+    });
+  }
+
   Future<void> addRoundResults(
       {required String roomId,
-     required int playerNumber,
+      required int playerNumber,
       required int roundNumber,
       required int answerOne,
       required int answerTwo,
@@ -33,9 +52,9 @@ class DuelResultCubit extends Cubit<DuelResultState> {
       required int answerFour,
       required int answerFive}) async {
     return duelGameRepository.addRoundResults(
-      roundNumber:roundNumber,
+        roundNumber: roundNumber,
         roomId: roomId,
-       playerNumber: playerNumber,
+        playerNumber: playerNumber,
         answerOne: answerOne,
         answerTwo: answerTwo,
         answerThree: answerThree,

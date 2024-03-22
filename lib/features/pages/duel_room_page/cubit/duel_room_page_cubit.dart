@@ -70,23 +70,8 @@ class DuelRoomPageCubit extends Cubit<DuelRoomPageState> {
     return duelGameRepository.resetRounds(playerId: playerId, roomId: roomId);
   }
 
-  Future<void> deleteQuestions({
-    required String roomId,
-    required int roundNumber,
-  }) async {
-    duelGameRepository
-        .getQuestionsFromFb(roomId: roomId, roundNumber: roundNumber)
-        .listen((event) {
-      for (final question in event) {
-        duelGameRepository.deleteQuestions(
-            roomId: roomId,
-            roundNumber: roundNumber,
-            questionId: question.id.toString());
-      }
-    });
-  }
-
-  Future<void> deleteScore({required String roomId}) async {
+  Future<void> deleteScore(
+      {required String roomId, required int roundNumber}) async {
     streamSubscription =
         duelGameRepository.getRoundsScores(roomId: roomId).listen((event) {
       for (final score in event) {
@@ -139,7 +124,7 @@ class DuelRoomPageCubit extends Cubit<DuelRoomPageState> {
 
     final categories = await questionRepository.getCategories();
 
-    duelGameRepository
+    streamSubscription = duelGameRepository
         .getPlayerInfo(
       id: id,
     )

@@ -178,7 +178,8 @@ class DuelGameDataSource {
         .doc(roomId)
         .collection("Questions$roundNumber")
         .doc(questionId)
-        .delete();
+        .delete()
+        .then((value) => print("DONE 4"));
   }
 
   Future<void> resetGameStatus({

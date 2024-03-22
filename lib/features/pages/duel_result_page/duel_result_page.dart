@@ -89,6 +89,8 @@ class DuelResultPage extends StatelessWidget {
                               status: false,
                               playerId: player.id,
                               points: score);
+                          context.read<DuelResultCubit>().deleteQuestions(
+                              roomId: roomId!, roundNumber: player.roundNumber);
                         }
                       }
                     },

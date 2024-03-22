@@ -13,7 +13,6 @@ class PlayerScoreCubit extends Cubit<PlayerScoreState> {
             errorMessage: null,
             playerOneScore: [],
             playerTwoScore: [],
-           
             status: Status.initial));
 
   final DuelGameRepository duelGameRepository;
@@ -25,7 +24,6 @@ class PlayerScoreCubit extends Cubit<PlayerScoreState> {
         errorMessage: null,
         playerOneScore: [],
         playerTwoScore: [],
-       
         status: Status.initial));
     duelGameRepository
         .getRoundsScores(
@@ -41,12 +39,10 @@ class PlayerScoreCubit extends Cubit<PlayerScoreState> {
             errorMessage: null,
             playerOneScore: playerOne,
             playerTwoScore: playerTwo,
-         
             status: Status.success));
       } catch (e) {
         emit(PlayerScoreState(
             errorMessage: null,
-           
             playerOneScore: [],
             playerTwoScore: [],
             status: Status.error));

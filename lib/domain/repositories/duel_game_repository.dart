@@ -211,14 +211,15 @@ class DuelGameRepository {
     return duelGameDataSource.updateCategory(
         playerId: playerId, category: category, roomId: roomId);
   }
-   Future<void> deleteQuestions({
-    required String roomId, required int roundNumber, required String questionId
-  }) async {
-    return duelGameDataSource.deleteQuestions(
-      roomId: roomId,
-                roundNumber: roundNumber,
-                questionId: questionId
-    );
+
+  Future<void> deleteQuestions(
+      {required String roomId,
+      required int roundNumber,
+      required String questionId}) async {
+    await duelGameDataSource
+        .deleteQuestions(
+            roomId: roomId, roundNumber: roundNumber, questionId: questionId)
+        .then((value) => print("DONE3"));
   }
 
   Future<void> deleteRoom({
