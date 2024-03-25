@@ -7,17 +7,19 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class DuelResultPage extends StatelessWidget {
-  DuelResultPage(
-      {required this.roomId,
-      super.key,
-      required this.players,
-      required this.user,
-      required this.ownerEmail,
-      required this.answerOne,
-      required this.answerTwo,
-      required this.answerThree,
-      required this.answerFour,
-      required this.answerFive});
+  DuelResultPage({
+    required this.roomId,
+    super.key,
+    required this.players,
+    required this.user,
+    required this.ownerEmail,
+    required this.answerOne,
+    required this.answerTwo,
+    required this.answerThree,
+    required this.answerFour,
+    required this.answerFive,
+    required this.gameStatus,
+  });
   final String? roomId;
   final List<PlayerModel>? players;
   final User? user;
@@ -28,6 +30,7 @@ class DuelResultPage extends StatelessWidget {
   final int answerThree;
   final int answerFour;
   final int answerFive;
+  final bool gameStatus;
 
   @override
   Widget build(BuildContext context) {
@@ -89,8 +92,11 @@ class DuelResultPage extends StatelessWidget {
                               status: false,
                               playerId: player.id,
                               points: score);
-                          context.read<DuelResultCubit>().deleteQuestions(
-                              roomId: roomId!, roundNumber: player.roundNumber);
+                          if (gameStatus == true) {
+                            context.read<DuelResultCubit>().deleteQuestions(
+                                roomId: roomId!,
+                                roundNumber: player.roundNumber);
+                          }
                         }
                       }
                     },

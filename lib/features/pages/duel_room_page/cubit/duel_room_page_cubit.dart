@@ -67,7 +67,9 @@ class DuelRoomPageCubit extends Cubit<DuelRoomPageState> {
 
   Future<void> resetRounds(
       {required String playerId, required String roomId}) async {
-    return duelGameRepository.resetRounds(playerId: playerId, roomId: roomId);
+    return duelGameRepository
+        .resetRounds(playerId: playerId, roomId: roomId)
+        .then((value) => print("rESET ROUNDS CUBIT"));
   }
 
   Future<void> deleteScore(
@@ -75,7 +77,9 @@ class DuelRoomPageCubit extends Cubit<DuelRoomPageState> {
     streamSubscription =
         duelGameRepository.getRoundsScores(roomId: roomId).listen((event) {
       for (final score in event) {
-        duelGameRepository.deleteScore(roomId: roomId, roundId: score.id);
+        duelGameRepository
+            .deleteScore(roomId: roomId, roundId: score.id)
+            .then((value) => print("DELETE SCORE CUBIT"));
       }
     });
   }
@@ -92,21 +96,22 @@ class DuelRoomPageCubit extends Cubit<DuelRoomPageState> {
     );
   }
 
-  Future<void> addQtoFirebase(
-      {required String roomId,
-      required int categoryId,
-      required int roundNumber,
-      required String playerId}) async {
-    await duelGameRepository.addQtoFirebase(
-        playerId: playerId,
-        roomId: roomId,
-        categoryId: categoryId,
-        roundNumber: roundNumber);
+  Future<void> addQtoFirebase({
+    required String roomId,
+    required int categoryId,
+    required int roundNumber,
+  }) async {
+    await duelGameRepository
+        .addQtoFirebase(
+            roomId: roomId, categoryId: categoryId, roundNumber: roundNumber)
+        .then((value) => print("QUESTIONS ADDED CUBIT"));
   }
 
   Future<void> updatePlayersCount(
       {required String roomId, required int value}) async {
-    return duelGameRepository.updatePlayersCount(roomId: roomId, value: value);
+    return duelGameRepository
+        .updatePlayersCount(roomId: roomId, value: value)
+        .then((value) => print("PLAYERS COUNT CHANGED CUBIT"));
   }
 
   Future<void> playerInfo({
@@ -124,7 +129,7 @@ class DuelRoomPageCubit extends Cubit<DuelRoomPageState> {
 
     final categories = await questionRepository.getCategories();
 
-    streamSubscription = duelGameRepository
+    duelGameRepository
         .getPlayerInfo(
       id: id,
     )

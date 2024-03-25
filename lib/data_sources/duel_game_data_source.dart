@@ -178,8 +178,7 @@ class DuelGameDataSource {
         .doc(roomId)
         .collection("Questions$roundNumber")
         .doc(questionId)
-        .delete()
-        .then((value) => print("DONE 4"));
+        .delete();
   }
 
   Future<void> resetGameStatus({
@@ -242,7 +241,9 @@ class DuelGameDataSource {
         .doc(roomId)
         .collection("Players")
         .doc(playerTwoId)
-        .update({"startGame": status, "questionsAdded": true});
+        .update({
+      "startGame": status,
+    });
   }
 
   Stream<QuerySnapshot<Map<String, dynamic>>> roomStatus(

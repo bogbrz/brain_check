@@ -30,14 +30,20 @@ class DuelResultCubit extends Cubit<DuelResultState> {
     required String roomId,
     required int roundNumber,
   }) async {
-    duelGameRepository
+    streamSubscription = duelGameRepository
         .getQuestionsFromFb(roomId: roomId, roundNumber: roundNumber)
         .listen((event) {
-      for (final question in event) {
-        duelGameRepository.deleteQuestions(
-            roomId: roomId,
-            roundNumber: roundNumber,
-            questionId: question.id.toString());
+      try {
+        for (final question in event) {
+          duelGameRepository
+              .deleteQuestions(
+                  roomId: roomId,
+                  roundNumber: roundNumber,
+                  questionId: question.id.toString())
+              .then((value) => print("Delete questions cubit"));
+        }
+      } catch (e) {
+        print("DELETE Q ERROR ${e.toString()}");
       }
     });
   }
@@ -60,5 +66,11 @@ class DuelResultCubit extends Cubit<DuelResultState> {
         answerThree: answerThree,
         answerFour: answerFour,
         answerFive: answerFive);
+  }
+
+  @override
+  Future<void> close() {
+    streamSubscription?.cancel();
+    return super.close();
   }
 }

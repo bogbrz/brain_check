@@ -143,9 +143,10 @@ class DuelQuestionPageCubit extends Cubit<DuelQuestionPageState> {
         answersThree: [],
         answersTwo: [],
         answersOne: []));
-    duelGameRepository
+    streamSubscription = duelGameRepository
         .getQuestionsFromFb(roomId: roomId, roundNumber: roundNumber)
         .listen((event) {
+      ;
       List<String> answersOne = [];
       if (event[0].incorrectTwo == null) {
         answersOne.add(event[0].correctAnswer.toString());
@@ -217,6 +218,8 @@ class DuelQuestionPageCubit extends Cubit<DuelQuestionPageState> {
       }
 
       try {
+        print(
+            "Q FROM BASE  1${event[0]}, 2${event[1]}, 3${event[2]}, 4${event[3]}, 5${event[4]} ");
         emit(DuelQuestionPageState(
             errorMessage: null,
             status: Status.success,

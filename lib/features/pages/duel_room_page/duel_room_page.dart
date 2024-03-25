@@ -45,6 +45,7 @@ class _GameRoomPageState extends State<GameRoomPage> {
         onWillPop: () async => false,
         child: Scaffold(body: SafeArea(
           child: BlocBuilder<DuelRoomPageCubit, DuelRoomPageState>(
+           
             builder: (context, state) {
               final categories = state.categories;
               switch (state.status) {
@@ -363,35 +364,32 @@ class _GameRoomPageState extends State<GameRoomPage> {
                           padding: EdgeInsets.all(
                               MediaQuery.of(context).size.height * 0.01),
                           child: ElevatedButton(
-                              onPressed: state.playerOne.isEmpty ||
-                                      state.playerTwo.isEmpty
-                                  ? null
-                                  : state.playerOne[0].ready == false ||
-                                          state.playerTwo[0].ready == false
+                              onPressed:
+                                  state.playerOne.isEmpty ||
+                                          state.playerTwo.isEmpty
                                       ? null
-                                      : state.playerOne[0].startGame ||
-                                              state.playerTwo[0].startGame
+                                      : state.playerOne[0].ready == false ||
+                                              state.playerTwo[0].ready == false
                                           ? null
-                                          : category == null
+                                          : state.playerOne[0].startGame ||
+                                                  state.playerTwo[0].startGame
                                               ? null
-                                              : state.playerOne[0]
-                                                          .roundNumber ==
-                                                      5
+                                              : category == null
                                                   ? null
-                                                  : () {
-                                                      for (final player
-                                                          in state.players) {
-                                                        if (player.email
-                                                                .toString() ==
-                                                            widget.roomModel
-                                                                .ownerMail
-                                                                .toString()) {
-                                                          context
-                                                              .read<
-                                                                  DuelRoomPageCubit>()
-                                                              .addQtoFirebase(
-                                                                  playerId:
-                                                                      player.id,
+                                                  : state.playerOne[0]
+                                                              .roundNumber ==
+                                                          5
+                                                      ? null
+                                                      : ()async {
+                                                          for (final player
+                                                              in state
+                                                                  .players) {
+                                                            if (player.email
+                                                                    .toString() ==
+                                                                widget.roomModel
+                                                                    .ownerMail
+                                                                    .toString()) {
+                                                            await  context.read<DuelRoomPageCubit>().addQtoFirebase(
                                                                   roundNumber:
                                                                       player
                                                                           .roundNumber,
@@ -400,22 +398,25 @@ class _GameRoomPageState extends State<GameRoomPage> {
                                                                       .id,
                                                                   categoryId:
                                                                       category!
-                                                                          .id)
-                                                              .then((value) => context.read<DuelRoomPageCubit>().startGame(
-                                                                  roomId: widget
-                                                                      .roomModel
-                                                                      .id,
-                                                                  playerOneId: state
-                                                                      .playerOne[
-                                                                          0]
-                                                                      .id,
-                                                                  playerTwoId: state
-                                                                      .playerTwo[0]
-                                                                      .id,
-                                                                  status: true));
-                                                        }
-                                                      }
-                                                    },
+                                                                          .id);
+                                                            }
+                                                            context.read<DuelRoomPageCubit>().startGame(
+                                                                roomId: widget
+                                                                    .roomModel
+                                                                    .id,
+                                                                playerOneId:
+                                                                    state
+                                                                        .players[
+                                                                            0]
+                                                                        .id,
+                                                                playerTwoId:
+                                                                    state
+                                                                        .players[
+                                                                            1]
+                                                                        .id,
+                                                                status: true);
+                                                          }
+                                                        },
                               child: Text(
                                 state.playerOne.isEmpty ||
                                         state.playerTwo.isEmpty

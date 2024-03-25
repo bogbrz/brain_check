@@ -41,13 +41,14 @@ class DuelGameRepository {
     required String roomId,
     required int categoryId,
     required int roundNumber,
-    required String playerId,
   }) async {
     final token = await questionDataSource.getToken();
 
     final questionsList = await questionDataSource.getListofQuestions(
         "easy", categoryId, 5, token.token);
+
     final results = questionsList.results;
+    print("Questions to add $results");
     for (final question in results) {
       await duelGameDataSource.addQtoFirebase(
           questionModel: question, roomId: roomId, roundNumber: roundNumber);
@@ -216,10 +217,8 @@ class DuelGameRepository {
       {required String roomId,
       required int roundNumber,
       required String questionId}) async {
-    await duelGameDataSource
-        .deleteQuestions(
-            roomId: roomId, roundNumber: roundNumber, questionId: questionId)
-        .then((value) => print("DONE3"));
+    await duelGameDataSource.deleteQuestions(
+        roomId: roomId, roundNumber: roundNumber, questionId: questionId);
   }
 
   Future<void> deleteRoom({

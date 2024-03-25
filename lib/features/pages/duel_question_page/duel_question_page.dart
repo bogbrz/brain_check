@@ -32,17 +32,26 @@ class DuelQuestionPage extends StatefulWidget {
 
 class _DuelQuestionPageState extends State<DuelQuestionPage> {
   @override
+  // @override
+  // void dispose() {
+  //   setState(() {
+  //     end = fals
+  //   });
+  //   super.dispose();
+  // }
+
   var index = 0;
   var choosedAnswer = "";
   var isChoosed = false;
- 
+  var end = false;
+
   var answerOne = 0;
   var answerTwo = 0;
   var answerThree = 0;
   var answerFour = 0;
   var answerFive = 0;
   final CountdownController controller = CountdownController(autoStart: true);
-
+  @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => getIt<DuelQuestionPageCubit>()
@@ -63,13 +72,13 @@ class _DuelQuestionPageState extends State<DuelQuestionPage> {
                   roomId: widget.roomId,
                   players: widget.players,
                   user: widget.user,
-                 
                   ownerEmail: widget.ownerEmail,
                   answerOne: answerOne,
                   answerTwo: answerTwo,
                   answerThree: answerThree,
                   answerFour: answerFour,
                   answerFive: answerFive,
+                  gameStatus: end,
                 );
               }
 
@@ -185,7 +194,6 @@ class _DuelQuestionPageState extends State<DuelQuestionPage> {
                                                     .firstQuestion.correctAnswer
                                                     .toString()) {
                                               answerOne++;
-                                              
                                             }
                                           });
 
@@ -214,7 +222,6 @@ class _DuelQuestionPageState extends State<DuelQuestionPage> {
                                                     .correctAnswer
                                                     .toString()) {
                                               answerTwo++;
-                                              
                                             }
                                           });
 
@@ -243,7 +250,6 @@ class _DuelQuestionPageState extends State<DuelQuestionPage> {
                                                     .thirdQuestion.correctAnswer
                                                     .toString()) {
                                               answerThree++;
-                                              
                                             }
                                           });
 
@@ -270,9 +276,7 @@ class _DuelQuestionPageState extends State<DuelQuestionPage> {
                                             if (choosedAnswer ==
                                                 state.fourthQuestion
                                                     .correctAnswer
-                                                    .toString()) {
-                                              
-                                            }
+                                                    .toString()) {}
                                           });
 
                                           print(choosedAnswer);
@@ -295,12 +299,12 @@ class _DuelQuestionPageState extends State<DuelQuestionPage> {
                                           setState(() {
                                             choosedAnswer = answer.toString();
                                             isChoosed = true;
+                                            end = true;
                                             if (choosedAnswer ==
                                                 state
                                                     .fifthQuestion.correctAnswer
                                                     .toString()) {
                                               answerFive++;
-                                              
                                             }
                                           });
 
