@@ -4,12 +4,12 @@ import 'package:brain_check/domain/models/game_room_model.dart';
 import 'package:brain_check/domain/repositories/duel_game_repository.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'duel_page_state.dart';
-part 'duel_page_cubit.freezed.dart';
+part 'rooms_list_page_state.dart';
+part 'rooms_list_page_cubit.freezed.dart';
 
-class DuelPageCubit extends Cubit<DuelPageState> {
-  DuelPageCubit({required this.duelGameRepository})
-      : super(const DuelPageState(
+class RoomsListPageCubit extends Cubit<RoomsListPageState> {
+  RoomsListPageCubit({required this.duelGameRepository})
+      : super(const RoomsListPageState(
             errorMessage: null, rooms: [], status: Status.initial, ));
 
   final DuelGameRepository duelGameRepository;
@@ -20,14 +20,14 @@ class DuelPageCubit extends Cubit<DuelPageState> {
   }
 
   Future<void> getRooms() async {
-    emit(const DuelPageState(errorMessage: null, rooms: [], status: Status.loading, ));
+    emit(const RoomsListPageState(errorMessage: null, rooms: [], status: Status.loading, ));
 
     duelGameRepository.getRooms().listen((event) {
       try {
-        emit(DuelPageState(
+        emit(RoomsListPageState(
             errorMessage: null, rooms: event, status: Status.success,));
       } catch (e) {
-        emit(DuelPageState(
+        emit(RoomsListPageState(
             errorMessage: e.toString(), rooms: [], status: Status.error,));
       }
     });

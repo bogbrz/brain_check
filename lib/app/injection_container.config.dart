@@ -26,27 +26,27 @@ import 'package:brain_check/features/pages/categories_page/cubit/categories_page
     as _i18;
 import 'package:brain_check/features/pages/difficulty_page/cubit/difficulty_page_cubit.dart'
     as _i19;
-import 'package:brain_check/features/pages/duel_page/cubit/duel_page_cubit.dart'
-    as _i21;
 import 'package:brain_check/features/pages/duel_question_page/cubit/duel_question_page_cubit.dart'
-    as _i22;
+    as _i21;
 import 'package:brain_check/features/pages/duel_result_page/cubit/duel_result_cubit.dart'
-    as _i23;
+    as _i22;
 import 'package:brain_check/features/pages/duel_room_page/cubit/duel_room_page_cubit.dart'
-    as _i24;
+    as _i23;
 import 'package:brain_check/features/pages/duel_room_page/widgets/cubit/player_score_cubit.dart'
-    as _i26;
-import 'package:brain_check/features/pages/home_page/cubit/home_page_cubit.dart'
     as _i25;
+import 'package:brain_check/features/pages/home_page/cubit/home_page_cubit.dart'
+    as _i24;
 import 'package:brain_check/features/pages/log_in/cubit/log_in_page_cubit.dart'
     as _i6;
 import 'package:brain_check/features/pages/question_page/cubit/question_page_cubit.dart'
-    as _i27;
+    as _i26;
 import 'package:brain_check/features/pages/ranked_game_page/cubit/ranked_game_cubit.dart'
     as _i15;
 import 'package:brain_check/features/pages/ranking_page/cubit/ranking_page_cubit.dart'
     as _i16;
 import 'package:brain_check/features/pages/result_page/cubit/result_page_cubit.dart'
+    as _i27;
+import 'package:brain_check/features/pages/rooms_list_page/cubit/rooms_list_page_cubit.dart'
     as _i28;
 import 'package:brain_check/features/pages/root_page/cubit/root_page_cubit.dart'
     as _i9;
@@ -114,30 +114,30 @@ extension GetItInjectableX on _i1.GetIt {
           duelGameDataSource: gh<_i5.DuelGameDataSource>(),
           questionDataSource: gh<_i13.QuestionDataSource>(),
         ));
-    gh.factory<_i21.DuelPageCubit>(() =>
-        _i21.DuelPageCubit(duelGameRepository: gh<_i20.DuelGameRepository>()));
-    gh.factory<_i22.DuelQuestionPageCubit>(() => _i22.DuelQuestionPageCubit(
+    gh.factory<_i21.DuelQuestionPageCubit>(() => _i21.DuelQuestionPageCubit(
         duelGameRepository: gh<_i20.DuelGameRepository>()));
-    gh.factory<_i23.DuelResultCubit>(() => _i23.DuelResultCubit(
+    gh.factory<_i22.DuelResultCubit>(() => _i22.DuelResultCubit(
         duelGameRepository: gh<_i20.DuelGameRepository>()));
-    gh.factory<_i24.DuelRoomPageCubit>(() => _i24.DuelRoomPageCubit(
+    gh.factory<_i23.DuelRoomPageCubit>(() => _i23.DuelRoomPageCubit(
           duelGameRepository: gh<_i20.DuelGameRepository>(),
           questionRepository: gh<_i14.QuestionRepository>(),
         ));
-    gh.factory<_i25.HomePageCubit>(() => _i25.HomePageCubit(
+    gh.factory<_i24.HomePageCubit>(() => _i24.HomePageCubit(
           rankingRepository: gh<_i8.RankingRepository>(),
           questionRepository: gh<_i14.QuestionRepository>(),
         ));
-    gh.factory<_i26.PlayerScoreCubit>(() => _i26.PlayerScoreCubit(
+    gh.factory<_i25.PlayerScoreCubit>(() => _i25.PlayerScoreCubit(
         duelGameRepository: gh<_i20.DuelGameRepository>()));
-    gh.factory<_i27.QuestionPageCubit>(() => _i27.QuestionPageCubit(
+    gh.factory<_i26.QuestionPageCubit>(() => _i26.QuestionPageCubit(
           questionRepository: gh<_i14.QuestionRepository>(),
           rankingRepository: gh<_i8.RankingRepository>(),
         ));
-    gh.factory<_i28.ResultPageCubit>(() => _i28.ResultPageCubit(
+    gh.factory<_i27.ResultPageCubit>(() => _i27.ResultPageCubit(
           rankingRepository: gh<_i8.RankingRepository>(),
           duelGameRepository: gh<_i20.DuelGameRepository>(),
         ));
+    gh.factory<_i28.RoomsListPageCubit>(() => _i28.RoomsListPageCubit(
+        duelGameRepository: gh<_i20.DuelGameRepository>()));
     return this;
   }
 }

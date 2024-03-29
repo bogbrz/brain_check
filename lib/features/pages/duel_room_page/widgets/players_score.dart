@@ -33,7 +33,7 @@ class PlayersScore extends StatelessWidget {
                 children: [
                   if (state.playerOneScore == null &&
                       state.playerTwoScore == null) ...[
-                    SizedBox.shrink()
+                    const SizedBox.shrink()
                   ] else if (state.playerOneScore != null) ...[
                     for (final score in state.playerOneScore!) ...[
                       Padding(
@@ -100,20 +100,20 @@ class PlayerTwoScore extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   score.answerOne == 1
-                      ? Icon(Icons.check_circle, color: Colors.green)
-                      : Icon(Icons.cancel_rounded, color: Colors.red),
+                      ? const Icon(Icons.check_circle, color: Colors.green)
+                      : const Icon(Icons.cancel_rounded, color: Colors.red),
                   score.answerTwo == 1
-                      ? Icon(Icons.check_circle, color: Colors.green)
-                      : Icon(Icons.cancel_rounded, color: Colors.red),
+                      ? const Icon(Icons.check_circle, color: Colors.green)
+                      : const Icon(Icons.cancel_rounded, color: Colors.red),
                   score.answerThree == 1
-                      ? Icon(Icons.check_circle, color: Colors.green)
-                      : Icon(Icons.cancel_rounded, color: Colors.red),
+                      ? const Icon(Icons.check_circle, color: Colors.green)
+                      : const Icon(Icons.cancel_rounded, color: Colors.red),
                   score.answerFour == 1
-                      ? Icon(Icons.check_circle, color: Colors.green)
-                      : Icon(Icons.cancel_rounded, color: Colors.red),
+                      ? const Icon(Icons.check_circle, color: Colors.green)
+                      : const Icon(Icons.cancel_rounded, color: Colors.red),
                   score.answerFive == 1
-                      ? Icon(Icons.check_circle, color: Colors.green)
-                      : Icon(Icons.cancel_rounded, color: Colors.red),
+                      ? const Icon(Icons.check_circle, color: Colors.green)
+                      : const Icon(Icons.cancel_rounded, color: Colors.red),
                 ],
               ),
             )
@@ -144,20 +144,20 @@ class PlayerOneScore extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   score.answerOne == 1
-                      ? Icon(Icons.check_circle, color: Colors.green)
-                      : Icon(Icons.cancel_rounded, color: Colors.red),
+                      ? const Icon(Icons.check_circle, color: Colors.green)
+                      : const Icon(Icons.cancel_rounded, color: Colors.red),
                   score.answerTwo == 1
-                      ? Icon(Icons.check_circle, color: Colors.green)
-                      : Icon(Icons.cancel_rounded, color: Colors.red),
+                      ? const Icon(Icons.check_circle, color: Colors.green)
+                      : const Icon(Icons.cancel_rounded, color: Colors.red),
                   score.answerThree == 1
-                      ? Icon(Icons.check_circle, color: Colors.green)
-                      : Icon(Icons.cancel_rounded, color: Colors.red),
+                      ? const Icon(Icons.check_circle, color: Colors.green)
+                      : const Icon(Icons.cancel_rounded, color: Colors.red),
                   score.answerFour == 1
-                      ? Icon(Icons.check_circle, color: Colors.green)
-                      : Icon(Icons.cancel_rounded, color: Colors.red),
+                      ? const Icon(Icons.check_circle, color: Colors.green)
+                      : const Icon(Icons.cancel_rounded, color: Colors.red),
                   score.answerFive == 1
-                      ? Icon(Icons.check_circle, color: Colors.green)
-                      : Icon(Icons.cancel_rounded, color: Colors.red),
+                      ? const Icon(Icons.check_circle, color: Colors.green)
+                      : const Icon(Icons.cancel_rounded, color: Colors.red),
                 ],
               ),
             )

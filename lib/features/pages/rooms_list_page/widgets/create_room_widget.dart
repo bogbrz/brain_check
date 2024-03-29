@@ -1,9 +1,14 @@
+import 'package:brain_check/app/core/enums/enums.dart';
 import 'package:brain_check/app/injection_container.dart';
 import 'package:brain_check/domain/models/game_room_model.dart';
-import 'package:brain_check/features/pages/duel_page/cubit/duel_page_cubit.dart';
+
+import 'package:brain_check/features/pages/duel_room_page/duel_room_page.dart';
+import 'package:brain_check/features/pages/rooms_list_page/cubit/rooms_list_page_cubit.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+
 
 class CreateRoomWidget extends StatelessWidget {
   CreateRoomWidget({super.key, required this.nickName, required this.rooms});
@@ -24,7 +29,7 @@ class CreateRoomWidget extends StatelessWidget {
                     context: context,
                     builder: (BuildContext context) {
                       return BlocProvider(
-                        create: (context) => getIt<DuelPageCubit>(),
+                        create: (context) => getIt<RoomsListPageCubit>(),
                         child: AlertDialog(
                           scrollable: true,
                           title: Text(
@@ -137,7 +142,7 @@ class _DialogContetWidgetState extends State<DialogContetWidget> {
         ),
         Padding(
             padding: const EdgeInsets.all(8.0),
-            child: BlocBuilder<DuelPageCubit, DuelPageState>(
+            child: BlocBuilder<RoomsListPageCubit, RoomsListPageState>(
               builder: (context, state) {
                 return ElevatedButton(
                     onPressed: nameController.text.isEmpty
@@ -146,7 +151,7 @@ class _DialogContetWidgetState extends State<DialogContetWidget> {
                                 element.name == nameController.text)
                             ? null
                             : () {
-                                context.read<DuelPageCubit>().createRoom(
+                                context.read<RoomsListPageCubit>().createRoom(
                                       name: nameController.text,
                                       password: passControler.text,
                                       nickName: widget.nickName,
@@ -167,3 +172,4 @@ class _DialogContetWidgetState extends State<DialogContetWidget> {
     );
   }
 }
+

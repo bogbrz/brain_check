@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'duel_page_cubit.dart';
+part of 'rooms_list_page_cubit.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,29 +15,29 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
-mixin _$DuelPageState {
+mixin _$RoomsListPageState {
   String? get errorMessage => throw _privateConstructorUsedError;
   List<GameRoomModel> get rooms => throw _privateConstructorUsedError;
   Status get status => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $DuelPageStateCopyWith<DuelPageState> get copyWith =>
+  $RoomsListPageStateCopyWith<RoomsListPageState> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $DuelPageStateCopyWith<$Res> {
-  factory $DuelPageStateCopyWith(
-          DuelPageState value, $Res Function(DuelPageState) then) =
-      _$DuelPageStateCopyWithImpl<$Res, DuelPageState>;
+abstract class $RoomsListPageStateCopyWith<$Res> {
+  factory $RoomsListPageStateCopyWith(
+          RoomsListPageState value, $Res Function(RoomsListPageState) then) =
+      _$RoomsListPageStateCopyWithImpl<$Res, RoomsListPageState>;
   @useResult
   $Res call({String? errorMessage, List<GameRoomModel> rooms, Status status});
 }
 
 /// @nodoc
-class _$DuelPageStateCopyWithImpl<$Res, $Val extends DuelPageState>
-    implements $DuelPageStateCopyWith<$Res> {
-  _$DuelPageStateCopyWithImpl(this._value, this._then);
+class _$RoomsListPageStateCopyWithImpl<$Res, $Val extends RoomsListPageState>
+    implements $RoomsListPageStateCopyWith<$Res> {
+  _$RoomsListPageStateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -70,7 +70,7 @@ class _$DuelPageStateCopyWithImpl<$Res, $Val extends DuelPageState>
 
 /// @nodoc
 abstract class _$$InitialImplCopyWith<$Res>
-    implements $DuelPageStateCopyWith<$Res> {
+    implements $RoomsListPageStateCopyWith<$Res> {
   factory _$$InitialImplCopyWith(
           _$InitialImpl value, $Res Function(_$InitialImpl) then) =
       __$$InitialImplCopyWithImpl<$Res>;
@@ -81,7 +81,7 @@ abstract class _$$InitialImplCopyWith<$Res>
 
 /// @nodoc
 class __$$InitialImplCopyWithImpl<$Res>
-    extends _$DuelPageStateCopyWithImpl<$Res, _$InitialImpl>
+    extends _$RoomsListPageStateCopyWithImpl<$Res, _$InitialImpl>
     implements _$$InitialImplCopyWith<$Res> {
   __$$InitialImplCopyWithImpl(
       _$InitialImpl _value, $Res Function(_$InitialImpl) _then)
@@ -135,7 +135,7 @@ class _$InitialImpl implements _Initial {
 
   @override
   String toString() {
-    return 'DuelPageState(errorMessage: $errorMessage, rooms: $rooms, status: $status)';
+    return 'RoomsListPageState(errorMessage: $errorMessage, rooms: $rooms, status: $status)';
   }
 
   @override
@@ -160,7 +160,7 @@ class _$InitialImpl implements _Initial {
       __$$InitialImplCopyWithImpl<_$InitialImpl>(this, _$identity);
 }
 
-abstract class _Initial implements DuelPageState {
+abstract class _Initial implements RoomsListPageState {
   const factory _Initial(
       {required final String? errorMessage,
       required final List<GameRoomModel> rooms,
