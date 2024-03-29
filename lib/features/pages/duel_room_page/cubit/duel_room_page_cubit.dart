@@ -25,7 +25,7 @@ class DuelRoomPageCubit extends Cubit<DuelRoomPageState> {
             categories: []));
   final DuelGameRepository duelGameRepository;
   final QuestionRepository questionRepository;
-  StreamSubscription? streamSubscription;
+  StreamSubscription? streamSubscriptionOne;
 
   Future<void> joinPlayer(
       {required String email,
@@ -74,7 +74,7 @@ class DuelRoomPageCubit extends Cubit<DuelRoomPageState> {
 
   Future<void> deleteScore(
       {required String roomId, required int roundNumber}) async {
-    streamSubscription =
+    streamSubscriptionOne =
         duelGameRepository.getRoundsScores(roomId: roomId).listen((event) {
       for (final score in event) {
         duelGameRepository
@@ -169,7 +169,7 @@ class DuelRoomPageCubit extends Cubit<DuelRoomPageState> {
 
   @override
   Future<void> close() {
-    streamSubscription?.cancel();
+    streamSubscriptionOne?.cancel();
     return super.close();
   }
 }

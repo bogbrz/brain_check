@@ -1,20 +1,16 @@
 import 'package:brain_check/app/core/enums/enums.dart';
 import 'package:brain_check/app/injection_container.dart';
 import 'package:brain_check/domain/models/categories_model.dart';
-import 'package:brain_check/domain/models/player_model.dart';
-import 'package:brain_check/features/pages/duel_page/duel_page.dart';
+import 'package:brain_check/domain/models/game_room_model.dart';
 import 'package:brain_check/features/pages/duel_question_page/duel_question_page.dart';
-
 import 'package:brain_check/features/pages/duel_room_page/cubit/duel_room_page_cubit.dart';
 import 'package:brain_check/features/pages/duel_room_page/widgets/player_one_widget.dart';
-import 'package:brain_check/features/pages/duel_room_page/widgets/players_score.dart';
 import 'package:brain_check/features/pages/duel_room_page/widgets/player_two_widget.dart';
+import 'package:brain_check/features/pages/duel_room_page/widgets/players_score.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:brain_check/domain/models/game_room_model.dart';
 
 class GameRoomPage extends StatefulWidget {
   const GameRoomPage({
@@ -45,7 +41,6 @@ class _GameRoomPageState extends State<GameRoomPage> {
         onWillPop: () async => false,
         child: Scaffold(body: SafeArea(
           child: BlocBuilder<DuelRoomPageCubit, DuelRoomPageState>(
-           
             builder: (context, state) {
               final categories = state.categories;
               switch (state.status) {
@@ -331,7 +326,7 @@ class _GameRoomPageState extends State<GameRoomPage> {
                               roomId: widget.roomModel.id,
                             ),
                             for (final player in state.players) ...[
-                              if (player.roundNumber == 5 &&
+                              if (player.roundNumber == 6 &&
                                   player.player == 1) ...[
                                 if (state.playerOne[0].points >
                                     state.playerTwo[0].points) ...[
@@ -343,9 +338,19 @@ class _GameRoomPageState extends State<GameRoomPage> {
                                             MediaQuery.of(context).size.height /
                                                 35),
                                   )
-                                ] else ...[
+                                ] else if (state.playerOne[0].points <
+                                    state.playerTwo[0].points) ...[
                                   Text(
                                     "THE WINNER IS ${state.playerTwo[0].nickName}",
+                                    style: GoogleFonts.bungee(
+                                        color: Colors.black,
+                                        fontSize:
+                                            MediaQuery.of(context).size.height /
+                                                35),
+                                  )
+                                ] else ...[
+                                  Text(
+                                    "IT'S A DRAW",
                                     style: GoogleFonts.bungee(
                                         color: Colors.black,
                                         fontSize:
@@ -378,9 +383,9 @@ class _GameRoomPageState extends State<GameRoomPage> {
                                                   ? null
                                                   : state.playerOne[0]
                                                               .roundNumber ==
-                                                          5
+                                                          6
                                                       ? null
-                                                      : ()async {
+                                                      : () async {
                                                           for (final player
                                                               in state
                                                                   .players) {
@@ -389,16 +394,19 @@ class _GameRoomPageState extends State<GameRoomPage> {
                                                                 widget.roomModel
                                                                     .ownerMail
                                                                     .toString()) {
-                                                            await  context.read<DuelRoomPageCubit>().addQtoFirebase(
-                                                                  roundNumber:
-                                                                      player
-                                                                          .roundNumber,
-                                                                  roomId: widget
-                                                                      .roomModel
-                                                                      .id,
-                                                                  categoryId:
-                                                                      category!
-                                                                          .id);
+                                                              await context
+                                                                  .read<
+                                                                      DuelRoomPageCubit>()
+                                                                  .addQtoFirebase(
+                                                                      roundNumber:
+                                                                          player
+                                                                              .roundNumber,
+                                                                      roomId: widget
+                                                                          .roomModel
+                                                                          .id,
+                                                                      categoryId:
+                                                                          category!
+                                                                              .id);
                                                             }
                                                             context.read<DuelRoomPageCubit>().startGame(
                                                                 roomId: widget
@@ -421,7 +429,7 @@ class _GameRoomPageState extends State<GameRoomPage> {
                                 state.playerOne.isEmpty ||
                                         state.playerTwo.isEmpty
                                     ? "Not enough players"
-                                    : state.playerOne[0].roundNumber == 5
+                                    : state.playerOne[0].roundNumber == 6
                                         ? "Game Over"
                                         : state.playerOne[0].ready == false ||
                                                 state.playerTwo[0].ready ==

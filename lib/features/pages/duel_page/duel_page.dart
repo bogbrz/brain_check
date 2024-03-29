@@ -2,6 +2,7 @@ import 'package:brain_check/app/core/enums/enums.dart';
 import 'package:brain_check/app/injection_container.dart';
 import 'package:brain_check/domain/models/game_room_model.dart';
 import 'package:brain_check/features/pages/duel_page/cubit/duel_page_cubit.dart';
+import 'package:brain_check/features/pages/duel_page/widgets/create_room_widget.dart';
 import 'package:brain_check/features/pages/duel_room_page/duel_room_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -14,8 +15,7 @@ class DuelPage extends StatelessWidget {
     required this.user,
     super.key,
   });
-  final TextEditingController nameController = TextEditingController();
-  final TextEditingController passControler = TextEditingController();
+
   final String nickName;
 
   final User? user;
@@ -69,8 +69,8 @@ class DuelPage extends StatelessWidget {
                                   );
                                 })),
                         CreateRoomWidget(
-                          nameController: nameController,
-                          passControler: passControler,
+                          rooms: state.rooms,
+                      
                           nickName: nickName,
                         )
                       ],
@@ -257,145 +257,3 @@ class RoomWidget extends StatelessWidget {
   }
 }
 
-class CreateRoomWidget extends StatelessWidget {
-  const CreateRoomWidget({
-    super.key,
-    required this.nameController,
-    required this.passControler,
-    required this.nickName,
-  });
-
-  final TextEditingController nameController;
-  final TextEditingController passControler;
-  final String nickName;
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(14.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: [
-          FloatingActionButton.extended(
-              onPressed: () {
-                showDialog(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return BlocProvider(
-                        create: (context) => getIt<DuelPageCubit>(),
-                        child: AlertDialog(
-                          scrollable: true,
-                          title: Text(
-                            "Create new game",
-                            style: GoogleFonts.bungee(
-                                color: Colors.white,
-                                fontSize:
-                                    MediaQuery.of(context).size.height / 50),
-                          ),
-                          content: Form(
-                            child: Column(children: [
-                              Row(
-                                children: [
-                                  Text(
-                                    "Room name",
-                                    style: GoogleFonts.bungee(
-                                        color: Colors.white,
-                                        fontSize:
-                                            MediaQuery.of(context).size.height /
-                                                50),
-                                  ),
-                                ],
-                              ),
-                              TextField(
-                                decoration: InputDecoration(
-                                  focusedBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                    width:
-                                        MediaQuery.of(context).size.width / 85,
-                                  )),
-                                  enabledBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                    width:
-                                        MediaQuery.of(context).size.width / 85,
-                                  )),
-                                ),
-                                controller: nameController,
-                              ),
-                              Row(
-                                children: [
-                                  Text(
-                                    "Password",
-                                    style: GoogleFonts.bungee(
-                                        color: Colors.white,
-                                        fontSize:
-                                            MediaQuery.of(context).size.height /
-                                                50),
-                                  ),
-                                ],
-                              ),
-                              TextField(
-                                decoration: InputDecoration(
-                                  focusedBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                    width:
-                                        MediaQuery.of(context).size.width / 85,
-                                  )),
-                                  enabledBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                    width:
-                                        MediaQuery.of(context).size.width / 85,
-                                  )),
-                                ),
-                                controller: passControler,
-                              ),
-                              Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child:
-                                      BlocBuilder<DuelPageCubit, DuelPageState>(
-                                    builder: (context, state) {
-                                      return ElevatedButton(
-                                          onPressed: () {
-                                            context
-                                                .read<DuelPageCubit>()
-                                                .createRoom(
-                                                  name: nameController.text,
-                                                  password: passControler.text,
-                                                  nickName: nickName,
-                                                );
-                                            nameController.clear();
-                                            passControler.clear();
-                                            Navigator.of(context).pop();
-                                          },
-                                          child: Text(
-                                            "Create",
-                                            style: GoogleFonts.bungee(
-                                                color: Colors.black,
-                                                fontSize: MediaQuery.of(context)
-                                                        .size
-                                                        .height /
-                                                    50),
-                                          ));
-                                    },
-                                  ))
-                            ]),
-                          ),
-                        ),
-                      );
-                    });
-              },
-              label: Row(
-                children: [
-                  Text(
-                    "Create new room",
-                    style: GoogleFonts.bungee(
-                        color: Colors.black,
-                        fontSize: MediaQuery.of(context).size.height / 50),
-                  ),
-                  Icon(Icons.add)
-                ],
-              )),
-        ],
-      ),
-    );
-  }
-}
