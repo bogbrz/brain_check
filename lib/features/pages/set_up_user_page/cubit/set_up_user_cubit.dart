@@ -20,7 +20,7 @@ class SetUpUserCubit extends Cubit<SetUpUserState> {
   StreamSubscription? streamSubscription;
 
   Future<void> getRankingForUpdate({required String email}) async {
-    emit(SetUpUserState(errorMessage: null, profile: [], status: Status.loading));
+    emit(const SetUpUserState(errorMessage: null, profile: [], status: Status.loading));
     streamSubscription =
         rankingRepository.getRankingForUpdate(email: email).listen((event) {
       try {

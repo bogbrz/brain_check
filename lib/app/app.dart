@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
             ),
             useMaterial3: true,
           ),
-          home: RootPage()),
+          home: const RootPage()),
     );
   }
 }

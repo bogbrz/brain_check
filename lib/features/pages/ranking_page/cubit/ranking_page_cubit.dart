@@ -17,7 +17,7 @@ class RankingPageCubit extends Cubit<RankingPageState> {
   final RankingRepository rankingRepository;
 
   Future<void> getRanking() async {
-    emit(RankingPageState(
+    emit(const RankingPageState(
         errorMessage: null, profiles: [], status: Status.loading));
     streamSubscription = rankingRepository.getRanking().listen((event) {
       try {

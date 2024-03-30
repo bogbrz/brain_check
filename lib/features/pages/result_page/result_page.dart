@@ -1,5 +1,6 @@
 import 'package:brain_check/app/core/enums/enums.dart';
 import 'package:brain_check/app/injection_container.dart';
+import 'package:brain_check/domain/models/player_model.dart';
 
 import 'package:brain_check/features/pages/question_page/question_page.dart';
 import 'package:brain_check/features/pages/result_page/cubit/result_page_cubit.dart';
@@ -11,19 +12,26 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class ResultsPage extends StatelessWidget {
-  const ResultsPage({
-    required this.questionPage,
-    required this.index,
-    super.key,
-    required this.points,
-    required this.isRanked,
-  });
+  const ResultsPage(
+      {required this.questionPage,
+      required this.index,
+      super.key,
+      required this.points,
+      required this.isRanked,
+      required this.isDuel,
+      required this.players,
+      required this.roomId,
+      required this.user});
 
   final QuestionPage questionPage;
   final int index;
 
   final int points;
   final bool isRanked;
+  final bool isDuel;
+  final List<PlayerModel>? players;
+  final String? roomId;
+  final User? user;
 
   @override
   Widget build(BuildContext context) {
@@ -35,9 +43,9 @@ class ResultsPage extends StatelessWidget {
           builder: (context, state) {
             switch (state.status) {
               case Status.initial:
-                return InitialStateWidget();
+                return const InitialStateWidget();
               case Status.loading:
-                return LoadingStateWidget();
+                return const LoadingStateWidget();
               case Status.error:
                 return ErrorStateWidget(
                     errorMessage: state.errorMessage.toString());
@@ -64,9 +72,13 @@ class ResultsPage extends StatelessWidget {
                             fontSize: MediaQuery.of(context).size.height / 35,
                           )),
                       FinishButtonWidget(
-                        isRanked: isRanked ,
+                        isRanked: isRanked,
                         points: points,
                         profiles: state.profile,
+                        isDuel: isDuel,
+                        players: players,
+                        roomId: roomId,
+                        user: user,
                       )
                     ],
                   ),

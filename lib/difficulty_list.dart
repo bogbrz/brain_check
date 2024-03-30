@@ -5,21 +5,21 @@ final List<DifficultyModel> difficulties = [
   DifficultyModel(
       name: "Random",
       nameId: "null",
-      icon: Image(image: AssetImage("images/question_mark.png")),
+      icon: const Image(image: AssetImage("images/question_mark.png")),
       color: Colors.grey),
   DifficultyModel(
       name: "Easy",
       nameId: "easy",
-      icon: Image(image: AssetImage("images/leave.png")),
+      icon: const Image(image: AssetImage("images/leave.png")),
       color: Colors.green),
   DifficultyModel(
       name: "Medium",
       nameId: "medium",
-      icon: Image(image: AssetImage("images/bitten_leaf_scaled.png")),
+      icon: const Image(image: AssetImage("images/bitten_leaf_scaled.png")),
       color: Colors.yellow),
   DifficultyModel(
       name: "Hard",
       nameId: "hard",
-      icon: Image(image: AssetImage("images/fire_leaf.png")),
+      icon: const Image(image: AssetImage("images/fire_leaf.png")),
       color: Colors.red),
 ];

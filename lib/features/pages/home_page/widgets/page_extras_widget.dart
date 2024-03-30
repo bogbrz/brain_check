@@ -22,7 +22,7 @@ class PageExtrasWidget extends StatelessWidget {
       children: [
         SizedBox(
             height: MediaQuery.of(context).size.height / 4,
-            child: Image(image: AssetImage("images/brain_question_white.png"))),
+            child: const Image(image: AssetImage("images/brain_question_white.png"))),
         SizedBox(
           height: MediaQuery.of(context).size.height * 0.3,
           child: Center(

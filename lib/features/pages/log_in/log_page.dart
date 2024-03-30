@@ -50,7 +50,7 @@ class _LogInPageState extends State<LogInPage> {
                     ],
                   ),
                   TextField(
-                    style: GoogleFonts.bungee(
+                    style: TextStyle(
                       fontSize: MediaQuery.of(context).size.height / 40,
                     ),
                     decoration: InputDecoration(
@@ -73,7 +73,7 @@ class _LogInPageState extends State<LogInPage> {
                     height: 10,
                   ),
                   TextField(
-                    style: GoogleFonts.bungee(
+                    style: TextStyle(
                       fontSize: MediaQuery.of(context).size.height / 40,
                     ),
                     obscureText: true,

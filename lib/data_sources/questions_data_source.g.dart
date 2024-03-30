@@ -24,7 +24,7 @@ class _QuestionDataSource implements QuestionDataSource {
     int? category,
     String? token,
   ) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'difficulty': difficulty,
       r'category': category,
@@ -32,7 +32,7 @@ class _QuestionDataSource implements QuestionDataSource {
     };
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
-    final Map<String, dynamic>? _data = null;
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio
         .fetch<Map<String, dynamic>>(_setStreamType<Questions>(Options(
       method: 'GET',
@@ -59,16 +59,18 @@ class _QuestionDataSource implements QuestionDataSource {
     String? difficulty,
     int? category,
     int? amount,
+    String? token,
   ) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'difficulty': difficulty,
       r'category': category,
       r'amount': amount,
+      r'token': token,
     };
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
-    final Map<String, dynamic>? _data = null;
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio
         .fetch<Map<String, dynamic>>(_setStreamType<Questions>(Options(
       method: 'GET',
@@ -92,10 +94,10 @@ class _QuestionDataSource implements QuestionDataSource {
 
   @override
   Future<CategoryModel> getCategories() async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final Map<String, dynamic>? _data = null;
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio
         .fetch<Map<String, dynamic>>(_setStreamType<CategoryModel>(Options(
       method: 'GET',
@@ -119,10 +121,10 @@ class _QuestionDataSource implements QuestionDataSource {
 
   @override
   Future<Welcome> getOverallInfo() async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final Map<String, dynamic>? _data = null;
+    const Map<String, dynamic>? _data = null;
     final _result =
         await _dio.fetch<Map<String, dynamic>>(_setStreamType<Welcome>(Options(
       method: 'GET',
@@ -146,10 +148,10 @@ class _QuestionDataSource implements QuestionDataSource {
 
   @override
   Future<WelcomeCategory> getCategoriesInfo(int category) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'category': category};
     final _headers = <String, dynamic>{};
-    final Map<String, dynamic>? _data = null;
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio
         .fetch<Map<String, dynamic>>(_setStreamType<WelcomeCategory>(Options(
       method: 'GET',
@@ -173,10 +175,10 @@ class _QuestionDataSource implements QuestionDataSource {
 
   @override
   Future<TokenModel> getToken() async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final Map<String, dynamic>? _data = null;
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio
         .fetch<Map<String, dynamic>>(_setStreamType<TokenModel>(Options(
       method: 'GET',

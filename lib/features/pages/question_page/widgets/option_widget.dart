@@ -17,8 +17,8 @@ class OptionWidget extends StatelessWidget {
 
   final dynamic choosedQuestion;
   final bool isCorrect;
-  final String option;
-  final List<String> answers;
+  final String? option;
+  final List<String?> answers;
   final double screenWidth;
   final double screenHeight;
 
@@ -40,7 +40,7 @@ class OptionWidget extends StatelessWidget {
         width: screenWidth * 0.2,
         height: screenHeight * 0.2,
         child: Text(
-          HtmlUnescape().convert(option),
+          HtmlUnescape().convert(option!),
           style: GoogleFonts.bungee(
             fontSize: MediaQuery.of(context).size.height / 45,
           ),

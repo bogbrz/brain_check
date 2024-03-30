@@ -12,13 +12,13 @@ part of 'question_page_cubit.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$QuestionPageState {
   String? get errorMessage => throw _privateConstructorUsedError;
   List<QuestionModel> get questions => throw _privateConstructorUsedError;
-  List<String> get answers => throw _privateConstructorUsedError;
+  List<String?> get answers => throw _privateConstructorUsedError;
   Status get status => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -35,7 +35,7 @@ abstract class $QuestionPageStateCopyWith<$Res> {
   $Res call(
       {String? errorMessage,
       List<QuestionModel> questions,
-      List<String> answers,
+      List<String?> answers,
       Status status});
 }
 
@@ -69,7 +69,7 @@ class _$QuestionPageStateCopyWithImpl<$Res, $Val extends QuestionPageState>
       answers: null == answers
           ? _value.answers
           : answers // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+              as List<String?>,
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
@@ -89,7 +89,7 @@ abstract class _$$QuestionPageStateImplCopyWith<$Res>
   $Res call(
       {String? errorMessage,
       List<QuestionModel> questions,
-      List<String> answers,
+      List<String?> answers,
       Status status});
 }
 
@@ -121,7 +121,7 @@ class __$$QuestionPageStateImplCopyWithImpl<$Res>
       answers: null == answers
           ? _value._answers
           : answers // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+              as List<String?>,
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
@@ -136,7 +136,7 @@ class _$QuestionPageStateImpl implements _QuestionPageState {
   _$QuestionPageStateImpl(
       {required this.errorMessage,
       required final List<QuestionModel> questions,
-      required final List<String> answers,
+      required final List<String?> answers,
       required this.status})
       : _questions = questions,
         _answers = answers;
@@ -151,9 +151,9 @@ class _$QuestionPageStateImpl implements _QuestionPageState {
     return EqualUnmodifiableListView(_questions);
   }
 
-  final List<String> _answers;
+  final List<String?> _answers;
   @override
-  List<String> get answers {
+  List<String?> get answers {
     if (_answers is EqualUnmodifiableListView) return _answers;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_answers);
@@ -200,7 +200,7 @@ abstract class _QuestionPageState implements QuestionPageState {
   factory _QuestionPageState(
       {required final String? errorMessage,
       required final List<QuestionModel> questions,
-      required final List<String> answers,
+      required final List<String?> answers,
       required final Status status}) = _$QuestionPageStateImpl;
 
   @override
@@ -208,7 +208,7 @@ abstract class _QuestionPageState implements QuestionPageState {
   @override
   List<QuestionModel> get questions;
   @override
-  List<String> get answers;
+  List<String?> get answers;
   @override
   Status get status;
   @override

@@ -44,9 +44,9 @@ class _CategoryPageState extends State<CategoryPage> {
           builder: (context, state) {
             switch (state.status) {
               case Status.initial:
-                return InitialStateWidget();
+                return const InitialStateWidget();
               case Status.loading:
-                return LoadingStateWidget();
+                return const LoadingStateWidget();
               case Status.error:
                 return ErrorStateWidget(
                     errorMessage: state.errorMessage.toString());
@@ -75,7 +75,7 @@ class _CategoryPageState extends State<CategoryPage> {
                                           TriviaCategory(id: 0, name: "Random"),
                                     ))));
                           },
-                          child: RandomCategoryWidget(),
+                          child: const RandomCategoryWidget(),
                         ),
                       ),
                     ),

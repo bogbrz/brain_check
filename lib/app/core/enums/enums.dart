@@ -10,7 +10,7 @@ class ErrorStateWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Text("Error : ${errorMessage}"),
+      child: Text("Error : $errorMessage"),
     );
   }
 }
@@ -24,7 +24,7 @@ class LoadingStateWidget extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Transform.scale(scale: 2, child: CircularProgressIndicator()),
+          Transform.scale(scale: 2, child: const CircularProgressIndicator()),
           Text(
             "Gathering data",
             style: GoogleFonts.bungee(
@@ -42,6 +42,8 @@ class InitialStateWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(child: Text("Initialing"));
+    return const Center(child: Text("Initialing"));
   }
 }
+
+

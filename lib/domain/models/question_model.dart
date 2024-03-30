@@ -27,17 +27,10 @@ class QuestionModel with _$QuestionModel {
     required String? category,
     required String question,
     required String correctAnswer,
-    required List<String> incorrectAnswers,
+    required List<String?> incorrectAnswers,
   }) = _QuestionModel;
   
-  // List<String> get answers {
-  //   List<String> answers = [];
-  //   answers.addAll(incorrectAnswers);
-  //   answers.add(correctAnswer);
-  //   answers.shuffle();
-    
-  //   return answers;
-  // }
+ 
 
   factory QuestionModel.fromJson(Map<String, dynamic> json) =>
       _$QuestionModelFromJson(json);

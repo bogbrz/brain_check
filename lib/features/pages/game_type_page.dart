@@ -1,15 +1,16 @@
-import 'dart:ffi';
 
 import 'package:brain_check/features/pages/categories_page/categories_page.dart';
-import 'package:brain_check/features/pages/duel_page.dart';
+
 import 'package:brain_check/features/pages/ranked_game_page/ranked_game_page.dart';
+import 'package:brain_check/features/pages/rooms_list_page/rooms_list_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class GameTypePage extends StatelessWidget {
-  const GameTypePage({super.key, required this.user});
+  const GameTypePage({super.key, required this.user, required this.nickName});
   final User? user;
+  final String nickName;
 
   @override
   Widget build(BuildContext context) {
@@ -85,7 +86,11 @@ class GameTypePage extends StatelessWidget {
               InkWell(
                 onTap: () {
                   Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => DuelPage(),
+                    builder: (context) => RoomsListPage(
+                      user: user,
+                      nickName: nickName,
+                    
+                    ),
                   ));
                 },
                 child: Container(

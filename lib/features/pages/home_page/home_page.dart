@@ -27,9 +27,9 @@ class HomePage extends StatelessWidget {
             builder: (context, state) {
           switch (state.status) {
             case Status.initial:
-              return InitialStateWidget();
+              return const InitialStateWidget();
             case Status.loading:
-              return LoadingStateWidget();
+              return const LoadingStateWidget();
             case Status.error:
               return ErrorStateWidget(
                   errorMessage: state.errorMessage.toString());
@@ -48,7 +48,7 @@ class HomePage extends StatelessWidget {
                         Row(
                           children: [
                             Image(
-                              image: AssetImage("images/brain.png"),
+                              image: const AssetImage("images/brain.png"),
                               width: MediaQuery.of(context).size.width / 10,
                             ),
                             Text(
@@ -73,6 +73,7 @@ class HomePage extends StatelessWidget {
                       ),
                       StartButtonWidget(
                         user: user,
+                        nickName: state.profile[0].nickName,
                       ),
                     ],
                   ));

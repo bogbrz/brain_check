@@ -1,6 +1,7 @@
 import 'package:brain_check/app/core/enums/enums.dart';
 import 'package:brain_check/app/injection_container.dart';
 import 'package:brain_check/device_size.dart';
+import 'package:brain_check/domain/models/player_model.dart';
 
 import 'package:brain_check/features/pages/question_page/cubit/question_page_cubit.dart';
 import 'package:brain_check/features/pages/question_page/widgets/option_widget.dart';
@@ -15,21 +16,26 @@ import 'package:timer_count_down/timer_controller.dart';
 import 'package:timer_count_down/timer_count_down.dart';
 
 class QuestionPage extends StatefulWidget {
-  const QuestionPage({
-    super.key,
-    required this.category,
-    required this.difficulty,
-    required this.questionsNumber,
-    required this.user,
-    required this.token,
-    required this.isRanked,
-  });
+  const QuestionPage(
+      {super.key,
+      required this.category,
+      required this.difficulty,
+      required this.questionsNumber,
+      required this.user,
+      required this.token,
+      required this.isRanked,
+      required this.isDuel,
+      required this.players,
+      required this.roomId});
   final String token;
   final int category;
   final String difficulty;
   final int questionsNumber;
   final User? user;
   final bool isRanked;
+  final bool isDuel;
+  final List<PlayerModel>? players;
+  final String? roomId;
 
   @override
   State<QuestionPage> createState() => _QuestionPageState();
@@ -37,7 +43,7 @@ class QuestionPage extends StatefulWidget {
 
 class _QuestionPageState extends State<QuestionPage> {
   @override
-  var choosedQuestion = null;
+  var choosedQuestion;
   var index = 0;
   var isCorrect = false;
   var next = false;
@@ -70,26 +76,34 @@ class _QuestionPageState extends State<QuestionPage> {
 
                 if (widget.questionsNumber == 0 && youLose ||
                     widget.questionsNumber != 0 &&
-                        index == widget.questionsNumber) {
+                        index == widget.questionsNumber &&
+                        widget.isDuel == false) {
                   return ResultsPage(
                     isRanked: widget.isRanked,
                     index: index,
                     points: points,
+                    isDuel: widget.isDuel,
+                    players: widget.players,
+                    roomId: widget.roomId,
+                    user: widget.user,
                     questionPage: QuestionPage(
+                        players: widget.players,
+                        roomId: widget.roomId,
                         isRanked: widget.isRanked,
                         token: widget.token,
                         category: widget.category,
                         difficulty: widget.difficulty,
                         questionsNumber: widget.questionsNumber,
+                        isDuel: widget.isDuel,
                         user: widget.user),
                   );
                 }
 
                 switch (state.status) {
                   case Status.initial:
-                    return InitialStateWidget();
+                    return const InitialStateWidget();
                   case Status.loading:
-                    return LoadingStateWidget();
+                    return const LoadingStateWidget();
                   case Status.error:
                     return ErrorStateWidget(
                         errorMessage: state.errorMessage.toString());
