@@ -5,6 +5,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class DuelResultPage extends StatelessWidget {
   DuelResultPage({
@@ -46,7 +48,7 @@ class DuelResultPage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "YOUR SCORE: ${score} POINTS",
+                    "${AppLocalizations.of(context).yourScore}: ${score} ${AppLocalizations.of(context).points}",
                     style: GoogleFonts.bungee(
                         color: Colors.white,
                         fontSize: MediaQuery.of(context).size.height / 35),
@@ -101,7 +103,7 @@ class DuelResultPage extends StatelessWidget {
                       }
                     },
                     child: Text(
-                      "BACK TO LOBBY",
+                      AppLocalizations.of(context).backToLobby,
                       style: GoogleFonts.bungee(
                           color: Colors.black,
                           fontSize: MediaQuery.of(context).size.height / 35),

@@ -9,15 +9,15 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CategoryPage extends StatefulWidget {
   const CategoryPage({
     required this.user,
- 
     super.key,
   });
   final User? user;
- 
 
   @override
   State<CategoryPage> createState() => _CategoryPageState();
@@ -33,7 +33,7 @@ class _CategoryPageState extends State<CategoryPage> {
         appBar: AppBar(
           centerTitle: true,
           title: Text(
-            "Choose category",
+            AppLocalizations.of(context).chooseCategory,
             style: GoogleFonts.bungee(
                 fontSize: MediaQuery.of(context).size.height / 30,
                 color: Colors.white),
@@ -69,7 +69,6 @@ class _CategoryPageState extends State<CategoryPage> {
 
                             Navigator.of(context).push(MaterialPageRoute(
                                 builder: ((context) => DifficultyPage(
-                                    
                                       user: widget.user,
                                       categoriesModel:
                                           TriviaCategory(id: 0, name: "Random"),
@@ -92,11 +91,10 @@ class _CategoryPageState extends State<CategoryPage> {
                               setState(() {
                                 choosedCategory = category.id;
                               });
-                              print("CATEGORY ID ${category.id}");
+                             
 
                               Navigator.of(context).push(MaterialPageRoute(
                                   builder: ((context) => DifficultyPage(
-                                    
                                         user: widget.user,
                                         categoriesModel: category,
                                       ))));

@@ -13,6 +13,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class GameRoomPage extends StatefulWidget {
   const GameRoomPage({
@@ -133,7 +135,7 @@ class _GameRoomPageState extends State<GameRoomPage> {
                               },
                               icon: const Icon(Icons.logout)),
                           Text(
-                            "${widget.roomModel.nickName}'s room",
+                            "${widget.roomModel.nickName} ${AppLocalizations.of(context).playerRoom}",
                             style: GoogleFonts.bungee(
                                 color: Colors.white,
                                 fontSize:
@@ -172,7 +174,8 @@ class _GameRoomPageState extends State<GameRoomPage> {
                                 SizedBox(
                                   width:
                                       MediaQuery.of(context).size.width * 0.1,
-                                  child: Text("Round number 1"),
+                                  child: Text(
+                                      "${AppLocalizations.of(context).roundNumber} 1"),
                                 ),
                               ] else if (player.email.toString() ==
                                   widget.roomModel.ownerMail.toString()) ...[
@@ -180,7 +183,7 @@ class _GameRoomPageState extends State<GameRoomPage> {
                                   width:
                                       MediaQuery.of(context).size.width * 0.2,
                                   child: Text(
-                                    'Round\n${player.roundNumber}',
+                                    '${AppLocalizations.of(context).roundNumber}\n${player.roundNumber}',
                                     textAlign: TextAlign.center,
                                     style: GoogleFonts.bungee(
                                         color: Colors.white,
@@ -272,7 +275,7 @@ class _GameRoomPageState extends State<GameRoomPage> {
                                         },
                                         value: category,
                                         hint: Text(
-                                          'Select category',
+                                          '${AppLocalizations.of(context).selectCategory}',
                                           style: GoogleFonts.bungee(
                                               color: Colors.black,
                                               fontSize: MediaQuery.of(context)
@@ -286,42 +289,9 @@ class _GameRoomPageState extends State<GameRoomPage> {
                                 ),
                               ),
                             ] else ...[
-                              Container(
-                                decoration: BoxDecoration(
-                                    border: Border(
-                                        bottom: BorderSide(
-                                            color: Colors.black,
-                                            width: MediaQuery.of(context)
-                                                    .size
-                                                    .width *
-                                                0.01))),
-                                width: MediaQuery.of(context).size.width * 0.98,
-                                height:
-                                    MediaQuery.of(context).size.height * 0.075,
-                                child: SizedBox(
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.6,
-                                  child: Center(
-                                    child: Padding(
-                                        padding: EdgeInsets.all(
-                                            MediaQuery.of(context).size.width *
-                                                0.02),
-                                        child: Text(
-                                          state.playerOne.isNotEmpty
-                                              ? state.playerOne[0].category
-                                              : state.playerTwo.isNotEmpty
-                                                  ? state.playerTwo[0].category
-                                                  : "not chosen",
-                                          style: GoogleFonts.bungee(
-                                              color: Colors.black,
-                                              fontSize: MediaQuery.of(context)
-                                                      .size
-                                                      .height /
-                                                  50),
-                                        )),
-                                  ),
-                                ),
-                              )
+                              NonOwnerCategoryWidget(
+                                  playerOne: state.playerOne,
+                                  playerTwo: state.playerTwo)
                             ],
                             PlayersScore(
                               roomId: widget.roomModel.id,
@@ -332,7 +302,7 @@ class _GameRoomPageState extends State<GameRoomPage> {
                                 if (state.playerOne[0].points >
                                     state.playerTwo[0].points) ...[
                                   Text(
-                                    "THE WINNER IS ${state.playerOne[0].nickName}",
+                                    "${AppLocalizations.of(context).theWinnerIs} ${state.playerOne[0].nickName}",
                                     style: GoogleFonts.bungee(
                                         color: Colors.black,
                                         fontSize:
@@ -342,7 +312,7 @@ class _GameRoomPageState extends State<GameRoomPage> {
                                 ] else if (state.playerOne[0].points <
                                     state.playerTwo[0].points) ...[
                                   Text(
-                                    "THE WINNER IS ${state.playerTwo[0].nickName}",
+                                    "${AppLocalizations.of(context).theWinnerIs} ${state.playerTwo[0].nickName}",
                                     style: GoogleFonts.bungee(
                                         color: Colors.black,
                                         fontSize:
@@ -351,7 +321,7 @@ class _GameRoomPageState extends State<GameRoomPage> {
                                   )
                                 ] else ...[
                                   Text(
-                                    "IT'S A DRAW",
+                                    "${AppLocalizations.of(context).draw}",
                                     style: GoogleFonts.bungee(
                                         color: Colors.black,
                                         fontSize:
@@ -429,14 +399,14 @@ class _GameRoomPageState extends State<GameRoomPage> {
                               child: Text(
                                 state.playerOne.isEmpty ||
                                         state.playerTwo.isEmpty
-                                    ? "Not enough players"
+                                    ? "${AppLocalizations.of(context).notEnoughPlayers}"
                                     : state.playerOne[0].roundNumber == 6
-                                        ? "Game Over"
+                                        ? "${AppLocalizations.of(context).gameOver}"
                                         : state.playerOne[0].ready == false ||
                                                 state.playerTwo[0].ready ==
                                                     false
-                                            ? "Players are not ready"
-                                            : 'Start Game',
+                                            ? "${AppLocalizations.of(context).playersNotReady}"
+                                            : '${AppLocalizations.of(context).startGame}',
                                 style: GoogleFonts.bungee(
                                     color: Colors.black,
                                     fontSize:

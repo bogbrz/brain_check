@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 enum Status { initial, loading, success, error }
 
@@ -26,7 +28,7 @@ class LoadingStateWidget extends StatelessWidget {
         children: [
           Transform.scale(scale: 2, child: const CircularProgressIndicator()),
           Text(
-            "Gathering data",
+            AppLocalizations.of(context).gatheringData,
             style: GoogleFonts.bungee(
                 color: Colors.white,
                 fontSize: MediaQuery.of(context).size.height / 25),
@@ -42,8 +44,9 @@ class InitialStateWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Center(child: Text("Initialing"));
+    return Center(
+        child: Text(
+      AppLocalizations.of(context).initialing,
+    ));
   }
 }
-
-

@@ -16,6 +16,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class DifficultyPage extends StatefulWidget {
   const DifficultyPage({
@@ -90,7 +92,7 @@ class _DifficultyPageState extends State<DifficultyPage> {
                                         children: [
                                           Expanded(
                                             child: Text(
-                                              "Choosed category: ${widget.categoriesModel.name}",
+                                              "${AppLocalizations.of(context).choosedCategory}: ${widget.categoriesModel.name}",
                                               style: GoogleFonts.bungee(
                                                 fontSize: MediaQuery.of(context)
                                                         .size
@@ -108,7 +110,7 @@ class _DifficultyPageState extends State<DifficultyPage> {
                                                           .categoriesModel.id ==
                                                       0
                                                   ? Text(
-                                                      "Amount questions in this category: ${state.overAll.totalNumOfVerifiedQuestions}",
+                                                      "${AppLocalizations.of(context).questionsAmount}: ${state.overAll.totalNumOfVerifiedQuestions}",
                                                       style: GoogleFonts.bungee(
                                                         fontSize: MediaQuery.of(
                                                                     context)
@@ -118,7 +120,7 @@ class _DifficultyPageState extends State<DifficultyPage> {
                                                       ),
                                                     )
                                                   : Text(
-                                                      "Amount questions in this category: ${state.info!.totalQuestionCount} ",
+                                                      "${AppLocalizations.of(context).questionsAmount}: ${state.info!.totalQuestionCount} ",
                                                       style: GoogleFonts.bungee(
                                                         fontSize: MediaQuery.of(
                                                                     context)
@@ -134,11 +136,11 @@ class _DifficultyPageState extends State<DifficultyPage> {
                                           Expanded(
                                             child: Text(
                                               choosedDifficulty.isEmpty
-                                                  ? "Choose difficulty: not choosen"
+                                                  ? "${AppLocalizations.of(context).choosedDifficulty}: ${AppLocalizations.of(context).notChoosen}"
                                                   : choosedDifficulty ==
                                                           null.toString()
-                                                      ? "Choose difficulty: random"
-                                                      : "Choose difficulty: $choosedDifficulty",
+                                                      ? "${AppLocalizations.of(context).choosedDifficulty}: ${AppLocalizations.of(context).random}"
+                                                      : "${AppLocalizations.of(context).choosedDifficulty}: $choosedDifficulty",
                                               style: GoogleFonts.bungee(
                                                 fontSize: MediaQuery.of(context)
                                                         .size
@@ -154,10 +156,10 @@ class _DifficultyPageState extends State<DifficultyPage> {
                                           Expanded(
                                             child: Text(
                                               questionsNumber == null
-                                                  ? "Amount of rounds: not choosen"
+                                                  ? "${AppLocalizations.of(context).roundsAmount}: ${AppLocalizations.of(context).notChoosen}"
                                                   : questionsNumber == 0
-                                                      ? "Amount of rounds: Survival"
-                                                      : "Amount of rounds: $questionsNumber",
+                                                      ? "${AppLocalizations.of(context).roundsAmount}: ${AppLocalizations.of(context).survival}"
+                                                      : "${AppLocalizations.of(context).roundsAmount}: $questionsNumber",
                                               style: GoogleFonts.bungee(
                                                 fontSize: MediaQuery.of(context)
                                                         .size
@@ -246,8 +248,8 @@ class _DifficultyPageState extends State<DifficultyPage> {
                                     Navigator.of(context)
                                         .push(MaterialPageRoute(
                                             builder: ((context) => QuestionPage(
-                                              players: null,
-                                              roomId: null,
+                                                  players: null,
+                                                  roomId: null,
                                                   isRanked: false,
                                                   token: state.tokenModel.token
                                                       .toString(),
@@ -329,7 +331,9 @@ class AmountWidget extends StatelessWidget {
           color: Colors.blue,
         ),
         child: Text(
-          amount.name,
+          amount.name == "Survival"
+              ? AppLocalizations.of(context).survival
+              : amount.name,
           style: GoogleFonts.bungee(
               fontSize: choosedAmount == null
                   ? MediaQuery.of(context).size.width / 35
@@ -372,7 +376,13 @@ class DifficultyWidget extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
-            difficulty.name,
+            difficulty.name == "Easy"
+                ? AppLocalizations.of(context).easy
+                : difficulty.name == "Medium"
+                    ? AppLocalizations.of(context).medium
+                    : difficulty.name == "Random"
+                        ? AppLocalizations.of(context).random
+                        : AppLocalizations.of(context).hard,
             style: GoogleFonts.bungee(
               fontSize: choosedDifficulty == ''
                   ? MediaQuery.of(context).size.width / 25

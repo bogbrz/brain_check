@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class UserInfoWidget extends StatelessWidget {
   const UserInfoWidget({
@@ -16,7 +18,7 @@ class UserInfoWidget extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(
-          "Add profile picture",
+          AppLocalizations.of(context).addProfilePictrue,
           style: GoogleFonts.bungee(fontSize: 20),
         ),
         CircleAvatar(
@@ -32,7 +34,7 @@ class UserInfoWidget extends StatelessWidget {
           ),
         ),
         Text(
-          "Set your nickname",
+          AppLocalizations.of(context).setNickName,
           style: GoogleFonts.bungee(fontSize: 20),
         ),
         Padding(
@@ -41,7 +43,7 @@ class UserInfoWidget extends StatelessWidget {
             maxLength: 13,
             style: GoogleFonts.bungee(fontSize: 20),
             decoration: InputDecoration(
-                hintText: "NickName",
+                hintText: AppLocalizations.of(context).nickName,
                 hintStyle: GoogleFonts.bungee(),
                 focusedBorder:
                     const OutlineInputBorder(borderSide: BorderSide(width: 8)),

@@ -5,6 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 class JoinPlayerTwoWidget extends StatelessWidget {
   const JoinPlayerTwoWidget({
     super.key,
@@ -42,7 +45,7 @@ class JoinPlayerTwoWidget extends StatelessWidget {
                     },
               child: const Image(image: AssetImage("images/join_game.png"))),
           Text(
-            "JOIN PLAYER 2",
+            "${AppLocalizations.of(context).joinPlayer}",
             style: GoogleFonts.bungee(
                 color: Colors.white,
                 fontSize: MediaQuery.of(context).size.height / 45),
@@ -83,7 +86,9 @@ class JoinPlayerTwoWidget extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        playerTwo[0].ready == true ? "Ready" : "Not ready",
+                        playerTwo[0].ready == true
+                            ? "${AppLocalizations.of(context).ready}"
+                            : "${AppLocalizations.of(context).notReady}",
                         style: GoogleFonts.bungee(
                             color: playerTwo[0].ready == true
                                 ? Colors.green

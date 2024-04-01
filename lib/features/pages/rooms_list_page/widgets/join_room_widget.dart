@@ -1,4 +1,3 @@
-
 import 'package:brain_check/app/core/enums/enums.dart';
 import 'package:brain_check/app/injection_container.dart';
 import 'package:brain_check/domain/models/game_room_model.dart';
@@ -10,21 +9,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-
-
-
-
-
-
-
-
-
-
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class JoinRoomWidget extends StatelessWidget {
-
-
-
   JoinRoomWidget({
     required this.nickName,
     required this.model,
@@ -47,7 +35,7 @@ class JoinRoomWidget extends StatelessWidget {
     return AlertDialog(
       scrollable: true,
       title: Text(
-        "${room.nickName}'s room",
+        "${room.nickName}${AppLocalizations.of(context).playerRoom}",
         style: GoogleFonts.bungee(
             color: Colors.white,
             fontSize: MediaQuery.of(context).size.height / 35),
@@ -58,7 +46,7 @@ class JoinRoomWidget extends StatelessWidget {
           Row(
             children: [
               Text(
-                "Enter password",
+                "${AppLocalizations.of(context).enterPassword}",
                 style: GoogleFonts.bungee(
                     color: Colors.white,
                     fontSize: MediaQuery.of(context).size.height / 55),
@@ -87,7 +75,7 @@ class JoinRoomWidget extends StatelessWidget {
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
                         content: Text(
-                          "Room is full",
+                          AppLocalizations.of(context).roomIsFull,
                           style: GoogleFonts.bungee(
                               color: Colors.white,
                               fontSize:
@@ -111,7 +99,7 @@ class JoinRoomWidget extends StatelessWidget {
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
                       content: Text(
-                        "Wrong password",
+                        AppLocalizations.of(context).wrongPassword,
                         style: GoogleFonts.bungee(
                             color: Colors.white,
                             fontSize: MediaQuery.of(context).size.height / 50),
@@ -122,7 +110,7 @@ class JoinRoomWidget extends StatelessWidget {
                 }
               },
               child: Text(
-                "Join",
+                AppLocalizations.of(context).joinPlayer,
                 style: GoogleFonts.bungee(
                     color: Colors.black,
                     fontSize: MediaQuery.of(context).size.height / 50),

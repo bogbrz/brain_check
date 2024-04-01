@@ -1,13 +1,10 @@
-
 import 'package:brain_check/features/pages/user_page/cubit/user_page_cubit.dart';
-
-
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-
-
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SignOutWidget extends StatelessWidget {
   const SignOutWidget({
@@ -27,7 +24,7 @@ class SignOutWidget extends StatelessWidget {
               border: Border.all(width: MediaQuery.of(context).size.width / 45),
               borderRadius: BorderRadius.circular(10)),
           child: Text(
-            "Log out",
+            AppLocalizations.of(context).logOut,
             style: GoogleFonts.bungee(
                 color: Colors.white,
                 fontSize: MediaQuery.of(context).size.height / 35),

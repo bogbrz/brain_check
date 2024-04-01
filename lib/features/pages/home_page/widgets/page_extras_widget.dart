@@ -3,7 +3,9 @@ import 'package:brain_check/domain/models/profile_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+ 
 class PageExtrasWidget extends StatelessWidget {
   const PageExtrasWidget(
       {super.key,
@@ -22,14 +24,15 @@ class PageExtrasWidget extends StatelessWidget {
       children: [
         SizedBox(
             height: MediaQuery.of(context).size.height / 4,
-            child: const Image(image: AssetImage("images/brain_question_white.png"))),
+            child: const Image(
+                image: AssetImage("images/brain_question_white.png"))),
         SizedBox(
           height: MediaQuery.of(context).size.height * 0.3,
           child: Center(
             child: Column(
               children: [
                 Text(
-                  '''Welcome back ${profiles[0].nickName}''',
+                  "${AppLocalizations.of(context).welcomeBack} ${profiles[0].nickName}",
                   textAlign: TextAlign.center,
                   style: GoogleFonts.bungee(
                       color: Colors.white,

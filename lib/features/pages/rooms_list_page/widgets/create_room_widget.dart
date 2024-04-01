@@ -9,6 +9,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CreateRoomWidget extends StatelessWidget {
   CreateRoomWidget({super.key, required this.nickName, required this.rooms});
@@ -33,7 +35,7 @@ class CreateRoomWidget extends StatelessWidget {
                         child: AlertDialog(
                           scrollable: true,
                           title: Text(
-                            "Create new game",
+                            AppLocalizations.of(context).createNewRoom,
                             style: GoogleFonts.bungee(
                                 color: Colors.white,
                                 fontSize:
@@ -50,7 +52,7 @@ class CreateRoomWidget extends StatelessWidget {
               label: Row(
                 children: [
                   Text(
-                    "Create new room",
+                    AppLocalizations.of(context).createNewRoom,
                     style: GoogleFonts.bungee(
                         color: Colors.black,
                         fontSize: MediaQuery.of(context).size.height / 50),
@@ -97,7 +99,7 @@ class _DialogContetWidgetState extends State<DialogContetWidget> {
         Row(
           children: [
             Text(
-              "Room name",
+              AppLocalizations.of(context).roomName,
               style: GoogleFonts.bungee(
                   color: Colors.white,
                   fontSize: MediaQuery.of(context).size.height / 50),
@@ -120,7 +122,7 @@ class _DialogContetWidgetState extends State<DialogContetWidget> {
         Row(
           children: [
             Text(
-              "Password",
+              AppLocalizations.of(context).password,
               style: GoogleFonts.bungee(
                   color: Colors.white,
                   fontSize: MediaQuery.of(context).size.height / 50),
@@ -161,7 +163,7 @@ class _DialogContetWidgetState extends State<DialogContetWidget> {
                                 Navigator.of(context).pop();
                               },
                     child: Text(
-                      "Create",
+                      AppLocalizations.of(context).create,
                       style: GoogleFonts.bungee(
                           color: Colors.black,
                           fontSize: MediaQuery.of(context).size.height / 50),
@@ -172,4 +174,3 @@ class _DialogContetWidgetState extends State<DialogContetWidget> {
     );
   }
 }
-

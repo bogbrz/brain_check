@@ -1,4 +1,3 @@
-
 import 'package:brain_check/features/pages/categories_page/categories_page.dart';
 
 import 'package:brain_check/features/pages/ranked_game_page/ranked_game_page.dart';
@@ -6,6 +5,8 @@ import 'package:brain_check/features/pages/rooms_list_page/rooms_list_page.dart'
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class GameTypePage extends StatelessWidget {
   const GameTypePage({super.key, required this.user, required this.nickName});
@@ -44,7 +45,7 @@ class GameTypePage extends StatelessWidget {
                         ),
                         child: SizedBox(
                             width: MediaQuery.of(context).size.width * 0.1,
-                            child: Text("CASUAL",
+                            child: Text(AppLocalizations.of(context).casual,
                                 style: GoogleFonts.bungee(
                                   fontSize:
                                       MediaQuery.of(context).size.height / 20,
@@ -71,7 +72,7 @@ class GameTypePage extends StatelessWidget {
                       ),
                       child: SizedBox(
                           width: MediaQuery.of(context).size.width * 0.1,
-                          child: Text("RANKED",
+                          child: Text(AppLocalizations.of(context).ranked,
                               style: GoogleFonts.bungee(
                                 fontSize:
                                     MediaQuery.of(context).size.height / 20,
@@ -89,7 +90,6 @@ class GameTypePage extends StatelessWidget {
                     builder: (context) => RoomsListPage(
                       user: user,
                       nickName: nickName,
-                    
                     ),
                   ));
                 },
@@ -104,7 +104,7 @@ class GameTypePage extends StatelessWidget {
                         width: MediaQuery.of(context).size.width / 40),
                   ),
                   child: SizedBox(
-                    child: Text('''D U E L''',
+                    child: Text(AppLocalizations.of(context).duel,
                         style: GoogleFonts.bungee(
                           fontSize: MediaQuery.of(context).size.height / 20,
                         )),
