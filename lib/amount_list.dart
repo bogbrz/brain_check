@@ -4,5 +4,5 @@ final List<AmountModel> amountButtons = [
   AmountModel(name: "1", nameId: 1),
   AmountModel(name: "5", nameId: 5),
   AmountModel(name: "10", nameId: 10),
-  AmountModel(name: "Survival", nameId: 0)
+  AmountModel(name: "15", nameId: 15)
 ];

@@ -44,11 +44,11 @@ class GameTypePage extends StatelessWidget {
                               width: MediaQuery.of(context).size.width / 40),
                         ),
                         child: SizedBox(
-                            width: MediaQuery.of(context).size.width * 0.1,
+                            width: MediaQuery.of(context).size.width * 0.07,
                             child: Text(AppLocalizations.of(context).casual,
                                 style: GoogleFonts.bungee(
                                   fontSize:
-                                      MediaQuery.of(context).size.height / 20,
+                                      MediaQuery.of(context).size.height / 31,
                                 ))),
                       ),
                     ),
@@ -71,11 +71,11 @@ class GameTypePage extends StatelessWidget {
                             width: MediaQuery.of(context).size.width / 40),
                       ),
                       child: SizedBox(
-                          width: MediaQuery.of(context).size.width * 0.1,
+                          width: MediaQuery.of(context).size.width * 0.07,
                           child: Text(AppLocalizations.of(context).ranked,
                               style: GoogleFonts.bungee(
                                 fontSize:
-                                    MediaQuery.of(context).size.height / 20,
+                                    MediaQuery.of(context).size.height / 31,
                               ))),
                     ),
                   ),
@@ -103,11 +103,12 @@ class GameTypePage extends StatelessWidget {
                     border: Border.all(
                         width: MediaQuery.of(context).size.width / 40),
                   ),
-                  child: SizedBox(
+                  child: Expanded(
                     child: Text(AppLocalizations.of(context).duel,
                         style: GoogleFonts.bungee(
-                          fontSize: MediaQuery.of(context).size.height / 20,
-                        )),
+                            fontSize: MediaQuery.of(context).size.height / 30,
+                            letterSpacing:
+                                MediaQuery.of(context).size.width * 0.05)),
                   ),
                 ),
               ),

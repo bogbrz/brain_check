@@ -331,9 +331,7 @@ class AmountWidget extends StatelessWidget {
           color: Colors.blue,
         ),
         child: Text(
-          amount.name == "Survival"
-              ? AppLocalizations.of(context).survival
-              : amount.name,
+          amount.name,
           style: GoogleFonts.bungee(
               fontSize: choosedAmount == null
                   ? MediaQuery.of(context).size.width / 35

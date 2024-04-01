@@ -27,7 +27,7 @@ class QuestionModel with _$QuestionModel {
     required String? category,
     required String question,
     required String correctAnswer,
-    required List<String?> incorrectAnswers,
+    required List<String> incorrectAnswers,
   }) = _QuestionModel;
   
  

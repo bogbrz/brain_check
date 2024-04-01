@@ -54,7 +54,8 @@ class RankedGamePage extends StatelessWidget {
                     child: Column(
                       children: [
                         Padding(
-                            padding: const EdgeInsets.all(10),
+                            padding: EdgeInsets.all(
+                                MediaQuery.of(context).size.height * 0.01),
                             child: InfoWidget(
                               profile: state.profile[0],
                             )),
@@ -81,16 +82,20 @@ class RankedGamePage extends StatelessWidget {
                                           )));
                                 },
                                 child: Container(
-                                  padding: const EdgeInsets.all(8),
+                                  padding: EdgeInsets.all(
+                                      MediaQuery.of(context).size.height *
+                                          0.005),
                                   decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(50),
-                                      color: Colors.black,
+                                      borderRadius: BorderRadius.circular(
+                                          MediaQuery.of(context).size.height *
+                                              0.1),
+                                      color: Colors.white,
                                       border: Border.all(
                                           width: MediaQuery.of(context)
                                                   .size
                                                   .width /
                                               55,
-                                          color: Colors.white)),
+                                          color: Colors.black)),
                                   width:
                                       MediaQuery.of(context).size.width * 0.6,
                                   height:
@@ -103,7 +108,7 @@ class RankedGamePage extends StatelessWidget {
                                                   .size
                                                   .height /
                                               20,
-                                          color: Colors.white),
+                                          color: Colors.black),
                                     ),
                                   ),
                                 ),
@@ -117,7 +122,7 @@ class RankedGamePage extends StatelessWidget {
                             style: GoogleFonts.bungee(
                                 fontSize:
                                     MediaQuery.of(context).size.height / 20,
-                                color: Colors.white),
+                                color: Colors.black),
                           ),
                         ]
                       ],
@@ -143,9 +148,9 @@ class InfoWidget extends StatelessWidget {
       decoration: BoxDecoration(
           border: Border.all(
               width: MediaQuery.of(context).size.width / 55,
-              color: Colors.white),
+              color: Colors.black),
           borderRadius: BorderRadius.circular(10),
-          color: Colors.black),
+          color: Colors.white),
       width: MediaQuery.of(context).size.width * 0.9,
       height: MediaQuery.of(context).size.height * 0.38,
       child: Padding(
@@ -161,7 +166,7 @@ class InfoWidget extends StatelessWidget {
                         "Brain Check ${AppLocalizations.of(context).tokens}: ${profile.lifes}",
                         style: GoogleFonts.bungee(
                             fontSize: MediaQuery.of(context).size.height / 40,
-                            color: Colors.white),
+                            color: Colors.black),
                       ),
                       SizedBox(
                         height: MediaQuery.of(context).size.height / 25,
@@ -177,7 +182,7 @@ class InfoWidget extends StatelessWidget {
                         "${AppLocalizations.of(context).gamesPlayed}: ${profile.gamesPlayed}",
                         style: GoogleFonts.bungee(
                             fontSize: MediaQuery.of(context).size.height / 40,
-                            color: Colors.white),
+                            color: Colors.black),
                       ),
                     ],
                   ),
@@ -187,7 +192,7 @@ class InfoWidget extends StatelessWidget {
                         "${AppLocalizations.of(context).yourScore}: ${profile.points}",
                         style: GoogleFonts.bungee(
                             fontSize: MediaQuery.of(context).size.height / 40,
-                            color: Colors.white),
+                            color: Colors.black),
                       ),
                     ],
                   ),
@@ -197,31 +202,37 @@ class InfoWidget extends StatelessWidget {
                 children: [
                   Row(
                     children: [
-                      Text(
-                        "${AppLocalizations.of(context).questionsAmount}: 5",
-                        style: GoogleFonts.bungee(
-                            fontSize: MediaQuery.of(context).size.height / 40,
-                            color: Colors.white),
+                      Expanded(
+                        child: Text(
+                          "${AppLocalizations.of(context).questionsAmount}: 5",
+                          style: GoogleFonts.bungee(
+                              fontSize: MediaQuery.of(context).size.height / 40,
+                              color: Colors.black),
+                        ),
                       ),
                     ],
                   ),
                   Row(
                     children: [
-                      Text(
-                        "${AppLocalizations.of(context).category}: ${AppLocalizations.of(context).random}",
-                        style: GoogleFonts.bungee(
-                            fontSize: MediaQuery.of(context).size.height / 40,
-                            color: Colors.white),
+                      Expanded(
+                        child: Text(
+                          "${AppLocalizations.of(context).category}: ${AppLocalizations.of(context).random}",
+                          style: GoogleFonts.bungee(
+                              fontSize: MediaQuery.of(context).size.height / 40,
+                              color: Colors.black),
+                        ),
                       ),
                     ],
                   ),
                   Row(
                     children: [
-                      Text(
-                        "${AppLocalizations.of(context).difficulty}: ${AppLocalizations.of(context).random}",
-                        style: GoogleFonts.bungee(
-                            fontSize: MediaQuery.of(context).size.height / 40,
-                            color: Colors.white),
+                      Expanded(
+                        child: Text(
+                          "${AppLocalizations.of(context).difficulty}: ${AppLocalizations.of(context).random}",
+                          style: GoogleFonts.bungee(
+                              fontSize: MediaQuery.of(context).size.height / 40,
+                              color: Colors.black),
+                        ),
                       ),
                     ],
                   )
