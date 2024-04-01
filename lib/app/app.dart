@@ -6,6 +6,8 @@ import 'package:brain_check/features/pages/root_page/root_page.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -16,6 +18,8 @@ class MyApp extends StatelessWidget {
       create: (context) => getIt<TokenCubitCubit>(),
       child: MaterialApp(
           title: 'Flutter Demo',
+          localizationsDelegates: AppLocalizations.localizationsDelegates,
+          supportedLocales: AppLocalizations.supportedLocales,
           debugShowCheckedModeBanner: Config.debugShowCheckModeBanner,
           theme: ThemeData(
             colorScheme: ColorScheme.fromSeed(

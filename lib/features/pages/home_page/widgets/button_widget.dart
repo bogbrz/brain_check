@@ -5,6 +5,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class StartButtonWidget extends StatelessWidget {
   const StartButtonWidget({
@@ -41,7 +43,8 @@ class StartButtonWidget extends StatelessWidget {
               borderRadius: BorderRadius.circular(10),
               border: Border.all(width: MediaQuery.of(context).size.width / 40),
             ),
-            child: Text("PLAY", style: GoogleFonts.bungee(fontSize: 45)),
+            child: Text(AppLocalizations.of(context).play,
+                style: GoogleFonts.bungee(fontSize: 45)),
           ),
         ),
       ),

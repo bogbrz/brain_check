@@ -8,6 +8,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class RankedGamePage extends StatelessWidget {
   const RankedGamePage({
@@ -30,7 +32,7 @@ class RankedGamePage extends StatelessWidget {
         child: Scaffold(
           appBar: AppBar(
             title: Text(
-              "Time to reset tokens: ${difference.inHours}:${difference.inMinutes.remainder(60)}",
+              "${AppLocalizations.of(context).timeToReset}: ${difference.inHours}:${difference.inMinutes.remainder(60)}",
               style: GoogleFonts.bungee(
                   fontSize: MediaQuery.of(context).size.height / 55,
                   color: Colors.white),
@@ -66,16 +68,17 @@ class RankedGamePage extends StatelessWidget {
                                       .fetchToken();
                                   Navigator.of(context).push(MaterialPageRoute(
                                       builder: (context) => QuestionPage(
-                                       players: null,
-                                       roomId: null,
-                                          isRanked: true,
-                                          category: 0,
-                                          difficulty: null.toString(),
-                                          questionsNumber: 5,
-                                          user: user,
-                                          token: state.tokenModel.token
-                                              .toString(),
-                                              isDuel: false,)));
+                                            players: null,
+                                            roomId: null,
+                                            isRanked: true,
+                                            category: 0,
+                                            difficulty: null.toString(),
+                                            questionsNumber: 5,
+                                            user: user,
+                                            token: state.tokenModel.token
+                                                .toString(),
+                                            isDuel: false,
+                                          )));
                                 },
                                 child: Container(
                                   padding: const EdgeInsets.all(8),
@@ -94,7 +97,7 @@ class RankedGamePage extends StatelessWidget {
                                       MediaQuery.of(context).size.height * 0.15,
                                   child: Center(
                                     child: Text(
-                                      "PLAY",
+                                      AppLocalizations.of(context).play,
                                       style: GoogleFonts.bungee(
                                           fontSize: MediaQuery.of(context)
                                                   .size
@@ -109,7 +112,7 @@ class RankedGamePage extends StatelessWidget {
                           )
                         ] else ...[
                           Text(
-                            "COME BACK TOMMOROW",
+                            AppLocalizations.of(context).comeBackTommorow,
                             textAlign: TextAlign.center,
                             style: GoogleFonts.bungee(
                                 fontSize:
@@ -155,7 +158,7 @@ class InfoWidget extends StatelessWidget {
                   Row(
                     children: [
                       Text(
-                        "Brain Check tokens: ${profile.lifes}",
+                        "Brain Check ${AppLocalizations.of(context).tokens}: ${profile.lifes}",
                         style: GoogleFonts.bungee(
                             fontSize: MediaQuery.of(context).size.height / 40,
                             color: Colors.white),
@@ -171,7 +174,7 @@ class InfoWidget extends StatelessWidget {
                   Row(
                     children: [
                       Text(
-                        "Games played: ${profile.gamesPlayed}",
+                        "${AppLocalizations.of(context).gamesPlayed}: ${profile.gamesPlayed}",
                         style: GoogleFonts.bungee(
                             fontSize: MediaQuery.of(context).size.height / 40,
                             color: Colors.white),
@@ -181,7 +184,7 @@ class InfoWidget extends StatelessWidget {
                   Row(
                     children: [
                       Text(
-                        "Your current Score: ${profile.points}",
+                        "${AppLocalizations.of(context).yourScore}: ${profile.points}",
                         style: GoogleFonts.bungee(
                             fontSize: MediaQuery.of(context).size.height / 40,
                             color: Colors.white),
@@ -195,7 +198,7 @@ class InfoWidget extends StatelessWidget {
                   Row(
                     children: [
                       Text(
-                        "Number of questions: 5",
+                        "${AppLocalizations.of(context).questionsAmount}: 5",
                         style: GoogleFonts.bungee(
                             fontSize: MediaQuery.of(context).size.height / 40,
                             color: Colors.white),
@@ -205,7 +208,7 @@ class InfoWidget extends StatelessWidget {
                   Row(
                     children: [
                       Text(
-                        "Category: Random",
+                        "${AppLocalizations.of(context).category}: ${AppLocalizations.of(context).random}",
                         style: GoogleFonts.bungee(
                             fontSize: MediaQuery.of(context).size.height / 40,
                             color: Colors.white),
@@ -215,7 +218,7 @@ class InfoWidget extends StatelessWidget {
                   Row(
                     children: [
                       Text(
-                        "Difficulty: Random",
+                        "${AppLocalizations.of(context).difficulty}: ${AppLocalizations.of(context).random}",
                         style: GoogleFonts.bungee(
                             fontSize: MediaQuery.of(context).size.height / 40,
                             color: Colors.white),

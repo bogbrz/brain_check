@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class LabelWidget extends StatelessWidget {
   const LabelWidget({
@@ -26,7 +28,7 @@ class LabelWidget extends StatelessWidget {
               width: MediaQuery.of(context).size.width * 0.15,
               child: Center(
                   child: Text(
-                "Place",
+                AppLocalizations.of(context).place,
                 style: GoogleFonts.bungee(
                     fontSize: MediaQuery.of(context).size.height / 50),
               ))),
@@ -34,7 +36,7 @@ class LabelWidget extends StatelessWidget {
               width: MediaQuery.of(context).size.width * 0.35,
               child: Center(
                   child: Text(
-                "Nickname",
+                AppLocalizations.of(context).nickName,
                 style: GoogleFonts.bungee(
                     fontSize: MediaQuery.of(context).size.height / 50),
               ))),
@@ -42,7 +44,7 @@ class LabelWidget extends StatelessWidget {
               width: MediaQuery.of(context).size.width * 0.25,
               child: Center(
                 child: Text(
-                  "Games played",
+                  AppLocalizations.of(context).gamesPlayed,
                   textAlign: TextAlign.center,
                   style: GoogleFonts.bungee(
                       fontSize: MediaQuery.of(context).size.height / 50),
@@ -52,7 +54,7 @@ class LabelWidget extends StatelessWidget {
             width: MediaQuery.of(context).size.width * 0.2,
             child: Center(
                 child: Text(
-              "Points",
+              AppLocalizations.of(context).points,
               style: GoogleFonts.bungee(
                   fontSize: MediaQuery.of(context).size.height / 50),
             )),

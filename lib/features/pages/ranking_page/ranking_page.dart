@@ -8,7 +8,8 @@ import 'package:brain_check/features/pages/ranking_page/widgets/ranking_profile_
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class RankingPage extends StatelessWidget {
   RankingPage({super.key});
   final TextStyle bungee = GoogleFonts.bungee();
@@ -21,7 +22,7 @@ class RankingPage extends StatelessWidget {
         appBar: AppBar(
           backgroundColor: const Color.fromARGB(255, 27, 58, 93),
           centerTitle: true,
-          title: Text("RANKING",
+          title: Text(AppLocalizations.of(context).ranking,
               style: GoogleFonts.bungee(
                 color: Colors.white,
                 fontSize: MediaQuery.of(context).size.height / 25,

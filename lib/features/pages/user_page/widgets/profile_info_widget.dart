@@ -1,14 +1,12 @@
-
 import 'package:brain_check/domain/models/profile_model.dart';
-
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import 'package:google_fonts/google_fonts.dart';
 
-
-
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ProfileInfoWidget extends StatelessWidget {
   const ProfileInfoWidget({
@@ -31,24 +29,25 @@ class ProfileInfoWidget extends StatelessWidget {
             radius: 40,
           ),
           for (final profile in profiles) ...[
-            Text("Your nickname: ${profile.nickName}",
+            Text(
+                "${AppLocalizations.of(context).yourNickName}: ${profile.nickName}",
                 textAlign: TextAlign.left,
                 style: GoogleFonts.bungee(
                     fontSize: MediaQuery.of(context).size.height / 35)),
             Text(
-              "Your email adress: ${user!.email}",
+              "${AppLocalizations.of(context).yourEmail}: ${user!.email}",
               style: GoogleFonts.bungee(
                   fontSize: MediaQuery.of(context).size.height / 35),
               textAlign: TextAlign.left,
             ),
             Text(
-              "Quiz played: ${profile.gamesPlayed} ",
+              "${AppLocalizations.of(context).quizPlayerd}: ${profile.gamesPlayed} ",
               style: GoogleFonts.bungee(
                   fontSize: MediaQuery.of(context).size.height / 35),
               textAlign: TextAlign.left,
             ),
             Text(
-              "Personal rating: ${profile.points}",
+              "${AppLocalizations.of(context).personalRating}: ${profile.points}",
               style: GoogleFonts.bungee(
                   fontSize: MediaQuery.of(context).size.height / 35),
               textAlign: TextAlign.left,

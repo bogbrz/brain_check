@@ -4,15 +4,16 @@ import 'package:brain_check/features/pages/user_page/user_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class NavigatorPage extends StatefulWidget {
   const NavigatorPage({
     required this.user,
-    
     super.key,
   });
   final User? user;
-  
+
   @override
   State<NavigatorPage> createState() => _NavigatorPageState();
 }
@@ -25,7 +26,7 @@ class _NavigatorPageState extends State<NavigatorPage> {
       body: Builder(builder: (context) {
         if (pageIndex == 0) {
           return HomePage(
-            user: widget.user, 
+            user: widget.user,
           );
         } else if (pageIndex == 2) {
           return UserPage(
@@ -56,7 +57,7 @@ class _NavigatorPageState extends State<NavigatorPage> {
                     ? MediaQuery.of(context).size.height / 20
                     : MediaQuery.of(context).size.height / 30,
               ),
-              label: "HOME",
+              label: AppLocalizations.of(context).home,
             ),
             BottomNavigationBarItem(
               icon: Image(
@@ -65,7 +66,7 @@ class _NavigatorPageState extends State<NavigatorPage> {
                     ? MediaQuery.of(context).size.height / 20
                     : MediaQuery.of(context).size.height / 35,
               ),
-              label: "RANKING",
+              label: AppLocalizations.of(context).ranking,
             ),
             BottomNavigationBarItem(
               icon: Image(
@@ -74,7 +75,7 @@ class _NavigatorPageState extends State<NavigatorPage> {
                     ? MediaQuery.of(context).size.height / 20
                     : MediaQuery.of(context).size.height / 30,
               ),
-              label: "USER",
+              label: AppLocalizations.of(context).user,
             ),
           ],
         ),

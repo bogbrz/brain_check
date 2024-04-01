@@ -11,6 +11,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:html_unescape/html_unescape.dart';
 import 'package:timer_count_down/timer_controller.dart';
 import 'package:timer_count_down/timer_count_down.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class DuelQuestionPage extends StatefulWidget {
   const DuelQuestionPage({
@@ -32,9 +34,6 @@ class DuelQuestionPage extends StatefulWidget {
 }
 
 class _DuelQuestionPageState extends State<DuelQuestionPage> {
-  
- 
-
   var index = 0;
   var choosedAnswer = "";
   var isChoosed = false;
@@ -106,7 +105,8 @@ class _DuelQuestionPageState extends State<DuelQuestionPage> {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Text("Question number ${index + 1}",
+                                  Text(
+                                      "${AppLocalizations.of(context).roundNumber} ${index + 1}",
                                       style: GoogleFonts.bungee(
                                         fontSize:
                                             MediaQuery.of(context).size.height /
@@ -327,4 +327,3 @@ class _DuelQuestionPageState extends State<DuelQuestionPage> {
     );
   }
 }
-

@@ -3,6 +3,8 @@ import 'package:brain_check/features/pages/log_in/cubit/log_in_page_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 final emailController = TextEditingController();
 final passwordController = TextEditingController();
@@ -29,7 +31,7 @@ class _LogInPageState extends State<LogInPage> {
             appBar: AppBar(
                 backgroundColor: const Color.fromARGB(255, 27, 58, 93),
                 title: Text(
-                  "Welcome to:",
+                  "${AppLocalizations.of(context).welcomeTo}",
                   style: GoogleFonts.bungee(
                       fontSize: MediaQuery.of(context).size.height / 20,
                       color: Colors.white),
@@ -78,7 +80,7 @@ class _LogInPageState extends State<LogInPage> {
                     ),
                     obscureText: true,
                     decoration: InputDecoration(
-                      hintText: "Password",
+                      hintText: "${AppLocalizations.of(context).password}",
                       fillColor: Colors.white,
                       filled: true,
                       hintStyle: GoogleFonts.bungee(color: Colors.black),
@@ -124,7 +126,9 @@ class _LogInPageState extends State<LogInPage> {
                       child: Padding(
                         padding: const EdgeInsets.all(4.0),
                         child: Text(
-                          isCreatingAccount ? "Create Account " : "Log in",
+                          isCreatingAccount
+                              ? "${AppLocalizations.of(context).createAccount}"
+                              : "${AppLocalizations.of(context).logIn}",
                           textAlign: TextAlign.center,
                           style: GoogleFonts.bungee(
                               fontSize:
@@ -143,7 +147,7 @@ class _LogInPageState extends State<LogInPage> {
                           });
                         },
                         child: Text(
-                          "Doesn't have an Account?",
+                          "${AppLocalizations.of(context).doesntHave}",
                           style: GoogleFonts.bungee(
                               fontSize: MediaQuery.of(context).size.height / 50,
                               color: Colors.black),
@@ -159,7 +163,7 @@ class _LogInPageState extends State<LogInPage> {
                           });
                         },
                         child: Text(
-                          "Already have an account?",
+                          "${AppLocalizations.of(context).alreadyHave}",
                           style: GoogleFonts.bungee(
                               fontSize: MediaQuery.of(context).size.height / 50,
                               color: Colors.black),
