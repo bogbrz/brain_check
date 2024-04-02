@@ -45,7 +45,7 @@ class DuelGameRepository {
     final token = await questionDataSource.getToken();
 
     final questionsList = await questionDataSource.getListofQuestions(
-        "easy", categoryId, 5, token.token);
+        null, categoryId, 5, token.token);
 
     final results = questionsList.results;
     print("Questions to add $results");

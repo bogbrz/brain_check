@@ -20,7 +20,7 @@ class DuelResultPage extends StatelessWidget {
     required this.answerThree,
     required this.answerFour,
     required this.answerFive,
-    required this.gameStatus,
+    required this.gameStatus, required this.answerSix, required this.answerSeven, required this.answerEight, required this.answerNine, required this.answerTen, required this.answerEleven, required this.answerTwelve, required this.answerThirteen, required this.answerFourteem, required this.answerFithteen,
   });
   final String? roomId;
   final List<PlayerModel>? players;
@@ -32,7 +32,19 @@ class DuelResultPage extends StatelessWidget {
   final int answerThree;
   final int answerFour;
   final int answerFive;
+   final int answerSix ;
+  final int answerSeven ;
+  final int answerEight ;
+  final int answerNine ;
+  final int answerTen ;
+  final int answerEleven ;
+  final int answerTwelve ;
+  final int answerThirteen ;
+  final int answerFourteem ;
+  final int answerFithteen ;
   final bool gameStatus;
+
+   
 
   @override
   Widget build(BuildContext context) {
@@ -71,6 +83,36 @@ class DuelResultPage extends StatelessWidget {
                             ? Icon(Icons.check_circle, color: Colors.green)
                             : Icon(Icons.cancel_rounded, color: Colors.red),
                         answerFive == 1
+                            ? Icon(Icons.check_circle, color: Colors.green)
+                            : Icon(Icons.cancel_rounded, color: Colors.red),
+                               answerSix == 1
+                            ? Icon(Icons.check_circle, color: Colors.green)
+                            : Icon(Icons.cancel_rounded, color: Colors.red),
+                        answerSeven == 1
+                            ? Icon(Icons.check_circle, color: Colors.green)
+                            : Icon(Icons.cancel_rounded, color: Colors.red),
+                        answerEight == 1
+                            ? Icon(Icons.check_circle, color: Colors.green)
+                            : Icon(Icons.cancel_rounded, color: Colors.red),
+                        answerNine == 1
+                            ? Icon(Icons.check_circle, color: Colors.green)
+                            : Icon(Icons.cancel_rounded, color: Colors.red),
+                        answerTen == 1
+                            ? Icon(Icons.check_circle, color: Colors.green)
+                            : Icon(Icons.cancel_rounded, color: Colors.red),
+                               answerEleven == 1
+                            ? Icon(Icons.check_circle, color: Colors.green)
+                            : Icon(Icons.cancel_rounded, color: Colors.red),
+                        answerTwelve == 1
+                            ? Icon(Icons.check_circle, color: Colors.green)
+                            : Icon(Icons.cancel_rounded, color: Colors.red),
+                        answerThirteen == 1
+                            ? Icon(Icons.check_circle, color: Colors.green)
+                            : Icon(Icons.cancel_rounded, color: Colors.red),
+                        answerFourteem == 1
+                            ? Icon(Icons.check_circle, color: Colors.green)
+                            : Icon(Icons.cancel_rounded, color: Colors.red),
+                        answerFithteen == 1
                             ? Icon(Icons.check_circle, color: Colors.green)
                             : Icon(Icons.cancel_rounded, color: Colors.red),
                       ],
