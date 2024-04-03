@@ -115,9 +115,7 @@ extension GetItInjectableX on _i1.GetIt {
           questionDataSource: gh<_i13.QuestionDataSource>(),
         ));
     gh.factory<_i21.DuelQuestionPageCubit>(() => _i21.DuelQuestionPageCubit(
-          duelGameRepository: gh<_i20.DuelGameRepository>(),
-          questionRepository: gh<_i14.QuestionRepository>(),
-        ));
+        duelGameRepository: gh<_i20.DuelGameRepository>()));
     gh.factory<_i22.DuelResultCubit>(() => _i22.DuelResultCubit(
         duelGameRepository: gh<_i20.DuelGameRepository>()));
     gh.factory<_i23.DuelRoomPageCubit>(() => _i23.DuelRoomPageCubit(

@@ -62,15 +62,15 @@ class ResultsPage extends StatelessWidget {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      Text(
-                          questionPage.questionsNumber != 0 &&
-                                  index == questionPage.questionsNumber
-                              ? "Your Score $points/$index"
-                              : "Your Score $points",
-                          textAlign: TextAlign.center,
-                          style: GoogleFonts.bungee(
-                            fontSize: MediaQuery.of(context).size.height / 35,
-                          )),
+                      // Text(
+                      //     questionPage.questionsNumber != 0 &&
+                      //             index == questionPage.questionsNumber
+                      //         ? "Your Score $points/$index"
+                      //         : "Your Score $points",
+                      //     textAlign: TextAlign.center,
+                      //     style: GoogleFonts.bungee(
+                      //       fontSize: MediaQuery.of(context).size.height / 35,
+                      //     )),
                       FinishButtonWidget(
                         isRanked: isRanked,
                         points: points,

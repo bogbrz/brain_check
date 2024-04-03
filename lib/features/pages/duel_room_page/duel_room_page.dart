@@ -64,10 +64,6 @@ class _GameRoomPageState extends State<GameRoomPage> {
                         players: state.players,
                         user: widget.user,
                         ownerEmail: widget.roomModel.ownerMail,
-                        isCausal: false,
-                        questionsAmount: 5,
-                        category: null,
-                        difficulty: null,
                       );
                     }
                   }

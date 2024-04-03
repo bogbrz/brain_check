@@ -248,18 +248,12 @@ class _DifficultyPageState extends State<DifficultyPage> {
                                     Navigator.of(context)
                                         .push(MaterialPageRoute(
                                             builder: ((context) => QuestionPage(
-                                                  players: null,
-                                                  roomId: null,
-                                                  isRanked: false,
-                                                  token: state.tokenModel.token
-                                                      .toString(),
-                                                  user: widget.user,
                                                   category:
                                                       widget.categoriesModel.id,
                                                   difficulty: choosedDifficulty,
-                                                  questionsNumber:
+                                                  user: widget.user,
+                                                  questionsAmount:
                                                       questionsNumber,
-                                                  isDuel: false,
                                                 ))));
                                   },
                                   child: Container(
@@ -331,7 +325,9 @@ class AmountWidget extends StatelessWidget {
           color: Colors.blue,
         ),
         child: Text(
-          amount.name,
+          amount.name == "Survival"
+              ? AppLocalizations.of(context).survival
+              : amount.name,
           style: GoogleFonts.bungee(
               fontSize: choosedAmount == null
                   ? MediaQuery.of(context).size.width / 35
