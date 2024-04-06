@@ -117,7 +117,9 @@ extension GetItInjectableX on _i1.GetIt {
     gh.factory<_i21.DuelQuestionPageCubit>(() => _i21.DuelQuestionPageCubit(
         duelGameRepository: gh<_i20.DuelGameRepository>()));
     gh.factory<_i22.DuelResultCubit>(() => _i22.DuelResultCubit(
-        duelGameRepository: gh<_i20.DuelGameRepository>()));
+          duelGameRepository: gh<_i20.DuelGameRepository>(),
+          rankingRepository: gh<_i8.RankingRepository>(),
+        ));
     gh.factory<_i23.DuelRoomPageCubit>(() => _i23.DuelRoomPageCubit(
           duelGameRepository: gh<_i20.DuelGameRepository>(),
           questionRepository: gh<_i14.QuestionRepository>(),
@@ -131,6 +133,7 @@ extension GetItInjectableX on _i1.GetIt {
     gh.factory<_i26.QuestionPageCubit>(() => _i26.QuestionPageCubit(
           questionRepository: gh<_i14.QuestionRepository>(),
           rankingRepository: gh<_i8.RankingRepository>(),
+          duelGameRepository: gh<_i20.DuelGameRepository>(),
         ));
     gh.factory<_i27.ResultPageCubit>(() => _i27.ResultPageCubit(
           rankingRepository: gh<_i8.RankingRepository>(),

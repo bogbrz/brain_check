@@ -64,22 +64,15 @@ class RankedGamePage extends StatelessWidget {
                             builder: (context, state) {
                               return InkWell(
                                 onTap: () async {
-                                  await context
-                                      .read<TokenCubitCubit>()
-                                      .fetchToken();
-                                  // Navigator.of(context).push(MaterialPageRoute(
-                                  //     builder: (context) => QuestionPage(
-                                  //           players: null,
-                                  //           roomId: null,
-                                  //           isRanked: true,
-                                  //           category: 0,
-                                  //           difficulty: null.toString(),
-                                  //           questionsNumber: 5,
-                                  //           user: user,
-                                  //           token: state.tokenModel.token
-                                  //               .toString(),
-                                  //           isDuel: false,
-                                  //         )));
+                                  Navigator.of(context).push(MaterialPageRoute(
+                                      builder: (context) => QuestionPage(
+                                            roomId: null,
+                                            gameType: GameType.ranked,
+                                            category: null,
+                                            difficulty: '',
+                                            questionsAmount: 5,
+                                            user: user,
+                                          )));
                                 },
                                 child: Container(
                                   padding: EdgeInsets.all(

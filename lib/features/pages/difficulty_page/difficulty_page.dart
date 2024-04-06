@@ -241,19 +241,20 @@ class _DifficultyPageState extends State<DifficultyPage> {
                                 return InkWell(
                                   onTap: () async {
                                     print(widget.categoriesModel.id);
-                                    await context
-                                        .read<TokenCubitCubit>()
-                                        .fetchToken();
+                                   
 
                                     Navigator.of(context)
                                         .push(MaterialPageRoute(
                                             builder: ((context) => QuestionPage(
+                                            
+                                              roomId: null,
                                                   category:
                                                       widget.categoriesModel.id,
                                                   difficulty: choosedDifficulty,
                                                   user: widget.user,
                                                   questionsAmount:
                                                       questionsNumber,
+                                                  gameType: GameType.casual,
                                                 ))));
                                   },
                                   child: Container(

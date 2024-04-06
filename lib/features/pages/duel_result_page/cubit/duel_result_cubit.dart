@@ -2,15 +2,18 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:brain_check/domain/repositories/duel_game_repository.dart';
+import 'package:brain_check/domain/repositories/ranking_repository.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'duel_result_state.dart';
 part 'duel_result_cubit.freezed.dart';
 
 class DuelResultCubit extends Cubit<DuelResultState> {
-  DuelResultCubit({required this.duelGameRepository})
+  DuelResultCubit(
+      {required this.duelGameRepository, required this.rankingRepository})
       : super(DuelResultState());
   final DuelGameRepository duelGameRepository;
+  final RankingRepository rankingRepository;
   StreamSubscription? streamSubscription;
   Future<void> resetGameStatus({
     required String roomId,
@@ -44,6 +47,17 @@ class DuelResultCubit extends Cubit<DuelResultState> {
         }
       } catch (e) {
         print("DELETE Q ERROR ${e.toString()}");
+      }
+    });
+  }
+
+  Future<void> updateRanking(
+      {required int points, required String userEmail}) async {
+    streamSubscription = rankingRepository
+        .getRankingForUpdate(email: userEmail.toString())
+        .listen((event) {
+      for (final player in event) {
+        rankingRepository.updateRanking(points: points, id: player.id);
       }
     });
   }

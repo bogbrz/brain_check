@@ -6,6 +6,7 @@ import 'package:brain_check/features/pages/duel_question_page/cubit/duel_questio
 import 'package:brain_check/features/pages/duel_result_page/duel_result_page.dart';
 import 'package:brain_check/features/pages/question_page/cubit/question_page_cubit.dart';
 import 'package:brain_check/features/pages/question_page/widgets/option_widget.dart';
+import 'package:brain_check/features/pages/result_page/result_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -23,13 +24,17 @@ class QuestionPage extends StatefulWidget {
     required this.category,
     required this.difficulty,
     required this.questionsAmount,
+    required this.gameType,
+    required this.roomId,
   });
 
   final User? user;
 
-  final int category;
+  final int? category;
   final String difficulty;
   final int questionsAmount;
+  final GameType gameType;
+  final String? roomId;
 
   @override
   State<QuestionPage> createState() => _QuestionPageState();
@@ -54,7 +59,7 @@ class _QuestionPageState extends State<QuestionPage> {
   var answerEleven = 0;
   var answerTwelve = 0;
   var answerThirteen = 0;
-  var answerFourteem = 0;
+  var answerFourteen = 0;
   var answerFithteen = 0;
   final CountdownController controller = CountdownController(autoStart: true);
   @override
@@ -62,9 +67,11 @@ class _QuestionPageState extends State<QuestionPage> {
     return BlocProvider(
       create: (context) => getIt<QuestionPageCubit>()
         ..getQuestion(
-            category: widget.category,
-            difficulty: widget.difficulty,
-            questionsAmount: widget.questionsAmount),
+          roomId: widget.roomId,
+          category: widget.category,
+          difficulty: widget.difficulty,
+          questionsAmount: widget.questionsAmount,
+        ),
       child: BlocBuilder<QuestionPageCubit, QuestionPageState>(
         builder: (context, state) {
           switch (state.status) {
@@ -77,7 +84,30 @@ class _QuestionPageState extends State<QuestionPage> {
                   errorMessage: state.errorMessage.toString());
             case Status.success:
               if (index == widget.questionsAmount) {
-                Navigator.of(context).pop();
+                return DuelResultPage(
+                  gameType: widget.gameType,
+                  questionAmount: widget.questionsAmount,
+                  roomId: null,
+                  players: null,
+                  user: widget.user,
+                  ownerEmail: null,
+                  answerOne: answerOne,
+                  answerTwo: answerTwo,
+                  answerThree: answerThree,
+                  answerFour: answerFour,
+                  answerFive: answerFive,
+                  answerSix: answerSix,
+                  answerSeven: answerSeven,
+                  answerEight: answerEight,
+                  answerNine: answerNine,
+                  answerTen: answerTen,
+                  answerEleven: answerEleven,
+                  answerTwelve: answerTwelve,
+                  answerThirteen: answerThirteen,
+                  answerFourteen: answerFourteen,
+                  answerFithteen: answerFithteen,
+                  gameStatus: null,
+                );
               }
 
               return Scaffold(
@@ -144,12 +174,15 @@ class _QuestionPageState extends State<QuestionPage> {
                               ),
                             ),
                             Padding(
-                              padding: EdgeInsets.only(
-                                top: MediaQuery.of(context).size.height * 0.09,
-                                left: MediaQuery.of(context).size.width * 0.01,
-                                right: MediaQuery.of(context).size.width * 0.01,
-                              ),
-                              child: Text(
+                                padding: EdgeInsets.only(
+                                  top:
+                                      MediaQuery.of(context).size.height * 0.09,
+                                  left:
+                                      MediaQuery.of(context).size.width * 0.01,
+                                  right:
+                                      MediaQuery.of(context).size.width * 0.01,
+                                ),
+                                child: Text(
                                   index == 0
                                       ? HtmlUnescape().convert(state
                                           .firstQuestion!.question
@@ -198,8 +231,8 @@ class _QuestionPageState extends State<QuestionPage> {
                                   style: GoogleFonts.bungee(
                                     fontSize:
                                         MediaQuery.of(context).size.height / 45,
-                                  )),
-                            ),
+                                  ),
+                                )),
                           ],
                         ),
                       ),
@@ -590,7 +623,7 @@ class _QuestionPageState extends State<QuestionPage> {
                                                 state.fourteenthQuestion!
                                                     .correctAnswer
                                                     .toString()) {
-                                              answerFourteem++;
+                                              answerFourteen++;
                                             }
                                           });
 

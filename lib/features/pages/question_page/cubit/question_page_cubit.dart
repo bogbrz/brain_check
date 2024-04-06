@@ -4,6 +4,7 @@ import 'package:bloc/bloc.dart';
 import 'package:brain_check/app/core/enums/enums.dart';
 import 'package:brain_check/domain/models/duel_question_model.dart';
 import 'package:brain_check/domain/models/question_model.dart';
+import 'package:brain_check/domain/repositories/duel_game_repository.dart';
 import 'package:brain_check/domain/repositories/questions_repository.dart';
 import 'package:brain_check/domain/repositories/ranking_repository.dart';
 
@@ -14,7 +15,9 @@ part 'question_page_cubit.freezed.dart';
 
 class QuestionPageCubit extends Cubit<QuestionPageState> {
   QuestionPageCubit(
-      {required this.questionRepository, required this.rankingRepository})
+      {required this.questionRepository,
+      required this.rankingRepository,
+      required this.duelGameRepository})
       : super(QuestionPageState(
           firstQuestion: null,
           secondQuestion: null,
@@ -52,12 +55,14 @@ class QuestionPageCubit extends Cubit<QuestionPageState> {
 
   final QuestionRepository questionRepository;
   final RankingRepository rankingRepository;
+  final DuelGameRepository duelGameRepository;
   StreamSubscription? streamSubscription;
 
   Future<void> getQuestion({
-    required int category,
-    required String difficulty,
+    required int? category,
+    required String? difficulty,
     required int questionsAmount,
+    required String? roomId,
   }) async {
     emit(QuestionPageState(
       firstQuestion: null,
@@ -93,7 +98,7 @@ class QuestionPageCubit extends Cubit<QuestionPageState> {
       answersFourteen: [],
       answersFifteen: [],
     ));
-    print("DUPA");
+
     final questionList = await questionRepository.getListOfQuestions(
         category: category, difficulty: difficulty, amount: 15);
     List<String> answersOne = [];
@@ -250,11 +255,11 @@ class QuestionPageCubit extends Cubit<QuestionPageState> {
         answersFifteen: [],
       ));
     }
+  }
 
-    @override
-    Future<void> close() {
-      streamSubscription?.cancel();
-      return super.close();
-    }
+  @override
+  Future<void> close() {
+    streamSubscription?.cancel();
+    return super.close();
   }
 }

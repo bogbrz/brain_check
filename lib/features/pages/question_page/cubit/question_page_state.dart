@@ -3,7 +3,7 @@ part of 'question_page_cubit.dart';
 @freezed
 class QuestionPageState with _$QuestionPageState {
   factory QuestionPageState({
-    required String? errorMessage,
+     required String? errorMessage,
     required QuestionModel? firstQuestion,
     required QuestionModel? secondQuestion,
     required QuestionModel? thirdQuestion,
@@ -19,6 +19,8 @@ class QuestionPageState with _$QuestionPageState {
     required QuestionModel? thirteenthQuestion,
     required QuestionModel? fourteenthQuestion,
     required QuestionModel? fifteenthQuestion,
+   
+  
     required Status status,
     required List<String?>? answersOne,
     required List<String?>? answersTwo,

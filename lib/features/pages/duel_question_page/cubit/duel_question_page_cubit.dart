@@ -146,7 +146,7 @@ class DuelQuestionPageCubit extends Cubit<DuelQuestionPageState> {
     streamSubscription = duelGameRepository
         .getQuestionsFromFb(roomId: roomId, roundNumber: roundNumber)
         .listen((event) {
-      ;
+      
       List<String> answersOne = [];
       if (event[0].incorrectTwo == null) {
         answersOne.add(event[0].correctAnswer.toString());
