@@ -1,6 +1,8 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:brain_check/app/core/enums/enums.dart';
+import 'package:brain_check/domain/models/profile_model.dart';
 import 'package:brain_check/domain/repositories/duel_game_repository.dart';
 import 'package:brain_check/domain/repositories/ranking_repository.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -11,7 +13,8 @@ part 'duel_result_cubit.freezed.dart';
 class DuelResultCubit extends Cubit<DuelResultState> {
   DuelResultCubit(
       {required this.duelGameRepository, required this.rankingRepository})
-      : super(DuelResultState());
+      : super(DuelResultState(
+            errorMessage: null, status: Status.initial, profiles: []));
   final DuelGameRepository duelGameRepository;
   final RankingRepository rankingRepository;
   StreamSubscription? streamSubscription;
@@ -51,15 +54,32 @@ class DuelResultCubit extends Cubit<DuelResultState> {
     });
   }
 
-  Future<void> updateRanking(
-      {required int points, required String userEmail}) async {
-    streamSubscription = rankingRepository
-        .getRankingForUpdate(email: userEmail.toString())
-        .listen((event) {
-      for (final player in event) {
-        rankingRepository.updateRanking(points: points, id: player.id);
+  Future<void> getRankingForUpdate({required String email}) async {
+    emit(DuelResultState(
+        errorMessage: null, profiles: [], status: Status.loading));
+    streamSubscription =
+        rankingRepository.getRankingForUpdate(email: email).listen((event) {
+      try {
+        emit(DuelResultState(
+            errorMessage: null, profiles: event, status: Status.success));
+      } catch (error) {
+        emit(DuelResultState(
+            errorMessage: error.toString(),
+            profiles: [],
+            status: Status.error));
       }
     });
+  }
+
+  Future<void> updateRanking(
+      {required int points, required String profileId}) async {
+    try {
+      rankingRepository
+          .updateRanking(points: points, id: profileId)
+          .then((value) => streamSubscription?.cancel());
+    } catch (e) {
+      print(e.toString());
+    }
   }
 
   Future<void> addRoundResults(

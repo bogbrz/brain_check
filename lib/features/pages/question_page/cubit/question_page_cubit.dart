@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:brain_check/app/core/enums/enums.dart';
-import 'package:brain_check/domain/models/duel_question_model.dart';
 import 'package:brain_check/domain/models/question_model.dart';
 import 'package:brain_check/domain/repositories/duel_game_repository.dart';
 import 'package:brain_check/domain/repositories/questions_repository.dart';

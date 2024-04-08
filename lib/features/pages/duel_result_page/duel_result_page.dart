@@ -6,7 +6,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class DuelResultPage extends StatelessWidget {
@@ -78,7 +77,7 @@ class DuelResultPage extends StatelessWidget {
         answerFourteen +
         answerFithteen;
     return BlocProvider(
-      create: (context) => getIt<DuelResultCubit>(),
+      create: (context) => getIt<DuelResultCubit>()..getRankingForUpdate(email: user!.email.toString()),
       child: Scaffold(body: BlocBuilder<DuelResultCubit, DuelResultState>(
         builder: (context, state) {
           return Center(
@@ -227,8 +226,9 @@ class DuelResultPage extends StatelessWidget {
                         Navigator.of(context).pop();
                         Navigator.of(context).pop();
                       } else {
+                       
                         context.read<DuelResultCubit>().updateRanking(
-                            points: score, userEmail: user!.email.toString());
+                            points: score, profileId: state.profiles[0].id);
                         Navigator.of(context).pop();
                       }
                     },

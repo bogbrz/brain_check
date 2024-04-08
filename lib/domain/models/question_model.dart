@@ -18,7 +18,6 @@ class Questions with _$Questions {
 
 @freezed
 class QuestionModel with _$QuestionModel {
-  
   const QuestionModel._();
   @JsonSerializable(fieldRename: FieldRename.snake)
   factory QuestionModel({
@@ -29,8 +28,6 @@ class QuestionModel with _$QuestionModel {
     required String correctAnswer,
     required List<String> incorrectAnswers,
   }) = _QuestionModel;
-  
- 
 
   factory QuestionModel.fromJson(Map<String, dynamic> json) =>
       _$QuestionModelFromJson(json);

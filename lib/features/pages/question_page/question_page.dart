@@ -1,12 +1,10 @@
 import 'package:brain_check/app/core/enums/enums.dart';
 import 'package:brain_check/app/injection_container.dart';
-import 'package:brain_check/domain/models/player_model.dart';
-import 'package:brain_check/features/pages/duel_question_page/cubit/duel_question_page_cubit.dart';
 
 import 'package:brain_check/features/pages/duel_result_page/duel_result_page.dart';
 import 'package:brain_check/features/pages/question_page/cubit/question_page_cubit.dart';
 import 'package:brain_check/features/pages/question_page/widgets/option_widget.dart';
-import 'package:brain_check/features/pages/result_page/result_page.dart';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -14,7 +12,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:html_unescape/html_unescape.dart';
 import 'package:timer_count_down/timer_controller.dart';
 import 'package:timer_count_down/timer_count_down.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class QuestionPage extends StatefulWidget {

@@ -9,12 +9,10 @@ import 'package:brain_check/features/pages/duel_room_page/widgets/non_owner_cate
 import 'package:brain_check/features/pages/duel_room_page/widgets/player_one_widget.dart';
 import 'package:brain_check/features/pages/duel_room_page/widgets/player_two_widget.dart';
 import 'package:brain_check/features/pages/duel_room_page/widgets/players_score.dart';
-import 'package:brain_check/features/pages/question_page/question_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class GameRoomPage extends StatefulWidget {

@@ -5,8 +5,6 @@ import 'package:brain_check/domain/repositories/authentication_repository.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-
-
 part 'root_page_state.dart';
 part 'root_page_cubit.freezed.dart';
 
@@ -25,8 +23,6 @@ class RootPageCubit extends Cubit<RootPageState> {
       }
     });
   }
-
-  
 
   @override
   Future<void> close() {
