@@ -3,7 +3,6 @@ import 'package:injectable/injectable.dart';
 
 part 'amount_button_model.freezed.dart';
 
-@injectable
 @freezed
 class AmountModel with _$AmountModel {
   factory AmountModel({

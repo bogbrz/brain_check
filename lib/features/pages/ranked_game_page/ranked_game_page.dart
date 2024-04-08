@@ -4,41 +4,55 @@ import 'package:brain_check/app/injection_container.dart';
 import 'package:brain_check/domain/models/profile_model.dart';
 import 'package:brain_check/features/pages/question_page/question_page.dart';
 import 'package:brain_check/features/pages/ranked_game_page/cubit/ranked_game_cubit.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:timer_count_down/timer_controller.dart';
+import 'package:timer_count_down/timer_count_down.dart';
 
 class RankedGamePage extends StatelessWidget {
-  const RankedGamePage({
+  RankedGamePage({
     required this.user,
     super.key,
   });
 
   final User? user;
-
+  final CountdownController controller = CountdownController(autoStart: true);
   @override
   Widget build(BuildContext context) {
     final now = DateTime.now();
-    final int hour = now.hour;
-    final DateTime resetTime = DateTime(now.year, now.month, now.day, 23, 59);
-    Duration difference = resetTime.difference(now);
+    final DateTime dateTime = DateTime.now();
 
     return BlocProvider(
         create: (context) => getIt<RankedGameCubit>()
           ..getRankingForUpdate(email: user!.email.toString()),
         child: Scaffold(
           appBar: AppBar(
-            title: Text(
-              "${AppLocalizations.of(context).timeToReset}: ${difference.inHours}:${difference.inMinutes.remainder(60)}",
-              style: GoogleFonts.bungee(
-                  fontSize: MediaQuery.of(context).size.height / 55,
-                  color: Colors.white),
-            ),
+            // title: Text(
+            //   "${AppLocalizations.of(context).timeToReset}: ${difference.inHours}:${difference.inMinutes.remainder(60)}",
+            //   style: GoogleFonts.bungee(
+            //       fontSize: MediaQuery.of(context).size.height / 55,
+            //       color: Colors.white),
+            // ),
             backgroundColor: const Color.fromARGB(255, 27, 58, 93),
           ),
-          body: BlocBuilder<RankedGameCubit, RankedGameState>(
+          body: BlocConsumer<RankedGameCubit, RankedGameState>(
+            listener: (context, state) {
+              DateTime lastLogin = DateTime.parse(
+                  state.profile[0].lastLogIn.toDate().toString());
+
+              Duration difference = dateTime.difference(lastLogin);
+              print(difference);
+              if (difference.inHours > 23) {
+                context.read<RankedGameCubit>().updateLifes(
+                      lastLogin: DateTime.now(),
+                      profileId: state.profile[0].id,
+                    );
+              }
+            },
             builder: (context, state) {
               switch (state.status) {
                 case Status.initial:
@@ -49,6 +63,13 @@ class RankedGamePage extends StatelessWidget {
                   return ErrorStateWidget(
                       errorMessage: state.errorMessage.toString());
                 case Status.success:
+                  DateTime lastLogin = DateTime.parse(
+                      state.profile[0].lastLogIn.toDate().toString());
+                  DateTime resetDay = DateTime(
+                      dateTime.year, dateTime.month, dateTime.day, 23, 59);
+
+                  Duration difference = resetDay.difference(lastLogin);
+                  int resetTime = int.parse(difference.inMinutes.toString());
                   return Center(
                     child: Column(
                       children: [
@@ -109,13 +130,26 @@ class RankedGamePage extends StatelessWidget {
                           )
                         ] else ...[
                           Text(
-                            AppLocalizations.of(context).comeBackTommorow,
+                            "${AppLocalizations.of(context).timeToReset}:",
                             textAlign: TextAlign.center,
                             style: GoogleFonts.bungee(
                                 fontSize:
                                     MediaQuery.of(context).size.height / 20,
                                 color: Colors.black),
                           ),
+                          Countdown(
+                            controller: controller,
+                            seconds: resetTime*60,
+                            build: (BuildContext context, double time) =>
+                                Text(time.toInt().toString(),
+                                    style: GoogleFonts.bungee(
+                                      fontSize:
+                                          MediaQuery.of(context).size.height /
+                                              30,
+                                    )),
+                            interval: const Duration(milliseconds: 1000),
+                            onFinished: () {},
+                          )
                         ]
                       ],
                     ),

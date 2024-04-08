@@ -14,5 +14,6 @@ class PlayerModel with _$PlayerModel {
     required bool startGame,
     required int roundNumber,
     required String category,
+    
   }) = _PlayerModel;
 }

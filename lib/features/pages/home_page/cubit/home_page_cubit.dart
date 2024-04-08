@@ -6,6 +6,7 @@ import 'package:brain_check/domain/models/overall_info_model.dart';
 import 'package:brain_check/domain/models/profile_model.dart';
 import 'package:brain_check/domain/repositories/questions_repository.dart';
 import 'package:brain_check/domain/repositories/ranking_repository.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'home_page_state.dart';
@@ -26,6 +27,12 @@ class HomePageCubit extends Cubit<HomePageState> {
   final RankingRepository rankingRepository;
   final QuestionRepository questionRepository;
   StreamSubscription? streamSubscription;
+
+  Future<void> updateLifes(
+      {required String profileId, required DateTime lastLogin}) async {
+    return rankingRepository.restoreLifes(
+        playerId: profileId, lastLogin: lastLogin );
+  }
 
   Future<void> getRankingForUpdate({required String email}) async {
     emit(HomePageState(

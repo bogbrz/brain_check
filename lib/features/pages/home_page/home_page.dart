@@ -4,6 +4,7 @@ import 'package:brain_check/app/injection_container.dart';
 import 'package:brain_check/features/pages/home_page/cubit/home_page_cubit.dart';
 import 'package:brain_check/features/pages/home_page/widgets/button_widget.dart';
 import 'package:brain_check/features/pages/home_page/widgets/page_extras_widget.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -12,19 +13,32 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({
+  HomePage({
     super.key,
     required this.user,
   });
   final User? user;
+  final DateTime dateTime = DateTime.now();
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
         create: (context) => getIt<HomePageCubit>()
           ..getRankingForUpdate(email: user!.email.toString()),
-        child: BlocBuilder<HomePageCubit, HomePageState>(
-            builder: (context, state) {
+        child: BlocConsumer<HomePageCubit, HomePageState>(
+            listener: (context, state) {
+          DateTime lastLogin =
+              DateTime.parse(state.profile[0].lastLogIn.toDate().toString());
+
+          Duration difference = dateTime.difference(lastLogin);
+          print(difference);
+          if (difference.inMinutes > 1) {
+            context.read<HomePageCubit>().updateLifes(
+                  lastLogin: DateTime.now(),
+                  profileId: state.profile[0].id,
+                );
+          }
+        }, builder: (context, state) {
           switch (state.status) {
             case Status.initial:
               return const InitialStateWidget();

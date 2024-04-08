@@ -12,22 +12,21 @@ part 'set_up_user_cubit.freezed.dart';
 class SetUpUserCubit extends Cubit<SetUpUserState> {
   SetUpUserCubit({required this.rankingRepository})
       : super(const SetUpUserState(
-            errorMessage: null, profile: [], status: Status.initial));
+          errorMessage: null,
+          profile: [],
+        status: Status.initial));
   final RankingRepository rankingRepository;
 
   StreamSubscription? streamSubscription;
 
   Future<void> getRankingForUpdate({required String email}) async {
-    emit(const SetUpUserState(
-        errorMessage: null, profile: [], status: Status.loading));
+    emit(const SetUpUserState(errorMessage: null, profile: [], status: Status.loading));
     streamSubscription =
         rankingRepository.getRankingForUpdate(email: email).listen((event) {
       try {
-        emit(SetUpUserState(
-            errorMessage: null, profile: event, status: Status.success));
+        emit(SetUpUserState(errorMessage: null, profile: event, status: Status.success));
       } catch (error) {
-        emit(SetUpUserState(
-            errorMessage: error.toString(), profile: [], status: Status.error));
+        emit(SetUpUserState(errorMessage: error.toString(), profile: [], status: Status.error));
       }
     });
   }
