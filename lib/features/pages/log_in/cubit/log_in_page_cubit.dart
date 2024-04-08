@@ -5,8 +5,6 @@ import 'package:brain_check/domain/repositories/authentication_repository.dart';
 
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-
-
 part 'log_in_page_state.dart';
 part 'log_in_page_cubit.freezed.dart';
 
@@ -17,14 +15,13 @@ class LogInPageCubit extends Cubit<LogInPageState> {
         ));
   final AuthRepository authRepository;
 
-
   Future<void> signInWitEmailAndPassword(
       {required String email, required String password}) async {
     emit(LogInPageState(
       errorMessage: "",
     ));
     try {
-       await authRepository.signInWitEmailAndPassword(
+      await authRepository.signInWitEmailAndPassword(
           email: email, password: password);
       emit(LogInPageState(
         errorMessage: "",
@@ -42,7 +39,7 @@ class LogInPageCubit extends Cubit<LogInPageState> {
       errorMessage: "",
     ));
     try {
-     await authRepository.createUserWithEmailAndPassword(
+      await authRepository.createUserWithEmailAndPassword(
           email: email, password: password);
       emit(LogInPageState(
         errorMessage: "",
@@ -53,9 +50,6 @@ class LogInPageCubit extends Cubit<LogInPageState> {
       );
     }
   }
- 
 
-  Future<void> setNickName() async {
-    
-  }
+  Future<void> setNickName() async {}
 }

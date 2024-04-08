@@ -3,7 +3,6 @@ import 'package:brain_check/data_sources/questions_data_source.dart';
 import 'package:brain_check/domain/models/duel_question_model.dart';
 import 'package:brain_check/domain/models/game_room_model.dart';
 import 'package:brain_check/domain/models/player_model.dart';
-import 'package:brain_check/domain/models/question_model.dart';
 import 'package:brain_check/domain/models/room_status_model.dart';
 import 'package:brain_check/domain/models/round_score_model.dart';
 import 'package:injectable/injectable.dart';
@@ -45,7 +44,7 @@ class DuelGameRepository {
     final token = await questionDataSource.getToken();
 
     final questionsList = await questionDataSource.getListofQuestions(
-        "easy", categoryId, 5, token.token);
+        null, categoryId, 5, token.token);
 
     final results = questionsList.results;
     print("Questions to add $results");

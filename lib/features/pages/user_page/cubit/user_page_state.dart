@@ -4,5 +4,6 @@ part of 'user_page_cubit.dart';
 class UserPageState with _$UserPageState {
   const factory UserPageState(
       {required String? errorMessage,
-      required List<ProfileModel> profile, required Status status}) = _UserPageState;
+      required List<ProfileModel> profile,
+      required Status status}) = _UserPageState;
 }

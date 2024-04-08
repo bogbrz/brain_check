@@ -1,50 +1,81 @@
 import 'package:flutter/material.dart';
-
 import 'package:google_fonts/google_fonts.dart';
 
-import 'package:html_unescape/html_unescape.dart';
-
-class OptionWidget extends StatelessWidget {
-  const OptionWidget({
+class AnswerWidget extends StatelessWidget {
+  const AnswerWidget({
     super.key,
-    required this.choosedQuestion,
-    required this.isCorrect,
-    required this.option,
-    required this.answers,
-    required this.screenWidth,
-    required this.screenHeight,
+    required this.answer,
+    required this.correctAnswer,
+    required this.choosedAnswer,
+    required this.isChoosed,
   });
+  final String choosedAnswer;
 
-  final dynamic choosedQuestion;
-  final bool isCorrect;
-  final String? option;
-  final List<String?> answers;
-  final double screenWidth;
-  final double screenHeight;
+  final String answer;
+
+  final String correctAnswer;
+  final bool isChoosed;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        alignment: Alignment.center,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
-          color: choosedQuestion == null
-              ? Colors.white
-              : isCorrect && option == answers[choosedQuestion]
-                  ? Colors.green
-                  : isCorrect == false && option == answers[choosedQuestion]
-                      ? Colors.red
-                      : Colors.white,
-          border: Border.all(width: MediaQuery.of(context).size.width / 45),
-        ),
-        width: screenWidth * 0.2,
-        height: screenHeight * 0.2,
-        child: Text(
-          HtmlUnescape().convert(option!),
-          style: GoogleFonts.bungee(
-            fontSize: MediaQuery.of(context).size.height / 45,
+    return Material(
+      clipBehavior: Clip.hardEdge,
+      child: Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10),
+            border: Border.all(width: MediaQuery.of(context).size.width / 55),
+            color: choosedAnswer.isEmpty && isChoosed == false
+                ? Colors.white
+                : choosedAnswer == correctAnswer &&
+                            choosedAnswer == answer &&
+                            isChoosed == true ||
+                        choosedAnswer != answer &&
+                            choosedAnswer != correctAnswer &&
+                            answer == correctAnswer
+                    ? Colors.green
+                    : choosedAnswer == answer &&
+                            choosedAnswer != correctAnswer &&
+                            isChoosed == true
+                        ? Colors.red
+                        : Colors.white,
           ),
-          textAlign: TextAlign.center,
-        ));
+          margin: EdgeInsetsDirectional.all(
+              MediaQuery.of(context).size.height * 0.005),
+          width: MediaQuery.of(context).size.width * 0.47,
+          height: MediaQuery.of(context).size.height * 0.25,
+          child: Center(
+              child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              SizedBox(
+                child: Row(
+                  children: [
+                    isChoosed &&
+                            choosedAnswer == answer &&
+                            choosedAnswer != correctAnswer
+                        ? Icon(
+                            Icons.cancel_outlined,
+                            size: 30,
+                          )
+                        : isChoosed && answer == correctAnswer
+                            ? Icon(
+                                Icons.check,
+                                size: 30,
+                              )
+                            : SizedBox.shrink()
+                  ],
+                ),
+                height: MediaQuery.of(context).size.height * 0.025,
+              ),
+              Text(answer,
+                  style: GoogleFonts.bungee(
+                    fontSize: MediaQuery.of(context).size.height / 55,
+                  )),
+              SizedBox(
+                height: MediaQuery.of(context).size.height * 0.025,
+              ),
+            ],
+          ))),
+    );
   }
 }

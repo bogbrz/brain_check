@@ -11,7 +11,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:html_unescape/html_unescape.dart';
 import 'package:timer_count_down/timer_controller.dart';
 import 'package:timer_count_down/timer_count_down.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class DuelQuestionPage extends StatefulWidget {
@@ -63,6 +62,8 @@ class _DuelQuestionPageState extends State<DuelQuestionPage> {
             case Status.success:
               if (index == 5) {
                 return DuelResultPage(
+                  gameType: GameType.duel,
+                  questionAmount: 5,
                   roomId: widget.roomId,
                   players: widget.players,
                   user: widget.user,
@@ -72,6 +73,16 @@ class _DuelQuestionPageState extends State<DuelQuestionPage> {
                   answerThree: answerThree,
                   answerFour: answerFour,
                   answerFive: answerFive,
+                  answerSix: 0,
+                  answerSeven: 0,
+                  answerEight: 0,
+                  answerNine: 0,
+                  answerTen: 0,
+                  answerEleven: 0,
+                  answerTwelve: 0,
+                  answerThirteen: 0,
+                  answerFourteen: 0,
+                  answerFithteen: 0,
                   gameStatus: end,
                 );
               }

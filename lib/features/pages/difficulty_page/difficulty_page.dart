@@ -16,7 +16,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class DifficultyPage extends StatefulWidget {
@@ -241,25 +240,20 @@ class _DifficultyPageState extends State<DifficultyPage> {
                                 return InkWell(
                                   onTap: () async {
                                     print(widget.categoriesModel.id);
-                                    await context
-                                        .read<TokenCubitCubit>()
-                                        .fetchToken();
+                                   
 
                                     Navigator.of(context)
                                         .push(MaterialPageRoute(
                                             builder: ((context) => QuestionPage(
-                                                  players: null,
-                                                  roomId: null,
-                                                  isRanked: false,
-                                                  token: state.tokenModel.token
-                                                      .toString(),
-                                                  user: widget.user,
+                                            
+                                              roomId: null,
                                                   category:
                                                       widget.categoriesModel.id,
                                                   difficulty: choosedDifficulty,
-                                                  questionsNumber:
+                                                  user: widget.user,
+                                                  questionsAmount:
                                                       questionsNumber,
-                                                  isDuel: false,
+                                                  gameType: GameType.casual,
                                                 ))));
                                   },
                                   child: Container(

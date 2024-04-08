@@ -1,10 +1,8 @@
-
 import 'package:freezed_annotation/freezed_annotation.dart';
 part 'duel_question_model.freezed.dart';
 
 @freezed
 class DuelQuestionModel with _$DuelQuestionModel {
-  
   factory DuelQuestionModel({
     required String? question,
     required String? correctAnswer,
@@ -15,9 +13,5 @@ class DuelQuestionModel with _$DuelQuestionModel {
     required String? category,
     required String? id,
     required int? roundNumber,
-   
-   
   }) = _DuelQuestionModel;
-
-  
 }

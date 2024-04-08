@@ -6,6 +6,7 @@ import 'package:injectable/injectable.dart';
 
 part 'token_cubit_state.dart';
 part 'token_cubit_cubit.freezed.dart';
+
 @injectable
 class TokenCubitCubit extends Cubit<TokenCubitState> {
   TokenCubitCubit({required this.questionRepository})
@@ -19,6 +20,4 @@ class TokenCubitCubit extends Cubit<TokenCubitState> {
 
     emit(TokenCubitState(tokenModel: tokenModel, errorMessage: null));
   }
-
- 
 }

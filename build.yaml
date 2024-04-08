@@ -1,12 +1,20 @@
 targets:  
   $default:  
     builders:  
-      injectable_generator:injectable_builder:  
+      source_gen|combining_builder:
+        generate_for:
+          - lib/**.dart
+        options:
+          build_extensions:
+            '^lib/{{}}.dart': 'lib/generated/{{}}.g.dart'
+      freezed|freezed:
+        enabled: true
+        options:
+          build_extensions:
+            '^lib/{{}}.dart': 'lib/generated/{{}}.freezed.dart'
+      injectable_generator|injectable_builder:  
         options:  
           auto_register: true  
-          # auto registers any class with a name matches the given pattern  
           class_name_pattern:  
             "Repository$|Cubit$"  
-            # auto registers any class inside a file with a  
-            # name matches the given pattern  
-          file_name_pattern: "_repository$|_cubit$"  
+          file_name_pattern: "_repository$|_cubit$"

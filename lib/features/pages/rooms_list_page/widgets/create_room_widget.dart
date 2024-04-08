@@ -1,15 +1,11 @@
-import 'package:brain_check/app/core/enums/enums.dart';
 import 'package:brain_check/app/injection_container.dart';
 import 'package:brain_check/domain/models/game_room_model.dart';
 
-import 'package:brain_check/features/pages/duel_room_page/duel_room_page.dart';
 import 'package:brain_check/features/pages/rooms_list_page/cubit/rooms_list_page_cubit.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CreateRoomWidget extends StatelessWidget {

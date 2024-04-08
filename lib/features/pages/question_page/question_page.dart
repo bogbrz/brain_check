@@ -1,40 +1,36 @@
 import 'package:brain_check/app/core/enums/enums.dart';
 import 'package:brain_check/app/injection_container.dart';
-import 'package:brain_check/device_size.dart';
-import 'package:brain_check/domain/models/player_model.dart';
 
+import 'package:brain_check/features/pages/duel_result_page/duel_result_page.dart';
 import 'package:brain_check/features/pages/question_page/cubit/question_page_cubit.dart';
 import 'package:brain_check/features/pages/question_page/widgets/option_widget.dart';
-import 'package:brain_check/features/pages/result_page/result_page.dart';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import 'package:html_unescape/html_unescape.dart';
 import 'package:timer_count_down/timer_controller.dart';
 import 'package:timer_count_down/timer_count_down.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class QuestionPage extends StatefulWidget {
-  const QuestionPage(
-      {super.key,
-      required this.category,
-      required this.difficulty,
-      required this.questionsNumber,
-      required this.user,
-      required this.token,
-      required this.isRanked,
-      required this.isDuel,
-      required this.players,
-      required this.roomId});
-  final String token;
-  final int category;
-  final String difficulty;
-  final int questionsNumber;
+  const QuestionPage({
+    super.key,
+    required this.user,
+    required this.category,
+    required this.difficulty,
+    required this.questionsAmount,
+    required this.gameType,
+    required this.roomId,
+  });
+
   final User? user;
-  final bool isRanked;
-  final bool isDuel;
-  final List<PlayerModel>? players;
+
+  final int? category;
+  final String difficulty;
+  final int questionsAmount;
+  final GameType gameType;
   final String? roomId;
 
   @override
@@ -42,342 +38,642 @@ class QuestionPage extends StatefulWidget {
 }
 
 class _QuestionPageState extends State<QuestionPage> {
-  @override
-  var choosedQuestion;
   var index = 0;
-  var isCorrect = false;
-  var next = false;
-  var points = 0;
-  var youLose = false;
-  var coolDown = true;
-  var noAnswerChoosed = false;
-  var safeCheck = false;
+  var choosedAnswer = "";
+  var isChoosed = false;
+  var end = false;
 
+  var answerOne = 0;
+  var answerTwo = 0;
+  var answerThree = 0;
+  var answerFour = 0;
+  var answerFive = 0;
+  var answerSix = 0;
+  var answerSeven = 0;
+  var answerEight = 0;
+  var answerNine = 0;
+  var answerTen = 0;
+  var answerEleven = 0;
+  var answerTwelve = 0;
+  var answerThirteen = 0;
+  var answerFourteen = 0;
+  var answerFithteen = 0;
   final CountdownController controller = CountdownController(autoStart: true);
-  final CountdownController controllerSafe =
-      CountdownController(autoStart: true);
   @override
   Widget build(BuildContext context) {
-    final screenWidth = context.deviceWidth;
-    final screenHeight = context.deviceHeight;
-
     return BlocProvider(
-        create: (context) => getIt<QuestionPageCubit>()
-          ..getQuestion(
-            difficulty: widget.difficulty,
-            category: widget.category,
-            token: widget.token,
-          ),
-        child: Scaffold(
-          body: SafeArea(
-            child: BlocBuilder<QuestionPageCubit, QuestionPageState>(
-              builder: (context, state) {
-                final answers = state.answers;
+      create: (context) => getIt<QuestionPageCubit>()
+        ..getQuestion(
+          roomId: widget.roomId,
+          category: widget.category,
+          difficulty: widget.difficulty,
+          questionsAmount: widget.questionsAmount,
+        ),
+      child: BlocBuilder<QuestionPageCubit, QuestionPageState>(
+        builder: (context, state) {
+          switch (state.status) {
+            case Status.initial:
+              return const InitialStateWidget();
+            case Status.loading:
+              return const LoadingStateWidget();
+            case Status.error:
+              return ErrorStateWidget(
+                  errorMessage: state.errorMessage.toString());
+            case Status.success:
+              if (index == widget.questionsAmount) {
+                return DuelResultPage(
+                  gameType: widget.gameType,
+                  questionAmount: widget.questionsAmount,
+                  roomId: null,
+                  players: null,
+                  user: widget.user,
+                  ownerEmail: null,
+                  answerOne: answerOne,
+                  answerTwo: answerTwo,
+                  answerThree: answerThree,
+                  answerFour: answerFour,
+                  answerFive: answerFive,
+                  answerSix: answerSix,
+                  answerSeven: answerSeven,
+                  answerEight: answerEight,
+                  answerNine: answerNine,
+                  answerTen: answerTen,
+                  answerEleven: answerEleven,
+                  answerTwelve: answerTwelve,
+                  answerThirteen: answerThirteen,
+                  answerFourteen: answerFourteen,
+                  answerFithteen: answerFithteen,
+                  gameStatus: null,
+                );
+              }
 
-                if (widget.questionsNumber == 0 && youLose ||
-                    widget.questionsNumber != 0 &&
-                        index == widget.questionsNumber &&
-                        widget.isDuel == false) {
-                  return ResultsPage(
-                    isRanked: widget.isRanked,
-                    index: index,
-                    points: points,
-                    isDuel: widget.isDuel,
-                    players: widget.players,
-                    roomId: widget.roomId,
-                    user: widget.user,
-                    questionPage: QuestionPage(
-                        players: widget.players,
-                        roomId: widget.roomId,
-                        isRanked: widget.isRanked,
-                        token: widget.token,
-                        category: widget.category,
-                        difficulty: widget.difficulty,
-                        questionsNumber: widget.questionsNumber,
-                        isDuel: widget.isDuel,
-                        user: widget.user),
-                  );
-                }
-
-                switch (state.status) {
-                  case Status.initial:
-                    return const InitialStateWidget();
-                  case Status.loading:
-                    return const LoadingStateWidget();
-                  case Status.error:
-                    return ErrorStateWidget(
-                        errorMessage: state.errorMessage.toString());
-
-                  case Status.success:
-                    return Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Container(
-                          alignment: Alignment.center,
-                          margin: const EdgeInsetsDirectional.all(16),
-                          padding: const EdgeInsets.all(8),
-                          decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(10),
-                              border: Border.all(
-                                  width: MediaQuery.of(context).size.width / 55,
-                                  color: Colors.black)),
-                          width: screenWidth * 0.5,
-                          height: screenHeight * 0.3,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Row(
+              return Scaffold(
+                body: Center(
+                  child: Column(
+                    children: [
+                      Container(
+                        alignment: Alignment.center,
+                        margin: EdgeInsetsDirectional.all(
+                            MediaQuery.of(context).size.height * 0.01),
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(10),
+                            border: Border.all(
+                                width: MediaQuery.of(context).size.width / 55,
+                                color: Colors.black)),
+                        height: MediaQuery.of(context).size.height * 0.4,
+                        child: Column(
+                          children: [
+                            Padding(
+                              padding: EdgeInsets.only(
+                                  top: MediaQuery.of(context).size.height *
+                                      0.00125,
+                                  left:
+                                      MediaQuery.of(context).size.height * 0.01,
+                                  right: MediaQuery.of(context).size.height *
+                                      0.01),
+                              child: Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
-                                    "Question number ${index + 1}",
-                                    style: GoogleFonts.bungee(
-                                      fontSize:
-                                          MediaQuery.of(context).size.height /
-                                              45,
-                                    ),
-                                  ),
-                                  Countdown(
-                                    controller: controller,
-                                    seconds: 15,
-                                    build:
-                                        (BuildContext context, double time) =>
-                                            Text(
-                                      time.toString(),
+                                      "${AppLocalizations.of(context).roundNumber} ${index + 1}",
                                       style: GoogleFonts.bungee(
                                         fontSize:
                                             MediaQuery.of(context).size.height /
-                                                35,
-                                      ),
-                                    ),
-                                    interval: const Duration(milliseconds: 100),
+                                                40,
+                                      )),
+                                  Countdown(
+                                    controller: controller,
+                                    seconds: 2,
+                                    build: (BuildContext context,
+                                            double time) =>
+                                        Text(time.toInt().toString(),
+                                            style: GoogleFonts.bungee(
+                                              fontSize: MediaQuery.of(context)
+                                                      .size
+                                                      .height /
+                                                  30,
+                                            )),
+                                    interval:
+                                        const Duration(milliseconds: 1000),
                                     onFinished: () {
                                       setState(() {
-                                        coolDown = false;
+                                        index++;
+                                        choosedAnswer = "";
+                                        isChoosed = false;
                                       });
-                                      if (choosedQuestion == null) {
-                                        setState(() {
-                                          noAnswerChoosed = true;
-                                        });
-                                      }
+
+                                      controller.restart();
                                     },
                                   )
                                 ],
                               ),
-                              Padding(
-                                padding: const EdgeInsets.all(12.0),
-                                child: SizedBox(
-                                    height: screenHeight * 0.15,
-                                    child: Text(
-                                      HtmlUnescape()
-                                          .convert(state.questions[0].question),
-                                      style: GoogleFonts.bungee(
-                                        fontSize:
-                                            MediaQuery.of(context).size.height /
-                                                45,
-                                      ),
-                                    )),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Wrap(
-                          children: [
-                            for (final option in answers) ...[
-                              Padding(
-                                padding: const EdgeInsets.all(4.0),
-                                child: Material(
-                                  shape: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(10)),
-                                  clipBehavior: Clip.hardEdge,
-                                  child: InkWell(
-                                    onTap: choosedQuestion != null ||
-                                            noAnswerChoosed == true
-                                        ? null
-                                        : () {
-                                            if (answers.length == 4) {
-                                              if (option == answers[0]) {
-                                                setState(() {
-                                                  choosedQuestion = 0;
-                                                  controller.pause();
-                                                  coolDown = false;
-                                                });
-                                              }
-                                              if (option == answers[1]) {
-                                                setState(() {
-                                                  choosedQuestion = 1;
-                                                  controller.pause();
-                                                  coolDown = false;
-                                                });
-                                              }
-                                              if (option == answers[2]) {
-                                                setState(() {
-                                                  choosedQuestion = 2;
-                                                  controller.pause();
-                                                  coolDown = false;
-                                                });
-                                              }
-                                              if (option == answers[3]) {
-                                                setState(() {
-                                                  choosedQuestion = 3;
-                                                  controller.pause();
-                                                  coolDown = false;
-                                                });
-                                              }
-                                              if (answers[choosedQuestion] ==
-                                                  state.questions[0]
-                                                      .correctAnswer) {
-                                                setState(() {
-                                                  isCorrect = true;
-                                                  points++;
-                                                });
-                                              }
-                                              if (answers[choosedQuestion] !=
-                                                  state.questions[0]
-                                                      .correctAnswer) {
-                                                setState(() {
-                                                  isCorrect = false;
-                                                  youLose = true;
-                                                });
-                                              }
-                                            } else {
-                                              if (option == answers[0]) {
-                                                setState(() {
-                                                  choosedQuestion = 0;
-                                                  controller.pause();
-                                                  coolDown = false;
-                                                });
-                                              }
-                                              if (option == answers[1]) {
-                                                setState(() {
-                                                  choosedQuestion = 1;
-                                                  controller.pause();
-                                                  coolDown = false;
-                                                });
-                                              }
-                                              if (answers[choosedQuestion] ==
-                                                  state.questions[0]
-                                                      .correctAnswer) {
-                                                setState(() {
-                                                  isCorrect = true;
-                                                  points++;
-                                                });
-                                              }
-                                              if (answers[choosedQuestion] !=
-                                                  state.questions[0]
-                                                      .correctAnswer) {
-                                                setState(() {
-                                                  isCorrect = false;
-                                                  youLose = true;
-                                                });
-                                              }
-                                            }
-                                          },
-                                    child: OptionWidget(
-                                        choosedQuestion: choosedQuestion,
-                                        isCorrect: isCorrect,
-                                        option: option,
-                                        answers: answers,
-                                        screenWidth: screenWidth,
-                                        screenHeight: screenHeight),
-                                  ),
+                            ),
+                            Padding(
+                                padding: EdgeInsets.only(
+                                  top:
+                                      MediaQuery.of(context).size.height * 0.09,
+                                  left:
+                                      MediaQuery.of(context).size.width * 0.01,
+                                  right:
+                                      MediaQuery.of(context).size.width * 0.01,
                                 ),
-                              )
-                            ],
+                                child: Text(
+                                  index == 0
+                                      ? HtmlUnescape().convert(state
+                                          .firstQuestion!.question
+                                          .toString())
+                                      : index == 1
+                                          ? HtmlUnescape().convert(state
+                                              .secondQuestion!.question
+                                              .toString())
+                                          : index == 2
+                                              ? HtmlUnescape().convert(state
+                                                  .thirdQuestion!.question
+                                                  .toString())
+                                              : index == 3
+                                                  ? HtmlUnescape().convert(state
+                                                      .fourthQuestion!.question
+                                                      .toString())
+                                                  : index == 4
+                                                      ? HtmlUnescape().convert(
+                                                          state.fifthQuestion!
+                                                              .question
+                                                              .toString())
+                                                      : index == 5
+                                                          ? HtmlUnescape()
+                                                              .convert(state
+                                                                  .sixthQuestion!
+                                                                  .question
+                                                                  .toString())
+                                                          : index == 6
+                                                              ? HtmlUnescape()
+                                                                  .convert(state.seventhQuestion!.question.toString())
+                                                              : index == 7
+                                                                  ? HtmlUnescape().convert(state.eightQuestion!.question.toString())
+                                                                  : index == 8
+                                                                      ? HtmlUnescape().convert(state.ninthQuestion!.question.toString())
+                                                                      : index == 9
+                                                                          ? HtmlUnescape().convert(state.tenthQuestion!.question.toString())
+                                                                          : index == 10
+                                                                              ? HtmlUnescape().convert(state.eleventhQuestion!.question.toString())
+                                                                              : index == 11
+                                                                                  ? HtmlUnescape().convert(state.twelvethQuestion!.question.toString())
+                                                                                  : index == 12
+                                                                                      ? HtmlUnescape().convert(state.thirteenthQuestion!.question.toString())
+                                                                                      : index == 13
+                                                                                          ? HtmlUnescape().convert(state.fourteenthQuestion!.question.toString())
+                                                                                          : HtmlUnescape().convert(state.fifteenthQuestion!.question.toString()),
+                                  style: GoogleFonts.bungee(
+                                    fontSize:
+                                        MediaQuery.of(context).size.height / 45,
+                                  ),
+                                )),
                           ],
                         ),
-                        SizedBox(
-                          height: MediaQuery.of(context).size.height * 0.025,
-                        ),
-                        InkWell(
-                            onTap: coolDown && safeCheck == false ||
-                                    coolDown == false && safeCheck == false ||
-                                    choosedQuestion == null &&
-                                        safeCheck == false
-                                ? null
-                                : () async {
-                                    setState(() {
-                                      index++;
-                                      choosedQuestion = null;
-                                      isCorrect = false;
-                                      coolDown = true;
-                                      noAnswerChoosed = false;
-                                      safeCheck = false;
-                                    });
+                      ),
+                      Wrap(
+                        children: [
+                          if (index == 0) ...[
+                            for (final answer in state.answersOne!) ...[
+                              InkWell(
+                                  onTap: isChoosed == true
+                                      ? null
+                                      : () {
+                                          setState(() {
+                                            choosedAnswer = answer.toString();
+                                            isChoosed = true;
+                                            if (choosedAnswer ==
+                                                state.firstQuestion!
+                                                    .correctAnswer
+                                                    .toString()) {
+                                              answerOne++;
+                                            }
+                                          });
 
-                                    index < widget.questionsNumber ||
-                                            widget.questionsNumber == 0
-                                        ? await context
-                                            .read<QuestionPageCubit>()
-                                            .getQuestion(
-                                              difficulty: widget.difficulty,
-                                              category: widget.category,
-                                              token: widget.token,
-                                            )
-                                            .then(
-                                                (value) => controller.restart())
-                                            .then((value) =>
-                                                controllerSafe.restart())
-                                        : null;
-                                  },
-                            child: Container(
-                              width: MediaQuery.of(context).size.width * 0.45,
-                              padding: const EdgeInsets.all(8),
-                              decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  border: Border.all(width: 8),
-                                  borderRadius: BorderRadius.circular(10)),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  Text("Next",
-                                      style: GoogleFonts.bungee(
-                                        fontSize:
-                                            MediaQuery.of(context).size.height /
-                                                25,
-                                      )),
-                                  safeCheck == false
-                                      ? Countdown(
-                                          controller: controllerSafe,
-                                          seconds: 5,
-                                          build: (BuildContext context,
-                                                  double time) =>
-                                              Text(time.toInt().toString(),
-                                                  style: GoogleFonts.bungee(
-                                                    fontSize:
-                                                        MediaQuery.of(context)
-                                                                .size
-                                                                .height /
-                                                            25,
-                                                  )),
-                                          interval: const Duration(
-                                              milliseconds: 1000),
-                                          onFinished: () {
-                                            setState(() {
-                                              safeCheck = true;
-                                            });
-                                          },
-                                        )
-                                      : Text("->",
-                                          style: GoogleFonts.bungee(
-                                            fontSize: MediaQuery.of(context)
-                                                    .size
-                                                    .height /
-                                                25,
-                                          )),
-                                ],
-                              ),
-                            )),
-                        Text(widget.token)
-                      ],
-                    );
-                }
-              },
-            ),
-          ),
-        ));
+                                          print(choosedAnswer);
+                                        },
+                                  child: AnswerWidget(
+                                      isChoosed: isChoosed,
+                                      choosedAnswer: choosedAnswer,
+                                      correctAnswer: state
+                                          .firstQuestion!.correctAnswer
+                                          .toString(),
+                                      answer: HtmlUnescape()
+                                          .convert(answer.toString())))
+                            ]
+                          ] else if (index == 1) ...[
+                            for (final answer in state.answersTwo!) ...[
+                              InkWell(
+                                  onTap: isChoosed == true
+                                      ? null
+                                      : () {
+                                          setState(() {
+                                            choosedAnswer = answer.toString();
+                                            isChoosed = true;
+                                            if (choosedAnswer ==
+                                                state.secondQuestion!
+                                                    .correctAnswer
+                                                    .toString()) {
+                                              answerTwo++;
+                                            }
+                                          });
+
+                                          print(choosedAnswer);
+                                        },
+                                  child: AnswerWidget(
+                                      isChoosed: isChoosed,
+                                      choosedAnswer: choosedAnswer,
+                                      correctAnswer: state
+                                          .secondQuestion!.correctAnswer
+                                          .toString(),
+                                      answer: HtmlUnescape()
+                                          .convert(answer.toString())))
+                            ]
+                          ] else if (index == 2) ...[
+                            for (final answer in state.answersThree!) ...[
+                              InkWell(
+                                  onTap: isChoosed == true
+                                      ? null
+                                      : () {
+                                          setState(() {
+                                            choosedAnswer = answer.toString();
+                                            isChoosed = true;
+                                            if (choosedAnswer ==
+                                                state.thirdQuestion!
+                                                    .correctAnswer
+                                                    .toString()) {
+                                              answerThree++;
+                                            }
+                                          });
+
+                                          print(choosedAnswer);
+                                        },
+                                  child: AnswerWidget(
+                                      isChoosed: isChoosed,
+                                      choosedAnswer: choosedAnswer,
+                                      correctAnswer: state
+                                          .thirdQuestion!.correctAnswer
+                                          .toString(),
+                                      answer: HtmlUnescape()
+                                          .convert(answer.toString())))
+                            ]
+                          ] else if (index == 3) ...[
+                            for (final answer in state.answersFour!) ...[
+                              InkWell(
+                                  onTap: isChoosed == true
+                                      ? null
+                                      : () {
+                                          setState(() {
+                                            choosedAnswer = answer.toString();
+                                            isChoosed = true;
+                                            if (choosedAnswer ==
+                                                state.fourthQuestion!
+                                                    .correctAnswer
+                                                    .toString()) {}
+                                          });
+
+                                          print(choosedAnswer);
+                                        },
+                                  child: AnswerWidget(
+                                      isChoosed: isChoosed,
+                                      choosedAnswer: choosedAnswer,
+                                      correctAnswer: state
+                                          .fourthQuestion!.correctAnswer
+                                          .toString(),
+                                      answer: HtmlUnescape()
+                                          .convert(answer.toString())))
+                            ]
+                          ] else if (index == 4) ...[
+                            for (final answer in state.answersFive!) ...[
+                              InkWell(
+                                  onTap: isChoosed == true
+                                      ? null
+                                      : () {
+                                          setState(() {
+                                            choosedAnswer = answer.toString();
+                                            isChoosed = true;
+                                            end = true;
+                                            if (choosedAnswer ==
+                                                state.fifthQuestion!
+                                                    .correctAnswer
+                                                    .toString()) {
+                                              answerFive++;
+                                            }
+                                          });
+
+                                          print(choosedAnswer);
+                                        },
+                                  child: AnswerWidget(
+                                      isChoosed: isChoosed,
+                                      choosedAnswer: choosedAnswer,
+                                      correctAnswer: state
+                                          .fifthQuestion!.correctAnswer
+                                          .toString(),
+                                      answer: HtmlUnescape()
+                                          .convert(answer.toString())))
+                            ]
+                          ] else if (index == 5) ...[
+                            for (final answer in state.answersSix!) ...[
+                              InkWell(
+                                  onTap: isChoosed == true
+                                      ? null
+                                      : () {
+                                          setState(() {
+                                            choosedAnswer = answer.toString();
+                                            isChoosed = true;
+                                            end = true;
+                                            if (choosedAnswer ==
+                                                state.sixthQuestion!
+                                                    .correctAnswer
+                                                    .toString()) {
+                                              answerSix++;
+                                            }
+                                          });
+
+                                          print(choosedAnswer);
+                                        },
+                                  child: AnswerWidget(
+                                      isChoosed: isChoosed,
+                                      choosedAnswer: choosedAnswer,
+                                      correctAnswer: state
+                                          .sixthQuestion!.correctAnswer
+                                          .toString(),
+                                      answer: HtmlUnescape()
+                                          .convert(answer.toString())))
+                            ]
+                          ] else if (index == 6) ...[
+                            for (final answer in state.answersSeven!) ...[
+                              InkWell(
+                                  onTap: isChoosed == true
+                                      ? null
+                                      : () {
+                                          setState(() {
+                                            choosedAnswer = answer.toString();
+                                            isChoosed = true;
+                                            end = true;
+                                            if (choosedAnswer ==
+                                                state.seventhQuestion!
+                                                    .correctAnswer
+                                                    .toString()) {
+                                              answerSeven++;
+                                            }
+                                          });
+
+                                          print(choosedAnswer);
+                                        },
+                                  child: AnswerWidget(
+                                      isChoosed: isChoosed,
+                                      choosedAnswer: choosedAnswer,
+                                      correctAnswer: state
+                                          .seventhQuestion!.correctAnswer
+                                          .toString(),
+                                      answer: HtmlUnescape()
+                                          .convert(answer.toString())))
+                            ]
+                          ] else if (index == 7) ...[
+                            for (final answer in state.answersEight!) ...[
+                              InkWell(
+                                  onTap: isChoosed == true
+                                      ? null
+                                      : () {
+                                          setState(() {
+                                            choosedAnswer = answer.toString();
+                                            isChoosed = true;
+                                            end = true;
+                                            if (choosedAnswer ==
+                                                state.eightQuestion!
+                                                    .correctAnswer
+                                                    .toString()) {
+                                              answerEight++;
+                                            }
+                                          });
+
+                                          print(choosedAnswer);
+                                        },
+                                  child: AnswerWidget(
+                                      isChoosed: isChoosed,
+                                      choosedAnswer: choosedAnswer,
+                                      correctAnswer: state
+                                          .eightQuestion!.correctAnswer
+                                          .toString(),
+                                      answer: HtmlUnescape()
+                                          .convert(answer.toString())))
+                            ]
+                          ] else if (index == 8) ...[
+                            for (final answer in state.answersNine!) ...[
+                              InkWell(
+                                  onTap: isChoosed == true
+                                      ? null
+                                      : () {
+                                          setState(() {
+                                            choosedAnswer = answer.toString();
+                                            isChoosed = true;
+                                            end = true;
+                                            if (choosedAnswer ==
+                                                state.ninthQuestion!
+                                                    .correctAnswer
+                                                    .toString()) {
+                                              answerNine++;
+                                            }
+                                          });
+
+                                          print(choosedAnswer);
+                                        },
+                                  child: AnswerWidget(
+                                      isChoosed: isChoosed,
+                                      choosedAnswer: choosedAnswer,
+                                      correctAnswer: state
+                                          .ninthQuestion!.correctAnswer
+                                          .toString(),
+                                      answer: HtmlUnescape()
+                                          .convert(answer.toString())))
+                            ]
+                          ] else if (index == 9) ...[
+                            for (final answer in state.answersNine!) ...[
+                              InkWell(
+                                  onTap: isChoosed == true
+                                      ? null
+                                      : () {
+                                          setState(() {
+                                            choosedAnswer = answer.toString();
+                                            isChoosed = true;
+                                            end = true;
+                                            if (choosedAnswer ==
+                                                state.tenthQuestion!
+                                                    .correctAnswer
+                                                    .toString()) {
+                                              answerTen++;
+                                            }
+                                          });
+
+                                          print(choosedAnswer);
+                                        },
+                                  child: AnswerWidget(
+                                      isChoosed: isChoosed,
+                                      choosedAnswer: choosedAnswer,
+                                      correctAnswer: state
+                                          .tenthQuestion!.correctAnswer
+                                          .toString(),
+                                      answer: HtmlUnescape()
+                                          .convert(answer.toString())))
+                            ]
+                          ] else if (index == 10) ...[
+                            for (final answer in state.answersEleven!) ...[
+                              InkWell(
+                                  onTap: isChoosed == true
+                                      ? null
+                                      : () {
+                                          setState(() {
+                                            choosedAnswer = answer.toString();
+                                            isChoosed = true;
+                                            end = true;
+                                            if (choosedAnswer ==
+                                                state.eleventhQuestion!
+                                                    .correctAnswer
+                                                    .toString()) {
+                                              answerEleven++;
+                                            }
+                                          });
+
+                                          print(choosedAnswer);
+                                        },
+                                  child: AnswerWidget(
+                                      isChoosed: isChoosed,
+                                      choosedAnswer: choosedAnswer,
+                                      correctAnswer: state
+                                          .eleventhQuestion!.correctAnswer
+                                          .toString(),
+                                      answer: HtmlUnescape()
+                                          .convert(answer.toString())))
+                            ]
+                          ] else if (index == 11) ...[
+                            for (final answer in state.answersTwelve!) ...[
+                              InkWell(
+                                  onTap: isChoosed == true
+                                      ? null
+                                      : () {
+                                          setState(() {
+                                            choosedAnswer = answer.toString();
+                                            isChoosed = true;
+                                            end = true;
+                                            if (choosedAnswer ==
+                                                state.twelvethQuestion!
+                                                    .correctAnswer
+                                                    .toString()) {
+                                              answerTwelve++;
+                                            }
+                                          });
+
+                                          print(choosedAnswer);
+                                        },
+                                  child: AnswerWidget(
+                                      isChoosed: isChoosed,
+                                      choosedAnswer: choosedAnswer,
+                                      correctAnswer: state
+                                          .twelvethQuestion!.correctAnswer
+                                          .toString(),
+                                      answer: HtmlUnescape()
+                                          .convert(answer.toString())))
+                            ]
+                          ] else if (index == 12) ...[
+                            for (final answer in state.answersThirteen!) ...[
+                              InkWell(
+                                  onTap: isChoosed == true
+                                      ? null
+                                      : () {
+                                          setState(() {
+                                            choosedAnswer = answer.toString();
+                                            isChoosed = true;
+                                            end = true;
+                                            if (choosedAnswer ==
+                                                state.thirteenthQuestion!
+                                                    .correctAnswer
+                                                    .toString()) {
+                                              answerThirteen++;
+                                            }
+                                          });
+
+                                          print(choosedAnswer);
+                                        },
+                                  child: AnswerWidget(
+                                      isChoosed: isChoosed,
+                                      choosedAnswer: choosedAnswer,
+                                      correctAnswer: state
+                                          .thirteenthQuestion!.correctAnswer
+                                          .toString(),
+                                      answer: HtmlUnescape()
+                                          .convert(answer.toString())))
+                            ]
+                          ] else if (index == 13) ...[
+                            for (final answer in state.answersFourteen!) ...[
+                              InkWell(
+                                  onTap: isChoosed == true
+                                      ? null
+                                      : () {
+                                          setState(() {
+                                            choosedAnswer = answer.toString();
+                                            isChoosed = true;
+                                            end = true;
+                                            if (choosedAnswer ==
+                                                state.fourteenthQuestion!
+                                                    .correctAnswer
+                                                    .toString()) {
+                                              answerFourteen++;
+                                            }
+                                          });
+
+                                          print(choosedAnswer);
+                                        },
+                                  child: AnswerWidget(
+                                      isChoosed: isChoosed,
+                                      choosedAnswer: choosedAnswer,
+                                      correctAnswer: state
+                                          .fourteenthQuestion!.correctAnswer
+                                          .toString(),
+                                      answer: HtmlUnescape()
+                                          .convert(answer.toString())))
+                            ]
+                          ] else if (index == 14) ...[
+                            for (final answer in state.answersFifteen!) ...[
+                              InkWell(
+                                  onTap: isChoosed == true
+                                      ? null
+                                      : () {
+                                          setState(() {
+                                            choosedAnswer = answer.toString();
+                                            isChoosed = true;
+                                            end = true;
+                                            if (choosedAnswer ==
+                                                state.fifteenthQuestion!
+                                                    .correctAnswer
+                                                    .toString()) {
+                                              answerFithteen++;
+                                            }
+                                          });
+
+                                          print(choosedAnswer);
+                                        },
+                                  child: AnswerWidget(
+                                      isChoosed: isChoosed,
+                                      choosedAnswer: choosedAnswer,
+                                      correctAnswer: state
+                                          .fifteenthQuestion!.correctAnswer
+                                          .toString(),
+                                      answer: HtmlUnescape()
+                                          .convert(answer.toString())))
+                            ]
+                          ]
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              );
+          }
+        },
+      ),
+    );
   }
 }

@@ -31,9 +31,6 @@ abstract class QuestionDataSource {
     @Query("category") int? category,
     @Query("amount") int? amount,
     @Query("token") String? token,
-    
-
-
   );
 
   @GET("/api_category.php/")
