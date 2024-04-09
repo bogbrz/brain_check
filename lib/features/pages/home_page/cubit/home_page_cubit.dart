@@ -31,7 +31,7 @@ class HomePageCubit extends Cubit<HomePageState> {
   Future<void> updateLifes(
       {required String profileId, required DateTime lastLogin}) async {
     return rankingRepository.restoreLifes(
-        playerId: profileId, lastLogin: lastLogin );
+        playerId: profileId, lastLogin: lastLogin);
   }
 
   Future<void> getRankingForUpdate({required String email}) async {

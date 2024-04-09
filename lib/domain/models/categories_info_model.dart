@@ -1,7 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'categories_info_model.freezed.dart';
-part 'categories_info_model.g.dart';
+part 'generated/categories_info_model.freezed.dart';
+part 'generated/categories_info_model.g.dart';
 
 @freezed
 class WelcomeCategory with _$WelcomeCategory {

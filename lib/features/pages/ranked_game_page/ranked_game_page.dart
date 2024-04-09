@@ -1,5 +1,5 @@
 import 'package:brain_check/app/core/enums/enums.dart';
-import 'package:brain_check/app/cubit%20copy/token_cubit_cubit.dart';
+
 import 'package:brain_check/app/injection_container.dart';
 import 'package:brain_check/domain/models/profile_model.dart';
 import 'package:brain_check/features/pages/question_page/question_page.dart';
@@ -12,6 +12,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:timer_count_down/timer_controller.dart';
 import 'package:timer_count_down/timer_count_down.dart';
+import 'package:flutter_timer_countdown/flutter_timer_countdown.dart';
 
 class RankedGamePage extends StatelessWidget {
   RankedGamePage({
@@ -31,12 +32,6 @@ class RankedGamePage extends StatelessWidget {
           ..getRankingForUpdate(email: user!.email.toString()),
         child: Scaffold(
           appBar: AppBar(
-            // title: Text(
-            //   "${AppLocalizations.of(context).timeToReset}: ${difference.inHours}:${difference.inMinutes.remainder(60)}",
-            //   style: GoogleFonts.bungee(
-            //       fontSize: MediaQuery.of(context).size.height / 55,
-            //       color: Colors.white),
-            // ),
             backgroundColor: const Color.fromARGB(255, 27, 58, 93),
           ),
           body: BlocConsumer<RankedGameCubit, RankedGameState>(
@@ -66,7 +61,7 @@ class RankedGamePage extends StatelessWidget {
                   DateTime lastLogin = DateTime.parse(
                       state.profile[0].lastLogIn.toDate().toString());
                   DateTime resetDay = DateTime(
-                      dateTime.year, dateTime.month, dateTime.day, 23, 59);
+                      dateTime.year, dateTime.month, dateTime.day, 24, 00);
 
                   Duration difference = resetDay.difference(lastLogin);
                   int resetTime = int.parse(difference.inMinutes.toString());
@@ -80,53 +75,42 @@ class RankedGamePage extends StatelessWidget {
                               profile: state.profile[0],
                             )),
                         if (state.profile[0].lifes != 0) ...[
-                          BlocBuilder<TokenCubitCubit, TokenCubitState>(
-                            builder: (context, state) {
-                              return InkWell(
-                                onTap: () async {
-                                  Navigator.of(context).push(MaterialPageRoute(
-                                      builder: (context) => QuestionPage(
-                                            roomId: null,
-                                            gameType: GameType.ranked,
-                                            category: null,
-                                            difficulty: '',
-                                            questionsAmount: 5,
-                                            user: user,
-                                          )));
-                                },
-                                child: Container(
-                                  padding: EdgeInsets.all(
-                                      MediaQuery.of(context).size.height *
-                                          0.005),
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(
-                                          MediaQuery.of(context).size.height *
-                                              0.1),
-                                      color: Colors.white,
-                                      border: Border.all(
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width /
-                                              55,
-                                          color: Colors.black)),
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.6,
-                                  height:
-                                      MediaQuery.of(context).size.height * 0.15,
-                                  child: Center(
-                                    child: Text(
-                                      AppLocalizations.of(context).play,
-                                      style: GoogleFonts.bungee(
-                                          fontSize: MediaQuery.of(context)
-                                                  .size
-                                                  .height /
-                                              20,
-                                          color: Colors.black),
-                                    ),
-                                  ),
-                                ),
-                              );
+                          InkWell(
+                            onTap: () async {
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) => QuestionPage(
+                                        roomId: null,
+                                        gameType: GameType.ranked,
+                                        category: null,
+                                        difficulty: '',
+                                        questionsAmount: 5,
+                                        user: user,
+                                      )));
                             },
+                            child: Container(
+                              padding: EdgeInsets.all(
+                                  MediaQuery.of(context).size.height * 0.005),
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(
+                                      MediaQuery.of(context).size.height * 0.1),
+                                  color: Colors.white,
+                                  border: Border.all(
+                                      width: MediaQuery.of(context).size.width /
+                                          55,
+                                      color: Colors.black)),
+                              width: MediaQuery.of(context).size.width * 0.6,
+                              height: MediaQuery.of(context).size.height * 0.15,
+                              child: Center(
+                                child: Text(
+                                  AppLocalizations.of(context).play,
+                                  style: GoogleFonts.bungee(
+                                      fontSize:
+                                          MediaQuery.of(context).size.height /
+                                              20,
+                                      color: Colors.black),
+                                ),
+                              ),
+                            ),
                           )
                         ] else ...[
                           Text(
@@ -137,18 +121,17 @@ class RankedGamePage extends StatelessWidget {
                                     MediaQuery.of(context).size.height / 20,
                                 color: Colors.black),
                           ),
-                          Countdown(
-                            controller: controller,
-                            seconds: resetTime*60,
-                            build: (BuildContext context, double time) =>
-                                Text(time.toInt().toString(),
-                                    style: GoogleFonts.bungee(
-                                      fontSize:
-                                          MediaQuery.of(context).size.height /
-                                              30,
-                                    )),
-                            interval: const Duration(milliseconds: 1000),
-                            onFinished: () {},
+                          TimerCountdown(
+                            format: CountDownTimerFormat.hoursMinutesSeconds,
+                            endTime: resetDay,
+                            timeTextStyle: GoogleFonts.bungee(
+                              fontSize: MediaQuery.of(context).size.height / 20,
+                            ),
+                            colonsTextStyle: GoogleFonts.bungee(
+                              fontSize: MediaQuery.of(context).size.height / 30,
+                            ),
+                            enableDescriptions: false,
+                            onEnd: () {},
                           )
                         ]
                       ],

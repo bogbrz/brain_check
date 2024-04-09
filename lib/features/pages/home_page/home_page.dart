@@ -27,17 +27,17 @@ class HomePage extends StatelessWidget {
           ..getRankingForUpdate(email: user!.email.toString()),
         child: BlocConsumer<HomePageCubit, HomePageState>(
             listener: (context, state) {
-          DateTime lastLogin =
-              DateTime.parse(state.profile[0].lastLogIn.toDate().toString());
+          // DateTime lastLogin =
+          //     DateTime.parse(state.profile[0].lastLogIn.toDate().toString());
 
-          Duration difference = dateTime.difference(lastLogin);
-          print(difference);
-          if (difference.inMinutes > 1) {
-            context.read<HomePageCubit>().updateLifes(
-                  lastLogin: DateTime.now(),
-                  profileId: state.profile[0].id,
-                );
-          }
+          // Duration difference = dateTime.difference(lastLogin);
+          // print(difference);
+          // if (difference.inMinutes > 1) {
+          //   context.read<HomePageCubit>().updateLifes(
+          //         lastLogin: DateTime.now(),
+          //         profileId: state.profile[0].id,
+          //       );
+          // }
         }, builder: (context, state) {
           switch (state.status) {
             case Status.initial:

@@ -34,11 +34,10 @@ class RankedGameCubit extends Cubit<RankedGameState> {
       }
     });
   }
+
   Future<void> updateLifes(
       {required String profileId, required DateTime lastLogin}) async {
     return rankingRepository.restoreLifes(
-        playerId: profileId, lastLogin: lastLogin );
+        playerId: profileId, lastLogin: lastLogin);
   }
-
- 
 }

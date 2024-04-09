@@ -1,7 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 
-part 'amount_button_model.freezed.dart';
+part 'generated/amount_button_model.freezed.dart';
 
 @freezed
 class AmountModel with _$AmountModel {

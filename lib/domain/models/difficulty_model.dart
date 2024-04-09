@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-part 'difficulty_model.freezed.dart';
+part 'generated/difficulty_model.freezed.dart';
 
 @freezed
 class DifficultyModel with _$DifficultyModel {
