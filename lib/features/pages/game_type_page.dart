@@ -102,13 +102,11 @@ class GameTypePage extends StatelessWidget {
                     border: Border.all(
                         width: MediaQuery.of(context).size.width / 40),
                   ),
-                  child: Expanded(
-                    child: Text(AppLocalizations.of(context).duel,
-                        style: GoogleFonts.bungee(
-                            fontSize: MediaQuery.of(context).size.height / 30,
-                            letterSpacing:
-                                MediaQuery.of(context).size.width * 0.05)),
-                  ),
+                  child: Text(AppLocalizations.of(context).duel,
+                      style: GoogleFonts.bungee(
+                          fontSize: MediaQuery.of(context).size.height / 30,
+                          letterSpacing:
+                              MediaQuery.of(context).size.width * 0.05)),
                 ),
               ),
             ],

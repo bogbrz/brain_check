@@ -1,6 +1,6 @@
 import 'package:brain_check/amount_list.dart';
 import 'package:brain_check/app/core/enums/enums.dart';
-import 'package:brain_check/app/cubit%20copy/token_cubit_cubit.dart';
+
 
 import 'package:brain_check/app/injection_container.dart';
 import 'package:brain_check/difficulty_list.dart';
@@ -235,9 +235,8 @@ class _DifficultyPageState extends State<DifficultyPage> {
                                 borderRadius: BorderRadius.circular(25)),
                             clipBehavior: Clip.hardEdge,
                             child:
-                                BlocBuilder<TokenCubitCubit, TokenCubitState>(
-                              builder: (context, state) {
-                                return InkWell(
+                               
+                                 InkWell(
                                   onTap: () async {
                                     print(widget.categoriesModel.id);
                                    
@@ -281,9 +280,8 @@ class _DifficultyPageState extends State<DifficultyPage> {
                                       ),
                                     ),
                                   ),
-                                );
-                              },
-                            ),
+                                )
+                             
                           )
                         ]));
                 }

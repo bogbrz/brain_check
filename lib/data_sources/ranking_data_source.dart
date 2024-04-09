@@ -17,7 +17,8 @@ class RankingFireBaseDataSource {
       "nickName": nickName,
       "points": 0,
       "gamesPlayed": 0,
-      "lifes": 5
+      "lifes": 5,
+      "lastLogIn": DateTime.now()
     });
   }
 
@@ -30,8 +31,6 @@ class RankingFireBaseDataSource {
     });
   }
 
- 
-
   Stream<QuerySnapshot<Map<String, dynamic>>> getRanking() {
     return FirebaseFirestore.instance
         .collection("Ranking")
@@ -39,11 +38,12 @@ class RankingFireBaseDataSource {
         .snapshots();
   }
 
-  Future<void> restoreLifes({required String id}) async {
+  Future<void> restoreLifes(
+      {required String playerId, required DateTime lastLogin}) async {
     return FirebaseFirestore.instance
         .collection("Ranking")
-        .doc(id)
-        .update({"lifes": 5});
+        .doc(playerId)
+        .update({"lifes": 5, "lastLogIn": lastLogin});
   }
 
   Stream<QuerySnapshot<Map<String, dynamic>>> getRankingForUpdate(

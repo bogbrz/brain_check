@@ -77,7 +77,8 @@ class DuelResultPage extends StatelessWidget {
         answerFourteen +
         answerFithteen;
     return BlocProvider(
-      create: (context) => getIt<DuelResultCubit>()..getRankingForUpdate(email: user!.email.toString()),
+      create: (context) => getIt<DuelResultCubit>()
+        ..getRankingForUpdate(email: user!.email.toString()),
       child: Scaffold(body: BlocBuilder<DuelResultCubit, DuelResultState>(
         builder: (context, state) {
           return Center(
@@ -87,7 +88,7 @@ class DuelResultPage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "${AppLocalizations.of(context).yourScore}: ${score} ${AppLocalizations.of(context).points} / $questionAmount",
+                    "${AppLocalizations.of(context).yourScore}: ${score} / $questionAmount",
                     style: GoogleFonts.bungee(
                         color: Colors.white,
                         fontSize: MediaQuery.of(context).size.height / 35),
@@ -226,7 +227,6 @@ class DuelResultPage extends StatelessWidget {
                         Navigator.of(context).pop();
                         Navigator.of(context).pop();
                       } else {
-                       
                         context.read<DuelResultCubit>().updateRanking(
                             points: score, profileId: state.profiles[0].id);
                         Navigator.of(context).pop();

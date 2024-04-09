@@ -1,8 +1,8 @@
 // ignore_for_file: invalid_annotation_target
 
 import 'package:freezed_annotation/freezed_annotation.dart';
-part 'question_model.freezed.dart';
-part 'question_model.g.dart';
+part 'generated/question_model.freezed.dart';
+part 'generated/question_model.g.dart';
 
 @freezed
 class Questions with _$Questions {

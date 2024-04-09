@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'questions_data_source.dart';
+part of '../questions_data_source.dart';
 
 // **************************************************************************
 // RetrofitGenerator

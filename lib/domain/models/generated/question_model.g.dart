@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'question_model.dart';
+part of '../question_model.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
@@ -17,7 +17,7 @@ _$QuestionsImpl _$$QuestionsImplFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$$QuestionsImplToJson(_$QuestionsImpl instance) =>
     <String, dynamic>{
       'response_code': instance.responseCode,
-      'results': instance.results,
+      'results': instance.results.map((e) => e.toJson()).toList(),
     };
 
 _$QuestionModelImpl _$$QuestionModelImplFromJson(Map<String, dynamic> json) =>

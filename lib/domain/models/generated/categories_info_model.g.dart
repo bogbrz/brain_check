@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'categories_info_model.dart';
+part of '../categories_info_model.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
@@ -20,7 +20,7 @@ Map<String, dynamic> _$$WelcomeCategoryImplToJson(
         _$WelcomeCategoryImpl instance) =>
     <String, dynamic>{
       'category_id': instance.categoryId,
-      'category_question_count': instance.categoryQuestionCount,
+      'category_question_count': instance.categoryQuestionCount?.toJson(),
     };
 
 _$CategoryQuestionCountImpl _$$CategoryQuestionCountImplFromJson(

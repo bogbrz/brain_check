@@ -2,8 +2,8 @@
 
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'categories_model.freezed.dart';
-part 'categories_model.g.dart';
+part 'generated/categories_model.freezed.dart';
+part 'generated/categories_model.g.dart';
 
 @freezed
 class CategoryModel with _$CategoryModel {

@@ -190,7 +190,8 @@ class DuelGameRepository {
             startGame: e["startGame"],
             id: e.id,
             roundNumber: e["roundNumber"],
-            category: e["category"]);
+            category: e["category"],
+            );
       }).toList();
     });
   }

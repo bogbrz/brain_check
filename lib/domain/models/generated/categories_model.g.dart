@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'categories_model.dart';
+part of '../categories_model.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
@@ -15,7 +15,8 @@ _$CategoryModelImpl _$$CategoryModelImplFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$$CategoryModelImplToJson(_$CategoryModelImpl instance) =>
     <String, dynamic>{
-      'trivia_categories': instance.triviaCategories,
+      'trivia_categories':
+          instance.triviaCategories.map((e) => e.toJson()).toList(),
     };
 
 _$TriviaCategoryImpl _$$TriviaCategoryImplFromJson(Map<String, dynamic> json) =>

@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'player_model.freezed.dart';
+part 'generated/player_model.freezed.dart';
 
 @freezed
 class PlayerModel with _$PlayerModel {

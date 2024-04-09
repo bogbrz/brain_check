@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'token_model.dart';
+part of '../token_model.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
@@ -9,13 +9,13 @@ part of 'token_model.dart';
 _$TokenModelImpl _$$TokenModelImplFromJson(Map<String, dynamic> json) =>
     _$TokenModelImpl(
       response: json['response'] as int?,
-      responeMessage: json['responeMessage'] as String?,
+      responeMessage: json['respone_message'] as String?,
       token: json['token'] as String?,
     );
 
 Map<String, dynamic> _$$TokenModelImplToJson(_$TokenModelImpl instance) =>
     <String, dynamic>{
       'response': instance.response,
-      'responeMessage': instance.responeMessage,
+      'respone_message': instance.responeMessage,
       'token': instance.token,
     };

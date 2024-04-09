@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-part 'duel_question_model.freezed.dart';
+part 'generated/duel_question_model.freezed.dart';
 
 @freezed
 class DuelQuestionModel with _$DuelQuestionModel {
