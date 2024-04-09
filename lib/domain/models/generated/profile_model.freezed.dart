@@ -23,6 +23,8 @@ mixin _$ProfileModel {
   String get id => throw _privateConstructorUsedError;
   int get lifes => throw _privateConstructorUsedError;
   Timestamp get lastLogIn => throw _privateConstructorUsedError;
+  Timestamp get gameStarted => throw _privateConstructorUsedError;
+  Timestamp get gameEnd => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ProfileModelCopyWith<ProfileModel> get copyWith =>
@@ -42,7 +44,9 @@ abstract class $ProfileModelCopyWith<$Res> {
       int gamesPlayed,
       String id,
       int lifes,
-      Timestamp lastLogIn});
+      Timestamp lastLogIn,
+      Timestamp gameStarted,
+      Timestamp gameEnd});
 }
 
 /// @nodoc
@@ -65,6 +69,8 @@ class _$ProfileModelCopyWithImpl<$Res, $Val extends ProfileModel>
     Object? id = null,
     Object? lifes = null,
     Object? lastLogIn = null,
+    Object? gameStarted = null,
+    Object? gameEnd = null,
   }) {
     return _then(_value.copyWith(
       email: null == email
@@ -95,6 +101,14 @@ class _$ProfileModelCopyWithImpl<$Res, $Val extends ProfileModel>
           ? _value.lastLogIn
           : lastLogIn // ignore: cast_nullable_to_non_nullable
               as Timestamp,
+      gameStarted: null == gameStarted
+          ? _value.gameStarted
+          : gameStarted // ignore: cast_nullable_to_non_nullable
+              as Timestamp,
+      gameEnd: null == gameEnd
+          ? _value.gameEnd
+          : gameEnd // ignore: cast_nullable_to_non_nullable
+              as Timestamp,
     ) as $Val);
   }
 }
@@ -114,7 +128,9 @@ abstract class _$$ProfileModelImplCopyWith<$Res>
       int gamesPlayed,
       String id,
       int lifes,
-      Timestamp lastLogIn});
+      Timestamp lastLogIn,
+      Timestamp gameStarted,
+      Timestamp gameEnd});
 }
 
 /// @nodoc
@@ -135,6 +151,8 @@ class __$$ProfileModelImplCopyWithImpl<$Res>
     Object? id = null,
     Object? lifes = null,
     Object? lastLogIn = null,
+    Object? gameStarted = null,
+    Object? gameEnd = null,
   }) {
     return _then(_$ProfileModelImpl(
       email: null == email
@@ -165,6 +183,14 @@ class __$$ProfileModelImplCopyWithImpl<$Res>
           ? _value.lastLogIn
           : lastLogIn // ignore: cast_nullable_to_non_nullable
               as Timestamp,
+      gameStarted: null == gameStarted
+          ? _value.gameStarted
+          : gameStarted // ignore: cast_nullable_to_non_nullable
+              as Timestamp,
+      gameEnd: null == gameEnd
+          ? _value.gameEnd
+          : gameEnd // ignore: cast_nullable_to_non_nullable
+              as Timestamp,
     ));
   }
 }
@@ -179,7 +205,9 @@ class _$ProfileModelImpl implements _ProfileModel {
       required this.gamesPlayed,
       required this.id,
       required this.lifes,
-      required this.lastLogIn});
+      required this.lastLogIn,
+      required this.gameStarted,
+      required this.gameEnd});
 
   @override
   final String email;
@@ -195,10 +223,14 @@ class _$ProfileModelImpl implements _ProfileModel {
   final int lifes;
   @override
   final Timestamp lastLogIn;
+  @override
+  final Timestamp gameStarted;
+  @override
+  final Timestamp gameEnd;
 
   @override
   String toString() {
-    return 'ProfileModel(email: $email, nickName: $nickName, points: $points, gamesPlayed: $gamesPlayed, id: $id, lifes: $lifes, lastLogIn: $lastLogIn)';
+    return 'ProfileModel(email: $email, nickName: $nickName, points: $points, gamesPlayed: $gamesPlayed, id: $id, lifes: $lifes, lastLogIn: $lastLogIn, gameStarted: $gameStarted, gameEnd: $gameEnd)';
   }
 
   @override
@@ -215,12 +247,15 @@ class _$ProfileModelImpl implements _ProfileModel {
             (identical(other.id, id) || other.id == id) &&
             (identical(other.lifes, lifes) || other.lifes == lifes) &&
             (identical(other.lastLogIn, lastLogIn) ||
-                other.lastLogIn == lastLogIn));
+                other.lastLogIn == lastLogIn) &&
+            (identical(other.gameStarted, gameStarted) ||
+                other.gameStarted == gameStarted) &&
+            (identical(other.gameEnd, gameEnd) || other.gameEnd == gameEnd));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, email, nickName, points, gamesPlayed, id, lifes, lastLogIn);
+  int get hashCode => Object.hash(runtimeType, email, nickName, points,
+      gamesPlayed, id, lifes, lastLogIn, gameStarted, gameEnd);
 
   @JsonKey(ignore: true)
   @override
@@ -237,7 +272,9 @@ abstract class _ProfileModel implements ProfileModel {
       required final int gamesPlayed,
       required final String id,
       required final int lifes,
-      required final Timestamp lastLogIn}) = _$ProfileModelImpl;
+      required final Timestamp lastLogIn,
+      required final Timestamp gameStarted,
+      required final Timestamp gameEnd}) = _$ProfileModelImpl;
 
   @override
   String get email;
@@ -253,6 +290,10 @@ abstract class _ProfileModel implements ProfileModel {
   int get lifes;
   @override
   Timestamp get lastLogIn;
+  @override
+  Timestamp get gameStarted;
+  @override
+  Timestamp get gameEnd;
   @override
   @JsonKey(ignore: true)
   _$$ProfileModelImplCopyWith<_$ProfileModelImpl> get copyWith =>

@@ -87,7 +87,7 @@ class HomePage extends StatelessWidget {
                       ),
                       StartButtonWidget(
                         user: user,
-                        nickName: state.profile[0].nickName,
+                        profile: state.profile[0],
                       ),
                     ],
                   ));

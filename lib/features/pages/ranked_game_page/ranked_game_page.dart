@@ -17,10 +17,12 @@ import 'package:flutter_timer_countdown/flutter_timer_countdown.dart';
 class RankedGamePage extends StatelessWidget {
   RankedGamePage({
     required this.user,
+    required this.profileModel,
     super.key,
   });
 
   final User? user;
+  final ProfileModel profileModel;
   final CountdownController controller = CountdownController(autoStart: true);
   @override
   Widget build(BuildContext context) {
@@ -79,6 +81,7 @@ class RankedGamePage extends StatelessWidget {
                             onTap: () async {
                               Navigator.of(context).push(MaterialPageRoute(
                                   builder: (context) => QuestionPage(
+                                        profileModel: profileModel,
                                         roomId: null,
                                         gameType: GameType.ranked,
                                         category: null,

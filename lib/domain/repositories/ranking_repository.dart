@@ -27,7 +27,9 @@ class RankingRepository {
             points: doc['points'],
             gamesPlayed: doc["gamesPlayed"],
             lifes: doc["lifes"],
-            lastLogIn: doc["lastLogIn"]);
+            lastLogIn: doc["lastLogIn"],
+            gameStarted: doc["gameStarted"],
+            gameEnd: doc["gameEnd"]);
       }).toList();
     });
   }
@@ -43,7 +45,9 @@ class RankingRepository {
                 points: doc['points'],
                 gamesPlayed: doc["gamesPlayed"],
                 lifes: doc["lifes"],
-                lastLogIn: doc["lastLogIn"]);
+                lastLogIn: doc["lastLogIn"],
+                gameStarted: doc["gameStarted"],
+                gameEnd: doc["gameEnd"]);
           })
           .where((element) => element.email == email)
           .toList();
@@ -58,5 +62,13 @@ class RankingRepository {
 
   Future<void> updateRanking({required int points, required String id}) async {
     return rankingFireBaseDataSource.updateRanking(points: points, docId: id);
+  }
+
+  Future<void> setStartTime({required String playerId}) async {
+    return rankingFireBaseDataSource.setStartTime(playerId: playerId);
+  }
+
+  Future<void> setEndTime({required String playerId}) async {
+    return rankingFireBaseDataSource.setEndTime(playerId: playerId);
   }
 }

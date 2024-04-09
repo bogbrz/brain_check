@@ -46,6 +46,24 @@ class RankingFireBaseDataSource {
         .update({"lifes": 5, "lastLogIn": lastLogin});
   }
 
+  Future<void> setStartTime({
+    required String playerId,
+  }) async {
+    return FirebaseFirestore.instance
+        .collection("Ranking")
+        .doc(playerId)
+        .update({"gameStarted": DateTime.now()});
+  }
+
+  Future<void> setEndTime({
+    required String playerId,
+  }) async {
+    return FirebaseFirestore.instance
+        .collection("Ranking")
+        .doc(playerId)
+        .update({"gameEnd": DateTime.now()});
+  }
+
   Stream<QuerySnapshot<Map<String, dynamic>>> getRankingForUpdate(
       {required String email}) {
     return FirebaseFirestore.instance

@@ -1,5 +1,6 @@
 import 'package:brain_check/app/core/enums/enums.dart';
 import 'package:brain_check/app/injection_container.dart';
+import 'package:brain_check/domain/models/profile_model.dart';
 
 import 'package:brain_check/features/pages/duel_result_page/duel_result_page.dart';
 import 'package:brain_check/features/pages/question_page/cubit/question_page_cubit.dart';
@@ -23,6 +24,7 @@ class QuestionPage extends StatefulWidget {
     required this.questionsAmount,
     required this.gameType,
     required this.roomId,
+    required this.profileModel,
   });
 
   final User? user;
@@ -32,6 +34,7 @@ class QuestionPage extends StatefulWidget {
   final int questionsAmount;
   final GameType gameType;
   final String? roomId;
+  final ProfileModel profileModel;
 
   @override
   State<QuestionPage> createState() => _QuestionPageState();
@@ -58,7 +61,7 @@ class _QuestionPageState extends State<QuestionPage> {
   var answerThirteen = 0;
   var answerFourteen = 0;
   var answerFithteen = 0;
-  final CountdownController controller = CountdownController(autoStart: true);
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -81,6 +84,9 @@ class _QuestionPageState extends State<QuestionPage> {
                   errorMessage: state.errorMessage.toString());
             case Status.success:
               if (index == widget.questionsAmount) {
+                context
+                    .read<QuestionPageCubit>()
+                    .setEndTime(playerId: widget.profileModel.id);
                 return DuelResultPage(
                   gameType: widget.gameType,
                   questionAmount: widget.questionsAmount,
@@ -121,7 +127,7 @@ class _QuestionPageState extends State<QuestionPage> {
                             border: Border.all(
                                 width: MediaQuery.of(context).size.width / 55,
                                 color: Colors.black)),
-                        height: MediaQuery.of(context).size.height * 0.4,
+                        height: MediaQuery.of(context).size.height * 0.3,
                         child: Column(
                           children: [
                             Padding(
@@ -143,30 +149,6 @@ class _QuestionPageState extends State<QuestionPage> {
                                             MediaQuery.of(context).size.height /
                                                 40,
                                       )),
-                                  Countdown(
-                                    controller: controller,
-                                    seconds: 2,
-                                    build: (BuildContext context,
-                                            double time) =>
-                                        Text(time.toInt().toString(),
-                                            style: GoogleFonts.bungee(
-                                              fontSize: MediaQuery.of(context)
-                                                      .size
-                                                      .height /
-                                                  30,
-                                            )),
-                                    interval:
-                                        const Duration(milliseconds: 1000),
-                                    onFinished: () {
-                                      setState(() {
-                                        index++;
-                                        choosedAnswer = "";
-                                        isChoosed = false;
-                                      });
-
-                                      controller.restart();
-                                    },
-                                  )
                                 ],
                               ),
                             ),
@@ -209,25 +191,50 @@ class _QuestionPageState extends State<QuestionPage> {
                                                                   .toString())
                                                           : index == 6
                                                               ? HtmlUnescape()
-                                                                  .convert(state.seventhQuestion!.question.toString())
+                                                                  .convert(
+                                                                  state
+                                                                      .seventhQuestion!
+                                                                      .question
+                                                                      .toString(),
+                                                                )
                                                               : index == 7
-                                                                  ? HtmlUnescape().convert(state.eightQuestion!.question.toString())
+                                                                  ? HtmlUnescape().convert(
+                                                                      state
+                                                                          .eightQuestion!
+                                                                          .question
+                                                                          .toString(),
+                                                                    )
                                                                   : index == 8
-                                                                      ? HtmlUnescape().convert(state.ninthQuestion!.question.toString())
+                                                                      ? HtmlUnescape().convert(
+                                                                          state
+                                                                              .ninthQuestion!
+                                                                              .question
+                                                                              .toString(),
+                                                                        )
                                                                       : index == 9
-                                                                          ? HtmlUnescape().convert(state.tenthQuestion!.question.toString())
+                                                                          ? HtmlUnescape().convert(
+                                                                              state.tenthQuestion!.question.toString(),
+                                                                            )
                                                                           : index == 10
-                                                                              ? HtmlUnescape().convert(state.eleventhQuestion!.question.toString())
+                                                                              ? HtmlUnescape().convert(
+                                                                                  state.eleventhQuestion!.question.toString(),
+                                                                                )
                                                                               : index == 11
-                                                                                  ? HtmlUnescape().convert(state.twelvethQuestion!.question.toString())
+                                                                                  ? HtmlUnescape().convert(
+                                                                                      state.twelvethQuestion!.question.toString(),
+                                                                                    )
                                                                                   : index == 12
-                                                                                      ? HtmlUnescape().convert(state.thirteenthQuestion!.question.toString())
+                                                                                      ? HtmlUnescape().convert(
+                                                                                          state.thirteenthQuestion!.question.toString(),
+                                                                                        )
                                                                                       : index == 13
-                                                                                          ? HtmlUnescape().convert(state.fourteenthQuestion!.question.toString())
+                                                                                          ? HtmlUnescape().convert(
+                                                                                              state.fourteenthQuestion!.question.toString(),
+                                                                                            )
                                                                                           : HtmlUnescape().convert(state.fifteenthQuestion!.question.toString()),
                                   style: GoogleFonts.bungee(
                                     fontSize:
-                                        MediaQuery.of(context).size.height / 45,
+                                        MediaQuery.of(context).size.height / 55,
                                   ),
                                 )),
                           ],
@@ -667,6 +674,21 @@ class _QuestionPageState extends State<QuestionPage> {
                           ]
                         ],
                       ),
+                      ElevatedButton(
+                          onPressed: () {
+                            setState(() {
+                              index++;
+                              choosedAnswer = "";
+                              isChoosed = false;
+                            });
+                          },
+                          child: Text(
+                            "Next",
+                            style: GoogleFonts.bungee(
+                                color: Colors.black,
+                                fontSize:
+                                    MediaQuery.of(context).size.width / 15),
+                          ))
                     ],
                   ),
                 ),

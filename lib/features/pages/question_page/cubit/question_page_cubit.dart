@@ -255,6 +255,9 @@ class QuestionPageCubit extends Cubit<QuestionPageState> {
       ));
     }
   }
+    Future<void> setEndTime({required String playerId}) async {
+    return rankingRepository.setEndTime(playerId: playerId);
+  }
 
   @override
   Future<void> close() {
