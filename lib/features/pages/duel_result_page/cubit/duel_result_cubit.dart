@@ -18,6 +18,7 @@ class DuelResultCubit extends Cubit<DuelResultState> {
           errorMessage: null,
           status: Status.initial,
           profiles: [],
+          gameDuration: null
         ));
   final DuelGameRepository duelGameRepository;
   final RankingRepository rankingRepository;
@@ -60,6 +61,7 @@ class DuelResultCubit extends Cubit<DuelResultState> {
 
   Future<void> getRankingForUpdate({required String email}) async {
     emit(DuelResultState(
+      gameDuration: null,
       gameLenght: null,
       errorMessage: null,
       profiles: [],
@@ -75,12 +77,14 @@ class DuelResultCubit extends Cubit<DuelResultState> {
           "${difference.inMinutes.remainder(60)}:${(difference.inSeconds.remainder(60)).toString().padLeft(2, '0')}";
       try {
         emit(DuelResultState(
+          gameDuration: difference,
             errorMessage: null,
             profiles: event,
             status: Status.success,
             gameLenght: formattedDuration));
       } catch (error) {
         emit(DuelResultState(
+          gameDuration: null,
             gameLenght: formattedDuration,
             errorMessage: error.toString(),
             profiles: [],

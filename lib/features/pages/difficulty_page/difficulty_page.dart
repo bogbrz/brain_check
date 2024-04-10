@@ -219,6 +219,7 @@ class _DifficultyPageState extends State<DifficultyPage> {
                                               questionsNumber = amount.nameId;
                                               print(questionsNumber);
                                             });
+                                            print(choosedDifficulty);
                                           },
                                           child: AmountWidget(
                                             amount: amount,
@@ -234,15 +235,16 @@ class _DifficultyPageState extends State<DifficultyPage> {
                           ),
                           ElevatedButton(
                             onPressed: () {
-                              context
-                                  .read<DifficultyPageCubit>()
-                                  .setStartTime(playerId: widget.profileModel.id);
+                              context.read<DifficultyPageCubit>().setStartTime(
+                                  playerId: widget.profileModel.id);
                               Navigator.of(context).push(MaterialPageRoute(
                                   builder: ((context) => QuestionPage(
-                                    profileModel: widget.profileModel,
+                                        profileModel: widget.profileModel,
                                         roomId: null,
                                         category: widget.categoriesModel.id,
-                                        difficulty: choosedDifficulty,
+                                        difficulty: choosedDifficulty != "null"
+                                            ? choosedDifficulty
+                                            : null,
                                         user: widget.user,
                                         questionsAmount: questionsNumber,
                                         gameType: GameType.casual,

@@ -30,7 +30,7 @@ class QuestionPage extends StatefulWidget {
   final User? user;
 
   final int? category;
-  final String difficulty;
+  final String? difficulty;
   final int questionsAmount;
   final GameType gameType;
   final String? roomId;

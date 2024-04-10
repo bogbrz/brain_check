@@ -78,6 +78,8 @@ class RankedGamePage extends StatelessWidget {
                         if (state.profile[0].lifes != 0) ...[
                           InkWell(
                             onTap: () async {
+                                   context.read<RankedGameCubit>().setStartTime(
+                                  playerId: profileModel.id);
                               Navigator.of(context).push(MaterialPageRoute(
                                   builder: (context) => QuestionPage(
                                         profileModel: profileModel,

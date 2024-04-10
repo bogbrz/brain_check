@@ -20,6 +20,7 @@ mixin _$DuelResultState {
   List<ProfileModel> get profiles => throw _privateConstructorUsedError;
   Status get status => throw _privateConstructorUsedError;
   String? get gameLenght => throw _privateConstructorUsedError;
+  Duration? get gameDuration => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $DuelResultStateCopyWith<DuelResultState> get copyWith =>
@@ -36,7 +37,8 @@ abstract class $DuelResultStateCopyWith<$Res> {
       {String? errorMessage,
       List<ProfileModel> profiles,
       Status status,
-      String? gameLenght});
+      String? gameLenght,
+      Duration? gameDuration});
 }
 
 /// @nodoc
@@ -56,6 +58,7 @@ class _$DuelResultStateCopyWithImpl<$Res, $Val extends DuelResultState>
     Object? profiles = null,
     Object? status = null,
     Object? gameLenght = freezed,
+    Object? gameDuration = freezed,
   }) {
     return _then(_value.copyWith(
       errorMessage: freezed == errorMessage
@@ -74,6 +77,10 @@ class _$DuelResultStateCopyWithImpl<$Res, $Val extends DuelResultState>
           ? _value.gameLenght
           : gameLenght // ignore: cast_nullable_to_non_nullable
               as String?,
+      gameDuration: freezed == gameDuration
+          ? _value.gameDuration
+          : gameDuration // ignore: cast_nullable_to_non_nullable
+              as Duration?,
     ) as $Val);
   }
 }
@@ -90,7 +97,8 @@ abstract class _$$InitialImplCopyWith<$Res>
       {String? errorMessage,
       List<ProfileModel> profiles,
       Status status,
-      String? gameLenght});
+      String? gameLenght,
+      Duration? gameDuration});
 }
 
 /// @nodoc
@@ -108,6 +116,7 @@ class __$$InitialImplCopyWithImpl<$Res>
     Object? profiles = null,
     Object? status = null,
     Object? gameLenght = freezed,
+    Object? gameDuration = freezed,
   }) {
     return _then(_$InitialImpl(
       errorMessage: freezed == errorMessage
@@ -126,6 +135,10 @@ class __$$InitialImplCopyWithImpl<$Res>
           ? _value.gameLenght
           : gameLenght // ignore: cast_nullable_to_non_nullable
               as String?,
+      gameDuration: freezed == gameDuration
+          ? _value.gameDuration
+          : gameDuration // ignore: cast_nullable_to_non_nullable
+              as Duration?,
     ));
   }
 }
@@ -137,7 +150,8 @@ class _$InitialImpl implements _Initial {
       {required this.errorMessage,
       required final List<ProfileModel> profiles,
       required this.status,
-      required this.gameLenght})
+      required this.gameLenght,
+      required this.gameDuration})
       : _profiles = profiles;
 
   @override
@@ -154,10 +168,12 @@ class _$InitialImpl implements _Initial {
   final Status status;
   @override
   final String? gameLenght;
+  @override
+  final Duration? gameDuration;
 
   @override
   String toString() {
-    return 'DuelResultState(errorMessage: $errorMessage, profiles: $profiles, status: $status, gameLenght: $gameLenght)';
+    return 'DuelResultState(errorMessage: $errorMessage, profiles: $profiles, status: $status, gameLenght: $gameLenght, gameDuration: $gameDuration)';
   }
 
   @override
@@ -170,12 +186,19 @@ class _$InitialImpl implements _Initial {
             const DeepCollectionEquality().equals(other._profiles, _profiles) &&
             (identical(other.status, status) || other.status == status) &&
             (identical(other.gameLenght, gameLenght) ||
-                other.gameLenght == gameLenght));
+                other.gameLenght == gameLenght) &&
+            (identical(other.gameDuration, gameDuration) ||
+                other.gameDuration == gameDuration));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, errorMessage,
-      const DeepCollectionEquality().hash(_profiles), status, gameLenght);
+  int get hashCode => Object.hash(
+      runtimeType,
+      errorMessage,
+      const DeepCollectionEquality().hash(_profiles),
+      status,
+      gameLenght,
+      gameDuration);
 
   @JsonKey(ignore: true)
   @override
@@ -189,7 +212,8 @@ abstract class _Initial implements DuelResultState {
       {required final String? errorMessage,
       required final List<ProfileModel> profiles,
       required final Status status,
-      required final String? gameLenght}) = _$InitialImpl;
+      required final String? gameLenght,
+      required final Duration? gameDuration}) = _$InitialImpl;
 
   @override
   String? get errorMessage;
@@ -199,6 +223,8 @@ abstract class _Initial implements DuelResultState {
   Status get status;
   @override
   String? get gameLenght;
+  @override
+  Duration? get gameDuration;
   @override
   @JsonKey(ignore: true)
   _$$InitialImplCopyWith<_$InitialImpl> get copyWith =>

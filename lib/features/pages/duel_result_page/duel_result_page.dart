@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:brain_check/app/core/enums/enums.dart';
 import 'package:brain_check/app/injection_container.dart';
 import 'package:brain_check/domain/models/player_model.dart';
@@ -61,21 +63,23 @@ class DuelResultPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    int score = answerOne +
-        answerTwo +
-        answerThree +
-        answerFour +
-        answerFive +
-        answerSix +
-        answerSeven +
-        answerEight +
-        answerNine +
-        answerTen +
-        answerEleven +
-        answerTwelve +
-        answerThirteen +
-        answerFourteen +
-        answerFithteen;
+    int score = (answerOne +
+            answerTwo +
+            answerThree +
+            answerFour +
+            answerFive +
+            answerSix +
+            answerSeven +
+            answerEight +
+            answerNine +
+            answerTen +
+            answerEleven +
+            answerTwelve +
+            answerThirteen +
+            answerFourteen +
+            answerFithteen) *
+        10;
+
     return BlocProvider(
       create: (context) => getIt<DuelResultCubit>()
         ..getRankingForUpdate(email: user!.email.toString()),
@@ -90,24 +94,29 @@ class DuelResultPage extends StatelessWidget {
               return ErrorStateWidget(
                   errorMessage: state.errorMessage.toString());
             case Status.success:
-
-              // Duration difference = gameEnd.difference(gameStared);
-              // print("DIFFERENCE $difference");
+              int pointsDeductionForTime = state.gameDuration!.inSeconds <= 30
+                  ? 0
+                  : ((state.gameDuration!.inSeconds) ~/ 5);
+              int totalPoints = score == 0
+                  ? 0
+                  : (score - pointsDeductionForTime) < 0
+                      ? 0
+                      : score - pointsDeductionForTime;
 
               return Center(
                 child: SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.2,
+                  height: MediaQuery.of(context).size.height * 0.3,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        "${AppLocalizations.of(context).yourScore}: ${score} / $questionAmount",
+                        "Your Time: ${state.gameLenght}  ",
                         style: GoogleFonts.bungee(
                             color: Colors.white,
                             fontSize: MediaQuery.of(context).size.height / 35),
                       ),
                       Text(
-                        "Your Time: ${state.gameLenght}  ",
+                        "${AppLocalizations.of(context).yourScore}: ${score} / ${questionAmount * 10}",
                         style: GoogleFonts.bungee(
                             color: Colors.white,
                             fontSize: MediaQuery.of(context).size.height / 35),
@@ -211,6 +220,12 @@ class DuelResultPage extends StatelessWidget {
                           ]
                         ],
                       ),
+                      Text(
+                        "Total points: $totalPoints  ",
+                        style: GoogleFonts.bungee(
+                            color: Colors.white,
+                            fontSize: MediaQuery.of(context).size.height / 35),
+                      ),
                       ElevatedButton(
                         onPressed: () {
                           if (gameType == GameType.duel) {
@@ -230,7 +245,7 @@ class DuelResultPage extends StatelessWidget {
                                     roomId: roomId!,
                                     status: false,
                                     playerId: player.id,
-                                    points: score);
+                                    points: totalPoints);
                                 if (gameStatus == true) {
                                   context
                                       .read<DuelResultCubit>()
@@ -244,7 +259,8 @@ class DuelResultPage extends StatelessWidget {
                             Navigator.of(context).pop();
                           } else {
                             context.read<DuelResultCubit>().updateRanking(
-                                points: score, profileId: state.profiles[0].id);
+                                points: totalPoints,
+                                profileId: state.profiles[0].id);
                             Navigator.of(context).pop();
                           }
                         },

@@ -35,6 +35,10 @@ class RankedGameCubit extends Cubit<RankedGameState> {
     });
   }
 
+  Future<void> setStartTime({required String playerId}) async {
+    return rankingRepository.setStartTime(playerId: playerId);
+  }
+
   Future<void> updateLifes(
       {required String profileId, required DateTime lastLogin}) async {
     return rankingRepository.restoreLifes(

@@ -7,5 +7,6 @@ class DuelResultState with _$DuelResultState {
       required List<ProfileModel> profiles,
       
       required Status status,
-      required String? gameLenght}) = _Initial;
+      required String? gameLenght,
+      required Duration? gameDuration}) = _Initial;
 }
