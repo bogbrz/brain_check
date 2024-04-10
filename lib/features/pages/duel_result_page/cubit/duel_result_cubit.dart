@@ -8,13 +8,17 @@ import 'package:brain_check/domain/repositories/ranking_repository.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'duel_result_state.dart';
-part 'duel_result_cubit.freezed.dart';
+part 'generated/duel_result_cubit.freezed.dart';
 
 class DuelResultCubit extends Cubit<DuelResultState> {
   DuelResultCubit(
       {required this.duelGameRepository, required this.rankingRepository})
       : super(DuelResultState(
-            errorMessage: null, status: Status.initial, profiles: []));
+          gameLenght: null,
+          errorMessage: null,
+          status: Status.initial,
+          profiles: [],
+        ));
   final DuelGameRepository duelGameRepository;
   final RankingRepository rankingRepository;
   StreamSubscription? streamSubscription;
@@ -56,14 +60,28 @@ class DuelResultCubit extends Cubit<DuelResultState> {
 
   Future<void> getRankingForUpdate({required String email}) async {
     emit(DuelResultState(
-        errorMessage: null, profiles: [], status: Status.loading));
+      gameLenght: null,
+      errorMessage: null,
+      profiles: [],
+      status: Status.loading,
+    ));
     streamSubscription =
         rankingRepository.getRankingForUpdate(email: email).listen((event) {
+      DateTime gameStart = event[0].gameStarted.toDate();
+      DateTime gameEnd = event[0].gameEnd.toDate();
+
+      Duration difference = gameEnd.difference(gameStart);
+      String formattedDuration =
+          "${difference.inMinutes.remainder(60)}:${(difference.inSeconds.remainder(60)).toString().padLeft(2, '0')}";
       try {
         emit(DuelResultState(
-            errorMessage: null, profiles: event, status: Status.success));
+            errorMessage: null,
+            profiles: event,
+            status: Status.success,
+            gameLenght: formattedDuration));
       } catch (error) {
         emit(DuelResultState(
+            gameLenght: formattedDuration,
             errorMessage: error.toString(),
             profiles: [],
             status: Status.error));

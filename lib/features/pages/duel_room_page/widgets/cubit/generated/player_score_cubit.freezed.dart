@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'difficulty_page_cubit.dart';
+part of '../player_score_cubit.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,36 +15,36 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
-mixin _$DifficultyPageState {
+mixin _$PlayerScoreState {
   String? get errorMessage => throw _privateConstructorUsedError;
-  CategoryQuestionCount? get info => throw _privateConstructorUsedError;
-  Overall get overAll => throw _privateConstructorUsedError;
+  List<RoundScoreModel>? get playerOneScore =>
+      throw _privateConstructorUsedError;
+  List<RoundScoreModel>? get playerTwoScore =>
+      throw _privateConstructorUsedError;
   Status get status => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $DifficultyPageStateCopyWith<DifficultyPageState> get copyWith =>
+  $PlayerScoreStateCopyWith<PlayerScoreState> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $DifficultyPageStateCopyWith<$Res> {
-  factory $DifficultyPageStateCopyWith(
-          DifficultyPageState value, $Res Function(DifficultyPageState) then) =
-      _$DifficultyPageStateCopyWithImpl<$Res, DifficultyPageState>;
+abstract class $PlayerScoreStateCopyWith<$Res> {
+  factory $PlayerScoreStateCopyWith(
+          PlayerScoreState value, $Res Function(PlayerScoreState) then) =
+      _$PlayerScoreStateCopyWithImpl<$Res, PlayerScoreState>;
   @useResult
   $Res call(
       {String? errorMessage,
-      CategoryQuestionCount? info,
-      Overall overAll,
+      List<RoundScoreModel>? playerOneScore,
+      List<RoundScoreModel>? playerTwoScore,
       Status status});
-
-  $CategoryQuestionCountCopyWith<$Res>? get info;
 }
 
 /// @nodoc
-class _$DifficultyPageStateCopyWithImpl<$Res, $Val extends DifficultyPageState>
-    implements $DifficultyPageStateCopyWith<$Res> {
-  _$DifficultyPageStateCopyWithImpl(this._value, this._then);
+class _$PlayerScoreStateCopyWithImpl<$Res, $Val extends PlayerScoreState>
+    implements $PlayerScoreStateCopyWith<$Res> {
+  _$PlayerScoreStateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -55,8 +55,8 @@ class _$DifficultyPageStateCopyWithImpl<$Res, $Val extends DifficultyPageState>
   @override
   $Res call({
     Object? errorMessage = freezed,
-    Object? info = freezed,
-    Object? overAll = null,
+    Object? playerOneScore = freezed,
+    Object? playerTwoScore = freezed,
     Object? status = null,
   }) {
     return _then(_value.copyWith(
@@ -64,37 +64,25 @@ class _$DifficultyPageStateCopyWithImpl<$Res, $Val extends DifficultyPageState>
           ? _value.errorMessage
           : errorMessage // ignore: cast_nullable_to_non_nullable
               as String?,
-      info: freezed == info
-          ? _value.info
-          : info // ignore: cast_nullable_to_non_nullable
-              as CategoryQuestionCount?,
-      overAll: null == overAll
-          ? _value.overAll
-          : overAll // ignore: cast_nullable_to_non_nullable
-              as Overall,
+      playerOneScore: freezed == playerOneScore
+          ? _value.playerOneScore
+          : playerOneScore // ignore: cast_nullable_to_non_nullable
+              as List<RoundScoreModel>?,
+      playerTwoScore: freezed == playerTwoScore
+          ? _value.playerTwoScore
+          : playerTwoScore // ignore: cast_nullable_to_non_nullable
+              as List<RoundScoreModel>?,
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as Status,
     ) as $Val);
   }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $CategoryQuestionCountCopyWith<$Res>? get info {
-    if (_value.info == null) {
-      return null;
-    }
-
-    return $CategoryQuestionCountCopyWith<$Res>(_value.info!, (value) {
-      return _then(_value.copyWith(info: value) as $Val);
-    });
-  }
 }
 
 /// @nodoc
 abstract class _$$InitialImplCopyWith<$Res>
-    implements $DifficultyPageStateCopyWith<$Res> {
+    implements $PlayerScoreStateCopyWith<$Res> {
   factory _$$InitialImplCopyWith(
           _$InitialImpl value, $Res Function(_$InitialImpl) then) =
       __$$InitialImplCopyWithImpl<$Res>;
@@ -102,17 +90,14 @@ abstract class _$$InitialImplCopyWith<$Res>
   @useResult
   $Res call(
       {String? errorMessage,
-      CategoryQuestionCount? info,
-      Overall overAll,
+      List<RoundScoreModel>? playerOneScore,
+      List<RoundScoreModel>? playerTwoScore,
       Status status});
-
-  @override
-  $CategoryQuestionCountCopyWith<$Res>? get info;
 }
 
 /// @nodoc
 class __$$InitialImplCopyWithImpl<$Res>
-    extends _$DifficultyPageStateCopyWithImpl<$Res, _$InitialImpl>
+    extends _$PlayerScoreStateCopyWithImpl<$Res, _$InitialImpl>
     implements _$$InitialImplCopyWith<$Res> {
   __$$InitialImplCopyWithImpl(
       _$InitialImpl _value, $Res Function(_$InitialImpl) _then)
@@ -122,8 +107,8 @@ class __$$InitialImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? errorMessage = freezed,
-    Object? info = freezed,
-    Object? overAll = null,
+    Object? playerOneScore = freezed,
+    Object? playerTwoScore = freezed,
     Object? status = null,
   }) {
     return _then(_$InitialImpl(
@@ -131,14 +116,14 @@ class __$$InitialImplCopyWithImpl<$Res>
           ? _value.errorMessage
           : errorMessage // ignore: cast_nullable_to_non_nullable
               as String?,
-      info: freezed == info
-          ? _value.info
-          : info // ignore: cast_nullable_to_non_nullable
-              as CategoryQuestionCount?,
-      overAll: null == overAll
-          ? _value.overAll
-          : overAll // ignore: cast_nullable_to_non_nullable
-              as Overall,
+      playerOneScore: freezed == playerOneScore
+          ? _value._playerOneScore
+          : playerOneScore // ignore: cast_nullable_to_non_nullable
+              as List<RoundScoreModel>?,
+      playerTwoScore: freezed == playerTwoScore
+          ? _value._playerTwoScore
+          : playerTwoScore // ignore: cast_nullable_to_non_nullable
+              as List<RoundScoreModel>?,
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
@@ -152,22 +137,40 @@ class __$$InitialImplCopyWithImpl<$Res>
 class _$InitialImpl implements _Initial {
   const _$InitialImpl(
       {required this.errorMessage,
-      required this.info,
-      required this.overAll,
-      required this.status});
+      required final List<RoundScoreModel>? playerOneScore,
+      required final List<RoundScoreModel>? playerTwoScore,
+      required this.status})
+      : _playerOneScore = playerOneScore,
+        _playerTwoScore = playerTwoScore;
 
   @override
   final String? errorMessage;
+  final List<RoundScoreModel>? _playerOneScore;
   @override
-  final CategoryQuestionCount? info;
+  List<RoundScoreModel>? get playerOneScore {
+    final value = _playerOneScore;
+    if (value == null) return null;
+    if (_playerOneScore is EqualUnmodifiableListView) return _playerOneScore;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
+  final List<RoundScoreModel>? _playerTwoScore;
   @override
-  final Overall overAll;
+  List<RoundScoreModel>? get playerTwoScore {
+    final value = _playerTwoScore;
+    if (value == null) return null;
+    if (_playerTwoScore is EqualUnmodifiableListView) return _playerTwoScore;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
   @override
   final Status status;
 
   @override
   String toString() {
-    return 'DifficultyPageState(errorMessage: $errorMessage, info: $info, overAll: $overAll, status: $status)';
+    return 'PlayerScoreState(errorMessage: $errorMessage, playerOneScore: $playerOneScore, playerTwoScore: $playerTwoScore, status: $status)';
   }
 
   @override
@@ -177,14 +180,20 @@ class _$InitialImpl implements _Initial {
             other is _$InitialImpl &&
             (identical(other.errorMessage, errorMessage) ||
                 other.errorMessage == errorMessage) &&
-            (identical(other.info, info) || other.info == info) &&
-            (identical(other.overAll, overAll) || other.overAll == overAll) &&
+            const DeepCollectionEquality()
+                .equals(other._playerOneScore, _playerOneScore) &&
+            const DeepCollectionEquality()
+                .equals(other._playerTwoScore, _playerTwoScore) &&
             (identical(other.status, status) || other.status == status));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, errorMessage, info, overAll, status);
+  int get hashCode => Object.hash(
+      runtimeType,
+      errorMessage,
+      const DeepCollectionEquality().hash(_playerOneScore),
+      const DeepCollectionEquality().hash(_playerTwoScore),
+      status);
 
   @JsonKey(ignore: true)
   @override
@@ -193,19 +202,19 @@ class _$InitialImpl implements _Initial {
       __$$InitialImplCopyWithImpl<_$InitialImpl>(this, _$identity);
 }
 
-abstract class _Initial implements DifficultyPageState {
+abstract class _Initial implements PlayerScoreState {
   const factory _Initial(
       {required final String? errorMessage,
-      required final CategoryQuestionCount? info,
-      required final Overall overAll,
+      required final List<RoundScoreModel>? playerOneScore,
+      required final List<RoundScoreModel>? playerTwoScore,
       required final Status status}) = _$InitialImpl;
 
   @override
   String? get errorMessage;
   @override
-  CategoryQuestionCount? get info;
+  List<RoundScoreModel>? get playerOneScore;
   @override
-  Overall get overAll;
+  List<RoundScoreModel>? get playerTwoScore;
   @override
   Status get status;
   @override

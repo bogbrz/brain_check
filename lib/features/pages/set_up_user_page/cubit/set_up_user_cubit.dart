@@ -7,7 +7,7 @@ import 'package:brain_check/domain/repositories/ranking_repository.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'set_up_user_state.dart';
-part 'set_up_user_cubit.freezed.dart';
+part 'generated/set_up_user_cubit.freezed.dart';
 
 class SetUpUserCubit extends Cubit<SetUpUserState> {
   SetUpUserCubit({required this.rankingRepository})

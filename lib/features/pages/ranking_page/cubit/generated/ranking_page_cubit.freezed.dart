@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'user_page_cubit.dart';
+part of '../ranking_page_cubit.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,29 +15,29 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
-mixin _$UserPageState {
+mixin _$RankingPageState {
   String? get errorMessage => throw _privateConstructorUsedError;
-  List<ProfileModel> get profile => throw _privateConstructorUsedError;
+  List<ProfileModel> get profiles => throw _privateConstructorUsedError;
   Status get status => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $UserPageStateCopyWith<UserPageState> get copyWith =>
+  $RankingPageStateCopyWith<RankingPageState> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $UserPageStateCopyWith<$Res> {
-  factory $UserPageStateCopyWith(
-          UserPageState value, $Res Function(UserPageState) then) =
-      _$UserPageStateCopyWithImpl<$Res, UserPageState>;
+abstract class $RankingPageStateCopyWith<$Res> {
+  factory $RankingPageStateCopyWith(
+          RankingPageState value, $Res Function(RankingPageState) then) =
+      _$RankingPageStateCopyWithImpl<$Res, RankingPageState>;
   @useResult
-  $Res call({String? errorMessage, List<ProfileModel> profile, Status status});
+  $Res call({String? errorMessage, List<ProfileModel> profiles, Status status});
 }
 
 /// @nodoc
-class _$UserPageStateCopyWithImpl<$Res, $Val extends UserPageState>
-    implements $UserPageStateCopyWith<$Res> {
-  _$UserPageStateCopyWithImpl(this._value, this._then);
+class _$RankingPageStateCopyWithImpl<$Res, $Val extends RankingPageState>
+    implements $RankingPageStateCopyWith<$Res> {
+  _$RankingPageStateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -48,7 +48,7 @@ class _$UserPageStateCopyWithImpl<$Res, $Val extends UserPageState>
   @override
   $Res call({
     Object? errorMessage = freezed,
-    Object? profile = null,
+    Object? profiles = null,
     Object? status = null,
   }) {
     return _then(_value.copyWith(
@@ -56,9 +56,9 @@ class _$UserPageStateCopyWithImpl<$Res, $Val extends UserPageState>
           ? _value.errorMessage
           : errorMessage // ignore: cast_nullable_to_non_nullable
               as String?,
-      profile: null == profile
-          ? _value.profile
-          : profile // ignore: cast_nullable_to_non_nullable
+      profiles: null == profiles
+          ? _value.profiles
+          : profiles // ignore: cast_nullable_to_non_nullable
               as List<ProfileModel>,
       status: null == status
           ? _value.status
@@ -69,39 +69,39 @@ class _$UserPageStateCopyWithImpl<$Res, $Val extends UserPageState>
 }
 
 /// @nodoc
-abstract class _$$UserPageStateImplCopyWith<$Res>
-    implements $UserPageStateCopyWith<$Res> {
-  factory _$$UserPageStateImplCopyWith(
-          _$UserPageStateImpl value, $Res Function(_$UserPageStateImpl) then) =
-      __$$UserPageStateImplCopyWithImpl<$Res>;
+abstract class _$$RankingPageStateImplCopyWith<$Res>
+    implements $RankingPageStateCopyWith<$Res> {
+  factory _$$RankingPageStateImplCopyWith(_$RankingPageStateImpl value,
+          $Res Function(_$RankingPageStateImpl) then) =
+      __$$RankingPageStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String? errorMessage, List<ProfileModel> profile, Status status});
+  $Res call({String? errorMessage, List<ProfileModel> profiles, Status status});
 }
 
 /// @nodoc
-class __$$UserPageStateImplCopyWithImpl<$Res>
-    extends _$UserPageStateCopyWithImpl<$Res, _$UserPageStateImpl>
-    implements _$$UserPageStateImplCopyWith<$Res> {
-  __$$UserPageStateImplCopyWithImpl(
-      _$UserPageStateImpl _value, $Res Function(_$UserPageStateImpl) _then)
+class __$$RankingPageStateImplCopyWithImpl<$Res>
+    extends _$RankingPageStateCopyWithImpl<$Res, _$RankingPageStateImpl>
+    implements _$$RankingPageStateImplCopyWith<$Res> {
+  __$$RankingPageStateImplCopyWithImpl(_$RankingPageStateImpl _value,
+      $Res Function(_$RankingPageStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? errorMessage = freezed,
-    Object? profile = null,
+    Object? profiles = null,
     Object? status = null,
   }) {
-    return _then(_$UserPageStateImpl(
+    return _then(_$RankingPageStateImpl(
       errorMessage: freezed == errorMessage
           ? _value.errorMessage
           : errorMessage // ignore: cast_nullable_to_non_nullable
               as String?,
-      profile: null == profile
-          ? _value._profile
-          : profile // ignore: cast_nullable_to_non_nullable
+      profiles: null == profiles
+          ? _value._profiles
+          : profiles // ignore: cast_nullable_to_non_nullable
               as List<ProfileModel>,
       status: null == status
           ? _value.status
@@ -113,21 +113,21 @@ class __$$UserPageStateImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$UserPageStateImpl implements _UserPageState {
-  const _$UserPageStateImpl(
+class _$RankingPageStateImpl implements _RankingPageState {
+  const _$RankingPageStateImpl(
       {required this.errorMessage,
-      required final List<ProfileModel> profile,
+      required final List<ProfileModel> profiles,
       required this.status})
-      : _profile = profile;
+      : _profiles = profiles;
 
   @override
   final String? errorMessage;
-  final List<ProfileModel> _profile;
+  final List<ProfileModel> _profiles;
   @override
-  List<ProfileModel> get profile {
-    if (_profile is EqualUnmodifiableListView) return _profile;
+  List<ProfileModel> get profiles {
+    if (_profiles is EqualUnmodifiableListView) return _profiles;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_profile);
+    return EqualUnmodifiableListView(_profiles);
   }
 
   @override
@@ -135,45 +135,46 @@ class _$UserPageStateImpl implements _UserPageState {
 
   @override
   String toString() {
-    return 'UserPageState(errorMessage: $errorMessage, profile: $profile, status: $status)';
+    return 'RankingPageState(errorMessage: $errorMessage, profiles: $profiles, status: $status)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$UserPageStateImpl &&
+            other is _$RankingPageStateImpl &&
             (identical(other.errorMessage, errorMessage) ||
                 other.errorMessage == errorMessage) &&
-            const DeepCollectionEquality().equals(other._profile, _profile) &&
+            const DeepCollectionEquality().equals(other._profiles, _profiles) &&
             (identical(other.status, status) || other.status == status));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, errorMessage,
-      const DeepCollectionEquality().hash(_profile), status);
+      const DeepCollectionEquality().hash(_profiles), status);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$UserPageStateImplCopyWith<_$UserPageStateImpl> get copyWith =>
-      __$$UserPageStateImplCopyWithImpl<_$UserPageStateImpl>(this, _$identity);
+  _$$RankingPageStateImplCopyWith<_$RankingPageStateImpl> get copyWith =>
+      __$$RankingPageStateImplCopyWithImpl<_$RankingPageStateImpl>(
+          this, _$identity);
 }
 
-abstract class _UserPageState implements UserPageState {
-  const factory _UserPageState(
+abstract class _RankingPageState implements RankingPageState {
+  const factory _RankingPageState(
       {required final String? errorMessage,
-      required final List<ProfileModel> profile,
-      required final Status status}) = _$UserPageStateImpl;
+      required final List<ProfileModel> profiles,
+      required final Status status}) = _$RankingPageStateImpl;
 
   @override
   String? get errorMessage;
   @override
-  List<ProfileModel> get profile;
+  List<ProfileModel> get profiles;
   @override
   Status get status;
   @override
   @JsonKey(ignore: true)
-  _$$UserPageStateImplCopyWith<_$UserPageStateImpl> get copyWith =>
+  _$$RankingPageStateImplCopyWith<_$RankingPageStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

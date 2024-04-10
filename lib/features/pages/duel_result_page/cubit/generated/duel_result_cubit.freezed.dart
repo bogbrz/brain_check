@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'ranking_page_cubit.dart';
+part of '../duel_result_cubit.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,29 +15,34 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
-mixin _$RankingPageState {
+mixin _$DuelResultState {
   String? get errorMessage => throw _privateConstructorUsedError;
   List<ProfileModel> get profiles => throw _privateConstructorUsedError;
   Status get status => throw _privateConstructorUsedError;
+  String? get gameLenght => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $RankingPageStateCopyWith<RankingPageState> get copyWith =>
+  $DuelResultStateCopyWith<DuelResultState> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $RankingPageStateCopyWith<$Res> {
-  factory $RankingPageStateCopyWith(
-          RankingPageState value, $Res Function(RankingPageState) then) =
-      _$RankingPageStateCopyWithImpl<$Res, RankingPageState>;
+abstract class $DuelResultStateCopyWith<$Res> {
+  factory $DuelResultStateCopyWith(
+          DuelResultState value, $Res Function(DuelResultState) then) =
+      _$DuelResultStateCopyWithImpl<$Res, DuelResultState>;
   @useResult
-  $Res call({String? errorMessage, List<ProfileModel> profiles, Status status});
+  $Res call(
+      {String? errorMessage,
+      List<ProfileModel> profiles,
+      Status status,
+      String? gameLenght});
 }
 
 /// @nodoc
-class _$RankingPageStateCopyWithImpl<$Res, $Val extends RankingPageState>
-    implements $RankingPageStateCopyWith<$Res> {
-  _$RankingPageStateCopyWithImpl(this._value, this._then);
+class _$DuelResultStateCopyWithImpl<$Res, $Val extends DuelResultState>
+    implements $DuelResultStateCopyWith<$Res> {
+  _$DuelResultStateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -50,6 +55,7 @@ class _$RankingPageStateCopyWithImpl<$Res, $Val extends RankingPageState>
     Object? errorMessage = freezed,
     Object? profiles = null,
     Object? status = null,
+    Object? gameLenght = freezed,
   }) {
     return _then(_value.copyWith(
       errorMessage: freezed == errorMessage
@@ -64,27 +70,35 @@ class _$RankingPageStateCopyWithImpl<$Res, $Val extends RankingPageState>
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as Status,
+      gameLenght: freezed == gameLenght
+          ? _value.gameLenght
+          : gameLenght // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$$RankingPageStateImplCopyWith<$Res>
-    implements $RankingPageStateCopyWith<$Res> {
-  factory _$$RankingPageStateImplCopyWith(_$RankingPageStateImpl value,
-          $Res Function(_$RankingPageStateImpl) then) =
-      __$$RankingPageStateImplCopyWithImpl<$Res>;
+abstract class _$$InitialImplCopyWith<$Res>
+    implements $DuelResultStateCopyWith<$Res> {
+  factory _$$InitialImplCopyWith(
+          _$InitialImpl value, $Res Function(_$InitialImpl) then) =
+      __$$InitialImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String? errorMessage, List<ProfileModel> profiles, Status status});
+  $Res call(
+      {String? errorMessage,
+      List<ProfileModel> profiles,
+      Status status,
+      String? gameLenght});
 }
 
 /// @nodoc
-class __$$RankingPageStateImplCopyWithImpl<$Res>
-    extends _$RankingPageStateCopyWithImpl<$Res, _$RankingPageStateImpl>
-    implements _$$RankingPageStateImplCopyWith<$Res> {
-  __$$RankingPageStateImplCopyWithImpl(_$RankingPageStateImpl _value,
-      $Res Function(_$RankingPageStateImpl) _then)
+class __$$InitialImplCopyWithImpl<$Res>
+    extends _$DuelResultStateCopyWithImpl<$Res, _$InitialImpl>
+    implements _$$InitialImplCopyWith<$Res> {
+  __$$InitialImplCopyWithImpl(
+      _$InitialImpl _value, $Res Function(_$InitialImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -93,8 +107,9 @@ class __$$RankingPageStateImplCopyWithImpl<$Res>
     Object? errorMessage = freezed,
     Object? profiles = null,
     Object? status = null,
+    Object? gameLenght = freezed,
   }) {
-    return _then(_$RankingPageStateImpl(
+    return _then(_$InitialImpl(
       errorMessage: freezed == errorMessage
           ? _value.errorMessage
           : errorMessage // ignore: cast_nullable_to_non_nullable
@@ -107,17 +122,22 @@ class __$$RankingPageStateImplCopyWithImpl<$Res>
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as Status,
+      gameLenght: freezed == gameLenght
+          ? _value.gameLenght
+          : gameLenght // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
 
 /// @nodoc
 
-class _$RankingPageStateImpl implements _RankingPageState {
-  const _$RankingPageStateImpl(
+class _$InitialImpl implements _Initial {
+  const _$InitialImpl(
       {required this.errorMessage,
       required final List<ProfileModel> profiles,
-      required this.status})
+      required this.status,
+      required this.gameLenght})
       : _profiles = profiles;
 
   @override
@@ -132,40 +152,44 @@ class _$RankingPageStateImpl implements _RankingPageState {
 
   @override
   final Status status;
+  @override
+  final String? gameLenght;
 
   @override
   String toString() {
-    return 'RankingPageState(errorMessage: $errorMessage, profiles: $profiles, status: $status)';
+    return 'DuelResultState(errorMessage: $errorMessage, profiles: $profiles, status: $status, gameLenght: $gameLenght)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$RankingPageStateImpl &&
+            other is _$InitialImpl &&
             (identical(other.errorMessage, errorMessage) ||
                 other.errorMessage == errorMessage) &&
             const DeepCollectionEquality().equals(other._profiles, _profiles) &&
-            (identical(other.status, status) || other.status == status));
+            (identical(other.status, status) || other.status == status) &&
+            (identical(other.gameLenght, gameLenght) ||
+                other.gameLenght == gameLenght));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, errorMessage,
-      const DeepCollectionEquality().hash(_profiles), status);
+      const DeepCollectionEquality().hash(_profiles), status, gameLenght);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$RankingPageStateImplCopyWith<_$RankingPageStateImpl> get copyWith =>
-      __$$RankingPageStateImplCopyWithImpl<_$RankingPageStateImpl>(
-          this, _$identity);
+  _$$InitialImplCopyWith<_$InitialImpl> get copyWith =>
+      __$$InitialImplCopyWithImpl<_$InitialImpl>(this, _$identity);
 }
 
-abstract class _RankingPageState implements RankingPageState {
-  const factory _RankingPageState(
+abstract class _Initial implements DuelResultState {
+  const factory _Initial(
       {required final String? errorMessage,
       required final List<ProfileModel> profiles,
-      required final Status status}) = _$RankingPageStateImpl;
+      required final Status status,
+      required final String? gameLenght}) = _$InitialImpl;
 
   @override
   String? get errorMessage;
@@ -174,7 +198,9 @@ abstract class _RankingPageState implements RankingPageState {
   @override
   Status get status;
   @override
+  String? get gameLenght;
+  @override
   @JsonKey(ignore: true)
-  _$$RankingPageStateImplCopyWith<_$RankingPageStateImpl> get copyWith =>
+  _$$InitialImplCopyWith<_$InitialImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

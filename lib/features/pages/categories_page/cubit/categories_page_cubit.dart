@@ -7,7 +7,7 @@ import 'package:brain_check/domain/repositories/questions_repository.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'categories_page_state.dart';
-part 'categories_page_cubit.freezed.dart';
+part 'generated/categories_page_cubit.freezed.dart';
 
 class CategoriesPageCubit extends Cubit<CategoriesPageState> {
   CategoriesPageCubit({required this.questionRepository})

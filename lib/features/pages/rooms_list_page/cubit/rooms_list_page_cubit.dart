@@ -5,7 +5,7 @@ import 'package:brain_check/domain/repositories/duel_game_repository.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'rooms_list_page_state.dart';
-part 'rooms_list_page_cubit.freezed.dart';
+part 'generated/rooms_list_page_cubit.freezed.dart';
 
 class RoomsListPageCubit extends Cubit<RoomsListPageState> {
   RoomsListPageCubit({required this.duelGameRepository})

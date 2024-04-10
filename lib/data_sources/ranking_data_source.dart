@@ -18,7 +18,9 @@ class RankingFireBaseDataSource {
       "points": 0,
       "gamesPlayed": 0,
       "lifes": 5,
-      "lastLogIn": DateTime.now()
+      "lastLogIn": DateTime.now(),
+      "gameStarted": DateTime.now(),
+      "gameEnd": DateTime.now()
     });
   }
 

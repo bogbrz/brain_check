@@ -84,9 +84,6 @@ class _QuestionPageState extends State<QuestionPage> {
                   errorMessage: state.errorMessage.toString());
             case Status.success:
               if (index == widget.questionsAmount) {
-                context
-                    .read<QuestionPageCubit>()
-                    .setEndTime(playerId: widget.profileModel.id);
                 return DuelResultPage(
                   gameType: widget.gameType,
                   questionAmount: widget.questionsAmount,
@@ -681,6 +678,11 @@ class _QuestionPageState extends State<QuestionPage> {
                               choosedAnswer = "";
                               isChoosed = false;
                             });
+                            if (index == widget.questionsAmount) {
+                              context
+                                  .read<QuestionPageCubit>()
+                                  .setEndTime(playerId: widget.profileModel.id);
+                            }
                           },
                           child: Text(
                             "Next",

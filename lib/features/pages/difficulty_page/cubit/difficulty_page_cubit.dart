@@ -7,7 +7,7 @@ import 'package:brain_check/domain/repositories/ranking_repository.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'difficulty_page_state.dart';
-part 'difficulty_page_cubit.freezed.dart';
+part 'generated/difficulty_page_cubit.freezed.dart';
 
 class DifficultyPageCubit extends Cubit<DifficultyPageState> {
   DifficultyPageCubit(

@@ -23,10 +23,11 @@ class RankedGamePage extends StatelessWidget {
 
   final User? user;
   final ProfileModel profileModel;
+
   final CountdownController controller = CountdownController(autoStart: true);
+
   @override
   Widget build(BuildContext context) {
-    final now = DateTime.now();
     final DateTime dateTime = DateTime.now();
 
     return BlocProvider(
@@ -42,8 +43,9 @@ class RankedGamePage extends StatelessWidget {
                   state.profile[0].lastLogIn.toDate().toString());
 
               Duration difference = dateTime.difference(lastLogin);
-              print(difference);
-              if (difference.inHours > 23) {
+              print(difference.inDays);
+
+              if (difference.inDays >= 1) {
                 context.read<RankedGameCubit>().updateLifes(
                       lastLogin: DateTime.now(),
                       profileId: state.profile[0].id,
@@ -62,11 +64,8 @@ class RankedGamePage extends StatelessWidget {
                 case Status.success:
                   DateTime lastLogin = DateTime.parse(
                       state.profile[0].lastLogIn.toDate().toString());
-                  DateTime resetDay = DateTime(
-                      dateTime.year, dateTime.month, dateTime.day, 24, 00);
+                  DateTime resetDay = lastLogin.add(Duration(hours: 24));
 
-                  Duration difference = resetDay.difference(lastLogin);
-                  int resetTime = int.parse(difference.inMinutes.toString());
                   return Center(
                     child: Column(
                       children: [
@@ -134,7 +133,12 @@ class RankedGamePage extends StatelessWidget {
                               fontSize: MediaQuery.of(context).size.height / 30,
                             ),
                             enableDescriptions: false,
-                            onEnd: () {},
+                            onEnd: () {
+                              context.read<RankedGameCubit>().updateLifes(
+                                    lastLogin: DateTime.now(),
+                                    profileId: state.profile[0].id,
+                                  );
+                            },
                           )
                         ]
                       ],
