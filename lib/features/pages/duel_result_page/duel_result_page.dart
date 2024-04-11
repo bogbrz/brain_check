@@ -1,4 +1,3 @@
-import 'dart:ffi';
 
 import 'package:brain_check/app/core/enums/enums.dart';
 import 'package:brain_check/app/injection_container.dart';
@@ -104,46 +103,38 @@ class DuelResultPage extends StatelessWidget {
                       : score - pointsDeductionForTime;
 
               return Center(
-                child: SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.3,
+                child: Container(
+                  color: Colors.white,
+                  height: MediaQuery.of(context).size.height * 0.35,
+                  width: MediaQuery.of(context).size.width * 0.7,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
                         "Your Time: ${state.gameLenght}  ",
                         style: GoogleFonts.bungee(
-                            color: Colors.white,
+                            color: Colors.black,
                             fontSize: MediaQuery.of(context).size.height / 35),
                       ),
                       Text(
                         "${AppLocalizations.of(context).yourScore}: ${score} / ${questionAmount * 10}",
                         style: GoogleFonts.bungee(
-                            color: Colors.white,
+                            color: Colors.black,
                             fontSize: MediaQuery.of(context).size.height / 35),
                       ),
-                      Wrap(
-                        children: [
-                          if (questionAmount == 1) ...[
+                      if (questionAmount == 1) ...[
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
                             answerOne == 1
                                 ? Icon(Icons.check_circle, color: Colors.green)
                                 : Icon(Icons.cancel_rounded, color: Colors.red),
-                          ] else if (questionAmount == 5) ...[
-                            answerOne == 1
-                                ? Icon(Icons.check_circle, color: Colors.green)
-                                : Icon(Icons.cancel_rounded, color: Colors.red),
-                            answerTwo == 1
-                                ? Icon(Icons.check_circle, color: Colors.green)
-                                : Icon(Icons.cancel_rounded, color: Colors.red),
-                            answerThree == 1
-                                ? Icon(Icons.check_circle, color: Colors.green)
-                                : Icon(Icons.cancel_rounded, color: Colors.red),
-                            answerFour == 1
-                                ? Icon(Icons.check_circle, color: Colors.green)
-                                : Icon(Icons.cancel_rounded, color: Colors.red),
-                            answerFive == 1
-                                ? Icon(Icons.check_circle, color: Colors.green)
-                                : Icon(Icons.cancel_rounded, color: Colors.red),
-                          ] else if (questionAmount == 10) ...[
+                          ],
+                        )
+                      ] else if (questionAmount == 5) ...[
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
                             answerOne == 1
                                 ? Icon(Icons.check_circle, color: Colors.green)
                                 : Icon(Icons.cancel_rounded, color: Colors.red),
@@ -159,10 +150,39 @@ class DuelResultPage extends StatelessWidget {
                             answerFive == 1
                                 ? Icon(Icons.check_circle, color: Colors.green)
                                 : Icon(Icons.cancel_rounded, color: Colors.red),
+                          ],
+                        )
+                      ] else if (questionAmount == 10) ...[
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            answerOne == 1
+                                ? Icon(Icons.check_circle, color: Colors.green)
+                                : Icon(Icons.cancel_rounded, color: Colors.red),
+                            answerTwo == 1
+                                ? Icon(Icons.check_circle, color: Colors.green)
+                                : Icon(Icons.cancel_rounded, color: Colors.red),
+                            answerThree == 1
+                                ? Icon(Icons.check_circle, color: Colors.green)
+                                : Icon(Icons.cancel_rounded, color: Colors.red),
+                            answerFour == 1
+                                ? Icon(Icons.check_circle, color: Colors.green)
+                                : Icon(Icons.cancel_rounded, color: Colors.red),
+                            answerFive == 1
+                                ? Icon(Icons.check_circle, color: Colors.green)
+                                : Icon(Icons.cancel_rounded, color: Colors.red),
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
                             answerSix == 1
                                 ? Icon(Icons.check_circle, color: Colors.green)
                                 : Icon(Icons.cancel_rounded, color: Colors.red),
                             answerSeven == 1
+                                ? Icon(Icons.check_circle, color: Colors.green)
+                                : Icon(Icons.cancel_rounded, color: Colors.red),
+                            answerEight == 1
                                 ? Icon(Icons.check_circle, color: Colors.green)
                                 : Icon(Icons.cancel_rounded, color: Colors.red),
                             answerNine == 1
@@ -171,7 +191,12 @@ class DuelResultPage extends StatelessWidget {
                             answerTen == 1
                                 ? Icon(Icons.check_circle, color: Colors.green)
                                 : Icon(Icons.cancel_rounded, color: Colors.red),
-                          ] else if (questionAmount == 15) ...[
+                          ],
+                        ),
+                      ] else if (questionAmount == 15) ...[
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
                             answerOne == 1
                                 ? Icon(Icons.check_circle, color: Colors.green)
                                 : Icon(Icons.cancel_rounded, color: Colors.red),
@@ -187,10 +212,18 @@ class DuelResultPage extends StatelessWidget {
                             answerFive == 1
                                 ? Icon(Icons.check_circle, color: Colors.green)
                                 : Icon(Icons.cancel_rounded, color: Colors.red),
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
                             answerSix == 1
                                 ? Icon(Icons.check_circle, color: Colors.green)
                                 : Icon(Icons.cancel_rounded, color: Colors.red),
                             answerSeven == 1
+                                ? Icon(Icons.check_circle, color: Colors.green)
+                                : Icon(Icons.cancel_rounded, color: Colors.red),
+                            answerEight == 1
                                 ? Icon(Icons.check_circle, color: Colors.green)
                                 : Icon(Icons.cancel_rounded, color: Colors.red),
                             answerNine == 1
@@ -199,10 +232,12 @@ class DuelResultPage extends StatelessWidget {
                             answerTen == 1
                                 ? Icon(Icons.check_circle, color: Colors.green)
                                 : Icon(Icons.cancel_rounded, color: Colors.red),
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
                             answerEleven == 1
-                                ? Icon(Icons.check_circle, color: Colors.green)
-                                : Icon(Icons.cancel_rounded, color: Colors.red),
-                            answerOne == 1
                                 ? Icon(Icons.check_circle, color: Colors.green)
                                 : Icon(Icons.cancel_rounded, color: Colors.red),
                             answerTwelve == 1
@@ -217,13 +252,13 @@ class DuelResultPage extends StatelessWidget {
                             answerFithteen == 1
                                 ? Icon(Icons.check_circle, color: Colors.green)
                                 : Icon(Icons.cancel_rounded, color: Colors.red),
-                          ]
-                        ],
-                      ),
+                          ],
+                        ),
+                      ],
                       Text(
                         "Total points: $totalPoints  ",
                         style: GoogleFonts.bungee(
-                            color: Colors.white,
+                            color: Colors.black,
                             fontSize: MediaQuery.of(context).size.height / 35),
                       ),
                       ElevatedButton(

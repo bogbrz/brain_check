@@ -4,14 +4,12 @@ import 'package:brain_check/app/injection_container.dart';
 import 'package:brain_check/domain/models/profile_model.dart';
 import 'package:brain_check/features/pages/question_page/question_page.dart';
 import 'package:brain_check/features/pages/ranked_game_page/cubit/ranked_game_cubit.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:timer_count_down/timer_controller.dart';
-import 'package:timer_count_down/timer_count_down.dart';
 import 'package:flutter_timer_countdown/flutter_timer_countdown.dart';
 
 class RankedGamePage extends StatelessWidget {

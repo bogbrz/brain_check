@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:brain_check/data_sources/ranking_data_source.dart';
 import 'package:brain_check/domain/models/profile_model.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 
 class RankingRepository {
   final RankingFireBaseDataSource rankingFireBaseDataSource;
