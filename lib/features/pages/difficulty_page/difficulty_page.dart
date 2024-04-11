@@ -1,12 +1,12 @@
 import 'package:brain_check/amount_list.dart';
 import 'package:brain_check/app/core/enums/enums.dart';
 
-
 import 'package:brain_check/app/injection_container.dart';
 import 'package:brain_check/difficulty_list.dart';
 import 'package:brain_check/domain/models/amount_button_model.dart';
 import 'package:brain_check/domain/models/categories_model.dart';
 import 'package:brain_check/domain/models/difficulty_model.dart';
+import 'package:brain_check/domain/models/profile_model.dart';
 
 import 'package:brain_check/features/pages/difficulty_page/cubit/difficulty_page_cubit.dart';
 import 'package:brain_check/features/pages/question_page/question_page.dart';
@@ -22,11 +22,13 @@ class DifficultyPage extends StatefulWidget {
   const DifficultyPage({
     required this.categoriesModel,
     required this.user,
+    required this.profileModel,
     super.key,
   });
 
   final TriviaCategory categoriesModel;
   final User? user;
+  final ProfileModel profileModel;
 
   @override
   State<DifficultyPage> createState() => _DifficultyPageState();
@@ -217,6 +219,7 @@ class _DifficultyPageState extends State<DifficultyPage> {
                                               questionsNumber = amount.nameId;
                                               print(questionsNumber);
                                             });
+                                            print(choosedDifficulty);
                                           },
                                           child: AmountWidget(
                                             amount: amount,
@@ -230,58 +233,31 @@ class _DifficultyPageState extends State<DifficultyPage> {
                               ],
                             ),
                           ),
-                          Material(
-                            shape: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(25)),
-                            clipBehavior: Clip.hardEdge,
-                            child:
-                               
-                                 InkWell(
-                                  onTap: () async {
-                                    print(widget.categoriesModel.id);
-                                   
-
-                                    Navigator.of(context)
-                                        .push(MaterialPageRoute(
-                                            builder: ((context) => QuestionPage(
-                                            
-                                              roomId: null,
-                                                  category:
-                                                      widget.categoriesModel.id,
-                                                  difficulty: choosedDifficulty,
-                                                  user: widget.user,
-                                                  questionsAmount:
-                                                      questionsNumber,
-                                                  gameType: GameType.casual,
-                                                ))));
-                                  },
-                                  child: Container(
-                                    alignment: Alignment.center,
-                                    height:
-                                        MediaQuery.of(context).size.height / 10,
-                                    width:
-                                        MediaQuery.of(context).size.width / 2,
-                                    padding: const EdgeInsets.all(4),
-                                    decoration: BoxDecoration(
-                                      color: Colors.blue,
-                                      borderRadius: BorderRadius.circular(25),
-                                      border: Border.all(
-                                        width:
-                                            MediaQuery.of(context).size.width /
-                                                55,
-                                      ),
-                                    ),
-                                    child: Text(
-                                      "START",
-                                      style: GoogleFonts.bungee(
-                                        fontSize:
-                                            MediaQuery.of(context).size.height /
-                                                25,
-                                      ),
-                                    ),
-                                  ),
-                                )
-                             
+                          ElevatedButton(
+                            onPressed: () {
+                              context.read<DifficultyPageCubit>().setStartTime(
+                                  playerId: widget.profileModel.id);
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: ((context) => QuestionPage(
+                                        profileModel: widget.profileModel,
+                                        roomId: null,
+                                        category: widget.categoriesModel.id,
+                                        difficulty: choosedDifficulty != "null"
+                                            ? choosedDifficulty
+                                            : null,
+                                        user: widget.user,
+                                        questionsAmount: questionsNumber,
+                                        gameType: GameType.casual,
+                                      ))));
+                            },
+                            child: Text(
+                              "START",
+                              style: GoogleFonts.bungee(
+                                color: Colors.black,
+                                fontSize:
+                                    MediaQuery.of(context).size.height / 25,
+                              ),
+                            ),
                           )
                         ]));
                 }
@@ -311,7 +287,7 @@ class AmountWidget extends StatelessWidget {
                 ? MediaQuery.of(context).size.height * 0.15
                 : MediaQuery.of(context).size.height * 0.1,
         width: choosedAmount == null
-            ? MediaQuery.of(context).size.width * 0.25
+            ? MediaQuery.of(context).size.width * 0.24
             : choosedAmount == amount.nameId
                 ? MediaQuery.of(context).size.width * 0.35
                 : MediaQuery.of(context).size.width * 0.21,
@@ -320,7 +296,7 @@ class AmountWidget extends StatelessWidget {
           border: Border.all(
             width: MediaQuery.of(context).size.width / 55,
           ),
-          color: Colors.blue,
+          color: Colors.white,
         ),
         child: Text(
           amount.name == "Survival"
@@ -357,7 +333,7 @@ class DifficultyWidget extends StatelessWidget {
               ? MediaQuery.of(context).size.height * 0.15
               : MediaQuery.of(context).size.height * 0.1,
       width: choosedDifficulty == ""
-          ? MediaQuery.of(context).size.width * 0.25
+          ? MediaQuery.of(context).size.width * 0.24
           : choosedDifficulty == difficulty.nameId
               ? MediaQuery.of(context).size.width * 0.35
               : MediaQuery.of(context).size.width * 0.21,

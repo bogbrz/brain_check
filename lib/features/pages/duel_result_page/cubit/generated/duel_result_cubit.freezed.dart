@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'difficulty_page_cubit.dart';
+part of '../duel_result_cubit.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,36 +15,36 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
-mixin _$DifficultyPageState {
+mixin _$DuelResultState {
   String? get errorMessage => throw _privateConstructorUsedError;
-  CategoryQuestionCount? get info => throw _privateConstructorUsedError;
-  Overall get overAll => throw _privateConstructorUsedError;
+  List<ProfileModel> get profiles => throw _privateConstructorUsedError;
   Status get status => throw _privateConstructorUsedError;
+  String? get gameLenght => throw _privateConstructorUsedError;
+  Duration? get gameDuration => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $DifficultyPageStateCopyWith<DifficultyPageState> get copyWith =>
+  $DuelResultStateCopyWith<DuelResultState> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $DifficultyPageStateCopyWith<$Res> {
-  factory $DifficultyPageStateCopyWith(
-          DifficultyPageState value, $Res Function(DifficultyPageState) then) =
-      _$DifficultyPageStateCopyWithImpl<$Res, DifficultyPageState>;
+abstract class $DuelResultStateCopyWith<$Res> {
+  factory $DuelResultStateCopyWith(
+          DuelResultState value, $Res Function(DuelResultState) then) =
+      _$DuelResultStateCopyWithImpl<$Res, DuelResultState>;
   @useResult
   $Res call(
       {String? errorMessage,
-      CategoryQuestionCount? info,
-      Overall overAll,
-      Status status});
-
-  $CategoryQuestionCountCopyWith<$Res>? get info;
+      List<ProfileModel> profiles,
+      Status status,
+      String? gameLenght,
+      Duration? gameDuration});
 }
 
 /// @nodoc
-class _$DifficultyPageStateCopyWithImpl<$Res, $Val extends DifficultyPageState>
-    implements $DifficultyPageStateCopyWith<$Res> {
-  _$DifficultyPageStateCopyWithImpl(this._value, this._then);
+class _$DuelResultStateCopyWithImpl<$Res, $Val extends DuelResultState>
+    implements $DuelResultStateCopyWith<$Res> {
+  _$DuelResultStateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -55,46 +55,39 @@ class _$DifficultyPageStateCopyWithImpl<$Res, $Val extends DifficultyPageState>
   @override
   $Res call({
     Object? errorMessage = freezed,
-    Object? info = freezed,
-    Object? overAll = null,
+    Object? profiles = null,
     Object? status = null,
+    Object? gameLenght = freezed,
+    Object? gameDuration = freezed,
   }) {
     return _then(_value.copyWith(
       errorMessage: freezed == errorMessage
           ? _value.errorMessage
           : errorMessage // ignore: cast_nullable_to_non_nullable
               as String?,
-      info: freezed == info
-          ? _value.info
-          : info // ignore: cast_nullable_to_non_nullable
-              as CategoryQuestionCount?,
-      overAll: null == overAll
-          ? _value.overAll
-          : overAll // ignore: cast_nullable_to_non_nullable
-              as Overall,
+      profiles: null == profiles
+          ? _value.profiles
+          : profiles // ignore: cast_nullable_to_non_nullable
+              as List<ProfileModel>,
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as Status,
+      gameLenght: freezed == gameLenght
+          ? _value.gameLenght
+          : gameLenght // ignore: cast_nullable_to_non_nullable
+              as String?,
+      gameDuration: freezed == gameDuration
+          ? _value.gameDuration
+          : gameDuration // ignore: cast_nullable_to_non_nullable
+              as Duration?,
     ) as $Val);
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $CategoryQuestionCountCopyWith<$Res>? get info {
-    if (_value.info == null) {
-      return null;
-    }
-
-    return $CategoryQuestionCountCopyWith<$Res>(_value.info!, (value) {
-      return _then(_value.copyWith(info: value) as $Val);
-    });
   }
 }
 
 /// @nodoc
 abstract class _$$InitialImplCopyWith<$Res>
-    implements $DifficultyPageStateCopyWith<$Res> {
+    implements $DuelResultStateCopyWith<$Res> {
   factory _$$InitialImplCopyWith(
           _$InitialImpl value, $Res Function(_$InitialImpl) then) =
       __$$InitialImplCopyWithImpl<$Res>;
@@ -102,17 +95,15 @@ abstract class _$$InitialImplCopyWith<$Res>
   @useResult
   $Res call(
       {String? errorMessage,
-      CategoryQuestionCount? info,
-      Overall overAll,
-      Status status});
-
-  @override
-  $CategoryQuestionCountCopyWith<$Res>? get info;
+      List<ProfileModel> profiles,
+      Status status,
+      String? gameLenght,
+      Duration? gameDuration});
 }
 
 /// @nodoc
 class __$$InitialImplCopyWithImpl<$Res>
-    extends _$DifficultyPageStateCopyWithImpl<$Res, _$InitialImpl>
+    extends _$DuelResultStateCopyWithImpl<$Res, _$InitialImpl>
     implements _$$InitialImplCopyWith<$Res> {
   __$$InitialImplCopyWithImpl(
       _$InitialImpl _value, $Res Function(_$InitialImpl) _then)
@@ -122,27 +113,32 @@ class __$$InitialImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? errorMessage = freezed,
-    Object? info = freezed,
-    Object? overAll = null,
+    Object? profiles = null,
     Object? status = null,
+    Object? gameLenght = freezed,
+    Object? gameDuration = freezed,
   }) {
     return _then(_$InitialImpl(
       errorMessage: freezed == errorMessage
           ? _value.errorMessage
           : errorMessage // ignore: cast_nullable_to_non_nullable
               as String?,
-      info: freezed == info
-          ? _value.info
-          : info // ignore: cast_nullable_to_non_nullable
-              as CategoryQuestionCount?,
-      overAll: null == overAll
-          ? _value.overAll
-          : overAll // ignore: cast_nullable_to_non_nullable
-              as Overall,
+      profiles: null == profiles
+          ? _value._profiles
+          : profiles // ignore: cast_nullable_to_non_nullable
+              as List<ProfileModel>,
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as Status,
+      gameLenght: freezed == gameLenght
+          ? _value.gameLenght
+          : gameLenght // ignore: cast_nullable_to_non_nullable
+              as String?,
+      gameDuration: freezed == gameDuration
+          ? _value.gameDuration
+          : gameDuration // ignore: cast_nullable_to_non_nullable
+              as Duration?,
     ));
   }
 }
@@ -152,22 +148,32 @@ class __$$InitialImplCopyWithImpl<$Res>
 class _$InitialImpl implements _Initial {
   const _$InitialImpl(
       {required this.errorMessage,
-      required this.info,
-      required this.overAll,
-      required this.status});
+      required final List<ProfileModel> profiles,
+      required this.status,
+      required this.gameLenght,
+      required this.gameDuration})
+      : _profiles = profiles;
 
   @override
   final String? errorMessage;
+  final List<ProfileModel> _profiles;
   @override
-  final CategoryQuestionCount? info;
-  @override
-  final Overall overAll;
+  List<ProfileModel> get profiles {
+    if (_profiles is EqualUnmodifiableListView) return _profiles;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_profiles);
+  }
+
   @override
   final Status status;
+  @override
+  final String? gameLenght;
+  @override
+  final Duration? gameDuration;
 
   @override
   String toString() {
-    return 'DifficultyPageState(errorMessage: $errorMessage, info: $info, overAll: $overAll, status: $status)';
+    return 'DuelResultState(errorMessage: $errorMessage, profiles: $profiles, status: $status, gameLenght: $gameLenght, gameDuration: $gameDuration)';
   }
 
   @override
@@ -177,14 +183,22 @@ class _$InitialImpl implements _Initial {
             other is _$InitialImpl &&
             (identical(other.errorMessage, errorMessage) ||
                 other.errorMessage == errorMessage) &&
-            (identical(other.info, info) || other.info == info) &&
-            (identical(other.overAll, overAll) || other.overAll == overAll) &&
-            (identical(other.status, status) || other.status == status));
+            const DeepCollectionEquality().equals(other._profiles, _profiles) &&
+            (identical(other.status, status) || other.status == status) &&
+            (identical(other.gameLenght, gameLenght) ||
+                other.gameLenght == gameLenght) &&
+            (identical(other.gameDuration, gameDuration) ||
+                other.gameDuration == gameDuration));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, errorMessage, info, overAll, status);
+  int get hashCode => Object.hash(
+      runtimeType,
+      errorMessage,
+      const DeepCollectionEquality().hash(_profiles),
+      status,
+      gameLenght,
+      gameDuration);
 
   @JsonKey(ignore: true)
   @override
@@ -193,21 +207,24 @@ class _$InitialImpl implements _Initial {
       __$$InitialImplCopyWithImpl<_$InitialImpl>(this, _$identity);
 }
 
-abstract class _Initial implements DifficultyPageState {
+abstract class _Initial implements DuelResultState {
   const factory _Initial(
       {required final String? errorMessage,
-      required final CategoryQuestionCount? info,
-      required final Overall overAll,
-      required final Status status}) = _$InitialImpl;
+      required final List<ProfileModel> profiles,
+      required final Status status,
+      required final String? gameLenght,
+      required final Duration? gameDuration}) = _$InitialImpl;
 
   @override
   String? get errorMessage;
   @override
-  CategoryQuestionCount? get info;
-  @override
-  Overall get overAll;
+  List<ProfileModel> get profiles;
   @override
   Status get status;
+  @override
+  String? get gameLenght;
+  @override
+  Duration? get gameDuration;
   @override
   @JsonKey(ignore: true)
   _$$InitialImplCopyWith<_$InitialImpl> get copyWith =>

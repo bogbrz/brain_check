@@ -8,7 +8,7 @@ import 'package:brain_check/domain/repositories/ranking_repository.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'ranked_game_state.dart';
-part 'ranked_game_cubit.freezed.dart';
+part 'generated/ranked_game_cubit.freezed.dart';
 
 class RankedGameCubit extends Cubit<RankedGameState> {
   RankedGameCubit(
@@ -33,6 +33,10 @@ class RankedGameCubit extends Cubit<RankedGameState> {
             errorMessage: error.toString(), profile: [], status: Status.error));
       }
     });
+  }
+
+  Future<void> setStartTime({required String playerId}) async {
+    return rankingRepository.setStartTime(playerId: playerId);
   }
 
   Future<void> updateLifes(

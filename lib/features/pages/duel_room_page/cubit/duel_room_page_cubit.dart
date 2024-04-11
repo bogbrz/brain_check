@@ -10,7 +10,7 @@ import 'package:brain_check/domain/repositories/questions_repository.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'duel_room_page_state.dart';
-part 'duel_room_page_cubit.freezed.dart';
+part 'generated/duel_room_page_cubit.freezed.dart';
 
 class DuelRoomPageCubit extends Cubit<DuelRoomPageState> {
   DuelRoomPageCubit(

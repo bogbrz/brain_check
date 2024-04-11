@@ -1,3 +1,4 @@
+import 'package:brain_check/domain/models/profile_model.dart';
 import 'package:brain_check/features/pages/game_type_page.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
@@ -11,12 +12,12 @@ class StartButtonWidget extends StatelessWidget {
   const StartButtonWidget({
     super.key,
     required this.user,
-    required this.nickName,
+    required this.profile,
   });
 
   final User? user;
 
-  final String nickName;
+  final ProfileModel profile;
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +30,7 @@ class StartButtonWidget extends StatelessWidget {
           onTap: () {
             Navigator.of(context).push(MaterialPageRoute(
                 builder: (context) => GameTypePage(
-                      nickName: nickName,
+                      profile: profile,
                       user: user,
                     )));
           },

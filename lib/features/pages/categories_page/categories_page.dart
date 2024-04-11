@@ -1,6 +1,7 @@
 import 'package:brain_check/app/core/enums/enums.dart';
 import 'package:brain_check/app/injection_container.dart';
 import 'package:brain_check/domain/models/categories_model.dart';
+import 'package:brain_check/domain/models/profile_model.dart';
 import 'package:brain_check/features/pages/categories_page/cubit/categories_page_cubit.dart';
 import 'package:brain_check/features/pages/categories_page/widgets/category_widgets.dart';
 import 'package:brain_check/features/pages/difficulty_page/difficulty_page.dart';
@@ -14,9 +15,11 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class CategoryPage extends StatefulWidget {
   const CategoryPage({
     required this.user,
+    required this.profileModel,
     super.key,
   });
   final User? user;
+  final ProfileModel profileModel;
 
   @override
   State<CategoryPage> createState() => _CategoryPageState();
@@ -68,6 +71,7 @@ class _CategoryPageState extends State<CategoryPage> {
 
                             Navigator.of(context).push(MaterialPageRoute(
                                 builder: ((context) => DifficultyPage(
+                                  profileModel: widget.profileModel,
                                       user: widget.user,
                                       categoriesModel:
                                           TriviaCategory(id: 0, name: "Random"),
@@ -90,10 +94,10 @@ class _CategoryPageState extends State<CategoryPage> {
                               setState(() {
                                 choosedCategory = category.id;
                               });
-                             
 
                               Navigator.of(context).push(MaterialPageRoute(
                                   builder: ((context) => DifficultyPage(
+                                    profileModel: widget.profileModel,
                                         user: widget.user,
                                         categoriesModel: category,
                                       ))));

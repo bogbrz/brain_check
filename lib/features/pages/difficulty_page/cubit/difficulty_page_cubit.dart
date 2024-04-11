@@ -3,13 +3,15 @@ import 'package:brain_check/app/core/enums/enums.dart';
 import 'package:brain_check/domain/models/categories_info_model.dart';
 import 'package:brain_check/domain/models/overall_info_model.dart';
 import 'package:brain_check/domain/repositories/questions_repository.dart';
+import 'package:brain_check/domain/repositories/ranking_repository.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'difficulty_page_state.dart';
-part 'difficulty_page_cubit.freezed.dart';
+part 'generated/difficulty_page_cubit.freezed.dart';
 
 class DifficultyPageCubit extends Cubit<DifficultyPageState> {
-  DifficultyPageCubit({required this.questionRepository})
+  DifficultyPageCubit(
+      {required this.questionRepository, required this.rankingRepository})
       : super(DifficultyPageState(
             status: Status.initial,
             overAll: Overall(
@@ -24,6 +26,7 @@ class DifficultyPageCubit extends Cubit<DifficultyPageState> {
                 totalMediumQuestionCount: 0,
                 totalHardQuestionCount: 0)));
   final QuestionRepository questionRepository;
+  final RankingRepository rankingRepository;
 
   Future<void> getCategoryInfo({required int category}) async {
     emit(DifficultyPageState(
@@ -98,5 +101,9 @@ class DifficultyPageCubit extends Cubit<DifficultyPageState> {
             status: Status.error));
       }
     }
+  }
+
+  Future<void> setStartTime({required String playerId}) async {
+    return rankingRepository.setStartTime(playerId: playerId);
   }
 }

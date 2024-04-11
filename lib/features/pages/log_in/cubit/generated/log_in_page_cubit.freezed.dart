@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'root_page_cubit.dart';
+part of '../log_in_page_cubit.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,28 +15,27 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
-mixin _$RootPageState {
-  User? get user => throw _privateConstructorUsedError;
+mixin _$LogInPageState {
   String get errorMessage => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $RootPageStateCopyWith<RootPageState> get copyWith =>
+  $LogInPageStateCopyWith<LogInPageState> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $RootPageStateCopyWith<$Res> {
-  factory $RootPageStateCopyWith(
-          RootPageState value, $Res Function(RootPageState) then) =
-      _$RootPageStateCopyWithImpl<$Res, RootPageState>;
+abstract class $LogInPageStateCopyWith<$Res> {
+  factory $LogInPageStateCopyWith(
+          LogInPageState value, $Res Function(LogInPageState) then) =
+      _$LogInPageStateCopyWithImpl<$Res, LogInPageState>;
   @useResult
-  $Res call({User? user, String errorMessage});
+  $Res call({String errorMessage});
 }
 
 /// @nodoc
-class _$RootPageStateCopyWithImpl<$Res, $Val extends RootPageState>
-    implements $RootPageStateCopyWith<$Res> {
-  _$RootPageStateCopyWithImpl(this._value, this._then);
+class _$LogInPageStateCopyWithImpl<$Res, $Val extends LogInPageState>
+    implements $LogInPageStateCopyWith<$Res> {
+  _$LogInPageStateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -46,14 +45,9 @@ class _$RootPageStateCopyWithImpl<$Res, $Val extends RootPageState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? user = freezed,
     Object? errorMessage = null,
   }) {
     return _then(_value.copyWith(
-      user: freezed == user
-          ? _value.user
-          : user // ignore: cast_nullable_to_non_nullable
-              as User?,
       errorMessage: null == errorMessage
           ? _value.errorMessage
           : errorMessage // ignore: cast_nullable_to_non_nullable
@@ -63,35 +57,30 @@ class _$RootPageStateCopyWithImpl<$Res, $Val extends RootPageState>
 }
 
 /// @nodoc
-abstract class _$$RootPageStateImplCopyWith<$Res>
-    implements $RootPageStateCopyWith<$Res> {
-  factory _$$RootPageStateImplCopyWith(
-          _$RootPageStateImpl value, $Res Function(_$RootPageStateImpl) then) =
-      __$$RootPageStateImplCopyWithImpl<$Res>;
+abstract class _$$LogInPageStateImplCopyWith<$Res>
+    implements $LogInPageStateCopyWith<$Res> {
+  factory _$$LogInPageStateImplCopyWith(_$LogInPageStateImpl value,
+          $Res Function(_$LogInPageStateImpl) then) =
+      __$$LogInPageStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({User? user, String errorMessage});
+  $Res call({String errorMessage});
 }
 
 /// @nodoc
-class __$$RootPageStateImplCopyWithImpl<$Res>
-    extends _$RootPageStateCopyWithImpl<$Res, _$RootPageStateImpl>
-    implements _$$RootPageStateImplCopyWith<$Res> {
-  __$$RootPageStateImplCopyWithImpl(
-      _$RootPageStateImpl _value, $Res Function(_$RootPageStateImpl) _then)
+class __$$LogInPageStateImplCopyWithImpl<$Res>
+    extends _$LogInPageStateCopyWithImpl<$Res, _$LogInPageStateImpl>
+    implements _$$LogInPageStateImplCopyWith<$Res> {
+  __$$LogInPageStateImplCopyWithImpl(
+      _$LogInPageStateImpl _value, $Res Function(_$LogInPageStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? user = freezed,
     Object? errorMessage = null,
   }) {
-    return _then(_$RootPageStateImpl(
-      user: freezed == user
-          ? _value.user
-          : user // ignore: cast_nullable_to_non_nullable
-              as User?,
+    return _then(_$LogInPageStateImpl(
       errorMessage: null == errorMessage
           ? _value.errorMessage
           : errorMessage // ignore: cast_nullable_to_non_nullable
@@ -102,50 +91,45 @@ class __$$RootPageStateImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$RootPageStateImpl implements _RootPageState {
-  _$RootPageStateImpl({required this.user, required this.errorMessage});
+class _$LogInPageStateImpl implements _LogInPageState {
+  _$LogInPageStateImpl({required this.errorMessage});
 
-  @override
-  final User? user;
   @override
   final String errorMessage;
 
   @override
   String toString() {
-    return 'RootPageState(user: $user, errorMessage: $errorMessage)';
+    return 'LogInPageState(errorMessage: $errorMessage)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$RootPageStateImpl &&
-            (identical(other.user, user) || other.user == user) &&
+            other is _$LogInPageStateImpl &&
             (identical(other.errorMessage, errorMessage) ||
                 other.errorMessage == errorMessage));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, user, errorMessage);
+  int get hashCode => Object.hash(runtimeType, errorMessage);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$RootPageStateImplCopyWith<_$RootPageStateImpl> get copyWith =>
-      __$$RootPageStateImplCopyWithImpl<_$RootPageStateImpl>(this, _$identity);
+  _$$LogInPageStateImplCopyWith<_$LogInPageStateImpl> get copyWith =>
+      __$$LogInPageStateImplCopyWithImpl<_$LogInPageStateImpl>(
+          this, _$identity);
 }
 
-abstract class _RootPageState implements RootPageState {
-  factory _RootPageState(
-      {required final User? user,
-      required final String errorMessage}) = _$RootPageStateImpl;
+abstract class _LogInPageState implements LogInPageState {
+  factory _LogInPageState({required final String errorMessage}) =
+      _$LogInPageStateImpl;
 
-  @override
-  User? get user;
   @override
   String get errorMessage;
   @override
   @JsonKey(ignore: true)
-  _$$RootPageStateImplCopyWith<_$RootPageStateImpl> get copyWith =>
+  _$$LogInPageStateImplCopyWith<_$LogInPageStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

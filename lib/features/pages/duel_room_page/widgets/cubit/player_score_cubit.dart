@@ -5,7 +5,7 @@ import 'package:brain_check/domain/repositories/duel_game_repository.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'player_score_state.dart';
-part 'player_score_cubit.freezed.dart';
+part 'generated/player_score_cubit.freezed.dart';
 
 class PlayerScoreCubit extends Cubit<PlayerScoreState> {
   PlayerScoreCubit({required this.duelGameRepository})

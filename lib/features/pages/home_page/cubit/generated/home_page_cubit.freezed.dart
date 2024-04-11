@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'player_score_cubit.dart';
+part of '../home_page_cubit.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,36 +15,34 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
-mixin _$PlayerScoreState {
+mixin _$HomePageState {
   String? get errorMessage => throw _privateConstructorUsedError;
-  List<RoundScoreModel>? get playerOneScore =>
-      throw _privateConstructorUsedError;
-  List<RoundScoreModel>? get playerTwoScore =>
-      throw _privateConstructorUsedError;
+  List<ProfileModel> get profile => throw _privateConstructorUsedError;
+  Overall get overAllInfo => throw _privateConstructorUsedError;
   Status get status => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $PlayerScoreStateCopyWith<PlayerScoreState> get copyWith =>
+  $HomePageStateCopyWith<HomePageState> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $PlayerScoreStateCopyWith<$Res> {
-  factory $PlayerScoreStateCopyWith(
-          PlayerScoreState value, $Res Function(PlayerScoreState) then) =
-      _$PlayerScoreStateCopyWithImpl<$Res, PlayerScoreState>;
+abstract class $HomePageStateCopyWith<$Res> {
+  factory $HomePageStateCopyWith(
+          HomePageState value, $Res Function(HomePageState) then) =
+      _$HomePageStateCopyWithImpl<$Res, HomePageState>;
   @useResult
   $Res call(
       {String? errorMessage,
-      List<RoundScoreModel>? playerOneScore,
-      List<RoundScoreModel>? playerTwoScore,
+      List<ProfileModel> profile,
+      Overall overAllInfo,
       Status status});
 }
 
 /// @nodoc
-class _$PlayerScoreStateCopyWithImpl<$Res, $Val extends PlayerScoreState>
-    implements $PlayerScoreStateCopyWith<$Res> {
-  _$PlayerScoreStateCopyWithImpl(this._value, this._then);
+class _$HomePageStateCopyWithImpl<$Res, $Val extends HomePageState>
+    implements $HomePageStateCopyWith<$Res> {
+  _$HomePageStateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -55,8 +53,8 @@ class _$PlayerScoreStateCopyWithImpl<$Res, $Val extends PlayerScoreState>
   @override
   $Res call({
     Object? errorMessage = freezed,
-    Object? playerOneScore = freezed,
-    Object? playerTwoScore = freezed,
+    Object? profile = null,
+    Object? overAllInfo = null,
     Object? status = null,
   }) {
     return _then(_value.copyWith(
@@ -64,14 +62,14 @@ class _$PlayerScoreStateCopyWithImpl<$Res, $Val extends PlayerScoreState>
           ? _value.errorMessage
           : errorMessage // ignore: cast_nullable_to_non_nullable
               as String?,
-      playerOneScore: freezed == playerOneScore
-          ? _value.playerOneScore
-          : playerOneScore // ignore: cast_nullable_to_non_nullable
-              as List<RoundScoreModel>?,
-      playerTwoScore: freezed == playerTwoScore
-          ? _value.playerTwoScore
-          : playerTwoScore // ignore: cast_nullable_to_non_nullable
-              as List<RoundScoreModel>?,
+      profile: null == profile
+          ? _value.profile
+          : profile // ignore: cast_nullable_to_non_nullable
+              as List<ProfileModel>,
+      overAllInfo: null == overAllInfo
+          ? _value.overAllInfo
+          : overAllInfo // ignore: cast_nullable_to_non_nullable
+              as Overall,
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
@@ -82,7 +80,7 @@ class _$PlayerScoreStateCopyWithImpl<$Res, $Val extends PlayerScoreState>
 
 /// @nodoc
 abstract class _$$InitialImplCopyWith<$Res>
-    implements $PlayerScoreStateCopyWith<$Res> {
+    implements $HomePageStateCopyWith<$Res> {
   factory _$$InitialImplCopyWith(
           _$InitialImpl value, $Res Function(_$InitialImpl) then) =
       __$$InitialImplCopyWithImpl<$Res>;
@@ -90,14 +88,14 @@ abstract class _$$InitialImplCopyWith<$Res>
   @useResult
   $Res call(
       {String? errorMessage,
-      List<RoundScoreModel>? playerOneScore,
-      List<RoundScoreModel>? playerTwoScore,
+      List<ProfileModel> profile,
+      Overall overAllInfo,
       Status status});
 }
 
 /// @nodoc
 class __$$InitialImplCopyWithImpl<$Res>
-    extends _$PlayerScoreStateCopyWithImpl<$Res, _$InitialImpl>
+    extends _$HomePageStateCopyWithImpl<$Res, _$InitialImpl>
     implements _$$InitialImplCopyWith<$Res> {
   __$$InitialImplCopyWithImpl(
       _$InitialImpl _value, $Res Function(_$InitialImpl) _then)
@@ -107,8 +105,8 @@ class __$$InitialImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? errorMessage = freezed,
-    Object? playerOneScore = freezed,
-    Object? playerTwoScore = freezed,
+    Object? profile = null,
+    Object? overAllInfo = null,
     Object? status = null,
   }) {
     return _then(_$InitialImpl(
@@ -116,14 +114,14 @@ class __$$InitialImplCopyWithImpl<$Res>
           ? _value.errorMessage
           : errorMessage // ignore: cast_nullable_to_non_nullable
               as String?,
-      playerOneScore: freezed == playerOneScore
-          ? _value._playerOneScore
-          : playerOneScore // ignore: cast_nullable_to_non_nullable
-              as List<RoundScoreModel>?,
-      playerTwoScore: freezed == playerTwoScore
-          ? _value._playerTwoScore
-          : playerTwoScore // ignore: cast_nullable_to_non_nullable
-              as List<RoundScoreModel>?,
+      profile: null == profile
+          ? _value._profile
+          : profile // ignore: cast_nullable_to_non_nullable
+              as List<ProfileModel>,
+      overAllInfo: null == overAllInfo
+          ? _value.overAllInfo
+          : overAllInfo // ignore: cast_nullable_to_non_nullable
+              as Overall,
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
@@ -137,40 +135,29 @@ class __$$InitialImplCopyWithImpl<$Res>
 class _$InitialImpl implements _Initial {
   const _$InitialImpl(
       {required this.errorMessage,
-      required final List<RoundScoreModel>? playerOneScore,
-      required final List<RoundScoreModel>? playerTwoScore,
+      required final List<ProfileModel> profile,
+      required this.overAllInfo,
       required this.status})
-      : _playerOneScore = playerOneScore,
-        _playerTwoScore = playerTwoScore;
+      : _profile = profile;
 
   @override
   final String? errorMessage;
-  final List<RoundScoreModel>? _playerOneScore;
+  final List<ProfileModel> _profile;
   @override
-  List<RoundScoreModel>? get playerOneScore {
-    final value = _playerOneScore;
-    if (value == null) return null;
-    if (_playerOneScore is EqualUnmodifiableListView) return _playerOneScore;
+  List<ProfileModel> get profile {
+    if (_profile is EqualUnmodifiableListView) return _profile;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
+    return EqualUnmodifiableListView(_profile);
   }
 
-  final List<RoundScoreModel>? _playerTwoScore;
   @override
-  List<RoundScoreModel>? get playerTwoScore {
-    final value = _playerTwoScore;
-    if (value == null) return null;
-    if (_playerTwoScore is EqualUnmodifiableListView) return _playerTwoScore;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
-  }
-
+  final Overall overAllInfo;
   @override
   final Status status;
 
   @override
   String toString() {
-    return 'PlayerScoreState(errorMessage: $errorMessage, playerOneScore: $playerOneScore, playerTwoScore: $playerTwoScore, status: $status)';
+    return 'HomePageState(errorMessage: $errorMessage, profile: $profile, overAllInfo: $overAllInfo, status: $status)';
   }
 
   @override
@@ -180,20 +167,15 @@ class _$InitialImpl implements _Initial {
             other is _$InitialImpl &&
             (identical(other.errorMessage, errorMessage) ||
                 other.errorMessage == errorMessage) &&
-            const DeepCollectionEquality()
-                .equals(other._playerOneScore, _playerOneScore) &&
-            const DeepCollectionEquality()
-                .equals(other._playerTwoScore, _playerTwoScore) &&
+            const DeepCollectionEquality().equals(other._profile, _profile) &&
+            (identical(other.overAllInfo, overAllInfo) ||
+                other.overAllInfo == overAllInfo) &&
             (identical(other.status, status) || other.status == status));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      errorMessage,
-      const DeepCollectionEquality().hash(_playerOneScore),
-      const DeepCollectionEquality().hash(_playerTwoScore),
-      status);
+  int get hashCode => Object.hash(runtimeType, errorMessage,
+      const DeepCollectionEquality().hash(_profile), overAllInfo, status);
 
   @JsonKey(ignore: true)
   @override
@@ -202,19 +184,19 @@ class _$InitialImpl implements _Initial {
       __$$InitialImplCopyWithImpl<_$InitialImpl>(this, _$identity);
 }
 
-abstract class _Initial implements PlayerScoreState {
+abstract class _Initial implements HomePageState {
   const factory _Initial(
       {required final String? errorMessage,
-      required final List<RoundScoreModel>? playerOneScore,
-      required final List<RoundScoreModel>? playerTwoScore,
+      required final List<ProfileModel> profile,
+      required final Overall overAllInfo,
       required final Status status}) = _$InitialImpl;
 
   @override
   String? get errorMessage;
   @override
-  List<RoundScoreModel>? get playerOneScore;
+  List<ProfileModel> get profile;
   @override
-  List<RoundScoreModel>? get playerTwoScore;
+  Overall get overAllInfo;
   @override
   Status get status;
   @override

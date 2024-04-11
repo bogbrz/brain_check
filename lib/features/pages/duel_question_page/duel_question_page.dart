@@ -125,7 +125,7 @@ class _DuelQuestionPageState extends State<DuelQuestionPage> {
                                       )),
                                   Countdown(
                                     controller: controller,
-                                    seconds: 2,
+                                    seconds: 15,
                                     build: (BuildContext context,
                                             double time) =>
                                         Text(time.toInt().toString(),

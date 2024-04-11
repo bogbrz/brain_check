@@ -6,7 +6,7 @@ import 'package:brain_check/domain/repositories/authentication_repository.dart';
 import 'package:brain_check/domain/repositories/ranking_repository.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 part 'user_page_state.dart';
-part 'user_page_cubit.freezed.dart';
+part 'generated/user_page_cubit.freezed.dart';
 
 class UserPageCubit extends Cubit<UserPageState> {
   UserPageCubit({required this.authRepository, required this.rankingRepository})

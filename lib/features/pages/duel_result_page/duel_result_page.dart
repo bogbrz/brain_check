@@ -1,3 +1,4 @@
+
 import 'package:brain_check/app/core/enums/enums.dart';
 import 'package:brain_check/app/injection_container.dart';
 import 'package:brain_check/domain/models/player_model.dart';
@@ -61,188 +62,256 @@ class DuelResultPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    int score = answerOne +
-        answerTwo +
-        answerThree +
-        answerFour +
-        answerFive +
-        answerSix +
-        answerSeven +
-        answerEight +
-        answerNine +
-        answerTen +
-        answerEleven +
-        answerTwelve +
-        answerThirteen +
-        answerFourteen +
-        answerFithteen;
+    int score = (answerOne +
+            answerTwo +
+            answerThree +
+            answerFour +
+            answerFive +
+            answerSix +
+            answerSeven +
+            answerEight +
+            answerNine +
+            answerTen +
+            answerEleven +
+            answerTwelve +
+            answerThirteen +
+            answerFourteen +
+            answerFithteen) *
+        10;
+
     return BlocProvider(
       create: (context) => getIt<DuelResultCubit>()
         ..getRankingForUpdate(email: user!.email.toString()),
       child: Scaffold(body: BlocBuilder<DuelResultCubit, DuelResultState>(
         builder: (context, state) {
-          return Center(
-            child: SizedBox(
-              height: MediaQuery.of(context).size.height * 0.2,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    "${AppLocalizations.of(context).yourScore}: ${score} / $questionAmount",
-                    style: GoogleFonts.bungee(
-                        color: Colors.white,
-                        fontSize: MediaQuery.of(context).size.height / 35),
-                  ),
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.4,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        if (questionAmount == 1) ...[
-                          answerOne == 1
-                              ? Icon(Icons.check_circle, color: Colors.green)
-                              : Icon(Icons.cancel_rounded, color: Colors.red),
-                        ] else if (questionAmount == 5) ...[
-                          answerOne == 1
-                              ? Icon(Icons.check_circle, color: Colors.green)
-                              : Icon(Icons.cancel_rounded, color: Colors.red),
-                          answerTwo == 1
-                              ? Icon(Icons.check_circle, color: Colors.green)
-                              : Icon(Icons.cancel_rounded, color: Colors.red),
-                          answerThree == 1
-                              ? Icon(Icons.check_circle, color: Colors.green)
-                              : Icon(Icons.cancel_rounded, color: Colors.red),
-                          answerFour == 1
-                              ? Icon(Icons.check_circle, color: Colors.green)
-                              : Icon(Icons.cancel_rounded, color: Colors.red),
-                          answerFive == 1
-                              ? Icon(Icons.check_circle, color: Colors.green)
-                              : Icon(Icons.cancel_rounded, color: Colors.red),
-                        ] else if (questionAmount == 10) ...[
-                          answerOne == 1
-                              ? Icon(Icons.check_circle, color: Colors.green)
-                              : Icon(Icons.cancel_rounded, color: Colors.red),
-                          answerTwo == 1
-                              ? Icon(Icons.check_circle, color: Colors.green)
-                              : Icon(Icons.cancel_rounded, color: Colors.red),
-                          answerThree == 1
-                              ? Icon(Icons.check_circle, color: Colors.green)
-                              : Icon(Icons.cancel_rounded, color: Colors.red),
-                          answerFour == 1
-                              ? Icon(Icons.check_circle, color: Colors.green)
-                              : Icon(Icons.cancel_rounded, color: Colors.red),
-                          answerFive == 1
-                              ? Icon(Icons.check_circle, color: Colors.green)
-                              : Icon(Icons.cancel_rounded, color: Colors.red),
-                          answerSix == 1
-                              ? Icon(Icons.check_circle, color: Colors.green)
-                              : Icon(Icons.cancel_rounded, color: Colors.red),
-                          answerSeven == 1
-                              ? Icon(Icons.check_circle, color: Colors.green)
-                              : Icon(Icons.cancel_rounded, color: Colors.red),
-                          answerNine == 1
-                              ? Icon(Icons.check_circle, color: Colors.green)
-                              : Icon(Icons.cancel_rounded, color: Colors.red),
-                          answerTen == 1
-                              ? Icon(Icons.check_circle, color: Colors.green)
-                              : Icon(Icons.cancel_rounded, color: Colors.red),
-                        ] else if (questionAmount == 15) ...[
-                          answerOne == 1
-                              ? Icon(Icons.check_circle, color: Colors.green)
-                              : Icon(Icons.cancel_rounded, color: Colors.red),
-                          answerTwo == 1
-                              ? Icon(Icons.check_circle, color: Colors.green)
-                              : Icon(Icons.cancel_rounded, color: Colors.red),
-                          answerThree == 1
-                              ? Icon(Icons.check_circle, color: Colors.green)
-                              : Icon(Icons.cancel_rounded, color: Colors.red),
-                          answerFour == 1
-                              ? Icon(Icons.check_circle, color: Colors.green)
-                              : Icon(Icons.cancel_rounded, color: Colors.red),
-                          answerFive == 1
-                              ? Icon(Icons.check_circle, color: Colors.green)
-                              : Icon(Icons.cancel_rounded, color: Colors.red),
-                          answerSix == 1
-                              ? Icon(Icons.check_circle, color: Colors.green)
-                              : Icon(Icons.cancel_rounded, color: Colors.red),
-                          answerSeven == 1
-                              ? Icon(Icons.check_circle, color: Colors.green)
-                              : Icon(Icons.cancel_rounded, color: Colors.red),
-                          answerNine == 1
-                              ? Icon(Icons.check_circle, color: Colors.green)
-                              : Icon(Icons.cancel_rounded, color: Colors.red),
-                          answerTen == 1
-                              ? Icon(Icons.check_circle, color: Colors.green)
-                              : Icon(Icons.cancel_rounded, color: Colors.red),
-                          answerEleven == 1
-                              ? Icon(Icons.check_circle, color: Colors.green)
-                              : Icon(Icons.cancel_rounded, color: Colors.red),
-                          answerOne == 1
-                              ? Icon(Icons.check_circle, color: Colors.green)
-                              : Icon(Icons.cancel_rounded, color: Colors.red),
-                          answerTwelve == 1
-                              ? Icon(Icons.check_circle, color: Colors.green)
-                              : Icon(Icons.cancel_rounded, color: Colors.red),
-                          answerThirteen == 1
-                              ? Icon(Icons.check_circle, color: Colors.green)
-                              : Icon(Icons.cancel_rounded, color: Colors.red),
-                          answerFourteen == 1
-                              ? Icon(Icons.check_circle, color: Colors.green)
-                              : Icon(Icons.cancel_rounded, color: Colors.red),
-                          answerFithteen == 1
-                              ? Icon(Icons.check_circle, color: Colors.green)
-                              : Icon(Icons.cancel_rounded, color: Colors.red),
-                        ]
+          switch (state.status) {
+            case Status.initial:
+              return const InitialStateWidget();
+            case Status.loading:
+              return const LoadingStateWidget();
+            case Status.error:
+              return ErrorStateWidget(
+                  errorMessage: state.errorMessage.toString());
+            case Status.success:
+              int pointsDeductionForTime = state.gameDuration!.inSeconds <= 30
+                  ? 0
+                  : ((state.gameDuration!.inSeconds) ~/ 5);
+              int totalPoints = score == 0
+                  ? 0
+                  : (score - pointsDeductionForTime) < 0
+                      ? 0
+                      : score - pointsDeductionForTime;
+
+              return Center(
+                child: Container(
+                  color: Colors.white,
+                  height: MediaQuery.of(context).size.height * 0.35,
+                  width: MediaQuery.of(context).size.width * 0.7,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "Your Time: ${state.gameLenght}  ",
+                        style: GoogleFonts.bungee(
+                            color: Colors.black,
+                            fontSize: MediaQuery.of(context).size.height / 35),
+                      ),
+                      Text(
+                        "${AppLocalizations.of(context).yourScore}: ${score} / ${questionAmount * 10}",
+                        style: GoogleFonts.bungee(
+                            color: Colors.black,
+                            fontSize: MediaQuery.of(context).size.height / 35),
+                      ),
+                      if (questionAmount == 1) ...[
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            answerOne == 1
+                                ? Icon(Icons.check_circle, color: Colors.green)
+                                : Icon(Icons.cancel_rounded, color: Colors.red),
+                          ],
+                        )
+                      ] else if (questionAmount == 5) ...[
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            answerOne == 1
+                                ? Icon(Icons.check_circle, color: Colors.green)
+                                : Icon(Icons.cancel_rounded, color: Colors.red),
+                            answerTwo == 1
+                                ? Icon(Icons.check_circle, color: Colors.green)
+                                : Icon(Icons.cancel_rounded, color: Colors.red),
+                            answerThree == 1
+                                ? Icon(Icons.check_circle, color: Colors.green)
+                                : Icon(Icons.cancel_rounded, color: Colors.red),
+                            answerFour == 1
+                                ? Icon(Icons.check_circle, color: Colors.green)
+                                : Icon(Icons.cancel_rounded, color: Colors.red),
+                            answerFive == 1
+                                ? Icon(Icons.check_circle, color: Colors.green)
+                                : Icon(Icons.cancel_rounded, color: Colors.red),
+                          ],
+                        )
+                      ] else if (questionAmount == 10) ...[
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            answerOne == 1
+                                ? Icon(Icons.check_circle, color: Colors.green)
+                                : Icon(Icons.cancel_rounded, color: Colors.red),
+                            answerTwo == 1
+                                ? Icon(Icons.check_circle, color: Colors.green)
+                                : Icon(Icons.cancel_rounded, color: Colors.red),
+                            answerThree == 1
+                                ? Icon(Icons.check_circle, color: Colors.green)
+                                : Icon(Icons.cancel_rounded, color: Colors.red),
+                            answerFour == 1
+                                ? Icon(Icons.check_circle, color: Colors.green)
+                                : Icon(Icons.cancel_rounded, color: Colors.red),
+                            answerFive == 1
+                                ? Icon(Icons.check_circle, color: Colors.green)
+                                : Icon(Icons.cancel_rounded, color: Colors.red),
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            answerSix == 1
+                                ? Icon(Icons.check_circle, color: Colors.green)
+                                : Icon(Icons.cancel_rounded, color: Colors.red),
+                            answerSeven == 1
+                                ? Icon(Icons.check_circle, color: Colors.green)
+                                : Icon(Icons.cancel_rounded, color: Colors.red),
+                            answerEight == 1
+                                ? Icon(Icons.check_circle, color: Colors.green)
+                                : Icon(Icons.cancel_rounded, color: Colors.red),
+                            answerNine == 1
+                                ? Icon(Icons.check_circle, color: Colors.green)
+                                : Icon(Icons.cancel_rounded, color: Colors.red),
+                            answerTen == 1
+                                ? Icon(Icons.check_circle, color: Colors.green)
+                                : Icon(Icons.cancel_rounded, color: Colors.red),
+                          ],
+                        ),
+                      ] else if (questionAmount == 15) ...[
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            answerOne == 1
+                                ? Icon(Icons.check_circle, color: Colors.green)
+                                : Icon(Icons.cancel_rounded, color: Colors.red),
+                            answerTwo == 1
+                                ? Icon(Icons.check_circle, color: Colors.green)
+                                : Icon(Icons.cancel_rounded, color: Colors.red),
+                            answerThree == 1
+                                ? Icon(Icons.check_circle, color: Colors.green)
+                                : Icon(Icons.cancel_rounded, color: Colors.red),
+                            answerFour == 1
+                                ? Icon(Icons.check_circle, color: Colors.green)
+                                : Icon(Icons.cancel_rounded, color: Colors.red),
+                            answerFive == 1
+                                ? Icon(Icons.check_circle, color: Colors.green)
+                                : Icon(Icons.cancel_rounded, color: Colors.red),
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            answerSix == 1
+                                ? Icon(Icons.check_circle, color: Colors.green)
+                                : Icon(Icons.cancel_rounded, color: Colors.red),
+                            answerSeven == 1
+                                ? Icon(Icons.check_circle, color: Colors.green)
+                                : Icon(Icons.cancel_rounded, color: Colors.red),
+                            answerEight == 1
+                                ? Icon(Icons.check_circle, color: Colors.green)
+                                : Icon(Icons.cancel_rounded, color: Colors.red),
+                            answerNine == 1
+                                ? Icon(Icons.check_circle, color: Colors.green)
+                                : Icon(Icons.cancel_rounded, color: Colors.red),
+                            answerTen == 1
+                                ? Icon(Icons.check_circle, color: Colors.green)
+                                : Icon(Icons.cancel_rounded, color: Colors.red),
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            answerEleven == 1
+                                ? Icon(Icons.check_circle, color: Colors.green)
+                                : Icon(Icons.cancel_rounded, color: Colors.red),
+                            answerTwelve == 1
+                                ? Icon(Icons.check_circle, color: Colors.green)
+                                : Icon(Icons.cancel_rounded, color: Colors.red),
+                            answerThirteen == 1
+                                ? Icon(Icons.check_circle, color: Colors.green)
+                                : Icon(Icons.cancel_rounded, color: Colors.red),
+                            answerFourteen == 1
+                                ? Icon(Icons.check_circle, color: Colors.green)
+                                : Icon(Icons.cancel_rounded, color: Colors.red),
+                            answerFithteen == 1
+                                ? Icon(Icons.check_circle, color: Colors.green)
+                                : Icon(Icons.cancel_rounded, color: Colors.red),
+                          ],
+                        ),
                       ],
-                    ),
-                  ),
-                  ElevatedButton(
-                    onPressed: () {
-                      if (gameType == GameType.duel) {
-                        for (final player in players!) {
-                          if (player.email.toString() ==
-                              user!.email.toString()) {
-                            context.read<DuelResultCubit>().addRoundResults(
-                                roomId: roomId!,
-                                playerNumber: player.player,
-                                roundNumber: player.roundNumber,
-                                answerOne: answerOne,
-                                answerTwo: answerTwo,
-                                answerThree: answerThree,
-                                answerFour: answerFour,
-                                answerFive: answerFive);
-                            context.read<DuelResultCubit>().resetGameStatus(
-                                roomId: roomId!,
-                                status: false,
-                                playerId: player.id,
-                                points: score);
-                            if (gameStatus == true) {
-                              context.read<DuelResultCubit>().deleteQuestions(
-                                  roomId: roomId!,
-                                  roundNumber: player.roundNumber);
+                      Text(
+                        "Total points: $totalPoints  ",
+                        style: GoogleFonts.bungee(
+                            color: Colors.black,
+                            fontSize: MediaQuery.of(context).size.height / 35),
+                      ),
+                      ElevatedButton(
+                        onPressed: () {
+                          if (gameType == GameType.duel) {
+                            for (final player in players!) {
+                              if (player.email.toString() ==
+                                  user!.email.toString()) {
+                                context.read<DuelResultCubit>().addRoundResults(
+                                    roomId: roomId!,
+                                    playerNumber: player.player,
+                                    roundNumber: player.roundNumber,
+                                    answerOne: answerOne,
+                                    answerTwo: answerTwo,
+                                    answerThree: answerThree,
+                                    answerFour: answerFour,
+                                    answerFive: answerFive);
+                                context.read<DuelResultCubit>().resetGameStatus(
+                                    roomId: roomId!,
+                                    status: false,
+                                    playerId: player.id,
+                                    points: totalPoints);
+                                if (gameStatus == true) {
+                                  context
+                                      .read<DuelResultCubit>()
+                                      .deleteQuestions(
+                                          roomId: roomId!,
+                                          roundNumber: player.roundNumber);
+                                }
+                              }
                             }
+                          } else if (gameType == GameType.casual) {
+                            Navigator.of(context).pop();
+                          } else {
+                            context.read<DuelResultCubit>().updateRanking(
+                                points: totalPoints,
+                                profileId: state.profiles[0].id);
+                            Navigator.of(context).pop();
                           }
-                        }
-                      } else if (gameType == GameType.casual) {
-                        Navigator.of(context).pop();
-                        Navigator.of(context).pop();
-                      } else {
-                        context.read<DuelResultCubit>().updateRanking(
-                            points: score, profileId: state.profiles[0].id);
-                        Navigator.of(context).pop();
-                      }
-                    },
-                    child: Text(
-                      AppLocalizations.of(context).backToLobby,
-                      style: GoogleFonts.bungee(
-                          color: Colors.black,
-                          fontSize: MediaQuery.of(context).size.height / 35),
-                    ),
+                        },
+                        child: Text(
+                          AppLocalizations.of(context).backToLobby,
+                          style: GoogleFonts.bungee(
+                              color: Colors.black,
+                              fontSize:
+                                  MediaQuery.of(context).size.height / 35),
+                        ),
+                      ),
+                    ],
                   ),
-                ],
-              ),
-            ),
-          );
+                ),
+              );
+          }
         },
       )),
     );

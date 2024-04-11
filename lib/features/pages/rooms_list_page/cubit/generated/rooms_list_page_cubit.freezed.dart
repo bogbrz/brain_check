@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'ranked_game_cubit.dart';
+part of '../rooms_list_page_cubit.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,29 +15,29 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
-mixin _$RankedGameState {
+mixin _$RoomsListPageState {
   String? get errorMessage => throw _privateConstructorUsedError;
-  List<ProfileModel> get profile => throw _privateConstructorUsedError;
+  List<GameRoomModel> get rooms => throw _privateConstructorUsedError;
   Status get status => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $RankedGameStateCopyWith<RankedGameState> get copyWith =>
+  $RoomsListPageStateCopyWith<RoomsListPageState> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $RankedGameStateCopyWith<$Res> {
-  factory $RankedGameStateCopyWith(
-          RankedGameState value, $Res Function(RankedGameState) then) =
-      _$RankedGameStateCopyWithImpl<$Res, RankedGameState>;
+abstract class $RoomsListPageStateCopyWith<$Res> {
+  factory $RoomsListPageStateCopyWith(
+          RoomsListPageState value, $Res Function(RoomsListPageState) then) =
+      _$RoomsListPageStateCopyWithImpl<$Res, RoomsListPageState>;
   @useResult
-  $Res call({String? errorMessage, List<ProfileModel> profile, Status status});
+  $Res call({String? errorMessage, List<GameRoomModel> rooms, Status status});
 }
 
 /// @nodoc
-class _$RankedGameStateCopyWithImpl<$Res, $Val extends RankedGameState>
-    implements $RankedGameStateCopyWith<$Res> {
-  _$RankedGameStateCopyWithImpl(this._value, this._then);
+class _$RoomsListPageStateCopyWithImpl<$Res, $Val extends RoomsListPageState>
+    implements $RoomsListPageStateCopyWith<$Res> {
+  _$RoomsListPageStateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -48,7 +48,7 @@ class _$RankedGameStateCopyWithImpl<$Res, $Val extends RankedGameState>
   @override
   $Res call({
     Object? errorMessage = freezed,
-    Object? profile = null,
+    Object? rooms = null,
     Object? status = null,
   }) {
     return _then(_value.copyWith(
@@ -56,10 +56,10 @@ class _$RankedGameStateCopyWithImpl<$Res, $Val extends RankedGameState>
           ? _value.errorMessage
           : errorMessage // ignore: cast_nullable_to_non_nullable
               as String?,
-      profile: null == profile
-          ? _value.profile
-          : profile // ignore: cast_nullable_to_non_nullable
-              as List<ProfileModel>,
+      rooms: null == rooms
+          ? _value.rooms
+          : rooms // ignore: cast_nullable_to_non_nullable
+              as List<GameRoomModel>,
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
@@ -70,18 +70,18 @@ class _$RankedGameStateCopyWithImpl<$Res, $Val extends RankedGameState>
 
 /// @nodoc
 abstract class _$$InitialImplCopyWith<$Res>
-    implements $RankedGameStateCopyWith<$Res> {
+    implements $RoomsListPageStateCopyWith<$Res> {
   factory _$$InitialImplCopyWith(
           _$InitialImpl value, $Res Function(_$InitialImpl) then) =
       __$$InitialImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String? errorMessage, List<ProfileModel> profile, Status status});
+  $Res call({String? errorMessage, List<GameRoomModel> rooms, Status status});
 }
 
 /// @nodoc
 class __$$InitialImplCopyWithImpl<$Res>
-    extends _$RankedGameStateCopyWithImpl<$Res, _$InitialImpl>
+    extends _$RoomsListPageStateCopyWithImpl<$Res, _$InitialImpl>
     implements _$$InitialImplCopyWith<$Res> {
   __$$InitialImplCopyWithImpl(
       _$InitialImpl _value, $Res Function(_$InitialImpl) _then)
@@ -91,7 +91,7 @@ class __$$InitialImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? errorMessage = freezed,
-    Object? profile = null,
+    Object? rooms = null,
     Object? status = null,
   }) {
     return _then(_$InitialImpl(
@@ -99,10 +99,10 @@ class __$$InitialImplCopyWithImpl<$Res>
           ? _value.errorMessage
           : errorMessage // ignore: cast_nullable_to_non_nullable
               as String?,
-      profile: null == profile
-          ? _value._profile
-          : profile // ignore: cast_nullable_to_non_nullable
-              as List<ProfileModel>,
+      rooms: null == rooms
+          ? _value._rooms
+          : rooms // ignore: cast_nullable_to_non_nullable
+              as List<GameRoomModel>,
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
@@ -116,18 +116,18 @@ class __$$InitialImplCopyWithImpl<$Res>
 class _$InitialImpl implements _Initial {
   const _$InitialImpl(
       {required this.errorMessage,
-      required final List<ProfileModel> profile,
+      required final List<GameRoomModel> rooms,
       required this.status})
-      : _profile = profile;
+      : _rooms = rooms;
 
   @override
   final String? errorMessage;
-  final List<ProfileModel> _profile;
+  final List<GameRoomModel> _rooms;
   @override
-  List<ProfileModel> get profile {
-    if (_profile is EqualUnmodifiableListView) return _profile;
+  List<GameRoomModel> get rooms {
+    if (_rooms is EqualUnmodifiableListView) return _rooms;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_profile);
+    return EqualUnmodifiableListView(_rooms);
   }
 
   @override
@@ -135,7 +135,7 @@ class _$InitialImpl implements _Initial {
 
   @override
   String toString() {
-    return 'RankedGameState(errorMessage: $errorMessage, profile: $profile, status: $status)';
+    return 'RoomsListPageState(errorMessage: $errorMessage, rooms: $rooms, status: $status)';
   }
 
   @override
@@ -145,13 +145,13 @@ class _$InitialImpl implements _Initial {
             other is _$InitialImpl &&
             (identical(other.errorMessage, errorMessage) ||
                 other.errorMessage == errorMessage) &&
-            const DeepCollectionEquality().equals(other._profile, _profile) &&
+            const DeepCollectionEquality().equals(other._rooms, _rooms) &&
             (identical(other.status, status) || other.status == status));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, errorMessage,
-      const DeepCollectionEquality().hash(_profile), status);
+      const DeepCollectionEquality().hash(_rooms), status);
 
   @JsonKey(ignore: true)
   @override
@@ -160,16 +160,16 @@ class _$InitialImpl implements _Initial {
       __$$InitialImplCopyWithImpl<_$InitialImpl>(this, _$identity);
 }
 
-abstract class _Initial implements RankedGameState {
+abstract class _Initial implements RoomsListPageState {
   const factory _Initial(
       {required final String? errorMessage,
-      required final List<ProfileModel> profile,
+      required final List<GameRoomModel> rooms,
       required final Status status}) = _$InitialImpl;
 
   @override
   String? get errorMessage;
   @override
-  List<ProfileModel> get profile;
+  List<GameRoomModel> get rooms;
   @override
   Status get status;
   @override

@@ -13,5 +13,5 @@ class ProfileModel with _$ProfileModel {
     required String id,
     required int lifes,
     required Timestamp lastLogIn,
-  }) = _ProfileModel;
+     required Timestamp gameStarted, required Timestamp gameEnd,  }) = _ProfileModel;
 }

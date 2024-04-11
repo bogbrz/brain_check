@@ -4,27 +4,28 @@ import 'package:brain_check/app/injection_container.dart';
 import 'package:brain_check/domain/models/profile_model.dart';
 import 'package:brain_check/features/pages/question_page/question_page.dart';
 import 'package:brain_check/features/pages/ranked_game_page/cubit/ranked_game_cubit.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:timer_count_down/timer_controller.dart';
-import 'package:timer_count_down/timer_count_down.dart';
 import 'package:flutter_timer_countdown/flutter_timer_countdown.dart';
 
 class RankedGamePage extends StatelessWidget {
   RankedGamePage({
     required this.user,
+    required this.profileModel,
     super.key,
   });
 
   final User? user;
+  final ProfileModel profileModel;
+
   final CountdownController controller = CountdownController(autoStart: true);
+
   @override
   Widget build(BuildContext context) {
-    final now = DateTime.now();
     final DateTime dateTime = DateTime.now();
 
     return BlocProvider(
@@ -40,8 +41,9 @@ class RankedGamePage extends StatelessWidget {
                   state.profile[0].lastLogIn.toDate().toString());
 
               Duration difference = dateTime.difference(lastLogin);
-              print(difference);
-              if (difference.inHours > 23) {
+              print(difference.inDays);
+
+              if (difference.inDays >= 1) {
                 context.read<RankedGameCubit>().updateLifes(
                       lastLogin: DateTime.now(),
                       profileId: state.profile[0].id,
@@ -60,11 +62,8 @@ class RankedGamePage extends StatelessWidget {
                 case Status.success:
                   DateTime lastLogin = DateTime.parse(
                       state.profile[0].lastLogIn.toDate().toString());
-                  DateTime resetDay = DateTime(
-                      dateTime.year, dateTime.month, dateTime.day, 24, 00);
+                  DateTime resetDay = lastLogin.add(Duration(hours: 24));
 
-                  Duration difference = resetDay.difference(lastLogin);
-                  int resetTime = int.parse(difference.inMinutes.toString());
                   return Center(
                     child: Column(
                       children: [
@@ -77,8 +76,11 @@ class RankedGamePage extends StatelessWidget {
                         if (state.profile[0].lifes != 0) ...[
                           InkWell(
                             onTap: () async {
+                                   context.read<RankedGameCubit>().setStartTime(
+                                  playerId: profileModel.id);
                               Navigator.of(context).push(MaterialPageRoute(
                                   builder: (context) => QuestionPage(
+                                        profileModel: profileModel,
                                         roomId: null,
                                         gameType: GameType.ranked,
                                         category: null,
@@ -131,7 +133,12 @@ class RankedGamePage extends StatelessWidget {
                               fontSize: MediaQuery.of(context).size.height / 30,
                             ),
                             enableDescriptions: false,
-                            onEnd: () {},
+                            onEnd: () {
+                              context.read<RankedGameCubit>().updateLifes(
+                                    lastLogin: DateTime.now(),
+                                    profileId: state.profile[0].id,
+                                  );
+                            },
                           )
                         ]
                       ],

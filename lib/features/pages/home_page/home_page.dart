@@ -4,7 +4,6 @@ import 'package:brain_check/app/injection_container.dart';
 import 'package:brain_check/features/pages/home_page/cubit/home_page_cubit.dart';
 import 'package:brain_check/features/pages/home_page/widgets/button_widget.dart';
 import 'package:brain_check/features/pages/home_page/widgets/page_extras_widget.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -87,7 +86,7 @@ class HomePage extends StatelessWidget {
                       ),
                       StartButtonWidget(
                         user: user,
-                        nickName: state.profile[0].nickName,
+                        profile: state.profile[0],
                       ),
                     ],
                   ));

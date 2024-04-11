@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'categories_page_cubit.dart';
+part of '../player_score_cubit.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,30 +15,36 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
-mixin _$CategoriesPageState {
+mixin _$PlayerScoreState {
   String? get errorMessage => throw _privateConstructorUsedError;
-  List<TriviaCategory> get categories => throw _privateConstructorUsedError;
+  List<RoundScoreModel>? get playerOneScore =>
+      throw _privateConstructorUsedError;
+  List<RoundScoreModel>? get playerTwoScore =>
+      throw _privateConstructorUsedError;
   Status get status => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $CategoriesPageStateCopyWith<CategoriesPageState> get copyWith =>
+  $PlayerScoreStateCopyWith<PlayerScoreState> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $CategoriesPageStateCopyWith<$Res> {
-  factory $CategoriesPageStateCopyWith(
-          CategoriesPageState value, $Res Function(CategoriesPageState) then) =
-      _$CategoriesPageStateCopyWithImpl<$Res, CategoriesPageState>;
+abstract class $PlayerScoreStateCopyWith<$Res> {
+  factory $PlayerScoreStateCopyWith(
+          PlayerScoreState value, $Res Function(PlayerScoreState) then) =
+      _$PlayerScoreStateCopyWithImpl<$Res, PlayerScoreState>;
   @useResult
   $Res call(
-      {String? errorMessage, List<TriviaCategory> categories, Status status});
+      {String? errorMessage,
+      List<RoundScoreModel>? playerOneScore,
+      List<RoundScoreModel>? playerTwoScore,
+      Status status});
 }
 
 /// @nodoc
-class _$CategoriesPageStateCopyWithImpl<$Res, $Val extends CategoriesPageState>
-    implements $CategoriesPageStateCopyWith<$Res> {
-  _$CategoriesPageStateCopyWithImpl(this._value, this._then);
+class _$PlayerScoreStateCopyWithImpl<$Res, $Val extends PlayerScoreState>
+    implements $PlayerScoreStateCopyWith<$Res> {
+  _$PlayerScoreStateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -49,7 +55,8 @@ class _$CategoriesPageStateCopyWithImpl<$Res, $Val extends CategoriesPageState>
   @override
   $Res call({
     Object? errorMessage = freezed,
-    Object? categories = null,
+    Object? playerOneScore = freezed,
+    Object? playerTwoScore = freezed,
     Object? status = null,
   }) {
     return _then(_value.copyWith(
@@ -57,10 +64,14 @@ class _$CategoriesPageStateCopyWithImpl<$Res, $Val extends CategoriesPageState>
           ? _value.errorMessage
           : errorMessage // ignore: cast_nullable_to_non_nullable
               as String?,
-      categories: null == categories
-          ? _value.categories
-          : categories // ignore: cast_nullable_to_non_nullable
-              as List<TriviaCategory>,
+      playerOneScore: freezed == playerOneScore
+          ? _value.playerOneScore
+          : playerOneScore // ignore: cast_nullable_to_non_nullable
+              as List<RoundScoreModel>?,
+      playerTwoScore: freezed == playerTwoScore
+          ? _value.playerTwoScore
+          : playerTwoScore // ignore: cast_nullable_to_non_nullable
+              as List<RoundScoreModel>?,
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
@@ -71,19 +82,22 @@ class _$CategoriesPageStateCopyWithImpl<$Res, $Val extends CategoriesPageState>
 
 /// @nodoc
 abstract class _$$InitialImplCopyWith<$Res>
-    implements $CategoriesPageStateCopyWith<$Res> {
+    implements $PlayerScoreStateCopyWith<$Res> {
   factory _$$InitialImplCopyWith(
           _$InitialImpl value, $Res Function(_$InitialImpl) then) =
       __$$InitialImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
-      {String? errorMessage, List<TriviaCategory> categories, Status status});
+      {String? errorMessage,
+      List<RoundScoreModel>? playerOneScore,
+      List<RoundScoreModel>? playerTwoScore,
+      Status status});
 }
 
 /// @nodoc
 class __$$InitialImplCopyWithImpl<$Res>
-    extends _$CategoriesPageStateCopyWithImpl<$Res, _$InitialImpl>
+    extends _$PlayerScoreStateCopyWithImpl<$Res, _$InitialImpl>
     implements _$$InitialImplCopyWith<$Res> {
   __$$InitialImplCopyWithImpl(
       _$InitialImpl _value, $Res Function(_$InitialImpl) _then)
@@ -93,7 +107,8 @@ class __$$InitialImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? errorMessage = freezed,
-    Object? categories = null,
+    Object? playerOneScore = freezed,
+    Object? playerTwoScore = freezed,
     Object? status = null,
   }) {
     return _then(_$InitialImpl(
@@ -101,10 +116,14 @@ class __$$InitialImplCopyWithImpl<$Res>
           ? _value.errorMessage
           : errorMessage // ignore: cast_nullable_to_non_nullable
               as String?,
-      categories: null == categories
-          ? _value._categories
-          : categories // ignore: cast_nullable_to_non_nullable
-              as List<TriviaCategory>,
+      playerOneScore: freezed == playerOneScore
+          ? _value._playerOneScore
+          : playerOneScore // ignore: cast_nullable_to_non_nullable
+              as List<RoundScoreModel>?,
+      playerTwoScore: freezed == playerTwoScore
+          ? _value._playerTwoScore
+          : playerTwoScore // ignore: cast_nullable_to_non_nullable
+              as List<RoundScoreModel>?,
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
@@ -116,20 +135,34 @@ class __$$InitialImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$InitialImpl implements _Initial {
-  _$InitialImpl(
+  const _$InitialImpl(
       {required this.errorMessage,
-      required final List<TriviaCategory> categories,
+      required final List<RoundScoreModel>? playerOneScore,
+      required final List<RoundScoreModel>? playerTwoScore,
       required this.status})
-      : _categories = categories;
+      : _playerOneScore = playerOneScore,
+        _playerTwoScore = playerTwoScore;
 
   @override
   final String? errorMessage;
-  final List<TriviaCategory> _categories;
+  final List<RoundScoreModel>? _playerOneScore;
   @override
-  List<TriviaCategory> get categories {
-    if (_categories is EqualUnmodifiableListView) return _categories;
+  List<RoundScoreModel>? get playerOneScore {
+    final value = _playerOneScore;
+    if (value == null) return null;
+    if (_playerOneScore is EqualUnmodifiableListView) return _playerOneScore;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_categories);
+    return EqualUnmodifiableListView(value);
+  }
+
+  final List<RoundScoreModel>? _playerTwoScore;
+  @override
+  List<RoundScoreModel>? get playerTwoScore {
+    final value = _playerTwoScore;
+    if (value == null) return null;
+    if (_playerTwoScore is EqualUnmodifiableListView) return _playerTwoScore;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
   }
 
   @override
@@ -137,7 +170,7 @@ class _$InitialImpl implements _Initial {
 
   @override
   String toString() {
-    return 'CategoriesPageState(errorMessage: $errorMessage, categories: $categories, status: $status)';
+    return 'PlayerScoreState(errorMessage: $errorMessage, playerOneScore: $playerOneScore, playerTwoScore: $playerTwoScore, status: $status)';
   }
 
   @override
@@ -148,13 +181,19 @@ class _$InitialImpl implements _Initial {
             (identical(other.errorMessage, errorMessage) ||
                 other.errorMessage == errorMessage) &&
             const DeepCollectionEquality()
-                .equals(other._categories, _categories) &&
+                .equals(other._playerOneScore, _playerOneScore) &&
+            const DeepCollectionEquality()
+                .equals(other._playerTwoScore, _playerTwoScore) &&
             (identical(other.status, status) || other.status == status));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, errorMessage,
-      const DeepCollectionEquality().hash(_categories), status);
+  int get hashCode => Object.hash(
+      runtimeType,
+      errorMessage,
+      const DeepCollectionEquality().hash(_playerOneScore),
+      const DeepCollectionEquality().hash(_playerTwoScore),
+      status);
 
   @JsonKey(ignore: true)
   @override
@@ -163,16 +202,19 @@ class _$InitialImpl implements _Initial {
       __$$InitialImplCopyWithImpl<_$InitialImpl>(this, _$identity);
 }
 
-abstract class _Initial implements CategoriesPageState {
-  factory _Initial(
+abstract class _Initial implements PlayerScoreState {
+  const factory _Initial(
       {required final String? errorMessage,
-      required final List<TriviaCategory> categories,
+      required final List<RoundScoreModel>? playerOneScore,
+      required final List<RoundScoreModel>? playerTwoScore,
       required final Status status}) = _$InitialImpl;
 
   @override
   String? get errorMessage;
   @override
-  List<TriviaCategory> get categories;
+  List<RoundScoreModel>? get playerOneScore;
+  @override
+  List<RoundScoreModel>? get playerTwoScore;
   @override
   Status get status;
   @override

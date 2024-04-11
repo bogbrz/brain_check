@@ -6,7 +6,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'root_page_state.dart';
-part 'root_page_cubit.freezed.dart';
+part 'generated/root_page_cubit.freezed.dart';
 
 class RootPageCubit extends Cubit<RootPageState> {
   RootPageCubit({required this.authRepository})

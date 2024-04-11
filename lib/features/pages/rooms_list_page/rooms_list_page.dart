@@ -1,5 +1,6 @@
 import 'package:brain_check/app/core/enums/enums.dart';
 import 'package:brain_check/app/injection_container.dart';
+import 'package:brain_check/domain/models/profile_model.dart';
 
 import 'package:brain_check/features/pages/rooms_list_page/cubit/rooms_list_page_cubit.dart';
 import 'package:brain_check/features/pages/rooms_list_page/widgets/create_room_widget.dart';
@@ -11,12 +12,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class RoomsListPage extends StatelessWidget {
   RoomsListPage({
-    required this.nickName,
+    required this.profile,
     required this.user,
     super.key,
   });
 
-  final String nickName;
+  final ProfileModel profile;
 
   final User? user;
 
@@ -54,7 +55,7 @@ class RoomsListPage extends StatelessWidget {
                                           builder: (BuildContext context) {
                                             return JoinRoomWidget(
                                               email: room.ownerMail,
-                                              nickName: nickName,
+                                              nickName: profile.nickName,
                                               model: room,
                                               id: room.id,
                                               user: user,
@@ -70,7 +71,7 @@ class RoomsListPage extends StatelessWidget {
                                 })),
                         CreateRoomWidget(
                           rooms: state.rooms,
-                          nickName: nickName,
+                          nickName: profile.nickName,
                         )
                       ],
                     );

@@ -1,3 +1,4 @@
+import 'package:brain_check/domain/models/profile_model.dart';
 import 'package:brain_check/features/pages/categories_page/categories_page.dart';
 
 import 'package:brain_check/features/pages/ranked_game_page/ranked_game_page.dart';
@@ -8,9 +9,9 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class GameTypePage extends StatelessWidget {
-  const GameTypePage({super.key, required this.user, required this.nickName});
+  const GameTypePage({super.key, required this.user, required this.profile});
   final User? user;
-  final String nickName;
+  final ProfileModel profile;
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +31,7 @@ class GameTypePage extends StatelessWidget {
                     child: InkWell(
                       onTap: () {
                         Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => CategoryPage(user: user)));
+                            builder: (context) => CategoryPage(user: user,profileModel: profile,)));
                       },
                       child: Container(
                         alignment: Alignment.center,
@@ -56,6 +57,7 @@ class GameTypePage extends StatelessWidget {
                     onTap: () {
                       Navigator.of(context).push(MaterialPageRoute(
                           builder: ((context) => RankedGamePage(
+                            profileModel: profile,
                                 user: user,
                               ))));
                     },
@@ -88,7 +90,7 @@ class GameTypePage extends StatelessWidget {
                   Navigator.of(context).push(MaterialPageRoute(
                     builder: (context) => RoomsListPage(
                       user: user,
-                      nickName: nickName,
+                      profile: profile,
                     ),
                   ));
                 },

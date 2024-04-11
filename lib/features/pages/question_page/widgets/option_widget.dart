@@ -40,9 +40,9 @@ class AnswerWidget extends StatelessWidget {
                         : Colors.white,
           ),
           margin: EdgeInsetsDirectional.all(
-              MediaQuery.of(context).size.height * 0.005),
+              MediaQuery.of(context).size.height * 0.007),
           width: MediaQuery.of(context).size.width * 0.47,
-          height: MediaQuery.of(context).size.height * 0.25,
+          height: MediaQuery.of(context).size.height * 0.2,
           child: Center(
               child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -55,12 +55,13 @@ class AnswerWidget extends StatelessWidget {
                             choosedAnswer != correctAnswer
                         ? Icon(
                             Icons.cancel_outlined,
-                            size: 30,
+                            size: MediaQuery.of(context).size.height * 0.035,
                           )
                         : isChoosed && answer == correctAnswer
                             ? Icon(
                                 Icons.check,
-                                size: 30,
+                                size:
+                                    MediaQuery.of(context).size.height * 0.035,
                               )
                             : SizedBox.shrink()
                   ],
@@ -69,7 +70,7 @@ class AnswerWidget extends StatelessWidget {
               ),
               Text(answer,
                   style: GoogleFonts.bungee(
-                    fontSize: MediaQuery.of(context).size.height / 55,
+                    fontSize: MediaQuery.of(context).size.height / 60,
                   )),
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.025,
