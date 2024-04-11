@@ -40,48 +40,54 @@ class RoomsListPage extends StatelessWidget {
                     return ErrorStateWidget(
                         errorMessage: state.errorMessage.toString());
                   case Status.success:
-                    return Column(
-                      children: [
-                        Expanded(
-                            child: ListView.builder(
-                                itemCount: state.rooms.length,
-                                itemBuilder: (context, index) {
-                                  final room = state.rooms[index];
-                                  int i = index + 1;
-                                  return InkWell(
-                                    onTap: () {
-                                      showDialog(
-                                          context: context,
-                                          builder: (BuildContext context) {
-                                            return JoinRoomWidget(
-                                              email: room.ownerMail,
-                                              nickName: profile.nickName,
-                                              model: room,
-                                              id: room.id,
-                                              user: user,
-                                              room: room,
-                                            );
-                                          });
-                                    },
-                                    child: RoomWidget(
-                                      room: room,
-                                      index: i,
-                                    ),
-                                  );
-                                })),
-                        CreateRoomWidget(
-                          rooms: state.rooms,
-                          nickName: profile.nickName,
-                        )
-                      ],
+                    return Container(
+                      decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                        colors: [
+                          Color.fromARGB(255, 0, 27, 48),
+                          Color.fromARGB(180, 66, 120, 255),
+                        ],
+                      )),
+                      child: Column(
+                        children: [
+                          Expanded(
+                              child: ListView.builder(
+                                  itemCount: state.rooms.length,
+                                  itemBuilder: (context, index) {
+                                    final room = state.rooms[index];
+                                    int i = index + 1;
+                                    return InkWell(
+                                      onTap: () {
+                                        showDialog(
+                                            context: context,
+                                            builder: (BuildContext context) {
+                                              return JoinRoomWidget(
+                                                email: room.ownerMail,
+                                                nickName: profile.nickName,
+                                                model: room,
+                                                id: room.id,
+                                                user: user,
+                                                room: room,
+                                              );
+                                            });
+                                      },
+                                      child: RoomWidget(
+                                        room: room,
+                                        index: i,
+                                      ),
+                                    );
+                                  })),
+                          CreateRoomWidget(
+                            rooms: state.rooms,
+                            nickName: profile.nickName,
+                          )
+                        ],
+                      ),
                     );
                 }
               },
             )));
   }
 }
-
-
-
-
-

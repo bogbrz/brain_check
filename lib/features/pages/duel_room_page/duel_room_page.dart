@@ -41,33 +41,42 @@ class _GameRoomPageState extends State<GameRoomPage> {
           getIt<DuelRoomPageCubit>()..playerInfo(id: widget.roomModel.id),
       child: WillPopScope(
         onWillPop: () async => false,
-        child: Scaffold(body: SafeArea(
-          child: BlocBuilder<DuelRoomPageCubit, DuelRoomPageState>(
-            builder: (context, state) {
-              final categories = state.categories;
-              switch (state.status) {
-                case Status.initial:
-                  return const InitialStateWidget();
-                case Status.loading:
-                  return const LoadingStateWidget();
-                case Status.error:
-                  return ErrorStateWidget(
-                      errorMessage: state.errorMessage.toString());
-                case Status.success:
-                  for (final player in state.players) {
-                    if (player.email == widget.user!.email.toString() &&
-                        player.startGame == true) {
-                      return DuelQuestionPage(
-                        roundNumber: player.roundNumber,
-                        roomId: widget.roomModel.id,
-                        players: state.players,
-                        user: widget.user,
-                        ownerEmail: widget.roomModel.ownerMail,
-                      );
-                    }
+        child: Scaffold(body: BlocBuilder<DuelRoomPageCubit, DuelRoomPageState>(
+          builder: (context, state) {
+            final categories = state.categories;
+            switch (state.status) {
+              case Status.initial:
+                return const InitialStateWidget();
+              case Status.loading:
+                return const LoadingStateWidget();
+              case Status.error:
+                return ErrorStateWidget(
+                    errorMessage: state.errorMessage.toString());
+              case Status.success:
+                for (final player in state.players) {
+                  if (player.email == widget.user!.email.toString() &&
+                      player.startGame == true) {
+                    return DuelQuestionPage(
+                      roundNumber: player.roundNumber,
+                      roomId: widget.roomModel.id,
+                      players: state.players,
+                      user: widget.user,
+                      ownerEmail: widget.roomModel.ownerMail,
+                    );
                   }
+                }
 
-                  return Column(
+                return Container(
+                  decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                    colors: [
+                      Color.fromARGB(255, 0, 27, 48),
+                      Color.fromARGB(180, 66, 120, 255),
+                    ],
+                  )),
+                  child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Row(
@@ -415,10 +424,10 @@ class _GameRoomPageState extends State<GameRoomPage> {
                         ),
                       ]
                     ],
-                  );
-              }
-            },
-          ),
+                  ),
+                );
+            }
+          },
         )),
       ),
     );

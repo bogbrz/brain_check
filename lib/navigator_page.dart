@@ -35,13 +35,22 @@ class _NavigatorPageState extends State<NavigatorPage> {
           return RankingPage();
         }
       }),
-      bottomNavigationBar: SizedBox(
+      bottomNavigationBar: Container(
         height: MediaQuery.of(context).size.height * 0.1,
+        decoration: BoxDecoration(
+            gradient: LinearGradient(
+          begin: Alignment.bottomRight,
+          end: Alignment.center,
+          colors: [
+            Color.fromARGB(255, 0, 27, 48),
+            Color.fromARGB(180, 66, 120, 255),
+          ],
+        )),
         child: BottomNavigationBar(
+          backgroundColor: Colors.transparent,
           selectedItemColor: Colors.white,
           selectedLabelStyle: GoogleFonts.bungee(),
           unselectedLabelStyle: GoogleFonts.bungee(),
-          backgroundColor: const Color.fromARGB(255, 27, 58, 93),
           onTap: (newIndex) {
             setState(() {
               pageIndex = newIndex;

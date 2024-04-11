@@ -12,8 +12,19 @@ class ErrorStateWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Text("Error : $errorMessage"),
+    return Container(
+      decoration: BoxDecoration(
+          gradient: LinearGradient(
+        begin: Alignment.topLeft,
+        end: Alignment.bottomRight,
+        colors: [
+          Color.fromARGB(255, 0, 27, 48),
+          Color.fromARGB(180, 66, 120, 255),
+        ],
+      )),
+      child: Center(
+        child: Text("Error : $errorMessage"),
+      ),
     );
   }
 }
@@ -23,18 +34,29 @@ class LoadingStateWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Transform.scale(scale: 2, child: const CircularProgressIndicator()),
-          Text(
-            AppLocalizations.of(context).gatheringData,
-            style: GoogleFonts.bungee(
-                color: Colors.white,
-                fontSize: MediaQuery.of(context).size.height / 25),
-          )
+    return Container(
+      decoration: BoxDecoration(
+          gradient: LinearGradient(
+        begin: Alignment.topLeft,
+        end: Alignment.bottomRight,
+        colors: [
+          Color.fromARGB(255, 0, 27, 48),
+          Color.fromARGB(180, 66, 120, 255),
         ],
+      )),
+      child: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Transform.scale(scale: 2, child: const CircularProgressIndicator()),
+            Text(
+              AppLocalizations.of(context).gatheringData,
+              style: GoogleFonts.bungee(
+                  color: Colors.white,
+                  fontSize: MediaQuery.of(context).size.height / 25),
+            )
+          ],
+        ),
       ),
     );
   }
@@ -45,9 +67,20 @@ class InitialStateWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-        child: Text(
-      AppLocalizations.of(context).initialing,
-    ));
+    return Container(
+      decoration: BoxDecoration(
+          gradient: LinearGradient(
+        begin: Alignment.topLeft,
+        end: Alignment.bottomRight,
+        colors: [
+          Color.fromARGB(255, 0, 27, 48),
+          Color.fromARGB(180, 66, 120, 255),
+        ],
+      )),
+      child: Center(
+          child: Text(
+        AppLocalizations.of(context).initialing,
+      )),
+    );
   }
 }

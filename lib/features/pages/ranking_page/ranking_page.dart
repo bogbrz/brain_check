@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 class RankingPage extends StatelessWidget {
   RankingPage({super.key});
   final TextStyle bungee = GoogleFonts.bungee();
@@ -38,21 +39,32 @@ class RankingPage extends StatelessWidget {
                 return ErrorStateWidget(
                     errorMessage: state.errorMessage.toString());
               case Status.success:
-                return Column(
-                  children: [
-                    const LabelWidget(),
-                    Expanded(
-                      child: ListView.builder(
-                        itemCount: state.profiles.length,
-                        itemBuilder: (context, index) {
-                          final profile = state.profiles[index];
-                          int i = index + 1;
-                          return RankingProfileWidget(
-                              i: i, bungee: bungee, profile: profile);
-                        },
+                return Container(
+                  decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                    colors: [
+                      Color.fromARGB(255, 0, 27, 48),
+                      Color.fromARGB(180, 66, 120, 255),
+                    ],
+                  )),
+                  child: Column(
+                    children: [
+                      const LabelWidget(),
+                      Expanded(
+                        child: ListView.builder(
+                          itemCount: state.profiles.length,
+                          itemBuilder: (context, index) {
+                            final profile = state.profiles[index];
+                            int i = index + 1;
+                            return RankingProfileWidget(
+                                i: i, bungee: bungee, profile: profile);
+                          },
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 );
             }
           },

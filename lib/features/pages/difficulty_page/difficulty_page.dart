@@ -54,19 +54,28 @@ class _DifficultyPageState extends State<DifficultyPage> {
             ),
             backgroundColor: const Color.fromARGB(255, 27, 58, 93),
           ),
-          body: SafeArea(
-            child: BlocBuilder<DifficultyPageCubit, DifficultyPageState>(
-              builder: (context, state) {
-                switch (state.status) {
-                  case Status.initial:
-                    return const InitialStateWidget();
-                  case Status.loading:
-                    return const LoadingStateWidget();
-                  case Status.error:
-                    return ErrorStateWidget(
-                        errorMessage: state.errorMessage.toString());
-                  case Status.success:
-                    return Center(
+          body: BlocBuilder<DifficultyPageCubit, DifficultyPageState>(
+            builder: (context, state) {
+              switch (state.status) {
+                case Status.initial:
+                  return const InitialStateWidget();
+                case Status.loading:
+                  return const LoadingStateWidget();
+                case Status.error:
+                  return ErrorStateWidget(
+                      errorMessage: state.errorMessage.toString());
+                case Status.success:
+                  return Container(
+                    decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                      colors: [
+                        Color.fromARGB(255, 0, 27, 48),
+                        Color.fromARGB(180, 66, 120, 255),
+                      ],
+                    )),
+                    child: Center(
                         child: Column(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
@@ -259,10 +268,10 @@ class _DifficultyPageState extends State<DifficultyPage> {
                               ),
                             ),
                           )
-                        ]));
-                }
-              },
-            ),
+                        ])),
+                  );
+              }
+            },
           ),
         ));
   }

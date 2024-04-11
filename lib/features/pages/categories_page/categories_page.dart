@@ -53,35 +53,19 @@ class _CategoryPageState extends State<CategoryPage> {
                 return ErrorStateWidget(
                     errorMessage: state.errorMessage.toString());
               case Status.success:
-                return ListView(children: [
-                  Center(
-                      child: Wrap(children: [
-                    Padding(
-                      padding: const EdgeInsets.all(5),
-                      child: Material(
-                        shape: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        clipBehavior: Clip.hardEdge,
-                        child: InkWell(
-                          onTap: () {
-                            setState(() {
-                              choosedCategory = 0;
-                            });
-
-                            Navigator.of(context).push(MaterialPageRoute(
-                                builder: ((context) => DifficultyPage(
-                                  profileModel: widget.profileModel,
-                                      user: widget.user,
-                                      categoriesModel:
-                                          TriviaCategory(id: 0, name: "Random"),
-                                    ))));
-                          },
-                          child: const RandomCategoryWidget(),
-                        ),
-                      ),
-                    ),
-                    for (final category in state.categories) ...[
+                return Container(
+                  decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                    colors: [
+                      Color.fromARGB(255, 0, 27, 48),
+                      Color.fromARGB(180, 66, 120, 255),
+                    ],
+                  )),
+                  child: ListView(children: [
+                    Center(
+                        child: Wrap(children: [
                       Padding(
                         padding: const EdgeInsets.all(5),
                         child: Material(
@@ -92,23 +76,50 @@ class _CategoryPageState extends State<CategoryPage> {
                           child: InkWell(
                             onTap: () {
                               setState(() {
-                                choosedCategory = category.id;
+                                choosedCategory = 0;
                               });
 
                               Navigator.of(context).push(MaterialPageRoute(
                                   builder: ((context) => DifficultyPage(
-                                    profileModel: widget.profileModel,
+                                        profileModel: widget.profileModel,
                                         user: widget.user,
-                                        categoriesModel: category,
+                                        categoriesModel: TriviaCategory(
+                                            id: 0, name: "Random"),
                                       ))));
                             },
-                            child: CategoryWidget(category: category),
+                            child: const RandomCategoryWidget(),
                           ),
                         ),
-                      )
-                    ],
-                  ]))
-                ]);
+                      ),
+                      for (final category in state.categories) ...[
+                        Padding(
+                          padding: const EdgeInsets.all(5),
+                          child: Material(
+                            shape: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            clipBehavior: Clip.hardEdge,
+                            child: InkWell(
+                              onTap: () {
+                                setState(() {
+                                  choosedCategory = category.id;
+                                });
+
+                                Navigator.of(context).push(MaterialPageRoute(
+                                    builder: ((context) => DifficultyPage(
+                                          profileModel: widget.profileModel,
+                                          user: widget.user,
+                                          categoriesModel: category,
+                                        ))));
+                              },
+                              child: CategoryWidget(category: category),
+                            ),
+                          ),
+                        )
+                      ],
+                    ]))
+                  ]),
+                );
             }
           },
         ),

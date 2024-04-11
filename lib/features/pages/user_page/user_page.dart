@@ -32,39 +32,50 @@ class UserPage extends StatelessWidget {
           centerTitle: true,
           backgroundColor: const Color.fromARGB(255, 27, 58, 93),
         ),
-        body: Center(
-          child: Container(
-            padding: const EdgeInsets.all(8),
-            height: MediaQuery.of(context).size.height * 0.7,
-            width: MediaQuery.of(context).size.width * 0.7,
-            decoration: BoxDecoration(
-                color: Colors.white,
-                border:
-                    Border.all(width: MediaQuery.of(context).size.width / 45),
-                borderRadius: BorderRadius.circular(10)),
-            child: BlocBuilder<UserPageCubit, UserPageState>(
-              builder: (context, state) {
-                switch (state.status) {
-                  case Status.initial:
-                    return const InitialStateWidget();
-                  case Status.loading:
-                    return const LoadingStateWidget();
+        body: Container(
+          decoration: BoxDecoration(
+              gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [
+              Color.fromARGB(255, 0, 27, 48),
+              Color.fromARGB(180, 66, 120, 255),
+            ],
+          )),
+          child: Center(
+            child: Container(
+              padding: const EdgeInsets.all(8),
+              height: MediaQuery.of(context).size.height * 0.7,
+              width: MediaQuery.of(context).size.width * 0.7,
+              decoration: BoxDecoration(
+                  color: Colors.white,
+                  border:
+                      Border.all(width: MediaQuery.of(context).size.width / 45),
+                  borderRadius: BorderRadius.circular(10)),
+              child: BlocBuilder<UserPageCubit, UserPageState>(
+                builder: (context, state) {
+                  switch (state.status) {
+                    case Status.initial:
+                      return const InitialStateWidget();
+                    case Status.loading:
+                      return const LoadingStateWidget();
 
-                  case Status.error:
-                    return ErrorStateWidget(
-                        errorMessage: state.errorMessage.toString());
-                  case Status.success:
-                    return Column(
-                      children: [
-                        ProfileInfoWidget(
-                          user: user,
-                          profiles: state.profile,
-                        ),
-                        const SignOutWidget()
-                      ],
-                    );
-                }
-              },
+                    case Status.error:
+                      return ErrorStateWidget(
+                          errorMessage: state.errorMessage.toString());
+                    case Status.success:
+                      return Column(
+                        children: [
+                          ProfileInfoWidget(
+                            user: user,
+                            profiles: state.profile,
+                          ),
+                          const SignOutWidget()
+                        ],
+                      );
+                  }
+                },
+              ),
             ),
           ),
         ),

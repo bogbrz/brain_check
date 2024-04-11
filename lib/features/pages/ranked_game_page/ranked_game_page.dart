@@ -64,84 +64,101 @@ class RankedGamePage extends StatelessWidget {
                       state.profile[0].lastLogIn.toDate().toString());
                   DateTime resetDay = lastLogin.add(Duration(hours: 24));
 
-                  return Center(
-                    child: Column(
-                      children: [
-                        Padding(
-                            padding: EdgeInsets.all(
-                                MediaQuery.of(context).size.height * 0.01),
-                            child: InfoWidget(
-                              profile: state.profile[0],
-                            )),
-                        if (state.profile[0].lifes != 0) ...[
-                          InkWell(
-                            onTap: () async {
-                                   context.read<RankedGameCubit>().setStartTime(
-                                  playerId: profileModel.id);
-                              Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (context) => QuestionPage(
-                                        profileModel: profileModel,
-                                        roomId: null,
-                                        gameType: GameType.ranked,
-                                        category: null,
-                                        difficulty: '',
-                                        questionsAmount: 5,
-                                        user: user,
-                                      )));
-                            },
-                            child: Container(
+                  return Container(
+                    decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                      colors: [
+                        Color.fromARGB(255, 0, 27, 48),
+                        Color.fromARGB(180, 66, 120, 255),
+                      ],
+                    )),
+                    child: Center(
+                      child: Column(
+                        children: [
+                          Padding(
                               padding: EdgeInsets.all(
-                                  MediaQuery.of(context).size.height * 0.005),
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(
-                                      MediaQuery.of(context).size.height * 0.1),
-                                  color: Colors.white,
-                                  border: Border.all(
-                                      width: MediaQuery.of(context).size.width /
-                                          55,
-                                      color: Colors.black)),
-                              width: MediaQuery.of(context).size.width * 0.6,
-                              height: MediaQuery.of(context).size.height * 0.15,
-                              child: Center(
-                                child: Text(
-                                  AppLocalizations.of(context).play,
-                                  style: GoogleFonts.bungee(
-                                      fontSize:
-                                          MediaQuery.of(context).size.height /
-                                              20,
-                                      color: Colors.black),
+                                  MediaQuery.of(context).size.height * 0.01),
+                              child: InfoWidget(
+                                profile: state.profile[0],
+                              )),
+                          if (state.profile[0].lifes != 0) ...[
+                            InkWell(
+                              onTap: () async {
+                                context
+                                    .read<RankedGameCubit>()
+                                    .setStartTime(playerId: profileModel.id);
+                                Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (context) => QuestionPage(
+                                          profileModel: profileModel,
+                                          roomId: null,
+                                          gameType: GameType.ranked,
+                                          category: null,
+                                          difficulty: '',
+                                          questionsAmount: 5,
+                                          user: user,
+                                        )));
+                              },
+                              child: Container(
+                                padding: EdgeInsets.all(
+                                    MediaQuery.of(context).size.height * 0.005),
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(
+                                        MediaQuery.of(context).size.height *
+                                            0.1),
+                                    color: Colors.white,
+                                    border: Border.all(
+                                        width:
+                                            MediaQuery.of(context).size.width /
+                                                55,
+                                        color: Colors.black)),
+                                width: MediaQuery.of(context).size.width * 0.6,
+                                height:
+                                    MediaQuery.of(context).size.height * 0.15,
+                                child: Center(
+                                  child: Text(
+                                    AppLocalizations.of(context).play,
+                                    style: GoogleFonts.bungee(
+                                        fontSize:
+                                            MediaQuery.of(context).size.height /
+                                                20,
+                                        color: Colors.black),
+                                  ),
                                 ),
                               ),
+                            )
+                          ] else ...[
+                            Text(
+                              "${AppLocalizations.of(context).timeToReset}:",
+                              textAlign: TextAlign.center,
+                              style: GoogleFonts.bungee(
+                                  fontSize:
+                                      MediaQuery.of(context).size.height / 20,
+                                  color: Colors.black),
                             ),
-                          )
-                        ] else ...[
-                          Text(
-                            "${AppLocalizations.of(context).timeToReset}:",
-                            textAlign: TextAlign.center,
-                            style: GoogleFonts.bungee(
+                            TimerCountdown(
+                              format: CountDownTimerFormat.hoursMinutesSeconds,
+                              endTime: resetDay,
+                              timeTextStyle: GoogleFonts.bungee(
                                 fontSize:
                                     MediaQuery.of(context).size.height / 20,
-                                color: Colors.black),
-                          ),
-                          TimerCountdown(
-                            format: CountDownTimerFormat.hoursMinutesSeconds,
-                            endTime: resetDay,
-                            timeTextStyle: GoogleFonts.bungee(
-                              fontSize: MediaQuery.of(context).size.height / 20,
-                            ),
-                            colonsTextStyle: GoogleFonts.bungee(
-                              fontSize: MediaQuery.of(context).size.height / 30,
-                            ),
-                            enableDescriptions: false,
-                            onEnd: () {
-                              context.read<RankedGameCubit>().updateLifes(
-                                    lastLogin: DateTime.now(),
-                                    profileId: state.profile[0].id,
-                                  );
-                            },
-                          )
-                        ]
-                      ],
+                              ),
+                              colonsTextStyle: GoogleFonts.bungee(
+                                fontSize:
+                                    MediaQuery.of(context).size.height / 30,
+                              ),
+                              enableDescriptions: false,
+                              onEnd: () {
+                                context.read<RankedGameCubit>().updateLifes(
+                                      lastLogin: DateTime.now(),
+                                      profileId: state.profile[0].id,
+                                    );
+                              },
+                            )
+                          ]
+                        ],
+                      ),
                     ),
                   );
               }

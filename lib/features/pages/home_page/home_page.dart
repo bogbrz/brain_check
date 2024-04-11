@@ -48,48 +48,30 @@ class HomePage extends StatelessWidget {
                   errorMessage: state.errorMessage.toString());
             case Status.success:
               return Scaffold(
-                  appBar: AppBar(
-                    title: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        Text(
-                          "BRAIN CHECK APP",
-                          style: GoogleFonts.bungee(
-                              color: Colors.white,
-                              fontSize: MediaQuery.of(context).size.width / 15),
-                        ),
-                        Row(
-                          children: [
-                            Image(
-                              image: const AssetImage("images/brain.png"),
-                              width: MediaQuery.of(context).size.width / 10,
-                            ),
-                            Text(
-                              state.profile[0].lifes.toString(),
-                              style: GoogleFonts.bungee(
-                                  color: Colors.white,
-                                  fontSize:
-                                      MediaQuery.of(context).size.width / 15),
-                            )
-                          ],
-                        )
-                      ],
+                  body: Container(
+                decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: [
+                    Color.fromARGB(255, 0, 27, 48),
+                    Color.fromARGB(180, 66, 120, 255),
+                  ],
+                )),
+                child: Column(
+                  children: [
+                    PageExtrasWidget(
+                      profiles: state.profile,
+                      user: user,
+                      overall: state.overAllInfo,
                     ),
-                    backgroundColor: const Color.fromARGB(255, 27, 58, 93),
-                  ),
-                  body: Column(
-                    children: [
-                      PageExtrasWidget(
-                        profiles: state.profile,
-                        user: user,
-                        overall: state.overAllInfo,
-                      ),
-                      StartButtonWidget(
-                        user: user,
-                        profile: state.profile[0],
-                      ),
-                    ],
-                  ));
+                    StartButtonWidget(
+                      user: user,
+                      profile: state.profile[0],
+                    ),
+                  ],
+                ),
+              ));
           }
         }));
   }

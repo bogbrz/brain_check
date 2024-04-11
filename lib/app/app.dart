@@ -1,6 +1,5 @@
 import 'package:brain_check/app/core/config.dart';
 
-
 import 'package:brain_check/features/pages/root_page/root_page.dart';
 
 import 'package:flutter/material.dart';
@@ -17,6 +16,8 @@ class MyApp extends StatelessWidget {
         supportedLocales: AppLocalizations.supportedLocales,
         debugShowCheckedModeBanner: Config.debugShowCheckModeBanner,
         theme: ThemeData(
+          primarySwatch: Colors.blue,
+          visualDensity: VisualDensity.adaptivePlatformDensity,
           colorScheme: ColorScheme.fromSeed(
             background: const Color.fromARGB(255, 31, 81, 135),
             seedColor: const Color.fromARGB(255, 255, 255, 255),
