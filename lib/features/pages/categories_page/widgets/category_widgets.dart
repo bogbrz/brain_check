@@ -18,9 +18,15 @@ class RandomCategoryWidget extends StatelessWidget {
       width: MediaQuery.of(context).size.width / 2.2,
       padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
-        color: const Color.fromARGB(255, 56, 146, 249),
-        border: Border.all(width: MediaQuery.of(context).size.width / 45),
-        borderRadius: BorderRadius.circular(10),
+        color: Colors.white,
+        gradient: LinearGradient(
+          begin: Alignment.bottomLeft,
+          end: Alignment.topRight,
+          colors: [
+            Color.fromARGB(255, 138, 154, 214),
+            Color.fromARGB(180, 66, 120, 255),
+          ],
+        ),
       ),
       child: Text(
         AppLocalizations.of(context).random,
@@ -50,9 +56,15 @@ class CategoryWidget extends StatelessWidget {
       width: MediaQuery.of(context).size.width / 2.2,
       padding: const EdgeInsets.all(4),
       decoration: BoxDecoration(
-        color: const Color.fromARGB(255, 56, 146, 249),
-        border: Border.all(width: MediaQuery.of(context).size.width / 45),
-        borderRadius: BorderRadius.circular(10),
+        color: Colors.white,
+        gradient: LinearGradient(
+          begin: Alignment.bottomLeft,
+          end: Alignment.topRight,
+          colors: [
+           Color.fromARGB(255, 138, 154, 214),
+            Color.fromARGB(180, 66, 120, 255),
+          ],
+        ),
       ),
       child: Text(
         category.name,

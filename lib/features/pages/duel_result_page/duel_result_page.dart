@@ -112,8 +112,7 @@ class DuelResultPage extends StatelessWidget {
                   ],
                 )),
                 child: Center(
-                  child: Container(
-                    color: Colors.white,
+                  child: SizedBox(
                     height: MediaQuery.of(context).size.height * 0.35,
                     width: MediaQuery.of(context).size.width * 0.7,
                     child: Column(
@@ -122,14 +121,14 @@ class DuelResultPage extends StatelessWidget {
                         Text(
                           "Your Time: ${state.gameLenght}  ",
                           style: GoogleFonts.bungee(
-                              color: Colors.black,
+                              color: Colors.white,
                               fontSize:
                                   MediaQuery.of(context).size.height / 35),
                         ),
                         Text(
                           "${AppLocalizations.of(context).yourScore}: ${score} / ${questionAmount * 10}",
                           style: GoogleFonts.bungee(
-                              color: Colors.black,
+                              color: Colors.white,
                               fontSize:
                                   MediaQuery.of(context).size.height / 35),
                         ),
@@ -331,11 +330,13 @@ class DuelResultPage extends StatelessWidget {
                         Text(
                           "Total points: $totalPoints  ",
                           style: GoogleFonts.bungee(
-                              color: Colors.black,
+                              color: Colors.white,
                               fontSize:
                                   MediaQuery.of(context).size.height / 35),
                         ),
                         ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.transparent),
                           onPressed: () {
                             if (gameType == GameType.duel) {
                               for (final player in players!) {

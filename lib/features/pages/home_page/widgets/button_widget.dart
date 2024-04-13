@@ -39,15 +39,16 @@ class StartButtonWidget extends StatelessWidget {
             width: MediaQuery.of(context).size.width * 0.6,
             height: MediaQuery.of(context).size.height * 0.1,
             decoration: BoxDecoration(
-                color: Colors.white,
-                gradient: LinearGradient(
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                  colors: [
-                    Color.fromARGB(255, 255, 255, 255),
-                    Color.fromARGB(180, 66, 120, 255),
-                  ],
-                )),
+              color: Colors.white,
+              gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [
+                  Color.fromARGB(255, 255, 255, 255),
+                  Color.fromARGB(180, 66, 120, 255),
+                ],
+              ),
+            ),
             child: Text(AppLocalizations.of(context).play,
                 style: GoogleFonts.bungee(fontSize: 45)),
           ),
