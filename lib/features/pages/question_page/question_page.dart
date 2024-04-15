@@ -112,14 +112,15 @@ class _QuestionPageState extends State<QuestionPage> {
                 child: Scaffold(
                   body: Container(
                     decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
-                      colors: [
-                        Color.fromARGB(255, 0, 27, 48),
-                        Color.fromARGB(180, 66, 120, 255),
-                      ],
-                    )),
+                      gradient: LinearGradient(
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                        colors: [
+                          Color.fromARGB(255, 0, 27, 48),
+                          Color.fromARGB(180, 66, 120, 255),
+                        ],
+                      ),
+                    ),
                     child: Center(
                       child: Column(
                         children: [
@@ -254,7 +255,6 @@ class _QuestionPageState extends State<QuestionPage> {
                             ),
                           ),
                           Wrap(
-                            
                             children: [
                               if (index == 0) ...[
                                 for (final answer in state.answersOne!) ...[

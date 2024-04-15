@@ -24,7 +24,7 @@ class StartButtonWidget extends StatelessWidget {
     return Center(
       child: Material(
         shadowColor: Colors.white70,
-        shape: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+        borderRadius: BorderRadius.circular(10),
         clipBehavior: Clip.hardEdge,
         child: InkWell(
           onTap: () {

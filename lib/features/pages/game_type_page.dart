@@ -27,19 +27,22 @@ class GameTypePage extends StatelessWidget {
         ],
       )),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Row(
-            children: [
-              IconButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                icon: Icon(Icons.arrow_back_sharp),
-                color: Colors.white,
-                iconSize: MediaQuery.of(context).size.height * 0.05,
-              )
-            ],
+          Padding(
+            padding:
+                EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.03),
+            child: Row(
+              children: [
+                IconButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  icon: Icon(Icons.arrow_back_sharp),
+                  color: Colors.white,
+                  iconSize: MediaQuery.of(context).size.height * 0.05,
+                )
+              ],
+            ),
           ),
           SizedBox(
             height: MediaQuery.of(context).size.height * 0.025,

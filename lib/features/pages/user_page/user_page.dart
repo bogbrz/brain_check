@@ -24,14 +24,6 @@ class UserPage extends StatelessWidget {
       create: (context) => getIt<UserPageCubit>()
         ..getRankingForUpdate(email: user!.email.toString()),
       child: Scaffold(
-        appBar: AppBar(
-          title: Text(
-            AppLocalizations.of(context).user,
-            style: GoogleFonts.bungee(color: Colors.white, fontSize: 35),
-          ),
-          centerTitle: true,
-          backgroundColor: const Color.fromARGB(255, 27, 58, 93),
-        ),
         body: Container(
           decoration: BoxDecoration(
               gradient: LinearGradient(
@@ -45,12 +37,18 @@ class UserPage extends StatelessWidget {
           child: Center(
             child: Container(
               padding: const EdgeInsets.all(8),
-              height: MediaQuery.of(context).size.height * 0.7,
+              height: MediaQuery.of(context).size.height * 0.8,
               width: MediaQuery.of(context).size.width * 0.7,
               decoration: BoxDecoration(
                   color: Colors.white,
-                  border:
-                      Border.all(width: MediaQuery.of(context).size.width / 45),
+                  gradient: LinearGradient(
+                    begin: Alignment.centerLeft,
+                    end: Alignment.centerRight,
+                    colors: [
+                      Color.fromARGB(255, 255, 255, 255),
+                      Color.fromARGB(180, 66, 120, 255),
+                    ],
+                  ),
                   borderRadius: BorderRadius.circular(10)),
               child: BlocBuilder<UserPageCubit, UserPageState>(
                 builder: (context, state) {

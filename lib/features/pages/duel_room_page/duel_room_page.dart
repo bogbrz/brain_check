@@ -79,90 +79,101 @@ class _GameRoomPageState extends State<GameRoomPage> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          IconButton.filledTonal(
-                              onPressed: () {
-                                if (widget.user!.email.toString() ==
-                                    widget.roomModel.ownerMail.toString()) {
-                                  context
-                                      .read<DuelRoomPageCubit>()
-                                      .deleteRoom(id: widget.roomModel.id);
-                                  Navigator.of(context).pop();
-                                  Navigator.of(context).pop();
-                                } else if (state.players.isEmpty) {
-                                  Navigator.of(context).pop();
-                                  Navigator.of(context).pop();
-                                } else {
-                                  for (final player in state.players) {
-                                    if (player.email ==
-                                        widget.user!.email.toString()) {
-                                      context
-                                          .read<DuelRoomPageCubit>()
-                                          .deleteScore(
-                                              roomId: widget.roomModel.id,
-                                              roundNumber: player.roundNumber);
-
-                                      for (final player in state.players) {
+                      Padding(
+                        padding: EdgeInsets.only(
+                            top: MediaQuery.of(context).size.height * 0.03),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            IconButton.filledTonal(
+                                onPressed: () {
+                                  if (widget.user!.email.toString() ==
+                                      widget.roomModel.ownerMail.toString()) {
+                                    context
+                                        .read<DuelRoomPageCubit>()
+                                        .deleteRoom(id: widget.roomModel.id);
+                                    Navigator.of(context).pop();
+                                    Navigator.of(context).pop();
+                                  } else if (state.players.isEmpty) {
+                                    Navigator.of(context).pop();
+                                    Navigator.of(context).pop();
+                                  } else {
+                                    for (final player in state.players) {
+                                      if (player.email ==
+                                          widget.user!.email.toString()) {
                                         context
                                             .read<DuelRoomPageCubit>()
-                                            .resetRounds(
+                                            .deleteScore(
                                                 roomId: widget.roomModel.id,
-                                                playerId: player.id);
+                                                roundNumber:
+                                                    player.roundNumber);
+
+                                        for (final player in state.players) {
+                                          context
+                                              .read<DuelRoomPageCubit>()
+                                              .resetRounds(
+                                                  roomId: widget.roomModel.id,
+                                                  playerId: player.id);
+                                        }
+
+                                        context
+                                            .read<DuelRoomPageCubit>()
+                                            .updatePlayersCount(
+                                                roomId: widget.roomModel.id,
+                                                value: -1);
+                                        context
+                                            .read<DuelRoomPageCubit>()
+                                            .leaveRoom(
+                                                id: player.id,
+                                                roomId: widget.roomModel.id);
+
+                                        Navigator.of(context).pop();
+                                        Navigator.of(context).pop();
+                                      } else if (widget.user!.email
+                                              .toString() !=
+                                          player.email.toString()) {
+                                        Navigator.of(context).pop();
+                                        Navigator.of(context).pop();
+                                      } else if (player.email ==
+                                              widget.user!.email.toString() &&
+                                          player.roundNumber == 5) {
+                                        context
+                                            .read<DuelRoomPageCubit>()
+                                            .deleteRoom(
+                                                id: widget.roomModel.id);
+                                        Navigator.of(context).pop();
+                                        Navigator.of(context).pop();
                                       }
-
-                                      context
-                                          .read<DuelRoomPageCubit>()
-                                          .updatePlayersCount(
-                                              roomId: widget.roomModel.id,
-                                              value: -1);
-                                      context
-                                          .read<DuelRoomPageCubit>()
-                                          .leaveRoom(
-                                              id: player.id,
-                                              roomId: widget.roomModel.id);
-
-                                      Navigator.of(context).pop();
-                                      Navigator.of(context).pop();
-                                    } else if (widget.user!.email.toString() !=
-                                        player.email.toString()) {
-                                      Navigator.of(context).pop();
-                                      Navigator.of(context).pop();
-                                    } else if (player.email ==
-                                            widget.user!.email.toString() &&
-                                        player.roundNumber == 5) {
-                                      context
-                                          .read<DuelRoomPageCubit>()
-                                          .deleteRoom(id: widget.roomModel.id);
-                                      Navigator.of(context).pop();
-                                      Navigator.of(context).pop();
                                     }
                                   }
-                                }
-                              },
-                              icon: const Icon(Icons.logout)),
-                          Text(
-                            "${widget.roomModel.nickName} ${AppLocalizations.of(context).playerRoom}",
-                            style: GoogleFonts.bungee(
-                                color: Colors.white,
-                                fontSize:
-                                    MediaQuery.of(context).size.height / 35),
-                          ),
-                          IconButton.filledTonal(
-                              onPressed: widget.user!.email !=
-                                      widget.roomModel.ownerMail
-                                  ? null
-                                  : () {
-                                      context
-                                          .read<DuelRoomPageCubit>()
-                                          .deleteRoom(id: widget.roomModel.id);
+                                },
+                                icon: const Icon(Icons.logout)),
+                            Expanded(
+                              child: Text(
+                                "${widget.roomModel.nickName} ${AppLocalizations.of(context).playerRoom}",
+                                style: GoogleFonts.bungee(
+                                    color: Colors.white,
+                                    fontSize:
+                                        MediaQuery.of(context).size.height /
+                                            35),
+                              ),
+                            ),
+                            // IconButton.filledTonal(
+                            //     onPressed: widget.user!.email !=
+                            //             widget.roomModel.ownerMail
+                            //         ? null
+                            //         : () {
+                            //             context
+                            //                 .read<DuelRoomPageCubit>()
+                            //                 .deleteRoom(
+                            //                     id: widget.roomModel.id);
 
-                                      Navigator.of(context).pop();
-                                      Navigator.of(context).pop();
-                                    },
-                              icon: const Icon(Icons.delete)),
-                        ],
+                            //             Navigator.of(context).pop();
+                            //             Navigator.of(context).pop();
+                            //           },
+                            //     icon: const Icon(Icons.delete)),
+                          ],
+                        ),
                       ),
                       Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -219,28 +230,49 @@ class _GameRoomPageState extends State<GameRoomPage> {
                         margin: EdgeInsetsDirectional.all(
                             MediaQuery.of(context).size.height * 0.01),
                         decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(10),
-                            border: Border.all(
-                                width: MediaQuery.of(context).size.width / 55,
-                                color: Colors.black)),
+                          gradient: LinearGradient(
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
+                            colors: [
+                              Color.fromARGB(255, 255, 255, 255),
+                              Color.fromARGB(180, 66, 120, 255),
+                            ],
+                          ),
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(10),
+                          // border: Border.all(
+                          //     width: MediaQuery.of(context).size.width / 55,
+                          //     color: Colors.black),
+                        ),
                         child: Column(
                           children: [
                             if (widget.user!.email.toString() ==
                                 widget.roomModel.ownerMail.toString()) ...[
                               Container(
                                 decoration: BoxDecoration(
-                                    border: Border(
-                                        bottom: BorderSide(
-                                            color: Colors.black,
-                                            width: MediaQuery.of(context)
-                                                    .size
-                                                    .width *
-                                                0.01))),
+                                    gradient: LinearGradient(
+                                      begin: Alignment.topLeft,
+                                      end: Alignment.bottomRight,
+                                      colors: [
+                                        Color.fromARGB(255, 255, 255, 255),
+                                        Color.fromARGB(180, 66, 120, 255),
+                                      ],
+                                    ),
+                                    borderRadius: BorderRadius.only(
+                                      topLeft: Radius.circular(10),
+                                      topRight: Radius.circular(10),
+                                    ),
+                                    border: Border.all(
+                                        color: Colors.transparent,
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                0.001)),
                                 width: MediaQuery.of(context).size.width * 0.98,
                                 height:
                                     MediaQuery.of(context).size.height * 0.075,
-                                child: SizedBox(
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10)),
                                   width:
                                       MediaQuery.of(context).size.width * 0.6,
                                   child: Center(
@@ -347,80 +379,131 @@ class _GameRoomPageState extends State<GameRoomPage> {
                         Padding(
                           padding: EdgeInsets.all(
                               MediaQuery.of(context).size.height * 0.01),
-                          child: ElevatedButton(
-                              onPressed:
-                                  state.playerOne.isEmpty ||
-                                          state.playerTwo.isEmpty
-                                      ? null
-                                      : state.playerOne[0].ready == false ||
-                                              state.playerTwo[0].ready == false
-                                          ? null
-                                          : state.playerOne[0].startGame ||
-                                                  state.playerTwo[0].startGame
-                                              ? null
-                                              : category == null
-                                                  ? null
-                                                  : state.playerOne[0]
-                                                              .roundNumber ==
-                                                          6
-                                                      ? null
-                                                      : () async {
-                                                          for (final player
-                                                              in state
-                                                                  .players) {
-                                                            if (player.email
-                                                                    .toString() ==
-                                                                widget.roomModel
-                                                                    .ownerMail
-                                                                    .toString()) {
-                                                              await context
-                                                                  .read<
-                                                                      DuelRoomPageCubit>()
-                                                                  .addQtoFirebase(
-                                                                      roundNumber:
-                                                                          player
-                                                                              .roundNumber,
-                                                                      roomId: widget
-                                                                          .roomModel
-                                                                          .id,
-                                                                      categoryId:
-                                                                          category!
-                                                                              .id);
-                                                            }
-                                                            context.read<DuelRoomPageCubit>().startGame(
-                                                                roomId: widget
-                                                                    .roomModel
-                                                                    .id,
-                                                                playerOneId:
-                                                                    state
-                                                                        .players[
-                                                                            0]
-                                                                        .id,
-                                                                playerTwoId:
-                                                                    state
-                                                                        .players[
-                                                                            1]
-                                                                        .id,
-                                                                status: true);
-                                                          }
-                                                        },
-                              child: Text(
-                                state.playerOne.isEmpty ||
+                          child: Container(
+                            height: MediaQuery.of(context).size.height * 0.05,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(50),
+                              gradient: LinearGradient(
+                                begin: Alignment.topLeft,
+                                end: Alignment.bottomRight,
+                                colors: state.playerOne.isEmpty ||
                                         state.playerTwo.isEmpty
-                                    ? "${AppLocalizations.of(context).notEnoughPlayers}"
-                                    : state.playerOne[0].roundNumber == 6
-                                        ? "${AppLocalizations.of(context).gameOver}"
+                                    ? [
+                                        Color.fromARGB(255, 82, 78, 78),
+                                        Color.fromARGB(180, 0, 0, 0),
+                                      ]
+                                    : state.playerOne[0].ready == false ||
+                                            state.playerTwo[0].ready == false
+                                        ? [
+                                            Color.fromARGB(255, 82, 78, 78),
+                                            Color.fromARGB(180, 0, 0, 0),
+                                          ]
+                                        : state.playerOne[0].startGame ||
+                                                state.playerTwo[0].startGame
+                                            ? [
+                                                Color.fromARGB(255, 82, 78, 78),
+                                                Color.fromARGB(180, 0, 0, 0),
+                                              ]
+                                            : category == null
+                                                ? [
+                                                    Color.fromARGB(
+                                                        255, 82, 78, 78),
+                                                    Color.fromARGB(
+                                                        180, 0, 0, 0),
+                                                  ]
+                                                : state.playerOne[0]
+                                                            .roundNumber ==
+                                                        6
+                                                    ? [
+                                                        Color.fromARGB(
+                                                            255, 82, 78, 78),
+                                                        Color.fromARGB(
+                                                            180, 0, 0, 0),
+                                                      ]
+                                                    : [
+                                                        Color.fromARGB(
+                                                            255, 255, 255, 255),
+                                                        Color.fromARGB(
+                                                            180, 66, 120, 255),
+                                                      ],
+                              ),
+                            ),
+                            child: ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                    backgroundColor: Colors.transparent),
+                                onPressed:
+                                    state.playerOne.isEmpty ||
+                                            state.playerTwo.isEmpty
+                                        ? null
                                         : state.playerOne[0].ready == false ||
                                                 state.playerTwo[0].ready ==
                                                     false
-                                            ? "${AppLocalizations.of(context).playersNotReady}"
-                                            : '${AppLocalizations.of(context).startGame}',
-                                style: GoogleFonts.bungee(
-                                    color: Colors.black,
-                                    fontSize:
-                                        MediaQuery.of(context).size.height /
-                                            35),
-                              )),
+                                            ? null
+                                            : state.playerOne[0].startGame ||
+                                                    state.playerTwo[0].startGame
+                                                ? null
+                                                : category == null
+                                                    ? null
+                                                    : state.playerOne[0]
+                                                                .roundNumber ==
+                                                            6
+                                                        ? null
+                                                        : () async {
+                                                            for (final player
+                                                                in state
+                                                                    .players) {
+                                                              if (player.email
+                                                                      .toString() ==
+                                                                  widget
+                                                                      .roomModel
+                                                                      .ownerMail
+                                                                      .toString()) {
+                                                                await context.read<DuelRoomPageCubit>().addQtoFirebase(
+                                                                    roundNumber:
+                                                                        player
+                                                                            .roundNumber,
+                                                                    roomId: widget
+                                                                        .roomModel
+                                                                        .id,
+                                                                    categoryId:
+                                                                        category!
+                                                                            .id);
+                                                              }
+                                                              context.read<DuelRoomPageCubit>().startGame(
+                                                                  roomId: widget
+                                                                      .roomModel
+                                                                      .id,
+                                                                  playerOneId:
+                                                                      state
+                                                                          .players[
+                                                                              0]
+                                                                          .id,
+                                                                  playerTwoId:
+                                                                      state
+                                                                          .players[
+                                                                              1]
+                                                                          .id,
+                                                                  status: true);
+                                                            }
+                                                          },
+                                child: Text(
+                                  state.playerOne.isEmpty ||
+                                          state.playerTwo.isEmpty
+                                      ? "${AppLocalizations.of(context).notEnoughPlayers}"
+                                      : state.playerOne[0].roundNumber == 6
+                                          ? "${AppLocalizations.of(context).gameOver}"
+                                          : state.playerOne[0].ready == false ||
+                                                  state.playerTwo[0].ready ==
+                                                      false
+                                              ? "${AppLocalizations.of(context).playersNotReady}"
+                                              : '${AppLocalizations.of(context).startGame}',
+                                  style: GoogleFonts.bungee(
+                                      color: Colors.black,
+                                      fontSize:
+                                          MediaQuery.of(context).size.height /
+                                              35),
+                                )),
+                          ),
                         ),
                       ]
                     ],

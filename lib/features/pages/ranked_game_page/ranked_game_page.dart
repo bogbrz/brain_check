@@ -81,6 +81,7 @@ class RankedGamePage extends StatelessWidget {
                                   MediaQuery.of(context).size.height * 0.025,
                             ),
                             Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 IconButton(
                                   onPressed: () {
@@ -90,7 +91,62 @@ class RankedGamePage extends StatelessWidget {
                                   color: Colors.white,
                                   iconSize:
                                       MediaQuery.of(context).size.height * 0.05,
-                                )
+                                ),
+                                SizedBox(
+                                  child: Row(
+                                    children: [
+                                      Text(
+                                        "Time to reset :",
+                                        style: GoogleFonts.bungee(
+                                            fontSize: MediaQuery.of(context)
+                                                    .size
+                                                    .height /
+                                                45,
+                                            color: Colors.white),
+                                      ),
+                                      Padding(
+                                        padding: EdgeInsets.only(
+                                            right: MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                0.05,
+                                            left: MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                0.05),
+                                        child: TimerCountdown(
+                                          format: CountDownTimerFormat
+                                              .hoursMinutesSeconds,
+                                          endTime: resetDay,
+                                          timeTextStyle: GoogleFonts.bungee(
+                                            color: Colors.white,
+                                            fontSize: MediaQuery.of(context)
+                                                    .size
+                                                    .height /
+                                                45,
+                                          ),
+                                          colonsTextStyle: GoogleFonts.bungee(
+                                            color: Colors.white,
+                                            fontSize: MediaQuery.of(context)
+                                                    .size
+                                                    .height /
+                                                45,
+                                          ),
+                                          enableDescriptions: false,
+                                          onEnd: () {
+                                            context
+                                                .read<RankedGameCubit>()
+                                                .updateLifes(
+                                                  lastLogin: DateTime.now(),
+                                                  profileId:
+                                                      state.profile[0].id,
+                                                );
+                                          },
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ),
                               ],
                             ),
                             SizedBox(

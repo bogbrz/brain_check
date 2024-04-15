@@ -20,7 +20,14 @@ class SignOutWidget extends StatelessWidget {
           padding: const EdgeInsets.all(8),
           decoration: BoxDecoration(
               color: const Color.fromARGB(255, 27, 58, 93),
-              border: Border.all(width: MediaQuery.of(context).size.width / 45),
+              gradient: LinearGradient(
+                begin: Alignment.bottomLeft,
+                end: Alignment.topRight,
+                colors: [
+                  Color.fromARGB(255, 22, 72, 234),
+                  Color.fromARGB(180, 66, 120, 255),
+                ],
+              ),
               borderRadius: BorderRadius.circular(10)),
           child: Text(
             AppLocalizations.of(context).logOut,

@@ -24,10 +24,22 @@ class RankingProfileWidget extends StatelessWidget {
           : MediaQuery.of(context).size.height * 0.05,
       margin: const EdgeInsets.only(left: 2.5, right: 2.5, bottom: 6, top: 6),
       decoration: BoxDecoration(
-          border: Border.all(
-            width: MediaQuery.of(context).size.width / 55,
-          ),
           borderRadius: BorderRadius.circular(10),
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            stops: i == 1 || i == 2 || i == 3 ? [1, 1] : [0.5, 1],
+            colors: [
+              i == 1
+                  ? Colors.yellowAccent
+                  : i == 2
+                      ? const Color.fromARGB(255, 199, 192, 192)
+                      : i == 3
+                          ? Colors.orangeAccent
+                          : Color.fromARGB(180, 66, 120, 255),
+              Colors.white,
+            ],
+          ),
           color: i == 1
               ? Colors.yellowAccent
               : i == 2

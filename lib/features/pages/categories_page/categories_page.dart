@@ -54,7 +54,7 @@ class _CategoryPageState extends State<CategoryPage> {
                     errorMessage: state.errorMessage.toString());
               case Status.success:
                 return Container(
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                       gradient: LinearGradient(
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
@@ -74,7 +74,7 @@ class _CategoryPageState extends State<CategoryPage> {
                               onPressed: () {
                                 Navigator.of(context).pop();
                               },
-                              icon: Icon(Icons.arrow_back_sharp),
+                              icon: const Icon(Icons.arrow_back_sharp),
                               color: Colors.white,
                               iconSize:
                                   MediaQuery.of(context).size.height * 0.05,

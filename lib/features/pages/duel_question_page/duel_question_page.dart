@@ -100,17 +100,24 @@ class _DuelQuestionPageState extends State<DuelQuestionPage> {
                   )),
                   child: Center(
                     child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Container(
                           alignment: Alignment.center,
                           margin: EdgeInsetsDirectional.all(
                               MediaQuery.of(context).size.height * 0.01),
                           decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(10),
-                              border: Border.all(
-                                  width: MediaQuery.of(context).size.width / 55,
-                                  color: Colors.black)),
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(10),
+                            gradient: LinearGradient(
+                              begin: Alignment.topLeft,
+                              end: Alignment.bottomRight,
+                              colors: [
+                                Color.fromARGB(255, 255, 255, 255),
+                                Color.fromARGB(180, 66, 120, 255),
+                              ],
+                            ),
+                          ),
                           height: MediaQuery.of(context).size.height * 0.4,
                           child: Column(
                             children: [

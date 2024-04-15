@@ -39,9 +39,6 @@ class _SetUpUserPageState extends State<SetUpUserPage> {
         create: (context) => getIt<SetUpUserCubit>()
           ..getRankingForUpdate(email: widget.user!.email.toString()),
         child: Scaffold(
-          appBar: AppBar(
-            backgroundColor: const Color.fromARGB(255, 27, 58, 93),
-          ),
           body: Container(
             decoration: BoxDecoration(
                 gradient: LinearGradient(

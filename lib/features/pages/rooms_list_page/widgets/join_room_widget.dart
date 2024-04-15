@@ -29,7 +29,7 @@ class JoinRoomWidget extends StatelessWidget {
     return AlertDialog(
       scrollable: true,
       title: Text(
-        "${room.nickName}${AppLocalizations.of(context).playerRoom}",
+        "${room.nickName} ${AppLocalizations.of(context).playerRoom}",
         style: GoogleFonts.bungee(
             color: Colors.white,
             fontSize: MediaQuery.of(context).size.height / 35),
