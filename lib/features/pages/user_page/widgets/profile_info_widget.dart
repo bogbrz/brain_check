@@ -1,7 +1,11 @@
+import 'package:brain_check/app/injection_container.dart';
 import 'package:brain_check/domain/models/profile_model.dart';
+import 'package:brain_check/features/pages/user_page/cubit/cubit/profile_picture_cubit.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:google_fonts/google_fonts.dart';
 
@@ -12,10 +16,12 @@ class ProfileInfoWidget extends StatelessWidget {
     super.key,
     required this.user,
     required this.profiles,
+    required this.profileImageUrl,
   });
 
   final User? user;
   final List<ProfileModel> profiles;
+  final String? profileImageUrl;
 
   @override
   Widget build(BuildContext context) {
@@ -23,9 +29,19 @@ class ProfileInfoWidget extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          const CircleAvatar(
+          CircleAvatar(
             backgroundColor: Color.fromARGB(255, 27, 58, 93),
-            radius: 40,
+            radius: MediaQuery.of(context).size.width * 0.2,
+            child: Container(
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(
+                MediaQuery.of(context).size.width * 0.12,
+              )),
+              child: Image.network(
+                profileImageUrl!,
+                fit: BoxFit.scaleDown,
+              ),
+            ),
           ),
           for (final profile in profiles) ...[
             Row(

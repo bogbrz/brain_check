@@ -65,6 +65,7 @@ class UserPage extends StatelessWidget {
                       return Column(
                         children: [
                           ProfileInfoWidget(
+                            profileImageUrl: state.uploadedImageUrl,
                             user: user,
                             profiles: state.profile,
                           ),

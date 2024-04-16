@@ -4,29 +4,53 @@ import 'package:brain_check/app/core/enums/enums.dart';
 import 'package:brain_check/domain/models/profile_model.dart';
 import 'package:brain_check/domain/repositories/authentication_repository.dart';
 import 'package:brain_check/domain/repositories/ranking_repository.dart';
+import 'package:brain_check/domain/repositories/storage_repository.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 part 'user_page_state.dart';
 part 'generated/user_page_cubit.freezed.dart';
 
 class UserPageCubit extends Cubit<UserPageState> {
-  UserPageCubit({required this.authRepository, required this.rankingRepository})
+  UserPageCubit(
+      {required this.authRepository,
+      required this.rankingRepository,
+      required this.storageRepository})
       : super(const UserPageState(
-            errorMessage: null, profile: [], status: Status.initial));
+           uploadedImageUrl: null,
+            errorMessage: null,
+            profile: [],
+            status: Status.initial));
   final AuthRepository authRepository;
   final RankingRepository rankingRepository;
+  final StorageRepository storageRepository;
   StreamSubscription? streamSubscription;
 
   Future<void> getRankingForUpdate({required String email}) async {
     emit(const UserPageState(
-        errorMessage: null, profile: [], status: Status.loading));
+      uploadedImageUrl: null,
+       
+        errorMessage: null,
+        profile: [],
+        status: Status.loading));
+     final uploadedImages = await storageRepository.getImages();
+    final uploadedImageUrl = await uploadedImages![0].getDownloadURL();
+
     streamSubscription =
         rankingRepository.getRankingForUpdate(email: email).listen((event) {
       try {
         emit(UserPageState(
-            errorMessage: null, profile: event, status: Status.success));
+          uploadedImageUrl: uploadedImageUrl,
+         
+            errorMessage: null,
+            profile: event,
+            status: Status.success));
       } catch (error) {
         emit(UserPageState(
-            errorMessage: error.toString(), profile: [], status: Status.error));
+          uploadedImageUrl: null,
+           
+            errorMessage: error.toString(),
+            profile: [],
+            status: Status.error));
       }
     });
   }
