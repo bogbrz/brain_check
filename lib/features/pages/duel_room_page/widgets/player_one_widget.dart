@@ -41,7 +41,10 @@ class JoinPlayerOneWidget extends StatelessWidget {
                           .read<DuelRoomPageCubit>()
                           .updatePlayersCount(roomId: id, value: 1);
                     },
-              child: const Image(image: AssetImage("images/join_game.png"))),
+              child: SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.15,
+                  child:
+                      const Image(image: AssetImage("images/join_game.png")))),
           Text(
             "${AppLocalizations.of(context).joinPlayer}",
             style: GoogleFonts.bungee(
@@ -51,6 +54,7 @@ class JoinPlayerOneWidget extends StatelessWidget {
         ] else ...[
           Material(
             clipBehavior: Clip.hardEdge,
+            color: Colors.transparent,
             shape: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(
                   25,
@@ -67,6 +71,7 @@ class JoinPlayerOneWidget extends StatelessWidget {
                               id: playerOne[0].id, ready: true, roomId: id);
                     },
               child: Container(
+                color: Colors.transparent,
                 child: Column(
                   children: [
                     Text(

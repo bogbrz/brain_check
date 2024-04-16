@@ -2,6 +2,7 @@ import 'package:brain_check/domain/models/player_model.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 class NonOwnerCategoryWidget extends StatelessWidget {
   const NonOwnerCategoryWidget(
       {super.key, required this.playerOne, required this.playerTwo});
@@ -13,6 +14,14 @@ class NonOwnerCategoryWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [
+              Color.fromARGB(255, 255, 255, 255),
+              Color.fromARGB(180, 66, 120, 255),
+            ],
+          ),
           border: Border(
               bottom: BorderSide(
                   color: Colors.black,

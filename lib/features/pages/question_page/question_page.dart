@@ -108,588 +108,625 @@ class _QuestionPageState extends State<QuestionPage> {
                 );
               }
 
-              return Scaffold(
-                body: Center(
-                  child: Column(
-                    children: [
-                      Container(
-                        alignment: Alignment.center,
-                        margin: EdgeInsetsDirectional.all(
-                            MediaQuery.of(context).size.height * 0.01),
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(10),
-                            border: Border.all(
-                                width: MediaQuery.of(context).size.width / 55,
-                                color: Colors.black)),
-                        height: MediaQuery.of(context).size.height * 0.3,
-                        child: Column(
-                          children: [
-                            Padding(
-                              padding: EdgeInsets.only(
-                                  top: MediaQuery.of(context).size.height *
-                                      0.00125,
-                                  left:
-                                      MediaQuery.of(context).size.height * 0.01,
-                                  right: MediaQuery.of(context).size.height *
-                                      0.01),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                      "${AppLocalizations.of(context).roundNumber} ${index + 1}",
-                                      style: GoogleFonts.bungee(
-                                        fontSize:
-                                            MediaQuery.of(context).size.height /
-                                                40,
-                                      )),
+              return SafeArea(
+                child: Scaffold(
+                  body: Container(
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                        colors: [
+                          Color.fromARGB(255, 0, 27, 48),
+                          Color.fromARGB(180, 66, 120, 255),
+                        ],
+                      ),
+                    ),
+                    child: Center(
+                      child: Column(
+                        children: [
+                          Container(
+                            alignment: Alignment.center,
+                            margin: EdgeInsetsDirectional.all(
+                                MediaQuery.of(context).size.height * 0.01),
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(10),
+                              gradient: LinearGradient(
+                                begin: Alignment.topLeft,
+                                end: Alignment.bottomRight,
+                                colors: [
+                                  Color.fromARGB(255, 255, 255, 255),
+                                  Color.fromARGB(180, 66, 120, 255),
                                 ],
                               ),
                             ),
-                            Padding(
-                                padding: EdgeInsets.only(
-                                  top:
-                                      MediaQuery.of(context).size.height * 0.09,
-                                  left:
-                                      MediaQuery.of(context).size.width * 0.01,
-                                  right:
-                                      MediaQuery.of(context).size.width * 0.01,
+                            height: MediaQuery.of(context).size.height * 0.3,
+                            child: Column(
+                              children: [
+                                Padding(
+                                  padding: EdgeInsets.only(
+                                      top: MediaQuery.of(context).size.height *
+                                          0.00125,
+                                      left: MediaQuery.of(context).size.height *
+                                          0.01,
+                                      right:
+                                          MediaQuery.of(context).size.height *
+                                              0.01),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                          "${AppLocalizations.of(context).roundNumber} ${index + 1}",
+                                          style: GoogleFonts.bungee(
+                                            fontSize: MediaQuery.of(context)
+                                                    .size
+                                                    .height /
+                                                40,
+                                          )),
+                                    ],
+                                  ),
                                 ),
-                                child: Text(
-                                  index == 0
-                                      ? HtmlUnescape().convert(state
-                                          .firstQuestion!.question
-                                          .toString())
-                                      : index == 1
+                                Padding(
+                                    padding: EdgeInsets.only(
+                                      top: MediaQuery.of(context).size.height *
+                                          0.09,
+                                      left: MediaQuery.of(context).size.width *
+                                          0.01,
+                                      right: MediaQuery.of(context).size.width *
+                                          0.01,
+                                    ),
+                                    child: Text(
+                                      index == 0
                                           ? HtmlUnescape().convert(state
-                                              .secondQuestion!.question
+                                              .firstQuestion!.question
                                               .toString())
-                                          : index == 2
+                                          : index == 1
                                               ? HtmlUnescape().convert(state
-                                                  .thirdQuestion!.question
+                                                  .secondQuestion!.question
                                                   .toString())
-                                              : index == 3
+                                              : index == 2
                                                   ? HtmlUnescape().convert(state
-                                                      .fourthQuestion!.question
+                                                      .thirdQuestion!.question
                                                       .toString())
-                                                  : index == 4
-                                                      ? HtmlUnescape().convert(
-                                                          state.fifthQuestion!
-                                                              .question
-                                                              .toString())
-                                                      : index == 5
+                                                  : index == 3
+                                                      ? HtmlUnescape().convert(state
+                                                          .fourthQuestion!
+                                                          .question
+                                                          .toString())
+                                                      : index == 4
                                                           ? HtmlUnescape()
                                                               .convert(state
-                                                                  .sixthQuestion!
+                                                                  .fifthQuestion!
                                                                   .question
                                                                   .toString())
-                                                          : index == 6
+                                                          : index == 5
                                                               ? HtmlUnescape()
-                                                                  .convert(
-                                                                  state
-                                                                      .seventhQuestion!
+                                                                  .convert(state
+                                                                      .sixthQuestion!
                                                                       .question
-                                                                      .toString(),
-                                                                )
-                                                              : index == 7
+                                                                      .toString())
+                                                              : index == 6
                                                                   ? HtmlUnescape().convert(
                                                                       state
-                                                                          .eightQuestion!
+                                                                          .seventhQuestion!
                                                                           .question
                                                                           .toString(),
                                                                     )
-                                                                  : index == 8
+                                                                  : index == 7
                                                                       ? HtmlUnescape().convert(
                                                                           state
-                                                                              .ninthQuestion!
+                                                                              .eightQuestion!
                                                                               .question
                                                                               .toString(),
                                                                         )
-                                                                      : index == 9
+                                                                      : index == 8
                                                                           ? HtmlUnescape().convert(
-                                                                              state.tenthQuestion!.question.toString(),
+                                                                              state.ninthQuestion!.question.toString(),
                                                                             )
-                                                                          : index == 10
+                                                                          : index == 9
                                                                               ? HtmlUnescape().convert(
-                                                                                  state.eleventhQuestion!.question.toString(),
+                                                                                  state.tenthQuestion!.question.toString(),
                                                                                 )
-                                                                              : index == 11
+                                                                              : index == 10
                                                                                   ? HtmlUnescape().convert(
-                                                                                      state.twelvethQuestion!.question.toString(),
+                                                                                      state.eleventhQuestion!.question.toString(),
                                                                                     )
-                                                                                  : index == 12
+                                                                                  : index == 11
                                                                                       ? HtmlUnescape().convert(
-                                                                                          state.thirteenthQuestion!.question.toString(),
+                                                                                          state.twelvethQuestion!.question.toString(),
                                                                                         )
-                                                                                      : index == 13
+                                                                                      : index == 12
                                                                                           ? HtmlUnescape().convert(
-                                                                                              state.fourteenthQuestion!.question.toString(),
+                                                                                              state.thirteenthQuestion!.question.toString(),
                                                                                             )
-                                                                                          : HtmlUnescape().convert(state.fifteenthQuestion!.question.toString()),
-                                  style: GoogleFonts.bungee(
+                                                                                          : index == 13
+                                                                                              ? HtmlUnescape().convert(
+                                                                                                  state.fourteenthQuestion!.question.toString(),
+                                                                                                )
+                                                                                              : HtmlUnescape().convert(state.fifteenthQuestion!.question.toString()),
+                                      style: GoogleFonts.bungee(
+                                        fontSize:
+                                            MediaQuery.of(context).size.height /
+                                                55,
+                                      ),
+                                    )),
+                              ],
+                            ),
+                          ),
+                          Wrap(
+                            children: [
+                              if (index == 0) ...[
+                                for (final answer in state.answersOne!) ...[
+                                  InkWell(
+                                      onTap: isChoosed == true
+                                          ? null
+                                          : () {
+                                              setState(() {
+                                                choosedAnswer =
+                                                    answer.toString();
+                                                isChoosed = true;
+                                                if (choosedAnswer ==
+                                                    state.firstQuestion!
+                                                        .correctAnswer
+                                                        .toString()) {
+                                                  answerOne++;
+                                                }
+                                              });
+
+                                              print(choosedAnswer);
+                                            },
+                                      child: AnswerWidget(
+                                          isChoosed: isChoosed,
+                                          choosedAnswer: choosedAnswer,
+                                          correctAnswer: state
+                                              .firstQuestion!.correctAnswer
+                                              .toString(),
+                                          answer: HtmlUnescape()
+                                              .convert(answer.toString())))
+                                ]
+                              ] else if (index == 1) ...[
+                                for (final answer in state.answersTwo!) ...[
+                                  InkWell(
+                                      onTap: isChoosed == true
+                                          ? null
+                                          : () {
+                                              setState(() {
+                                                choosedAnswer =
+                                                    answer.toString();
+                                                isChoosed = true;
+                                                if (choosedAnswer ==
+                                                    state.secondQuestion!
+                                                        .correctAnswer
+                                                        .toString()) {
+                                                  answerTwo++;
+                                                }
+                                              });
+
+                                              print(choosedAnswer);
+                                            },
+                                      child: AnswerWidget(
+                                          isChoosed: isChoosed,
+                                          choosedAnswer: choosedAnswer,
+                                          correctAnswer: state
+                                              .secondQuestion!.correctAnswer
+                                              .toString(),
+                                          answer: HtmlUnescape()
+                                              .convert(answer.toString())))
+                                ]
+                              ] else if (index == 2) ...[
+                                for (final answer in state.answersThree!) ...[
+                                  InkWell(
+                                      onTap: isChoosed == true
+                                          ? null
+                                          : () {
+                                              setState(() {
+                                                choosedAnswer =
+                                                    answer.toString();
+                                                isChoosed = true;
+                                                if (choosedAnswer ==
+                                                    state.thirdQuestion!
+                                                        .correctAnswer
+                                                        .toString()) {
+                                                  answerThree++;
+                                                }
+                                              });
+
+                                              print(choosedAnswer);
+                                            },
+                                      child: AnswerWidget(
+                                          isChoosed: isChoosed,
+                                          choosedAnswer: choosedAnswer,
+                                          correctAnswer: state
+                                              .thirdQuestion!.correctAnswer
+                                              .toString(),
+                                          answer: HtmlUnescape()
+                                              .convert(answer.toString())))
+                                ]
+                              ] else if (index == 3) ...[
+                                for (final answer in state.answersFour!) ...[
+                                  InkWell(
+                                      onTap: isChoosed == true
+                                          ? null
+                                          : () {
+                                              setState(() {
+                                                choosedAnswer =
+                                                    answer.toString();
+                                                isChoosed = true;
+                                                if (choosedAnswer ==
+                                                    state.fourthQuestion!
+                                                        .correctAnswer
+                                                        .toString()) {}
+                                              });
+
+                                              print(choosedAnswer);
+                                            },
+                                      child: AnswerWidget(
+                                          isChoosed: isChoosed,
+                                          choosedAnswer: choosedAnswer,
+                                          correctAnswer: state
+                                              .fourthQuestion!.correctAnswer
+                                              .toString(),
+                                          answer: HtmlUnescape()
+                                              .convert(answer.toString())))
+                                ]
+                              ] else if (index == 4) ...[
+                                for (final answer in state.answersFive!) ...[
+                                  InkWell(
+                                      onTap: isChoosed == true
+                                          ? null
+                                          : () {
+                                              setState(() {
+                                                choosedAnswer =
+                                                    answer.toString();
+                                                isChoosed = true;
+                                                end = true;
+                                                if (choosedAnswer ==
+                                                    state.fifthQuestion!
+                                                        .correctAnswer
+                                                        .toString()) {
+                                                  answerFive++;
+                                                }
+                                              });
+
+                                              print(choosedAnswer);
+                                            },
+                                      child: AnswerWidget(
+                                          isChoosed: isChoosed,
+                                          choosedAnswer: choosedAnswer,
+                                          correctAnswer: state
+                                              .fifthQuestion!.correctAnswer
+                                              .toString(),
+                                          answer: HtmlUnescape()
+                                              .convert(answer.toString())))
+                                ]
+                              ] else if (index == 5) ...[
+                                for (final answer in state.answersSix!) ...[
+                                  InkWell(
+                                      onTap: isChoosed == true
+                                          ? null
+                                          : () {
+                                              setState(() {
+                                                choosedAnswer =
+                                                    answer.toString();
+                                                isChoosed = true;
+                                                end = true;
+                                                if (choosedAnswer ==
+                                                    state.sixthQuestion!
+                                                        .correctAnswer
+                                                        .toString()) {
+                                                  answerSix++;
+                                                }
+                                              });
+
+                                              print(choosedAnswer);
+                                            },
+                                      child: AnswerWidget(
+                                          isChoosed: isChoosed,
+                                          choosedAnswer: choosedAnswer,
+                                          correctAnswer: state
+                                              .sixthQuestion!.correctAnswer
+                                              .toString(),
+                                          answer: HtmlUnescape()
+                                              .convert(answer.toString())))
+                                ]
+                              ] else if (index == 6) ...[
+                                for (final answer in state.answersSeven!) ...[
+                                  InkWell(
+                                      onTap: isChoosed == true
+                                          ? null
+                                          : () {
+                                              setState(() {
+                                                choosedAnswer =
+                                                    answer.toString();
+                                                isChoosed = true;
+                                                end = true;
+                                                if (choosedAnswer ==
+                                                    state.seventhQuestion!
+                                                        .correctAnswer
+                                                        .toString()) {
+                                                  answerSeven++;
+                                                }
+                                              });
+
+                                              print(choosedAnswer);
+                                            },
+                                      child: AnswerWidget(
+                                          isChoosed: isChoosed,
+                                          choosedAnswer: choosedAnswer,
+                                          correctAnswer: state
+                                              .seventhQuestion!.correctAnswer
+                                              .toString(),
+                                          answer: HtmlUnescape()
+                                              .convert(answer.toString())))
+                                ]
+                              ] else if (index == 7) ...[
+                                for (final answer in state.answersEight!) ...[
+                                  InkWell(
+                                      onTap: isChoosed == true
+                                          ? null
+                                          : () {
+                                              setState(() {
+                                                choosedAnswer =
+                                                    answer.toString();
+                                                isChoosed = true;
+                                                end = true;
+                                                if (choosedAnswer ==
+                                                    state.eightQuestion!
+                                                        .correctAnswer
+                                                        .toString()) {
+                                                  answerEight++;
+                                                }
+                                              });
+
+                                              print(choosedAnswer);
+                                            },
+                                      child: AnswerWidget(
+                                          isChoosed: isChoosed,
+                                          choosedAnswer: choosedAnswer,
+                                          correctAnswer: state
+                                              .eightQuestion!.correctAnswer
+                                              .toString(),
+                                          answer: HtmlUnescape()
+                                              .convert(answer.toString())))
+                                ]
+                              ] else if (index == 8) ...[
+                                for (final answer in state.answersNine!) ...[
+                                  InkWell(
+                                      onTap: isChoosed == true
+                                          ? null
+                                          : () {
+                                              setState(() {
+                                                choosedAnswer =
+                                                    answer.toString();
+                                                isChoosed = true;
+                                                end = true;
+                                                if (choosedAnswer ==
+                                                    state.ninthQuestion!
+                                                        .correctAnswer
+                                                        .toString()) {
+                                                  answerNine++;
+                                                }
+                                              });
+
+                                              print(choosedAnswer);
+                                            },
+                                      child: AnswerWidget(
+                                          isChoosed: isChoosed,
+                                          choosedAnswer: choosedAnswer,
+                                          correctAnswer: state
+                                              .ninthQuestion!.correctAnswer
+                                              .toString(),
+                                          answer: HtmlUnescape()
+                                              .convert(answer.toString())))
+                                ]
+                              ] else if (index == 9) ...[
+                                for (final answer in state.answersNine!) ...[
+                                  InkWell(
+                                      onTap: isChoosed == true
+                                          ? null
+                                          : () {
+                                              setState(() {
+                                                choosedAnswer =
+                                                    answer.toString();
+                                                isChoosed = true;
+                                                end = true;
+                                                if (choosedAnswer ==
+                                                    state.tenthQuestion!
+                                                        .correctAnswer
+                                                        .toString()) {
+                                                  answerTen++;
+                                                }
+                                              });
+
+                                              print(choosedAnswer);
+                                            },
+                                      child: AnswerWidget(
+                                          isChoosed: isChoosed,
+                                          choosedAnswer: choosedAnswer,
+                                          correctAnswer: state
+                                              .tenthQuestion!.correctAnswer
+                                              .toString(),
+                                          answer: HtmlUnescape()
+                                              .convert(answer.toString())))
+                                ]
+                              ] else if (index == 10) ...[
+                                for (final answer in state.answersEleven!) ...[
+                                  InkWell(
+                                      onTap: isChoosed == true
+                                          ? null
+                                          : () {
+                                              setState(() {
+                                                choosedAnswer =
+                                                    answer.toString();
+                                                isChoosed = true;
+                                                end = true;
+                                                if (choosedAnswer ==
+                                                    state.eleventhQuestion!
+                                                        .correctAnswer
+                                                        .toString()) {
+                                                  answerEleven++;
+                                                }
+                                              });
+
+                                              print(choosedAnswer);
+                                            },
+                                      child: AnswerWidget(
+                                          isChoosed: isChoosed,
+                                          choosedAnswer: choosedAnswer,
+                                          correctAnswer: state
+                                              .eleventhQuestion!.correctAnswer
+                                              .toString(),
+                                          answer: HtmlUnescape()
+                                              .convert(answer.toString())))
+                                ]
+                              ] else if (index == 11) ...[
+                                for (final answer in state.answersTwelve!) ...[
+                                  InkWell(
+                                      onTap: isChoosed == true
+                                          ? null
+                                          : () {
+                                              setState(() {
+                                                choosedAnswer =
+                                                    answer.toString();
+                                                isChoosed = true;
+                                                end = true;
+                                                if (choosedAnswer ==
+                                                    state.twelvethQuestion!
+                                                        .correctAnswer
+                                                        .toString()) {
+                                                  answerTwelve++;
+                                                }
+                                              });
+
+                                              print(choosedAnswer);
+                                            },
+                                      child: AnswerWidget(
+                                          isChoosed: isChoosed,
+                                          choosedAnswer: choosedAnswer,
+                                          correctAnswer: state
+                                              .twelvethQuestion!.correctAnswer
+                                              .toString(),
+                                          answer: HtmlUnescape()
+                                              .convert(answer.toString())))
+                                ]
+                              ] else if (index == 12) ...[
+                                for (final answer
+                                    in state.answersThirteen!) ...[
+                                  InkWell(
+                                      onTap: isChoosed == true
+                                          ? null
+                                          : () {
+                                              setState(() {
+                                                choosedAnswer =
+                                                    answer.toString();
+                                                isChoosed = true;
+                                                end = true;
+                                                if (choosedAnswer ==
+                                                    state.thirteenthQuestion!
+                                                        .correctAnswer
+                                                        .toString()) {
+                                                  answerThirteen++;
+                                                }
+                                              });
+
+                                              print(choosedAnswer);
+                                            },
+                                      child: AnswerWidget(
+                                          isChoosed: isChoosed,
+                                          choosedAnswer: choosedAnswer,
+                                          correctAnswer: state
+                                              .thirteenthQuestion!.correctAnswer
+                                              .toString(),
+                                          answer: HtmlUnescape()
+                                              .convert(answer.toString())))
+                                ]
+                              ] else if (index == 13) ...[
+                                for (final answer
+                                    in state.answersFourteen!) ...[
+                                  InkWell(
+                                      onTap: isChoosed == true
+                                          ? null
+                                          : () {
+                                              setState(() {
+                                                choosedAnswer =
+                                                    answer.toString();
+                                                isChoosed = true;
+                                                end = true;
+                                                if (choosedAnswer ==
+                                                    state.fourteenthQuestion!
+                                                        .correctAnswer
+                                                        .toString()) {
+                                                  answerFourteen++;
+                                                }
+                                              });
+
+                                              print(choosedAnswer);
+                                            },
+                                      child: AnswerWidget(
+                                          isChoosed: isChoosed,
+                                          choosedAnswer: choosedAnswer,
+                                          correctAnswer: state
+                                              .fourteenthQuestion!.correctAnswer
+                                              .toString(),
+                                          answer: HtmlUnescape()
+                                              .convert(answer.toString())))
+                                ]
+                              ] else if (index == 14) ...[
+                                for (final answer in state.answersFifteen!) ...[
+                                  InkWell(
+                                      onTap: isChoosed == true
+                                          ? null
+                                          : () {
+                                              setState(() {
+                                                choosedAnswer =
+                                                    answer.toString();
+                                                isChoosed = true;
+                                                end = true;
+                                                if (choosedAnswer ==
+                                                    state.fifteenthQuestion!
+                                                        .correctAnswer
+                                                        .toString()) {
+                                                  answerFithteen++;
+                                                }
+                                              });
+
+                                              print(choosedAnswer);
+                                            },
+                                      child: AnswerWidget(
+                                          isChoosed: isChoosed,
+                                          choosedAnswer: choosedAnswer,
+                                          correctAnswer: state
+                                              .fifteenthQuestion!.correctAnswer
+                                              .toString(),
+                                          answer: HtmlUnescape()
+                                              .convert(answer.toString())))
+                                ]
+                              ]
+                            ],
+                          ),
+                          ElevatedButton(
+                              onPressed: () {
+                                setState(() {
+                                  index++;
+                                  choosedAnswer = "";
+                                  isChoosed = false;
+                                });
+                                if (index == widget.questionsAmount) {
+                                  context.read<QuestionPageCubit>().setEndTime(
+                                      playerId: widget.profileModel.id);
+                                }
+                              },
+                              child: Text(
+                                "Next",
+                                style: GoogleFonts.bungee(
+                                    color: Colors.black,
                                     fontSize:
-                                        MediaQuery.of(context).size.height / 55,
-                                  ),
-                                )),
-                          ],
-                        ),
-                      ),
-                      Wrap(
-                        children: [
-                          if (index == 0) ...[
-                            for (final answer in state.answersOne!) ...[
-                              InkWell(
-                                  onTap: isChoosed == true
-                                      ? null
-                                      : () {
-                                          setState(() {
-                                            choosedAnswer = answer.toString();
-                                            isChoosed = true;
-                                            if (choosedAnswer ==
-                                                state.firstQuestion!
-                                                    .correctAnswer
-                                                    .toString()) {
-                                              answerOne++;
-                                            }
-                                          });
-
-                                          print(choosedAnswer);
-                                        },
-                                  child: AnswerWidget(
-                                      isChoosed: isChoosed,
-                                      choosedAnswer: choosedAnswer,
-                                      correctAnswer: state
-                                          .firstQuestion!.correctAnswer
-                                          .toString(),
-                                      answer: HtmlUnescape()
-                                          .convert(answer.toString())))
-                            ]
-                          ] else if (index == 1) ...[
-                            for (final answer in state.answersTwo!) ...[
-                              InkWell(
-                                  onTap: isChoosed == true
-                                      ? null
-                                      : () {
-                                          setState(() {
-                                            choosedAnswer = answer.toString();
-                                            isChoosed = true;
-                                            if (choosedAnswer ==
-                                                state.secondQuestion!
-                                                    .correctAnswer
-                                                    .toString()) {
-                                              answerTwo++;
-                                            }
-                                          });
-
-                                          print(choosedAnswer);
-                                        },
-                                  child: AnswerWidget(
-                                      isChoosed: isChoosed,
-                                      choosedAnswer: choosedAnswer,
-                                      correctAnswer: state
-                                          .secondQuestion!.correctAnswer
-                                          .toString(),
-                                      answer: HtmlUnescape()
-                                          .convert(answer.toString())))
-                            ]
-                          ] else if (index == 2) ...[
-                            for (final answer in state.answersThree!) ...[
-                              InkWell(
-                                  onTap: isChoosed == true
-                                      ? null
-                                      : () {
-                                          setState(() {
-                                            choosedAnswer = answer.toString();
-                                            isChoosed = true;
-                                            if (choosedAnswer ==
-                                                state.thirdQuestion!
-                                                    .correctAnswer
-                                                    .toString()) {
-                                              answerThree++;
-                                            }
-                                          });
-
-                                          print(choosedAnswer);
-                                        },
-                                  child: AnswerWidget(
-                                      isChoosed: isChoosed,
-                                      choosedAnswer: choosedAnswer,
-                                      correctAnswer: state
-                                          .thirdQuestion!.correctAnswer
-                                          .toString(),
-                                      answer: HtmlUnescape()
-                                          .convert(answer.toString())))
-                            ]
-                          ] else if (index == 3) ...[
-                            for (final answer in state.answersFour!) ...[
-                              InkWell(
-                                  onTap: isChoosed == true
-                                      ? null
-                                      : () {
-                                          setState(() {
-                                            choosedAnswer = answer.toString();
-                                            isChoosed = true;
-                                            if (choosedAnswer ==
-                                                state.fourthQuestion!
-                                                    .correctAnswer
-                                                    .toString()) {}
-                                          });
-
-                                          print(choosedAnswer);
-                                        },
-                                  child: AnswerWidget(
-                                      isChoosed: isChoosed,
-                                      choosedAnswer: choosedAnswer,
-                                      correctAnswer: state
-                                          .fourthQuestion!.correctAnswer
-                                          .toString(),
-                                      answer: HtmlUnescape()
-                                          .convert(answer.toString())))
-                            ]
-                          ] else if (index == 4) ...[
-                            for (final answer in state.answersFive!) ...[
-                              InkWell(
-                                  onTap: isChoosed == true
-                                      ? null
-                                      : () {
-                                          setState(() {
-                                            choosedAnswer = answer.toString();
-                                            isChoosed = true;
-                                            end = true;
-                                            if (choosedAnswer ==
-                                                state.fifthQuestion!
-                                                    .correctAnswer
-                                                    .toString()) {
-                                              answerFive++;
-                                            }
-                                          });
-
-                                          print(choosedAnswer);
-                                        },
-                                  child: AnswerWidget(
-                                      isChoosed: isChoosed,
-                                      choosedAnswer: choosedAnswer,
-                                      correctAnswer: state
-                                          .fifthQuestion!.correctAnswer
-                                          .toString(),
-                                      answer: HtmlUnescape()
-                                          .convert(answer.toString())))
-                            ]
-                          ] else if (index == 5) ...[
-                            for (final answer in state.answersSix!) ...[
-                              InkWell(
-                                  onTap: isChoosed == true
-                                      ? null
-                                      : () {
-                                          setState(() {
-                                            choosedAnswer = answer.toString();
-                                            isChoosed = true;
-                                            end = true;
-                                            if (choosedAnswer ==
-                                                state.sixthQuestion!
-                                                    .correctAnswer
-                                                    .toString()) {
-                                              answerSix++;
-                                            }
-                                          });
-
-                                          print(choosedAnswer);
-                                        },
-                                  child: AnswerWidget(
-                                      isChoosed: isChoosed,
-                                      choosedAnswer: choosedAnswer,
-                                      correctAnswer: state
-                                          .sixthQuestion!.correctAnswer
-                                          .toString(),
-                                      answer: HtmlUnescape()
-                                          .convert(answer.toString())))
-                            ]
-                          ] else if (index == 6) ...[
-                            for (final answer in state.answersSeven!) ...[
-                              InkWell(
-                                  onTap: isChoosed == true
-                                      ? null
-                                      : () {
-                                          setState(() {
-                                            choosedAnswer = answer.toString();
-                                            isChoosed = true;
-                                            end = true;
-                                            if (choosedAnswer ==
-                                                state.seventhQuestion!
-                                                    .correctAnswer
-                                                    .toString()) {
-                                              answerSeven++;
-                                            }
-                                          });
-
-                                          print(choosedAnswer);
-                                        },
-                                  child: AnswerWidget(
-                                      isChoosed: isChoosed,
-                                      choosedAnswer: choosedAnswer,
-                                      correctAnswer: state
-                                          .seventhQuestion!.correctAnswer
-                                          .toString(),
-                                      answer: HtmlUnescape()
-                                          .convert(answer.toString())))
-                            ]
-                          ] else if (index == 7) ...[
-                            for (final answer in state.answersEight!) ...[
-                              InkWell(
-                                  onTap: isChoosed == true
-                                      ? null
-                                      : () {
-                                          setState(() {
-                                            choosedAnswer = answer.toString();
-                                            isChoosed = true;
-                                            end = true;
-                                            if (choosedAnswer ==
-                                                state.eightQuestion!
-                                                    .correctAnswer
-                                                    .toString()) {
-                                              answerEight++;
-                                            }
-                                          });
-
-                                          print(choosedAnswer);
-                                        },
-                                  child: AnswerWidget(
-                                      isChoosed: isChoosed,
-                                      choosedAnswer: choosedAnswer,
-                                      correctAnswer: state
-                                          .eightQuestion!.correctAnswer
-                                          .toString(),
-                                      answer: HtmlUnescape()
-                                          .convert(answer.toString())))
-                            ]
-                          ] else if (index == 8) ...[
-                            for (final answer in state.answersNine!) ...[
-                              InkWell(
-                                  onTap: isChoosed == true
-                                      ? null
-                                      : () {
-                                          setState(() {
-                                            choosedAnswer = answer.toString();
-                                            isChoosed = true;
-                                            end = true;
-                                            if (choosedAnswer ==
-                                                state.ninthQuestion!
-                                                    .correctAnswer
-                                                    .toString()) {
-                                              answerNine++;
-                                            }
-                                          });
-
-                                          print(choosedAnswer);
-                                        },
-                                  child: AnswerWidget(
-                                      isChoosed: isChoosed,
-                                      choosedAnswer: choosedAnswer,
-                                      correctAnswer: state
-                                          .ninthQuestion!.correctAnswer
-                                          .toString(),
-                                      answer: HtmlUnescape()
-                                          .convert(answer.toString())))
-                            ]
-                          ] else if (index == 9) ...[
-                            for (final answer in state.answersNine!) ...[
-                              InkWell(
-                                  onTap: isChoosed == true
-                                      ? null
-                                      : () {
-                                          setState(() {
-                                            choosedAnswer = answer.toString();
-                                            isChoosed = true;
-                                            end = true;
-                                            if (choosedAnswer ==
-                                                state.tenthQuestion!
-                                                    .correctAnswer
-                                                    .toString()) {
-                                              answerTen++;
-                                            }
-                                          });
-
-                                          print(choosedAnswer);
-                                        },
-                                  child: AnswerWidget(
-                                      isChoosed: isChoosed,
-                                      choosedAnswer: choosedAnswer,
-                                      correctAnswer: state
-                                          .tenthQuestion!.correctAnswer
-                                          .toString(),
-                                      answer: HtmlUnescape()
-                                          .convert(answer.toString())))
-                            ]
-                          ] else if (index == 10) ...[
-                            for (final answer in state.answersEleven!) ...[
-                              InkWell(
-                                  onTap: isChoosed == true
-                                      ? null
-                                      : () {
-                                          setState(() {
-                                            choosedAnswer = answer.toString();
-                                            isChoosed = true;
-                                            end = true;
-                                            if (choosedAnswer ==
-                                                state.eleventhQuestion!
-                                                    .correctAnswer
-                                                    .toString()) {
-                                              answerEleven++;
-                                            }
-                                          });
-
-                                          print(choosedAnswer);
-                                        },
-                                  child: AnswerWidget(
-                                      isChoosed: isChoosed,
-                                      choosedAnswer: choosedAnswer,
-                                      correctAnswer: state
-                                          .eleventhQuestion!.correctAnswer
-                                          .toString(),
-                                      answer: HtmlUnescape()
-                                          .convert(answer.toString())))
-                            ]
-                          ] else if (index == 11) ...[
-                            for (final answer in state.answersTwelve!) ...[
-                              InkWell(
-                                  onTap: isChoosed == true
-                                      ? null
-                                      : () {
-                                          setState(() {
-                                            choosedAnswer = answer.toString();
-                                            isChoosed = true;
-                                            end = true;
-                                            if (choosedAnswer ==
-                                                state.twelvethQuestion!
-                                                    .correctAnswer
-                                                    .toString()) {
-                                              answerTwelve++;
-                                            }
-                                          });
-
-                                          print(choosedAnswer);
-                                        },
-                                  child: AnswerWidget(
-                                      isChoosed: isChoosed,
-                                      choosedAnswer: choosedAnswer,
-                                      correctAnswer: state
-                                          .twelvethQuestion!.correctAnswer
-                                          .toString(),
-                                      answer: HtmlUnescape()
-                                          .convert(answer.toString())))
-                            ]
-                          ] else if (index == 12) ...[
-                            for (final answer in state.answersThirteen!) ...[
-                              InkWell(
-                                  onTap: isChoosed == true
-                                      ? null
-                                      : () {
-                                          setState(() {
-                                            choosedAnswer = answer.toString();
-                                            isChoosed = true;
-                                            end = true;
-                                            if (choosedAnswer ==
-                                                state.thirteenthQuestion!
-                                                    .correctAnswer
-                                                    .toString()) {
-                                              answerThirteen++;
-                                            }
-                                          });
-
-                                          print(choosedAnswer);
-                                        },
-                                  child: AnswerWidget(
-                                      isChoosed: isChoosed,
-                                      choosedAnswer: choosedAnswer,
-                                      correctAnswer: state
-                                          .thirteenthQuestion!.correctAnswer
-                                          .toString(),
-                                      answer: HtmlUnescape()
-                                          .convert(answer.toString())))
-                            ]
-                          ] else if (index == 13) ...[
-                            for (final answer in state.answersFourteen!) ...[
-                              InkWell(
-                                  onTap: isChoosed == true
-                                      ? null
-                                      : () {
-                                          setState(() {
-                                            choosedAnswer = answer.toString();
-                                            isChoosed = true;
-                                            end = true;
-                                            if (choosedAnswer ==
-                                                state.fourteenthQuestion!
-                                                    .correctAnswer
-                                                    .toString()) {
-                                              answerFourteen++;
-                                            }
-                                          });
-
-                                          print(choosedAnswer);
-                                        },
-                                  child: AnswerWidget(
-                                      isChoosed: isChoosed,
-                                      choosedAnswer: choosedAnswer,
-                                      correctAnswer: state
-                                          .fourteenthQuestion!.correctAnswer
-                                          .toString(),
-                                      answer: HtmlUnescape()
-                                          .convert(answer.toString())))
-                            ]
-                          ] else if (index == 14) ...[
-                            for (final answer in state.answersFifteen!) ...[
-                              InkWell(
-                                  onTap: isChoosed == true
-                                      ? null
-                                      : () {
-                                          setState(() {
-                                            choosedAnswer = answer.toString();
-                                            isChoosed = true;
-                                            end = true;
-                                            if (choosedAnswer ==
-                                                state.fifteenthQuestion!
-                                                    .correctAnswer
-                                                    .toString()) {
-                                              answerFithteen++;
-                                            }
-                                          });
-
-                                          print(choosedAnswer);
-                                        },
-                                  child: AnswerWidget(
-                                      isChoosed: isChoosed,
-                                      choosedAnswer: choosedAnswer,
-                                      correctAnswer: state
-                                          .fifteenthQuestion!.correctAnswer
-                                          .toString(),
-                                      answer: HtmlUnescape()
-                                          .convert(answer.toString())))
-                            ]
-                          ]
+                                        MediaQuery.of(context).size.width / 15),
+                              ))
                         ],
                       ),
-                      ElevatedButton(
-                          onPressed: () {
-                            setState(() {
-                              index++;
-                              choosedAnswer = "";
-                              isChoosed = false;
-                            });
-                            if (index == widget.questionsAmount) {
-                              context
-                                  .read<QuestionPageCubit>()
-                                  .setEndTime(playerId: widget.profileModel.id);
-                            }
-                          },
-                          child: Text(
-                            "Next",
-                            style: GoogleFonts.bungee(
-                                color: Colors.black,
-                                fontSize:
-                                    MediaQuery.of(context).size.width / 15),
-                          ))
-                    ],
+                    ),
                   ),
                 ),
               );

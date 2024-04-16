@@ -28,28 +28,52 @@ class ProfileInfoWidget extends StatelessWidget {
             radius: 40,
           ),
           for (final profile in profiles) ...[
-            Text(
-                "${AppLocalizations.of(context).yourNickName}: ${profile.nickName}",
-                textAlign: TextAlign.left,
-                style: GoogleFonts.bungee(
-                    fontSize: MediaQuery.of(context).size.height / 35)),
-            Text(
-              "${AppLocalizations.of(context).yourEmail}: ${user!.email}",
-              style: GoogleFonts.bungee(
-                  fontSize: MediaQuery.of(context).size.height / 35),
-              textAlign: TextAlign.left,
+            Row(
+              children: [
+                Expanded(
+                  child: Text(
+                      "${AppLocalizations.of(context).yourNickName}: ${profile.nickName}",
+                      textAlign: TextAlign.left,
+                      style: GoogleFonts.bungee(
+                          fontSize: MediaQuery.of(context).size.height / 35)),
+                ),
+              ],
             ),
-            Text(
-              "${AppLocalizations.of(context).quizPlayerd}: ${profile.gamesPlayed} ",
-              style: GoogleFonts.bungee(
-                  fontSize: MediaQuery.of(context).size.height / 35),
-              textAlign: TextAlign.left,
+            Row(
+              children: [
+                Expanded(
+                  child: Text(
+                    "${AppLocalizations.of(context).yourEmail}: ${user!.email}",
+                    style: GoogleFonts.bungee(
+                        fontSize: MediaQuery.of(context).size.height / 35),
+                    textAlign: TextAlign.left,
+                  ),
+                ),
+              ],
             ),
-            Text(
-              "${AppLocalizations.of(context).personalRating}: ${profile.points}",
-              style: GoogleFonts.bungee(
-                  fontSize: MediaQuery.of(context).size.height / 35),
-              textAlign: TextAlign.left,
+            Row(
+              children: [
+                Expanded(
+                  child: Text(
+                    "${AppLocalizations.of(context).quizPlayerd}: ${profile.gamesPlayed} ",
+                    style: GoogleFonts.bungee(
+                        fontSize: MediaQuery.of(context).size.height / 35),
+                    textAlign: TextAlign.left,
+                  ),
+                ),
+              ],
+            ),
+            Row(
+              children: [
+                Expanded(
+                  child: Text(
+                    "${AppLocalizations.of(context).personalRating}: ${profile.points}",
+                    style: GoogleFonts.bungee(
+                        fontSize: MediaQuery.of(context).size.height / 35),
+                    textAlign: TextAlign.left,
+                  ),
+                ),
+              ],
             ),
           ],
         ],

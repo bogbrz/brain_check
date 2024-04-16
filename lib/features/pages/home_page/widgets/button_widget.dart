@@ -24,7 +24,7 @@ class StartButtonWidget extends StatelessWidget {
     return Center(
       child: Material(
         shadowColor: Colors.white70,
-        shape: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+        borderRadius: BorderRadius.circular(10),
         clipBehavior: Clip.hardEdge,
         child: InkWell(
           onTap: () {
@@ -40,8 +40,14 @@ class StartButtonWidget extends StatelessWidget {
             height: MediaQuery.of(context).size.height * 0.1,
             decoration: BoxDecoration(
               color: Colors.white,
-              borderRadius: BorderRadius.circular(10),
-              border: Border.all(width: MediaQuery.of(context).size.width / 40),
+              gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [
+                  Color.fromARGB(255, 255, 255, 255),
+                  Color.fromARGB(180, 66, 120, 255),
+                ],
+              ),
             ),
             child: Text(AppLocalizations.of(context).play,
                 style: GoogleFonts.bungee(fontSize: 45)),

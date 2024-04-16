@@ -1,4 +1,3 @@
-
 import 'package:brain_check/app/core/enums/enums.dart';
 import 'package:brain_check/app/injection_container.dart';
 import 'package:brain_check/domain/models/player_model.dart';
@@ -102,212 +101,307 @@ class DuelResultPage extends StatelessWidget {
                       ? 0
                       : score - pointsDeductionForTime;
 
-              return Center(
-                child: Container(
-                  color: Colors.white,
-                  height: MediaQuery.of(context).size.height * 0.35,
-                  width: MediaQuery.of(context).size.width * 0.7,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "Your Time: ${state.gameLenght}  ",
-                        style: GoogleFonts.bungee(
-                            color: Colors.black,
-                            fontSize: MediaQuery.of(context).size.height / 35),
-                      ),
-                      Text(
-                        "${AppLocalizations.of(context).yourScore}: ${score} / ${questionAmount * 10}",
-                        style: GoogleFonts.bungee(
-                            color: Colors.black,
-                            fontSize: MediaQuery.of(context).size.height / 35),
-                      ),
-                      if (questionAmount == 1) ...[
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            answerOne == 1
-                                ? Icon(Icons.check_circle, color: Colors.green)
-                                : Icon(Icons.cancel_rounded, color: Colors.red),
-                          ],
-                        )
-                      ] else if (questionAmount == 5) ...[
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            answerOne == 1
-                                ? Icon(Icons.check_circle, color: Colors.green)
-                                : Icon(Icons.cancel_rounded, color: Colors.red),
-                            answerTwo == 1
-                                ? Icon(Icons.check_circle, color: Colors.green)
-                                : Icon(Icons.cancel_rounded, color: Colors.red),
-                            answerThree == 1
-                                ? Icon(Icons.check_circle, color: Colors.green)
-                                : Icon(Icons.cancel_rounded, color: Colors.red),
-                            answerFour == 1
-                                ? Icon(Icons.check_circle, color: Colors.green)
-                                : Icon(Icons.cancel_rounded, color: Colors.red),
-                            answerFive == 1
-                                ? Icon(Icons.check_circle, color: Colors.green)
-                                : Icon(Icons.cancel_rounded, color: Colors.red),
-                          ],
-                        )
-                      ] else if (questionAmount == 10) ...[
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            answerOne == 1
-                                ? Icon(Icons.check_circle, color: Colors.green)
-                                : Icon(Icons.cancel_rounded, color: Colors.red),
-                            answerTwo == 1
-                                ? Icon(Icons.check_circle, color: Colors.green)
-                                : Icon(Icons.cancel_rounded, color: Colors.red),
-                            answerThree == 1
-                                ? Icon(Icons.check_circle, color: Colors.green)
-                                : Icon(Icons.cancel_rounded, color: Colors.red),
-                            answerFour == 1
-                                ? Icon(Icons.check_circle, color: Colors.green)
-                                : Icon(Icons.cancel_rounded, color: Colors.red),
-                            answerFive == 1
-                                ? Icon(Icons.check_circle, color: Colors.green)
-                                : Icon(Icons.cancel_rounded, color: Colors.red),
-                          ],
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            answerSix == 1
-                                ? Icon(Icons.check_circle, color: Colors.green)
-                                : Icon(Icons.cancel_rounded, color: Colors.red),
-                            answerSeven == 1
-                                ? Icon(Icons.check_circle, color: Colors.green)
-                                : Icon(Icons.cancel_rounded, color: Colors.red),
-                            answerEight == 1
-                                ? Icon(Icons.check_circle, color: Colors.green)
-                                : Icon(Icons.cancel_rounded, color: Colors.red),
-                            answerNine == 1
-                                ? Icon(Icons.check_circle, color: Colors.green)
-                                : Icon(Icons.cancel_rounded, color: Colors.red),
-                            answerTen == 1
-                                ? Icon(Icons.check_circle, color: Colors.green)
-                                : Icon(Icons.cancel_rounded, color: Colors.red),
-                          ],
-                        ),
-                      ] else if (questionAmount == 15) ...[
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            answerOne == 1
-                                ? Icon(Icons.check_circle, color: Colors.green)
-                                : Icon(Icons.cancel_rounded, color: Colors.red),
-                            answerTwo == 1
-                                ? Icon(Icons.check_circle, color: Colors.green)
-                                : Icon(Icons.cancel_rounded, color: Colors.red),
-                            answerThree == 1
-                                ? Icon(Icons.check_circle, color: Colors.green)
-                                : Icon(Icons.cancel_rounded, color: Colors.red),
-                            answerFour == 1
-                                ? Icon(Icons.check_circle, color: Colors.green)
-                                : Icon(Icons.cancel_rounded, color: Colors.red),
-                            answerFive == 1
-                                ? Icon(Icons.check_circle, color: Colors.green)
-                                : Icon(Icons.cancel_rounded, color: Colors.red),
-                          ],
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            answerSix == 1
-                                ? Icon(Icons.check_circle, color: Colors.green)
-                                : Icon(Icons.cancel_rounded, color: Colors.red),
-                            answerSeven == 1
-                                ? Icon(Icons.check_circle, color: Colors.green)
-                                : Icon(Icons.cancel_rounded, color: Colors.red),
-                            answerEight == 1
-                                ? Icon(Icons.check_circle, color: Colors.green)
-                                : Icon(Icons.cancel_rounded, color: Colors.red),
-                            answerNine == 1
-                                ? Icon(Icons.check_circle, color: Colors.green)
-                                : Icon(Icons.cancel_rounded, color: Colors.red),
-                            answerTen == 1
-                                ? Icon(Icons.check_circle, color: Colors.green)
-                                : Icon(Icons.cancel_rounded, color: Colors.red),
-                          ],
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            answerEleven == 1
-                                ? Icon(Icons.check_circle, color: Colors.green)
-                                : Icon(Icons.cancel_rounded, color: Colors.red),
-                            answerTwelve == 1
-                                ? Icon(Icons.check_circle, color: Colors.green)
-                                : Icon(Icons.cancel_rounded, color: Colors.red),
-                            answerThirteen == 1
-                                ? Icon(Icons.check_circle, color: Colors.green)
-                                : Icon(Icons.cancel_rounded, color: Colors.red),
-                            answerFourteen == 1
-                                ? Icon(Icons.check_circle, color: Colors.green)
-                                : Icon(Icons.cancel_rounded, color: Colors.red),
-                            answerFithteen == 1
-                                ? Icon(Icons.check_circle, color: Colors.green)
-                                : Icon(Icons.cancel_rounded, color: Colors.red),
-                          ],
-                        ),
-                      ],
-                      Text(
-                        "Total points: $totalPoints  ",
-                        style: GoogleFonts.bungee(
-                            color: Colors.black,
-                            fontSize: MediaQuery.of(context).size.height / 35),
-                      ),
-                      ElevatedButton(
-                        onPressed: () {
-                          if (gameType == GameType.duel) {
-                            for (final player in players!) {
-                              if (player.email.toString() ==
-                                  user!.email.toString()) {
-                                context.read<DuelResultCubit>().addRoundResults(
-                                    roomId: roomId!,
-                                    playerNumber: player.player,
-                                    roundNumber: player.roundNumber,
-                                    answerOne: answerOne,
-                                    answerTwo: answerTwo,
-                                    answerThree: answerThree,
-                                    answerFour: answerFour,
-                                    answerFive: answerFive);
-                                context.read<DuelResultCubit>().resetGameStatus(
-                                    roomId: roomId!,
-                                    status: false,
-                                    playerId: player.id,
-                                    points: totalPoints);
-                                if (gameStatus == true) {
-                                  context
-                                      .read<DuelResultCubit>()
-                                      .deleteQuestions(
-                                          roomId: roomId!,
-                                          roundNumber: player.roundNumber);
-                                }
-                              }
-                            }
-                          } else if (gameType == GameType.casual) {
-                            Navigator.of(context).pop();
-                          } else {
-                            context.read<DuelResultCubit>().updateRanking(
-                                points: totalPoints,
-                                profileId: state.profiles[0].id);
-                            Navigator.of(context).pop();
-                          }
-                        },
-                        child: Text(
-                          AppLocalizations.of(context).backToLobby,
+              return Container(
+                decoration: const BoxDecoration(
+                    gradient: LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: [
+                    Color.fromARGB(255, 0, 27, 48),
+                    Color.fromARGB(180, 66, 120, 255),
+                  ],
+                )),
+                child: Center(
+                  child: SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.35,
+                    width: MediaQuery.of(context).size.width * 0.7,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          "Your Time: ${state.gameLenght}  ",
                           style: GoogleFonts.bungee(
-                              color: Colors.black,
+                              color: Colors.white,
                               fontSize:
                                   MediaQuery.of(context).size.height / 35),
                         ),
-                      ),
-                    ],
+                        Text(
+                          "${AppLocalizations.of(context).yourScore}: ${score} / ${questionAmount * 10}",
+                          style: GoogleFonts.bungee(
+                              color: Colors.white,
+                              fontSize:
+                                  MediaQuery.of(context).size.height / 35),
+                        ),
+                        if (questionAmount == 1) ...[
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              answerOne == 1
+                                  ? const Icon(Icons.check_circle,
+                                      color: Colors.green)
+                                  : const Icon(Icons.cancel_rounded,
+                                      color: Colors.red),
+                            ],
+                          )
+                        ] else if (questionAmount == 5) ...[
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              answerOne == 1
+                                  ? const Icon(Icons.check_circle,
+                                      color: Colors.green)
+                                  : const Icon(Icons.cancel_rounded,
+                                      color: Colors.red),
+                              answerTwo == 1
+                                  ? const Icon(Icons.check_circle,
+                                      color: Colors.green)
+                                  : const Icon(Icons.cancel_rounded,
+                                      color: Colors.red),
+                              answerThree == 1
+                                  ? const Icon(Icons.check_circle,
+                                      color: Colors.green)
+                                  : const Icon(Icons.cancel_rounded,
+                                      color: Colors.red),
+                              answerFour == 1
+                                  ? const Icon(Icons.check_circle,
+                                      color: Colors.green)
+                                  : const Icon(Icons.cancel_rounded,
+                                      color: Colors.red),
+                              answerFive == 1
+                                  ? const Icon(Icons.check_circle,
+                                      color: Colors.green)
+                                  : const Icon(Icons.cancel_rounded,
+                                      color: Colors.red),
+                            ],
+                          )
+                        ] else if (questionAmount == 10) ...[
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              answerOne == 1
+                                  ? const Icon(Icons.check_circle,
+                                      color: Colors.green)
+                                  : const Icon(Icons.cancel_rounded,
+                                      color: Colors.red),
+                              answerTwo == 1
+                                  ? const Icon(Icons.check_circle,
+                                      color: Colors.green)
+                                  : const Icon(Icons.cancel_rounded,
+                                      color: Colors.red),
+                              answerThree == 1
+                                  ? const Icon(Icons.check_circle,
+                                      color: Colors.green)
+                                  : const Icon(Icons.cancel_rounded,
+                                      color: Colors.red),
+                              answerFour == 1
+                                  ? const Icon(Icons.check_circle,
+                                      color: Colors.green)
+                                  : const Icon(Icons.cancel_rounded,
+                                      color: Colors.red),
+                              answerFive == 1
+                                  ? const Icon(Icons.check_circle,
+                                      color: Colors.green)
+                                  : const Icon(Icons.cancel_rounded,
+                                      color: Colors.red),
+                            ],
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              answerSix == 1
+                                  ? const Icon(Icons.check_circle,
+                                      color: Colors.green)
+                                  : const Icon(Icons.cancel_rounded,
+                                      color: Colors.red),
+                              answerSeven == 1
+                                  ? const Icon(Icons.check_circle,
+                                      color: Colors.green)
+                                  : const Icon(Icons.cancel_rounded,
+                                      color: Colors.red),
+                              answerEight == 1
+                                  ? const Icon(Icons.check_circle,
+                                      color: Colors.green)
+                                  : const Icon(Icons.cancel_rounded,
+                                      color: Colors.red),
+                              answerNine == 1
+                                  ? const Icon(Icons.check_circle,
+                                      color: Colors.green)
+                                  : const Icon(Icons.cancel_rounded,
+                                      color: Colors.red),
+                              answerTen == 1
+                                  ? const Icon(Icons.check_circle,
+                                      color: Colors.green)
+                                  : const Icon(Icons.cancel_rounded,
+                                      color: Colors.red),
+                            ],
+                          ),
+                        ] else if (questionAmount == 15) ...[
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              answerOne == 1
+                                  ? const Icon(Icons.check_circle,
+                                      color: Colors.green)
+                                  : const Icon(Icons.cancel_rounded,
+                                      color: Colors.red),
+                              answerTwo == 1
+                                  ? const Icon(Icons.check_circle,
+                                      color: Colors.green)
+                                  : const Icon(Icons.cancel_rounded,
+                                      color: Colors.red),
+                              answerThree == 1
+                                  ? const Icon(Icons.check_circle,
+                                      color: Colors.green)
+                                  : const Icon(Icons.cancel_rounded,
+                                      color: Colors.red),
+                              answerFour == 1
+                                  ? const Icon(Icons.check_circle,
+                                      color: Colors.green)
+                                  : const Icon(Icons.cancel_rounded,
+                                      color: Colors.red),
+                              answerFive == 1
+                                  ? const Icon(Icons.check_circle,
+                                      color: Colors.green)
+                                  : const Icon(Icons.cancel_rounded,
+                                      color: Colors.red),
+                            ],
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              answerSix == 1
+                                  ? const Icon(Icons.check_circle,
+                                      color: Colors.green)
+                                  : const Icon(Icons.cancel_rounded,
+                                      color: Colors.red),
+                              answerSeven == 1
+                                  ? const Icon(Icons.check_circle,
+                                      color: Colors.green)
+                                  : const Icon(Icons.cancel_rounded,
+                                      color: Colors.red),
+                              answerEight == 1
+                                  ? const Icon(Icons.check_circle,
+                                      color: Colors.green)
+                                  : const Icon(Icons.cancel_rounded,
+                                      color: Colors.red),
+                              answerNine == 1
+                                  ? const Icon(Icons.check_circle,
+                                      color: Colors.green)
+                                  : const Icon(Icons.cancel_rounded,
+                                      color: Colors.red),
+                              answerTen == 1
+                                  ? const Icon(Icons.check_circle,
+                                      color: Colors.green)
+                                  : const Icon(Icons.cancel_rounded,
+                                      color: Colors.red),
+                            ],
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              answerEleven == 1
+                                  ? const Icon(Icons.check_circle,
+                                      color: Colors.green)
+                                  : const Icon(Icons.cancel_rounded,
+                                      color: Colors.red),
+                              answerTwelve == 1
+                                  ? const Icon(Icons.check_circle,
+                                      color: Colors.green)
+                                  : const Icon(Icons.cancel_rounded,
+                                      color: Colors.red),
+                              answerThirteen == 1
+                                  ? const Icon(Icons.check_circle,
+                                      color: Colors.green)
+                                  : const Icon(Icons.cancel_rounded,
+                                      color: Colors.red),
+                              answerFourteen == 1
+                                  ? const Icon(Icons.check_circle,
+                                      color: Colors.green)
+                                  : const Icon(Icons.cancel_rounded,
+                                      color: Colors.red),
+                              answerFithteen == 1
+                                  ? const Icon(Icons.check_circle,
+                                      color: Colors.green)
+                                  : const Icon(Icons.cancel_rounded,
+                                      color: Colors.red),
+                            ],
+                          ),
+                        ],
+                        Text(
+                          "Total points: $totalPoints  ",
+                          style: GoogleFonts.bungee(
+                              color: Colors.white,
+                              fontSize:
+                                  MediaQuery.of(context).size.height / 35),
+                        ),
+                        Container(
+                          height: MediaQuery.of(context).size.height * 0.09,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(60),
+                            gradient: const LinearGradient(
+                              begin: Alignment.topLeft,
+                              end: Alignment.bottomRight,
+                              colors: [
+                                Color.fromARGB(255, 255, 255, 255),
+                                Color.fromARGB(180, 66, 120, 255),
+                              ],
+                            ),
+                          ),
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.transparent),
+                            onPressed: () {
+                              if (gameType == GameType.duel) {
+                                for (final player in players!) {
+                                  if (player.email.toString() ==
+                                      user!.email.toString()) {
+                                    context
+                                        .read<DuelResultCubit>()
+                                        .addRoundResults(
+                                            roomId: roomId!,
+                                            playerNumber: player.player,
+                                            roundNumber: player.roundNumber,
+                                            answerOne: answerOne,
+                                            answerTwo: answerTwo,
+                                            answerThree: answerThree,
+                                            answerFour: answerFour,
+                                            answerFive: answerFive);
+                                    context
+                                        .read<DuelResultCubit>()
+                                        .resetGameStatus(
+                                            roomId: roomId!,
+                                            status: false,
+                                            playerId: player.id,
+                                            points: totalPoints);
+                                    if (gameStatus == true) {
+                                      context
+                                          .read<DuelResultCubit>()
+                                          .deleteQuestions(
+                                              roomId: roomId!,
+                                              roundNumber: player.roundNumber);
+                                    }
+                                  }
+                                }
+                              } else if (gameType == GameType.casual) {
+                                Navigator.of(context).pop();
+                              } else {
+                                context.read<DuelResultCubit>().updateRanking(
+                                    points: totalPoints,
+                                    profileId: state.profiles[0].id);
+                                Navigator.of(context).pop();
+                              }
+                            },
+                            child: Text(
+                              AppLocalizations.of(context).backToLobby,
+                              style: GoogleFonts.bungee(
+                                  color: Colors.black,
+                                  fontSize:
+                                      MediaQuery.of(context).size.height / 35),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               );

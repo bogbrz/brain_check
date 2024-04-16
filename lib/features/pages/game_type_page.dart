@@ -16,61 +16,105 @@ class GameTypePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          backgroundColor: const Color.fromARGB(255, 27, 58, 93),
-        ),
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Material(
-                    clipBehavior: Clip.hardEdge,
-                    child: InkWell(
-                      onTap: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => CategoryPage(user: user,profileModel: profile,)));
-                      },
-                      child: Container(
-                        alignment: Alignment.center,
-                        width: MediaQuery.of(context).size.width * 0.49,
-                        height: MediaQuery.of(context).size.height * 0.5,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(10),
-                          border: Border.all(
-                              width: MediaQuery.of(context).size.width / 40),
+        body: Container(
+      decoration: BoxDecoration(
+          gradient: LinearGradient(
+        begin: Alignment.topLeft,
+        end: Alignment.bottomRight,
+        colors: [
+          Color.fromARGB(255, 0, 27, 48),
+          Color.fromARGB(180, 66, 120, 255),
+        ],
+      )),
+      child: Column(
+        children: [
+          Padding(
+            padding:
+                EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.03),
+            child: Row(
+              children: [
+                IconButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  icon: Icon(Icons.arrow_back_sharp),
+                  color: Colors.white,
+                  iconSize: MediaQuery.of(context).size.height * 0.05,
+                )
+              ],
+            ),
+          ),
+          SizedBox(
+            height: MediaQuery.of(context).size.height * 0.025,
+          ),
+          Padding(
+            padding: EdgeInsets.all(MediaQuery.of(context).size.height * 0.025),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Material(
+                  clipBehavior: Clip.hardEdge,
+                  borderRadius: BorderRadius.circular(20),
+                  child: InkWell(
+                    onTap: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => CategoryPage(
+                                user: user,
+                                profileModel: profile,
+                              )));
+                    },
+                    child: Container(
+                      alignment: Alignment.center,
+                      width: MediaQuery.of(context).size.width * 0.4,
+                      height: MediaQuery.of(context).size.height * 0.5,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        color: Colors.white,
+                        gradient: LinearGradient(
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                          colors: [
+                            Color.fromARGB(255, 159, 177, 240),
+                            Color.fromARGB(180, 66, 120, 255),
+                          ],
                         ),
-                        child: SizedBox(
-                            width: MediaQuery.of(context).size.width * 0.07,
-                            child: Text(AppLocalizations.of(context).casual,
-                                style: GoogleFonts.bungee(
-                                  fontSize:
-                                      MediaQuery.of(context).size.height / 31,
-                                ))),
                       ),
+                      child: SizedBox(
+                          width: MediaQuery.of(context).size.width * 0.07,
+                          child: Text(AppLocalizations.of(context).casual,
+                              style: GoogleFonts.bungee(
+                                fontSize:
+                                    MediaQuery.of(context).size.height / 31,
+                              ))),
                     ),
                   ),
-                  InkWell(
+                ),
+                Material(
+                  clipBehavior: Clip.hardEdge,
+                  borderRadius: BorderRadius.circular(20),
+                  child: InkWell(
                     onTap: () {
                       Navigator.of(context).push(MaterialPageRoute(
                           builder: ((context) => RankedGamePage(
-                            profileModel: profile,
+                                profileModel: profile,
                                 user: user,
                               ))));
                     },
                     child: Container(
                       alignment: Alignment.center,
-                      width: MediaQuery.of(context).size.width * 0.49,
+                      width: MediaQuery.of(context).size.width * 0.4,
                       height: MediaQuery.of(context).size.height * 0.5,
                       decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(10),
-                        border: Border.all(
-                            width: MediaQuery.of(context).size.width / 40),
-                      ),
+                          borderRadius: BorderRadius.circular(20),
+                          color: Colors.white,
+                          gradient: LinearGradient(
+                            begin: Alignment.topRight,
+                            end: Alignment.bottomLeft,
+                            colors: [
+                              Color.fromARGB(255, 159, 177, 240),
+                              Color.fromARGB(180, 66, 120, 255),
+                            ],
+                          )),
                       child: SizedBox(
                           width: MediaQuery.of(context).size.width * 0.07,
                           child: Text(AppLocalizations.of(context).ranked,
@@ -80,39 +124,45 @@ class GameTypePage extends StatelessWidget {
                               ))),
                     ),
                   ),
-                ],
-              ),
-              SizedBox(
-                height: MediaQuery.of(context).size.height * 0.005,
-              ),
-              InkWell(
-                onTap: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => RoomsListPage(
-                      user: user,
-                      profile: profile,
-                    ),
-                  ));
-                },
-                child: Container(
-                  alignment: Alignment.center,
-                  width: MediaQuery.of(context).size.width * 0.99,
-                  height: MediaQuery.of(context).size.height * 0.15,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(10),
-                    border: Border.all(
-                        width: MediaQuery.of(context).size.width / 40),
-                  ),
-                  child: Text(AppLocalizations.of(context).duel,
-                      style: GoogleFonts.bungee(
-                          fontSize: MediaQuery.of(context).size.height / 30,
-                          letterSpacing:
-                              MediaQuery.of(context).size.width * 0.05)),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
-        ));
+          Padding(
+            padding: EdgeInsets.all(MediaQuery.of(context).size.height * 0.025),
+            child: InkWell(
+              onTap: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => RoomsListPage(
+                    user: user,
+                    profile: profile,
+                  ),
+                ));
+              },
+              child: Container(
+                alignment: Alignment.center,
+                height: MediaQuery.of(context).size.width * 0.320,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    color: Colors.white,
+                    gradient: LinearGradient(
+                      begin: Alignment.bottomCenter,
+                      end: Alignment.topCenter,
+                      colors: [
+                        Color.fromARGB(255, 138, 154, 214),
+                        Color.fromARGB(180, 66, 120, 255),
+                      ],
+                    )),
+                child: Text(AppLocalizations.of(context).duel,
+                    style: GoogleFonts.bungee(
+                        fontSize: MediaQuery.of(context).size.height / 30,
+                        letterSpacing:
+                            MediaQuery.of(context).size.width * 0.05)),
+              ),
+            ),
+          ),
+        ],
+      ),
+    ));
   }
 }

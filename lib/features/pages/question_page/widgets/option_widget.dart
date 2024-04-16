@@ -23,7 +23,28 @@ class AnswerWidget extends StatelessWidget {
       child: Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
-            border: Border.all(width: MediaQuery.of(context).size.width / 55),
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [
+                Color.fromARGB(255, 255, 255, 255),
+                choosedAnswer.isEmpty && isChoosed == false
+                    ? Colors.white
+                    : choosedAnswer == correctAnswer &&
+                                choosedAnswer == answer &&
+                                isChoosed == true ||
+                            choosedAnswer != answer &&
+                                choosedAnswer != correctAnswer &&
+                                answer == correctAnswer
+                        ? Colors.green
+                        : choosedAnswer == answer &&
+                                choosedAnswer != correctAnswer &&
+                                isChoosed == true
+                            ? Colors.red
+                            : Colors.white,
+                Color.fromARGB(180, 66, 120, 255),
+              ],
+            ),
             color: choosedAnswer.isEmpty && isChoosed == false
                 ? Colors.white
                 : choosedAnswer == correctAnswer &&

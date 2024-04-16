@@ -21,41 +21,55 @@ class CreateRoomWidget extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          FloatingActionButton.extended(
-              onPressed: () {
-                showDialog(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return BlocProvider(
-                        create: (context) => getIt<RoomsListPageCubit>(),
-                        child: AlertDialog(
-                          scrollable: true,
-                          title: Text(
-                            AppLocalizations.of(context).createNewRoom,
-                            style: GoogleFonts.bungee(
-                                color: Colors.white,
-                                fontSize:
-                                    MediaQuery.of(context).size.height / 50),
-                          ),
-                          content: DialogContetWidget(
-                            nickName: nickName,
-                            rooms: rooms,
-                          ),
-                        ),
-                      );
-                    });
-              },
-              label: Row(
-                children: [
-                  Text(
-                    AppLocalizations.of(context).createNewRoom,
-                    style: GoogleFonts.bungee(
-                        color: Colors.black,
-                        fontSize: MediaQuery.of(context).size.height / 50),
-                  ),
-                  Icon(Icons.add)
+          Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20),
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [
+                  Color.fromARGB(255, 255, 255, 255),
+                  Color.fromARGB(180, 29, 81, 211),
                 ],
-              )),
+              ),
+            ),
+            child: FloatingActionButton.extended(
+                backgroundColor: Colors.transparent,
+                onPressed: () {
+                  showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return BlocProvider(
+                          create: (context) => getIt<RoomsListPageCubit>(),
+                          child: AlertDialog(
+                            scrollable: true,
+                            title: Text(
+                              AppLocalizations.of(context).createNewRoom,
+                              style: GoogleFonts.bungee(
+                                  color: Colors.white,
+                                  fontSize:
+                                      MediaQuery.of(context).size.height / 50),
+                            ),
+                            content: DialogContetWidget(
+                              nickName: nickName,
+                              rooms: rooms,
+                            ),
+                          ),
+                        );
+                      });
+                },
+                label: Row(
+                  children: [
+                    Text(
+                      AppLocalizations.of(context).createNewRoom,
+                      style: GoogleFonts.bungee(
+                          color: Colors.black,
+                          fontSize: MediaQuery.of(context).size.height / 50),
+                    ),
+                    Icon(Icons.add)
+                  ],
+                )),
+          ),
         ],
       ),
     );
@@ -90,83 +104,81 @@ class _DialogContetWidgetState extends State<DialogContetWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Form(
-      child: Column(children: [
-        Row(
-          children: [
-            Text(
-              AppLocalizations.of(context).roomName,
-              style: GoogleFonts.bungee(
-                  color: Colors.white,
-                  fontSize: MediaQuery.of(context).size.height / 50),
-            ),
-          ],
-        ),
-        TextField(
-          decoration: InputDecoration(
-            focusedBorder: OutlineInputBorder(
-                borderSide: BorderSide(
-              width: MediaQuery.of(context).size.width / 85,
-            )),
-            enabledBorder: OutlineInputBorder(
-                borderSide: BorderSide(
-              width: MediaQuery.of(context).size.width / 85,
-            )),
+    return Column(children: [
+      Row(
+        children: [
+          Text(
+            AppLocalizations.of(context).roomName,
+            style: GoogleFonts.bungee(
+                color: Colors.white,
+                fontSize: MediaQuery.of(context).size.height / 50),
           ),
-          controller: nameController,
+        ],
+      ),
+      TextField(
+        decoration: InputDecoration(
+          focusedBorder: OutlineInputBorder(
+              borderSide: BorderSide(
+            width: MediaQuery.of(context).size.width / 85,
+          )),
+          enabledBorder: OutlineInputBorder(
+              borderSide: BorderSide(
+            width: MediaQuery.of(context).size.width / 85,
+          )),
         ),
-        Row(
-          children: [
-            Text(
-              AppLocalizations.of(context).password,
-              style: GoogleFonts.bungee(
-                  color: Colors.white,
-                  fontSize: MediaQuery.of(context).size.height / 50),
-            ),
-          ],
-        ),
-        TextField(
-          decoration: InputDecoration(
-            focusedBorder: OutlineInputBorder(
-                borderSide: BorderSide(
-              width: MediaQuery.of(context).size.width / 85,
-            )),
-            enabledBorder: OutlineInputBorder(
-                borderSide: BorderSide(
-              width: MediaQuery.of(context).size.width / 85,
-            )),
+        controller: nameController,
+      ),
+      Row(
+        children: [
+          Text(
+            AppLocalizations.of(context).password,
+            style: GoogleFonts.bungee(
+                color: Colors.white,
+                fontSize: MediaQuery.of(context).size.height / 50),
           ),
-          controller: passControler,
+        ],
+      ),
+      TextField(
+        decoration: InputDecoration(
+          focusedBorder: OutlineInputBorder(
+              borderSide: BorderSide(
+            width: MediaQuery.of(context).size.width / 85,
+          )),
+          enabledBorder: OutlineInputBorder(
+              borderSide: BorderSide(
+            width: MediaQuery.of(context).size.width / 85,
+          )),
         ),
-        Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: BlocBuilder<RoomsListPageCubit, RoomsListPageState>(
-              builder: (context, state) {
-                return ElevatedButton(
-                    onPressed: nameController.text.isEmpty
-                        ? null
-                        : widget.rooms.any((element) =>
-                                element.name == nameController.text)
-                            ? null
-                            : () {
-                                context.read<RoomsListPageCubit>().createRoom(
-                                      name: nameController.text,
-                                      password: passControler.text,
-                                      nickName: widget.nickName,
-                                    );
-                                nameController.clear();
-                                passControler.clear();
-                                Navigator.of(context).pop();
-                              },
-                    child: Text(
-                      AppLocalizations.of(context).create,
-                      style: GoogleFonts.bungee(
-                          color: Colors.black,
-                          fontSize: MediaQuery.of(context).size.height / 50),
-                    ));
-              },
-            ))
-      ]),
-    );
+        controller: passControler,
+      ),
+      Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: BlocBuilder<RoomsListPageCubit, RoomsListPageState>(
+            builder: (context, state) {
+              return ElevatedButton(
+                  onPressed: nameController.text.isEmpty
+                      ? null
+                      : widget.rooms.any(
+                              (element) => element.name == nameController.text)
+                          ? null
+                          : () {
+                              context.read<RoomsListPageCubit>().createRoom(
+                                    name: nameController.text,
+                                    password: passControler.text,
+                                    nickName: widget.nickName,
+                                  );
+                              nameController.clear();
+                              passControler.clear();
+                              Navigator.of(context).pop();
+                            },
+                  child: Text(
+                    AppLocalizations.of(context).create,
+                    style: GoogleFonts.bungee(
+                        color: Colors.black,
+                        fontSize: MediaQuery.of(context).size.height / 50),
+                  ));
+            },
+          ))
+    ]);
   }
 }

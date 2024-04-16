@@ -44,225 +44,272 @@ class _DifficultyPageState extends State<DifficultyPage> {
         create: (context) => getIt<DifficultyPageCubit>()
           ..getCategoryInfo(category: widget.categoriesModel.id),
         child: Scaffold(
-          appBar: AppBar(
-            centerTitle: true,
-            title: Text(
-              "BRAIN CHECK APP",
-              style: GoogleFonts.bungee(
-                  fontSize: MediaQuery.of(context).size.height / 30,
-                  color: Colors.white),
-            ),
-            backgroundColor: const Color.fromARGB(255, 27, 58, 93),
-          ),
-          body: SafeArea(
-            child: BlocBuilder<DifficultyPageCubit, DifficultyPageState>(
-              builder: (context, state) {
-                switch (state.status) {
-                  case Status.initial:
-                    return const InitialStateWidget();
-                  case Status.loading:
-                    return const LoadingStateWidget();
-                  case Status.error:
-                    return ErrorStateWidget(
-                        errorMessage: state.errorMessage.toString());
-                  case Status.success:
-                    return Center(
-                        child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
+          body: BlocBuilder<DifficultyPageCubit, DifficultyPageState>(
+            builder: (context, state) {
+              switch (state.status) {
+                case Status.initial:
+                  return const InitialStateWidget();
+                case Status.loading:
+                  return const LoadingStateWidget();
+                case Status.error:
+                  return ErrorStateWidget(
+                      errorMessage: state.errorMessage.toString());
+                case Status.success:
+                  return Center(
+                      child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                        Padding(
+                          padding: EdgeInsets.only(
+                              top: MediaQuery.of(context).size.height * 0.03),
+                          child: Row(
                             children: [
-                          Padding(
-                              padding: const EdgeInsets.all(10),
-                              child: Container(
-                                decoration: BoxDecoration(
-                                    border: Border.all(
-                                      width: MediaQuery.of(context).size.width /
-                                          55,
-                                    ),
-                                    borderRadius: BorderRadius.circular(10),
-                                    color: Colors.white),
-                                width: MediaQuery.of(context).size.width * 0.9,
-                                height:
-                                    MediaQuery.of(context).size.height * 0.38,
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Column(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceEvenly,
-                                    children: [
-                                      Row(
-                                        children: [
-                                          Expanded(
-                                            child: Text(
-                                              "${AppLocalizations.of(context).choosedCategory}: ${widget.categoriesModel.name}",
-                                              style: GoogleFonts.bungee(
-                                                fontSize: MediaQuery.of(context)
-                                                        .size
-                                                        .height /
-                                                    45,
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      Row(
-                                        children: [
-                                          Expanded(
-                                              child: widget
-                                                          .categoriesModel.id ==
-                                                      0
-                                                  ? Text(
-                                                      "${AppLocalizations.of(context).questionsAmount}: ${state.overAll.totalNumOfVerifiedQuestions}",
-                                                      style: GoogleFonts.bungee(
-                                                        fontSize: MediaQuery.of(
-                                                                    context)
-                                                                .size
-                                                                .height /
-                                                            45,
-                                                      ),
-                                                    )
-                                                  : Text(
-                                                      "${AppLocalizations.of(context).questionsAmount}: ${state.info!.totalQuestionCount} ",
-                                                      style: GoogleFonts.bungee(
-                                                        fontSize: MediaQuery.of(
-                                                                    context)
-                                                                .size
-                                                                .height /
-                                                            45,
-                                                      ),
-                                                    )),
-                                        ],
-                                      ),
-                                      Row(
-                                        children: [
-                                          Expanded(
-                                            child: Text(
-                                              choosedDifficulty.isEmpty
-                                                  ? "${AppLocalizations.of(context).choosedDifficulty}: ${AppLocalizations.of(context).notChoosen}"
-                                                  : choosedDifficulty ==
-                                                          null.toString()
-                                                      ? "${AppLocalizations.of(context).choosedDifficulty}: ${AppLocalizations.of(context).random}"
-                                                      : "${AppLocalizations.of(context).choosedDifficulty}: $choosedDifficulty",
-                                              style: GoogleFonts.bungee(
-                                                fontSize: MediaQuery.of(context)
-                                                        .size
-                                                        .height /
-                                                    45,
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      Row(
-                                        children: [
-                                          Expanded(
-                                            child: Text(
-                                              questionsNumber == null
-                                                  ? "${AppLocalizations.of(context).roundsAmount}: ${AppLocalizations.of(context).notChoosen}"
-                                                  : questionsNumber == 0
-                                                      ? "${AppLocalizations.of(context).roundsAmount}: ${AppLocalizations.of(context).survival}"
-                                                      : "${AppLocalizations.of(context).roundsAmount}: $questionsNumber",
-                                              style: GoogleFonts.bungee(
-                                                fontSize: MediaQuery.of(context)
-                                                        .size
-                                                        .height /
-                                                    45,
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
+                              IconButton(
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                                icon: Icon(Icons.arrow_back_sharp),
+                                color: Colors.white,
+                                iconSize:
+                                    MediaQuery.of(context).size.height * 0.05,
+                              )
+                            ],
+                          ),
+                        ),
+                        Padding(
+                            padding: EdgeInsets.all(
+                                MediaQuery.of(context).size.height * 0.025),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20),
+                                color: Colors.white,
+                                gradient: LinearGradient(
+                                  begin: Alignment.topLeft,
+                                  end: Alignment.bottomRight,
+                                  colors: [
+                                    Color.fromARGB(255, 159, 177, 240),
+                                    Color.fromARGB(180, 66, 120, 255),
+                                  ],
                                 ),
-                              )),
-                          SizedBox(
-                            height: MediaQuery.of(context).size.height / 3,
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                Row(
+                              ),
+                              width: MediaQuery.of(context).size.width * 0.9,
+                              height: MediaQuery.of(context).size.height * 0.38,
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Column(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceEvenly,
                                   children: [
-                                    for (final difficulty in difficulties) ...[
-                                      Material(
-                                        shape: const OutlineInputBorder(),
-                                        clipBehavior: Clip.hardEdge,
-                                        child: InkWell(
-                                          onTap: () {
-                                            setState(() {
-                                              choosedDifficulty =
-                                                  difficulty.nameId;
-                                              print(choosedDifficulty);
-                                            });
-                                          },
-                                          child: DifficultyWidget(
-                                              choosedDifficulty:
-                                                  choosedDifficulty,
-                                              difficulty: difficulty),
-                                        ),
-                                      ),
-                                    ]
-                                  ],
-                                ),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    for (final amount in amountButtons) ...[
-                                      Material(
-                                        shape: const OutlineInputBorder(),
-                                        clipBehavior: Clip.hardEdge,
-                                        child: InkWell(
-                                          onTap: () {
-                                            setState(() {
-                                              questionsNumber = amount.nameId;
-                                              print(questionsNumber);
-                                            });
-                                            print(choosedDifficulty);
-                                          },
-                                          child: AmountWidget(
-                                            amount: amount,
-                                            choosedAmount: questionsNumber,
+                                    Row(
+                                      children: [
+                                        Expanded(
+                                          child: Text(
+                                            "${AppLocalizations.of(context).choosedCategory}: ${widget.categoriesModel.name}",
+                                            style: GoogleFonts.bungee(
+                                              fontSize: MediaQuery.of(context)
+                                                      .size
+                                                      .height /
+                                                  45,
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                    ],
+                                      ],
+                                    ),
+                                    Row(
+                                      children: [
+                                        Expanded(
+                                            child: widget.categoriesModel.id ==
+                                                    0
+                                                ? Text(
+                                                    "${AppLocalizations.of(context).questionsAmount}: ${state.overAll.totalNumOfVerifiedQuestions}",
+                                                    style: GoogleFonts.bungee(
+                                                      fontSize:
+                                                          MediaQuery.of(context)
+                                                                  .size
+                                                                  .height /
+                                                              45,
+                                                    ),
+                                                  )
+                                                : Text(
+                                                    "${AppLocalizations.of(context).questionsAmount}: ${state.info!.totalQuestionCount} ",
+                                                    style: GoogleFonts.bungee(
+                                                      fontSize:
+                                                          MediaQuery.of(context)
+                                                                  .size
+                                                                  .height /
+                                                              45,
+                                                    ),
+                                                  )),
+                                      ],
+                                    ),
+                                    Row(
+                                      children: [
+                                        Expanded(
+                                          child: Text(
+                                            choosedDifficulty.isEmpty
+                                                ? "${AppLocalizations.of(context).choosedDifficulty}: ${AppLocalizations.of(context).notChoosen}"
+                                                : choosedDifficulty ==
+                                                        null.toString()
+                                                    ? "${AppLocalizations.of(context).choosedDifficulty}: ${AppLocalizations.of(context).random}"
+                                                    : "${AppLocalizations.of(context).choosedDifficulty}: $choosedDifficulty",
+                                            style: GoogleFonts.bungee(
+                                              fontSize: MediaQuery.of(context)
+                                                      .size
+                                                      .height /
+                                                  45,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    Row(
+                                      children: [
+                                        Expanded(
+                                          child: Text(
+                                            questionsNumber == null
+                                                ? "${AppLocalizations.of(context).roundsAmount}: ${AppLocalizations.of(context).notChoosen}"
+                                                : questionsNumber == 0
+                                                    ? "${AppLocalizations.of(context).roundsAmount}: ${AppLocalizations.of(context).survival}"
+                                                    : "${AppLocalizations.of(context).roundsAmount}: $questionsNumber",
+                                            style: GoogleFonts.bungee(
+                                              fontSize: MediaQuery.of(context)
+                                                      .size
+                                                      .height /
+                                                  45,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
                                   ],
                                 ),
-                              ],
-                            ),
+                              ),
+                            )),
+                        SizedBox(
+                          height: MediaQuery.of(context).size.height / 3,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  for (final difficulty in difficulties) ...[
+                                    Material(
+                                      borderRadius: BorderRadius.circular(20),
+                                      clipBehavior: Clip.hardEdge,
+                                      child: InkWell(
+                                        onTap: () {
+                                          setState(() {
+                                            choosedDifficulty =
+                                                difficulty.nameId;
+                                            print(choosedDifficulty);
+                                          });
+                                        },
+                                        child: DifficultyWidget(
+                                            choosedDifficulty:
+                                                choosedDifficulty,
+                                            difficulty: difficulty),
+                                      ),
+                                    ),
+                                  ]
+                                ],
+                              ),
+                              SizedBox(
+                                height:
+                                    MediaQuery.of(context).size.height * 0.01,
+                              ),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  for (final amount in amountButtons) ...[
+                                    Material(
+                                      clipBehavior: Clip.hardEdge,
+                                      borderRadius: BorderRadius.circular(20),
+                                      child: InkWell(
+                                        onTap: () {
+                                          setState(() {
+                                            questionsNumber = amount.nameId;
+                                            print(questionsNumber);
+                                          });
+                                          print(choosedDifficulty);
+                                        },
+                                        child: AmountWidget(
+                                          amount: amount,
+                                          choosedAmount: questionsNumber,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ],
+                              ),
+                            ],
                           ),
-                          ElevatedButton(
-                            onPressed: () {
-                              context.read<DifficultyPageCubit>().setStartTime(
-                                  playerId: widget.profileModel.id);
-                              Navigator.of(context).push(MaterialPageRoute(
-                                  builder: ((context) => QuestionPage(
-                                        profileModel: widget.profileModel,
-                                        roomId: null,
-                                        category: widget.categoriesModel.id,
-                                        difficulty: choosedDifficulty != "null"
-                                            ? choosedDifficulty
-                                            : null,
-                                        user: widget.user,
-                                        questionsAmount: questionsNumber,
-                                        gameType: GameType.casual,
-                                      ))));
-                            },
-                            child: Text(
-                              "START",
-                              style: GoogleFonts.bungee(
-                                color: Colors.black,
-                                fontSize:
-                                    MediaQuery.of(context).size.height / 25,
+                        ),
+                        SizedBox(
+                          height: MediaQuery.of(context).size.height * 0.01,
+                        ),
+                        Material(
+                          borderRadius: BorderRadius.circular(20),
+                          clipBehavior: Clip.hardEdge,
+                          child: InkWell(
+                            onTap: choosedDifficulty.isEmpty ||
+                                    questionsNumber == null
+                                ? null
+                                : () {
+                                    context
+                                        .read<DifficultyPageCubit>()
+                                        .setStartTime(
+                                            playerId: widget.profileModel.id);
+                                    Navigator.of(context)
+                                        .push(MaterialPageRoute(
+                                            builder: ((context) => QuestionPage(
+                                                  profileModel:
+                                                      widget.profileModel,
+                                                  roomId: null,
+                                                  category:
+                                                      widget.categoriesModel.id,
+                                                  difficulty:
+                                                      choosedDifficulty !=
+                                                              "null"
+                                                          ? choosedDifficulty
+                                                          : null,
+                                                  user: widget.user,
+                                                  questionsAmount:
+                                                      questionsNumber,
+                                                  gameType: GameType.casual,
+                                                ))));
+                                  },
+                            child: Container(
+                              alignment: Alignment.center,
+                              width: MediaQuery.of(context).size.width * 0.5,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20),
+                                color: Colors.white,
+                                gradient: LinearGradient(
+                                  begin: Alignment.topLeft,
+                                  end: Alignment.bottomRight,
+                                  colors: [
+                                    Color.fromARGB(255, 255, 255, 255),
+                                    Color.fromARGB(180, 66, 120, 255),
+                                  ],
+                                ),
+                              ),
+                              child: Text(
+                                "START",
+                                style: GoogleFonts.bungee(
+                                  color: Colors.black,
+                                  fontSize:
+                                      MediaQuery.of(context).size.height / 25,
+                                ),
                               ),
                             ),
-                          )
-                        ]));
-                }
-              },
-            ),
+                          ),
+                        )
+                      ]));
+              }
+            },
           ),
         ));
   }
@@ -293,10 +340,16 @@ class AmountWidget extends StatelessWidget {
                 : MediaQuery.of(context).size.width * 0.21,
         alignment: Alignment.center,
         decoration: BoxDecoration(
-          border: Border.all(
-            width: MediaQuery.of(context).size.width / 55,
-          ),
+          borderRadius: BorderRadius.circular(20),
           color: Colors.white,
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [
+              Color.fromARGB(255, 255, 255, 255),
+              Color.fromARGB(180, 66, 120, 255),
+            ],
+          ),
         ),
         child: Text(
           amount.name == "Survival"
@@ -338,8 +391,18 @@ class DifficultyWidget extends StatelessWidget {
               ? MediaQuery.of(context).size.width * 0.35
               : MediaQuery.of(context).size.width * 0.21,
       decoration: BoxDecoration(
-          border: Border.all(width: MediaQuery.of(context).size.width / 55),
-          color: difficulty.color),
+        borderRadius: BorderRadius.circular(20),
+        color: Colors.white,
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          stops: [0.5, 2],
+          colors: [
+            difficulty.color,
+            Color.fromARGB(255, 255, 255, 255),
+          ],
+        ),
+      ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [

@@ -13,9 +13,15 @@ class LabelWidget extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.only(bottom: 6, top: 6),
       decoration: BoxDecoration(
-          border: Border.symmetric(
-              horizontal:
-                  BorderSide(width: MediaQuery.of(context).size.width / 55)),
+          gradient: LinearGradient(
+            begin: Alignment.bottomLeft,
+            end: Alignment.topRight,
+            colors: [
+              Color.fromARGB(255, 255, 255, 255),
+              Color.fromARGB(180, 66, 120, 255),
+            ],
+          ),
+          borderRadius: BorderRadius.circular(10),
           color: Colors.white),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
