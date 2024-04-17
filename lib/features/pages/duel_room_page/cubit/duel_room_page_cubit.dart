@@ -31,8 +31,10 @@ class DuelRoomPageCubit extends Cubit<DuelRoomPageState> {
       {required String email,
       required String nickName,
       required String id,
-      required int playerNumber}) async {
+      required int playerNumber
+      ,required String userPicture}) async {
     return duelGameRepository.joinPlayer(
+      userPicture: userPicture,
         email: email, nickName: nickName, id: id, playerNumber: playerNumber);
   }
 

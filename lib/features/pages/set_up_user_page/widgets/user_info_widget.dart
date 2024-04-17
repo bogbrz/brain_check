@@ -23,7 +23,7 @@ class UserInfoWidget extends StatefulWidget {
 
 class _UserInfoWidgetState extends State<UserInfoWidget> {
   File? _selectedImage;
-  
+  var isChoosed = true;
 
   @override
   Widget build(BuildContext context) {
@@ -42,26 +42,32 @@ class _UserInfoWidgetState extends State<UserInfoWidget> {
           child: InkWell(
             onTap: () {
               _pickImageFromGallery();
+              setState(() {
+                isChoosed = false;
+              });
             },
             child: CircleAvatar(
-                radius: MediaQuery.of(context).size.width * 0.2,
-                child: _selectedImage != null
-                    ? Image.file(
-                        _selectedImage!,
-                        fit: BoxFit.fill,
-                      )
-                    : const Icon(
-                        Icons.add_outlined,
-                        size: 60,
-                      )),
+              radius: MediaQuery.of(context).size.width * 0.2,
+              backgroundImage: _selectedImage != null
+                  ? Image.file(
+                      _selectedImage!,
+                    ).image
+                  : null,
+              child: _selectedImage == null
+                  ? Icon(Icons.add_a_photo)
+                  : SizedBox.shrink(),
+            ),
           ),
         ),
-        _selectedImage != null
+        isChoosed == false
             ? Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   IconButton(
                       onPressed: () {
+                        setState(() {
+                          isChoosed = true;
+                        });
                         context
                             .read<SetUpUserCubit>()
                             .uploadImage(file: _selectedImage!);
@@ -89,17 +95,17 @@ class _UserInfoWidgetState extends State<UserInfoWidget> {
         ),
         Padding(
           padding: const EdgeInsets.all(8.0),
-          child: TextField(
-            maxLength: 13,
-            style: GoogleFonts.bungee(fontSize: 20),
-            decoration: InputDecoration(
+          child: SizedBox(
+            width: MediaQuery.of(context).size.width * 0.5,
+            child: TextField(
+              maxLength: 13,
+              style: GoogleFonts.bungee(fontSize: 20),
+              decoration: InputDecoration(
                 hintText: AppLocalizations.of(context).nickName,
                 hintStyle: GoogleFonts.bungee(),
-                focusedBorder:
-                    const OutlineInputBorder(borderSide: BorderSide(width: 8)),
-                enabledBorder:
-                    const OutlineInputBorder(borderSide: BorderSide(width: 8))),
-            controller: widget.controller,
+              ),
+              controller: widget.controller,
+            ),
           ),
         ),
       ],

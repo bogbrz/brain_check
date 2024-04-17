@@ -171,8 +171,9 @@ class DuelGameRepository {
       {required String email,
       required String nickName,
       required String id,
-      required int playerNumber}) async {
+      required int playerNumber, required String userPicture}) async {
     return duelGameDataSource.joinPlayer(
+      userPicture: userPicture,
         email: email, nickName: nickName, id: id, playerNumber: playerNumber);
   }
 
@@ -191,6 +192,7 @@ class DuelGameRepository {
             id: e.id,
             roundNumber: e["roundNumber"],
             category: e["category"],
+            userPicture: e["userPicture"]
             );
       }).toList();
     });

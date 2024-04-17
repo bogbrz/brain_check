@@ -26,161 +26,172 @@ class _LogInPageState extends State<LogInPage> {
       create: (context) => getIt<LogInPageCubit>(),
       child: BlocBuilder<LogInPageCubit, LogInPageState>(
         builder: (context, state) {
-          return Scaffold(
-            appBar: AppBar(
-                backgroundColor: const Color.fromARGB(255, 27, 58, 93),
-                title: Text(
-                  "${AppLocalizations.of(context).welcomeTo}",
-                  style: GoogleFonts.bungee(
-                      fontSize: MediaQuery.of(context).size.height / 20,
-                      color: Colors.white),
-                )),
-            body: Container(
-              decoration: BoxDecoration(
+          return SafeArea(
+            child: Scaffold(
+              body: Container(
+                decoration: BoxDecoration(
                   gradient: LinearGradient(
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-                colors: [
-                  Color.fromARGB(255, 0, 27, 48),
-                  Color.fromARGB(180, 66, 120, 255),
-                ],
-              )),
-              child: Padding(
-                padding: const EdgeInsets.all(15.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Row(
-                      children: [
-                        Text(
-                          "BRAINCHECK",
-                          style: GoogleFonts.bungee(
-                              fontSize: MediaQuery.of(context).size.height / 20,
-                              color: Colors.white),
-                        ),
-                      ],
-                    ),
-                    TextField(
-                      style: TextStyle(
-                        fontSize: MediaQuery.of(context).size.height / 40,
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                    colors: [
+                      Color.fromARGB(255, 0, 27, 48),
+                      Color.fromARGB(180, 66, 120, 255),
+                    ],
+                  ),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(15.0),
+                  child: Column(
+                    children: [
+                      Text(
+                        " ${AppLocalizations.of(context).welcomeTo} BRAINCHECK",
+                        style: GoogleFonts.bungee(
+                            fontSize: MediaQuery.of(context).size.height / 20,
+                            color: Colors.white),
                       ),
-                      decoration: InputDecoration(
-                        focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                          width: MediaQuery.of(context).size.width / 55,
-                        )),
-                        enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                          width: MediaQuery.of(context).size.width / 55,
-                        )),
-                        hintText: "Email",
-                        fillColor: Colors.white,
-                        filled: true,
-                        hintStyle: GoogleFonts.bungee(color: Colors.black),
-                      ),
-                      controller: emailController,
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    TextField(
-                      style: TextStyle(
-                        fontSize: MediaQuery.of(context).size.height / 40,
-                      ),
-                      obscureText: true,
-                      decoration: InputDecoration(
-                        hintText: "${AppLocalizations.of(context).password}",
-                        fillColor: Colors.white,
-                        filled: true,
-                        hintStyle: GoogleFonts.bungee(color: Colors.black),
-                        focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                          width: MediaQuery.of(context).size.width / 55,
-                        )),
-                        enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                          width: MediaQuery.of(context).size.width / 55,
-                        )),
-                      ),
-                      controller: passwordController,
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    InkWell(
-                      onTap: () async {
-                        if (isCreatingAccount) {
-                          context
-                              .read<LogInPageCubit>()
-                              .createUserWithEmailAndPassword(
-                                  email: emailController.text,
-                                  password: passwordController.text);
-                        } else {
-                          context
-                              .read<LogInPageCubit>()
-                              .signInWitEmailAndPassword(
-                                  email: emailController.text,
-                                  password: passwordController.text);
-                        }
-                      },
-                      child: Container(
-                        alignment: Alignment.center,
-                        width: MediaQuery.of(context).size.width / 2,
+                      Container(
                         decoration: BoxDecoration(
-                          color: Colors.white,
-                          border: Border.all(
-                              width: MediaQuery.of(context).size.width / 55,
-                              color: Colors.black),
+                          borderRadius: BorderRadius.circular(10),
+                          gradient: LinearGradient(
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
+                            colors: [
+                              Color.fromARGB(255, 255, 255, 255),
+                              Color.fromARGB(180, 66, 120, 255),
+                            ],
+                          ),
                         ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(4.0),
-                          child: Text(
-                            isCreatingAccount
-                                ? "${AppLocalizations.of(context).createAccount}"
-                                : "${AppLocalizations.of(context).logIn}",
-                            textAlign: TextAlign.center,
-                            style: GoogleFonts.bungee(
-                                fontSize:
-                                    MediaQuery.of(context).size.height / 30),
+                        child: TextField(
+                          style: TextStyle(
+                            fontSize: MediaQuery.of(context).size.height / 40,
+                          ),
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10)),
+                            hintText: "Email",
+                            fillColor: Colors.transparent,
+                            filled: true,
+                            hintStyle: GoogleFonts.bungee(color: Colors.black),
+                          ),
+                          controller: emailController,
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          gradient: LinearGradient(
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
+                            colors: [
+                              Color.fromARGB(255, 255, 255, 255),
+                              Color.fromARGB(180, 66, 120, 255),
+                            ],
+                          ),
+                        ),
+                        child: TextField(
+                          style: TextStyle(
+                            fontSize: MediaQuery.of(context).size.height / 40,
+                          ),
+                          obscureText: true,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10)),
+                            hintText:
+                                "${AppLocalizations.of(context).password}",
+                            fillColor: Colors.transparent,
+                            filled: true,
+                            hintStyle: GoogleFonts.bungee(color: Colors.black),
+                          ),
+                          controller: passwordController,
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      InkWell(
+                        onTap: () async {
+                          if (isCreatingAccount) {
+                            context
+                                .read<LogInPageCubit>()
+                                .createUserWithEmailAndPassword(
+                                    email: emailController.text,
+                                    password: passwordController.text);
+                          } else {
+                            context
+                                .read<LogInPageCubit>()
+                                .signInWitEmailAndPassword(
+                                    email: emailController.text,
+                                    password: passwordController.text);
+                          }
+                        },
+                        child: Container(
+                          alignment: Alignment.center,
+                          width: MediaQuery.of(context).size.width / 2,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: Colors.white,
+                            gradient: LinearGradient(
+                              begin: Alignment.topLeft,
+                              end: Alignment.bottomRight,
+                              colors: [
+                                Color.fromARGB(255, 255, 255, 255),
+                                Color.fromARGB(180, 245, 245, 245),
+                              ],
+                            ),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(4.0),
+                            child: Text(
+                              isCreatingAccount
+                                  ? "${AppLocalizations.of(context).createAccount}"
+                                  : "${AppLocalizations.of(context).logIn}",
+                              textAlign: TextAlign.center,
+                              style: GoogleFonts.bungee(
+                                  fontSize:
+                                      MediaQuery.of(context).size.height / 30),
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                    if (isCreatingAccount == false) ...[
-                      TextButton(
-                          onPressed: () {
-                            passwordController.clear();
-                            emailController.clear();
-                            setState(() {
-                              isCreatingAccount = true;
-                            });
-                          },
-                          child: Text(
-                            "${AppLocalizations.of(context).doesntHave}",
-                            style: GoogleFonts.bungee(
-                                fontSize:
-                                    MediaQuery.of(context).size.height / 50,
-                                color: Colors.black),
-                          )),
+                      if (isCreatingAccount == false) ...[
+                        TextButton(
+                            onPressed: () {
+                              passwordController.clear();
+                              emailController.clear();
+                              setState(() {
+                                isCreatingAccount = true;
+                              });
+                            },
+                            child: Text(
+                              "${AppLocalizations.of(context).doesntHave}",
+                              style: GoogleFonts.bungee(
+                                  fontSize:
+                                      MediaQuery.of(context).size.height / 50,
+                                  color: Colors.black),
+                            )),
+                      ],
+                      if (isCreatingAccount == true) ...[
+                        TextButton(
+                            onPressed: () {
+                              passwordController.clear();
+                              emailController.clear();
+                              setState(() {
+                                isCreatingAccount = false;
+                              });
+                            },
+                            child: Text(
+                              "${AppLocalizations.of(context).alreadyHave}",
+                              style: GoogleFonts.bungee(
+                                  fontSize:
+                                      MediaQuery.of(context).size.height / 50,
+                                  color: Colors.black),
+                            ))
+                      ],
                     ],
-                    if (isCreatingAccount == true) ...[
-                      TextButton(
-                          onPressed: () {
-                            passwordController.clear();
-                            emailController.clear();
-                            setState(() {
-                              isCreatingAccount = false;
-                            });
-                          },
-                          child: Text(
-                            "${AppLocalizations.of(context).alreadyHave}",
-                            style: GoogleFonts.bungee(
-                                fontSize:
-                                    MediaQuery.of(context).size.height / 50,
-                                color: Colors.black),
-                          ))
-                    ],
-                  ],
+                  ),
                 ),
               ),
             ),

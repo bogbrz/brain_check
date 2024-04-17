@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 import 'package:bloc/bloc.dart';
 import 'package:brain_check/app/core/enums/enums.dart';
 import 'package:brain_check/domain/models/profile_model.dart';
@@ -16,7 +17,7 @@ class UserPageCubit extends Cubit<UserPageState> {
       required this.rankingRepository,
       required this.storageRepository})
       : super(const UserPageState(
-           uploadedImageUrl: null,
+            uploadedImageUrl: null,
             errorMessage: null,
             profile: [],
             status: Status.initial));
@@ -27,32 +28,34 @@ class UserPageCubit extends Cubit<UserPageState> {
 
   Future<void> getRankingForUpdate({required String email}) async {
     emit(const UserPageState(
-      uploadedImageUrl: null,
-       
+        uploadedImageUrl: null,
         errorMessage: null,
         profile: [],
         status: Status.loading));
-     final uploadedImages = await storageRepository.getImages();
+    final uploadedImages = await storageRepository.getImages();
     final uploadedImageUrl = await uploadedImages![0].getDownloadURL();
 
     streamSubscription =
         rankingRepository.getRankingForUpdate(email: email).listen((event) {
       try {
         emit(UserPageState(
-          uploadedImageUrl: uploadedImageUrl,
-         
+            uploadedImageUrl: uploadedImageUrl,
             errorMessage: null,
             profile: event,
             status: Status.success));
       } catch (error) {
         emit(UserPageState(
-          uploadedImageUrl: null,
-           
+            uploadedImageUrl: null,
             errorMessage: error.toString(),
             profile: [],
             status: Status.error));
       }
     });
+  }
+
+  Future<void> uploadImage({required File file}) async {
+    await storageRepository.uploadImage(file: file);
+    print("Dupa");
   }
 
   Future<void> signOut() async {

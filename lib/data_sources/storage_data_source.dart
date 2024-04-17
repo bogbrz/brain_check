@@ -13,8 +13,11 @@ class StorageDataSource {
 
   Future<void> uploadImage(File file) async {
     final fileName = file.path.split("/").last;
+    final testName = "name";
+    final testFileName = fileName.split(".").last;
 
-    final uploadRef = storageRef.child("$userId/uploads/$fileName");
+    final uploadRef =
+        storageRef.child("$userId/uploads/$testName.$testFileName");
     await uploadRef.putFile(file);
   }
 

@@ -25,55 +25,46 @@ class HomePage extends StatelessWidget {
         create: (context) => getIt<HomePageCubit>()
           ..getRankingForUpdate(email: user!.email.toString()),
         child: BlocConsumer<HomePageCubit, HomePageState>(
-            listener: (context, state) {
-          // DateTime lastLogin =
-          //     DateTime.parse(state.profile[0].lastLogIn.toDate().toString());
-
-          // Duration difference = dateTime.difference(lastLogin);
-          // print(difference);
-          // if (difference.inMinutes > 1) {
-          //   context.read<HomePageCubit>().updateLifes(
-          //         lastLogin: DateTime.now(),
-          //         profileId: state.profile[0].id,
-          //       );
-          // }
-        }, builder: (context, state) {
-          switch (state.status) {
-            case Status.initial:
-              return const InitialStateWidget();
-            case Status.loading:
-              return const LoadingStateWidget();
-            case Status.error:
-              return ErrorStateWidget(
-                  errorMessage: state.errorMessage.toString());
-            case Status.success:
-              return Scaffold(
-                  body: Container(
-                decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                  colors: [
-                    Color.fromARGB(255, 0, 27, 48),
-                    Color.fromARGB(180, 66, 120, 255),
-                  ],
-                )),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    PageExtrasWidget(
-                      profiles: state.profile,
-                      user: user,
-                      overall: state.overAllInfo,
+            listener: (context, state) {},
+            builder: (context, state) {
+              switch (state.status) {
+                case Status.initial:
+                  return const InitialStateWidget();
+                case Status.loading:
+                  return const LoadingStateWidget();
+                case Status.error:
+                  return ErrorStateWidget(
+                      errorMessage: state.errorMessage.toString());
+                case Status.success:
+                  return Scaffold(
+                      body: Container(
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                        colors: [
+                          Color.fromARGB(255, 0, 27, 48),
+                          Color.fromARGB(180, 66, 120, 255),
+                        ],
+                      ),
                     ),
-                    StartButtonWidget(
-                      user: user,
-                      profile: state.profile[0],
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        PageExtrasWidget(
+                          profiles: state.profile,
+                          user: user,
+                          overall: state.overAllInfo,
+                        ),
+                        StartButtonWidget(
+                          userPicture: state.uploadedImageUrl,
+                          user: user,
+                          profile: state.profile[0],
+                        ),
+                      ],
                     ),
-                  ],
-                ),
-              ));
-          }
-        }));
+                  ));
+              }
+            }));
   }
 }

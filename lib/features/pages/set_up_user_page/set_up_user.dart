@@ -71,10 +71,16 @@ class _SetUpUserPageState extends State<SetUpUserPage> {
                         width: MediaQuery.of(context).size.width * 0.8,
                         height: MediaQuery.of(context).size.height * 0.6,
                         decoration: BoxDecoration(
-                            color: Colors.white,
-                            border: Border.all(
-                              width: 8,
-                            )),
+                          borderRadius: BorderRadius.circular(10),
+                          gradient: LinearGradient(
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
+                            colors: [
+                              Color.fromARGB(255, 251, 251, 251),
+                              Color.fromARGB(180, 66, 120, 255),
+                            ],
+                          ),
+                        ),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [

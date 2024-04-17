@@ -25,6 +25,7 @@ mixin _$PlayerModel {
   bool get startGame => throw _privateConstructorUsedError;
   int get roundNumber => throw _privateConstructorUsedError;
   String get category => throw _privateConstructorUsedError;
+  String get userPicture => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $PlayerModelCopyWith<PlayerModel> get copyWith =>
@@ -46,7 +47,8 @@ abstract class $PlayerModelCopyWith<$Res> {
       bool ready,
       bool startGame,
       int roundNumber,
-      String category});
+      String category,
+      String userPicture});
 }
 
 /// @nodoc
@@ -71,6 +73,7 @@ class _$PlayerModelCopyWithImpl<$Res, $Val extends PlayerModel>
     Object? startGame = null,
     Object? roundNumber = null,
     Object? category = null,
+    Object? userPicture = null,
   }) {
     return _then(_value.copyWith(
       email: null == email
@@ -109,6 +112,10 @@ class _$PlayerModelCopyWithImpl<$Res, $Val extends PlayerModel>
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
               as String,
+      userPicture: null == userPicture
+          ? _value.userPicture
+          : userPicture // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -130,7 +137,8 @@ abstract class _$$PlayerModelImplCopyWith<$Res>
       bool ready,
       bool startGame,
       int roundNumber,
-      String category});
+      String category,
+      String userPicture});
 }
 
 /// @nodoc
@@ -153,6 +161,7 @@ class __$$PlayerModelImplCopyWithImpl<$Res>
     Object? startGame = null,
     Object? roundNumber = null,
     Object? category = null,
+    Object? userPicture = null,
   }) {
     return _then(_$PlayerModelImpl(
       email: null == email
@@ -191,6 +200,10 @@ class __$$PlayerModelImplCopyWithImpl<$Res>
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
               as String,
+      userPicture: null == userPicture
+          ? _value.userPicture
+          : userPicture // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -207,7 +220,8 @@ class _$PlayerModelImpl implements _PlayerModel {
       required this.ready,
       required this.startGame,
       required this.roundNumber,
-      required this.category});
+      required this.category,
+      required this.userPicture});
 
   @override
   final String email;
@@ -227,10 +241,12 @@ class _$PlayerModelImpl implements _PlayerModel {
   final int roundNumber;
   @override
   final String category;
+  @override
+  final String userPicture;
 
   @override
   String toString() {
-    return 'PlayerModel(email: $email, nickName: $nickName, points: $points, id: $id, player: $player, ready: $ready, startGame: $startGame, roundNumber: $roundNumber, category: $category)';
+    return 'PlayerModel(email: $email, nickName: $nickName, points: $points, id: $id, player: $player, ready: $ready, startGame: $startGame, roundNumber: $roundNumber, category: $category, userPicture: $userPicture)';
   }
 
   @override
@@ -250,12 +266,14 @@ class _$PlayerModelImpl implements _PlayerModel {
             (identical(other.roundNumber, roundNumber) ||
                 other.roundNumber == roundNumber) &&
             (identical(other.category, category) ||
-                other.category == category));
+                other.category == category) &&
+            (identical(other.userPicture, userPicture) ||
+                other.userPicture == userPicture));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, email, nickName, points, id,
-      player, ready, startGame, roundNumber, category);
+      player, ready, startGame, roundNumber, category, userPicture);
 
   @JsonKey(ignore: true)
   @override
@@ -274,7 +292,8 @@ abstract class _PlayerModel implements PlayerModel {
       required final bool ready,
       required final bool startGame,
       required final int roundNumber,
-      required final String category}) = _$PlayerModelImpl;
+      required final String category,
+      required final String userPicture}) = _$PlayerModelImpl;
 
   @override
   String get email;
@@ -294,6 +313,8 @@ abstract class _PlayerModel implements PlayerModel {
   int get roundNumber;
   @override
   String get category;
+  @override
+  String get userPicture;
   @override
   @JsonKey(ignore: true)
   _$$PlayerModelImplCopyWith<_$PlayerModelImpl> get copyWith =>

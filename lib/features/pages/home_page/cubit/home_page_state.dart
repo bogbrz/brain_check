@@ -6,5 +6,6 @@ class HomePageState with _$HomePageState {
       {required String? errorMessage,
       required List<ProfileModel> profile,
       required Overall overAllInfo,
-      required Status status}) = _Initial;
+      required Status status,
+      required String? uploadedImageUrl, }) = _Initial;
 }

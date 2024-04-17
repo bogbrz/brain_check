@@ -14,6 +14,7 @@ class JoinRoomWidget extends StatelessWidget {
     required this.id,
     required this.user,
     required this.room,
+    required this.userPicture,
     super.key,
   });
   final String nickName;
@@ -21,6 +22,7 @@ class JoinRoomWidget extends StatelessWidget {
   final String email;
   final String id;
   final User? user;
+  final String? userPicture;
   final GameRoomModel room;
 
   final TextEditingController passwordController = TextEditingController();
@@ -81,6 +83,7 @@ class JoinRoomWidget extends StatelessWidget {
                   } else {
                     Navigator.of(context).push(MaterialPageRoute(
                         builder: (context) => GameRoomPage(
+                          userPicture: userPicture ,
                               nickName: nickName,
                               user: user,
                               roomModel: room,

@@ -1,3 +1,4 @@
+import 'package:brain_check/app/injection_container.dart';
 import 'package:brain_check/features/pages/user_page/cubit/user_page_cubit.dart';
 
 import 'package:flutter/material.dart';
@@ -12,29 +13,36 @@ class SignOutWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-        onTap: () {
-          context.read<UserPageCubit>().signOut();
+    return BlocProvider(
+      create: (context) => getIt<UserPageCubit>(),
+      child: BlocBuilder<UserPageCubit, UserPageState>(
+        builder: (context, state) {
+          return InkWell(
+              onTap: () {
+                context.read<UserPageCubit>().signOut();
+              },
+              child: Container(
+                padding: const EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                    color: const Color.fromARGB(255, 27, 58, 93),
+                    gradient: LinearGradient(
+                      begin: Alignment.bottomLeft,
+                      end: Alignment.topRight,
+                      colors: [
+                        Color.fromARGB(255, 22, 72, 234),
+                        Color.fromARGB(180, 66, 120, 255),
+                      ],
+                    ),
+                    borderRadius: BorderRadius.circular(10)),
+                child: Text(
+                  AppLocalizations.of(context).logOut,
+                  style: GoogleFonts.bungee(
+                      color: Colors.white,
+                      fontSize: MediaQuery.of(context).size.height / 35),
+                ),
+              ));
         },
-        child: Container(
-          padding: const EdgeInsets.all(8),
-          decoration: BoxDecoration(
-              color: const Color.fromARGB(255, 27, 58, 93),
-              gradient: LinearGradient(
-                begin: Alignment.bottomLeft,
-                end: Alignment.topRight,
-                colors: [
-                  Color.fromARGB(255, 22, 72, 234),
-                  Color.fromARGB(180, 66, 120, 255),
-                ],
-              ),
-              borderRadius: BorderRadius.circular(10)),
-          child: Text(
-            AppLocalizations.of(context).logOut,
-            style: GoogleFonts.bungee(
-                color: Colors.white,
-                fontSize: MediaQuery.of(context).size.height / 35),
-          ),
-        ));
+      ),
+    );
   }
 }

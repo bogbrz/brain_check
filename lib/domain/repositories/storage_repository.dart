@@ -12,6 +12,11 @@ class StorageRepository {
   }
 
   Future<List<Reference>?> getImages() async {
-    return storageDataSource.getImages();
+    final list = await storageDataSource.getImages();
+    if (list == null) {
+      return null;
+    } else {
+      return list;
+    }
   }
 }
