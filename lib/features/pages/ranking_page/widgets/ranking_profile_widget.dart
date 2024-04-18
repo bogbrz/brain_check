@@ -80,6 +80,9 @@ class RankingProfileWidget extends StatelessWidget {
                                 ))),
           SizedBox(
               width: MediaQuery.of(context).size.width * 0.37,
+              child: Center(child: Image.network(profile.imageUrl!))),
+          SizedBox(
+              width: MediaQuery.of(context).size.width * 0.37,
               child: Center(
                   child: i == 1 || i == 2 || i == 3
                       ? Text(

@@ -6,6 +6,7 @@ class SetUpUserState with _$SetUpUserState {
       {required String? errorMessage,
       required List<ProfileModel> profile,
       required Status status,
+      required String? uploadImageUrl,
      
      
       

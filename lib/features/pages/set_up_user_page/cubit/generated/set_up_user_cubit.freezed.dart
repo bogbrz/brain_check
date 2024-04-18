@@ -19,6 +19,7 @@ mixin _$SetUpUserState {
   String? get errorMessage => throw _privateConstructorUsedError;
   List<ProfileModel> get profile => throw _privateConstructorUsedError;
   Status get status => throw _privateConstructorUsedError;
+  String? get uploadImageUrl => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $SetUpUserStateCopyWith<SetUpUserState> get copyWith =>
@@ -31,7 +32,11 @@ abstract class $SetUpUserStateCopyWith<$Res> {
           SetUpUserState value, $Res Function(SetUpUserState) then) =
       _$SetUpUserStateCopyWithImpl<$Res, SetUpUserState>;
   @useResult
-  $Res call({String? errorMessage, List<ProfileModel> profile, Status status});
+  $Res call(
+      {String? errorMessage,
+      List<ProfileModel> profile,
+      Status status,
+      String? uploadImageUrl});
 }
 
 /// @nodoc
@@ -50,6 +55,7 @@ class _$SetUpUserStateCopyWithImpl<$Res, $Val extends SetUpUserState>
     Object? errorMessage = freezed,
     Object? profile = null,
     Object? status = null,
+    Object? uploadImageUrl = freezed,
   }) {
     return _then(_value.copyWith(
       errorMessage: freezed == errorMessage
@@ -64,6 +70,10 @@ class _$SetUpUserStateCopyWithImpl<$Res, $Val extends SetUpUserState>
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as Status,
+      uploadImageUrl: freezed == uploadImageUrl
+          ? _value.uploadImageUrl
+          : uploadImageUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -76,7 +86,11 @@ abstract class _$$SetUpUserStateImplCopyWith<$Res>
       __$$SetUpUserStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String? errorMessage, List<ProfileModel> profile, Status status});
+  $Res call(
+      {String? errorMessage,
+      List<ProfileModel> profile,
+      Status status,
+      String? uploadImageUrl});
 }
 
 /// @nodoc
@@ -93,6 +107,7 @@ class __$$SetUpUserStateImplCopyWithImpl<$Res>
     Object? errorMessage = freezed,
     Object? profile = null,
     Object? status = null,
+    Object? uploadImageUrl = freezed,
   }) {
     return _then(_$SetUpUserStateImpl(
       errorMessage: freezed == errorMessage
@@ -107,6 +122,10 @@ class __$$SetUpUserStateImplCopyWithImpl<$Res>
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as Status,
+      uploadImageUrl: freezed == uploadImageUrl
+          ? _value.uploadImageUrl
+          : uploadImageUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -117,7 +136,8 @@ class _$SetUpUserStateImpl implements _SetUpUserState {
   const _$SetUpUserStateImpl(
       {required this.errorMessage,
       required final List<ProfileModel> profile,
-      required this.status})
+      required this.status,
+      required this.uploadImageUrl})
       : _profile = profile;
 
   @override
@@ -132,10 +152,12 @@ class _$SetUpUserStateImpl implements _SetUpUserState {
 
   @override
   final Status status;
+  @override
+  final String? uploadImageUrl;
 
   @override
   String toString() {
-    return 'SetUpUserState(errorMessage: $errorMessage, profile: $profile, status: $status)';
+    return 'SetUpUserState(errorMessage: $errorMessage, profile: $profile, status: $status, uploadImageUrl: $uploadImageUrl)';
   }
 
   @override
@@ -146,12 +168,14 @@ class _$SetUpUserStateImpl implements _SetUpUserState {
             (identical(other.errorMessage, errorMessage) ||
                 other.errorMessage == errorMessage) &&
             const DeepCollectionEquality().equals(other._profile, _profile) &&
-            (identical(other.status, status) || other.status == status));
+            (identical(other.status, status) || other.status == status) &&
+            (identical(other.uploadImageUrl, uploadImageUrl) ||
+                other.uploadImageUrl == uploadImageUrl));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, errorMessage,
-      const DeepCollectionEquality().hash(_profile), status);
+      const DeepCollectionEquality().hash(_profile), status, uploadImageUrl);
 
   @JsonKey(ignore: true)
   @override
@@ -165,7 +189,8 @@ abstract class _SetUpUserState implements SetUpUserState {
   const factory _SetUpUserState(
       {required final String? errorMessage,
       required final List<ProfileModel> profile,
-      required final Status status}) = _$SetUpUserStateImpl;
+      required final Status status,
+      required final String? uploadImageUrl}) = _$SetUpUserStateImpl;
 
   @override
   String? get errorMessage;
@@ -173,6 +198,8 @@ abstract class _SetUpUserState implements SetUpUserState {
   List<ProfileModel> get profile;
   @override
   Status get status;
+  @override
+  String? get uploadImageUrl;
   @override
   @JsonKey(ignore: true)
   _$$SetUpUserStateImplCopyWith<_$SetUpUserStateImpl> get copyWith =>

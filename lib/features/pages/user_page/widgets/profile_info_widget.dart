@@ -90,7 +90,14 @@ class _ProfileInfoWidgetState extends State<ProfileInfoWidget> {
                                     });
                                     context
                                         .read<UserPageCubit>()
-                                        .uploadImage(file: _selectedImage!);
+                                        .uploadImage(file: _selectedImage!)
+                                        .then((value) {
+                                      context
+                                          .read<UserPageCubit>()
+                                          .updateImageUrl(
+                                              imageUrl: state.uploadedImageUrl!,
+                                              docId: state.profile[0].id);
+                                    });
                                   },
                                   icon: Icon(
                                     Icons.check_box_rounded,

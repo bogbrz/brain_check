@@ -33,7 +33,9 @@ class UserPageCubit extends Cubit<UserPageState> {
         profile: [],
         status: Status.loading));
     final uploadedImages = await storageRepository.getImages();
-    final uploadedImageUrl = await uploadedImages![0].getDownloadURL();
+    final uploadedImageUrl = uploadedImages == null
+        ? null
+        : await uploadedImages[0].getDownloadURL();
 
     streamSubscription =
         rankingRepository.getRankingForUpdate(email: email).listen((event) {
@@ -51,6 +53,12 @@ class UserPageCubit extends Cubit<UserPageState> {
             status: Status.error));
       }
     });
+  }
+
+  Future<void> updateImageUrl(
+      {required String imageUrl, required String docId}) async {
+    await rankingRepository.updateImageUrl(imageUrl: imageUrl, docId: docId);
+    print("Dupa");
   }
 
   Future<void> uploadImage({required File file}) async {

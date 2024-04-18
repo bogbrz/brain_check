@@ -25,6 +25,7 @@ mixin _$ProfileModel {
   Timestamp get lastLogIn => throw _privateConstructorUsedError;
   Timestamp get gameStarted => throw _privateConstructorUsedError;
   Timestamp get gameEnd => throw _privateConstructorUsedError;
+  String? get imageUrl => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ProfileModelCopyWith<ProfileModel> get copyWith =>
@@ -46,7 +47,8 @@ abstract class $ProfileModelCopyWith<$Res> {
       int lifes,
       Timestamp lastLogIn,
       Timestamp gameStarted,
-      Timestamp gameEnd});
+      Timestamp gameEnd,
+      String? imageUrl});
 }
 
 /// @nodoc
@@ -71,6 +73,7 @@ class _$ProfileModelCopyWithImpl<$Res, $Val extends ProfileModel>
     Object? lastLogIn = null,
     Object? gameStarted = null,
     Object? gameEnd = null,
+    Object? imageUrl = freezed,
   }) {
     return _then(_value.copyWith(
       email: null == email
@@ -109,6 +112,10 @@ class _$ProfileModelCopyWithImpl<$Res, $Val extends ProfileModel>
           ? _value.gameEnd
           : gameEnd // ignore: cast_nullable_to_non_nullable
               as Timestamp,
+      imageUrl: freezed == imageUrl
+          ? _value.imageUrl
+          : imageUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -130,7 +137,8 @@ abstract class _$$ProfileModelImplCopyWith<$Res>
       int lifes,
       Timestamp lastLogIn,
       Timestamp gameStarted,
-      Timestamp gameEnd});
+      Timestamp gameEnd,
+      String? imageUrl});
 }
 
 /// @nodoc
@@ -153,6 +161,7 @@ class __$$ProfileModelImplCopyWithImpl<$Res>
     Object? lastLogIn = null,
     Object? gameStarted = null,
     Object? gameEnd = null,
+    Object? imageUrl = freezed,
   }) {
     return _then(_$ProfileModelImpl(
       email: null == email
@@ -191,6 +200,10 @@ class __$$ProfileModelImplCopyWithImpl<$Res>
           ? _value.gameEnd
           : gameEnd // ignore: cast_nullable_to_non_nullable
               as Timestamp,
+      imageUrl: freezed == imageUrl
+          ? _value.imageUrl
+          : imageUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -207,7 +220,8 @@ class _$ProfileModelImpl implements _ProfileModel {
       required this.lifes,
       required this.lastLogIn,
       required this.gameStarted,
-      required this.gameEnd});
+      required this.gameEnd,
+      required this.imageUrl});
 
   @override
   final String email;
@@ -227,10 +241,12 @@ class _$ProfileModelImpl implements _ProfileModel {
   final Timestamp gameStarted;
   @override
   final Timestamp gameEnd;
+  @override
+  final String? imageUrl;
 
   @override
   String toString() {
-    return 'ProfileModel(email: $email, nickName: $nickName, points: $points, gamesPlayed: $gamesPlayed, id: $id, lifes: $lifes, lastLogIn: $lastLogIn, gameStarted: $gameStarted, gameEnd: $gameEnd)';
+    return 'ProfileModel(email: $email, nickName: $nickName, points: $points, gamesPlayed: $gamesPlayed, id: $id, lifes: $lifes, lastLogIn: $lastLogIn, gameStarted: $gameStarted, gameEnd: $gameEnd, imageUrl: $imageUrl)';
   }
 
   @override
@@ -250,12 +266,14 @@ class _$ProfileModelImpl implements _ProfileModel {
                 other.lastLogIn == lastLogIn) &&
             (identical(other.gameStarted, gameStarted) ||
                 other.gameStarted == gameStarted) &&
-            (identical(other.gameEnd, gameEnd) || other.gameEnd == gameEnd));
+            (identical(other.gameEnd, gameEnd) || other.gameEnd == gameEnd) &&
+            (identical(other.imageUrl, imageUrl) ||
+                other.imageUrl == imageUrl));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, email, nickName, points,
-      gamesPlayed, id, lifes, lastLogIn, gameStarted, gameEnd);
+      gamesPlayed, id, lifes, lastLogIn, gameStarted, gameEnd, imageUrl);
 
   @JsonKey(ignore: true)
   @override
@@ -274,7 +292,8 @@ abstract class _ProfileModel implements ProfileModel {
       required final int lifes,
       required final Timestamp lastLogIn,
       required final Timestamp gameStarted,
-      required final Timestamp gameEnd}) = _$ProfileModelImpl;
+      required final Timestamp gameEnd,
+      required final String? imageUrl}) = _$ProfileModelImpl;
 
   @override
   String get email;
@@ -294,6 +313,8 @@ abstract class _ProfileModel implements ProfileModel {
   Timestamp get gameStarted;
   @override
   Timestamp get gameEnd;
+  @override
+  String? get imageUrl;
   @override
   @JsonKey(ignore: true)
   _$$ProfileModelImplCopyWith<_$ProfileModelImpl> get copyWith =>

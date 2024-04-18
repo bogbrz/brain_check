@@ -17,7 +17,10 @@ class SetUpUserCubit extends Cubit<SetUpUserState> {
   SetUpUserCubit(
       {required this.rankingRepository, required this.storageRepository})
       : super(const SetUpUserState(
-            errorMessage: null, profile: [], status: Status.initial));
+            errorMessage: null,
+            profile: [],
+            status: Status.initial,
+            uploadImageUrl: null));
   final RankingRepository rankingRepository;
   final StorageRepository storageRepository;
 
@@ -25,23 +28,40 @@ class SetUpUserCubit extends Cubit<SetUpUserState> {
 
   Future<void> getRankingForUpdate({required String email}) async {
     emit(const SetUpUserState(
-        errorMessage: null, profile: [], status: Status.loading));
+        uploadImageUrl: null,
+        errorMessage: null,
+        profile: [],
+        status: Status.loading));
+    final uploadedImages = await storageRepository.getImages();
+
+    final uploadedImageUrl = uploadedImages == null
+        ? null
+        : await uploadedImages[0].getDownloadURL();
     streamSubscription =
         rankingRepository.getRankingForUpdate(email: email).listen((event) {
       try {
+        print("success");
         emit(SetUpUserState(
-            errorMessage: null, profile: event, status: Status.success));
+            uploadImageUrl: uploadedImageUrl,
+            errorMessage: null,
+            profile: event,
+            status: Status.success));
       } catch (error) {
         emit(SetUpUserState(
-            errorMessage: error.toString(), profile: [], status: Status.error));
+            uploadImageUrl: null,
+            errorMessage: error.toString(),
+            profile: [],
+            status: Status.error));
       }
     });
   }
 
   Future<void> addProfileToGlobalRanking(
-      {required String nickName, required String email}) async {
+      {required String nickName,
+      required String email,
+      required String? imageUrl}) async {
     await rankingRepository.addProfileToGlobal(
-        nickName: nickName, email: email);
+        nickName: nickName, email: email, imageUrl: imageUrl);
   }
 
   Future<void> uploadImage({required File file}) async {

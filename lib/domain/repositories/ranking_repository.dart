@@ -8,12 +8,12 @@ class RankingRepository {
 
   RankingRepository({required this.rankingFireBaseDataSource});
 
-  Future<void> addProfileToGlobal({
-    required String nickName,
-    required String email,
-  }) async {
+  Future<void> addProfileToGlobal(
+      {required String nickName,
+      required String email,
+      required String? imageUrl}) async {
     await rankingFireBaseDataSource.addToRanking(
-        nickName: nickName, email: email);
+        nickName: nickName, email: email, imageUrl: imageUrl);
   }
 
   Stream<List<ProfileModel>> getRanking() {
@@ -28,7 +28,8 @@ class RankingRepository {
             lifes: doc["lifes"],
             lastLogIn: doc["lastLogIn"],
             gameStarted: doc["gameStarted"],
-            gameEnd: doc["gameEnd"]);
+            gameEnd: doc["gameEnd"],
+            imageUrl: doc["imageUrl"]);
       }).toList();
     });
   }
@@ -46,7 +47,8 @@ class RankingRepository {
                 lifes: doc["lifes"],
                 lastLogIn: doc["lastLogIn"],
                 gameStarted: doc["gameStarted"],
-                gameEnd: doc["gameEnd"]);
+                gameEnd: doc["gameEnd"],
+                imageUrl: doc["imageUrl"]);
           })
           .where((element) => element.email == email)
           .toList();
@@ -61,6 +63,9 @@ class RankingRepository {
 
   Future<void> updateRanking({required int points, required String id}) async {
     return rankingFireBaseDataSource.updateRanking(points: points, docId: id);
+  }
+  Future<void> updateImageUrl({ required String imageUrl, required String docId}) async {
+    return rankingFireBaseDataSource.updateImageUrl(imageUrl: imageUrl, docId: docId);
   }
 
   Future<void> setStartTime({required String playerId}) async {

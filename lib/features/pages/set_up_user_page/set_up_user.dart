@@ -25,13 +25,6 @@ class SetUpUserPage extends StatefulWidget {
 
 class _SetUpUserPageState extends State<SetUpUserPage> {
   final controller = TextEditingController();
-  @override
-  void initState() {
-    controller.addListener(() {
-      setState(() {});
-    });
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -52,6 +45,7 @@ class _SetUpUserPageState extends State<SetUpUserPage> {
             child: Center(
               child: BlocBuilder<SetUpUserCubit, SetUpUserState>(
                 builder: (context, state) {
+                  print(state.uploadImageUrl);
                   if (state.profile.isNotEmpty) {
                     return NavigatorPage(
                       user: widget.user,
@@ -85,35 +79,8 @@ class _SetUpUserPageState extends State<SetUpUserPage> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             UserInfoWidget(
-                              controller: controller,
+                              user: widget.user,
                             ),
-                            InkWell(
-                                onTap: controller.text.isEmpty
-                                    ? null
-                                    : () {
-                                        context
-                                            .read<SetUpUserCubit>()
-                                            .addProfileToGlobalRanking(
-                                              nickName: controller.text,
-                                              email:
-                                                  widget.user!.email.toString(),
-                                            );
-                                      },
-                                child: Container(
-                                    width:
-                                        MediaQuery.of(context).size.width * 0.3,
-                                    height: MediaQuery.of(context).size.height *
-                                        0.075,
-                                    decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        border: Border.all(
-                                          width: 8,
-                                        )),
-                                    child: Center(
-                                        child: Text(
-                                      AppLocalizations.of(context).set,
-                                      style: GoogleFonts.bungee(fontSize: 25),
-                                    ))))
                           ],
                         ),
                       );
