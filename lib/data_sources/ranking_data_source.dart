@@ -8,7 +8,9 @@ class RankingFireBaseDataSource {
   final userId = FirebaseAuth.instance.currentUser?.uid;
 
   Future<void> addToRanking(
-      {required String nickName, required String email}) async {
+      {required String nickName,
+      required String email,
+      required String? imageUrl}) async {
     if (userId == null) {
       throw Exception("user not logged in");
     }
@@ -20,7 +22,8 @@ class RankingFireBaseDataSource {
       "lifes": 5,
       "lastLogIn": DateTime.now(),
       "gameStarted": DateTime.now(),
-      "gameEnd": DateTime.now()
+      "gameEnd": DateTime.now(),
+      "imageUrl": imageUrl
     });
   }
 
@@ -30,6 +33,14 @@ class RankingFireBaseDataSource {
       "points": FieldValue.increment(points),
       "gamesPlayed": FieldValue.increment(1),
       "lifes": FieldValue.increment(-1),
+    });
+  }
+  Future<void> updateImageUrl(
+      {required String imageUrl, required String docId}) async {
+    await FirebaseFirestore.instance.collection("Ranking").doc(docId).update({
+      
+      
+      "imageUrl": imageUrl,
     });
   }
 

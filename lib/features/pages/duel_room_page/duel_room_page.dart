@@ -20,12 +20,13 @@ class GameRoomPage extends StatefulWidget {
     required this.user,
     required this.roomModel,
     required this.nickName,
+    required this.userPicture,
     super.key,
   });
 
   final User? user;
   final String nickName;
-
+  final String? userPicture;
   final GameRoomModel roomModel;
 
   @override
@@ -158,20 +159,7 @@ class _GameRoomPageState extends State<GameRoomPage> {
                                             35),
                               ),
                             ),
-                            // IconButton.filledTonal(
-                            //     onPressed: widget.user!.email !=
-                            //             widget.roomModel.ownerMail
-                            //         ? null
-                            //         : () {
-                            //             context
-                            //                 .read<DuelRoomPageCubit>()
-                            //                 .deleteRoom(
-                            //                     id: widget.roomModel.id);
-
-                            //             Navigator.of(context).pop();
-                            //             Navigator.of(context).pop();
-                            //           },
-                            //     icon: const Icon(Icons.delete)),
+                  
                           ],
                         ),
                       ),
@@ -181,6 +169,7 @@ class _GameRoomPageState extends State<GameRoomPage> {
                             SizedBox(
                               width: MediaQuery.of(context).size.width * 0.4,
                               child: JoinPlayerOneWidget(
+                                userPicture: widget.userPicture,
                                 nickName: widget.nickName,
                                 id: widget.roomModel.id,
                                 playerOne: state.playerOne,
@@ -216,6 +205,8 @@ class _GameRoomPageState extends State<GameRoomPage> {
                             SizedBox(
                               width: MediaQuery.of(context).size.width * 0.4,
                               child: JoinPlayerTwoWidget(
+                                userPicture: widget.userPicture,
+                        
                                 nickName: widget.roomModel.nickName,
                                 id: widget.roomModel.id,
                                 playerTwo: state.playerTwo,

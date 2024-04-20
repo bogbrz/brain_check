@@ -9,9 +9,10 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class GameTypePage extends StatelessWidget {
-  const GameTypePage({super.key, required this.user, required this.profile});
+  const GameTypePage({super.key, required this.user, required this.profile, required this.userPicture});
   final User? user;
   final ProfileModel profile;
+  final String? userPicture;
 
   @override
   Widget build(BuildContext context) {
@@ -134,6 +135,7 @@ class GameTypePage extends StatelessWidget {
               onTap: () {
                 Navigator.of(context).push(MaterialPageRoute(
                   builder: (context) => RoomsListPage(
+                    userPicture: userPicture,
                     user: user,
                     profile: profile,
                   ),

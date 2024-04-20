@@ -20,6 +20,7 @@ mixin _$HomePageState {
   List<ProfileModel> get profile => throw _privateConstructorUsedError;
   Overall get overAllInfo => throw _privateConstructorUsedError;
   Status get status => throw _privateConstructorUsedError;
+  String? get uploadedImageUrl => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $HomePageStateCopyWith<HomePageState> get copyWith =>
@@ -36,7 +37,8 @@ abstract class $HomePageStateCopyWith<$Res> {
       {String? errorMessage,
       List<ProfileModel> profile,
       Overall overAllInfo,
-      Status status});
+      Status status,
+      String? uploadedImageUrl});
 }
 
 /// @nodoc
@@ -56,6 +58,7 @@ class _$HomePageStateCopyWithImpl<$Res, $Val extends HomePageState>
     Object? profile = null,
     Object? overAllInfo = null,
     Object? status = null,
+    Object? uploadedImageUrl = freezed,
   }) {
     return _then(_value.copyWith(
       errorMessage: freezed == errorMessage
@@ -74,6 +77,10 @@ class _$HomePageStateCopyWithImpl<$Res, $Val extends HomePageState>
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as Status,
+      uploadedImageUrl: freezed == uploadedImageUrl
+          ? _value.uploadedImageUrl
+          : uploadedImageUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -90,7 +97,8 @@ abstract class _$$InitialImplCopyWith<$Res>
       {String? errorMessage,
       List<ProfileModel> profile,
       Overall overAllInfo,
-      Status status});
+      Status status,
+      String? uploadedImageUrl});
 }
 
 /// @nodoc
@@ -108,6 +116,7 @@ class __$$InitialImplCopyWithImpl<$Res>
     Object? profile = null,
     Object? overAllInfo = null,
     Object? status = null,
+    Object? uploadedImageUrl = freezed,
   }) {
     return _then(_$InitialImpl(
       errorMessage: freezed == errorMessage
@@ -126,6 +135,10 @@ class __$$InitialImplCopyWithImpl<$Res>
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as Status,
+      uploadedImageUrl: freezed == uploadedImageUrl
+          ? _value.uploadedImageUrl
+          : uploadedImageUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -137,7 +150,8 @@ class _$InitialImpl implements _Initial {
       {required this.errorMessage,
       required final List<ProfileModel> profile,
       required this.overAllInfo,
-      required this.status})
+      required this.status,
+      required this.uploadedImageUrl})
       : _profile = profile;
 
   @override
@@ -154,10 +168,12 @@ class _$InitialImpl implements _Initial {
   final Overall overAllInfo;
   @override
   final Status status;
+  @override
+  final String? uploadedImageUrl;
 
   @override
   String toString() {
-    return 'HomePageState(errorMessage: $errorMessage, profile: $profile, overAllInfo: $overAllInfo, status: $status)';
+    return 'HomePageState(errorMessage: $errorMessage, profile: $profile, overAllInfo: $overAllInfo, status: $status, uploadedImageUrl: $uploadedImageUrl)';
   }
 
   @override
@@ -170,12 +186,19 @@ class _$InitialImpl implements _Initial {
             const DeepCollectionEquality().equals(other._profile, _profile) &&
             (identical(other.overAllInfo, overAllInfo) ||
                 other.overAllInfo == overAllInfo) &&
-            (identical(other.status, status) || other.status == status));
+            (identical(other.status, status) || other.status == status) &&
+            (identical(other.uploadedImageUrl, uploadedImageUrl) ||
+                other.uploadedImageUrl == uploadedImageUrl));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, errorMessage,
-      const DeepCollectionEquality().hash(_profile), overAllInfo, status);
+  int get hashCode => Object.hash(
+      runtimeType,
+      errorMessage,
+      const DeepCollectionEquality().hash(_profile),
+      overAllInfo,
+      status,
+      uploadedImageUrl);
 
   @JsonKey(ignore: true)
   @override
@@ -189,7 +212,8 @@ abstract class _Initial implements HomePageState {
       {required final String? errorMessage,
       required final List<ProfileModel> profile,
       required final Overall overAllInfo,
-      required final Status status}) = _$InitialImpl;
+      required final Status status,
+      required final String? uploadedImageUrl}) = _$InitialImpl;
 
   @override
   String? get errorMessage;
@@ -199,6 +223,8 @@ abstract class _Initial implements HomePageState {
   Overall get overAllInfo;
   @override
   Status get status;
+  @override
+  String? get uploadedImageUrl;
   @override
   @JsonKey(ignore: true)
   _$$InitialImplCopyWith<_$InitialImpl> get copyWith =>

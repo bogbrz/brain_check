@@ -38,15 +38,15 @@ class LabelWidget extends StatelessWidget {
                     fontSize: MediaQuery.of(context).size.height / 50),
               ))),
           SizedBox(
-              width: MediaQuery.of(context).size.width * 0.35,
+              width: MediaQuery.of(context).size.width * 0.4,
               child: Center(
                   child: Text(
-                AppLocalizations.of(context).nickName,
+                "PLAYER ",
                 style: GoogleFonts.bungee(
                     fontSize: MediaQuery.of(context).size.height / 50),
               ))),
           SizedBox(
-              width: MediaQuery.of(context).size.width * 0.25,
+              width: MediaQuery.of(context).size.width * 0.20,
               child: Center(
                 child: Text(
                   AppLocalizations.of(context).gamesPlayed,

@@ -7,20 +7,21 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class JoinPlayerOneWidget extends StatelessWidget {
-  const JoinPlayerOneWidget({
-    super.key,
-    required this.nickName,
-    required this.id,
-    required this.playerOne,
-    required this.playerTwo,
-    required this.user,
-  });
+  const JoinPlayerOneWidget(
+      {super.key,
+      required this.nickName,
+      required this.id,
+      required this.playerOne,
+      required this.playerTwo,
+      required this.user,
+      required this.userPicture});
 
   final String nickName;
   final String id;
   final List<PlayerModel> playerOne;
   final List<PlayerModel> playerTwo;
   final User? user;
+  final String? userPicture;
 
   @override
   Widget build(BuildContext context) {
@@ -33,6 +34,7 @@ class JoinPlayerOneWidget extends StatelessWidget {
                   ? null
                   : () {
                       context.read<DuelRoomPageCubit>().joinPlayer(
+                          userPicture: userPicture!,
                           email: user!.email.toString(),
                           nickName: nickName,
                           id: id,
@@ -80,6 +82,10 @@ class JoinPlayerOneWidget extends StatelessWidget {
                           color: Colors.white,
                           fontSize: MediaQuery.of(context).size.height / 15),
                     ),
+                    CircleAvatar(
+                        radius: MediaQuery.of(context).size.width * 0.1,
+                        backgroundImage:
+                            Image.network(playerOne[0].userPicture).image),
                     Text(
                       playerOne[0].nickName,
                       style: GoogleFonts.bungee(

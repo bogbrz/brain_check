@@ -19,6 +19,7 @@ mixin _$UserPageState {
   String? get errorMessage => throw _privateConstructorUsedError;
   List<ProfileModel> get profile => throw _privateConstructorUsedError;
   Status get status => throw _privateConstructorUsedError;
+  String? get uploadedImageUrl => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $UserPageStateCopyWith<UserPageState> get copyWith =>
@@ -31,7 +32,11 @@ abstract class $UserPageStateCopyWith<$Res> {
           UserPageState value, $Res Function(UserPageState) then) =
       _$UserPageStateCopyWithImpl<$Res, UserPageState>;
   @useResult
-  $Res call({String? errorMessage, List<ProfileModel> profile, Status status});
+  $Res call(
+      {String? errorMessage,
+      List<ProfileModel> profile,
+      Status status,
+      String? uploadedImageUrl});
 }
 
 /// @nodoc
@@ -50,6 +55,7 @@ class _$UserPageStateCopyWithImpl<$Res, $Val extends UserPageState>
     Object? errorMessage = freezed,
     Object? profile = null,
     Object? status = null,
+    Object? uploadedImageUrl = freezed,
   }) {
     return _then(_value.copyWith(
       errorMessage: freezed == errorMessage
@@ -64,6 +70,10 @@ class _$UserPageStateCopyWithImpl<$Res, $Val extends UserPageState>
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as Status,
+      uploadedImageUrl: freezed == uploadedImageUrl
+          ? _value.uploadedImageUrl
+          : uploadedImageUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -76,7 +86,11 @@ abstract class _$$UserPageStateImplCopyWith<$Res>
       __$$UserPageStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String? errorMessage, List<ProfileModel> profile, Status status});
+  $Res call(
+      {String? errorMessage,
+      List<ProfileModel> profile,
+      Status status,
+      String? uploadedImageUrl});
 }
 
 /// @nodoc
@@ -93,6 +107,7 @@ class __$$UserPageStateImplCopyWithImpl<$Res>
     Object? errorMessage = freezed,
     Object? profile = null,
     Object? status = null,
+    Object? uploadedImageUrl = freezed,
   }) {
     return _then(_$UserPageStateImpl(
       errorMessage: freezed == errorMessage
@@ -107,6 +122,10 @@ class __$$UserPageStateImplCopyWithImpl<$Res>
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as Status,
+      uploadedImageUrl: freezed == uploadedImageUrl
+          ? _value.uploadedImageUrl
+          : uploadedImageUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -117,7 +136,8 @@ class _$UserPageStateImpl implements _UserPageState {
   const _$UserPageStateImpl(
       {required this.errorMessage,
       required final List<ProfileModel> profile,
-      required this.status})
+      required this.status,
+      required this.uploadedImageUrl})
       : _profile = profile;
 
   @override
@@ -132,10 +152,12 @@ class _$UserPageStateImpl implements _UserPageState {
 
   @override
   final Status status;
+  @override
+  final String? uploadedImageUrl;
 
   @override
   String toString() {
-    return 'UserPageState(errorMessage: $errorMessage, profile: $profile, status: $status)';
+    return 'UserPageState(errorMessage: $errorMessage, profile: $profile, status: $status, uploadedImageUrl: $uploadedImageUrl)';
   }
 
   @override
@@ -146,12 +168,14 @@ class _$UserPageStateImpl implements _UserPageState {
             (identical(other.errorMessage, errorMessage) ||
                 other.errorMessage == errorMessage) &&
             const DeepCollectionEquality().equals(other._profile, _profile) &&
-            (identical(other.status, status) || other.status == status));
+            (identical(other.status, status) || other.status == status) &&
+            (identical(other.uploadedImageUrl, uploadedImageUrl) ||
+                other.uploadedImageUrl == uploadedImageUrl));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, errorMessage,
-      const DeepCollectionEquality().hash(_profile), status);
+      const DeepCollectionEquality().hash(_profile), status, uploadedImageUrl);
 
   @JsonKey(ignore: true)
   @override
@@ -164,7 +188,8 @@ abstract class _UserPageState implements UserPageState {
   const factory _UserPageState(
       {required final String? errorMessage,
       required final List<ProfileModel> profile,
-      required final Status status}) = _$UserPageStateImpl;
+      required final Status status,
+      required final String? uploadedImageUrl}) = _$UserPageStateImpl;
 
   @override
   String? get errorMessage;
@@ -172,6 +197,8 @@ abstract class _UserPageState implements UserPageState {
   List<ProfileModel> get profile;
   @override
   Status get status;
+  @override
+  String? get uploadedImageUrl;
   @override
   @JsonKey(ignore: true)
   _$$UserPageStateImplCopyWith<_$UserPageStateImpl> get copyWith =>

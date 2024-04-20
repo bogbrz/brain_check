@@ -6,6 +6,7 @@ import 'package:brain_check/domain/models/overall_info_model.dart';
 import 'package:brain_check/domain/models/profile_model.dart';
 import 'package:brain_check/domain/repositories/questions_repository.dart';
 import 'package:brain_check/domain/repositories/ranking_repository.dart';
+import 'package:brain_check/domain/repositories/storage_repository.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'home_page_state.dart';
@@ -13,8 +14,11 @@ part 'generated/home_page_cubit.freezed.dart';
 
 class HomePageCubit extends Cubit<HomePageState> {
   HomePageCubit(
-      {required this.rankingRepository, required this.questionRepository})
+      {required this.rankingRepository,
+      required this.questionRepository,
+      required this.storageRepository})
       : super(HomePageState(
+            uploadedImageUrl: null,
             status: Status.initial,
             errorMessage: null,
             profile: [],
@@ -25,6 +29,7 @@ class HomePageCubit extends Cubit<HomePageState> {
                 totalNumOfVerifiedQuestions: 0)));
   final RankingRepository rankingRepository;
   final QuestionRepository questionRepository;
+  final StorageRepository storageRepository;
   StreamSubscription? streamSubscription;
 
   Future<void> updateLifes(
@@ -42,18 +47,26 @@ class HomePageCubit extends Cubit<HomePageState> {
             totalNumOfQuestions: 0,
             totalNumOfRejectedQuestions: 0,
             totalNumOfVerifiedQuestions: 0),
-        status: Status.loading));
+        status: Status.loading,
+        uploadedImageUrl: null));
+    final uploadedImages = await storageRepository.getImages();
+
+    final uploadedImageUrl = uploadedImages == null
+        ? null
+        : await uploadedImages[0].getDownloadURL();
     final info = await questionRepository.getOverAllInfo();
     streamSubscription =
         rankingRepository.getRankingForUpdate(email: email).listen((event) {
       try {
         emit(HomePageState(
+            uploadedImageUrl: uploadedImageUrl,
             errorMessage: null,
             profile: event,
             overAllInfo: info,
             status: Status.success));
       } catch (error) {
         emit(HomePageState(
+            uploadedImageUrl: null,
             errorMessage: error.toString(),
             profile: [],
             overAllInfo: info,

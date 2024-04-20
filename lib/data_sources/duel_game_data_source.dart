@@ -135,7 +135,7 @@ class DuelGameDataSource {
       {required String email,
       required String nickName,
       required String id,
-      required int playerNumber}) async {
+      required int playerNumber, required String userPicture}) async {
     await FirebaseFirestore.instance
         .collection("GameRooms")
         .doc(id)
@@ -148,7 +148,8 @@ class DuelGameDataSource {
       "ready": false,
       "startGame": false,
       "roundNumber": 1,
-      "category": "not choosen"
+      "category": "not choosen",
+      "userPicture" : userPicture
     });
   }
 

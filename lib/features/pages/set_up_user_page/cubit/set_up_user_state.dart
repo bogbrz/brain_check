@@ -5,5 +5,10 @@ class SetUpUserState with _$SetUpUserState {
   const factory SetUpUserState(
       {required String? errorMessage,
       required List<ProfileModel> profile,
-      required Status status}) = _SetUpUserState;
+      required Status status,
+      required String? uploadImageUrl,
+     
+     
+      
+      }) = _SetUpUserState;
 }
