@@ -40,6 +40,7 @@ class _UserInfoWidgetState extends State<UserInfoWidget> {
     return BlocBuilder<SetUpUserCubit, SetUpUserState>(
       builder: (context, state) {
         print("WIDET ${state.uploadImageUrl}");
+
         return Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -59,19 +60,7 @@ class _UserInfoWidgetState extends State<UserInfoWidget> {
                     isChoosed = false;
                   });
                 },
-                child: CircleAvatar(
-                  radius: MediaQuery.of(context).size.width * 0.2,
-                  backgroundImage: _selectedImage != null
-                      ? Image.file(
-                          _selectedImage!,
-                        ).image
-                      : state.uploadImageUrl == null
-                          ? null
-                          : Image.network(state.uploadImageUrl!).image,
-                  child: _selectedImage == null && state.uploadImageUrl == null
-                      ? Icon(Icons.add_a_photo)
-                      : SizedBox.shrink(),
-                ),
+                child: ProfilePictureWidget(selectedImage: _selectedImage),
               ),
             ),
             isChoosed == false
@@ -79,12 +68,12 @@ class _UserInfoWidgetState extends State<UserInfoWidget> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       IconButton(
-                          onPressed: () {
+                          onPressed: () async {
                             setState(() {
                               isChoosed = true;
                             });
 
-                            context
+                            await context
                                 .read<SetUpUserCubit>()
                                 .uploadImage(file: _selectedImage!)
                                 .then((value) {
@@ -141,6 +130,7 @@ class _UserInfoWidgetState extends State<UserInfoWidget> {
                               nickName: controller.text,
                               email: widget.user!.email.toString(),
                             );
+                        controller.clear();
                       },
                 child: Container(
                     width: MediaQuery.of(context).size.width * 0.3,
@@ -168,5 +158,46 @@ class _UserInfoWidgetState extends State<UserInfoWidget> {
     setState(() {
       _selectedImage = File(returnedImage!.path);
     });
+  }
+}
+
+class ProfilePictureWidget extends StatelessWidget {
+  const ProfilePictureWidget({
+    super.key,
+    required File? selectedImage,
+  }) : _selectedImage = selectedImage;
+
+  final File? _selectedImage;
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<SetUpUserCubit, SetUpUserState>(
+      builder: (context, state) {
+        switch (state.status) {
+          case Status.initial:
+            return const InitialStateWidget();
+          case Status.loading:
+            return const LoadingPictureWidget();
+
+          case Status.error:
+            return ErrorStateWidget(
+                errorMessage: state.errorMessage.toString());
+          case Status.success:
+            return CircleAvatar(
+              radius: MediaQuery.of(context).size.width * 0.2,
+              backgroundImage: _selectedImage != null
+                  ? Image.file(
+                      _selectedImage!,
+                    ).image
+                  : state.uploadImageUrl == null
+                      ? null
+                      : Image.network(state.uploadImageUrl!).image,
+              child: _selectedImage == null && state.uploadImageUrl == null
+                  ? Icon(Icons.add_a_photo)
+                  : SizedBox.shrink(),
+            );
+        }
+      },
+    );
   }
 }

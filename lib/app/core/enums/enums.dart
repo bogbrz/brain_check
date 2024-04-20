@@ -34,30 +34,31 @@ class LoadingStateWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-          gradient: LinearGradient(
-        begin: Alignment.topLeft,
-        end: Alignment.bottomRight,
-        colors: [
-          Color.fromARGB(255, 0, 27, 48),
-          Color.fromARGB(180, 66, 120, 255),
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Transform.scale(scale: 2, child: const CircularProgressIndicator()),
+          Text(
+            AppLocalizations.of(context).gatheringData,
+            style: GoogleFonts.bungee(
+                color: Colors.white,
+                fontSize: MediaQuery.of(context).size.height / 25),
+          )
         ],
-      )),
-      child: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Transform.scale(scale: 2, child: const CircularProgressIndicator()),
-            Text(
-              AppLocalizations.of(context).gatheringData,
-              style: GoogleFonts.bungee(
-                  color: Colors.white,
-                  fontSize: MediaQuery.of(context).size.height / 25),
-            )
-          ],
-        ),
       ),
+    );
+  }
+}
+
+class LoadingPictureWidget extends StatelessWidget {
+  const LoadingPictureWidget({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(shape: BoxShape.circle),
+      child: CircularProgressIndicator(),
     );
   }
 }

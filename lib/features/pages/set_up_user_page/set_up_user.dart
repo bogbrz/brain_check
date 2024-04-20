@@ -51,40 +51,30 @@ class _SetUpUserPageState extends State<SetUpUserPage> {
                       user: widget.user,
                     );
                   }
-                  switch (state.status) {
-                    case Status.initial:
-                      return const InitialStateWidget();
-                    case Status.loading:
-                      return const LoadingStateWidget();
-
-                    case Status.error:
-                      return ErrorStateWidget(
-                          errorMessage: state.errorMessage.toString());
-                    case Status.success:
-                      return Container(
-                        width: MediaQuery.of(context).size.width * 0.8,
-                        height: MediaQuery.of(context).size.height * 0.6,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          gradient: LinearGradient(
-                            begin: Alignment.topLeft,
-                            end: Alignment.bottomRight,
-                            colors: [
-                              Color.fromARGB(255, 251, 251, 251),
-                              Color.fromARGB(180, 66, 120, 255),
-                            ],
-                          ),
+                  
+                  return Container(
+                    width: MediaQuery.of(context).size.width * 0.8,
+                    height: MediaQuery.of(context).size.height * 0.6,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      gradient: LinearGradient(
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                        colors: [
+                          Color.fromARGB(255, 251, 251, 251),
+                          Color.fromARGB(180, 66, 120, 255),
+                        ],
+                      ),
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        UserInfoWidget(
+                          user: widget.user,
                         ),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            UserInfoWidget(
-                              user: widget.user,
-                            ),
-                          ],
-                        ),
-                      );
-                  }
+                      ],
+                    ),
+                  );
                 },
               ),
             ),

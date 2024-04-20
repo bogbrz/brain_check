@@ -80,11 +80,16 @@ class RankingProfileWidget extends StatelessWidget {
                                 ))),
           SizedBox(
               width: MediaQuery.of(context).size.width * 0.37,
-              child: Center(child: Image.network(profile.imageUrl!))),
-          SizedBox(
-              width: MediaQuery.of(context).size.width * 0.37,
               child: Center(
-                  child: i == 1 || i == 2 || i == 3
+                  child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  CircleAvatar(
+                      radius: i == 1 || i == 2 || i == 3
+                          ? MediaQuery.of(context).size.width * 0.09
+                          : MediaQuery.of(context).size.width * 0.05,
+                      backgroundImage: Image.network(profile.imageUrl!).image),
+                  i == 1 || i == 2 || i == 3
                       ? Text(
                           profile.nickName,
                           style: GoogleFonts.bungee(
@@ -96,7 +101,9 @@ class RankingProfileWidget extends StatelessWidget {
                           style: GoogleFonts.bungee(
                               fontSize:
                                   MediaQuery.of(context).size.height / 65),
-                        ))),
+                        )
+                ],
+              ))),
           SizedBox(
               width: MediaQuery.of(context).size.width * 0.1,
               child: i == 1 || i == 2 || i == 3
