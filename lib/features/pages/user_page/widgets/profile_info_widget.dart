@@ -32,150 +32,163 @@ class _ProfileInfoWidgetState extends State<ProfileInfoWidget> {
   var isChoosed = true;
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => getIt<UserPageCubit>()
-        ..getRankingForUpdate(email: widget.user!.email.toString()),
-      child: BlocBuilder<UserPageCubit, UserPageState>(
-        builder: (context, state) {
-          switch (state.status) {
-            case Status.initial:
-              return const InitialStateWidget();
-            case Status.loading:
-              return const LoadingStateWidget();
-            case Status.error:
-              return ErrorStateWidget(
-                  errorMessage: state.errorMessage.toString());
-            case Status.success:
-              return Expanded(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Stack(children: <Widget>[
-                      CircleAvatar(
-                          radius: MediaQuery.of(context).size.width * 0.2,
-                          backgroundImage: state.uploadedImageUrl == null
-                              ? null
-                              : isChoosed == true && _selectedImage == null
-                                  ? Image.network(
-                                          state.uploadedImageUrl.toString())
-                                      .image
-                                  : _selectedImage != null
-                                      ? Image.file(_selectedImage!).image
-                                      : Image.network(
-                                              state.uploadedImageUrl.toString())
-                                          .image),
-                      Positioned(
-                          left: MediaQuery.of(context).size.width * 0.3,
-                          child: IconButton.filledTonal(
-                              iconSize:
-                                  MediaQuery.of(context).size.width * 0.05,
-                              onPressed: () {
-                                setState(() {
-                                  isChoosed = false;
-                                });
-                                _pickImageFromGallery();
-                              },
-                              icon: Icon(
-                                Icons.edit_sharp,
-                              )))
-                    ]),
+    return BlocBuilder<UserPageCubit, UserPageState>(
+      builder: (context, state) {
+        switch (state.status) {
+          case Status.initial:
+            return const InitialStateWidget();
+          case Status.loading:
+            return const LoadingStateWidget();
+          case Status.error:
+            return ErrorStateWidget(
+                errorMessage: state.errorMessage.toString());
+          case Status.success:
+            return Expanded(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Stack(children: <Widget>[
+                    CircleAvatar(
+                        radius: MediaQuery.of(context).size.width * 0.2,
+                        backgroundImage: state.uploadedImageUrl == null
+                            ? null
+                            : isChoosed == true && _selectedImage == null
+                                ? Image.network(
+                                        state.uploadedImageUrl.toString())
+                                    .image
+                                : _selectedImage != null
+                                    ? Image.file(_selectedImage!).image
+                                    : Image.network(
+                                            state.uploadedImageUrl.toString())
+                                        .image),
+                    Positioned(
+                        left: MediaQuery.of(context).size.width * 0.3,
+                        child: IconButton.filledTonal(
+                            iconSize: MediaQuery.of(context).size.width * 0.05,
+                            onPressed: () async {
+                              setState(() {
+                                isChoosed = false;
+                              });
+                              _pickImageFromGallery();
+
+                              print(state.uploadedImageUrl);
+                            },
+                            icon: Icon(
+                              Icons.edit_sharp,
+                            )))
+                  ]),
+                  isChoosed == false
+                      ? Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            IconButton(
+                                onPressed: () {
+                                  context
+                                      .read<UserPageCubit>()
+                                      .uploadImage(file: _selectedImage!)
+                                      .then((value) async {
+                                    await context
+                                        .read<UserPageCubit>()
+                                        .getRankingForUpdate(
+                                            email:
+                                                widget.user!.email.toString());
+                                  });
+                                },
+                                icon: Icon(
+                                  Icons.check_box_rounded,
+                                  color: Colors.green,
+                                )),
+                            IconButton(
+                                onPressed: () {
+                                  setState(() {
+                                    _selectedImage = null;
+                                  });
+                                },
+                                icon: Icon(
+                                  Icons.cancel,
+                                  color: Colors.red,
+                                ))
+                          ],
+                        )
+                      : SizedBox.shrink(),
+                  for (final profile in state.profile) ...[
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Text(
+                              "${AppLocalizations.of(context).yourNickName}: ${profile.nickName}",
+                              textAlign: TextAlign.left,
+                              style: GoogleFonts.bungee(
+                                  fontSize:
+                                      MediaQuery.of(context).size.height / 35)),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Text(
+                            "${AppLocalizations.of(context).yourEmail}: ${widget.user!.email}",
+                            style: GoogleFonts.bungee(
+                                fontSize:
+                                    MediaQuery.of(context).size.height / 35),
+                            textAlign: TextAlign.left,
+                          ),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Text(
+                            "${AppLocalizations.of(context).quizPlayerd}: ${profile.gamesPlayed} ",
+                            style: GoogleFonts.bungee(
+                                fontSize:
+                                    MediaQuery.of(context).size.height / 35),
+                            textAlign: TextAlign.left,
+                          ),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Text(
+                            "${AppLocalizations.of(context).personalRating}: ${profile.points}",
+                            style: GoogleFonts.bungee(
+                                fontSize:
+                                    MediaQuery.of(context).size.height / 35),
+                            textAlign: TextAlign.left,
+                          ),
+                        ),
+                      ],
+                    ),
                     isChoosed == false
-                        ? Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              IconButton(
+                        ? BlocBuilder<UserPageCubit, UserPageState>(
+                            builder: (context, state) {
+                              return ElevatedButton(
                                   onPressed: () {
+                                    context
+                                        .read<UserPageCubit>()
+                                        .updateImageUrl(
+                                            imageUrl: state.uploadedImageUrl!,
+                                            docId: state.profile[0].id);
+
                                     setState(() {
                                       isChoosed = true;
                                     });
-                                    context
-                                        .read<UserPageCubit>()
-                                        .uploadImage(file: _selectedImage!)
-                                        .then((value) {
-                                      context
-                                          .read<UserPageCubit>()
-                                          .updateImageUrl(
-                                              imageUrl: state.uploadedImageUrl!,
-                                              docId: state.profile[0].id);
-                                    });
+                                    print("BUTTON ${state.uploadedImageUrl}");
                                   },
-                                  icon: Icon(
-                                    Icons.check_box_rounded,
-                                    color: Colors.green,
-                                  )),
-                              IconButton(
-                                  onPressed: () {
-                                    setState(() {
-                                      _selectedImage = null;
-                                    });
-                                  },
-                                  icon: Icon(
-                                    Icons.cancel,
-                                    color: Colors.red,
-                                  ))
-                            ],
+                                  child: Text("Accept"));
+                            },
                           )
-                        : SizedBox.shrink(),
-                    for (final profile in state.profile) ...[
-                      Row(
-                        children: [
-                          Expanded(
-                            child: Text(
-                                "${AppLocalizations.of(context).yourNickName}: ${profile.nickName}",
-                                textAlign: TextAlign.left,
-                                style: GoogleFonts.bungee(
-                                    fontSize:
-                                        MediaQuery.of(context).size.height /
-                                            35)),
-                          ),
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          Expanded(
-                            child: Text(
-                              "${AppLocalizations.of(context).yourEmail}: ${widget.user!.email}",
-                              style: GoogleFonts.bungee(
-                                  fontSize:
-                                      MediaQuery.of(context).size.height / 35),
-                              textAlign: TextAlign.left,
-                            ),
-                          ),
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          Expanded(
-                            child: Text(
-                              "${AppLocalizations.of(context).quizPlayerd}: ${profile.gamesPlayed} ",
-                              style: GoogleFonts.bungee(
-                                  fontSize:
-                                      MediaQuery.of(context).size.height / 35),
-                              textAlign: TextAlign.left,
-                            ),
-                          ),
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          Expanded(
-                            child: Text(
-                              "${AppLocalizations.of(context).personalRating}: ${profile.points}",
-                              style: GoogleFonts.bungee(
-                                  fontSize:
-                                      MediaQuery.of(context).size.height / 35),
-                              textAlign: TextAlign.left,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
+                        : SizedBox.shrink()
                   ],
-                ),
-              );
-          }
-        },
-      ),
+                ],
+              ),
+            );
+        }
+      },
     );
   }
 

@@ -8,7 +8,7 @@ import 'package:brain_check/domain/repositories/storage_repository.dart';
 import 'package:brain_check/domain/repositories/ranking_repository.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:image_picker/image_picker.dart';
+
 
 part 'set_up_user_state.dart';
 part 'generated/set_up_user_cubit.freezed.dart';

@@ -25,20 +25,17 @@ class PageExtrasWidget extends StatelessWidget {
             height: MediaQuery.of(context).size.height / 4,
             child: const Image(
                 image: AssetImage("images/brain_question_white.png"))),
-        SizedBox(
-          height: MediaQuery.of(context).size.height * 0.3,
-          child: Center(
-            child: Column(
-              children: [
-                Text(
-                  "${AppLocalizations.of(context).welcomeBack} ${profiles[0].nickName}",
-                  textAlign: TextAlign.center,
-                  style: GoogleFonts.bungee(
-                      color: Colors.white,
-                      fontSize: MediaQuery.of(context).size.height / 15),
-                ),
-              ],
-            ),
+        Center(
+          child: Column(
+            children: [
+              Text(
+                "${AppLocalizations.of(context).welcomeBack} ${profiles[0].nickName}",
+                textAlign: TextAlign.center,
+                style: GoogleFonts.bungee(
+                    color: Colors.white,
+                    fontSize: MediaQuery.of(context).size.height / 15),
+              ),
+            ],
           ),
         ),
       ],

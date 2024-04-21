@@ -20,8 +20,11 @@ class UserPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
+    return BlocProvider(
+      create: (context) => getIt<UserPageCubit>()
+        ..getRankingForUpdate(email: user!.email.toString()),
+      child: Scaffold(
+          body: Container(
         decoration: BoxDecoration(
             gradient: LinearGradient(
           begin: Alignment.topLeft,
@@ -33,36 +36,30 @@ class UserPage extends StatelessWidget {
         )),
         child: Center(
           child: Container(
-            padding: const EdgeInsets.all(8),
-            height: MediaQuery.of(context).size.height * 0.8,
-            width: MediaQuery.of(context).size.width * 0.8,
-            decoration: BoxDecoration(
-                color: Colors.white,
-                gradient: LinearGradient(
-                  begin: Alignment.centerLeft,
-                  end: Alignment.centerRight,
-                  colors: [
-                    Color.fromARGB(255, 255, 255, 255),
-                    Color.fromARGB(180, 66, 120, 255),
-                  ],
-                ),
-                borderRadius: BorderRadius.circular(10)),
-            child: 
-               Column(
-                      children: [
-                        ProfileInfoWidget(
-                       
-                          user: user,
-                          
-                        ),
-                        const SignOutWidget()
-                      ],
-                    )
-                
-            
-          ),
+              padding: const EdgeInsets.all(8),
+              height: MediaQuery.of(context).size.height * 0.8,
+              width: MediaQuery.of(context).size.width * 0.8,
+              decoration: BoxDecoration(
+                  color: Colors.white,
+                  gradient: LinearGradient(
+                    begin: Alignment.centerLeft,
+                    end: Alignment.centerRight,
+                    colors: [
+                      Color.fromARGB(255, 255, 255, 255),
+                      Color.fromARGB(180, 66, 120, 255),
+                    ],
+                  ),
+                  borderRadius: BorderRadius.circular(10)),
+              child: Column(
+                children: [
+                  ProfileInfoWidget(
+                    user: user,
+                  ),
+                  const SignOutWidget()
+                ],
+              )),
         ),
-      ),
+      )),
     );
   }
 }
