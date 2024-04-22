@@ -1,4 +1,3 @@
-import 'package:brain_check/app/core/enums/enums.dart';
 import 'package:brain_check/app/injection_container.dart';
 
 import 'package:brain_check/features/pages/set_up_user_page/cubit/set_up_user_cubit.dart';
@@ -9,16 +8,12 @@ import 'package:brain_check/navigator_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SetUpUserPage extends StatefulWidget {
-  const SetUpUserPage({
+  SetUpUserPage({
     super.key,
-    required this.user,
   });
-  final User? user;
-
+  final User? user = FirebaseAuth.instance.currentUser;
   @override
   State<SetUpUserPage> createState() => _SetUpUserPageState();
 }
@@ -51,7 +46,7 @@ class _SetUpUserPageState extends State<SetUpUserPage> {
                       user: widget.user,
                     );
                   }
-                  
+
                   return Container(
                     width: MediaQuery.of(context).size.width * 0.8,
                     height: MediaQuery.of(context).size.height * 0.6,

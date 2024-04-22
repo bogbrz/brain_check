@@ -1,10 +1,8 @@
 import 'dart:io';
 
 import 'package:brain_check/app/core/enums/enums.dart';
-import 'package:brain_check/app/injection_container.dart';
 import 'package:brain_check/features/pages/set_up_user_page/cubit/set_up_user_cubit.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -136,10 +134,17 @@ class _UserInfoWidgetState extends State<UserInfoWidget> {
                     width: MediaQuery.of(context).size.width * 0.3,
                     height: MediaQuery.of(context).size.height * 0.075,
                     decoration: BoxDecoration(
-                        color: Colors.white,
-                        border: Border.all(
-                          width: 8,
-                        )),
+                      borderRadius: BorderRadius.circular(
+                          MediaQuery.of(context).size.width * 0.05),
+                      gradient: LinearGradient(
+                        begin: Alignment.topRight,
+                        end: Alignment.bottomLeft,
+                        colors: [
+                          Color.fromARGB(255, 255, 255, 255),
+                          Color.fromARGB(180, 53, 94, 197),
+                        ],
+                      ),
+                    ),
                     child: Center(
                         child: Text(
                       AppLocalizations.of(context).set,

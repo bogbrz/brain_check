@@ -23,7 +23,7 @@ class _LogInPageState extends State<LogInPage> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => getIt<LogInPageCubit>(),
+      create: (context) => getIt<LogInPageCubit>()..authStateChanges(),
       child: BlocBuilder<LogInPageCubit, LogInPageState>(
         builder: (context, state) {
           return SafeArea(

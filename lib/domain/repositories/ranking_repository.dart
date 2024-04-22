@@ -64,8 +64,11 @@ class RankingRepository {
   Future<void> updateRanking({required int points, required String id}) async {
     return rankingFireBaseDataSource.updateRanking(points: points, docId: id);
   }
-  Future<void> updateImageUrl({ required String imageUrl, required String docId}) async {
-    return rankingFireBaseDataSource.updateImageUrl(imageUrl: imageUrl, docId: docId);
+  Future<void> updateProfilePicture({ required String imageUrl, required String docId, }) async {
+    return rankingFireBaseDataSource.updateProfile(imageUrl: imageUrl, docId: docId, );
+  }
+  Future<void> updateNickName({ required String docId, required String nickName}) async {
+    return rankingFireBaseDataSource.updateNickName( docId: docId, nickName: nickName);
   }
 
   Future<void> setStartTime({required String playerId}) async {

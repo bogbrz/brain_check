@@ -1,12 +1,9 @@
 import 'dart:io';
 
 import 'package:brain_check/app/core/enums/enums.dart';
-import 'package:brain_check/app/injection_container.dart';
-import 'package:brain_check/domain/models/profile_model.dart';
 import 'package:brain_check/features/pages/user_page/cubit/user_page_cubit.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -28,8 +25,18 @@ class ProfileInfoWidget extends StatefulWidget {
 }
 
 class _ProfileInfoWidgetState extends State<ProfileInfoWidget> {
+  final controller = TextEditingController();
   File? _selectedImage;
-  var isChoosed = true;
+  @override
+  void initState() {
+    controller.addListener(() {
+      setState(() {});
+    });
+
+    super.initState();
+  }
+
+  var isEditing = false;
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<UserPageCubit, UserPageState>(
@@ -47,12 +54,35 @@ class _ProfileInfoWidgetState extends State<ProfileInfoWidget> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  Stack(children: <Widget>[
-                    CircleAvatar(
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      IconButton.filledTonal(
+                          iconSize: MediaQuery.of(context).size.width * 0.05,
+                          onPressed: () async {
+                            setState(() {
+                              isEditing = true;
+                            });
+                            print(isEditing);
+                          },
+                          icon: Icon(
+                            Icons.edit_sharp,
+                          ))
+                    ],
+                  ),
+                  InkWell(
+                    onTap: isEditing == false
+                        ? null
+                        : () {
+                            _pickImageFromGallery();
+
+                            print(state.uploadedImageUrl);
+                          },
+                    child: CircleAvatar(
                         radius: MediaQuery.of(context).size.width * 0.2,
                         backgroundImage: state.uploadedImageUrl == null
                             ? null
-                            : isChoosed == true && _selectedImage == null
+                            : isEditing == false && _selectedImage == null
                                 ? Image.network(
                                         state.uploadedImageUrl.toString())
                                     .image
@@ -61,67 +91,55 @@ class _ProfileInfoWidgetState extends State<ProfileInfoWidget> {
                                     : Image.network(
                                             state.uploadedImageUrl.toString())
                                         .image),
-                    Positioned(
-                        left: MediaQuery.of(context).size.width * 0.3,
-                        child: IconButton.filledTonal(
-                            iconSize: MediaQuery.of(context).size.width * 0.05,
-                            onPressed: () async {
-                              setState(() {
-                                isChoosed = false;
-                              });
-                              _pickImageFromGallery();
-
-                              print(state.uploadedImageUrl);
-                            },
-                            icon: Icon(
-                              Icons.edit_sharp,
-                            )))
-                  ]),
-                  isChoosed == false
-                      ? Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            IconButton(
-                                onPressed: () {
-                                  context
-                                      .read<UserPageCubit>()
-                                      .uploadImage(file: _selectedImage!)
-                                      .then((value) async {
-                                    await context
-                                        .read<UserPageCubit>()
-                                        .getRankingForUpdate(
-                                            email:
-                                                widget.user!.email.toString());
-                                  });
-                                },
-                                icon: Icon(
-                                  Icons.check_box_rounded,
-                                  color: Colors.green,
-                                )),
-                            IconButton(
-                                onPressed: () {
-                                  setState(() {
-                                    _selectedImage = null;
-                                  });
-                                },
-                                icon: Icon(
-                                  Icons.cancel,
-                                  color: Colors.red,
-                                ))
-                          ],
-                        )
-                      : SizedBox.shrink(),
+                  ),
                   for (final profile in state.profile) ...[
                     Row(
                       children: [
-                        Expanded(
-                          child: Text(
-                              "${AppLocalizations.of(context).yourNickName}: ${profile.nickName}",
-                              textAlign: TextAlign.left,
-                              style: GoogleFonts.bungee(
-                                  fontSize:
-                                      MediaQuery.of(context).size.height / 35)),
-                        ),
+                        isEditing == false
+                            ? Expanded(
+                                child: Text(
+                                    "${AppLocalizations.of(context).yourNickName}: ${profile.nickName}",
+                                    textAlign: TextAlign.left,
+                                    style: GoogleFonts.bungee(
+                                        fontSize:
+                                            MediaQuery.of(context).size.height /
+                                                35)))
+                            : Expanded(
+                                child: Container(
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.6,
+                                  child: Column(
+                                    children: [
+                                      Row(
+                                        children: [
+                                          Text(
+                                              "${AppLocalizations.of(context).yourNickName}: ",
+                                              textAlign: TextAlign.left,
+                                              style: GoogleFonts.bungee(
+                                                  fontSize:
+                                                      MediaQuery.of(context)
+                                                              .size
+                                                              .height /
+                                                          35)),
+                                        ],
+                                      ),
+                                      TextField(
+                                        maxLength: 13,
+                                        style: GoogleFonts.bungee(
+                                            fontSize: MediaQuery.of(context)
+                                                    .size
+                                                    .height /
+                                                35),
+                                        decoration: InputDecoration(
+                                          hintText: profile.nickName,
+                                          hintStyle: GoogleFonts.bungee(),
+                                        ),
+                                        controller: controller,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              )
                       ],
                     ),
                     Row(
@@ -163,20 +181,108 @@ class _ProfileInfoWidgetState extends State<ProfileInfoWidget> {
                         ),
                       ],
                     ),
-                    isChoosed == false
+                    isEditing == true
                         ? BlocBuilder<UserPageCubit, UserPageState>(
                             builder: (context, state) {
                               return ElevatedButton(
                                   onPressed: () {
+                                    // _selectedImage == null &&
+                                    //         controller.text.isNotEmpty
+                                    //     ? context
+                                    //         .read<UserPageCubit>()
+                                    //         .updateProfile(
+                                    //             nickName:
+                                    //                 controller.text.isEmpty
+                                    //                     ? profile.nickName
+                                    //                     : controller.text,
+                                    //             imageUrl:
+                                    //                 state.uploadedImageUrl!,
+                                    //             docId: state.profile[0].id)
+                                    //         .then((value) {
+                                    //         setState(() {
+                                    //           isEditing = false;
+                                    //         });
+                                    //         print("KONTROLER $controller.");
+                                    //         controller.clear();
+                                    //       })
+                                    //     :
                                     context
                                         .read<UserPageCubit>()
-                                        .updateImageUrl(
-                                            imageUrl: state.uploadedImageUrl!,
-                                            docId: state.profile[0].id);
+                                        .uploadImage(file: _selectedImage!)
+                                        .then(
+                                      (value) async {
+                                        await context
+                                            .read<UserPageCubit>()
+                                            .getRankingForUpdate(
+                                                email: widget.user!.email
+                                                    .toString());
 
-                                    setState(() {
-                                      isChoosed = true;
+                                        print("KONTROLER $controller.");
+                                      },
+                                    ).then((value) {
+                                      print("Kontroler $controller");
+                                      context
+                                          .read<UserPageCubit>()
+                                          .updateProfilePicture(
+                                              imageUrl: state.uploadedImageUrl!,
+                                              docId: state.profile[0].id);
                                     });
+                                    context
+                                        .read<UserPageCubit>()
+                                        .updateNickName(
+                                            docId: profile.id,
+                                            nickName: controller.text.isEmpty
+                                                ? profile.nickName
+                                                : controller.text);
+                                    setState(() {
+                                      isEditing = false;
+                                    });
+                                    controller.clear();
+
+                                    // _selectedImage != null
+                                    //     ?
+                                    // context
+                                    //         .read<UserPageCubit>()
+                                    //         .uploadImage(file: _selectedImage!)
+                                    //         .then((value) async {
+                                    //         await context
+                                    //             .read<UserPageCubit>()
+                                    //             .getRankingForUpdate(
+                                    //                 email: widget.user!.email
+                                    //                     .toString());
+                                    //       }).then((value) {
+                                    //         context
+                                    //             .read<UserPageCubit>()
+                                    //             .updateProfile(
+                                    //                 nickName:
+                                    //                     controller.text.isEmpty
+                                    //                         ? profile.nickName
+                                    //                         : controller.text,
+                                    //                 imageUrl:
+                                    //                     state.uploadedImageUrl!,
+                                    //                 docId: state.profile[0].id)
+                                    //             .then((value) {
+                                    //           setState(() {
+                                    //             isEditing = false;
+                                    //           });
+                                    //         });
+                                    //       })
+                                    //     : context
+                                    //         .read<UserPageCubit>()
+                                    //         .updateProfile(
+                                    //             nickName:
+                                    //                 controller.text.isEmpty
+                                    //                     ? profile.nickName
+                                    //                     : controller.text,
+                                    //             imageUrl:
+                                    //                 state.uploadedImageUrl!,
+                                    //             docId: state.profile[0].id)
+                                    //         .then((value) {
+                                    //         setState(() {
+                                    //           isEditing = false;
+                                    //         });
+                                    //       });
+
                                     print("BUTTON ${state.uploadedImageUrl}");
                                   },
                                   child: Text("Accept"));

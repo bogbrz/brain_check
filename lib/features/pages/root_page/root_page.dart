@@ -8,10 +8,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class RootPage extends StatelessWidget {
   const RootPage({
-  
     super.key,
   });
-
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +20,7 @@ class RootPage extends StatelessWidget {
           if (state.user == null) {
             return const LogInPage();
           }
-          return SetUpUserPage(user: state.user, );
+          return SetUpUserPage();
         }));
   }
 }

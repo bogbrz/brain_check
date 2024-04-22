@@ -35,15 +35,25 @@ class RankingFireBaseDataSource {
       "lifes": FieldValue.increment(-1),
     });
   }
-  Future<void> updateImageUrl(
-      {required String imageUrl, required String docId}) async {
+  Future<void> updateProfile(
+      {required String imageUrl, required String docId, }) async {
     await FirebaseFirestore.instance.collection("Ranking").doc(docId).update({
       
       
       "imageUrl": imageUrl,
+    
     });
   }
 
+ Future<void> updateNickName(
+      { required String docId, required String nickName}) async {
+    await FirebaseFirestore.instance.collection("Ranking").doc(docId).update({
+      
+      
+    
+      "nickName" : nickName
+    });
+  }
   Stream<QuerySnapshot<Map<String, dynamic>>> getRanking() {
     return FirebaseFirestore.instance
         .collection("Ranking")

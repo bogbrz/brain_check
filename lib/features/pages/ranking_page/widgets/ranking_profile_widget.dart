@@ -88,7 +88,9 @@ class RankingProfileWidget extends StatelessWidget {
                       radius: i == 1 || i == 2 || i == 3
                           ? MediaQuery.of(context).size.width * 0.09
                           : MediaQuery.of(context).size.width * 0.05,
-                      backgroundImage: Image.network(profile.imageUrl!).image),
+                      backgroundImage: profile.imageUrl == null
+                          ? null
+                          : Image.network(profile.imageUrl!).image),
                   i == 1 || i == 2 || i == 3
                       ? Text(
                           profile.nickName,

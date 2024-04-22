@@ -6,7 +6,6 @@ import 'package:brain_check/app/core/enums/enums.dart';
 import 'package:brain_check/domain/models/profile_model.dart';
 import 'package:brain_check/domain/repositories/storage_repository.dart';
 import 'package:brain_check/domain/repositories/ranking_repository.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 

@@ -6,7 +6,6 @@ import 'package:brain_check/domain/models/profile_model.dart';
 import 'package:brain_check/domain/repositories/authentication_repository.dart';
 import 'package:brain_check/domain/repositories/ranking_repository.dart';
 import 'package:brain_check/domain/repositories/storage_repository.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 part 'user_page_state.dart';
 part 'generated/user_page_cubit.freezed.dart';
@@ -56,9 +55,22 @@ class UserPageCubit extends Cubit<UserPageState> {
     });
   }
 
-  Future<void> updateImageUrl(
-      {required String imageUrl, required String docId}) async {
-    await rankingRepository.updateImageUrl(imageUrl: imageUrl, docId: docId);
+  Future<void> updateProfilePicture(
+      {required String imageUrl,
+      required String docId,
+     }) async {
+
+    await rankingRepository.updateProfilePicture(
+        imageUrl: imageUrl, docId: docId, );
+    print("UPDATE");
+  }
+   Future<void> updateNickName(
+      {
+      required String docId,
+      required String nickName}) async {
+
+    await rankingRepository.updateNickName(
+        docId: docId, nickName: nickName);
     print("UPDATE");
   }
 

@@ -1,4 +1,3 @@
-import 'package:brain_check/app/core/enums/enums.dart';
 import 'package:brain_check/app/injection_container.dart';
 
 import 'package:brain_check/features/pages/user_page/cubit/user_page_cubit.dart';
@@ -8,8 +7,6 @@ import 'package:brain_check/features/pages/user_page/widgets/sign_out_widget.dar
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class UserPage extends StatelessWidget {
   const UserPage({
@@ -36,7 +33,7 @@ class UserPage extends StatelessWidget {
         )),
         child: Center(
           child: Container(
-              padding: const EdgeInsets.all(8),
+              padding: EdgeInsets.all(MediaQuery.of(context).size.width * 0.05),
               height: MediaQuery.of(context).size.height * 0.8,
               width: MediaQuery.of(context).size.width * 0.8,
               decoration: BoxDecoration(
