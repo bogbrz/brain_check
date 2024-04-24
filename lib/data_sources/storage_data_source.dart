@@ -15,7 +15,10 @@ class StorageDataSource {
     final testName = "name";
 
     final uploadRef = storageRef.child("$userId/uploads/$testName.jpg");
-    await uploadRef.putFile(file);
+
+    await uploadRef.putFile(file).then((p0) {
+      print("UPLOADED IMAGE ");
+    });
   }
 
   Future<List<Reference>?> getImages() async {

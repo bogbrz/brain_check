@@ -26,6 +26,7 @@ class HomePage extends StatelessWidget {
         child: BlocConsumer<HomePageCubit, HomePageState>(
             listener: (context, state) {},
             builder: (context, state) {
+              print("DISPLAY NAME : ${user!.displayName}");
               switch (state.status) {
                 case Status.initial:
                   return const InitialStateWidget();

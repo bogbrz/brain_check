@@ -14,12 +14,14 @@ class AuthDataSource {
   }
 
   Future<void> createUserWithEmailAndPassword(
-      {required String email, required String password}) async {
+      {required String email,
+      required String password,
+    }) async {
     await FirebaseAuth.instance
         .createUserWithEmailAndPassword(email: email, password: password);
   }
 
-    Future<void> signOut() async {
+  Future<void> signOut() async {
     await FirebaseAuth.instance.signOut();
   }
 }

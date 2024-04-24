@@ -7,6 +7,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 final emailController = TextEditingController();
 final passwordController = TextEditingController();
+final nickNameController = TextEditingController();
 
 class LogInPage extends StatefulWidget {
   const LogInPage({

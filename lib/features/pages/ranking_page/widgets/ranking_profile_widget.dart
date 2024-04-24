@@ -96,13 +96,13 @@ class RankingProfileWidget extends StatelessWidget {
                           profile.nickName,
                           style: GoogleFonts.bungee(
                               fontSize:
-                                  MediaQuery.of(context).size.height / 55),
+                                  MediaQuery.of(context).size.height / 65),
                         )
                       : Text(
                           profile.nickName,
                           style: GoogleFonts.bungee(
                               fontSize:
-                                  MediaQuery.of(context).size.height / 65),
+                                  MediaQuery.of(context).size.height / 70),
                         )
                 ],
               ))),

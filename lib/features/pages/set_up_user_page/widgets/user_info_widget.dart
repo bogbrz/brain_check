@@ -125,7 +125,9 @@ class _UserInfoWidgetState extends State<UserInfoWidget> {
                             .read<SetUpUserCubit>()
                             .addProfileToGlobalRanking(
                               imageUrl: state.uploadImageUrl,
-                              nickName: controller.text,
+                              nickName: controller.text.isNotEmpty
+                                  ? controller.text
+                                  : widget.user!.displayName.toString(),
                               email: widget.user!.email.toString(),
                             );
                         controller.clear();

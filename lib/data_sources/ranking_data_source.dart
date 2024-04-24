@@ -24,6 +24,8 @@ class RankingFireBaseDataSource {
       "gameStarted": DateTime.now(),
       "gameEnd": DateTime.now(),
       "imageUrl": imageUrl
+    }).then((value) {
+      FirebaseAuth.instance.currentUser!.updateDisplayName(nickName);
     });
   }
 
@@ -35,25 +37,19 @@ class RankingFireBaseDataSource {
       "lifes": FieldValue.increment(-1),
     });
   }
+
   Future<void> updateProfile(
-      {required String imageUrl, required String docId, }) async {
+      {required String imageUrl,
+      required String docId,
+      required String nickName}) async {
     await FirebaseFirestore.instance.collection("Ranking").doc(docId).update({
-      
-      
+      "nickName": nickName,
       "imageUrl": imageUrl,
-    
+    }).then((value) {
+      FirebaseAuth.instance.currentUser!.updateDisplayName(nickName);
     });
   }
 
- Future<void> updateNickName(
-      { required String docId, required String nickName}) async {
-    await FirebaseFirestore.instance.collection("Ranking").doc(docId).update({
-      
-      
-    
-      "nickName" : nickName
-    });
-  }
   Stream<QuerySnapshot<Map<String, dynamic>>> getRanking() {
     return FirebaseFirestore.instance
         .collection("Ranking")

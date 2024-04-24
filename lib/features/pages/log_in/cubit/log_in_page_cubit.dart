@@ -43,10 +43,10 @@ class LogInPageCubit extends Cubit<LogInPageState> {
   }
 
   Future<void> createUserWithEmailAndPassword(
-      {required String email, required String password}) async {
+      {required String email, required String password, }) async {
     try {
       await authRepository.createUserWithEmailAndPassword(
-          email: email, password: password);
+          email: email, password: password,);
     } catch (error) {
       LogInPageState(
         user: null,

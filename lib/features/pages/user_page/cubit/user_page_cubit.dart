@@ -55,28 +55,26 @@ class UserPageCubit extends Cubit<UserPageState> {
     });
   }
 
-  Future<void> updateProfilePicture(
+  Future<void> updateProfile(
       {required String imageUrl,
       required String docId,
-     }) async {
-
-    await rankingRepository.updateProfilePicture(
-        imageUrl: imageUrl, docId: docId, );
-    print("UPDATE");
-  }
-   Future<void> updateNickName(
-      {
-      required String docId,
       required String nickName}) async {
-
-    await rankingRepository.updateNickName(
-        docId: docId, nickName: nickName);
+    await rankingRepository.updateProfile(
+      nickName: nickName,
+      imageUrl: imageUrl,
+      docId: docId,
+    );
     print("UPDATE");
   }
 
-  Future<void> uploadImage({required File file}) async {
-    await storageRepository.uploadImage(file: file);
-    print("Dupa");
+ 
+
+  Future<void> uploadImage({required File? file}) async {
+    if (file == null) {
+      return;
+    } else {
+      return storageRepository.uploadImage(file: file);
+    }
   }
 
   Future<void> signOut() async {
