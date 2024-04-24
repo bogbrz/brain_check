@@ -14,14 +14,14 @@ class RoomsListPage extends StatelessWidget {
   RoomsListPage({
     required this.profile,
     required this.user,
-    required this.userPicture,
+  
     super.key,
   });
 
   final ProfileModel profile;
 
   final User? user;
-  final String? userPicture;
+
 
   @override
   Widget build(BuildContext context) {
@@ -81,7 +81,8 @@ class RoomsListPage extends StatelessWidget {
                                         context: context,
                                         builder: (BuildContext context) {
                                           return JoinRoomWidget(
-                                            userPicture: userPicture,
+                                            profileModel: profile,
+                                          
                                             email: room.ownerMail,
                                             nickName: profile.nickName,
                                             model: room,

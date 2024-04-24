@@ -1,4 +1,5 @@
 import 'package:brain_check/domain/models/game_room_model.dart';
+import 'package:brain_check/domain/models/profile_model.dart';
 
 import 'package:brain_check/features/pages/duel_room_page/duel_room_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -14,7 +15,7 @@ class JoinRoomWidget extends StatelessWidget {
     required this.id,
     required this.user,
     required this.room,
-    required this.userPicture,
+    required this.profileModel,
     super.key,
   });
   final String nickName;
@@ -22,7 +23,7 @@ class JoinRoomWidget extends StatelessWidget {
   final String email;
   final String id;
   final User? user;
-  final String? userPicture;
+  final ProfileModel profileModel;
   final GameRoomModel room;
 
   final TextEditingController passwordController = TextEditingController();
@@ -83,7 +84,7 @@ class JoinRoomWidget extends StatelessWidget {
                   } else {
                     Navigator.of(context).push(MaterialPageRoute(
                         builder: (context) => GameRoomPage(
-                          userPicture: userPicture ,
+                              userPicture: profileModel.imageUrl,
                               nickName: nickName,
                               user: user,
                               roomModel: room,

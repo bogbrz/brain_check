@@ -4,6 +4,7 @@ import 'package:brain_check/features/pages/game_type_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -13,13 +14,11 @@ class StartButtonWidget extends StatelessWidget {
     super.key,
     required this.user,
     required this.profile,
-    required this.userPicture
   });
 
   final User? user;
 
   final ProfileModel profile;
-  final String? userPicture;
 
   @override
   Widget build(BuildContext context) {
@@ -30,12 +29,7 @@ class StartButtonWidget extends StatelessWidget {
         clipBehavior: Clip.hardEdge,
         child: InkWell(
           onTap: () {
-            Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => GameTypePage(
-                  userPicture: userPicture ,
-                      profile: profile,
-                      user: user,
-                    )));
+            context.pushNamed("/gameTypePage", extra: profile);
           },
           child: Container(
             alignment: Alignment.center,

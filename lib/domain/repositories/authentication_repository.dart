@@ -22,6 +22,12 @@ class AuthRepository {
         email: email, password: password, );
   }
 
+   Future<void> updateDisplayName(
+      {required String email,  }) async {
+    await authDataSource.updateDisplayName(
+        email: email,  );
+  }
+
   Future<void> signOut() async {
     await authDataSource.signOut();
   }

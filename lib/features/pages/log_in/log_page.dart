@@ -120,6 +120,10 @@ class _LogInPageState extends State<LogInPage> {
                                 .createUserWithEmailAndPassword(
                                     email: emailController.text,
                                     password: passwordController.text);
+
+                            // context
+                            //     .read<LogInPageCubit>()
+                            //     .updateDisplayName(email: emailController.text);
                           } else {
                             context
                                 .read<LogInPageCubit>()

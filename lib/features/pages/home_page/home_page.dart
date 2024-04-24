@@ -57,7 +57,7 @@ class HomePage extends StatelessWidget {
                           overall: state.overAllInfo,
                         ),
                         StartButtonWidget(
-                          userPicture: state.uploadedImageUrl,
+                      
                           user: user,
                           profile: state.profile[0],
                         ),

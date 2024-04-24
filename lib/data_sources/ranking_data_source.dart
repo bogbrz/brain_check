@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -14,6 +16,7 @@ class RankingFireBaseDataSource {
     if (userId == null) {
       throw Exception("user not logged in");
     }
+
     await FirebaseFirestore.instance.collection("Ranking").add({
       "email": email,
       "nickName": nickName,
@@ -24,9 +27,8 @@ class RankingFireBaseDataSource {
       "gameStarted": DateTime.now(),
       "gameEnd": DateTime.now(),
       "imageUrl": imageUrl
-    }).then((value) {
-      FirebaseAuth.instance.currentUser!.updateDisplayName(nickName);
-    });
+    }).then((value) =>
+        FirebaseAuth.instance.currentUser!.updateDisplayName(nickName));
   }
 
   Future<void> updateRanking(
@@ -45,9 +47,8 @@ class RankingFireBaseDataSource {
     await FirebaseFirestore.instance.collection("Ranking").doc(docId).update({
       "nickName": nickName,
       "imageUrl": imageUrl,
-    }).then((value) {
-      FirebaseAuth.instance.currentUser!.updateDisplayName(nickName);
-    });
+    }).then((value) =>
+        FirebaseAuth.instance.currentUser!.updateDisplayName(nickName));
   }
 
   Stream<QuerySnapshot<Map<String, dynamic>>> getRanking() {
