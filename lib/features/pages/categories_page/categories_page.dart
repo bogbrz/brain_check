@@ -1,6 +1,8 @@
 import 'package:brain_check/app/core/enums/enums.dart';
 import 'package:brain_check/app/injection_container.dart';
+import 'package:brain_check/category_list.dart';
 import 'package:brain_check/domain/models/categories_model.dart';
+import 'package:brain_check/domain/models/difficulty_page_route_model.dart';
 import 'package:brain_check/domain/models/profile_model.dart';
 import 'package:brain_check/features/pages/categories_page/cubit/categories_page_cubit.dart';
 import 'package:brain_check/features/pages/categories_page/widgets/category_widgets.dart';
@@ -72,7 +74,7 @@ class _CategoryPageState extends State<CategoryPage> {
                           children: [
                             IconButton(
                               onPressed: () {
-                                Navigator.of(context).pop();
+                                context.pop();
                               },
                               icon: const Icon(Icons.arrow_back_sharp),
                               color: Colors.white,
@@ -107,23 +109,27 @@ class _CategoryPageState extends State<CategoryPage> {
                                       choosedCategory = 0;
                                     });
 
-                                    // context.pushNamed(
-                                    //   "/difficultyPage",
-                                    //   extra: widget.profileModel,
-                                    // );
+                                    context.pushNamed(
+                                      "/difficultyPage",
+                                      extra: DifficultyRouteModel(
+                                          user: widget.user!,
+                                          profileModel: widget.profileModel,
+                                          category: TriviaCategory(
+                                              id: 0, name: "Random")),
+                                    );
 
-                                    Navigator.of(context).push(
-                                        MaterialPageRoute(
-                                            builder: ((context) =>
-                                                DifficultyPage(
-                                                  profileModel:
-                                                      widget.profileModel,
-                                                  user: widget.user,
-                                                  categoriesModel:
-                                                      TriviaCategory(
-                                                          id: 0,
-                                                          name: "Random"),
-                                                ))));
+                                    // Navigator.of(context).push(
+                                    //     MaterialPageRoute(
+                                    //         builder: ((context) =>
+                                    //             DifficultyPage(
+                                    //               profileModel:
+                                    //                   widget.profileModel,
+                                    //               user: widget.user,
+                                    //               categoriesModel:
+                                    //                   TriviaCategory(
+                                    //                       id: 0,
+                                    //                       name: "Random"),
+                                    //             ))));
                                   },
                                   child: const RandomCategoryWidget(),
                                 ),
@@ -143,16 +149,22 @@ class _CategoryPageState extends State<CategoryPage> {
                                       setState(() {
                                         choosedCategory = category.id;
                                       });
-
-                                      Navigator.of(context).push(
-                                          MaterialPageRoute(
-                                              builder: ((context) =>
-                                                  DifficultyPage(
-                                                    profileModel:
-                                                        widget.profileModel,
-                                                    user: widget.user,
-                                                    categoriesModel: category,
-                                                  ))));
+                                      context.pushNamed(
+                                        "/difficultyPage",
+                                        extra: DifficultyRouteModel(
+                                            user: widget.user!,
+                                            profileModel: widget.profileModel,
+                                            category: category),
+                                      );
+                                      // Navigator.of(context).push(
+                                      //     MaterialPageRoute(
+                                      //         builder: ((context) =>
+                                      //             DifficultyPage(
+                                      //               profileModel:
+                                      //                   widget.profileModel,
+                                      //               user: widget.user,
+                                      //               categoriesModel: category,
+                                      //             ))));
                                     },
                                     child: CategoryWidget(category: category),
                                   ),

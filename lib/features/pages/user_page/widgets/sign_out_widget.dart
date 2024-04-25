@@ -5,6 +5,7 @@ import 'package:firebase_core/firebase_core.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -22,6 +23,7 @@ class SignOutWidget extends StatelessWidget {
           return InkWell(
               onTap: () {
                 print("${FirebaseAuth.instance.currentUser!.email}");
+
                 context.read<UserPageCubit>().signOut();
               },
               child: Container(

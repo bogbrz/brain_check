@@ -1,12 +1,20 @@
 import 'package:brain_check/domain/models/categories_model.dart';
+import 'package:brain_check/domain/models/difficulty_page_route_model.dart';
+import 'package:brain_check/domain/models/duel_room_page_route_model.dart';
 import 'package:brain_check/domain/models/profile_model.dart';
+import 'package:brain_check/domain/models/question_page_route_model.dart';
+import 'package:brain_check/domain/models/result_page_route_model.dart';
 import 'package:brain_check/features/pages/categories_page/categories_page.dart';
 import 'package:brain_check/features/pages/difficulty_page/difficulty_page.dart';
+import 'package:brain_check/features/pages/duel_room_page/duel_room_page.dart';
 import 'package:brain_check/features/pages/game_type_page.dart';
 import 'package:brain_check/features/pages/home_page/home_page.dart';
 import 'package:brain_check/features/pages/log_in/log_page.dart';
+import 'package:brain_check/features/pages/question_page/question_page.dart';
 import 'package:brain_check/features/pages/ranked_game_page/ranked_game_page.dart';
+import 'package:brain_check/features/pages/result_page/result_page.dart';
 import 'package:brain_check/features/pages/rooms_list_page/rooms_list_page.dart';
+import 'package:brain_check/features/pages/root_page/cubit/root_page_cubit.dart';
 import 'package:brain_check/features/pages/root_page/root_page.dart';
 import 'package:brain_check/features/pages/set_up_user_page/set_up_user.dart';
 import 'package:brain_check/features/pages/user_page/user_page.dart';
@@ -36,7 +44,7 @@ Future<String?> appRouteRedirect(
 
 class AppRouter {
   static GoRouter router = GoRouter(
-    redirect: appRouteRedirect,
+    // redirect: appRouteRedirect,
     initialLocation: "/rootPage",
     routes: <RouteBase>[
       GoRoute(
@@ -116,7 +124,7 @@ class AppRouter {
           );
         },
       ),
-       GoRoute(
+      GoRoute(
         path: "/rankedGamePage",
         name: "/rankedGamePage",
         builder: (context, state) {
@@ -129,7 +137,7 @@ class AppRouter {
           );
         },
       ),
-        GoRoute(
+      GoRoute(
         path: "/roomsListPage",
         name: "/roomsListPage",
         builder: (context, state) {
@@ -142,20 +150,55 @@ class AppRouter {
           );
         },
       ),
-
-         GoRoute(
+      GoRoute(
         path: "/difficultyPage",
         name: "/difficultyPage",
         builder: (context, state) {
           // final User? user = state.extra as User?;
-          final ProfileModel profile = state.extra as ProfileModel;
-
-          final TriviaCategory categoriesModel = state.extra as TriviaCategory;
+          final DifficultyRouteModel model =
+              state.extra as DifficultyRouteModel;
 
           return DifficultyPage(
-            user: user,
-            categoriesModel: categoriesModel ,
-            profileModel: profile,
+            model: model,
+          );
+        },
+      ),
+      GoRoute(
+        path: "/questionPage",
+        name: "/questionPage",
+        builder: (context, state) {
+          // final User? user = state.extra as User?;
+          final QuestionPageRouteModel model =
+              state.extra as QuestionPageRouteModel;
+
+          return QuestionPage(
+            model: model,
+          );
+        },
+      ),
+      GoRoute(
+        path: "/resultPage",
+        name: "/resultPage",
+        builder: (context, state) {
+          // final User? user = state.extra as User?;
+          final ResultPageRouteModel model =
+              state.extra as ResultPageRouteModel;
+
+          return ResultPage(
+            model: model,
+          );
+        },
+      ),
+      GoRoute(
+        path: "/duelRoomPage",
+        name: "/duelRoomPage",
+        builder: (context, state) {
+          // final User? user = state.extra as User?;
+          final DuelRoomRoutePageModel model =
+              state.extra as DuelRoomRoutePageModel;
+
+          return DuelRoomPage(
+            model: model,
           );
         },
       ),

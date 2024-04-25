@@ -1,8 +1,8 @@
-part of 'duel_result_cubit.dart';
+part of 'result_cubit.dart';
 
 @freezed
-class DuelResultState with _$DuelResultState {
-  const factory DuelResultState(
+class ResultState with _$ResultState {
+  const factory ResultState(
       {required String? errorMessage,
       required List<ProfileModel> profiles,
       
