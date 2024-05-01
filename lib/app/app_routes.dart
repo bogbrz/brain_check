@@ -1,9 +1,12 @@
+import 'dart:async';
+
 import 'package:brain_check/domain/models/categories_model.dart';
 import 'package:brain_check/domain/models/difficulty_page_route_model.dart';
 import 'package:brain_check/domain/models/duel_room_page_route_model.dart';
 import 'package:brain_check/domain/models/profile_model.dart';
 import 'package:brain_check/domain/models/question_page_route_model.dart';
 import 'package:brain_check/domain/models/result_page_route_model.dart';
+import 'package:brain_check/domain/repositories/authentication_repository.dart';
 import 'package:brain_check/features/pages/categories_page/categories_page.dart';
 import 'package:brain_check/features/pages/difficulty_page/difficulty_page.dart';
 import 'package:brain_check/features/pages/duel_room_page/duel_room_page.dart';
@@ -14,8 +17,7 @@ import 'package:brain_check/features/pages/question_page/question_page.dart';
 import 'package:brain_check/features/pages/ranked_game_page/ranked_game_page.dart';
 import 'package:brain_check/features/pages/result_page/result_page.dart';
 import 'package:brain_check/features/pages/rooms_list_page/rooms_list_page.dart';
-import 'package:brain_check/features/pages/root_page/cubit/root_page_cubit.dart';
-import 'package:brain_check/features/pages/root_page/root_page.dart';
+
 import 'package:brain_check/features/pages/set_up_user_page/set_up_user.dart';
 import 'package:brain_check/features/pages/user_page/user_page.dart';
 import 'package:brain_check/navigator_page.dart';
@@ -25,35 +27,30 @@ import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
 
 final User? user = FirebaseAuth.instance.currentUser;
-Future<String?> appRouteRedirect(
-    BuildContext context, GoRouterState state) async {
-  final loggedIn = user != null &&
-      user!.displayName != null &&
-      state.matchedLocation == "/loginPage";
-  final logg = user != null && state.matchedLocation == "/loginPage";
-  final logginIn = user != null &&
-      user!.displayName == null &&
-      state.matchedLocation == "/loginPage";
-  final signOut = user == null && state.matchedLocation == "/loginPage";
-  if (loggedIn) return "/navigatorPage";
-  if (logg) return "/navigatorPage";
-  if (logginIn) return "/setUpUserPage";
-  if (signOut) return "/loginPage";
-  return null;
-}
 
 class AppRouter {
   static GoRouter router = GoRouter(
-    // redirect: appRouteRedirect,
-    initialLocation: "/rootPage",
+    refreshListenable:
+        GoRouterRefreshStream(FirebaseAuth.instance.authStateChanges()),
+    redirectLimit: 3,
+    redirect: (context, state) {
+      final User? user = FirebaseAuth.instance.currentUser;
+      if (user == null) return "/loginPage";
+      if (user.displayName == null) return "/setUpUserPage";
+      if (user.displayName != null && state.matchedLocation == "/loginPage")
+        return "/navigatorPage";
+
+      return null;
+    },
+    initialLocation: "/loginPage",
     routes: <RouteBase>[
-      GoRoute(
-        path: "/rootPage",
-        name: "/rootPage",
-        builder: (context, state) {
-          return RootPage();
-        },
-      ),
+      // GoRoute(
+      //   path: "/rootPage",
+      //   name: "/rootPage",
+      //   builder: (context, state) {
+      //     return RootPage();
+      //   },
+      // ),
       GoRoute(
         path: "/loginPage",
         name: "/loginPage",
@@ -204,4 +201,18 @@ class AppRouter {
       ),
     ],
   );
+}
+
+class GoRouterRefreshStream extends ChangeNotifier {
+  GoRouterRefreshStream(Stream<dynamic> stream) {
+    notifyListeners();
+    _subscription = stream.asBroadcastStream().listen((_) => notifyListeners());
+  }
+  late final StreamSubscription<dynamic> _subscription;
+
+  @override
+  void dispose() {
+    _subscription.cancel();
+    super.dispose();
+  }
 }

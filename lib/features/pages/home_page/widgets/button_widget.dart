@@ -29,7 +29,7 @@ class StartButtonWidget extends StatelessWidget {
         clipBehavior: Clip.hardEdge,
         child: InkWell(
           onTap: () {
-            context.pushNamed("/gameTypePage", extra: profile);
+            context.push("/gameTypePage", extra: profile);
           },
           child: Container(
             alignment: Alignment.center,
