@@ -4,5 +4,6 @@ part of 'log_in_page_cubit.dart';
 class LogInPageState with _$LogInPageState {
   factory LogInPageState({
     required String errorMessage,
+    required User? user, 
   }) = _LogInPageState;
 }

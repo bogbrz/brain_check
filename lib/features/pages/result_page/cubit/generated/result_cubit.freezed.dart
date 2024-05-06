@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of '../duel_result_cubit.dart';
+part of '../result_cubit.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,7 +15,7 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
-mixin _$DuelResultState {
+mixin _$ResultState {
   String? get errorMessage => throw _privateConstructorUsedError;
   List<ProfileModel> get profiles => throw _privateConstructorUsedError;
   Status get status => throw _privateConstructorUsedError;
@@ -23,15 +23,15 @@ mixin _$DuelResultState {
   Duration? get gameDuration => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $DuelResultStateCopyWith<DuelResultState> get copyWith =>
+  $ResultStateCopyWith<ResultState> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $DuelResultStateCopyWith<$Res> {
-  factory $DuelResultStateCopyWith(
-          DuelResultState value, $Res Function(DuelResultState) then) =
-      _$DuelResultStateCopyWithImpl<$Res, DuelResultState>;
+abstract class $ResultStateCopyWith<$Res> {
+  factory $ResultStateCopyWith(
+          ResultState value, $Res Function(ResultState) then) =
+      _$ResultStateCopyWithImpl<$Res, ResultState>;
   @useResult
   $Res call(
       {String? errorMessage,
@@ -42,9 +42,9 @@ abstract class $DuelResultStateCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$DuelResultStateCopyWithImpl<$Res, $Val extends DuelResultState>
-    implements $DuelResultStateCopyWith<$Res> {
-  _$DuelResultStateCopyWithImpl(this._value, this._then);
+class _$ResultStateCopyWithImpl<$Res, $Val extends ResultState>
+    implements $ResultStateCopyWith<$Res> {
+  _$ResultStateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -87,7 +87,7 @@ class _$DuelResultStateCopyWithImpl<$Res, $Val extends DuelResultState>
 
 /// @nodoc
 abstract class _$$InitialImplCopyWith<$Res>
-    implements $DuelResultStateCopyWith<$Res> {
+    implements $ResultStateCopyWith<$Res> {
   factory _$$InitialImplCopyWith(
           _$InitialImpl value, $Res Function(_$InitialImpl) then) =
       __$$InitialImplCopyWithImpl<$Res>;
@@ -103,7 +103,7 @@ abstract class _$$InitialImplCopyWith<$Res>
 
 /// @nodoc
 class __$$InitialImplCopyWithImpl<$Res>
-    extends _$DuelResultStateCopyWithImpl<$Res, _$InitialImpl>
+    extends _$ResultStateCopyWithImpl<$Res, _$InitialImpl>
     implements _$$InitialImplCopyWith<$Res> {
   __$$InitialImplCopyWithImpl(
       _$InitialImpl _value, $Res Function(_$InitialImpl) _then)
@@ -173,7 +173,7 @@ class _$InitialImpl implements _Initial {
 
   @override
   String toString() {
-    return 'DuelResultState(errorMessage: $errorMessage, profiles: $profiles, status: $status, gameLenght: $gameLenght, gameDuration: $gameDuration)';
+    return 'ResultState(errorMessage: $errorMessage, profiles: $profiles, status: $status, gameLenght: $gameLenght, gameDuration: $gameDuration)';
   }
 
   @override
@@ -207,7 +207,7 @@ class _$InitialImpl implements _Initial {
       __$$InitialImplCopyWithImpl<_$InitialImpl>(this, _$identity);
 }
 
-abstract class _Initial implements DuelResultState {
+abstract class _Initial implements ResultState {
   const factory _Initial(
       {required final String? errorMessage,
       required final List<ProfileModel> profiles,

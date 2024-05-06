@@ -1,38 +1,38 @@
 import 'package:brain_check/app/core/enums/enums.dart';
 import 'package:brain_check/app/injection_container.dart';
-import 'package:brain_check/domain/models/profile_model.dart';
+import 'package:brain_check/domain/models/question_page_route_model.dart';
+import 'package:brain_check/domain/models/result_page_route_model.dart';
 
-import 'package:brain_check/features/pages/duel_result_page/duel_result_page.dart';
 import 'package:brain_check/features/pages/question_page/cubit/question_page_cubit.dart';
 import 'package:brain_check/features/pages/question_page/widgets/option_widget.dart';
 
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:html_unescape/html_unescape.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class QuestionPage extends StatefulWidget {
-  const QuestionPage({
-    super.key,
-    required this.user,
-    required this.category,
-    required this.difficulty,
-    required this.questionsAmount,
-    required this.gameType,
-    required this.roomId,
-    required this.profileModel,
-  });
+  const QuestionPage({super.key, required this.model
+      // required this.user,
+      // required this.category,
+      // required this.difficulty,
+      // required this.questionsAmount,
+      // required this.gameType,
+      // required this.profileModel,
+      });
 
-  final User? user;
+  final QuestionPageRouteModel model;
 
-  final int? category;
-  final String? difficulty;
-  final int questionsAmount;
-  final GameType gameType;
-  final String? roomId;
-  final ProfileModel profileModel;
+  // final User? user;
+
+  // final int? category;
+  // final String? difficulty;
+  // final int questionsAmount;
+  // final GameType gameType;
+
+  // final ProfileModel profileModel;
 
   @override
   State<QuestionPage> createState() => _QuestionPageState();
@@ -65,10 +65,9 @@ class _QuestionPageState extends State<QuestionPage> {
     return BlocProvider(
       create: (context) => getIt<QuestionPageCubit>()
         ..getQuestion(
-          roomId: widget.roomId,
-          category: widget.category,
-          difficulty: widget.difficulty,
-          questionsAmount: widget.questionsAmount,
+          category: widget.model.categoryId,
+          difficulty: widget.model.difficulty,
+          questionsAmount: widget.model.questionAmount,
         ),
       child: BlocBuilder<QuestionPageCubit, QuestionPageState>(
         builder: (context, state) {
@@ -81,32 +80,34 @@ class _QuestionPageState extends State<QuestionPage> {
               return ErrorStateWidget(
                   errorMessage: state.errorMessage.toString());
             case Status.success:
-              if (index == widget.questionsAmount) {
-                return DuelResultPage(
-                  gameType: widget.gameType,
-                  questionAmount: widget.questionsAmount,
-                  roomId: null,
-                  players: null,
-                  user: widget.user,
-                  ownerEmail: null,
-                  answerOne: answerOne,
-                  answerTwo: answerTwo,
-                  answerThree: answerThree,
-                  answerFour: answerFour,
-                  answerFive: answerFive,
-                  answerSix: answerSix,
-                  answerSeven: answerSeven,
-                  answerEight: answerEight,
-                  answerNine: answerNine,
-                  answerTen: answerTen,
-                  answerEleven: answerEleven,
-                  answerTwelve: answerTwelve,
-                  answerThirteen: answerThirteen,
-                  answerFourteen: answerFourteen,
-                  answerFithteen: answerFithteen,
-                  gameStatus: null,
-                );
-              }
+              // if (index == widget.model.questionAmount) {
+              //   return ResultPage(
+              //     model: ResultPageRouteModel(
+              //       gameType: widget.model.gameType,
+              //       questionAmount: widget.model.questionAmount,
+              //       roomId: null,
+              //       players: null,
+              //       user: widget.model.user,
+              //       ownerEmail: null,
+              //       answerOne: answerOne,
+              //       answerTwo: answerTwo,
+              //       answerThree: answerThree,
+              //       answerFour: answerFour,
+              //       answerFive: answerFive,
+              //       answerSix: answerSix,
+              //       answerSeven: answerSeven,
+              //       answerEight: answerEight,
+              //       answerNine: answerNine,
+              //       answerTen: answerTen,
+              //       answerEleven: answerEleven,
+              //       answerTwelve: answerTwelve,
+              //       answerThirteen: answerThirteen,
+              //       answerFourteen: answerFourteen,
+              //       answerFithteen: answerFithteen,
+              //       gameStatus: null,
+              //     ),
+              //   );
+              // }
 
               return SafeArea(
                 child: Scaffold(
@@ -356,7 +357,9 @@ class _QuestionPageState extends State<QuestionPage> {
                                                 if (choosedAnswer ==
                                                     state.fourthQuestion!
                                                         .correctAnswer
-                                                        .toString()) {}
+                                                        .toString()) {
+                                                           answerFour++;
+                                                        }
                                               });
 
                                               print(choosedAnswer);
@@ -712,9 +715,36 @@ class _QuestionPageState extends State<QuestionPage> {
                                   choosedAnswer = "";
                                   isChoosed = false;
                                 });
-                                if (index == widget.questionsAmount) {
+                                if (index == widget.model.questionAmount) {
                                   context.read<QuestionPageCubit>().setEndTime(
-                                      playerId: widget.profileModel.id);
+                                      playerId: widget.model.profileModel.id);
+
+                                  context.pushReplacement("/resultPage",
+                                      extra: ResultPageRouteModel(
+                                        gameType: widget.model.gameType,
+                                        questionAmount:
+                                            widget.model.questionAmount,
+                                        roomId: null,
+                                        players: null,
+                                        user: widget.model.user,
+                                        ownerEmail: null,
+                                        answerOne: answerOne,
+                                        answerTwo: answerTwo,
+                                        answerThree: answerThree,
+                                        answerFour: answerFour,
+                                        answerFive: answerFive,
+                                        answerSix: answerSix,
+                                        answerSeven: answerSeven,
+                                        answerEight: answerEight,
+                                        answerNine: answerNine,
+                                        answerTen: answerTen,
+                                        answerEleven: answerEleven,
+                                        answerTwelve: answerTwelve,
+                                        answerThirteen: answerThirteen,
+                                        answerFourteen: answerFourteen,
+                                        answerFithteen: answerFithteen,
+                                        gameStatus: null,
+                                      ));
                                 }
                               },
                               child: Text(

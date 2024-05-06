@@ -8,7 +8,6 @@ import 'package:brain_check/features/pages/ranking_page/widgets/ranking_profile_
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class RankingPage extends StatelessWidget {
   RankingPage({super.key});

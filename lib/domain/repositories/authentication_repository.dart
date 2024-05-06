@@ -17,9 +17,15 @@ class AuthRepository {
   }
 
   Future<void> createUserWithEmailAndPassword(
-      {required String email, required String password}) async {
+      {required String email, required String password, }) async {
     await authDataSource.createUserWithEmailAndPassword(
-        email: email, password: password);
+        email: email, password: password, );
+  }
+
+   Future<void> updateDisplayName(
+      {required String email,  }) async {
+    await authDataSource.updateDisplayName(
+        email: email,  );
   }
 
   Future<void> signOut() async {

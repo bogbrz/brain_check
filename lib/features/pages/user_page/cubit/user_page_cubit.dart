@@ -6,7 +6,6 @@ import 'package:brain_check/domain/models/profile_model.dart';
 import 'package:brain_check/domain/repositories/authentication_repository.dart';
 import 'package:brain_check/domain/repositories/ranking_repository.dart';
 import 'package:brain_check/domain/repositories/storage_repository.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 part 'user_page_state.dart';
 part 'generated/user_page_cubit.freezed.dart';
@@ -26,7 +25,7 @@ class UserPageCubit extends Cubit<UserPageState> {
   final StorageRepository storageRepository;
   StreamSubscription? streamSubscription;
 
-  Future<void> getRankingForUpdate({required String email}) async {
+  Future<void> getRankingForUpdate({required String email, required String userId}) async {
     emit(const UserPageState(
         uploadedImageUrl: null,
         errorMessage: null,
@@ -38,7 +37,7 @@ class UserPageCubit extends Cubit<UserPageState> {
         : await uploadedImages[0].getDownloadURL();
 
     streamSubscription =
-        rankingRepository.getRankingForUpdate(email: email).listen((event) {
+        rankingRepository.getRankingForUpdate(email: email,userId: userId ).listen((event) {
       try {
         print("WIDGET $uploadedImageUrl");
         emit(UserPageState(
@@ -56,15 +55,26 @@ class UserPageCubit extends Cubit<UserPageState> {
     });
   }
 
-  Future<void> updateImageUrl(
-      {required String imageUrl, required String docId}) async {
-    await rankingRepository.updateImageUrl(imageUrl: imageUrl, docId: docId);
+  Future<void> updateProfile(
+      {required String imageUrl,
+      required String docId,
+      required String nickName}) async {
+    await rankingRepository.updateProfile(
+      nickName: nickName,
+      imageUrl: imageUrl,
+      docId: docId,
+    );
     print("UPDATE");
   }
 
-  Future<void> uploadImage({required File file}) async {
-    await storageRepository.uploadImage(file: file);
-    print("Dupa");
+ 
+
+  Future<void> uploadImage({required File? file}) async {
+    if (file == null) {
+      return;
+    } else {
+      return storageRepository.uploadImage(file: file);
+    }
   }
 
   Future<void> signOut() async {

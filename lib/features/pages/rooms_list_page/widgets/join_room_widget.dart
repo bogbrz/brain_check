@@ -1,8 +1,10 @@
+import 'package:brain_check/domain/models/duel_room_page_route_model.dart';
 import 'package:brain_check/domain/models/game_room_model.dart';
+import 'package:brain_check/domain/models/profile_model.dart';
 
-import 'package:brain_check/features/pages/duel_room_page/duel_room_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -14,7 +16,7 @@ class JoinRoomWidget extends StatelessWidget {
     required this.id,
     required this.user,
     required this.room,
-    required this.userPicture,
+    required this.profileModel,
     super.key,
   });
   final String nickName;
@@ -22,7 +24,7 @@ class JoinRoomWidget extends StatelessWidget {
   final String email;
   final String id;
   final User? user;
-  final String? userPicture;
+  final ProfileModel profileModel;
   final GameRoomModel room;
 
   final TextEditingController passwordController = TextEditingController();
@@ -67,7 +69,7 @@ class JoinRoomWidget extends StatelessWidget {
                 if (passwordController.text == model.password) {
                   if (room.playersAmount == 2) {
                     passwordController.clear();
-                    Navigator.of(context).pop();
+                    context.pop();
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
                         content: Text(
@@ -81,18 +83,25 @@ class JoinRoomWidget extends StatelessWidget {
                       ),
                     );
                   } else {
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => GameRoomPage(
-                          userPicture: userPicture ,
-                              nickName: nickName,
-                              user: user,
-                              roomModel: room,
-                            )));
+                    context.pushNamed("/duelRoomPage",
+                        extra: DuelRoomRoutePageModel(
+                          userPicture: profileModel.imageUrl,
+                          nickName: nickName,
+                          user: user,
+                          roomModel: room,
+                        ));
+                    // Navigator.of(context).push(MaterialPageRoute(
+                    //     builder: (context) => GameRoomPage(
+                    //           userPicture: profileModel.imageUrl,
+                    //           nickName: nickName,
+                    //           user: user,
+                    //           roomModel: room,
+                    //         )));
                     passwordController.clear();
                   }
                 } else {
                   passwordController.clear();
-                  Navigator.of(context).pop();
+               context.pop();
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
                       content: Text(

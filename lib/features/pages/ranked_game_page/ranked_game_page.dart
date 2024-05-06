@@ -2,11 +2,12 @@ import 'package:brain_check/app/core/enums/enums.dart';
 
 import 'package:brain_check/app/injection_container.dart';
 import 'package:brain_check/domain/models/profile_model.dart';
-import 'package:brain_check/features/pages/question_page/question_page.dart';
+import 'package:brain_check/domain/models/question_page_route_model.dart';
 import 'package:brain_check/features/pages/ranked_game_page/cubit/ranked_game_cubit.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:timer_count_down/timer_controller.dart';
@@ -30,7 +31,7 @@ class RankedGamePage extends StatelessWidget {
 
     return BlocProvider(
         create: (context) => getIt<RankedGameCubit>()
-          ..getRankingForUpdate(email: user!.email.toString()),
+          ..getRankingForUpdate(email: user!.email.toString(),userId: user!.uid),
         child: Container(
           child: Scaffold(
             body: BlocConsumer<RankedGameCubit, RankedGameState>(
@@ -85,7 +86,7 @@ class RankedGamePage extends StatelessWidget {
                               children: [
                                 IconButton(
                                   onPressed: () {
-                                    Navigator.of(context).pop();
+                                   context.pop();
                                   },
                                   icon: Icon(Icons.arrow_back_sharp),
                                   color: Colors.white,
@@ -165,16 +166,34 @@ class RankedGamePage extends StatelessWidget {
                                   context
                                       .read<RankedGameCubit>()
                                       .setStartTime(playerId: profileModel.id);
-                                  Navigator.of(context).push(MaterialPageRoute(
-                                      builder: (context) => QuestionPage(
-                                            profileModel: profileModel,
-                                            roomId: null,
-                                            gameType: GameType.ranked,
-                                            category: null,
-                                            difficulty: '',
-                                            questionsAmount: 5,
-                                            user: user,
-                                          )));
+
+                                  context.pushNamed(
+                                    "/questionPage",
+                                    extra: QuestionPageRouteModel(
+                                        user: user!,
+                                        profileModel: profileModel,
+                                        categoryId: null,
+                                        questionAmount: 5,
+                                        difficulty: '',
+                                        gameType: GameType.ranked),
+                                  );
+
+                                  // Navigator.of(context).push(MaterialPageRoute(
+                                  //     builder: (context) => QuestionPage(
+                                  //           model: QuestionPageRouteModel(
+                                  //               user: user!,
+                                  //               profileModel: profileModel,
+                                  //               categoryId: null,
+                                  //               questionAmount: 5,
+                                  //               difficulty: '',
+                                  //               gameType: GameType.ranked),
+                                  //           profileModel: profileModel,
+                                  //           gameType: GameType.ranked,
+                                  //           category: null,
+                                  //           difficulty: '',
+                                  //           questionsAmount: 5,
+                                  //           user: user,
+                                  //         )));
                                 },
                                 child: Container(
                                   padding: EdgeInsets.all(

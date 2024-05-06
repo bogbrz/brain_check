@@ -9,7 +9,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class HomePage extends StatelessWidget {
   HomePage({
@@ -23,18 +22,22 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
         create: (context) => getIt<HomePageCubit>()
-          ..getRankingForUpdate(email: user!.email.toString()),
+          ..getRankingForUpdate(
+              email: user!.email.toString(), userId: user!.uid),
         child: BlocConsumer<HomePageCubit, HomePageState>(
             listener: (context, state) {},
             builder: (context, state) {
+              print("DISPLAY useer : ${user}");
+              print("DISPLAY NAME : ${user!.displayName}");
               switch (state.status) {
                 case Status.initial:
                   return const InitialStateWidget();
-                case Status.loading:
-                  return const LoadingStateWidget();
+
                 case Status.error:
                   return ErrorStateWidget(
                       errorMessage: state.errorMessage.toString());
+                case Status.loading:
+                  return const LoadingStateWidget();
                 case Status.success:
                   return Scaffold(
                       body: Container(
@@ -52,12 +55,11 @@ class HomePage extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         PageExtrasWidget(
-                          profiles: state.profile,
+                          profile: state.profile[0],
                           user: user,
                           overall: state.overAllInfo,
                         ),
                         StartButtonWidget(
-                          userPicture: state.uploadedImageUrl,
                           user: user,
                           profile: state.profile[0],
                         ),

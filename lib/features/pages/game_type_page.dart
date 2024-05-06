@@ -1,18 +1,19 @@
 import 'package:brain_check/domain/models/profile_model.dart';
-import 'package:brain_check/features/pages/categories_page/categories_page.dart';
 
-import 'package:brain_check/features/pages/ranked_game_page/ranked_game_page.dart';
-import 'package:brain_check/features/pages/rooms_list_page/rooms_list_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class GameTypePage extends StatelessWidget {
-  const GameTypePage({super.key, required this.user, required this.profile, required this.userPicture});
+  const GameTypePage({
+    super.key,
+    required this.user,
+    required this.profile,
+  });
   final User? user;
   final ProfileModel profile;
-  final String? userPicture;
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +37,7 @@ class GameTypePage extends StatelessWidget {
               children: [
                 IconButton(
                   onPressed: () {
-                    Navigator.of(context).pop();
+                    context.pop();
                   },
                   icon: Icon(Icons.arrow_back_sharp),
                   color: Colors.white,
@@ -58,11 +59,12 @@ class GameTypePage extends StatelessWidget {
                   borderRadius: BorderRadius.circular(20),
                   child: InkWell(
                     onTap: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => CategoryPage(
-                                user: user,
-                                profileModel: profile,
-                              )));
+                      context.pushNamed("/categoryPage", extra: profile);
+                      // Navigator.of(context).push(MaterialPageRoute(
+                      //     builder: (context) => CategoryPage(
+                      //           user: user,
+                      //           profileModel: profile,
+                      //         )));
                     },
                     child: Container(
                       alignment: Alignment.center,
@@ -95,11 +97,12 @@ class GameTypePage extends StatelessWidget {
                   borderRadius: BorderRadius.circular(20),
                   child: InkWell(
                     onTap: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                          builder: ((context) => RankedGamePage(
-                                profileModel: profile,
-                                user: user,
-                              ))));
+                      context.pushNamed("/rankedGamePage", extra: profile);
+                      // Navigator.of(context).push(MaterialPageRoute(
+                      //     builder: ((context) => RankedGamePage(
+                      //           profileModel: profile,
+                      //           user: user,
+                      //         ))));
                     },
                     child: Container(
                       alignment: Alignment.center,
@@ -133,13 +136,13 @@ class GameTypePage extends StatelessWidget {
             padding: EdgeInsets.all(MediaQuery.of(context).size.height * 0.025),
             child: InkWell(
               onTap: () {
-                Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => RoomsListPage(
-                    userPicture: userPicture,
-                    user: user,
-                    profile: profile,
-                  ),
-                ));
+                context.pushNamed("/roomsListPage", extra: profile);
+                // Navigator.of(context).push(MaterialPageRoute(
+                //   builder: (context) => RoomsListPage(
+                //     user: user,
+                //     profile: profile,
+                //   ),
+                // ));
               },
               child: Container(
                 alignment: Alignment.center,

@@ -17,6 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$LogInPageState {
   String get errorMessage => throw _privateConstructorUsedError;
+  User? get user => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $LogInPageStateCopyWith<LogInPageState> get copyWith =>
@@ -29,7 +30,7 @@ abstract class $LogInPageStateCopyWith<$Res> {
           LogInPageState value, $Res Function(LogInPageState) then) =
       _$LogInPageStateCopyWithImpl<$Res, LogInPageState>;
   @useResult
-  $Res call({String errorMessage});
+  $Res call({String errorMessage, User? user});
 }
 
 /// @nodoc
@@ -46,12 +47,17 @@ class _$LogInPageStateCopyWithImpl<$Res, $Val extends LogInPageState>
   @override
   $Res call({
     Object? errorMessage = null,
+    Object? user = freezed,
   }) {
     return _then(_value.copyWith(
       errorMessage: null == errorMessage
           ? _value.errorMessage
           : errorMessage // ignore: cast_nullable_to_non_nullable
               as String,
+      user: freezed == user
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as User?,
     ) as $Val);
   }
 }
@@ -64,7 +70,7 @@ abstract class _$$LogInPageStateImplCopyWith<$Res>
       __$$LogInPageStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String errorMessage});
+  $Res call({String errorMessage, User? user});
 }
 
 /// @nodoc
@@ -79,12 +85,17 @@ class __$$LogInPageStateImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? errorMessage = null,
+    Object? user = freezed,
   }) {
     return _then(_$LogInPageStateImpl(
       errorMessage: null == errorMessage
           ? _value.errorMessage
           : errorMessage // ignore: cast_nullable_to_non_nullable
               as String,
+      user: freezed == user
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as User?,
     ));
   }
 }
@@ -92,14 +103,16 @@ class __$$LogInPageStateImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$LogInPageStateImpl implements _LogInPageState {
-  _$LogInPageStateImpl({required this.errorMessage});
+  _$LogInPageStateImpl({required this.errorMessage, required this.user});
 
   @override
   final String errorMessage;
+  @override
+  final User? user;
 
   @override
   String toString() {
-    return 'LogInPageState(errorMessage: $errorMessage)';
+    return 'LogInPageState(errorMessage: $errorMessage, user: $user)';
   }
 
   @override
@@ -108,11 +121,12 @@ class _$LogInPageStateImpl implements _LogInPageState {
         (other.runtimeType == runtimeType &&
             other is _$LogInPageStateImpl &&
             (identical(other.errorMessage, errorMessage) ||
-                other.errorMessage == errorMessage));
+                other.errorMessage == errorMessage) &&
+            (identical(other.user, user) || other.user == user));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, errorMessage);
+  int get hashCode => Object.hash(runtimeType, errorMessage, user);
 
   @JsonKey(ignore: true)
   @override
@@ -123,11 +137,14 @@ class _$LogInPageStateImpl implements _LogInPageState {
 }
 
 abstract class _LogInPageState implements LogInPageState {
-  factory _LogInPageState({required final String errorMessage}) =
-      _$LogInPageStateImpl;
+  factory _LogInPageState(
+      {required final String errorMessage,
+      required final User? user}) = _$LogInPageStateImpl;
 
   @override
   String get errorMessage;
+  @override
+  User? get user;
   @override
   @JsonKey(ignore: true)
   _$$LogInPageStateImplCopyWith<_$LogInPageStateImpl> get copyWith =>

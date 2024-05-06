@@ -7,13 +7,13 @@ import 'package:brain_check/domain/repositories/duel_game_repository.dart';
 import 'package:brain_check/domain/repositories/ranking_repository.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'duel_result_state.dart';
-part 'generated/duel_result_cubit.freezed.dart';
+part 'result_state.dart';
+part 'generated/result_cubit.freezed.dart';
 
-class DuelResultCubit extends Cubit<DuelResultState> {
-  DuelResultCubit(
+class ResultCubit extends Cubit<ResultState> {
+  ResultCubit(
       {required this.duelGameRepository, required this.rankingRepository})
-      : super(DuelResultState(
+      : super(ResultState(
           gameLenght: null,
           errorMessage: null,
           status: Status.initial,
@@ -59,8 +59,8 @@ class DuelResultCubit extends Cubit<DuelResultState> {
     });
   }
 
-  Future<void> getRankingForUpdate({required String email}) async {
-    emit(DuelResultState(
+  Future<void> getRankingForUpdate({required String email,required String userId}) async {
+    emit(ResultState(
       gameDuration: null,
       gameLenght: null,
       errorMessage: null,
@@ -68,7 +68,7 @@ class DuelResultCubit extends Cubit<DuelResultState> {
       status: Status.loading,
     ));
     streamSubscription =
-        rankingRepository.getRankingForUpdate(email: email).listen((event) {
+        rankingRepository.getRankingForUpdate(email: email, userId: userId).listen((event) {
       DateTime gameStart = event[0].gameStarted.toDate();
       DateTime gameEnd = event[0].gameEnd.toDate();
 
@@ -76,14 +76,14 @@ class DuelResultCubit extends Cubit<DuelResultState> {
       String formattedDuration =
           "${difference.inMinutes.remainder(60)}:${(difference.inSeconds.remainder(60)).toString().padLeft(2, '0')}";
       try {
-        emit(DuelResultState(
+        emit(ResultState(
           gameDuration: difference,
             errorMessage: null,
             profiles: event,
             status: Status.success,
             gameLenght: formattedDuration));
       } catch (error) {
-        emit(DuelResultState(
+        emit(ResultState(
           gameDuration: null,
             gameLenght: formattedDuration,
             errorMessage: error.toString(),

@@ -5,15 +5,11 @@ import 'package:injectable/injectable.dart';
 
 @injectable
 class RankingFireBaseDataSource {
-  final userId = FirebaseAuth.instance.currentUser?.uid;
-
   Future<void> addToRanking(
       {required String nickName,
       required String email,
-      required String? imageUrl}) async {
-    if (userId == null) {
-      throw Exception("user not logged in");
-    }
+      required String? imageUrl,
+      required String userId}) async {
     await FirebaseFirestore.instance.collection("Ranking").add({
       "email": email,
       "nickName": nickName,
@@ -23,8 +19,10 @@ class RankingFireBaseDataSource {
       "lastLogIn": DateTime.now(),
       "gameStarted": DateTime.now(),
       "gameEnd": DateTime.now(),
-      "imageUrl": imageUrl
-    });
+      "imageUrl": imageUrl,
+      "userId": userId
+    }).then((value) async =>
+        await FirebaseAuth.instance.currentUser!.updateDisplayName(nickName));
   }
 
   Future<void> updateRanking(
@@ -35,13 +33,16 @@ class RankingFireBaseDataSource {
       "lifes": FieldValue.increment(-1),
     });
   }
-  Future<void> updateImageUrl(
-      {required String imageUrl, required String docId}) async {
+
+  Future<void> updateProfile(
+      {required String imageUrl,
+      required String docId,
+      required String nickName}) async {
     await FirebaseFirestore.instance.collection("Ranking").doc(docId).update({
-      
-      
+      "nickName": nickName,
       "imageUrl": imageUrl,
-    });
+    }).then((value) =>
+        FirebaseAuth.instance.currentUser!.updateDisplayName(nickName));
   }
 
   Stream<QuerySnapshot<Map<String, dynamic>>> getRanking() {

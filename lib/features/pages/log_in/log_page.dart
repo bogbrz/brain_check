@@ -7,6 +7,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 final emailController = TextEditingController();
 final passwordController = TextEditingController();
+final nickNameController = TextEditingController();
 
 class LogInPage extends StatefulWidget {
   const LogInPage({
@@ -23,8 +24,18 @@ class _LogInPageState extends State<LogInPage> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => getIt<LogInPageCubit>(),
-      child: BlocBuilder<LogInPageCubit, LogInPageState>(
+      create: (context) => getIt<LogInPageCubit>()..authStateChanges(),
+      child: BlocConsumer<LogInPageCubit, LogInPageState>(
+        listener: (context, state) {
+          if (state.errorMessage.isNotEmpty) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(state.errorMessage),
+                backgroundColor: Colors.red,
+              ),
+            );
+          }
+        },
         builder: (context, state) {
           return SafeArea(
             child: Scaffold(
@@ -119,6 +130,10 @@ class _LogInPageState extends State<LogInPage> {
                                 .createUserWithEmailAndPassword(
                                     email: emailController.text,
                                     password: passwordController.text);
+
+                            // context
+                            //     .read<LogInPageCubit>()
+                            //     .updateDisplayName(email: emailController.text);
                           } else {
                             context
                                 .read<LogInPageCubit>()

@@ -1,87 +1,89 @@
 import 'package:brain_check/app/core/enums/enums.dart';
 import 'package:brain_check/app/injection_container.dart';
-import 'package:brain_check/domain/models/player_model.dart';
-import 'package:brain_check/features/pages/duel_result_page/cubit/duel_result_cubit.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:brain_check/domain/models/result_page_route_model.dart';
+import 'package:brain_check/features/pages/result_page/cubit/result_cubit.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class DuelResultPage extends StatelessWidget {
-  DuelResultPage({
-    required this.roomId,
-    super.key,
-    required this.players,
-    required this.user,
-    required this.ownerEmail,
-    required this.answerOne,
-    required this.answerTwo,
-    required this.answerThree,
-    required this.answerFour,
-    required this.answerFive,
-    required this.gameStatus,
-    required this.gameType,
-    required this.questionAmount,
-    required this.answerSix,
-    required this.answerSeven,
-    required this.answerEight,
-    required this.answerNine,
-    required this.answerTen,
-    required this.answerEleven,
-    required this.answerTwelve,
-    required this.answerThirteen,
-    required this.answerFourteen,
-    required this.answerFithteen,
-  });
-  final String? roomId;
-  final List<PlayerModel>? players;
-  final User? user;
+class ResultPage extends StatelessWidget {
+  ResultPage(
+      {super.key,
+      // required this.players,
+      // required this.user,
+      // required this.ownerEmail,
+      // required this.answerOne,
+      // required this.answerTwo,
+      // required this.answerThree,
+      // required this.answerFour,
+      // required this.answerFive,
+      // required this.gameStatus,
+      // required this.gameType,
+      // required this.questionAmount,
+      // required this.answerSix,
+      // required this.answerSeven,
+      // required this.answerEight,
+      // required this.answerNine,
+      // required this.answerTen,
+      // required this.answerEleven,
+      // required this.answerTwelve,
+      // required this.answerThirteen,
+      // required this.answerFourteen,
+      // required this.answerFithteen,
+      //  required this.roomId,
+      required this.model});
+  final ResultPageRouteModel model;
+  // final String? roomId;
+  // final List<PlayerModel>? players;
+  // final User? user;
 
-  final String? ownerEmail;
-  final int answerOne;
-  final int answerTwo;
-  final int answerThree;
-  final int answerFour;
-  final int answerFive;
-  final int answerSix;
-  final int answerSeven;
-  final int answerEight;
-  final int answerNine;
-  final int answerTen;
-  final int answerEleven;
-  final int answerTwelve;
-  final int answerThirteen;
-  final int answerFourteen;
-  final int answerFithteen;
-  final bool? gameStatus;
-  final GameType gameType;
+  // final String? ownerEmail;
+  // final int answerOne;
+  // final int answerTwo;
+  // final int answerThree;
+  // final int answerFour;
+  // final int answerFive;
+  // final int answerSix;
+  // final int answerSeven;
+  // final int answerEight;
+  // final int answerNine;
+  // final int answerTen;
+  // final int answerEleven;
+  // final int answerTwelve;
+  // final int answerThirteen;
+  // final int answerFourteen;
+  // final int answerFithteen;
+  // final bool? gameStatus;
+  // final GameType gameType;
 
-  final int questionAmount;
+  // final int questionAmount;
 
   @override
   Widget build(BuildContext context) {
-    int score = (answerOne +
-            answerTwo +
-            answerThree +
-            answerFour +
-            answerFive +
-            answerSix +
-            answerSeven +
-            answerEight +
-            answerNine +
-            answerTen +
-            answerEleven +
-            answerTwelve +
-            answerThirteen +
-            answerFourteen +
-            answerFithteen) *
+    int score = (model.answerOne +
+            model.answerTwo +
+            model.answerThree +
+            model.answerFour +
+            model.answerFive +
+            model.answerSix +
+            model.answerSeven +
+            model.answerEight +
+            model.answerNine +
+            model.answerTen +
+            model.answerEleven +
+            model.answerTwelve +
+            model.answerThirteen +
+            model.answerFourteen +
+            model.answerFithteen) *
         10;
 
     return BlocProvider(
-      create: (context) => getIt<DuelResultCubit>()
-        ..getRankingForUpdate(email: user!.email.toString()),
-      child: Scaffold(body: BlocBuilder<DuelResultCubit, DuelResultState>(
+      create: (context) => getIt<ResultCubit>()
+        ..getRankingForUpdate(email: model.user!.email.toString(), userId: model.user!.uid),
+      child: Scaffold(body: BlocBuilder<ResultCubit, ResultState>(
         builder: (context, state) {
           switch (state.status) {
             case Status.initial:
@@ -126,79 +128,79 @@ class DuelResultPage extends StatelessWidget {
                                   MediaQuery.of(context).size.height / 35),
                         ),
                         Text(
-                          "${AppLocalizations.of(context).yourScore}: ${score} / ${questionAmount * 10}",
+                          "${AppLocalizations.of(context).yourScore}: ${score} / ${model.questionAmount * 10}",
                           style: GoogleFonts.bungee(
                               color: Colors.white,
                               fontSize:
                                   MediaQuery.of(context).size.height / 35),
                         ),
-                        if (questionAmount == 1) ...[
+                        if (model.questionAmount == 1) ...[
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              answerOne == 1
+                              model.answerOne == 1
                                   ? const Icon(Icons.check_circle,
                                       color: Colors.green)
                                   : const Icon(Icons.cancel_rounded,
                                       color: Colors.red),
                             ],
                           )
-                        ] else if (questionAmount == 5) ...[
+                        ] else if (model.questionAmount == 5) ...[
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              answerOne == 1
+                              model.answerOne == 1
                                   ? const Icon(Icons.check_circle,
                                       color: Colors.green)
                                   : const Icon(Icons.cancel_rounded,
                                       color: Colors.red),
-                              answerTwo == 1
+                              model.answerTwo == 1
                                   ? const Icon(Icons.check_circle,
                                       color: Colors.green)
                                   : const Icon(Icons.cancel_rounded,
                                       color: Colors.red),
-                              answerThree == 1
+                              model.answerThree == 1
                                   ? const Icon(Icons.check_circle,
                                       color: Colors.green)
                                   : const Icon(Icons.cancel_rounded,
                                       color: Colors.red),
-                              answerFour == 1
+                              model.answerFour == 1
                                   ? const Icon(Icons.check_circle,
                                       color: Colors.green)
                                   : const Icon(Icons.cancel_rounded,
                                       color: Colors.red),
-                              answerFive == 1
+                              model.answerFive == 1
                                   ? const Icon(Icons.check_circle,
                                       color: Colors.green)
                                   : const Icon(Icons.cancel_rounded,
                                       color: Colors.red),
                             ],
                           )
-                        ] else if (questionAmount == 10) ...[
+                        ] else if (model.questionAmount == 10) ...[
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              answerOne == 1
+                              model.answerOne == 1
                                   ? const Icon(Icons.check_circle,
                                       color: Colors.green)
                                   : const Icon(Icons.cancel_rounded,
                                       color: Colors.red),
-                              answerTwo == 1
+                              model.answerTwo == 1
                                   ? const Icon(Icons.check_circle,
                                       color: Colors.green)
                                   : const Icon(Icons.cancel_rounded,
                                       color: Colors.red),
-                              answerThree == 1
+                              model.answerThree == 1
                                   ? const Icon(Icons.check_circle,
                                       color: Colors.green)
                                   : const Icon(Icons.cancel_rounded,
                                       color: Colors.red),
-                              answerFour == 1
+                              model.answerFour == 1
                                   ? const Icon(Icons.check_circle,
                                       color: Colors.green)
                                   : const Icon(Icons.cancel_rounded,
                                       color: Colors.red),
-                              answerFive == 1
+                              model.answerFive == 1
                                   ? const Icon(Icons.check_circle,
                                       color: Colors.green)
                                   : const Icon(Icons.cancel_rounded,
@@ -208,88 +210,58 @@ class DuelResultPage extends StatelessWidget {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              answerSix == 1
+                              model.answerSix == 1
                                   ? const Icon(Icons.check_circle,
                                       color: Colors.green)
                                   : const Icon(Icons.cancel_rounded,
                                       color: Colors.red),
-                              answerSeven == 1
+                              model.answerSeven == 1
                                   ? const Icon(Icons.check_circle,
                                       color: Colors.green)
                                   : const Icon(Icons.cancel_rounded,
                                       color: Colors.red),
-                              answerEight == 1
+                              model.answerEight == 1
                                   ? const Icon(Icons.check_circle,
                                       color: Colors.green)
                                   : const Icon(Icons.cancel_rounded,
                                       color: Colors.red),
-                              answerNine == 1
+                              model.answerNine == 1
                                   ? const Icon(Icons.check_circle,
                                       color: Colors.green)
                                   : const Icon(Icons.cancel_rounded,
                                       color: Colors.red),
-                              answerTen == 1
-                                  ? const Icon(Icons.check_circle,
-                                      color: Colors.green)
-                                  : const Icon(Icons.cancel_rounded,
-                                      color: Colors.red),
-                            ],
-                          ),
-                        ] else if (questionAmount == 15) ...[
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              answerOne == 1
-                                  ? const Icon(Icons.check_circle,
-                                      color: Colors.green)
-                                  : const Icon(Icons.cancel_rounded,
-                                      color: Colors.red),
-                              answerTwo == 1
-                                  ? const Icon(Icons.check_circle,
-                                      color: Colors.green)
-                                  : const Icon(Icons.cancel_rounded,
-                                      color: Colors.red),
-                              answerThree == 1
-                                  ? const Icon(Icons.check_circle,
-                                      color: Colors.green)
-                                  : const Icon(Icons.cancel_rounded,
-                                      color: Colors.red),
-                              answerFour == 1
-                                  ? const Icon(Icons.check_circle,
-                                      color: Colors.green)
-                                  : const Icon(Icons.cancel_rounded,
-                                      color: Colors.red),
-                              answerFive == 1
+                              model.answerTen == 1
                                   ? const Icon(Icons.check_circle,
                                       color: Colors.green)
                                   : const Icon(Icons.cancel_rounded,
                                       color: Colors.red),
                             ],
                           ),
+                        ] else if (model.questionAmount == 15) ...[
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              answerSix == 1
+                              model.answerOne == 1
                                   ? const Icon(Icons.check_circle,
                                       color: Colors.green)
                                   : const Icon(Icons.cancel_rounded,
                                       color: Colors.red),
-                              answerSeven == 1
+                              model.answerTwo == 1
                                   ? const Icon(Icons.check_circle,
                                       color: Colors.green)
                                   : const Icon(Icons.cancel_rounded,
                                       color: Colors.red),
-                              answerEight == 1
+                              model.answerThree == 1
                                   ? const Icon(Icons.check_circle,
                                       color: Colors.green)
                                   : const Icon(Icons.cancel_rounded,
                                       color: Colors.red),
-                              answerNine == 1
+                              model.answerFour == 1
                                   ? const Icon(Icons.check_circle,
                                       color: Colors.green)
                                   : const Icon(Icons.cancel_rounded,
                                       color: Colors.red),
-                              answerTen == 1
+                              model.answerFive == 1
                                   ? const Icon(Icons.check_circle,
                                       color: Colors.green)
                                   : const Icon(Icons.cancel_rounded,
@@ -299,27 +271,57 @@ class DuelResultPage extends StatelessWidget {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              answerEleven == 1
+                              model.answerSix == 1
                                   ? const Icon(Icons.check_circle,
                                       color: Colors.green)
                                   : const Icon(Icons.cancel_rounded,
                                       color: Colors.red),
-                              answerTwelve == 1
+                              model.answerSeven == 1
                                   ? const Icon(Icons.check_circle,
                                       color: Colors.green)
                                   : const Icon(Icons.cancel_rounded,
                                       color: Colors.red),
-                              answerThirteen == 1
+                              model.answerEight == 1
                                   ? const Icon(Icons.check_circle,
                                       color: Colors.green)
                                   : const Icon(Icons.cancel_rounded,
                                       color: Colors.red),
-                              answerFourteen == 1
+                              model.answerNine == 1
                                   ? const Icon(Icons.check_circle,
                                       color: Colors.green)
                                   : const Icon(Icons.cancel_rounded,
                                       color: Colors.red),
-                              answerFithteen == 1
+                              model.answerTen == 1
+                                  ? const Icon(Icons.check_circle,
+                                      color: Colors.green)
+                                  : const Icon(Icons.cancel_rounded,
+                                      color: Colors.red),
+                            ],
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              model.answerEleven == 1
+                                  ? const Icon(Icons.check_circle,
+                                      color: Colors.green)
+                                  : const Icon(Icons.cancel_rounded,
+                                      color: Colors.red),
+                              model.answerTwelve == 1
+                                  ? const Icon(Icons.check_circle,
+                                      color: Colors.green)
+                                  : const Icon(Icons.cancel_rounded,
+                                      color: Colors.red),
+                              model.answerThirteen == 1
+                                  ? const Icon(Icons.check_circle,
+                                      color: Colors.green)
+                                  : const Icon(Icons.cancel_rounded,
+                                      color: Colors.red),
+                              model.answerFourteen == 1
+                                  ? const Icon(Icons.check_circle,
+                                      color: Colors.green)
+                                  : const Icon(Icons.cancel_rounded,
+                                      color: Colors.red),
+                              model.answerFithteen == 1
                                   ? const Icon(Icons.check_circle,
                                       color: Colors.green)
                                   : const Icon(Icons.cancel_rounded,
@@ -351,44 +353,42 @@ class DuelResultPage extends StatelessWidget {
                             style: ElevatedButton.styleFrom(
                                 backgroundColor: Colors.transparent),
                             onPressed: () {
-                              if (gameType == GameType.duel) {
-                                for (final player in players!) {
+                              if (model.gameType == GameType.duel) {
+                                for (final player in model.players!) {
                                   if (player.email.toString() ==
-                                      user!.email.toString()) {
-                                    context
-                                        .read<DuelResultCubit>()
-                                        .addRoundResults(
-                                            roomId: roomId!,
-                                            playerNumber: player.player,
-                                            roundNumber: player.roundNumber,
-                                            answerOne: answerOne,
-                                            answerTwo: answerTwo,
-                                            answerThree: answerThree,
-                                            answerFour: answerFour,
-                                            answerFive: answerFive);
-                                    context
-                                        .read<DuelResultCubit>()
-                                        .resetGameStatus(
-                                            roomId: roomId!,
-                                            status: false,
-                                            playerId: player.id,
-                                            points: totalPoints);
-                                    if (gameStatus == true) {
+                                      model.user!.email.toString()) {
+                                    context.read<ResultCubit>().addRoundResults(
+                                        roomId: model.roomId!,
+                                        playerNumber: player.player,
+                                        roundNumber: player.roundNumber,
+                                        answerOne: model.answerOne,
+                                        answerTwo: model.answerTwo,
+                                        answerThree: model.answerThree,
+                                        answerFour: model.answerFour,
+                                        answerFive: model.answerFive);
+                                    context.read<ResultCubit>().resetGameStatus(
+                                        roomId: model.roomId!,
+                                        status: false,
+                                        playerId: player.id,
+                                        points: totalPoints);
+                                    if (model.gameStatus == true) {
                                       context
-                                          .read<DuelResultCubit>()
+                                          .read<ResultCubit>()
                                           .deleteQuestions(
-                                              roomId: roomId!,
+                                              roomId: model.roomId!,
                                               roundNumber: player.roundNumber);
+                                      context.pop();
                                     }
                                   }
                                 }
-                              } else if (gameType == GameType.casual) {
-                                Navigator.of(context).pop();
+                              } else if (model.gameType == GameType.casual) {
+                                context.pop();
                               } else {
-                                context.read<DuelResultCubit>().updateRanking(
+                                context.read<ResultCubit>().updateRanking(
                                     points: totalPoints,
                                     profileId: state.profiles[0].id);
-                                Navigator.of(context).pop();
+                                context.pop();
+                                // Navigator.of(context).pop();
                               }
                             },
                             child: Text(

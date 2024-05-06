@@ -13,13 +13,19 @@ class AuthDataSource {
         .signInWithEmailAndPassword(email: email, password: password);
   }
 
-  Future<void> createUserWithEmailAndPassword(
-      {required String email, required String password}) async {
+  Future<void> createUserWithEmailAndPassword({
+    required String email,
+    required String password,
+  }) async {
     await FirebaseAuth.instance
         .createUserWithEmailAndPassword(email: email, password: password);
   }
 
-    Future<void> signOut() async {
+  Future<void> updateDisplayName({required String email}) async {
+    await FirebaseAuth.instance.currentUser!.updateDisplayName(email);
+  }
+
+  Future<void> signOut() async {
     await FirebaseAuth.instance.signOut();
   }
 }

@@ -4,31 +4,33 @@ import 'package:brain_check/app/core/enums/enums.dart';
 import 'package:brain_check/app/injection_container.dart';
 import 'package:brain_check/difficulty_list.dart';
 import 'package:brain_check/domain/models/amount_button_model.dart';
-import 'package:brain_check/domain/models/categories_model.dart';
 import 'package:brain_check/domain/models/difficulty_model.dart';
-import 'package:brain_check/domain/models/profile_model.dart';
+import 'package:brain_check/domain/models/difficulty_page_route_model.dart';
+import 'package:brain_check/domain/models/question_page_route_model.dart';
 
 import 'package:brain_check/features/pages/difficulty_page/cubit/difficulty_page_cubit.dart';
-import 'package:brain_check/features/pages/question_page/question_page.dart';
 
-import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class DifficultyPage extends StatefulWidget {
   const DifficultyPage({
-    required this.categoriesModel,
-    required this.user,
-    required this.profileModel,
+    // required this.categoriesModel,
+    // required this.user,
+    // required this.profileModel,
+    required this.model,
     super.key,
   });
 
-  final TriviaCategory categoriesModel;
-  final User? user;
-  final ProfileModel profileModel;
+  final DifficultyRouteModel model;
+
+  // final TriviaCategory categoriesModel;
+  // final User? user;
+  // final ProfileModel profileModel;
 
   @override
   State<DifficultyPage> createState() => _DifficultyPageState();
@@ -42,7 +44,7 @@ class _DifficultyPageState extends State<DifficultyPage> {
   Widget build(BuildContext context) {
     return BlocProvider(
         create: (context) => getIt<DifficultyPageCubit>()
-          ..getCategoryInfo(category: widget.categoriesModel.id),
+          ..getCategoryInfo(category: widget.model.category.id),
         child: Scaffold(
           body: BlocBuilder<DifficultyPageCubit, DifficultyPageState>(
             builder: (context, state) {
@@ -66,7 +68,7 @@ class _DifficultyPageState extends State<DifficultyPage> {
                             children: [
                               IconButton(
                                 onPressed: () {
-                                  Navigator.of(context).pop();
+                                  context.pop();
                                 },
                                 icon: Icon(Icons.arrow_back_sharp),
                                 color: Colors.white,
@@ -104,7 +106,7 @@ class _DifficultyPageState extends State<DifficultyPage> {
                                       children: [
                                         Expanded(
                                           child: Text(
-                                            "${AppLocalizations.of(context).choosedCategory}: ${widget.categoriesModel.name}",
+                                            "${AppLocalizations.of(context).choosedCategory}: ${widget.model.category.name}",
                                             style: GoogleFonts.bungee(
                                               fontSize: MediaQuery.of(context)
                                                       .size
@@ -118,8 +120,7 @@ class _DifficultyPageState extends State<DifficultyPage> {
                                     Row(
                                       children: [
                                         Expanded(
-                                            child: widget.categoriesModel.id ==
-                                                    0
+                                            child: widget.model.category.id == 0
                                                 ? Text(
                                                     "${AppLocalizations.of(context).questionsAmount}: ${state.overAll.totalNumOfVerifiedQuestions}",
                                                     style: GoogleFonts.bungee(
@@ -261,25 +262,57 @@ class _DifficultyPageState extends State<DifficultyPage> {
                                     context
                                         .read<DifficultyPageCubit>()
                                         .setStartTime(
-                                            playerId: widget.profileModel.id);
-                                    Navigator.of(context)
-                                        .push(MaterialPageRoute(
-                                            builder: ((context) => QuestionPage(
-                                                  profileModel:
-                                                      widget.profileModel,
-                                                  roomId: null,
-                                                  category:
-                                                      widget.categoriesModel.id,
-                                                  difficulty:
-                                                      choosedDifficulty !=
-                                                              "null"
-                                                          ? choosedDifficulty
-                                                          : null,
-                                                  user: widget.user,
-                                                  questionsAmount:
-                                                      questionsNumber,
-                                                  gameType: GameType.casual,
-                                                ))));
+                                            playerId:
+                                                widget.model.profileModel.id);
+                                    context.pushNamed(
+                                      "/questionPage",
+                                      extra: QuestionPageRouteModel(
+                                          user: widget.model.user,
+                                          profileModel:
+                                              widget.model.profileModel,
+                                          categoryId: widget.model.category.id,
+                                          questionAmount: questionsNumber,
+                                          difficulty:
+                                              choosedDifficulty != "null"
+                                                  ? choosedDifficulty
+                                                  : null,
+                                          gameType: GameType.casual),
+                                    );
+
+                                    // Navigator.of(context)
+                                    //     .push(MaterialPageRoute(
+                                    //         builder: ((context) => QuestionPage(
+                                    //               model: QuestionPageRouteModel(
+                                    //                   user: widget.model.user,
+                                    //                   profileModel: widget
+                                    //                       .model.profileModel,
+                                    //                   categoryId: widget
+                                    //                       .model.category.id,
+                                    //                   questionAmount:
+                                    //                       questionsNumber,
+                                    //                   difficulty:
+                                    //                       choosedDifficulty !=
+                                    //                               "null"
+                                    //                           ? choosedDifficulty
+                                    //                           : null,
+                                    //                   gameType:
+                                    //                       GameType.casual),
+                                    //               profileModel:
+                                    //                   widget.model.profileModel,
+                                    //               category:
+                                    //                   widget.model.category.id,
+                                    //               difficulty:
+                                    //                   choosedDifficulty !=
+                                    //                           "null"
+                                    //                       ? choosedDifficulty
+                                    //                       : null,
+                                    //               user: widget.model.user,
+                                    //               questionsAmount:
+                                    //                   questionsNumber,
+                                    //               gameType: GameType.casual,
+                                    //             )))
+
+                                    //             );
                                   },
                             child: Container(
                               alignment: Alignment.center,

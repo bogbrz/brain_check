@@ -12,13 +12,13 @@ class StorageDataSource {
   final userId = FirebaseAuth.instance.currentUser?.uid;
 
   Future<void> uploadImage(File file) async {
-    final fileName = file.path.split("/").last;
     final testName = "name";
-    final testFileName = fileName.split(".").last;
 
-    final uploadRef =
-        storageRef.child("$userId/uploads/$testName.$testFileName");
-    await uploadRef.putFile(file);
+    final uploadRef = storageRef.child("$userId/uploads/$testName.jpg");
+
+    await uploadRef.putFile(file).then((p0) {
+      print("UPLOADED IMAGE ");
+    });
   }
 
   Future<List<Reference>?> getImages() async {

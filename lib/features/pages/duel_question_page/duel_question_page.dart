@@ -1,12 +1,14 @@
 import 'package:brain_check/app/core/enums/enums.dart';
 import 'package:brain_check/app/injection_container.dart';
 import 'package:brain_check/domain/models/player_model.dart';
+import 'package:brain_check/domain/models/result_page_route_model.dart';
 import 'package:brain_check/features/pages/duel_question_page/cubit/duel_question_page_cubit.dart';
 import 'package:brain_check/features/pages/duel_question_page/widgets/answer_widget.dart';
-import 'package:brain_check/features/pages/duel_result_page/duel_result_page.dart';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:html_unescape/html_unescape.dart';
 import 'package:timer_count_down/timer_controller.dart';
@@ -60,32 +62,34 @@ class _DuelQuestionPageState extends State<DuelQuestionPage> {
               return ErrorStateWidget(
                   errorMessage: state.errorMessage.toString());
             case Status.success:
-              if (index == 5) {
-                return DuelResultPage(
-                  gameType: GameType.duel,
-                  questionAmount: 5,
-                  roomId: widget.roomId,
-                  players: widget.players,
-                  user: widget.user,
-                  ownerEmail: widget.ownerEmail,
-                  answerOne: answerOne,
-                  answerTwo: answerTwo,
-                  answerThree: answerThree,
-                  answerFour: answerFour,
-                  answerFive: answerFive,
-                  answerSix: 0,
-                  answerSeven: 0,
-                  answerEight: 0,
-                  answerNine: 0,
-                  answerTen: 0,
-                  answerEleven: 0,
-                  answerTwelve: 0,
-                  answerThirteen: 0,
-                  answerFourteen: 0,
-                  answerFithteen: 0,
-                  gameStatus: end,
-                );
-              }
+              // if (index == 5) {
+              //   return ResultPage(
+              //     model: ResultPageRouteModel(
+              //       gameType: GameType.duel,
+              //       questionAmount: 5,
+              //       roomId: widget.roomId,
+              //       players: widget.players,
+              //       user: widget.user,
+              //       ownerEmail: widget.ownerEmail,
+              //       answerOne: answerOne,
+              //       answerTwo: answerTwo,
+              //       answerThree: answerThree,
+              //       answerFour: answerFour,
+              //       answerFive: answerFive,
+              //       answerSix: 0,
+              //       answerSeven: 0,
+              //       answerEight: 0,
+              //       answerNine: 0,
+              //       answerTen: 0,
+              //       answerEleven: 0,
+              //       answerTwelve: 0,
+              //       answerThirteen: 0,
+              //       answerFourteen: 0,
+              //       answerFithteen: 0,
+              //       gameStatus: end,
+              //     ),
+              //   );
+              // }
 
               return Scaffold(
                 body: Container(
@@ -143,7 +147,7 @@ class _DuelQuestionPageState extends State<DuelQuestionPage> {
                                         )),
                                     Countdown(
                                       controller: controller,
-                                      seconds: 15,
+                                      seconds: 5,
                                       build: (BuildContext context,
                                               double time) =>
                                           Text(time.toInt().toString(),
@@ -160,6 +164,35 @@ class _DuelQuestionPageState extends State<DuelQuestionPage> {
                                           index++;
                                           choosedAnswer = "";
                                           isChoosed = false;
+                                          if (index == 5) {
+                                            context.pushNamed(
+                                              "/resultPage",
+                                              extra: ResultPageRouteModel(
+                                                gameType: GameType.duel,
+                                                questionAmount: 5,
+                                                roomId: widget.roomId,
+                                                players: widget.players,
+                                                user: widget.user,
+                                                ownerEmail: widget.ownerEmail,
+                                                answerOne: answerOne,
+                                                answerTwo: answerTwo,
+                                                answerThree: answerThree,
+                                                answerFour: answerFour,
+                                                answerFive: answerFive,
+                                                answerSix: 0,
+                                                answerSeven: 0,
+                                                answerEight: 0,
+                                                answerNine: 0,
+                                                answerTen: 0,
+                                                answerEleven: 0,
+                                                answerTwelve: 0,
+                                                answerThirteen: 0,
+                                                answerFourteen: 0,
+                                                answerFithteen: 0,
+                                                gameStatus: end,
+                                              ),
+                                            );
+                                          }
                                         });
 
                                         controller.restart();

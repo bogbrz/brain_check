@@ -10,11 +10,11 @@ class PageExtrasWidget extends StatelessWidget {
       {super.key,
       required this.user,
       required this.overall,
-      required this.profiles});
+      required this.profile});
 
   final User? user;
   final Overall overall;
-  final List<ProfileModel> profiles;
+  final ProfileModel profile;
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +29,7 @@ class PageExtrasWidget extends StatelessWidget {
           child: Column(
             children: [
               Text(
-                "${AppLocalizations.of(context).welcomeBack} ${profiles[0].nickName}",
+                "${AppLocalizations.of(context).welcomeBack} ${profile.nickName}",
                 textAlign: TextAlign.center,
                 style: GoogleFonts.bungee(
                     color: Colors.white,

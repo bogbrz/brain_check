@@ -11,6 +11,11 @@ class StorageRepository {
     await storageDataSource.uploadImage(file);
   }
 
+
+  Future<void> updateImage({required File file}) async {
+    await storageDataSource.uploadImage(file);
+  }
+
   Future<List<Reference>?> getImages() async {
     final list = await storageDataSource.getImages();
     if (list!.isEmpty) {

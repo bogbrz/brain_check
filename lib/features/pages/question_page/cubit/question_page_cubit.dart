@@ -61,7 +61,7 @@ class QuestionPageCubit extends Cubit<QuestionPageState> {
     required int? category,
     required String? difficulty,
     required int questionsAmount,
-    required String? roomId,
+   
   }) async {
     emit(QuestionPageState(
       firstQuestion: null,

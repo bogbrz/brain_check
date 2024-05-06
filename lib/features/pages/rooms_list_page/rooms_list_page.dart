@@ -9,19 +9,18 @@ import 'package:brain_check/features/pages/rooms_list_page/widgets/room_widget.d
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 class RoomsListPage extends StatelessWidget {
   RoomsListPage({
     required this.profile,
     required this.user,
-    required this.userPicture,
     super.key,
   });
 
   final ProfileModel profile;
 
   final User? user;
-  final String? userPicture;
 
   @override
   Widget build(BuildContext context) {
@@ -59,7 +58,7 @@ class RoomsListPage extends StatelessWidget {
                           children: [
                             IconButton(
                               onPressed: () {
-                                Navigator.of(context).pop();
+                                context.pop();
                               },
                               icon: Icon(Icons.arrow_back_sharp),
                               color: Colors.white,
@@ -81,7 +80,7 @@ class RoomsListPage extends StatelessWidget {
                                         context: context,
                                         builder: (BuildContext context) {
                                           return JoinRoomWidget(
-                                            userPicture: userPicture,
+                                            profileModel: profile,
                                             email: room.ownerMail,
                                             nickName: profile.nickName,
                                             model: room,
