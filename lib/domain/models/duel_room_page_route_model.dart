@@ -1,7 +1,5 @@
 
-import 'package:brain_check/domain/models/categories_model.dart';
 import 'package:brain_check/domain/models/game_room_model.dart';
-import 'package:brain_check/domain/models/profile_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 

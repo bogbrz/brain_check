@@ -1,10 +1,8 @@
 import 'package:brain_check/app/core/enums/enums.dart';
 import 'package:brain_check/app/injection_container.dart';
-import 'package:brain_check/domain/models/player_model.dart';
 import 'package:brain_check/domain/models/result_page_route_model.dart';
 import 'package:brain_check/features/pages/result_page/cubit/result_cubit.dart';
 
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -84,7 +82,7 @@ class ResultPage extends StatelessWidget {
 
     return BlocProvider(
       create: (context) => getIt<ResultCubit>()
-        ..getRankingForUpdate(email: model.user!.email.toString()),
+        ..getRankingForUpdate(email: model.user!.email.toString(), userId: model.user!.uid),
       child: Scaffold(body: BlocBuilder<ResultCubit, ResultState>(
         builder: (context, state) {
           switch (state.status) {

@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -7,16 +5,11 @@ import 'package:injectable/injectable.dart';
 
 @injectable
 class RankingFireBaseDataSource {
-  final userId = FirebaseAuth.instance.currentUser?.uid;
-
   Future<void> addToRanking(
       {required String nickName,
       required String email,
-      required String? imageUrl}) async {
-    if (userId == null) {
-      throw Exception("user not logged in");
-    }
-
+      required String? imageUrl,
+      required String userId}) async {
     await FirebaseFirestore.instance.collection("Ranking").add({
       "email": email,
       "nickName": nickName,
@@ -26,9 +19,10 @@ class RankingFireBaseDataSource {
       "lastLogIn": DateTime.now(),
       "gameStarted": DateTime.now(),
       "gameEnd": DateTime.now(),
-      "imageUrl": imageUrl
-    }).then((value) =>
-        FirebaseAuth.instance.currentUser!.updateDisplayName(nickName));
+      "imageUrl": imageUrl,
+      "userId": userId
+    }).then((value) async =>
+        await FirebaseAuth.instance.currentUser!.updateDisplayName(nickName));
   }
 
   Future<void> updateRanking(

@@ -25,7 +25,17 @@ class _LogInPageState extends State<LogInPage> {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => getIt<LogInPageCubit>()..authStateChanges(),
-      child: BlocBuilder<LogInPageCubit, LogInPageState>(
+      child: BlocConsumer<LogInPageCubit, LogInPageState>(
+        listener: (context, state) {
+          if (state.errorMessage.isNotEmpty) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(state.errorMessage),
+                backgroundColor: Colors.red,
+              ),
+            );
+          }
+        },
         builder: (context, state) {
           return SafeArea(
             child: Scaffold(

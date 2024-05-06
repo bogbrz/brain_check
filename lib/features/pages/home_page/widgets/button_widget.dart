@@ -1,5 +1,4 @@
 import 'package:brain_check/domain/models/profile_model.dart';
-import 'package:brain_check/features/pages/game_type_page.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
 

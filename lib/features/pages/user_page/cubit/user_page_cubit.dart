@@ -25,7 +25,7 @@ class UserPageCubit extends Cubit<UserPageState> {
   final StorageRepository storageRepository;
   StreamSubscription? streamSubscription;
 
-  Future<void> getRankingForUpdate({required String email}) async {
+  Future<void> getRankingForUpdate({required String email, required String userId}) async {
     emit(const UserPageState(
         uploadedImageUrl: null,
         errorMessage: null,
@@ -37,7 +37,7 @@ class UserPageCubit extends Cubit<UserPageState> {
         : await uploadedImages[0].getDownloadURL();
 
     streamSubscription =
-        rankingRepository.getRankingForUpdate(email: email).listen((event) {
+        rankingRepository.getRankingForUpdate(email: email,userId: userId ).listen((event) {
       try {
         print("WIDGET $uploadedImageUrl");
         emit(UserPageState(

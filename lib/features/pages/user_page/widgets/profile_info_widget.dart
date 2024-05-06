@@ -43,7 +43,8 @@ class _ProfileInfoWidgetState extends State<ProfileInfoWidget> {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => getIt<UserPageCubit>()
-        ..getRankingForUpdate(email: widget.user!.email.toString()),
+        ..getRankingForUpdate(
+            email: widget.user!.email.toString(), userId: widget.user!.uid),
       child: BlocConsumer<UserPageCubit, UserPageState>(
         listener: (context, state) {},
         builder: (context, state) {

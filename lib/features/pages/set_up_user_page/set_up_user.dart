@@ -25,7 +25,8 @@ class _SetUpUserPageState extends State<SetUpUserPage> {
   Widget build(BuildContext context) {
     return BlocProvider(
         create: (context) => getIt<SetUpUserCubit>()
-          ..getRankingForUpdate(email: widget.user!.email.toString()),
+          ..getRankingForUpdate(
+              email: widget.user!.email.toString(), userId: widget.user!.uid),
         child: Scaffold(
           body: Container(
             decoration: BoxDecoration(
@@ -41,11 +42,8 @@ class _SetUpUserPageState extends State<SetUpUserPage> {
               child: BlocBuilder<SetUpUserCubit, SetUpUserState>(
                 builder: (context, state) {
                   print(state.uploadImageUrl);
-                  if (state.profile.isNotEmpty) {
-                    return NavigatorPage(
-                      user: widget.user,
-                    );
-                  }
+                  print("DISPLAY useer : ${widget.user}");
+                  print("DISPLAY NAME : ${widget.user!.displayName}");
 
                   return Container(
                     width: MediaQuery.of(context).size.width * 0.8,

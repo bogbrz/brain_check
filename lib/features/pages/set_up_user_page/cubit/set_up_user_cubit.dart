@@ -25,19 +25,19 @@ class SetUpUserCubit extends Cubit<SetUpUserState> {
 
   StreamSubscription? streamSubscription;
 
-  Future<void> getRankingForUpdate({required String email}) async {
+  Future<void> getRankingForUpdate({required String email, required String userId}) async {
     emit(const SetUpUserState(
         uploadImageUrl: null,
         errorMessage: null,
         profile: [],
-        status: Status.loading));
+        status: Status.loading,));
     final uploadedImages = await storageRepository.getImages();
 
     final uploadedImageUrl = uploadedImages == null
         ? null
         : await uploadedImages[0].getDownloadURL();
     streamSubscription =
-        rankingRepository.getRankingForUpdate(email: email).listen((event) {
+        rankingRepository.getRankingForUpdate(email: email,userId: userId).listen((event) {
       try {
         print("success");
         emit(SetUpUserState(
@@ -58,9 +58,9 @@ class SetUpUserCubit extends Cubit<SetUpUserState> {
   Future<void> addProfileToGlobalRanking(
       {required String nickName,
       required String email,
-      required String? imageUrl}) async {
+      required String? imageUrl,required String userId}) async {
     await rankingRepository.addProfileToGlobal(
-        nickName: nickName, email: email, imageUrl: imageUrl);
+        nickName: nickName, email: email, imageUrl: imageUrl, userId: userId);
   }
 
   Future<void> uploadImage({required File file}) async {

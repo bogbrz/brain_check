@@ -2,7 +2,6 @@ import 'package:brain_check/domain/models/duel_room_page_route_model.dart';
 import 'package:brain_check/domain/models/game_room_model.dart';
 import 'package:brain_check/domain/models/profile_model.dart';
 
-import 'package:brain_check/features/pages/duel_room_page/duel_room_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';

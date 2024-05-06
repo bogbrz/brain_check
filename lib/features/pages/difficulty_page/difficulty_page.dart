@@ -4,16 +4,12 @@ import 'package:brain_check/app/core/enums/enums.dart';
 import 'package:brain_check/app/injection_container.dart';
 import 'package:brain_check/difficulty_list.dart';
 import 'package:brain_check/domain/models/amount_button_model.dart';
-import 'package:brain_check/domain/models/categories_model.dart';
 import 'package:brain_check/domain/models/difficulty_model.dart';
 import 'package:brain_check/domain/models/difficulty_page_route_model.dart';
-import 'package:brain_check/domain/models/profile_model.dart';
 import 'package:brain_check/domain/models/question_page_route_model.dart';
 
 import 'package:brain_check/features/pages/difficulty_page/cubit/difficulty_page_cubit.dart';
-import 'package:brain_check/features/pages/question_page/question_page.dart';
 
-import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

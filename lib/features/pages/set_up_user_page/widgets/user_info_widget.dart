@@ -1,10 +1,12 @@
 import 'dart:io';
 
 import 'package:brain_check/app/core/enums/enums.dart';
+import 'package:brain_check/features/pages/home_page/home_page.dart';
 import 'package:brain_check/features/pages/set_up_user_page/cubit/set_up_user_cubit.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -78,7 +80,8 @@ class _UserInfoWidgetState extends State<UserInfoWidget> {
                               context
                                   .read<SetUpUserCubit>()
                                   .getRankingForUpdate(
-                                      email: widget.user!.email.toString());
+                                      email: widget.user!.email.toString(),
+                                      userId: widget.user!.uid);
                             });
                           },
                           icon: Icon(
@@ -124,13 +127,15 @@ class _UserInfoWidgetState extends State<UserInfoWidget> {
                         context
                             .read<SetUpUserCubit>()
                             .addProfileToGlobalRanking(
-                              imageUrl: state.uploadImageUrl,
-                              nickName: controller.text.isNotEmpty
-                                  ? controller.text
-                                  : widget.user!.displayName.toString(),
-                              email: widget.user!.email.toString(),
-                            );
+                                imageUrl: state.uploadImageUrl,
+                                nickName: controller.text.isNotEmpty
+                                    ? controller.text
+                                    : widget.user!.displayName.toString(),
+                                email: widget.user!.email.toString(),
+                                userId: widget.user!.uid);
+
                         controller.clear();
+                        context.goNamed("/homePage", extra: widget.user);
                       },
                 child: Container(
                     width: MediaQuery.of(context).size.width * 0.3,

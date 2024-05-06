@@ -1,14 +1,11 @@
 import 'package:brain_check/app/core/enums/enums.dart';
 import 'package:brain_check/app/injection_container.dart';
-import 'package:brain_check/domain/models/profile_model.dart';
 import 'package:brain_check/domain/models/question_page_route_model.dart';
 import 'package:brain_check/domain/models/result_page_route_model.dart';
 
 import 'package:brain_check/features/pages/question_page/cubit/question_page_cubit.dart';
 import 'package:brain_check/features/pages/question_page/widgets/option_widget.dart';
-import 'package:brain_check/features/pages/result_page/result_page.dart';
 
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';

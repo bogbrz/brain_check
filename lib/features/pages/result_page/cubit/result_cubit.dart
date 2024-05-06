@@ -59,7 +59,7 @@ class ResultCubit extends Cubit<ResultState> {
     });
   }
 
-  Future<void> getRankingForUpdate({required String email}) async {
+  Future<void> getRankingForUpdate({required String email,required String userId}) async {
     emit(ResultState(
       gameDuration: null,
       gameLenght: null,
@@ -68,7 +68,7 @@ class ResultCubit extends Cubit<ResultState> {
       status: Status.loading,
     ));
     streamSubscription =
-        rankingRepository.getRankingForUpdate(email: email).listen((event) {
+        rankingRepository.getRankingForUpdate(email: email, userId: userId).listen((event) {
       DateTime gameStart = event[0].gameStarted.toDate();
       DateTime gameEnd = event[0].gameEnd.toDate();
 

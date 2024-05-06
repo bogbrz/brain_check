@@ -2,7 +2,6 @@ import 'package:brain_check/app/core/enums/enums.dart';
 import 'package:brain_check/app/injection_container.dart';
 import 'package:brain_check/domain/models/categories_model.dart';
 import 'package:brain_check/domain/models/duel_room_page_route_model.dart';
-import 'package:brain_check/domain/models/game_room_model.dart';
 
 import 'package:brain_check/features/pages/duel_question_page/duel_question_page.dart';
 import 'package:brain_check/features/pages/duel_room_page/cubit/duel_room_page_cubit.dart';
@@ -10,7 +9,6 @@ import 'package:brain_check/features/pages/duel_room_page/widgets/non_owner_cate
 import 'package:brain_check/features/pages/duel_room_page/widgets/player_one_widget.dart';
 import 'package:brain_check/features/pages/duel_room_page/widgets/player_two_widget.dart';
 import 'package:brain_check/features/pages/duel_room_page/widgets/players_score.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';

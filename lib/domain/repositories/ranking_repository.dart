@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:brain_check/data_sources/ranking_data_source.dart';
 import 'package:brain_check/data_sources/storage_data_source.dart';
 import 'package:brain_check/domain/models/profile_model.dart';
-import 'package:brain_check/domain/repositories/storage_repository.dart';
 
 class RankingRepository {
   final RankingFireBaseDataSource rankingFireBaseDataSource;
@@ -16,15 +15,17 @@ class RankingRepository {
   Future<void> addProfileToGlobal(
       {required String nickName,
       required String email,
-      required String? imageUrl}) async {
+      required String? imageUrl,
+      required String userId}) async {
     await rankingFireBaseDataSource.addToRanking(
-        nickName: nickName, email: email, imageUrl: imageUrl);
+        nickName: nickName, email: email, imageUrl: imageUrl, userId: userId);
   }
 
   Stream<List<ProfileModel>> getRanking() {
     return rankingFireBaseDataSource.getRanking().map((snapshot) {
       return snapshot.docs.map((doc) {
         return ProfileModel(
+            userId: doc["userId"],
             id: doc.id,
             email: doc['email'],
             nickName: doc['nickName'],
@@ -39,11 +40,12 @@ class RankingRepository {
     });
   }
 
-  Stream<List<ProfileModel>> getRankingForUpdate({required String email}) {
+  Stream<List<ProfileModel>> getRankingForUpdate({required String email,required String userId}) {
     return rankingFireBaseDataSource.getRanking().map((snapshot) {
       return snapshot.docs
           .map((doc) {
             return ProfileModel(
+                userId: doc["userId"],
                 id: doc.id,
                 email: doc['email'],
                 nickName: doc['nickName'],
@@ -55,7 +57,7 @@ class RankingRepository {
                 gameEnd: doc["gameEnd"],
                 imageUrl: doc["imageUrl"]);
           })
-          .where((element) => element.email == email)
+          .where((element) => element.email == email).where((element) => element.userId == userId)
           .toList();
     });
   }

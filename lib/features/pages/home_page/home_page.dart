@@ -22,19 +22,22 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
         create: (context) => getIt<HomePageCubit>()
-          ..getRankingForUpdate(email: user!.email.toString()),
+          ..getRankingForUpdate(
+              email: user!.email.toString(), userId: user!.uid),
         child: BlocConsumer<HomePageCubit, HomePageState>(
             listener: (context, state) {},
             builder: (context, state) {
+              print("DISPLAY useer : ${user}");
               print("DISPLAY NAME : ${user!.displayName}");
               switch (state.status) {
                 case Status.initial:
                   return const InitialStateWidget();
-                case Status.loading:
-                  return const LoadingStateWidget();
+
                 case Status.error:
                   return ErrorStateWidget(
                       errorMessage: state.errorMessage.toString());
+                case Status.loading:
+                  return const LoadingStateWidget();
                 case Status.success:
                   return Scaffold(
                       body: Container(
@@ -52,12 +55,11 @@ class HomePage extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         PageExtrasWidget(
-                          profiles: state.profile,
+                          profile: state.profile[0],
                           user: user,
                           overall: state.overAllInfo,
                         ),
                         StartButtonWidget(
-                      
                           user: user,
                           profile: state.profile[0],
                         ),

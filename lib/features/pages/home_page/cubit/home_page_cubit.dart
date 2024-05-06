@@ -38,7 +38,7 @@ class HomePageCubit extends Cubit<HomePageState> {
         playerId: profileId, lastLogin: lastLogin);
   }
 
-  Future<void> getRankingForUpdate({required String email}) async {
+  Future<void> getRankingForUpdate({required String email, required userId}) async {
     emit(HomePageState(
         errorMessage: null,
         profile: [],
@@ -56,7 +56,7 @@ class HomePageCubit extends Cubit<HomePageState> {
         : await uploadedImages[0].getDownloadURL();
     final info = await questionRepository.getOverAllInfo();
     streamSubscription =
-        rankingRepository.getRankingForUpdate(email: email).listen((event) {
+        rankingRepository.getRankingForUpdate(email: email,userId: userId).listen((event) {
       try {
         emit(HomePageState(
             uploadedImageUrl: uploadedImageUrl,

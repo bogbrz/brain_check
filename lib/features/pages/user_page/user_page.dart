@@ -1,12 +1,9 @@
-import 'package:brain_check/app/injection_container.dart';
 
-import 'package:brain_check/features/pages/user_page/cubit/user_page_cubit.dart';
 import 'package:brain_check/features/pages/user_page/widgets/profile_info_widget.dart';
 import 'package:brain_check/features/pages/user_page/widgets/sign_out_widget.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class UserPage extends StatelessWidget {
   const UserPage({

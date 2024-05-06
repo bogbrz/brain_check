@@ -3,7 +3,6 @@ import 'package:brain_check/app/core/enums/enums.dart';
 import 'package:brain_check/app/injection_container.dart';
 import 'package:brain_check/domain/models/profile_model.dart';
 import 'package:brain_check/domain/models/question_page_route_model.dart';
-import 'package:brain_check/features/pages/question_page/question_page.dart';
 import 'package:brain_check/features/pages/ranked_game_page/cubit/ranked_game_cubit.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -32,7 +31,7 @@ class RankedGamePage extends StatelessWidget {
 
     return BlocProvider(
         create: (context) => getIt<RankedGameCubit>()
-          ..getRankingForUpdate(email: user!.email.toString()),
+          ..getRankingForUpdate(email: user!.email.toString(),userId: user!.uid),
         child: Container(
           child: Scaffold(
             body: BlocConsumer<RankedGameCubit, RankedGameState>(
