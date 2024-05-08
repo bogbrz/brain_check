@@ -37,7 +37,7 @@ class SetUpUserCubit extends Cubit<SetUpUserState> {
         ? null
         : await uploadedImages[0].getDownloadURL();
     streamSubscription =
-        rankingRepository.getRankingForUpdate(email: email,userId: userId).listen((event) {
+        rankingRepository.getRankingForUpdate(email: email,).listen((event) {
       try {
         print("success");
         emit(SetUpUserState(

@@ -56,7 +56,7 @@ class HomePageCubit extends Cubit<HomePageState> {
         : await uploadedImages[0].getDownloadURL();
     final info = await questionRepository.getOverAllInfo();
     streamSubscription =
-        rankingRepository.getRankingForUpdate(email: email,userId: userId).listen((event) {
+        rankingRepository.getRankingForUpdate(email: email).listen((event) {
       try {
         emit(HomePageState(
             uploadedImageUrl: uploadedImageUrl,

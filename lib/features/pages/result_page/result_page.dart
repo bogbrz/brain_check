@@ -82,7 +82,8 @@ class ResultPage extends StatelessWidget {
 
     return BlocProvider(
       create: (context) => getIt<ResultCubit>()
-        ..getRankingForUpdate(email: model.user!.email.toString(), userId: model.user!.uid),
+        ..getRankingForUpdate(
+            email: model.user!.email.toString(),),
       child: Scaffold(body: BlocBuilder<ResultCubit, ResultState>(
         builder: (context, state) {
           switch (state.status) {
@@ -94,6 +95,7 @@ class ResultPage extends StatelessWidget {
               return ErrorStateWidget(
                   errorMessage: state.errorMessage.toString());
             case Status.success:
+              print("GAME DURATION ${state.gameDuration}");
               int pointsDeductionForTime = state.gameDuration!.inSeconds <= 30
                   ? 0
                   : ((state.gameDuration!.inSeconds) ~/ 5);

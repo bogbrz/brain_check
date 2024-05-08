@@ -40,7 +40,8 @@ class RankingRepository {
     });
   }
 
-  Stream<List<ProfileModel>> getRankingForUpdate({required String email,required String userId}) {
+  Stream<List<ProfileModel>> getRankingForUpdate(
+      {required String email,}) {
     return rankingFireBaseDataSource.getRanking().map((snapshot) {
       return snapshot.docs
           .map((doc) {
@@ -57,7 +58,7 @@ class RankingRepository {
                 gameEnd: doc["gameEnd"],
                 imageUrl: doc["imageUrl"]);
           })
-          .where((element) => element.email == email).where((element) => element.userId == userId)
+          .where((element) => element.email == email)
           .toList();
     });
   }

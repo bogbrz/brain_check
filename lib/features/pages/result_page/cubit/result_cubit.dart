@@ -14,12 +14,11 @@ class ResultCubit extends Cubit<ResultState> {
   ResultCubit(
       {required this.duelGameRepository, required this.rankingRepository})
       : super(ResultState(
-          gameLenght: null,
-          errorMessage: null,
-          status: Status.initial,
-          profiles: [],
-          gameDuration: null
-        ));
+            gameLenght: null,
+            errorMessage: null,
+            status: Status.initial,
+            profiles: [],
+            gameDuration: null));
   final DuelGameRepository duelGameRepository;
   final RankingRepository rankingRepository;
   StreamSubscription? streamSubscription;
@@ -59,7 +58,7 @@ class ResultCubit extends Cubit<ResultState> {
     });
   }
 
-  Future<void> getRankingForUpdate({required String email,required String userId}) async {
+  Future<void> getRankingForUpdate({required String email}) async {
     emit(ResultState(
       gameDuration: null,
       gameLenght: null,
@@ -67,24 +66,31 @@ class ResultCubit extends Cubit<ResultState> {
       profiles: [],
       status: Status.loading,
     ));
-    streamSubscription =
-        rankingRepository.getRankingForUpdate(email: email, userId: userId).listen((event) {
+    streamSubscription = rankingRepository
+        .getRankingForUpdate(
+      email: email,
+    )
+        .listen((event) {
       DateTime gameStart = event[0].gameStarted.toDate();
+
       DateTime gameEnd = event[0].gameEnd.toDate();
+      print("GAME START $gameStart");
+      print("GAME End $gameEnd");
 
       Duration difference = gameEnd.difference(gameStart);
+      print("DIFFERENCE $difference");
       String formattedDuration =
           "${difference.inMinutes.remainder(60)}:${(difference.inSeconds.remainder(60)).toString().padLeft(2, '0')}";
       try {
         emit(ResultState(
-          gameDuration: difference,
+            gameDuration: difference,
             errorMessage: null,
             profiles: event,
             status: Status.success,
             gameLenght: formattedDuration));
       } catch (error) {
         emit(ResultState(
-          gameDuration: null,
+            gameDuration: null,
             gameLenght: formattedDuration,
             errorMessage: error.toString(),
             profiles: [],
