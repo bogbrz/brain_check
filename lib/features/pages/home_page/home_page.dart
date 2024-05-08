@@ -27,8 +27,6 @@ class HomePage extends StatelessWidget {
         child: BlocConsumer<HomePageCubit, HomePageState>(
             listener: (context, state) {},
             builder: (context, state) {
-              print("DISPLAY useer : ${user}");
-              print("DISPLAY NAME : ${user!.displayName}");
               switch (state.status) {
                 case Status.initial:
                   return const InitialStateWidget();
@@ -39,6 +37,10 @@ class HomePage extends StatelessWidget {
                 case Status.loading:
                   return const LoadingStateWidget();
                 case Status.success:
+                  print("DISPLAY useer  HOMEPAGE : ${user!}");
+
+                  print(
+                      "DISPLAY useer  HOMEPAGE FIREBASE : ${FirebaseAuth.instance.currentUser}");
                   return Scaffold(
                       body: Container(
                     decoration: BoxDecoration(

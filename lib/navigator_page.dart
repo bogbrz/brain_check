@@ -1,4 +1,6 @@
-
+import 'package:brain_check/features/pages/home_page/home_page.dart';
+import 'package:brain_check/features/pages/ranking_page/ranking_page.dart';
+import 'package:brain_check/features/pages/user_page/user_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -22,7 +24,7 @@ class _NavigatorPageState extends State<NavigatorPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: widget.navigationShell,
-      // Builder(builder: (context) {
+      //     Builder(builder: (context) {
       //   if (pageIndex == 0) {
       //     return HomePage(
       //       user: widget.user,

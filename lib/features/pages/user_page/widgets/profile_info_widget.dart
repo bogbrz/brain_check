@@ -49,6 +49,9 @@ class _ProfileInfoWidgetState extends State<ProfileInfoWidget> {
         listener: (context, state) {},
         builder: (context, state) {
           print("CHOODES ${_selectedImage}");
+          print("USER NOT FB ${widget.user}");
+          print(
+              "DISPLAY useer  USERPAGE FB : ${FirebaseAuth.instance.currentUser}");
           switch (state.status) {
             case Status.initial:
               return const InitialStateWidget();
