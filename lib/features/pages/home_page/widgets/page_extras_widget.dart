@@ -22,13 +22,13 @@ class PageExtrasWidget extends StatefulWidget {
 }
 
 class _PageExtrasWidgetState extends State<PageExtrasWidget>
-    with SingleTickerProviderStateMixin {
+    with TickerProviderStateMixin {
+  late final AnimationController animationController = AnimationController(
+    vsync: this,
+    duration: Duration(seconds: 2),
+  )..repeat(reverse: true);
   @override
   Widget build(BuildContext context) {
-    late final AnimationController animationController = AnimationController(
-      vsync: this,
-      duration: Duration(seconds: 2),
-    )..repeat(reverse: true);
     late final Animation<Offset> _offsetAnimation = Tween<Offset>(
       begin: Offset(0, -0.3),
       end: Offset(0.0, 0),
@@ -59,5 +59,11 @@ class _PageExtrasWidgetState extends State<PageExtrasWidget>
         ),
       ],
     );
+  }
+
+  @override
+  void dispose() {
+    animationController.dispose();
+    super.dispose();
   }
 }
