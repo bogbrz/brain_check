@@ -21,33 +21,31 @@ class StartButtonWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Material(
-        shadowColor: Colors.white70,
-        borderRadius: BorderRadius.circular(10),
-        clipBehavior: Clip.hardEdge,
-        child: InkWell(
-          onTap: () {
-            context.push("/gameTypePage", extra: profile);
-          },
-          child: Container(
-            alignment: Alignment.center,
-            width: MediaQuery.of(context).size.width * 0.6,
-            height: MediaQuery.of(context).size.height * 0.1,
-            decoration: BoxDecoration(
-              color: Colors.white,
-              gradient: LinearGradient(
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-                colors: [
-                  Color.fromARGB(255, 255, 255, 255),
-                  Color.fromARGB(180, 66, 120, 255),
-                ],
-              ),
+    return Material(
+      shadowColor: Colors.white70,
+      borderRadius: BorderRadius.circular(10),
+      clipBehavior: Clip.hardEdge,
+      child: InkWell(
+        onTap: () {
+          context.push("/gameTypePage", extra: profile);
+        },
+        child: Container(
+          alignment: Alignment.center,
+          width: MediaQuery.of(context).size.width * 0.6,
+          height: MediaQuery.of(context).size.height * 0.1,
+          decoration: BoxDecoration(
+            color: Colors.white,
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [
+                Color.fromARGB(255, 255, 255, 255),
+                Color.fromARGB(180, 66, 120, 255),
+              ],
             ),
-            child: Text(AppLocalizations.of(context).play,
-                style: GoogleFonts.bungee(fontSize: 45)),
           ),
+          child: Text(AppLocalizations.of(context).play,
+              style: GoogleFonts.bungee(fontSize: 45)),
         ),
       ),
     );

@@ -24,9 +24,7 @@ class _SetUpUserPageState extends State<SetUpUserPage> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-        create: (context) => getIt<SetUpUserCubit>()
-          ..getRankingForUpdate(
-              email: widget.user!.email.toString(), userId: widget.user!.uid),
+        create: (context) => getIt<SetUpUserCubit>()..getRanking(),
         child: Scaffold(
           body: Container(
             decoration: BoxDecoration(

@@ -25,7 +25,7 @@ final controller = TextEditingController();
 
 class _UserInfoWidgetState extends State<UserInfoWidget> {
   File? _selectedImage;
-  var isChoosed = true;
+  // var isChoosed = true;
   @override
   void initState() {
     controller.addListener(() {
@@ -57,50 +57,50 @@ class _UserInfoWidgetState extends State<UserInfoWidget> {
                 onTap: () {
                   _pickImageFromGallery();
                   setState(() {
-                    isChoosed = false;
+                    // isChoosed = false;
                   });
                 },
                 child: ProfilePictureWidget(selectedImage: _selectedImage),
               ),
             ),
-            isChoosed == false
-                ? Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      IconButton(
-                          onPressed: () async {
-                            setState(() {
-                              isChoosed = true;
-                            });
+            // isChoosed == false
+            //     ? Row(
+            //         mainAxisAlignment: MainAxisAlignment.center,
+            //         children: [
+            //           IconButton(
+            //               onPressed: () {
+            //                 setState(() {
+            //                   isChoosed = false;
+            //                 });
 
-                            await context
-                                .read<SetUpUserCubit>()
-                                .uploadImage(file: _selectedImage!)
-                                .then((value) {
-                              context
-                                  .read<SetUpUserCubit>()
-                                  .getRankingForUpdate(
-                                      email: widget.user!.email.toString(),
-                                      userId: widget.user!.uid);
-                            });
-                          },
-                          icon: Icon(
-                            Icons.check_box_rounded,
-                            color: Colors.green,
-                          )),
-                      IconButton(
-                          onPressed: () {
-                            setState(() {
-                              _selectedImage = null;
-                            });
-                          },
-                          icon: Icon(
-                            Icons.cancel,
-                            color: Colors.red,
-                          ))
-                    ],
-                  )
-                : SizedBox.shrink(),
+            //                 // context
+            //                 //     .read<SetUpUserCubit>()
+            //                 //     .uploadImage(file: _selectedImage!)
+            //                 //     .then((value) {
+            //                 // context
+            //                 //     .read<SetUpUserCubit>()
+            //                 //     .getRankingForUpdate(
+            //                 //         email: widget.user!.email.toString(),
+            //                 //         userId: widget.user!.uid);
+            //                 // });
+            //               },
+            //               icon: Icon(
+            //                 Icons.check_box_rounded,
+            //                 color: Colors.green,
+            //               )),
+            //           IconButton(
+            //               onPressed: () {
+            //                 setState(() {
+            //                   _selectedImage = null;
+            //                 });
+            //               },
+            //               icon: Icon(
+            //                 Icons.cancel,
+            //                 color: Colors.red,
+            //               ))
+            //         ],
+            //       )
+            //     : SizedBox.shrink(),
             Text(
               AppLocalizations.of(context).setNickName,
               style: GoogleFonts.bungee(fontSize: 20),
@@ -121,18 +121,25 @@ class _UserInfoWidgetState extends State<UserInfoWidget> {
               ),
             ),
             InkWell(
-                onTap: controller.text.isEmpty
+                onTap: controller.text.isEmpty ||
+                        state.profile.any(
+                            (element) => element.nickName == controller.text)
                     ? null
-                    : () {
-                        context
+                    : () async {
+                        await context
                             .read<SetUpUserCubit>()
-                            .addProfileToGlobalRanking(
-                                imageUrl: state.uploadImageUrl,
-                                nickName: controller.text.isNotEmpty
-                                    ? controller.text
-                                    : widget.user!.displayName.toString(),
-                                email: widget.user!.email.toString(),
-                                userId: widget.user!.uid);
+                            .uploadImage(file: _selectedImage!)
+                            .then((value) {
+                          context
+                              .read<SetUpUserCubit>()
+                              .addProfileToGlobalRanking(
+                                  imageUrl: state.uploadImageUrl,
+                                  nickName: controller.text.isNotEmpty
+                                      ? controller.text
+                                      : widget.user!.displayName.toString(),
+                                  email: widget.user!.email.toString(),
+                                  userId: widget.user!.uid);
+                        });
 
                         controller.clear();
                         context.goNamed("/homePage", extra: widget.user);

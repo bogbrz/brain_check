@@ -299,4 +299,10 @@ class DuelQuestionPageCubit extends Cubit<DuelQuestionPageState> {
       }
     });
   }
+
+  @override
+  Future<void> close() {
+    streamSubscription?.cancel();
+    return super.close();
+  }
 }

@@ -300,7 +300,10 @@ class _ProfileInfoWidgetState extends State<ProfileInfoWidget> {
         await ImagePicker().pickImage(source: ImageSource.gallery);
 
     setState(() {
-      _selectedImage = File(returnedImage!.path);
+      if (returnedImage == null) {
+      } else {
+        _selectedImage = File(returnedImage.path);   
+      }
     });
   }
 }

@@ -17,8 +17,20 @@ class RankingRepository {
       required String email,
       required String? imageUrl,
       required String userId}) async {
+    final list = await storageDataSource.getImages();
+    if (list!.isEmpty) {
+      null;
+      print("LIST $list IS EMPTY");
+    }
+
+    final uploadedImages = list;
+    final uploadedImageUrl = await uploadedImages[0].getDownloadURL();
+    print(uploadedImageUrl);
     await rankingFireBaseDataSource.addToRanking(
-        nickName: nickName, email: email, imageUrl: imageUrl, userId: userId);
+        nickName: nickName,
+        email: email,
+        imageUrl: uploadedImageUrl,
+        userId: userId);
   }
 
   Stream<List<ProfileModel>> getRanking() {
@@ -40,8 +52,9 @@ class RankingRepository {
     });
   }
 
-  Stream<List<ProfileModel>> getRankingForUpdate(
-      {required String email,}) {
+  Stream<List<ProfileModel>> getRankingForUpdate({
+    required String email,
+  }) {
     return rankingFireBaseDataSource.getRanking().map((snapshot) {
       return snapshot.docs
           .map((doc) {

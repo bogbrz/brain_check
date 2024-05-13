@@ -7,6 +7,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 final emailController = TextEditingController();
 final passwordController = TextEditingController();
+final passwordConfirmController = TextEditingController();
 final nickNameController = TextEditingController();
 
 class LogInPage extends StatefulWidget {
@@ -122,26 +123,73 @@ class _LogInPageState extends State<LogInPage> {
                       const SizedBox(
                         height: 10,
                       ),
+                      isCreatingAccount
+                          ? Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                gradient: LinearGradient(
+                                  begin: Alignment.topLeft,
+                                  end: Alignment.bottomRight,
+                                  colors: [
+                                    Color.fromARGB(255, 255, 255, 255),
+                                    Color.fromARGB(180, 66, 120, 255),
+                                  ],
+                                ),
+                              ),
+                              child: TextField(
+                                style: TextStyle(
+                                  fontSize:
+                                      MediaQuery.of(context).size.height / 40,
+                                ),
+                                obscureText: true,
+                                decoration: InputDecoration(
+                                  border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(10)),
+                                  hintText: "Confirm password",
+                                  fillColor: Colors.transparent,
+                                  filled: true,
+                                  hintStyle:
+                                      GoogleFonts.bungee(color: Colors.black),
+                                ),
+                                controller: passwordConfirmController,
+                              ),
+                            )
+                          : SizedBox.shrink(),
+                      const SizedBox(
+                        height: 10,
+                      ),
                       InkWell(
-                        onTap: () async {
-                          if (isCreatingAccount) {
-                            context
-                                .read<LogInPageCubit>()
-                                .createUserWithEmailAndPassword(
-                                    email: emailController.text,
-                                    password: passwordController.text);
+                        onTap: isCreatingAccount == true &&
+                                passwordConfirmController.text.isEmpty
+                            ? null
+                            : () async {
+                                if (isCreatingAccount &&
+                                    passwordConfirmController.text ==
+                                        passwordController.text) {
+                                  context
+                                      .read<LogInPageCubit>()
+                                      .createUserWithEmailAndPassword(
+                                          email: emailController.text,
+                                          password: passwordController.text);
 
-                            // context
-                            //     .read<LogInPageCubit>()
-                            //     .updateDisplayName(email: emailController.text);
-                          } else {
-                            context
-                                .read<LogInPageCubit>()
-                                .signInWitEmailAndPassword(
-                                    email: emailController.text,
-                                    password: passwordController.text);
-                          }
-                        },
+                                  // context
+                                  //     .read<LogInPageCubit>()
+                                  //     .updateDisplayName(email: emailController.text);
+                                } else if (isCreatingAccount &&
+                                    passwordConfirmController.text !=
+                                        passwordController.text) {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                          content: Text(
+                                              "Passwords are not the same")));
+                                } else {
+                                  context
+                                      .read<LogInPageCubit>()
+                                      .signInWitEmailAndPassword(
+                                          email: emailController.text,
+                                          password: passwordController.text);
+                                }
+                              },
                         child: Container(
                           alignment: Alignment.center,
                           width: MediaQuery.of(context).size.width / 2,
@@ -175,6 +223,7 @@ class _LogInPageState extends State<LogInPage> {
                         TextButton(
                             onPressed: () {
                               passwordController.clear();
+                              passwordConfirmController.clear();
                               emailController.clear();
                               setState(() {
                                 isCreatingAccount = true;
@@ -192,6 +241,7 @@ class _LogInPageState extends State<LogInPage> {
                         TextButton(
                             onPressed: () {
                               passwordController.clear();
+                              passwordConfirmController.clear();
                               emailController.clear();
                               setState(() {
                                 isCreatingAccount = false;

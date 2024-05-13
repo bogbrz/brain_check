@@ -119,7 +119,7 @@ class ResultCubit extends Cubit<ResultState> {
       required int answerThree,
       required int answerFour,
       required int answerFive}) async {
-    return duelGameRepository.addRoundResults(
+    await duelGameRepository.addRoundResults(
         roundNumber: roundNumber,
         roomId: roomId,
         playerNumber: playerNumber,

@@ -30,10 +30,11 @@ class _PageExtrasWidgetState extends State<PageExtrasWidget>
   @override
   Widget build(BuildContext context) {
     late final Animation<Offset> _offsetAnimation = Tween<Offset>(
-      begin: Offset(0, -0.3),
-      end: Offset(0.0, 0),
+      begin: Offset(0, -0.2),
+      end: Offset(0.0, 0.2),
     ).animate(
         CurvedAnimation(parent: animationController, curve: Curves.elasticIn));
+    ;
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [

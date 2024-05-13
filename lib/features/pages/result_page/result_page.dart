@@ -83,7 +83,8 @@ class ResultPage extends StatelessWidget {
     return BlocProvider(
       create: (context) => getIt<ResultCubit>()
         ..getRankingForUpdate(
-            email: model.user!.email.toString(),),
+          email: model.user!.email.toString(),
+        ),
       child: Scaffold(body: BlocBuilder<ResultCubit, ResultState>(
         builder: (context, state) {
           switch (state.status) {
@@ -373,14 +374,16 @@ class ResultPage extends StatelessWidget {
                                         status: false,
                                         playerId: player.id,
                                         points: totalPoints);
-                                    if (model.gameStatus == true) {
+                                    if (model.gameStatus == true &&
+                                        model.user!.email.toString() ==
+                                            model.ownerEmail.toString()) {
                                       context
                                           .read<ResultCubit>()
                                           .deleteQuestions(
                                               roomId: model.roomId!,
                                               roundNumber: player.roundNumber);
-                                      context.pop();
                                     }
+                                    context.pop();
                                   }
                                 }
                               } else if (model.gameType == GameType.casual) {

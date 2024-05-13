@@ -1,4 +1,3 @@
-
 import 'package:brain_check/features/pages/user_page/widgets/profile_info_widget.dart';
 import 'package:brain_check/features/pages/user_page/widgets/sign_out_widget.dart';
 
@@ -42,6 +41,7 @@ class UserPage extends StatelessWidget {
                 ),
                 borderRadius: BorderRadius.circular(10)),
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 ProfileInfoWidget(
                   user: user,

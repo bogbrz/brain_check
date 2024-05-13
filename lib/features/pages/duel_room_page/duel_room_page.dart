@@ -32,6 +32,7 @@ class DuelRoomPage extends StatefulWidget {
   // final GameRoomModel roomModel;
 
   final DuelRoomRoutePageModel model;
+  
 
   @override
   State<DuelRoomPage> createState() => _DuelRoomPageState();
@@ -218,7 +219,7 @@ class _DuelRoomPageState extends State<DuelRoomPage> {
                               width: MediaQuery.of(context).size.width * 0.4,
                               child: JoinPlayerTwoWidget(
                                 userPicture: widget.model.userPicture,
-                                nickName: widget.model.roomModel.nickName,
+                                nickName: widget.model.nickName,
                                 id: widget.model.roomModel.id,
                                 playerTwo: state.playerTwo,
                                 playerOne: state.playerOne,
@@ -523,4 +524,5 @@ class _DuelRoomPageState extends State<DuelRoomPage> {
       ),
     );
   }
+
 }
