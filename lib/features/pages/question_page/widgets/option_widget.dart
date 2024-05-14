@@ -27,7 +27,7 @@ class AnswerWidget extends StatelessWidget {
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
               colors: [
-                Color.fromARGB(255, 255, 255, 255),
+                const Color.fromARGB(255, 255, 255, 255),
                 choosedAnswer.isEmpty && isChoosed == false
                     ? Colors.white
                     : choosedAnswer == correctAnswer &&
@@ -42,7 +42,7 @@ class AnswerWidget extends StatelessWidget {
                                 isChoosed == true
                             ? Colors.red
                             : Colors.white,
-                Color.fromARGB(180, 66, 120, 255),
+                const Color.fromARGB(180, 66, 120, 255),
               ],
             ),
             color: choosedAnswer.isEmpty && isChoosed == false
@@ -69,6 +69,7 @@ class AnswerWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               SizedBox(
+                height: MediaQuery.of(context).size.height * 0.025,
                 child: Row(
                   children: [
                     isChoosed &&
@@ -84,10 +85,9 @@ class AnswerWidget extends StatelessWidget {
                                 size:
                                     MediaQuery.of(context).size.height * 0.035,
                               )
-                            : SizedBox.shrink()
+                            : const SizedBox.shrink()
                   ],
                 ),
-                height: MediaQuery.of(context).size.height * 0.025,
               ),
               Text(answer,
                   style: GoogleFonts.bungee(

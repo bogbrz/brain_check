@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:brain_check/app/core/enums/enums.dart';
-import 'package:brain_check/features/pages/home_page/home_page.dart';
 import 'package:brain_check/features/pages/set_up_user_page/cubit/set_up_user_cubit.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +12,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:image_picker/image_picker.dart';
 
 class UserInfoWidget extends StatefulWidget {
-  UserInfoWidget({super.key, required this.user});
+  const UserInfoWidget({super.key, required this.user});
 
   final User? user;
 
@@ -25,7 +24,7 @@ final controller = TextEditingController();
 
 class _UserInfoWidgetState extends State<UserInfoWidget> {
   File? _selectedImage;
-  // var isChoosed = true;
+
   @override
   void initState() {
     controller.addListener(() {
@@ -39,7 +38,7 @@ class _UserInfoWidgetState extends State<UserInfoWidget> {
   Widget build(BuildContext context) {
     return BlocBuilder<SetUpUserCubit, SetUpUserState>(
       builder: (context, state) {
-        print("WIDET ${state.uploadImageUrl}");
+       
 
         return Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -57,50 +56,13 @@ class _UserInfoWidgetState extends State<UserInfoWidget> {
                 onTap: () {
                   _pickImageFromGallery();
                   setState(() {
-                    // isChoosed = false;
+                 
                   });
                 },
                 child: ProfilePictureWidget(selectedImage: _selectedImage),
               ),
             ),
-            // isChoosed == false
-            //     ? Row(
-            //         mainAxisAlignment: MainAxisAlignment.center,
-            //         children: [
-            //           IconButton(
-            //               onPressed: () {
-            //                 setState(() {
-            //                   isChoosed = false;
-            //                 });
-
-            //                 // context
-            //                 //     .read<SetUpUserCubit>()
-            //                 //     .uploadImage(file: _selectedImage!)
-            //                 //     .then((value) {
-            //                 // context
-            //                 //     .read<SetUpUserCubit>()
-            //                 //     .getRankingForUpdate(
-            //                 //         email: widget.user!.email.toString(),
-            //                 //         userId: widget.user!.uid);
-            //                 // });
-            //               },
-            //               icon: Icon(
-            //                 Icons.check_box_rounded,
-            //                 color: Colors.green,
-            //               )),
-            //           IconButton(
-            //               onPressed: () {
-            //                 setState(() {
-            //                   _selectedImage = null;
-            //                 });
-            //               },
-            //               icon: Icon(
-            //                 Icons.cancel,
-            //                 color: Colors.red,
-            //               ))
-            //         ],
-            //       )
-            //     : SizedBox.shrink(),
+          
             Text(
               AppLocalizations.of(context).setNickName,
               style: GoogleFonts.bungee(fontSize: 20),
@@ -150,7 +112,7 @@ class _UserInfoWidgetState extends State<UserInfoWidget> {
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(
                           MediaQuery.of(context).size.width * 0.05),
-                      gradient: LinearGradient(
+                      gradient: const LinearGradient(
                         begin: Alignment.topRight,
                         end: Alignment.bottomLeft,
                         colors: [
@@ -212,8 +174,8 @@ class ProfilePictureWidget extends StatelessWidget {
                       ? null
                       : Image.network(state.uploadImageUrl!).image,
               child: _selectedImage == null && state.uploadImageUrl == null
-                  ? Icon(Icons.add_a_photo)
-                  : SizedBox.shrink(),
+                  ? const Icon(Icons.add_a_photo)
+                  : const SizedBox.shrink(),
             );
         }
       },

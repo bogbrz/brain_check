@@ -47,7 +47,7 @@ class DuelGameRepository {
         null, categoryId, 5, token.token);
 
     final results = questionsList.results;
-    print("Questions to add $results");
+
     for (final question in results) {
       await duelGameDataSource.addQtoFirebase(
           questionModel: question, roomId: roomId, roundNumber: roundNumber);

@@ -13,7 +13,7 @@ class ErrorStateWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
           gradient: LinearGradient(
         begin: Alignment.topLeft,
         end: Alignment.bottomRight,
@@ -57,8 +57,8 @@ class LoadingPictureWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(shape: BoxShape.circle),
-      child: CircularProgressIndicator(),
+      decoration: const BoxDecoration(shape: BoxShape.circle),
+      child: const CircularProgressIndicator(),
     );
   }
 }
@@ -69,7 +69,7 @@ class InitialStateWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
           gradient: LinearGradient(
         begin: Alignment.topLeft,
         end: Alignment.bottomRight,

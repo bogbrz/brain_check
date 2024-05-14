@@ -37,13 +37,11 @@ class HomePage extends StatelessWidget {
                 case Status.loading:
                   return const LoadingStateWidget();
                 case Status.success:
-                  print("DISPLAY useer  HOMEPAGE : ${user!}");
+            
 
-                  print(
-                      "DISPLAY useer  HOMEPAGE FIREBASE : ${FirebaseAuth.instance.currentUser}");
                   return Scaffold(
                       body: Container(
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       gradient: LinearGradient(
                         begin: Alignment.topLeft,
                         end: Alignment.bottomRight,

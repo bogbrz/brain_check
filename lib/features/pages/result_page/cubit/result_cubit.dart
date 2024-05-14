@@ -13,7 +13,7 @@ part 'generated/result_cubit.freezed.dart';
 class ResultCubit extends Cubit<ResultState> {
   ResultCubit(
       {required this.duelGameRepository, required this.rankingRepository})
-      : super(ResultState(
+      : super(const ResultState(
             gameLenght: null,
             errorMessage: null,
             status: Status.initial,
@@ -45,21 +45,19 @@ class ResultCubit extends Cubit<ResultState> {
         .listen((event) {
       try {
         for (final question in event) {
-          duelGameRepository
-              .deleteQuestions(
-                  roomId: roomId,
-                  roundNumber: roundNumber,
-                  questionId: question.id.toString())
-              .then((value) => print("Delete questions cubit"));
+          duelGameRepository.deleteQuestions(
+              roomId: roomId,
+              roundNumber: roundNumber,
+              questionId: question.id.toString());
         }
       } catch (e) {
-        print("DELETE Q ERROR ${e.toString()}");
+        throw Exception(e.toString());
       }
     });
   }
 
   Future<void> getRankingForUpdate({required String email}) async {
-    emit(ResultState(
+    emit(const ResultState(
       gameDuration: null,
       gameLenght: null,
       errorMessage: null,
@@ -74,11 +72,9 @@ class ResultCubit extends Cubit<ResultState> {
       DateTime gameStart = event[0].gameStarted.toDate();
 
       DateTime gameEnd = event[0].gameEnd.toDate();
-      print("GAME START $gameStart");
-      print("GAME End $gameEnd");
 
       Duration difference = gameEnd.difference(gameStart);
-      print("DIFFERENCE $difference");
+
       String formattedDuration =
           "${difference.inMinutes.remainder(60)}:${(difference.inSeconds.remainder(60)).toString().padLeft(2, '0')}";
       try {
@@ -106,7 +102,7 @@ class ResultCubit extends Cubit<ResultState> {
           .updateRanking(points: points, id: profileId)
           .then((value) => streamSubscription?.cancel());
     } catch (e) {
-      print(e.toString());
+      throw Exception(e.toString());
     }
   }
 

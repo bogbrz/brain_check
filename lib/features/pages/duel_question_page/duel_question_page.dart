@@ -62,38 +62,11 @@ class _DuelQuestionPageState extends State<DuelQuestionPage> {
               return ErrorStateWidget(
                   errorMessage: state.errorMessage.toString());
             case Status.success:
-              // if (index == 5) {
-              //   return ResultPage(
-              //     model: ResultPageRouteModel(
-              //       gameType: GameType.duel,
-              //       questionAmount: 5,
-              //       roomId: widget.roomId,
-              //       players: widget.players,
-              //       user: widget.user,
-              //       ownerEmail: widget.ownerEmail,
-              //       answerOne: answerOne,
-              //       answerTwo: answerTwo,
-              //       answerThree: answerThree,
-              //       answerFour: answerFour,
-              //       answerFive: answerFive,
-              //       answerSix: 0,
-              //       answerSeven: 0,
-              //       answerEight: 0,
-              //       answerNine: 0,
-              //       answerTen: 0,
-              //       answerEleven: 0,
-              //       answerTwelve: 0,
-              //       answerThirteen: 0,
-              //       answerFourteen: 0,
-              //       answerFithteen: 0,
-              //       gameStatus: end,
-              //     ),
-              //   );
-              // }
+      
 
               return Scaffold(
                 body: Container(
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                       gradient: LinearGradient(
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
@@ -113,7 +86,7 @@ class _DuelQuestionPageState extends State<DuelQuestionPage> {
                           decoration: BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(10),
-                            gradient: LinearGradient(
+                            gradient: const LinearGradient(
                               begin: Alignment.topLeft,
                               end: Alignment.bottomRight,
                               colors: [
@@ -260,7 +233,7 @@ class _DuelQuestionPageState extends State<DuelQuestionPage> {
                                               }
                                             });
 
-                                            print(choosedAnswer);
+                                 
                                           },
                                     child: AnswerWidget(
                                         isChoosed: isChoosed,
@@ -288,7 +261,7 @@ class _DuelQuestionPageState extends State<DuelQuestionPage> {
                                               }
                                             });
 
-                                            print(choosedAnswer);
+                                   
                                           },
                                     child: AnswerWidget(
                                         isChoosed: isChoosed,
@@ -316,7 +289,7 @@ class _DuelQuestionPageState extends State<DuelQuestionPage> {
                                               }
                                             });
 
-                                            print(choosedAnswer);
+                                
                                           },
                                     child: AnswerWidget(
                                         isChoosed: isChoosed,
@@ -342,7 +315,7 @@ class _DuelQuestionPageState extends State<DuelQuestionPage> {
                                                       .toString()) {}
                                             });
 
-                                            print(choosedAnswer);
+                                
                                           },
                                     child: AnswerWidget(
                                         isChoosed: isChoosed,
@@ -371,7 +344,7 @@ class _DuelQuestionPageState extends State<DuelQuestionPage> {
                                               }
                                             });
 
-                                            print(choosedAnswer);
+                                  
                                           },
                                     child: AnswerWidget(
                                         isChoosed: isChoosed,

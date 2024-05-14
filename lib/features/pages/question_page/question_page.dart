@@ -15,24 +15,12 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class QuestionPage extends StatefulWidget {
   const QuestionPage({super.key, required this.model
-      // required this.user,
-      // required this.category,
-      // required this.difficulty,
-      // required this.questionsAmount,
-      // required this.gameType,
-      // required this.profileModel,
+
       });
 
   final QuestionPageRouteModel model;
 
-  // final User? user;
 
-  // final int? category;
-  // final String? difficulty;
-  // final int questionsAmount;
-  // final GameType gameType;
-
-  // final ProfileModel profileModel;
 
   @override
   State<QuestionPage> createState() => _QuestionPageState();
@@ -70,34 +58,7 @@ class _QuestionPageState extends State<QuestionPage> {
             questionsAmount: widget.model.questionAmount,
           ),
         child:
-            // if (index == widget.model.questionAmount) {
-            //   return ResultPage(
-            //     model: ResultPageRouteModel(
-            //       gameType: widget.model.gameType,
-            //       questionAmount: widget.model.questionAmount,
-            //       roomId: null,
-            //       players: null,
-            //       user: widget.model.user,
-            //       ownerEmail: null,
-            //       answerOne: answerOne,
-            //       answerTwo: answerTwo,
-            //       answerThree: answerThree,
-            //       answerFour: answerFour,
-            //       answerFive: answerFive,
-            //       answerSix: answerSix,
-            //       answerSeven: answerSeven,
-            //       answerEight: answerEight,
-            //       answerNine: answerNine,
-            //       answerTen: answerTen,
-            //       answerEleven: answerEleven,
-            //       answerTwelve: answerTwelve,
-            //       answerThirteen: answerThirteen,
-            //       answerFourteen: answerFourteen,
-            //       answerFithteen: answerFithteen,
-            //       gameStatus: null,
-            //     ),
-            //   );
-            // }
+          
 
             SafeArea(
           child: Scaffold(
@@ -113,7 +74,7 @@ class _QuestionPageState extends State<QuestionPage> {
                         errorMessage: state.errorMessage.toString());
                   case Status.success:
                     return Container(
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                         gradient: LinearGradient(
                           begin: Alignment.topLeft,
                           end: Alignment.bottomRight,
@@ -133,7 +94,7 @@ class _QuestionPageState extends State<QuestionPage> {
                               decoration: BoxDecoration(
                                 color: Colors.white,
                                 borderRadius: BorderRadius.circular(10),
-                                gradient: LinearGradient(
+                                gradient: const LinearGradient(
                                   begin: Alignment.topLeft,
                                   end: Alignment.bottomRight,
                                   colors: [
@@ -278,7 +239,7 @@ class _QuestionPageState extends State<QuestionPage> {
                                                   }
                                                 });
 
-                                                print(choosedAnswer);
+                              
                                               },
                                         child: AnswerWidget(
                                             isChoosed: isChoosed,
@@ -307,7 +268,7 @@ class _QuestionPageState extends State<QuestionPage> {
                                                   }
                                                 });
 
-                                                print(choosedAnswer);
+                                       
                                               },
                                         child: AnswerWidget(
                                             isChoosed: isChoosed,
@@ -336,7 +297,7 @@ class _QuestionPageState extends State<QuestionPage> {
                                                   }
                                                 });
 
-                                                print(choosedAnswer);
+                                    
                                               },
                                         child: AnswerWidget(
                                             isChoosed: isChoosed,
@@ -365,7 +326,7 @@ class _QuestionPageState extends State<QuestionPage> {
                                                   }
                                                 });
 
-                                                print(choosedAnswer);
+                                    
                                               },
                                         child: AnswerWidget(
                                             isChoosed: isChoosed,
@@ -395,7 +356,7 @@ class _QuestionPageState extends State<QuestionPage> {
                                                   }
                                                 });
 
-                                                print(choosedAnswer);
+                                               
                                               },
                                         child: AnswerWidget(
                                             isChoosed: isChoosed,
@@ -425,7 +386,7 @@ class _QuestionPageState extends State<QuestionPage> {
                                                   }
                                                 });
 
-                                                print(choosedAnswer);
+                                               
                                               },
                                         child: AnswerWidget(
                                             isChoosed: isChoosed,
@@ -455,7 +416,7 @@ class _QuestionPageState extends State<QuestionPage> {
                                                   }
                                                 });
 
-                                                print(choosedAnswer);
+                                               
                                               },
                                         child: AnswerWidget(
                                             isChoosed: isChoosed,
@@ -485,7 +446,7 @@ class _QuestionPageState extends State<QuestionPage> {
                                                   }
                                                 });
 
-                                                print(choosedAnswer);
+                                           
                                               },
                                         child: AnswerWidget(
                                             isChoosed: isChoosed,
@@ -515,7 +476,7 @@ class _QuestionPageState extends State<QuestionPage> {
                                                   }
                                                 });
 
-                                                print(choosedAnswer);
+                                        
                                               },
                                         child: AnswerWidget(
                                             isChoosed: isChoosed,
@@ -545,7 +506,7 @@ class _QuestionPageState extends State<QuestionPage> {
                                                   }
                                                 });
 
-                                                print(choosedAnswer);
+                                               
                                               },
                                         child: AnswerWidget(
                                             isChoosed: isChoosed,
@@ -576,7 +537,7 @@ class _QuestionPageState extends State<QuestionPage> {
                                                   }
                                                 });
 
-                                                print(choosedAnswer);
+                                            
                                               },
                                         child: AnswerWidget(
                                             isChoosed: isChoosed,
@@ -607,7 +568,7 @@ class _QuestionPageState extends State<QuestionPage> {
                                                   }
                                                 });
 
-                                                print(choosedAnswer);
+                                               
                                               },
                                         child: AnswerWidget(
                                             isChoosed: isChoosed,
@@ -638,7 +599,7 @@ class _QuestionPageState extends State<QuestionPage> {
                                                   }
                                                 });
 
-                                                print(choosedAnswer);
+                                               
                                               },
                                         child: AnswerWidget(
                                             isChoosed: isChoosed,
@@ -670,7 +631,7 @@ class _QuestionPageState extends State<QuestionPage> {
                                                   }
                                                 });
 
-                                                print(choosedAnswer);
+                                               
                                               },
                                         child: AnswerWidget(
                                             isChoosed: isChoosed,
@@ -702,7 +663,7 @@ class _QuestionPageState extends State<QuestionPage> {
                                                   }
                                                 });
 
-                                                print(choosedAnswer);
+                                               
                                               },
                                         child: AnswerWidget(
                                             isChoosed: isChoosed,

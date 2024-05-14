@@ -19,7 +19,7 @@ class GameTypePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         body: Container(
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
           gradient: LinearGradient(
         begin: Alignment.topLeft,
         end: Alignment.bottomRight,
@@ -39,7 +39,7 @@ class GameTypePage extends StatelessWidget {
                   onPressed: () {
                     context.pop();
                   },
-                  icon: Icon(Icons.arrow_back_sharp),
+                  icon: const Icon(Icons.arrow_back_sharp),
                   color: Colors.white,
                   iconSize: MediaQuery.of(context).size.height * 0.05,
                 )
@@ -60,11 +60,7 @@ class GameTypePage extends StatelessWidget {
                   child: InkWell(
                     onTap: () {
                       context.pushNamed("/categoryPage", extra: profile);
-                      // Navigator.of(context).push(MaterialPageRoute(
-                      //     builder: (context) => CategoryPage(
-                      //           user: user,
-                      //           profileModel: profile,
-                      //         )));
+                   
                     },
                     child: Container(
                       alignment: Alignment.center,
@@ -73,7 +69,7 @@ class GameTypePage extends StatelessWidget {
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20),
                         color: Colors.white,
-                        gradient: LinearGradient(
+                        gradient: const LinearGradient(
                           begin: Alignment.topLeft,
                           end: Alignment.bottomRight,
                           colors: [
@@ -98,21 +94,17 @@ class GameTypePage extends StatelessWidget {
                   child: InkWell(
                     onTap: () {
                       context.pushNamed("/rankedGamePage", extra: profile);
-                      // Navigator.of(context).push(MaterialPageRoute(
-                      //     builder: ((context) => RankedGamePage(
-                      //           profileModel: profile,
-                      //           user: user,
-                      //         ))));
+                    
                     },
                     child: AnimatedContainer(
-                      duration: Duration(seconds: 5),
+                      duration: const Duration(seconds: 5),
                       alignment: Alignment.center,
                       width: MediaQuery.of(context).size.width * 0.4,
                       height: MediaQuery.of(context).size.height * 0.5,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20),
                           color: Colors.white,
-                          gradient: LinearGradient(
+                          gradient: const LinearGradient(
                             begin: Alignment.topRight,
                             end: Alignment.bottomLeft,
                             colors: [
@@ -138,12 +130,7 @@ class GameTypePage extends StatelessWidget {
             child: InkWell(
               onTap: () {
                 context.pushNamed("/roomsListPage", extra: profile);
-                // Navigator.of(context).push(MaterialPageRoute(
-                //   builder: (context) => RoomsListPage(
-                //     user: user,
-                //     profile: profile,
-                //   ),
-                // ));
+              
               },
               child: Container(
                 alignment: Alignment.center,
@@ -151,7 +138,7 @@ class GameTypePage extends StatelessWidget {
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
                     color: Colors.white,
-                    gradient: LinearGradient(
+                    gradient: const LinearGradient(
                       begin: Alignment.bottomCenter,
                       end: Alignment.topCenter,
                       colors: [

@@ -4,7 +4,6 @@ import 'package:brain_check/app/injection_container.dart';
 import 'package:brain_check/features/pages/ranking_page/cubit/ranking_page_cubit.dart';
 import 'package:brain_check/features/pages/ranking_page/widgets/label_widget.dart';
 import 'package:brain_check/features/pages/ranking_page/widgets/ranking_profile_widget.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -23,8 +22,7 @@ class RankingPage extends StatelessWidget {
           appBar: null,
           body: BlocBuilder<RankingPageCubit, RankingPageState>(
             builder: (context, state) {
-              print(
-                  "DISPLAY useer  RANKING PAGE : ${FirebaseAuth.instance.currentUser}");
+         
               switch (state.status) {
                 case Status.initial:
                   return const InitialStateWidget();
@@ -35,7 +33,7 @@ class RankingPage extends StatelessWidget {
                       errorMessage: state.errorMessage.toString());
                 case Status.success:
                   return Container(
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       gradient: LinearGradient(
                         begin: Alignment.topLeft,
                         end: Alignment.bottomRight,

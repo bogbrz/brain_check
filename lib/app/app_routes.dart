@@ -19,9 +19,9 @@ import 'package:brain_check/features/pages/rooms_list_page/rooms_list_page.dart'
 
 import 'package:brain_check/features/pages/set_up_user_page/set_up_user.dart';
 import 'package:brain_check/features/pages/user_page/user_page.dart';
-import 'package:brain_check/navigator_page.dart';
+import 'package:brain_check/features/pages/navigator_page/navigator_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/foundation.dart';
+
 import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
 
@@ -66,28 +66,24 @@ class AppRouter {
       StatefulShellRoute.indexedStack(
         builder: (BuildContext context, GoRouterState state,
             StatefulNavigationShell navigationShell) {
-          // Return the widget that implements the custom shell (in this case
-          // using a BottomNavigationBar). The StatefulNavigationShell is passed
-          // to be able access the state of the shell and to navigate to other
-          // branches in a stateful way.
+         
           return NavigatorPage(
             user: user,
             navigationShell: navigationShell,
           );
         },
         branches: <StatefulShellBranch>[
-          // The route branch for the first tab of the bottom navigation bar.
+        
           StatefulShellBranch(
             navigatorKey: _sectionANavigatorKey,
             routes: <RouteBase>[
               GoRoute(
-                  // The screen to display as the root in the first tab of the
-                  // bottom navigation bar.
+              
                   path: '/homePage',
                   pageBuilder: (BuildContext context, GoRouterState state) {
                     final User? userr = FirebaseAuth.instance.currentUser;
                     return CustomTransitionPage(
-                        transitionDuration: Duration(seconds: 5),
+                        transitionDuration: const Duration(seconds: 5),
                         key: state.pageKey,
                         child: HomePage(
                           user: userr,
@@ -96,7 +92,7 @@ class AppRouter {
                             (context, animation, secondaryAnimation, child) {
                           return SlideTransition(
                             position: Tween<Offset>(
-                                    begin: Offset(-1, 0), end: Offset.zero)
+                                    begin: const Offset(-1, 0), end: Offset.zero)
                                 .animate(animation),
                             child: child,
                           );
@@ -109,8 +105,7 @@ class AppRouter {
             navigatorKey: _sectionCNavigatorKey,
             routes: <RouteBase>[
               GoRoute(
-                // The screen to display as the root in the first tab of the
-                // bottom navigation bar.
+             
                 path: '/rankingPage',
                 builder: (BuildContext context, GoRouterState state) =>
                     RankingPage(),
@@ -121,8 +116,7 @@ class AppRouter {
             navigatorKey: _sectionBNavigatorKey,
             routes: <RouteBase>[
               GoRoute(
-                  // The screen to display as the root in the first tab of the
-                  // bottom navigation bar.
+              
                   path: '/userPage',
                   builder: (BuildContext context, GoRouterState state) {
                     final User? userr = FirebaseAuth.instance.currentUser;
@@ -138,7 +132,7 @@ class AppRouter {
         path: "/loginPage",
         name: "/loginPage",
         builder: (context, state) {
-          return LogInPage();
+          return const LogInPage();
         },
       ),
       GoRoute(
@@ -148,41 +142,14 @@ class AppRouter {
           return SetUpUserPage();
         },
       ),
-      // GoRoute(
-      //   path: "/navigatorPage",
-      //   name: "/navigatorPage",
-      //   pageBuilder: (
-      //     context,
-      //     state,
-      //   ) {
-      //     final User? userr = FirebaseAuth.instance.currentUser;
-      //     //      final StatefulNavigationShell navigationShell =
-      //     // StatefulNavigationShell;
-      //     return CustomTransitionPage(
-      //       key: state.pageKey,
-      //       child: NavigatorPage(
-      //         user: userr,
-      //         // navigationShell: globalNavigationShell,
-      //       ),
-      //       transitionDuration: Duration(seconds: 2),
-      //       transitionsBuilder:
-      //           (context, animation, secondaryAnimation, child) {
-      //         return FadeTransition(
-      //           opacity:
-      //               CurveTween(curve: Curves.easeInCirc).animate(animation),
-      //           child: child,
-      //         );
-      //       },
-      //     );
-      //   },
-      // ),
+  
       GoRoute(
         path: "/userPage",
         name: "/userPage",
         pageBuilder: (context, state) {
-          // final User? user = state.extra as User?;
+     
           return CustomTransitionPage(
-            transitionDuration: Duration(seconds: 5),
+            transitionDuration: const Duration(seconds: 5),
             transitionsBuilder:
                 (context, animation, secondaryAnimation, child) {
               return FadeTransition(
@@ -201,7 +168,7 @@ class AppRouter {
         path: "/homePage",
         name: "/homePage",
         builder: (context, state) {
-          // final User? user = state.extra as User?;
+        
           return HomePage(
             user: user,
           );
@@ -211,7 +178,7 @@ class AppRouter {
         path: "/gameTypePage",
         name: "/gameTypePage",
         pageBuilder: (context, state) {
-          // final User? user = state.extra as User?;
+          
           final ProfileModel profile = state.extra as ProfileModel;
 
           return CustomTransitionPage(
@@ -220,11 +187,11 @@ class AppRouter {
               user: user,
               profile: profile,
             ),
-            transitionDuration: Duration(seconds: 1),
+            transitionDuration: const Duration(seconds: 1),
             transitionsBuilder:
                 (context, animation, secondaryAnimation, child) {
               return SlideTransition(
-                position: Tween<Offset>(begin: Offset(0, -1), end: Offset.zero)
+                position: Tween<Offset>(begin: const Offset(0, -1), end: Offset.zero)
                     .animate(animation),
                 child: child,
               );
@@ -236,16 +203,16 @@ class AppRouter {
         path: "/categoryPage",
         name: "/categoryPage",
         pageBuilder: (context, state) {
-          // final User? user = state.extra as User?;
+          
           final ProfileModel profile = state.extra as ProfileModel;
 
           return CustomTransitionPage(
             key: state.pageKey,
-            transitionDuration: Duration(seconds: 1),
+            transitionDuration: const Duration(seconds: 1),
             transitionsBuilder:
                 (context, animation, secondaryAnimation, child) {
               return SlideTransition(
-                position: Tween<Offset>(begin: Offset(-1, 0), end: Offset.zero)
+                position: Tween<Offset>(begin: const Offset(-1, 0), end: Offset.zero)
                     .animate(animation),
                 child: child,
               );
@@ -261,16 +228,16 @@ class AppRouter {
         path: "/rankedGamePage",
         name: "/rankedGamePage",
         pageBuilder: (context, state) {
-          // final User? user = state.extra as User?;
+          
           final ProfileModel profile = state.extra as ProfileModel;
 
           return CustomTransitionPage(
             key: state.pageKey,
-            transitionDuration: Duration(seconds: 1),
+            transitionDuration: const Duration(seconds: 1),
             transitionsBuilder:
                 (context, animation, secondaryAnimation, child) {
               return SlideTransition(
-                position: Tween<Offset>(begin: Offset(1, 0), end: Offset.zero)
+                position: Tween<Offset>(begin: const Offset(1, 0), end: Offset.zero)
                     .animate(animation),
                 child: child,
               );
@@ -286,16 +253,16 @@ class AppRouter {
         path: "/roomsListPage",
         name: "/roomsListPage",
         pageBuilder: (context, state) {
-          // final User? user = state.extra as User?;
+          
           final ProfileModel profile = state.extra as ProfileModel;
 
           return CustomTransitionPage(
             key: state.pageKey,
-            transitionDuration: Duration(seconds: 1),
+            transitionDuration: const Duration(seconds: 1),
             transitionsBuilder:
                 (context, animation, secondaryAnimation, child) {
               return SlideTransition(
-                position: Tween<Offset>(begin: Offset(0, 1), end: Offset.zero)
+                position: Tween<Offset>(begin: const Offset(0, 1), end: Offset.zero)
                     .animate(animation),
                 child: child,
               );
@@ -311,13 +278,13 @@ class AppRouter {
         path: "/difficultyPage",
         name: "/difficultyPage",
         pageBuilder: (context, state) {
-          // final User? user = state.extra as User?;
+          
           final DifficultyRouteModel model =
               state.extra as DifficultyRouteModel;
 
           return CustomTransitionPage(
             key: state.pageKey,
-            transitionDuration: Duration(seconds: 1),
+            transitionDuration: const Duration(seconds: 1),
             transitionsBuilder:
                 (context, animation, secondaryAnimation, child) {
               return FadeTransition(
@@ -336,12 +303,12 @@ class AppRouter {
         path: "/questionPage",
         name: "/questionPage",
         pageBuilder: (context, state) {
-          // final User? user = state.extra as User?;
+          
           final QuestionPageRouteModel model =
               state.extra as QuestionPageRouteModel;
 
           return CustomTransitionPage(
-            transitionDuration: Duration(seconds: 2),
+            transitionDuration: const Duration(seconds: 2),
             transitionsBuilder:
                 (context, animation, secondaryAnimation, child) {
               return FadeTransition(
@@ -360,7 +327,7 @@ class AppRouter {
         path: "/resultPage",
         name: "/resultPage",
         pageBuilder: (context, state) {
-          // final User? user = state.extra as User?;
+          
           final ResultPageRouteModel model =
               state.extra as ResultPageRouteModel;
 
@@ -385,13 +352,13 @@ class AppRouter {
         path: "/duelRoomPage",
         name: "/duelRoomPage",
         pageBuilder: (context, state) {
-          // final User? user = state.extra as User?;
+          
           final DuelRoomRoutePageModel model =
               state.extra as DuelRoomRoutePageModel;
 
           return CustomTransitionPage(
             key: state.pageKey,
-            transitionDuration: Duration(seconds: 1),
+            transitionDuration: const Duration(seconds: 1),
             transitionsBuilder:
                 (context, animation, secondaryAnimation, child) {
               return FadeTransition(

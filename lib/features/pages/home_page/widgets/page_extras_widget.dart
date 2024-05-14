@@ -2,7 +2,6 @@ import 'package:brain_check/domain/models/overall_info_model.dart';
 import 'package:brain_check/domain/models/profile_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -25,21 +24,20 @@ class _PageExtrasWidgetState extends State<PageExtrasWidget>
     with TickerProviderStateMixin {
   late final AnimationController animationController = AnimationController(
     vsync: this,
-    duration: Duration(seconds: 2),
+    duration: const Duration(seconds: 2),
   )..repeat(reverse: true);
   @override
   Widget build(BuildContext context) {
-    late final Animation<Offset> _offsetAnimation = Tween<Offset>(
-      begin: Offset(0, -0.2),
-      end: Offset(0.0, 0.2),
+    late final Animation<Offset> offsetAnimation = Tween<Offset>(
+      begin: const Offset(0, -0.2),
+      end: const Offset(0.0, 0.2),
     ).animate(
         CurvedAnimation(parent: animationController, curve: Curves.elasticIn));
-    ;
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         SlideTransition(
-          position: _offsetAnimation,
+          position: offsetAnimation,
           child: SizedBox(
               height: MediaQuery.of(context).size.height / 4,
               child: const Image(

@@ -33,7 +33,7 @@ class StartButtonWidget extends StatelessWidget {
           alignment: Alignment.center,
           width: MediaQuery.of(context).size.width * 0.6,
           height: MediaQuery.of(context).size.height * 0.1,
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             color: Colors.white,
             gradient: LinearGradient(
               begin: Alignment.topLeft,

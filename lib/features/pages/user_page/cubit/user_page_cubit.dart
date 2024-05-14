@@ -39,7 +39,7 @@ class UserPageCubit extends Cubit<UserPageState> {
     streamSubscription =
         rankingRepository.getRankingForUpdate(email: email,).listen((event) {
       try {
-        print("WIDGET $uploadedImageUrl");
+   
         emit(UserPageState(
             uploadedImageUrl: uploadedImageUrl,
             errorMessage: null,
@@ -64,7 +64,7 @@ class UserPageCubit extends Cubit<UserPageState> {
       imageUrl: imageUrl,
       docId: docId,
     );
-    print("UPDATE");
+  
   }
 
  

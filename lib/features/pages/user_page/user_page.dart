@@ -15,7 +15,7 @@ class UserPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         body: Container(
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
           gradient: LinearGradient(
         begin: Alignment.topLeft,
         end: Alignment.bottomRight,
@@ -31,7 +31,7 @@ class UserPage extends StatelessWidget {
             width: MediaQuery.of(context).size.width * 0.8,
             decoration: BoxDecoration(
                 color: Colors.white,
-                gradient: LinearGradient(
+                gradient: const LinearGradient(
                   begin: Alignment.centerLeft,
                   end: Alignment.centerRight,
                   colors: [

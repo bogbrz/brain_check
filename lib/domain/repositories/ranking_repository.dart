@@ -20,12 +20,12 @@ class RankingRepository {
     final list = await storageDataSource.getImages();
     if (list!.isEmpty) {
       null;
-      print("LIST $list IS EMPTY");
+  
     }
 
     final uploadedImages = list;
     final uploadedImageUrl = await uploadedImages[0].getDownloadURL();
-    print(uploadedImageUrl);
+  
     await rankingFireBaseDataSource.addToRanking(
         nickName: nickName,
         email: email,
@@ -93,12 +93,12 @@ class RankingRepository {
     final list = await storageDataSource.getImages();
     if (list!.isEmpty) {
       null;
-      print("LIST $list IS EMPTY");
+    
     }
 
     final uploadedImages = list;
     final uploadedImageUrl = await uploadedImages[0].getDownloadURL();
-    print(uploadedImageUrl);
+   
     return rankingFireBaseDataSource.updateProfile(
         imageUrl: uploadedImageUrl, docId: docId, nickName: nickName);
   }

@@ -46,7 +46,7 @@ class DifficultyPageCubit extends Cubit<DifficultyPageState> {
     if (category == 0) {
       try {
         final info = await questionRepository.getOverAllInfo();
-        print("CUBIT INFO $info");
+       
         emit(DifficultyPageState(
             overAll: info,
             errorMessage: null,
@@ -75,7 +75,7 @@ class DifficultyPageCubit extends Cubit<DifficultyPageState> {
       try {
         final info =
             await questionRepository.getCategoryInfo(category: category);
-        print("CUBIT INFO $info");
+    
         emit(DifficultyPageState(
             overAll: Overall(
                 totalNumOfQuestions: 0,

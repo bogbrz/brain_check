@@ -9,7 +9,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CreateRoomWidget extends StatelessWidget {
-  CreateRoomWidget({super.key, required this.nickName, required this.rooms});
+  const CreateRoomWidget({super.key, required this.nickName, required this.rooms});
 
   final String nickName;
   final List<GameRoomModel> rooms;
@@ -24,7 +24,7 @@ class CreateRoomWidget extends StatelessWidget {
           Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20),
-              gradient: LinearGradient(
+              gradient: const LinearGradient(
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
                 colors: [
@@ -66,7 +66,7 @@ class CreateRoomWidget extends StatelessWidget {
                           color: Colors.black,
                           fontSize: MediaQuery.of(context).size.height / 50),
                     ),
-                    Icon(Icons.add)
+                    const Icon(Icons.add)
                   ],
                 )),
           ),
@@ -77,7 +77,7 @@ class CreateRoomWidget extends StatelessWidget {
 }
 
 class DialogContetWidget extends StatefulWidget {
-  DialogContetWidget({
+  const DialogContetWidget({
     super.key,
     required this.nickName,
     required this.rooms,
@@ -116,6 +116,7 @@ class _DialogContetWidgetState extends State<DialogContetWidget> {
         ],
       ),
       TextField(
+        maxLength: 10,
         decoration: InputDecoration(
           focusedBorder: OutlineInputBorder(
               borderSide: BorderSide(
