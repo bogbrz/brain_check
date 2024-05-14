@@ -8,11 +8,12 @@ import 'package:brain_check/features/pages/rooms_list_page/widgets/join_room_wid
 import 'package:brain_check/features/pages/rooms_list_page/widgets/room_widget.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 class RoomsListPage extends StatelessWidget {
-  RoomsListPage({
+  const RoomsListPage({
     required this.profile,
     required this.user,
     super.key,
@@ -39,7 +40,7 @@ class RoomsListPage extends StatelessWidget {
                     errorMessage: state.errorMessage.toString());
               case Status.success:
                 return Container(
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     gradient: LinearGradient(
                       begin: Alignment.topLeft,
                       end: Alignment.bottomRight,
@@ -60,7 +61,7 @@ class RoomsListPage extends StatelessWidget {
                               onPressed: () {
                                 context.pop();
                               },
-                              icon: Icon(Icons.arrow_back_sharp),
+                              icon: const Icon(Icons.arrow_back_sharp),
                               color: Colors.white,
                               iconSize:
                                   MediaQuery.of(context).size.height * 0.05,
@@ -69,7 +70,12 @@ class RoomsListPage extends StatelessWidget {
                         ),
                       ),
                       Expanded(
-                          child: ListView.builder(
+                          child: GridView.builder(
+                              gridDelegate:
+                                  const SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 3,
+                                childAspectRatio: 1,
+                              ),
                               itemCount: state.rooms.length,
                               itemBuilder: (context, index) {
                                 final room = state.rooms[index];

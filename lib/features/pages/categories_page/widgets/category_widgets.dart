@@ -17,7 +17,7 @@ class RandomCategoryWidget extends StatelessWidget {
       height: MediaQuery.of(context).size.height / 6,
       width: MediaQuery.of(context).size.width / 2.2,
       padding: const EdgeInsets.all(10),
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: Colors.white,
         gradient: LinearGradient(
           begin: Alignment.bottomLeft,
@@ -55,7 +55,7 @@ class CategoryWidget extends StatelessWidget {
       height: MediaQuery.of(context).size.height / 6,
       width: MediaQuery.of(context).size.width / 2.2,
       padding: const EdgeInsets.all(4),
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: Colors.white,
         gradient: LinearGradient(
           begin: Alignment.bottomLeft,

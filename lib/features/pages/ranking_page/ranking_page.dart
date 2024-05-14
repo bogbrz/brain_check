@@ -22,6 +22,7 @@ class RankingPage extends StatelessWidget {
           appBar: null,
           body: BlocBuilder<RankingPageCubit, RankingPageState>(
             builder: (context, state) {
+         
               switch (state.status) {
                 case Status.initial:
                   return const InitialStateWidget();
@@ -32,7 +33,7 @@ class RankingPage extends StatelessWidget {
                       errorMessage: state.errorMessage.toString());
                 case Status.success:
                   return Container(
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       gradient: LinearGradient(
                         begin: Alignment.topLeft,
                         end: Alignment.bottomRight,

@@ -5,6 +5,7 @@ part 'generated/token_model.g.dart';
 
 @freezed
 class TokenModel with _$TokenModel {
+  // ignore: invalid_annotation_target
   @JsonSerializable()
   factory TokenModel(
       {required int? response,

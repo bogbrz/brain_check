@@ -217,8 +217,7 @@ class DuelQuestionPageCubit extends Cubit<DuelQuestionPageState> {
       }
 
       try {
-        print(
-            "Q FROM BASE  1${event[0]}, 2${event[1]}, 3${event[2]}, 4${event[3]}, 5${event[4]} ");
+
         emit(DuelQuestionPageState(
             errorMessage: null,
             status: Status.success,
@@ -298,5 +297,11 @@ class DuelQuestionPageCubit extends Cubit<DuelQuestionPageState> {
             answersOne: []));
       }
     });
+  }
+
+  @override
+  Future<void> close() {
+    streamSubscription?.cancel();
+    return super.close();
   }
 }

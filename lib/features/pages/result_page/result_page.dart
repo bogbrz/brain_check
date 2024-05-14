@@ -10,56 +10,12 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ResultPage extends StatelessWidget {
-  ResultPage(
+  const ResultPage(
       {super.key,
-      // required this.players,
-      // required this.user,
-      // required this.ownerEmail,
-      // required this.answerOne,
-      // required this.answerTwo,
-      // required this.answerThree,
-      // required this.answerFour,
-      // required this.answerFive,
-      // required this.gameStatus,
-      // required this.gameType,
-      // required this.questionAmount,
-      // required this.answerSix,
-      // required this.answerSeven,
-      // required this.answerEight,
-      // required this.answerNine,
-      // required this.answerTen,
-      // required this.answerEleven,
-      // required this.answerTwelve,
-      // required this.answerThirteen,
-      // required this.answerFourteen,
-      // required this.answerFithteen,
-      //  required this.roomId,
+     
       required this.model});
   final ResultPageRouteModel model;
-  // final String? roomId;
-  // final List<PlayerModel>? players;
-  // final User? user;
 
-  // final String? ownerEmail;
-  // final int answerOne;
-  // final int answerTwo;
-  // final int answerThree;
-  // final int answerFour;
-  // final int answerFive;
-  // final int answerSix;
-  // final int answerSeven;
-  // final int answerEight;
-  // final int answerNine;
-  // final int answerTen;
-  // final int answerEleven;
-  // final int answerTwelve;
-  // final int answerThirteen;
-  // final int answerFourteen;
-  // final int answerFithteen;
-  // final bool? gameStatus;
-  // final GameType gameType;
-
-  // final int questionAmount;
 
   @override
   Widget build(BuildContext context) {
@@ -82,7 +38,9 @@ class ResultPage extends StatelessWidget {
 
     return BlocProvider(
       create: (context) => getIt<ResultCubit>()
-        ..getRankingForUpdate(email: model.user!.email.toString(), userId: model.user!.uid),
+        ..getRankingForUpdate(
+          email: model.user!.email.toString(),
+        ),
       child: Scaffold(body: BlocBuilder<ResultCubit, ResultState>(
         builder: (context, state) {
           switch (state.status) {
@@ -94,6 +52,7 @@ class ResultPage extends StatelessWidget {
               return ErrorStateWidget(
                   errorMessage: state.errorMessage.toString());
             case Status.success:
+        
               int pointsDeductionForTime = state.gameDuration!.inSeconds <= 30
                   ? 0
                   : ((state.gameDuration!.inSeconds) ~/ 5);
@@ -128,7 +87,7 @@ class ResultPage extends StatelessWidget {
                                   MediaQuery.of(context).size.height / 35),
                         ),
                         Text(
-                          "${AppLocalizations.of(context).yourScore}: ${score} / ${model.questionAmount * 10}",
+                          "${AppLocalizations.of(context).yourScore}: $score / ${model.questionAmount * 10}",
                           style: GoogleFonts.bungee(
                               color: Colors.white,
                               fontSize:
@@ -371,14 +330,16 @@ class ResultPage extends StatelessWidget {
                                         status: false,
                                         playerId: player.id,
                                         points: totalPoints);
-                                    if (model.gameStatus == true) {
+                                    if (model.gameStatus == true &&
+                                        model.user!.email.toString() ==
+                                            model.ownerEmail.toString()) {
                                       context
                                           .read<ResultCubit>()
                                           .deleteQuestions(
                                               roomId: model.roomId!,
                                               roundNumber: player.roundNumber);
-                                      context.pop();
                                     }
+                                    context.pop();
                                   }
                                 }
                               } else if (model.gameType == GameType.casual) {
@@ -388,7 +349,7 @@ class ResultPage extends StatelessWidget {
                                     points: totalPoints,
                                     profileId: state.profiles[0].id);
                                 context.pop();
-                                // Navigator.of(context).pop();
+                              
                               }
                             },
                             child: Text(

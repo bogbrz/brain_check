@@ -22,7 +22,7 @@ class QuestionRepository {
   Future<TokenModel> fetchToken() async {
     final tokenModel = await questionDataSource.getToken();
 
-    print("REPOSITORY TOKEN $tokenModel");
+  
 
     return tokenModel;
   }
@@ -40,7 +40,7 @@ class QuestionRepository {
       token.token
     );
 
-    print("Questions ${questions.results}");
+    
 
     return questions.results;
   }

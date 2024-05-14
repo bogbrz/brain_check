@@ -44,7 +44,7 @@ class JoinRoomWidget extends StatelessWidget {
           Row(
             children: [
               Text(
-                "${AppLocalizations.of(context).enterPassword}",
+                AppLocalizations.of(context).enterPassword,
                 style: GoogleFonts.bungee(
                     color: Colors.white,
                     fontSize: MediaQuery.of(context).size.height / 55),
@@ -90,13 +90,7 @@ class JoinRoomWidget extends StatelessWidget {
                           user: user,
                           roomModel: room,
                         ));
-                    // Navigator.of(context).push(MaterialPageRoute(
-                    //     builder: (context) => GameRoomPage(
-                    //           userPicture: profileModel.imageUrl,
-                    //           nickName: nickName,
-                    //           user: user,
-                    //           roomModel: room,
-                    //         )));
+                
                     passwordController.clear();
                   }
                 } else {

@@ -37,9 +37,9 @@ class SetUpUserCubit extends Cubit<SetUpUserState> {
         ? null
         : await uploadedImages[0].getDownloadURL();
     streamSubscription =
-        rankingRepository.getRankingForUpdate(email: email,userId: userId).listen((event) {
+        rankingRepository.getRankingForUpdate(email: email,).listen((event) {
       try {
-        print("success");
+  
         emit(SetUpUserState(
             uploadImageUrl: uploadedImageUrl,
             errorMessage: null,
@@ -47,6 +47,33 @@ class SetUpUserCubit extends Cubit<SetUpUserState> {
             status: Status.success));
       } catch (error) {
         emit(SetUpUserState(
+            uploadImageUrl: null,
+            errorMessage: error.toString(),
+            profile: [],
+            status: Status.error));
+      }
+    });
+  }
+    Future<void> getRanking() async {
+       final uploadedImages = await storageRepository.getImages();
+
+    final uploadedImageUrl = uploadedImages == null
+        ? null
+        : await uploadedImages[0].getDownloadURL();
+   emit(const SetUpUserState(
+        uploadImageUrl: null,
+        errorMessage: null,
+        profile: [],
+        status: Status.loading,));
+    streamSubscription = rankingRepository.getRanking().listen((event) {
+      try {
+        emit(SetUpUserState(
+            uploadImageUrl: uploadedImageUrl,
+            errorMessage: null,
+            profile: event,
+            status: Status.success));
+      } catch (error) {
+          emit(SetUpUserState(
             uploadImageUrl: null,
             errorMessage: error.toString(),
             profile: [],
@@ -65,7 +92,7 @@ class SetUpUserCubit extends Cubit<SetUpUserState> {
 
   Future<void> uploadImage({required File file}) async {
     await storageRepository.uploadImage(file: file);
-    print("Dupa");
+   
   }
 
   @override

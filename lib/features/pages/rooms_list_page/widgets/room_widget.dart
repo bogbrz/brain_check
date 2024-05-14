@@ -15,59 +15,61 @@ class RoomWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Container(
-        margin: const EdgeInsets.all(8),
-        width: MediaQuery.of(context).size.width * 0.5,
-        height: MediaQuery.of(context).size.height * 0.15,
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topRight,
-            end: Alignment.bottomLeft,
-            colors: [
-              Color.fromARGB(255, 93, 158, 190),
-              Color.fromARGB(180, 66, 120, 255),
-            ],
-          ),
-          borderRadius: BorderRadius.circular(20),
-          color: Colors.black,
-        ),
-        child: Column(
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 8, top: 8),
-                  child: Text(
-                    index.toString(),
-                    style: GoogleFonts.bungee(
-                        color: Colors.black,
-                        fontSize: MediaQuery.of(context).size.height / 55),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(right: 8, top: 8),
-                  child: Text(
-                    "${room.playersAmount}/2",
-                    style: GoogleFonts.bungee(
-                        color: Colors.black,
-                        fontSize: MediaQuery.of(context).size.height / 55),
-                  ),
-                )
+      child: Wrap(children: [
+        Container(
+          margin: const EdgeInsets.all(4),
+          width: MediaQuery.of(context).size.width * 0.4,
+          height: MediaQuery.of(context).size.height * 0.15,
+          decoration: BoxDecoration(
+            gradient: const LinearGradient(
+              begin: Alignment.topRight,
+              end: Alignment.bottomLeft,
+              colors: [
+                Color.fromARGB(255, 93, 158, 190),
+                Color.fromARGB(180, 66, 120, 255),
               ],
             ),
-            SizedBox(
-              height: MediaQuery.of(context).size.height * 0.02,
-            ),
-            Text(
-              room.name,
-              style: GoogleFonts.bungee(
-                  color: Colors.black,
-                  fontSize: MediaQuery.of(context).size.height / 40),
-            ),
-          ],
+            borderRadius: BorderRadius.circular(20),
+            color: Colors.black,
+          ),
+          child: Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(left: 8, top: 8),
+                    child: Text(
+                      index.toString(),
+                      style: GoogleFonts.bungee(
+                          color: Colors.black,
+                          fontSize: MediaQuery.of(context).size.height / 55),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(right: 8, top: 8),
+                    child: Text(
+                      "${room.playersAmount}/2",
+                      style: GoogleFonts.bungee(
+                          color: Colors.black,
+                          fontSize: MediaQuery.of(context).size.height / 55),
+                    ),
+                  )
+                ],
+              ),
+              SizedBox(
+                height: MediaQuery.of(context).size.height * 0.02,
+              ),
+              Text(
+                room.name,
+                style: GoogleFonts.bungee(
+                    color: Colors.black,
+                    fontSize: MediaQuery.of(context).size.height / 40),
+              ),
+            ],
+          ),
         ),
-      ),
+      ]),
     );
   }
 }

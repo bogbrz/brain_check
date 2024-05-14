@@ -13,13 +13,12 @@ part 'generated/result_cubit.freezed.dart';
 class ResultCubit extends Cubit<ResultState> {
   ResultCubit(
       {required this.duelGameRepository, required this.rankingRepository})
-      : super(ResultState(
-          gameLenght: null,
-          errorMessage: null,
-          status: Status.initial,
-          profiles: [],
-          gameDuration: null
-        ));
+      : super(const ResultState(
+            gameLenght: null,
+            errorMessage: null,
+            status: Status.initial,
+            profiles: [],
+            gameDuration: null));
   final DuelGameRepository duelGameRepository;
   final RankingRepository rankingRepository;
   StreamSubscription? streamSubscription;
@@ -46,45 +45,48 @@ class ResultCubit extends Cubit<ResultState> {
         .listen((event) {
       try {
         for (final question in event) {
-          duelGameRepository
-              .deleteQuestions(
-                  roomId: roomId,
-                  roundNumber: roundNumber,
-                  questionId: question.id.toString())
-              .then((value) => print("Delete questions cubit"));
+          duelGameRepository.deleteQuestions(
+              roomId: roomId,
+              roundNumber: roundNumber,
+              questionId: question.id.toString());
         }
       } catch (e) {
-        print("DELETE Q ERROR ${e.toString()}");
+        throw Exception(e.toString());
       }
     });
   }
 
-  Future<void> getRankingForUpdate({required String email,required String userId}) async {
-    emit(ResultState(
+  Future<void> getRankingForUpdate({required String email}) async {
+    emit(const ResultState(
       gameDuration: null,
       gameLenght: null,
       errorMessage: null,
       profiles: [],
       status: Status.loading,
     ));
-    streamSubscription =
-        rankingRepository.getRankingForUpdate(email: email, userId: userId).listen((event) {
+    streamSubscription = rankingRepository
+        .getRankingForUpdate(
+      email: email,
+    )
+        .listen((event) {
       DateTime gameStart = event[0].gameStarted.toDate();
+
       DateTime gameEnd = event[0].gameEnd.toDate();
 
       Duration difference = gameEnd.difference(gameStart);
+
       String formattedDuration =
           "${difference.inMinutes.remainder(60)}:${(difference.inSeconds.remainder(60)).toString().padLeft(2, '0')}";
       try {
         emit(ResultState(
-          gameDuration: difference,
+            gameDuration: difference,
             errorMessage: null,
             profiles: event,
             status: Status.success,
             gameLenght: formattedDuration));
       } catch (error) {
         emit(ResultState(
-          gameDuration: null,
+            gameDuration: null,
             gameLenght: formattedDuration,
             errorMessage: error.toString(),
             profiles: [],
@@ -100,7 +102,7 @@ class ResultCubit extends Cubit<ResultState> {
           .updateRanking(points: points, id: profileId)
           .then((value) => streamSubscription?.cancel());
     } catch (e) {
-      print(e.toString());
+      throw Exception(e.toString());
     }
   }
 
@@ -113,7 +115,7 @@ class ResultCubit extends Cubit<ResultState> {
       required int answerThree,
       required int answerFour,
       required int answerFive}) async {
-    return duelGameRepository.addRoundResults(
+    await duelGameRepository.addRoundResults(
         roundNumber: roundNumber,
         roomId: roomId,
         playerNumber: playerNumber,

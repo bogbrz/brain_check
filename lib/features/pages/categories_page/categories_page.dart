@@ -32,16 +32,6 @@ class _CategoryPageState extends State<CategoryPage> {
     return BlocProvider(
       create: (context) => getIt<CategoriesPageCubit>()..getCategories(),
       child: Scaffold(
-        // appBar: AppBar(
-        //   centerTitle: true,
-        //   title: Text(
-        //     AppLocalizations.of(context).chooseCategory,
-        //     style: GoogleFonts.bungee(
-        //         fontSize: MediaQuery.of(context).size.height / 30,
-        //         color: Colors.white),
-        //   ),
-        //   backgroundColor: const Color.fromARGB(255, 27, 58, 93),
-        // ),
         body: BlocBuilder<CategoriesPageCubit, CategoriesPageState>(
           builder: (context, state) {
             switch (state.status) {
@@ -97,9 +87,7 @@ class _CategoryPageState extends State<CategoryPage> {
                               padding: EdgeInsets.all(
                                   MediaQuery.of(context).size.height * 0.01),
                               child: Material(
-                                shape: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
+                                borderRadius: BorderRadius.circular(10),
                                 clipBehavior: Clip.hardEdge,
                                 child: InkWell(
                                   onTap: () {
@@ -115,19 +103,6 @@ class _CategoryPageState extends State<CategoryPage> {
                                           category: TriviaCategory(
                                               id: 0, name: "Random")),
                                     );
-
-                                    // Navigator.of(context).push(
-                                    //     MaterialPageRoute(
-                                    //         builder: ((context) =>
-                                    //             DifficultyPage(
-                                    //               profileModel:
-                                    //                   widget.profileModel,
-                                    //               user: widget.user,
-                                    //               categoriesModel:
-                                    //                   TriviaCategory(
-                                    //                       id: 0,
-                                    //                       name: "Random"),
-                                    //             ))));
                                   },
                                   child: const RandomCategoryWidget(),
                                 ),
@@ -138,9 +113,7 @@ class _CategoryPageState extends State<CategoryPage> {
                                 padding: EdgeInsets.all(
                                     MediaQuery.of(context).size.height * 0.01),
                                 child: Material(
-                                  shape: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
+                                  borderRadius: BorderRadius.circular(10),
                                   clipBehavior: Clip.hardEdge,
                                   child: InkWell(
                                     onTap: () {
@@ -154,15 +127,6 @@ class _CategoryPageState extends State<CategoryPage> {
                                             profileModel: widget.profileModel,
                                             category: category),
                                       );
-                                      // Navigator.of(context).push(
-                                      //     MaterialPageRoute(
-                                      //         builder: ((context) =>
-                                      //             DifficultyPage(
-                                      //               profileModel:
-                                      //                   widget.profileModel,
-                                      //               user: widget.user,
-                                      //               categoriesModel: category,
-                                      //             ))));
                                     },
                                     child: CategoryWidget(category: category),
                                   ),

@@ -11,6 +11,7 @@ part of '../questions_data_source.dart';
 class _QuestionDataSource implements QuestionDataSource {
   _QuestionDataSource(
     this._dio, {
+    // ignore: unused_element
     this.baseUrl,
   });
 
