@@ -84,6 +84,10 @@ dev_dependencies:
   injectable_generator: ^2.4.1
   mocktail: ^1.0.3
   bloc_test: ^9.1.7
+  flutter_launcher_icons: ^0.13.1
+flutter_icons:
+ android: true
+ image_path: "assets/ikonaaa.png"  
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
