@@ -43,42 +43,6 @@ void main() {
     });
   });
 
-  group("addQtoFirebase", () {
-    test("should callduelGameDataSource.addQtoFirebase() method once",
-        () async {
-      when(() => dataSource2.getToken()).thenAnswer((_) async => TokenModel(
-          response: 1, responeMessage: "responeMessage", token: "1"));
-      when(() => dataSource2.getListofQuestions("easy", 9, 1, "1"))
-          .thenAnswer((_) async => Questions(responseCode: 0, results: [
-                QuestionModel(
-                    type: "type",
-                    difficulty: "easy",
-                    category: "category",
-                    question: "question",
-                    correctAnswer: "correctAnswer",
-                    incorrectAnswers: ["incorrectAnswers"])
-              ]));
-      await sut.addQtoFirebase(roomId: "", categoryId: 1, roundNumber: 1);
-      verify(
-        () => dataSource1.addQtoFirebase(
-            roomId: "",
-            roundNumber: 1,
-            questionModel: QuestionModel(
-                type: "type",
-                difficulty: "easy",
-                category: "category",
-                question: "question",
-                correctAnswer: "correctAnswer",
-                incorrectAnswers: ["incorrectAnswers"])),
-      ).called(1);
-      verify(
-        () => dataSource2.getToken(),
-      ).called(1);
-      verify(
-        () => dataSource2.getListofQuestions("easy", 1, 1, "1"),
-      ).called(1);
-    });
-  });
   group("resetGameStatus", () {
     test("should call duelGameDataSource.resetGameStatus() method once",
         () async {

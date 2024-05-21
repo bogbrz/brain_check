@@ -123,18 +123,7 @@ void main() {
       ).called(1);
     });
   });
-  // group("deleteScore", () {
-  //   test("should call duelGameRepository.deleteScore once", () async {
-  //     when(
-  //       () => repository1.deleteScore(roomId: "1", roundId: "1"),
-  //     ).thenAnswer((_) async => []);
-  //     await sut.deleteScore(roomId: "1", roundNumber: 1);
 
-  //     verify(
-  //       () => repository1.deleteScore(roomId: "1", roundId: "1"),
-  //     ).called(1);
-  //   });
-  // });
   group("deleteRoom", () {
     test("should call duelGameRepository.deleteRoom once", () async {
       when(
