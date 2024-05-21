@@ -6,7 +6,8 @@ Brain check app features include:
  - Duel game type that allows players to compete with each other.
 
 TECHNICAL PART:
-This app was written in dart language with use of Flutter framework. 
-The structure of the app was modeled for the clean architecture structure.
-This app contains unit tests written for cubits and repositories.![image](https://github.com/bogbrz/brain_check/assets/142913714/1173d2c6-0b70-44c5-99fb-fb8897ae6b87)
+This app was written in dart language with use of Flutter framework. The structure of the app was modeled for the clean architecture structure. This app contains unit tests written for cubits and repositories.
+
+
+![image](https://github.com/bogbrz/brain_check/assets/142913714/1173d2c6-0b70-44c5-99fb-fb8897ae6b87)
 
