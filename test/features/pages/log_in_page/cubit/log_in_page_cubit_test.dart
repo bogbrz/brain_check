@@ -1,5 +1,4 @@
 import 'package:brain_check/domain/repositories/authentication_repository.dart';
-import 'package:brain_check/features/pages/duel_room_page/cubit/duel_room_page_cubit.dart';
 import 'package:brain_check/features/pages/log_in/cubit/log_in_page_cubit.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';

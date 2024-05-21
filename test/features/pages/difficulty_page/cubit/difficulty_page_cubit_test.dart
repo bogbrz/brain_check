@@ -1,11 +1,9 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:brain_check/app/core/enums/enums.dart';
 import 'package:brain_check/domain/models/categories_info_model.dart';
-import 'package:brain_check/domain/models/categories_model.dart';
 import 'package:brain_check/domain/models/overall_info_model.dart';
 import 'package:brain_check/domain/repositories/questions_repository.dart';
 import 'package:brain_check/domain/repositories/ranking_repository.dart';
-import 'package:brain_check/features/pages/categories_page/cubit/categories_page_cubit.dart';
 import 'package:brain_check/features/pages/difficulty_page/cubit/difficulty_page_cubit.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';

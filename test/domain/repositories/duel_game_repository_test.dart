@@ -1,7 +1,5 @@
 import 'package:brain_check/data_sources/duel_game_data_source.dart';
 import 'package:brain_check/data_sources/questions_data_source.dart';
-import 'package:brain_check/domain/models/question_model.dart';
-import 'package:brain_check/domain/models/token_model.dart';
 import 'package:brain_check/domain/repositories/duel_game_repository.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
