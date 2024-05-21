@@ -13,7 +13,7 @@ class LabelWidget extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.only(bottom: 6, top: 6),
       decoration: BoxDecoration(
-          gradient: LinearGradient(
+          gradient: const LinearGradient(
             begin: Alignment.bottomLeft,
             end: Alignment.topRight,
             colors: [

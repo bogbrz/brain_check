@@ -24,7 +24,7 @@ class RankedGameCubit extends Cubit<RankedGameState> {
         errorMessage: null, profile: [], status: Status.loading));
 
     streamSubscription =
-        rankingRepository.getRankingForUpdate(email: email, userId: userId).listen((event) {
+        rankingRepository.getRankingForUpdate(email: email, ).listen((event) {
       try {
         emit(RankedGameState(
             errorMessage: null, profile: event, status: Status.success));

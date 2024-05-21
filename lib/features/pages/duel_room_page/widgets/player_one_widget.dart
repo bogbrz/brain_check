@@ -48,7 +48,7 @@ class JoinPlayerOneWidget extends StatelessWidget {
                   child:
                       const Image(image: AssetImage("images/join_game.png")))),
           Text(
-            "${AppLocalizations.of(context).joinPlayer}",
+            AppLocalizations.of(context).joinPlayer,
             style: GoogleFonts.bungee(
                 color: Colors.white,
                 fontSize: MediaQuery.of(context).size.height / 45),
@@ -97,8 +97,8 @@ class JoinPlayerOneWidget extends StatelessWidget {
                       children: [
                         Text(
                           playerOne[0].ready == true
-                              ? "${AppLocalizations.of(context).ready}"
-                              : "${AppLocalizations.of(context).notReady}",
+                              ? AppLocalizations.of(context).ready
+                              : AppLocalizations.of(context).notReady,
                           style: GoogleFonts.bungee(
                               color: playerOne[0].ready == true
                                   ? Colors.green

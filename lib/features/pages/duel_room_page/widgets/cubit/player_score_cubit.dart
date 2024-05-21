@@ -9,7 +9,7 @@ part 'generated/player_score_cubit.freezed.dart';
 
 class PlayerScoreCubit extends Cubit<PlayerScoreState> {
   PlayerScoreCubit({required this.duelGameRepository})
-      : super(PlayerScoreState(
+      : super(const PlayerScoreState(
             errorMessage: null,
             playerOneScore: [],
             playerTwoScore: [],
@@ -20,7 +20,7 @@ class PlayerScoreCubit extends Cubit<PlayerScoreState> {
   Future<void> getRoundsScore({
     required String roomId,
   }) async {
-    emit(PlayerScoreState(
+    emit(const PlayerScoreState(
         errorMessage: null,
         playerOneScore: [],
         playerTwoScore: [],
@@ -41,7 +41,7 @@ class PlayerScoreCubit extends Cubit<PlayerScoreState> {
             playerTwoScore: playerTwo,
             status: Status.success));
       } catch (e) {
-        emit(PlayerScoreState(
+        emit(const PlayerScoreState(
             errorMessage: null,
             playerOneScore: [],
             playerTwoScore: [],

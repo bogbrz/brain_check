@@ -36,7 +36,7 @@ class RankingProfileWidget extends StatelessWidget {
                       ? const Color.fromARGB(255, 199, 192, 192)
                       : i == 3
                           ? Colors.orangeAccent
-                          : Color.fromARGB(180, 66, 120, 255),
+                          : const Color.fromARGB(180, 66, 120, 255),
               Colors.white,
             ],
           ),

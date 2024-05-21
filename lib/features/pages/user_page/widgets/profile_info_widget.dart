@@ -48,7 +48,7 @@ class _ProfileInfoWidgetState extends State<ProfileInfoWidget> {
       child: BlocConsumer<UserPageCubit, UserPageState>(
         listener: (context, state) {},
         builder: (context, state) {
-          print("CHOODES ${_selectedImage}");
+ 
           switch (state.status) {
             case Status.initial:
               return const InitialStateWidget();
@@ -71,9 +71,9 @@ class _ProfileInfoWidgetState extends State<ProfileInfoWidget> {
                               setState(() {
                                 isEditing = true;
                               });
-                              print(isEditing);
+                   
                             },
-                            icon: Icon(
+                            icon: const Icon(
                               Icons.edit_sharp,
                             ))
                       ],
@@ -84,7 +84,7 @@ class _ProfileInfoWidgetState extends State<ProfileInfoWidget> {
                           : () {
                               _pickImageFromGallery();
 
-                              print("CHOODES ${_selectedImage}");
+                          
                             },
                       child: CircleAvatar(
                           radius: MediaQuery.of(context).size.width * 0.2,
@@ -120,7 +120,7 @@ class _ProfileInfoWidgetState extends State<ProfileInfoWidget> {
                                                   .height /
                                               35)))
                               : Expanded(
-                                  child: Container(
+                                  child: SizedBox(
                                     width:
                                         MediaQuery.of(context).size.width * 0.6,
                                     child: Column(
@@ -199,26 +199,7 @@ class _ProfileInfoWidgetState extends State<ProfileInfoWidget> {
                       isEditing == true
                           ? ElevatedButton(
                               onPressed: () {
-                                // _selectedImage == null &&
-                                //         controller.text.isNotEmpty
-                                //     ? context
-                                //         .read<UserPageCubit>()
-                                //         .updateProfile(
-                                //             nickName:
-                                //                 controller.text.isEmpty
-                                //                     ? profile.nickName
-                                //                     : controller.text,
-                                //             imageUrl:
-                                //                 state.uploadedImageUrl!,
-                                //             docId: state.profile[0].id)
-                                //         .then((value) {
-                                //         setState(() {
-                                //           isEditing = false;
-                                //         });
-                                //         print("KONTROLER $controller.");
-                                //         controller.clear();
-                                //       })
-                                //     :
+                        
                                 context
                                     .read<UserPageCubit>()
                                     .uploadImage(file: _selectedImage)
@@ -234,54 +215,11 @@ class _ProfileInfoWidgetState extends State<ProfileInfoWidget> {
                                   });
                                 });
 
-                                // _selectedImage != null
-                                //     ?
-                                // context
-                                //         .read<UserPageCubit>()
-                                //         .uploadImage(file: _selectedImage!)
-                                //         .then((value) async {
-                                //         await context
-                                //             .read<UserPageCubit>()
-                                //             .getRankingForUpdate(
-                                //                 email: widget.user!.email
-                                //                     .toString());
-                                //       }).then((value) {
-                                //         context
-                                //             .read<UserPageCubit>()
-                                //             .updateProfile(
-                                //                 nickName:
-                                //                     controller.text.isEmpty
-                                //                         ? profile.nickName
-                                //                         : controller.text,
-                                //                 imageUrl:
-                                //                     state.uploadedImageUrl!,
-                                //                 docId: state.profile[0].id)
-                                //             .then((value) {
-                                //           setState(() {
-                                //             isEditing = false;
-                                //           });
-                                //         });
-                                //       })
-                                //     : context
-                                //         .read<UserPageCubit>()
-                                //         .updateProfile(
-                                //             nickName:
-                                //                 controller.text.isEmpty
-                                //                     ? profile.nickName
-                                //                     : controller.text,
-                                //             imageUrl:
-                                //                 state.uploadedImageUrl!,
-                                //             docId: state.profile[0].id)
-                                //         .then((value) {
-                                //         setState(() {
-                                //           isEditing = false;
-                                //         });
-                                //       });
-
-                                print("BUTTON ${state.uploadedImageUrl}");
+                               
+                            
                               },
-                              child: Text("Accept"))
-                          : SizedBox.shrink()
+                              child: const Text("Accept"))
+                          : const SizedBox.shrink()
                     ],
                   ],
                 ),
@@ -297,7 +235,10 @@ class _ProfileInfoWidgetState extends State<ProfileInfoWidget> {
         await ImagePicker().pickImage(source: ImageSource.gallery);
 
     setState(() {
-      _selectedImage = File(returnedImage!.path);
+      if (returnedImage == null) {
+      } else {
+        _selectedImage = File(returnedImage.path);   
+      }
     });
   }
 }

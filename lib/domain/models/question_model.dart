@@ -6,6 +6,7 @@ part 'generated/question_model.g.dart';
 
 @freezed
 class Questions with _$Questions {
+
   @JsonSerializable(fieldRename: FieldRename.snake)
   factory Questions({
     required int responseCode,

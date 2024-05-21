@@ -31,11 +31,14 @@ class DuelRoomPageCubit extends Cubit<DuelRoomPageState> {
       {required String email,
       required String nickName,
       required String id,
-      required int playerNumber
-      ,required String userPicture}) async {
+      required int playerNumber,
+      required String userPicture}) async {
     return duelGameRepository.joinPlayer(
-      userPicture: userPicture,
-        email: email, nickName: nickName, id: id, playerNumber: playerNumber);
+        userPicture: userPicture,
+        email: email,
+        nickName: nickName,
+        id: id,
+        playerNumber: playerNumber);
   }
 
   Future<void> readyStatus(
@@ -69,9 +72,7 @@ class DuelRoomPageCubit extends Cubit<DuelRoomPageState> {
 
   Future<void> resetRounds(
       {required String playerId, required String roomId}) async {
-    return duelGameRepository
-        .resetRounds(playerId: playerId, roomId: roomId)
-        .then((value) => print("rESET ROUNDS CUBIT"));
+    return duelGameRepository.resetRounds(playerId: playerId, roomId: roomId);
   }
 
   Future<void> deleteScore(
@@ -79,16 +80,12 @@ class DuelRoomPageCubit extends Cubit<DuelRoomPageState> {
     streamSubscriptionOne =
         duelGameRepository.getRoundsScores(roomId: roomId).listen((event) {
       for (final score in event) {
-        duelGameRepository
-            .deleteScore(roomId: roomId, roundId: score.id)
-            .then((value) => print("DELETE SCORE CUBIT"));
+        duelGameRepository.deleteScore(roomId: roomId, roundId: score.id);
       }
     });
   }
 
-  Future<void> setCategory({required String id, required String roomId}) async {
-    return duelGameRepository.leaveRoom(id: id, roomId: roomId);
-  }
+  
 
   Future<void> deleteRoom({
     required String id,
@@ -103,17 +100,13 @@ class DuelRoomPageCubit extends Cubit<DuelRoomPageState> {
     required int categoryId,
     required int roundNumber,
   }) async {
-    await duelGameRepository
-        .addQtoFirebase(
-            roomId: roomId, categoryId: categoryId, roundNumber: roundNumber)
-        .then((value) => print("QUESTIONS ADDED CUBIT"));
+    await duelGameRepository.addQtoFirebase(
+        roomId: roomId, categoryId: categoryId, roundNumber: roundNumber);
   }
 
   Future<void> updatePlayersCount(
       {required String roomId, required int value}) async {
-    return duelGameRepository
-        .updatePlayersCount(roomId: roomId, value: value)
-        .then((value) => print("PLAYERS COUNT CHANGED CUBIT"));
+    return duelGameRepository.updatePlayersCount(roomId: roomId, value: value);
   }
 
   Future<void> playerInfo({

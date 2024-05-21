@@ -34,7 +34,7 @@ class CategoriesPageCubit extends Cubit<CategoriesPageState> {
         status: Status.success,
       ));
 
-      // print(categories);
+  
     } catch (error) {
       emit(CategoriesPageState(
         errorMessage: error.toString(),

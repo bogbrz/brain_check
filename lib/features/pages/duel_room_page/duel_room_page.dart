@@ -17,19 +17,9 @@ import 'package:go_router/go_router.dart';
 
 class DuelRoomPage extends StatefulWidget {
   const DuelRoomPage({
-    // required this.user,
-    // required this.roomModel,
-    // required this.nickName,
-    // required this.userPicture,
     required this.model,
     super.key,
   });
-
-  // final User? user;
-  // final String nickName;
-  // final String? userPicture;
-
-  // final GameRoomModel roomModel;
 
   final DuelRoomRoutePageModel model;
 
@@ -72,7 +62,7 @@ class _DuelRoomPageState extends State<DuelRoomPage> {
                 }
 
                 return Container(
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                       gradient: LinearGradient(
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
@@ -218,7 +208,7 @@ class _DuelRoomPageState extends State<DuelRoomPage> {
                               width: MediaQuery.of(context).size.width * 0.4,
                               child: JoinPlayerTwoWidget(
                                 userPicture: widget.model.userPicture,
-                                nickName: widget.model.roomModel.nickName,
+                                nickName: widget.model.nickName,
                                 id: widget.model.roomModel.id,
                                 playerTwo: state.playerTwo,
                                 playerOne: state.playerOne,
@@ -232,7 +222,7 @@ class _DuelRoomPageState extends State<DuelRoomPage> {
                         margin: EdgeInsetsDirectional.all(
                             MediaQuery.of(context).size.height * 0.01),
                         decoration: BoxDecoration(
-                          gradient: LinearGradient(
+                          gradient: const LinearGradient(
                             begin: Alignment.topLeft,
                             end: Alignment.bottomRight,
                             colors: [
@@ -242,9 +232,6 @@ class _DuelRoomPageState extends State<DuelRoomPage> {
                           ),
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(10),
-                          // border: Border.all(
-                          //     width: MediaQuery.of(context).size.width / 55,
-                          //     color: Colors.black),
                         ),
                         child: Column(
                           children: [
@@ -253,7 +240,7 @@ class _DuelRoomPageState extends State<DuelRoomPage> {
                                     .toString()) ...[
                               Container(
                                 decoration: BoxDecoration(
-                                    gradient: LinearGradient(
+                                    gradient: const LinearGradient(
                                       begin: Alignment.topLeft,
                                       end: Alignment.bottomRight,
                                       colors: [
@@ -261,7 +248,7 @@ class _DuelRoomPageState extends State<DuelRoomPage> {
                                         Color.fromARGB(180, 66, 120, 255),
                                       ],
                                     ),
-                                    borderRadius: BorderRadius.only(
+                                    borderRadius: const BorderRadius.only(
                                       topLeft: Radius.circular(10),
                                       topRight: Radius.circular(10),
                                     ),
@@ -320,7 +307,7 @@ class _DuelRoomPageState extends State<DuelRoomPage> {
                                         },
                                         value: category,
                                         hint: Text(
-                                          '${AppLocalizations.of(context).selectCategory}',
+                                          AppLocalizations.of(context).selectCategory,
                                           style: GoogleFonts.bungee(
                                               color: Colors.black,
                                               fontSize: MediaQuery.of(context)
@@ -366,7 +353,7 @@ class _DuelRoomPageState extends State<DuelRoomPage> {
                                   )
                                 ] else ...[
                                   Text(
-                                    "${AppLocalizations.of(context).draw}",
+                                    AppLocalizations.of(context).draw,
                                     style: GoogleFonts.bungee(
                                         color: Colors.black,
                                         fontSize:
@@ -394,41 +381,41 @@ class _DuelRoomPageState extends State<DuelRoomPage> {
                                 colors: state.playerOne.isEmpty ||
                                         state.playerTwo.isEmpty
                                     ? [
-                                        Color.fromARGB(255, 82, 78, 78),
-                                        Color.fromARGB(180, 0, 0, 0),
+                                        const Color.fromARGB(255, 82, 78, 78),
+                                        const Color.fromARGB(180, 0, 0, 0),
                                       ]
                                     : state.playerOne[0].ready == false ||
                                             state.playerTwo[0].ready == false
                                         ? [
-                                            Color.fromARGB(255, 82, 78, 78),
-                                            Color.fromARGB(180, 0, 0, 0),
+                                            const Color.fromARGB(255, 82, 78, 78),
+                                            const Color.fromARGB(180, 0, 0, 0),
                                           ]
                                         : state.playerOne[0].startGame ||
                                                 state.playerTwo[0].startGame
                                             ? [
-                                                Color.fromARGB(255, 82, 78, 78),
-                                                Color.fromARGB(180, 0, 0, 0),
+                                                const Color.fromARGB(255, 82, 78, 78),
+                                                const Color.fromARGB(180, 0, 0, 0),
                                               ]
                                             : category == null
                                                 ? [
-                                                    Color.fromARGB(
+                                                    const Color.fromARGB(
                                                         255, 82, 78, 78),
-                                                    Color.fromARGB(
+                                                    const Color.fromARGB(
                                                         180, 0, 0, 0),
                                                   ]
                                                 : state.playerOne[0]
                                                             .roundNumber ==
                                                         6
                                                     ? [
-                                                        Color.fromARGB(
+                                                        const Color.fromARGB(
                                                             255, 82, 78, 78),
-                                                        Color.fromARGB(
+                                                        const Color.fromARGB(
                                                             180, 0, 0, 0),
                                                       ]
                                                     : [
-                                                        Color.fromARGB(
+                                                        const Color.fromARGB(
                                                             255, 255, 255, 255),
-                                                        Color.fromARGB(
+                                                        const Color.fromARGB(
                                                             180, 66, 120, 255),
                                                       ],
                               ),
@@ -497,14 +484,14 @@ class _DuelRoomPageState extends State<DuelRoomPage> {
                                 child: Text(
                                   state.playerOne.isEmpty ||
                                           state.playerTwo.isEmpty
-                                      ? "${AppLocalizations.of(context).notEnoughPlayers}"
+                                      ? AppLocalizations.of(context).notEnoughPlayers
                                       : state.playerOne[0].roundNumber == 6
-                                          ? "${AppLocalizations.of(context).gameOver}"
+                                          ? AppLocalizations.of(context).gameOver
                                           : state.playerOne[0].ready == false ||
                                                   state.playerTwo[0].ready ==
                                                       false
-                                              ? "${AppLocalizations.of(context).playersNotReady}"
-                                              : '${AppLocalizations.of(context).startGame}',
+                                              ? AppLocalizations.of(context).playersNotReady
+                                              : AppLocalizations.of(context).startGame,
                                   style: GoogleFonts.bungee(
                                       color: Colors.black,
                                       fontSize:

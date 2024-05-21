@@ -52,7 +52,7 @@ class JoinPlayerTwoWidget extends StatelessWidget {
                     ),
                   ))),
           Text(
-            "${AppLocalizations.of(context).joinPlayer}",
+            AppLocalizations.of(context).joinPlayer,
             style: GoogleFonts.bungee(
                 color: Colors.white,
                 fontSize: MediaQuery.of(context).size.height / 45),
@@ -99,8 +99,8 @@ class JoinPlayerTwoWidget extends StatelessWidget {
                     children: [
                       Text(
                         playerTwo[0].ready == true
-                            ? "${AppLocalizations.of(context).ready}"
-                            : "${AppLocalizations.of(context).notReady}",
+                            ? AppLocalizations.of(context).ready
+                            : AppLocalizations.of(context).notReady,
                         style: GoogleFonts.bungee(
                             color: playerTwo[0].ready == true
                                 ? Colors.green

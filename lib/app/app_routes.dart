@@ -19,9 +19,9 @@ import 'package:brain_check/features/pages/rooms_list_page/rooms_list_page.dart'
 
 import 'package:brain_check/features/pages/set_up_user_page/set_up_user.dart';
 import 'package:brain_check/features/pages/user_page/user_page.dart';
-import 'package:brain_check/navigator_page.dart';
+import 'package:brain_check/features/pages/navigator_page/navigator_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/foundation.dart';
+
 import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
 
@@ -66,29 +66,38 @@ class AppRouter {
       StatefulShellRoute.indexedStack(
         builder: (BuildContext context, GoRouterState state,
             StatefulNavigationShell navigationShell) {
-          // Return the widget that implements the custom shell (in this case
-          // using a BottomNavigationBar). The StatefulNavigationShell is passed
-          // to be able access the state of the shell and to navigate to other
-          // branches in a stateful way.
+         
           return NavigatorPage(
             user: user,
             navigationShell: navigationShell,
           );
         },
         branches: <StatefulShellBranch>[
-          // The route branch for the first tab of the bottom navigation bar.
+        
           StatefulShellBranch(
             navigatorKey: _sectionANavigatorKey,
             routes: <RouteBase>[
               GoRoute(
-                // The screen to display as the root in the first tab of the
-                // bottom navigation bar.
-                path: '/homePage',
-                builder: (BuildContext context, GoRouterState state) =>
-                    HomePage(
-                  user: user,
-                ),
-              ),
+              
+                  path: '/homePage',
+                  pageBuilder: (BuildContext context, GoRouterState state) {
+                    final User? userr = FirebaseAuth.instance.currentUser;
+                    return CustomTransitionPage(
+                        transitionDuration: const Duration(seconds: 5),
+                        key: state.pageKey,
+                        child: HomePage(
+                          user: userr,
+                        ),
+                        transitionsBuilder:
+                            (context, animation, secondaryAnimation, child) {
+                          return SlideTransition(
+                            position: Tween<Offset>(
+                                    begin: const Offset(-1, 0), end: Offset.zero)
+                                .animate(animation),
+                            child: child,
+                          );
+                        });
+                  }),
             ],
           ),
 
@@ -96,8 +105,7 @@ class AppRouter {
             navigatorKey: _sectionCNavigatorKey,
             routes: <RouteBase>[
               GoRoute(
-                // The screen to display as the root in the first tab of the
-                // bottom navigation bar.
+             
                 path: '/rankingPage',
                 builder: (BuildContext context, GoRouterState state) =>
                     RankingPage(),
@@ -108,14 +116,14 @@ class AppRouter {
             navigatorKey: _sectionBNavigatorKey,
             routes: <RouteBase>[
               GoRoute(
-                // The screen to display as the root in the first tab of the
-                // bottom navigation bar.
-                path: '/userPage',
-                builder: (BuildContext context, GoRouterState state) =>
-                    UserPage(
-                  user: user,
-                ),
-              ),
+              
+                  path: '/userPage',
+                  builder: (BuildContext context, GoRouterState state) {
+                    final User? userr = FirebaseAuth.instance.currentUser;
+                    return UserPage(
+                      user: userr,
+                    );
+                  }),
             ],
           ),
         ],
@@ -124,7 +132,7 @@ class AppRouter {
         path: "/loginPage",
         name: "/loginPage",
         builder: (context, state) {
-          return LogInPage();
+          return const LogInPage();
         },
       ),
       GoRoute(
@@ -134,41 +142,25 @@ class AppRouter {
           return SetUpUserPage();
         },
       ),
-      // GoRoute(
-      //   path: "/navigatorPage",
-      //   name: "/navigatorPage",
-      //   pageBuilder: (
-      //     context,
-      //     state,
-      //   ) {
-      //     // final User? user = state.extra as User?;
-      //     //      final StatefulNavigationShell navigationShell =
-      //     // StatefulNavigationShell;
-      //     return CustomTransitionPage(
-      //       key: state.pageKey,
-      //       child: NavigatorPage(
-      //         user: user,
-      //         navigationShell: globalNavigationShell,
-      //       ),
-      //       transitionDuration: Duration(seconds: 2),
-      //       transitionsBuilder:
-      //           (context, animation, secondaryAnimation, child) {
-      //         return FadeTransition(
-      //           opacity:
-      //               CurveTween(curve: Curves.easeInCirc).animate(animation),
-      //           child: child,
-      //         );
-      //       },
-      //     );
-      //   },
-      // ),
+  
       GoRoute(
         path: "/userPage",
         name: "/userPage",
-        builder: (context, state) {
-          // final User? user = state.extra as User?;
-          return UserPage(
-            user: user,
+        pageBuilder: (context, state) {
+     
+          return CustomTransitionPage(
+            transitionDuration: const Duration(seconds: 5),
+            transitionsBuilder:
+                (context, animation, secondaryAnimation, child) {
+              return FadeTransition(
+                opacity:
+                    CurveTween(curve: Curves.easeInOutCirc).animate(animation),
+                child: child,
+              );
+            },
+            child: UserPage(
+              user: user,
+            ),
           );
         },
       ),
@@ -176,7 +168,7 @@ class AppRouter {
         path: "/homePage",
         name: "/homePage",
         builder: (context, state) {
-          // final User? user = state.extra as User?;
+        
           return HomePage(
             user: user,
           );
@@ -185,104 +177,199 @@ class AppRouter {
       GoRoute(
         path: "/gameTypePage",
         name: "/gameTypePage",
-        builder: (context, state) {
-          // final User? user = state.extra as User?;
+        pageBuilder: (context, state) {
+          
           final ProfileModel profile = state.extra as ProfileModel;
 
-          return GameTypePage(
-            user: user,
-            profile: profile,
+          return CustomTransitionPage(
+            key: state.pageKey,
+            child: GameTypePage(
+              user: user,
+              profile: profile,
+            ),
+            transitionDuration: const Duration(seconds: 1),
+            transitionsBuilder:
+                (context, animation, secondaryAnimation, child) {
+              return SlideTransition(
+                position: Tween<Offset>(begin: const Offset(0, -1), end: Offset.zero)
+                    .animate(animation),
+                child: child,
+              );
+            },
           );
         },
       ),
       GoRoute(
         path: "/categoryPage",
         name: "/categoryPage",
-        builder: (context, state) {
-          // final User? user = state.extra as User?;
+        pageBuilder: (context, state) {
+          
           final ProfileModel profile = state.extra as ProfileModel;
 
-          return CategoryPage(
-            user: user,
-            profileModel: profile,
+          return CustomTransitionPage(
+            key: state.pageKey,
+            transitionDuration: const Duration(seconds: 1),
+            transitionsBuilder:
+                (context, animation, secondaryAnimation, child) {
+              return SlideTransition(
+                position: Tween<Offset>(begin: const Offset(-1, 0), end: Offset.zero)
+                    .animate(animation),
+                child: child,
+              );
+            },
+            child: CategoryPage(
+              user: user,
+              profileModel: profile,
+            ),
           );
         },
       ),
       GoRoute(
         path: "/rankedGamePage",
         name: "/rankedGamePage",
-        builder: (context, state) {
-          // final User? user = state.extra as User?;
+        pageBuilder: (context, state) {
+          
           final ProfileModel profile = state.extra as ProfileModel;
 
-          return RankedGamePage(
-            user: user,
-            profileModel: profile,
+          return CustomTransitionPage(
+            key: state.pageKey,
+            transitionDuration: const Duration(seconds: 1),
+            transitionsBuilder:
+                (context, animation, secondaryAnimation, child) {
+              return SlideTransition(
+                position: Tween<Offset>(begin: const Offset(1, 0), end: Offset.zero)
+                    .animate(animation),
+                child: child,
+              );
+            },
+            child: RankedGamePage(
+              user: user,
+              profileModel: profile,
+            ),
           );
         },
       ),
       GoRoute(
         path: "/roomsListPage",
         name: "/roomsListPage",
-        builder: (context, state) {
-          // final User? user = state.extra as User?;
+        pageBuilder: (context, state) {
+          
           final ProfileModel profile = state.extra as ProfileModel;
 
-          return RoomsListPage(
-            user: user,
-            profile: profile,
+          return CustomTransitionPage(
+            key: state.pageKey,
+            transitionDuration: const Duration(seconds: 1),
+            transitionsBuilder:
+                (context, animation, secondaryAnimation, child) {
+              return SlideTransition(
+                position: Tween<Offset>(begin: const Offset(0, 1), end: Offset.zero)
+                    .animate(animation),
+                child: child,
+              );
+            },
+            child: RoomsListPage(
+              user: user,
+              profile: profile,
+            ),
           );
         },
       ),
       GoRoute(
         path: "/difficultyPage",
         name: "/difficultyPage",
-        builder: (context, state) {
-          // final User? user = state.extra as User?;
+        pageBuilder: (context, state) {
+          
           final DifficultyRouteModel model =
               state.extra as DifficultyRouteModel;
 
-          return DifficultyPage(
-            model: model,
+          return CustomTransitionPage(
+            key: state.pageKey,
+            transitionDuration: const Duration(seconds: 1),
+            transitionsBuilder:
+                (context, animation, secondaryAnimation, child) {
+              return FadeTransition(
+                opacity:
+                    CurveTween(curve: Curves.easeInCubic).animate(animation),
+                child: child,
+              );
+            },
+            child: DifficultyPage(
+              model: model,
+            ),
           );
         },
       ),
       GoRoute(
         path: "/questionPage",
         name: "/questionPage",
-        builder: (context, state) {
-          // final User? user = state.extra as User?;
+        pageBuilder: (context, state) {
+          
           final QuestionPageRouteModel model =
               state.extra as QuestionPageRouteModel;
 
-          return QuestionPage(
-            model: model,
+          return CustomTransitionPage(
+            transitionDuration: const Duration(seconds: 2),
+            transitionsBuilder:
+                (context, animation, secondaryAnimation, child) {
+              return FadeTransition(
+                opacity:
+                    CurveTween(curve: Curves.easeInOutCirc).animate(animation),
+                child: child,
+              );
+            },
+            child: QuestionPage(
+              model: model,
+            ),
           );
         },
       ),
       GoRoute(
         path: "/resultPage",
         name: "/resultPage",
-        builder: (context, state) {
-          // final User? user = state.extra as User?;
+        pageBuilder: (context, state) {
+          
           final ResultPageRouteModel model =
               state.extra as ResultPageRouteModel;
 
-          return ResultPage(
-            model: model,
+          return CustomTransitionPage(
+            key: state.pageKey,
+            transitionDuration: Duration(seconds: 1.5.toInt()),
+            transitionsBuilder:
+                (context, animation, secondaryAnimation, child) {
+              return FadeTransition(
+                opacity:
+                    CurveTween(curve: Curves.easeInOutCirc).animate(animation),
+                child: child,
+              );
+            },
+            child: ResultPage(
+              model: model,
+            ),
           );
         },
       ),
       GoRoute(
         path: "/duelRoomPage",
         name: "/duelRoomPage",
-        builder: (context, state) {
-          // final User? user = state.extra as User?;
+        pageBuilder: (context, state) {
+          
           final DuelRoomRoutePageModel model =
               state.extra as DuelRoomRoutePageModel;
 
-          return DuelRoomPage(
-            model: model,
+          return CustomTransitionPage(
+            key: state.pageKey,
+            transitionDuration: const Duration(seconds: 1),
+            transitionsBuilder:
+                (context, animation, secondaryAnimation, child) {
+              return FadeTransition(
+                opacity:
+                    CurveTween(curve: Curves.easeInOutCirc).animate(animation),
+                child: child,
+              );
+            },
+            child: DuelRoomPage(
+              model: model,
+            ),
           );
         },
       ),
