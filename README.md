@@ -1,3 +1,5 @@
+
+https://github.com/bogbrz/brain_check/assets/142913714/08cfe2a1-b943-400b-971a-d43096fff9ae
 BRAIN CHECK QUIZ APP
 Brain check app uses Open Trivia database API to acquire questions for different game types.
 Brain check app features include:
@@ -32,23 +34,39 @@ Main packages used in this project:
 LOGGING IN WITH HOMEPAGE
 
 
-https://github.com/bogbrz/brain_check/assets/142913714/0cec852a-e14e-418e-ab73-e54709588d77
+
+
+https://github.com/bogbrz/brain_check/assets/142913714/51ef9418-4e5a-41d7-ab6d-f1b9ca8354a2
+
+
 
 
 CASUAL GAME TYPE
 
 
-https://github.com/bogbrz/brain_check/assets/142913714/fcc71d49-77ac-4a5c-ad4c-dea178e3fd4b
+
+
+https://github.com/bogbrz/brain_check/assets/142913714/c8ffd63f-6bfb-458f-b728-b7497454815b
+
+
 
 
 RANKED GAME TYPE
 
 
-https://github.com/bogbrz/brain_check/assets/142913714/5cb8e4db-240d-434c-af5d-b060ee2059b5
+
+
+https://github.com/bogbrz/brain_check/assets/142913714/a675c047-ae1d-44c3-a19e-04c7a7756554
+
+
 
 
 DUEL GAME TYPE
 
 
-https://github.com/bogbrz/brain_check/assets/142913714/14a78da5-362f-4887-a3fb-32ca90f755c4
+
+
+https://github.com/bogbrz/brain_check/assets/142913714/a284b630-c88a-4572-b669-05799505bd2a
+
+
 
