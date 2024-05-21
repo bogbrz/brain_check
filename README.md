@@ -1,5 +1,3 @@
-
-https://github.com/bogbrz/brain_check/assets/142913714/08cfe2a1-b943-400b-971a-d43096fff9ae
 BRAIN CHECK QUIZ APP
 Brain check app uses Open Trivia database API to acquire questions for different game types.
 Brain check app features include:
